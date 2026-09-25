@@ -164,3 +164,7 @@ Thumbs.db
 unimportant_files/Client_ID.txt
 secret.key
 *.key
+
+# Jupyter Notebooks and checkpoints
+*.ipynb
+.ipynb_checkpoints/

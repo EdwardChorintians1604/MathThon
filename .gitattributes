@@ -1,0 +1,8 @@
+# Exclude Jupyter Notebooks from language statistics
+*.ipynb linguist-detectable=false
+
+# Mark archive/unimportant files as vendored so they don't skew repository statistics
+unimportant_files/* linguist-vendored
+
+# Mark CSV dataset files as vendored
+*.csv linguist-vendored
