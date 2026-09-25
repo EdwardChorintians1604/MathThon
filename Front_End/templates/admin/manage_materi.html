@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathThon | Manajemen Materi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css_for_dashboard_user.css') }}">
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        /* ── Hard-coded dark theme — no CSS variable dependency ── */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html, body {
+            background-color: #0a0d14 !important;
+            font-family: 'DM Sans', sans-serif !important;
+            color: #e2e8f0 !important;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Kill Bootstrap's white bg overrides */
+        body > *, .container-fluid, .container, .row, [class*="col-"] {
+            color: inherit;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 15% 0%, rgba(99,179,237,0.07) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 85% 100%, rgba(183,148,244,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 40% at 55% 50%, rgba(79,209,197,0.04) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container-fluid { position: relative; z-index: 1; }
+
+        /* ─── Page Header ─── */
+        .page-header { padding: 1.5rem 0 1.2rem; }
+        .page-header .overline {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #4fd1c5;
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+        .page-header h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #1a1b1d 30%, #63b3ed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0 0 0.3rem;
+            line-height: 1.15;
+        }
+        .page-header .subtitle {
+            font-size: 0.9rem;
+            color: #08182d !important;
+            font-weight: 300;
+            margin: 0;
+        }
+
+        /* ─── Action Buttons ─── */
+        .action-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin-bottom: 1.4rem;
+        }
+        .btn-add {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.55rem 1.3rem;
+            background: linear-gradient(135deg, #63b3ed, #4fd1c5);
+            color: #0a0d14 !important;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: box-shadow 0.25s, transform 0.2s, opacity 0.2s;
+        }
+        .btn-add:hover {
+            color: #0a0d14 !important;
+            box-shadow: 0 0 20px rgba(99,179,237,0.4);
+            transform: translateY(-1px);
+            opacity: 0.92;
+        }
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.55rem 1.3rem;
+            background: rgba(255,255,255,0.04);
+            color: #020e1e !important;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 50px;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.25s, color 0.25s, transform 0.2s;
+        }
+        .btn-back:hover {
+            border-color: rgba(255,255,255,0.2);
+            color: #392470 !important;
+            transform: translateY(-1px);
+        }
+
+        /* ─── Search ─── */
+        .search-wrap {
+            position: relative;
+            margin-bottom: 1.6rem;
+        }
+        .search-wrap .bi {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4a5568;
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+        .search-wrap input {
+            width: 100%;
+            background: rgba(255,255,255,0.04) !important;
+            border: 1px solid rgba(255,255,255,0.08) !important;
+            border-radius: 50px;
+            padding: 0.65rem 1.2rem 0.65rem 2.6rem;
+            color: #065b4d !important;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.875rem;
+            transition: border-color 0.25s, box-shadow 0.25s;
+            backdrop-filter: blur(10px);
+        }
+        .search-wrap input::placeholder { color: #4a5568 !important; }
+        .search-wrap input:focus {
+            outline: none !important;
+            border-color: rgba(99,179,237,0.4) !important;
+            box-shadow: 0 0 0 3px rgba(99,179,237,0.1) !important;
+            background: rgba(255,255,255,0.06) !important;
+        }
+
+        /* ─── Card ─── */
+        .data-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(12px);
+            overflow: hidden;
+        }
+        .data-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .data-card-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #0a1b32 !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .data-card-title i { color: #4fd1c5 !important; }
+        .count-pill {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.25rem 0.8rem;
+            background: rgba(99,179,237,0.1);
+            color: #63b3ed !important;
+            border: 1px solid rgba(99,179,237,0.2);
+            border-radius: 50px;
+        }
+
+        /* ─── Table ─── */
+        .table-responsive { overflow-x: auto; }
+
+        table.materi-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 0.45rem;
+        }
+
+        table.materi-table thead th {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #4a5568 !important;
+            padding: 0.5rem 1rem;
+            border: none;
+            background: transparent !important;
+            white-space: nowrap;
+        }
+
+        table.materi-table tbody tr {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            animation: fadeUp 0.35s ease both;
+        }
+        table.materi-table tbody tr:hover {
+            background: rgba(255,255,255,0.06);
+            transform: translateX(2px);
+            box-shadow: 0 0 0 1px rgba(99,179,237,0.1), 0 4px 20px rgba(0,0,0,0.25);
+        }
+        table.materi-table tbody td {
+            padding: 0.85rem 1rem;
+            border: none !important;
+            font-size: 0.875rem;
+            color: #e2e8f0 !important;
+            vertical-align: middle;
+        }
+
+        /* Round first & last cells */
+        table.materi-table tbody td:first-child { border-radius: 10px 0 0 10px; }
+        table.materi-table tbody td:last-child  { border-radius: 0 10px 10px 0; }
+
+        /* ID cell */
+        .id-badge {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #718096 !important;
+            padding: 0.2rem 0.65rem;
+            border-radius: 50px;
+        }
+
+        /* Title cell */
+        .materi-title {
+            font-weight: 500;
+            color: #055f12 !important;
+        }
+
+        /* Description cell */
+        .materi-desc {
+            color: #a0aec0 !important;
+            font-size: 0.82rem;
+            max-width: 260px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Status badge */
+        .status-pill {
+            display: inline-block;
+            padding: 0.22rem 0.75rem;
+            border-radius: 50px;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            background: rgba(104,211,145,0.12);
+            color: #68d391 !important;
+            border: 1px solid rgba(104,211,145,0.2);
+        }
+        .status-pill.inactive {
+            background: rgba(113,128,150,0.12);
+            color: #718096 !important;
+            border-color: rgba(113,128,150,0.2);
+        }
+        .status-pill.draft {
+            background: rgba(246,173,85,0.12);
+            color: #f6ad55 !important;
+            border-color: rgba(246,173,85,0.2);
+        }
+
+        /* Rating */
+        .rating-display {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: #f6ad55 !important;
+        }
+        .rating-display i { font-size: 0.75rem; }
+
+        /* Action buttons */
+        .action-cell {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        .btn-icon.edit {
+            background: rgba(246,173,85,0.1);
+            border-color: rgba(246,173,85,0.25);
+            color: #f6ad55 !important;
+        }
+        .btn-icon.edit:hover {
+            background: rgba(246,173,85,0.2);
+            box-shadow: 0 0 12px rgba(246,173,85,0.25);
+            transform: translateY(-1px);
+            color: #f6ad55 !important;
+        }
+        .btn-icon.delete {
+            background: rgba(252,129,129,0.1);
+            border-color: rgba(252,129,129,0.25);
+            color: #fc8181 !important;
+        }
+        .btn-icon.delete:hover {
+            background: rgba(252,129,129,0.2);
+            box-shadow: 0 0 12px rgba(252,129,129,0.25);
+            transform: translateY(-1px);
+        }
+
+        /* Empty row */
+        .empty-row td {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #4a5568 !important;
+            font-size: 0.875rem;
+        }
+        .empty-row .empty-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4a5568 !important;
+        }
+
+        /* ─── Modal ─── */
+        .modal-content {
+            background: #13182a !important;
+            border: 1px solid rgba(255,255,255,0.08) !important;
+            border-radius: 16px;
+            color: #e2e8f0 !important;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+        }
+        .modal-header {
+            border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+            padding: 1.2rem 1.5rem;
+            background: transparent !important;
+        }
+        .modal-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #fc8181 !important;
+        }
+        .modal-title i { font-size: 1rem; }
+        .btn-close {
+            filter: invert(1) brightness(0.5);
+        }
+        .modal-body {
+            padding: 1.4rem 1.5rem;
+            font-size: 0.9rem;
+            color: #a0aec0 !important;
+            line-height: 1.6;
+            background: transparent !important;
+        }
+        .modal-body strong { color: #e2e8f0 !important; }
+        .delete-warning {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            background: rgba(252,129,129,0.07);
+            border: 1px solid rgba(252,129,129,0.15);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            font-size: 0.82rem;
+            color: #fc8181 !important;
+        }
+        .delete-warning i { font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .modal-footer {
+            border-top: 1px solid rgba(255,255,255,0.08) !important;
+            padding: 1rem 1.5rem;
+            gap: 0.5rem;
+            background: transparent !important;
+        }
+        .btn-modal-cancel {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #a0aec0 !important;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .btn-modal-cancel:hover {
+            border-color: rgba(255,255,255,0.2);
+            color: #e2e8f0 !important;
+        }
+        .btn-modal-delete {
+            background: linear-gradient(135deg, #fc8181, #f56565);
+            border: none;
+            color: #0a0d14;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            transition: box-shadow 0.2s, opacity 0.2s;
+        }
+        .btn-modal-delete:hover {
+            box-shadow: 0 0 16px rgba(252,129,129,0.4);
+            opacity: 0.92;
+            color: #0a0d14;
+        }
+
+        /* ─── Animations ─── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid mt-3 px-4 px-md-5">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="overline"><i class="bi bi-journal-bookmark-fill"></i> &nbsp;Konten Pembelajaran</div>
+        <h1>Manajemen Materi</h1>
+        <p class="subtitle">Kelola seluruh materi yang tersedia untuk pengguna sistem.</p>
+    </div>
+
+    <!-- Action bar -->
+    <div class="action-bar">
+        <a href="{{ url_for('admin.add_materi') }}" class="btn-add">
+            <i class="bi bi-plus-lg"></i> Tambahkan Materi Baru
+        </a>
+        <a href="{{ url_for('admin.dashboard_admin') }}" class="btn-back">
+            <i class="bi bi-arrow-left"></i> Kembali ke Dashboard
+        </a>
+    </div>
+
+    <!-- Search -->
+    <div class="search-wrap">
+        <i class="bi bi-search"></i>
+        <input type="text" id="searchInput" placeholder="Cari berdasarkan judul atau deskripsi...">
+    </div>
+
+    <!-- Data card -->
+    <div class="data-card">
+        <div class="data-card-header">
+            <div class="data-card-title">
+                <i class="bi bi-grid-3x3-gap-fill"></i> Daftar Materi
+            </div>
+            <span class="count-pill" id="rowCount">
+                {{ daftar_materi|length if daftar_materi else 0 }} materi
+            </span>
+        </div>
+
+        <div class="table-responsive">
+            <table class="materi-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Judul Materi</th>
+                        <th>Deskripsi</th>
+                        <th>Status</th>
+                        <th>Rating</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if daftar_materi and daftar_materi|length > 0 %}
+                        {% for m in daftar_materi %}
+                        <tr style="animation-delay: {{ loop.index0 * 50 }}ms">
+                            <td><span class="id-badge">#{{ m.id }}</span></td>
+                            <td><span class="materi-title">{{ m.judul_materi }}</span></td>
+                            <td><span class="materi-desc">{{ m.deskripsi }}</span></td>
+                            <td>
+                                {% set s = m.status | lower %}
+                                {% if 'aktif' in s or 'active' in s %}
+                                    <span class="status-pill">{{ m.status }}</span>
+                                {% elif 'draft' in s %}
+                                    <span class="status-pill draft">{{ m.status }}</span>
+                                {% else %}
+                                    <span class="status-pill inactive">{{ m.status }}</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="rating-display">
+                                    <i class="bi bi-star-fill"></i>
+                                    {{ m.rating }}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="action-cell">
+                                    <a href="{{ url_for('admin.edit_materi', materi_id=m.id) }}"
+                                       class="btn-icon edit" title="Edit Materi">
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </a>
+                                    <button type="button"
+                                            class="btn-icon delete"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#deleteMateriModal{{ m.id }}"
+                                            title="Hapus Materi">
+                                        <i class="bi bi-trash3-fill"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr class="empty-row">
+                            <td colspan="6">
+                                <i class="bi bi-inbox empty-icon"></i>
+                                Belum ada data materi.
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ─── Delete Modals ─── -->
+{% for materi in daftar_materi %}
+<div class="modal fade" id="deleteMateriModal{{ materi.id }}" tabindex="-1"
+     aria-labelledby="deleteMateriModalLabel{{ materi.id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteMateriModalLabel{{ materi.id }}">
+                    <i class="bi bi-trash3-fill"></i> Hapus Materi
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+            </div>
+            <div class="modal-body">
+                Anda akan menghapus materi <strong>"{{ materi.judul_materi }}"</strong> (ID: #{{ materi.id }}).
+                <div class="delete-warning">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <span>Tindakan ini tidak dapat dibatalkan. Semua data terkait materi ini akan dihapus permanen.</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <form action="{{ url_for('admin.delete_materi', materi_id=materi.id) }}" method="POST" class="d-flex gap-2">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="button" class="btn-modal-cancel" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn-modal-delete">
+                        <i class="bi bi-trash3-fill me-1"></i> Ya, Hapus
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("searchInput");
+    const tbody       = document.querySelector(".materi-table tbody");
+    const rowCount    = document.getElementById("rowCount");
+
+    if (searchInput && tbody) {
+        searchInput.addEventListener("input", function () {
+            const term = this.value.trim().toLowerCase();
+            let visible = 0;
+            Array.from(tbody.rows).forEach(function (row) {
+                if (row.classList.contains('empty-row')) return;
+                const judul    = row.cells[1]?.textContent.toLowerCase() || "";
+                const deskripsi = row.cells[2]?.textContent.toLowerCase() || "";
+                const show = term === "" || judul.includes(term) || deskripsi.includes(term);
+                row.style.display = show ? "" : "none";
+                if (show) visible++;
+            });
+            if (rowCount) rowCount.textContent = visible + " materi";
+        });
+    }
+});
+</script>
+</body>
+</html>

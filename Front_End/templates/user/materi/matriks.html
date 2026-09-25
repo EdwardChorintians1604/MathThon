@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi: Matriks</title>
+    <link rel="icon" href="{{url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/materi.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+    <header>
+        <!-- Hamburger Button untuk Mobile -->
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Menu">
+            <i class="bi bi-list"></i>
+        </button>
+        
+        <nav>
+            <!-- Sidenav Kiri -->
+            <div id="sidenav" class="sidenav">
+                <button class="close-btn" id="closeBtn" aria-label="Close Menu">
+                    <i class="bi bi-x"></i>
+                </button>
+                <h3>Navigasi Matriks</h3>
+                <ul>
+                    <li><a href="{{url_for('user.dashboard_user')}}">Kembali ke Beranda</a></li>
+                    <li><a href="#pengertian">Pengertian</a></li>
+                    <li><a href="#jenis">Jenis-Jenis</a></li>
+                    <li><a href="#operasi">Operasi Matriks</a></li>
+                    <li><a href="#determinan">Determinan</a></li>
+                    <li><a href="#latihan">Latihan Soal</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1 style="color:#2c3e50; font-weight:800; text-align:center; margin-bottom:8px;">Materi: Matriks</h1>
+        <p style="text-align:center; color:#777; margin-bottom:30px; margin-left:220px;">Memahami susunan bilangan dalam baris dan kolom, serta operasi-operasinya</p>
+
+        <div id="isi-materi" style="margin-left:220px;">
+
+            <!-- Intro Banner -->
+            <div class="card" style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%); color:white; border:none;">
+                <div class="card-body" style="padding:28px;">
+                    <h2 style="color:white; font-weight:700; margin-bottom:12px;"><i class="bi bi-grid-3x3-gap-fill"></i> Mengapa Matriks Penting?</h2>
+                    <p style="color:rgba(255,255,255,0.88); line-height:1.8; font-size:1.02rem;">Matriks digunakan secara luas dalam kehidupan nyata: dari <strong style="color:#64ffda;">kriptografi</strong> (enkripsi data), <strong style="color:#64ffda;">grafika komputer</strong> (transformasi 3D), <strong style="color:#64ffda;">machine learning</strong>, hingga <strong style="color:#64ffda;">sistem persamaan linear</strong> di bidang teknik dan ekonomi.</p>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+                        <span style="background:rgba(100,255,218,0.15); border:1px solid rgba(100,255,218,0.4); color:#64ffda; padding:5px 14px; border-radius:20px; font-size:0.85rem;">🔐 Kriptografi</span>
+                        <span style="background:rgba(100,255,218,0.15); border:1px solid rgba(100,255,218,0.4); color:#64ffda; padding:5px 14px; border-radius:20px; font-size:0.85rem;">🎮 Game & Grafis 3D</span>
+                        <span style="background:rgba(100,255,218,0.15); border:1px solid rgba(100,255,218,0.4); color:#64ffda; padding:5px 14px; border-radius:20px; font-size:0.85rem;">🤖 Machine Learning</span>
+                        <span style="background:rgba(100,255,218,0.15); border:1px solid rgba(100,255,218,0.4); color:#64ffda; padding:5px 14px; border-radius:20px; font-size:0.85rem;">📊 Ekonomi & Statistik</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pengertian -->
+            <div class="card" id="pengertian">
+                <div class="card-body" style="padding:28px;">
+                    <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px;">
+                        <div style="width:52px; height:52px; background:linear-gradient(135deg,#007bff,#6610f2); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0; color:white; box-shadow:0 4px 12px rgba(0,123,255,0.3);"><i class="bi bi-grid-3x3"></i></div>
+                        <div>
+                            <h2 style="color:#004085; font-weight:700; margin:0; font-size:1.4rem;">Pengertian Matriks</h2>
+                            <span style="background:#cce5ff; color:#004085; font-size:0.75rem; padding:2px 10px; border-radius:20px; font-weight:600;">Notasi: A, B, C (huruf kapital)</span>
+                        </div>
+                    </div>
+
+                    <p style="color:#444; line-height:1.8; font-size:1rem;">Matriks adalah <strong>susunan bilangan yang disusun secara teratur dalam bentuk baris (horizontal) dan kolom (vertikal)</strong> sehingga membentuk sebuah persegi panjang. Ukuran atau <em>ordo</em> matriks dinyatakan sebagai <strong>m × n</strong>, di mana <strong>m</strong> adalah jumlah baris dan <strong>n</strong> adalah jumlah kolom. Setiap bilangan di dalam matriks disebut <em>elemen</em> atau <em>entri</em>.</p>
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:18px;">
+                        <div style="background:#f0f4ff; border-radius:12px; padding:18px; border-top:4px solid #007bff;">
+                            <p style="font-weight:700; color:#004085; margin-bottom:10px; font-size:0.95rem;"><i class="bi bi-grid"></i> Contoh Matriks A (2×3)</p>
+                            <div style="background:white; border-radius:8px; padding:12px; text-align:center; font-size:1.1rem; font-family:monospace; border:1px solid #cce5ff; letter-spacing:0.05em;">
+                                <div>⌈ 1 &nbsp; 2 &nbsp; 3 ⌉</div>
+                                <div>⌊ 4 &nbsp; 5 &nbsp; 6 ⌋</div>
+                            </div>
+                            <p style="color:#6c757d; font-size:0.82rem; margin-top:8px; margin-bottom:0;">2 baris, 3 kolom → ordo 2×3</p>
+                        </div>
+                        <div style="background:#f0f4ff; border-radius:12px; padding:18px; border-top:4px solid #6610f2;">
+                            <p style="font-weight:700; color:#4a0a9e; margin-bottom:10px; font-size:0.95rem;"><i class="bi bi-info-circle"></i> Notasi Elemen</p>
+                            <div style="background:white; border-radius:8px; padding:12px; border:1px solid #d4b8ff;">
+                                <p style="color:#333; font-size:0.9rem; margin-bottom:6px;">Elemen matriks A pada baris ke-<em>i</em> dan kolom ke-<em>j</em> ditulis:</p>
+                                <p style="text-align:center; font-size:1.2rem; font-weight:700; color:#6610f2; margin:8px 0;">a<sub>ij</sub></p>
+                                <p style="color:#888; font-size:0.82rem; margin:0;">Contoh: a<sub>12</sub> = 2 (baris 1, kolom 2)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jenis-Jenis -->
+            <div class="card" id="jenis">
+                <div class="card-body" style="padding:28px;">
+                    <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px;">
+                        <div style="width:52px; height:52px; background:linear-gradient(135deg,#28a745,#20c997); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0; color:white; box-shadow:0 4px 12px rgba(40,167,69,0.3);"><i class="bi bi-list-ul"></i></div>
+                        <div>
+                            <h2 style="color:#155724; font-weight:700; margin:0; font-size:1.4rem;">Jenis-Jenis Matriks</h2>
+                            <span style="background:#d4edda; color:#155724; font-size:0.75rem; padding:2px 10px; border-radius:20px; font-weight:600;">Berdasarkan ordo dan nilai elemen</span>
+                        </div>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                        <div style="background:#f8fff9; border:1.5px solid #28a745; border-radius:12px; padding:16px;">
+                            <p style="font-weight:700; color:#155724; margin-bottom:8px;">📏 Matriks Baris (1×n)</p>
+                            <p style="font-size:0.88rem; color:#555; margin-bottom:8px;">Matriks yang hanya memiliki <strong>satu baris</strong>. Jumlah kolom bisa berapa saja.</p>
+                            <div style="background:#d4edda; border-radius:6px; padding:8px; font-family:monospace; font-size:0.95rem; text-align:center;">
+                                [ 3 &nbsp; 7 &nbsp; 2 &nbsp; 9 ]
+                            </div>
+                            <p style="color:#888; font-size:0.8rem; margin-top:6px; margin-bottom:0;">Ordo: 1×4</p>
+                        </div>
+
+                        <div style="background:#f8fff9; border:1.5px solid #28a745; border-radius:12px; padding:16px;">
+                            <p style="font-weight:700; color:#155724; margin-bottom:8px;">📐 Matriks Kolom (m×1)</p>
+                            <p style="font-size:0.88rem; color:#555; margin-bottom:8px;">Matriks yang hanya memiliki <strong>satu kolom</strong>. Jumlah baris bisa berapa saja.</p>
+                            <div style="background:#d4edda; border-radius:6px; padding:8px; font-family:monospace; font-size:0.95rem; text-align:center;">
+                                ⌈ 5 ⌉<br>| 1 |<br>⌊ 8 ⌋
+                            </div>
+                            <p style="color:#888; font-size:0.8rem; margin-top:6px; margin-bottom:0;">Ordo: 3×1</p>
+                        </div>
+
+                        <div style="background:#f8fff9; border:1.5px solid #28a745; border-radius:12px; padding:16px;">
+                            <p style="font-weight:700; color:#155724; margin-bottom:8px;">⬛ Matriks Persegi (n×n)</p>
+                            <p style="font-size:0.88rem; color:#555; margin-bottom:8px;">Matriks dengan <strong>jumlah baris = jumlah kolom</strong>. Memiliki <em>diagonal utama</em>.</p>
+                            <div style="background:#d4edda; border-radius:6px; padding:8px; font-family:monospace; font-size:0.95rem; text-align:center;">
+                                ⌈ 1 &nbsp; 2 ⌉<br>⌊ 3 &nbsp; 4 ⌋
+                            </div>
+                            <p style="color:#888; font-size:0.8rem; margin-top:6px; margin-bottom:0;">Ordo: 2×2</p>
+                        </div>
+
+                        <div style="background:#f8fff9; border:1.5px solid #28a745; border-radius:12px; padding:16px;">
+                            <p style="font-weight:700; color:#155724; margin-bottom:8px;">🆔 Matriks Identitas (I)</p>
+                            <p style="font-size:0.88rem; color:#555; margin-bottom:8px;">Diagonal utama bernilai <strong>1</strong>, semua elemen lain bernilai <strong>0</strong>. Berlaku: A × I = A.</p>
+                            <div style="background:#d4edda; border-radius:6px; padding:8px; font-family:monospace; font-size:0.95rem; text-align:center;">
+                                ⌈ <strong>1</strong> &nbsp; 0 ⌉<br>⌊ 0 &nbsp; <strong>1</strong> ⌋
+                            </div>
+                            <p style="color:#888; font-size:0.8rem; margin-top:6px; margin-bottom:0;">I₂ (identitas ordo 2)</p>
+                        </div>
+
+                        <div style="background:#f8fff9; border:1.5px solid #28a745; border-radius:12px; padding:16px;">
+                            <p style="font-weight:700; color:#155724; margin-bottom:8px;">🔢 Matriks Nol (O)</p>
+                            <p style="font-size:0.88rem; color:#555; margin-bottom:8px;">Semua elemennya bernilai <strong>0</strong>. Berlaku sebagai elemen netral penjumlahan matriks.</p>
+                            <div style="background:#d4edda; border-radius:6px; padding:8px; font-family:monospace; font-size:0.95rem; text-align:center;">
+                                ⌈ 0 &nbsp; 0 ⌉<br>⌊ 0 &nbsp; 0 ⌋
+                            </div>
+                            <p style="color:#888; font-size:0.8rem; margin-top:6px; margin-bottom:0;">A + O = A</p>
+                        </div>
+
+                        <div style="background:#f8fff9; border:1.5px solid #28a745; border-radius:12px; padding:16px;">
+                            <p style="font-weight:700; color:#155724; margin-bottom:8px;">↗️ Matriks Diagonal</p>
+                            <p style="font-size:0.88rem; color:#555; margin-bottom:8px;">Matriks persegi dengan elemen <strong>di luar diagonal utama = 0</strong>. Diagonal utama bebas.</p>
+                            <div style="background:#d4edda; border-radius:6px; padding:8px; font-family:monospace; font-size:0.95rem; text-align:center;">
+                                ⌈ 5 &nbsp; 0 ⌉<br>⌊ 0 &nbsp; 3 ⌋
+                            </div>
+                            <p style="color:#888; font-size:0.8rem; margin-top:6px; margin-bottom:0;">Khusus: I adalah matriks diagonal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Operasi Matriks -->
+            <div class="card" id="operasi">
+                <div class="card-body" style="padding:28px;">
+                    <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px;">
+                        <div style="width:52px; height:52px; background:linear-gradient(135deg,#fd7e14,#ffc107); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0; color:white; box-shadow:0 4px 12px rgba(253,126,20,0.3);"><i class="bi bi-calculator"></i></div>
+                        <div>
+                            <h2 style="color:#6d3a00; font-weight:700; margin:0; font-size:1.4rem;">Operasi Matriks</h2>
+                            <span style="background:#ffe5cc; color:#6d3a00; font-size:0.75rem; padding:2px 10px; border-radius:20px; font-weight:600;">Penjumlahan, Pengurangan, Perkalian</span>
+                        </div>
+                    </div>
+
+                    <!-- Penjumlahan & Pengurangan -->
+                    <div style="background:#fff8f0; border-left:5px solid #fd7e14; border-radius:0 12px 12px 0; padding:18px; margin-bottom:16px;">
+                        <p style="font-weight:700; color:#6d3a00; margin-bottom:8px; font-size:1rem;">➕ / ➖ Penjumlahan & Pengurangan Matriks</p>
+                        <p style="color:#555; font-size:0.9rem; margin-bottom:12px;"><strong>Syarat:</strong> Kedua matriks harus memiliki ordo yang sama (m×n). Caranya: jumlahkan/kurangkan elemen yang <em>seletak</em> (posisi baris dan kolomnya sama).</p>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                            <div style="background:white; border-radius:8px; padding:12px; border:1px solid #ffd0a0;">
+                                <p style="font-size:0.85rem; font-weight:600; color:#6d3a00; margin-bottom:8px;">Contoh Penjumlahan A + B:</p>
+                                <div style="font-family:monospace; font-size:0.88rem; color:#333; line-height:1.7;">
+                                    ⌈2 3⌉ + ⌈1 0⌉ = ⌈<strong>3</strong> <strong>3</strong>⌉<br>
+                                    ⌊1 4⌋ &nbsp; ⌊2 5⌋ &nbsp; ⌊<strong>3</strong> <strong>9</strong>⌋
+                                </div>
+                                <p style="color:#888; font-size:0.78rem; margin-top:6px; margin-bottom:0;">2+1=3, 3+0=3, 1+2=3, 4+5=9</p>
+                            </div>
+                            <div style="background:white; border-radius:8px; padding:12px; border:1px solid #ffd0a0;">
+                                <p style="font-size:0.85rem; font-weight:600; color:#6d3a00; margin-bottom:8px;">Contoh Pengurangan A − B:</p>
+                                <div style="font-family:monospace; font-size:0.88rem; color:#333; line-height:1.7;">
+                                    ⌈5 8⌉ − ⌈2 3⌉ = ⌈<strong>3</strong> <strong>5</strong>⌉<br>
+                                    ⌊6 9⌋ &nbsp; ⌊1 4⌋ &nbsp; ⌊<strong>5</strong> <strong>5</strong>⌋
+                                </div>
+                                <p style="color:#888; font-size:0.78rem; margin-top:6px; margin-bottom:0;">5−2=3, 8−3=5, 6−1=5, 9−4=5</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Perkalian Skalar -->
+                    <div style="background:#fff8f0; border-left:5px solid #ffc107; border-radius:0 12px 12px 0; padding:18px; margin-bottom:16px;">
+                        <p style="font-weight:700; color:#856404; margin-bottom:8px; font-size:1rem;">🔢 Perkalian Skalar (k × A)</p>
+                        <p style="color:#555; font-size:0.9rem; margin-bottom:12px;">Kalikan <strong>setiap elemen</strong> matriks dengan bilangan skalar <em>k</em>. Tidak ada syarat ordo khusus.</p>
+                        <div style="background:white; border-radius:8px; padding:12px; border:1px solid #ffd0a0; display:inline-block;">
+                            <div style="font-family:monospace; font-size:0.95rem; color:#333; line-height:1.7;">
+                                3 × ⌈2 &nbsp;1⌉ = ⌈<strong>6</strong> &nbsp;<strong>3</strong>⌉<br>
+                                &nbsp; &nbsp; &nbsp;⌊3 &nbsp;4⌋ &nbsp; ⌊<strong>9</strong> <strong>12</strong>⌋
+                            </div>
+                            <p style="color:#888; font-size:0.78rem; margin-top:6px; margin-bottom:0;">Setiap elemen dikalikan 3</p>
+                        </div>
+                    </div>
+
+                    <!-- Perkalian Matriks -->
+                    <div style="background:#fff8f0; border-left:5px solid #dc3545; border-radius:0 12px 12px 0; padding:18px;">
+                        <p style="font-weight:700; color:#721c24; margin-bottom:8px; font-size:1rem;">✖️ Perkalian Matriks (A × B)</p>
+                        <p style="color:#555; font-size:0.9rem; margin-bottom:6px;"><strong>Syarat:</strong> Jumlah <em>kolom A</em> harus sama dengan jumlah <em>baris B</em>. Jika A ordo m×<strong>k</strong> dan B ordo <strong>k</strong>×n, maka hasil A×B berukuran m×n.</p>
+                        <div style="background:#fff3cd; border-radius:8px; padding:10px 14px; margin-bottom:12px; border:1px solid #ffc107;">
+                            <p style="margin:0; font-size:0.88rem; color:#856404;"><strong>⚠️ Perhatian:</strong> Perkalian matriks <strong>tidak komutatif</strong>! A×B ≠ B×A (umumnya)</p>
+                        </div>
+                        <div style="background:white; border-radius:8px; padding:14px; border:1px solid #f5c6cb;">
+                            <p style="font-size:0.85rem; font-weight:600; color:#721c24; margin-bottom:10px;">Contoh: A(2×2) × B(2×2)</p>
+                            <div style="font-family:monospace; font-size:0.88rem; color:#333; line-height:2;">
+                                ⌈1 2⌉ × ⌈5 6⌉ = ⌈(1×5+2×7) &nbsp;(1×6+2×8)⌉ = ⌈<strong>19</strong> <strong>22</strong>⌉<br>
+                                ⌊3 4⌋ &nbsp; ⌊7 8⌋ &nbsp; ⌊(3×5+4×7) &nbsp;(3×6+4×8)⌋ &nbsp; ⌊<strong>43</strong> <strong>50</strong>⌋
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Determinan -->
+            <div class="card" id="determinan">
+                <div class="card-body" style="padding:28px;">
+                    <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px;">
+                        <div style="width:52px; height:52px; background:linear-gradient(135deg,#17a2b8,#007bff); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0; color:white; box-shadow:0 4px 12px rgba(23,162,184,0.3);"><i class="bi bi-hash"></i></div>
+                        <div>
+                            <h2 style="color:#0c5460; font-weight:700; margin:0; font-size:1.4rem;">Determinan Matriks</h2>
+                            <span style="background:#d1ecf1; color:#0c5460; font-size:0.75rem; padding:2px 10px; border-radius:20px; font-weight:600;">Notasi: det(A) atau |A|</span>
+                        </div>
+                    </div>
+
+                    <p style="color:#444; line-height:1.8; font-size:1rem;">Determinan adalah sebuah <strong>nilai skalar</strong> (bilangan tunggal) yang dapat dihitung dari matriks persegi. Determinan sangat penting karena menentukan apakah suatu matriks memiliki invers atau tidak — jika <strong>det(A) = 0</strong>, matriks disebut <em>singular</em> dan <strong>tidak memiliki invers</strong>.</p>
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:18px;">
+                        <!-- Det 2x2 -->
+                        <div style="background:#e8f7fa; border:1.5px solid #17a2b8; border-radius:12px; padding:18px;">
+                            <p style="font-weight:700; color:#0c5460; margin-bottom:12px; font-size:0.95rem;"><i class="bi bi-2-square-fill"></i> Determinan Matriks 2×2</p>
+                            <div style="background:white; border-radius:8px; padding:14px; text-align:center; margin-bottom:10px;">
+                                <div style="font-size:1.05rem; font-family:monospace; line-height:1.9;">
+                                    A = ⌈ a &nbsp; b ⌉<br>
+                                    &nbsp; &nbsp; &nbsp;⌊ c &nbsp; d ⌋
+                                </div>
+                                <div style="margin-top:10px; font-size:1.1rem; font-weight:700; color:#17a2b8;">
+                                    det(A) = <strong>ad − bc</strong>
+                                </div>
+                            </div>
+                            <div style="background:#d1ecf1; border-radius:8px; padding:12px;">
+                                <p style="font-size:0.85rem; font-weight:600; color:#0c5460; margin-bottom:6px;">Contoh:</p>
+                                <div style="font-family:monospace; font-size:0.9rem; line-height:1.7;">
+                                    A = ⌈ 3 &nbsp; 2 ⌉<br>
+                                    &nbsp; &nbsp; &nbsp;⌊ 1 &nbsp; 4 ⌋
+                                </div>
+                                <p style="font-size:0.9rem; color:#333; margin-top:8px; margin-bottom:0;">det(A) = (3×4) − (2×1) = 12 − 2 = <strong style="color:#0c5460;">10</strong></p>
+                            </div>
+                        </div>
+
+                        <!-- Det 3x3 + Sifat -->
+                        <div style="background:#e8f7fa; border:1.5px solid #17a2b8; border-radius:12px; padding:18px;">
+                            <p style="font-weight:700; color:#0c5460; margin-bottom:12px; font-size:0.95rem;"><i class="bi bi-3-square-fill"></i> Determinan Matriks 3×3 (Sarrus)</p>
+                            <div style="background:white; border-radius:8px; padding:12px; margin-bottom:10px;">
+                                <p style="font-size:0.82rem; color:#555; margin-bottom:8px;">Metode Sarrus: diagonal kanan (+), diagonal kiri (−)</p>
+                                <div style="font-family:monospace; font-size:0.85rem; line-height:1.7; color:#333;">
+                                    det = aei + bfg + cdh<br>
+                                    &nbsp; &nbsp; &nbsp; &nbsp; − ceg − afh − bdi
+                                </div>
+                            </div>
+                            <div style="background:#d1ecf1; border-radius:8px; padding:12px;">
+                                <p style="font-size:0.85rem; font-weight:600; color:#0c5460; margin-bottom:6px;"><i class="bi bi-exclamation-circle"></i> Sifat Penting</p>
+                                <ul style="font-size:0.85rem; color:#555; margin:0; padding-left:16px;">
+                                    <li>det(A) = 0 → matriks singular, tak berinvers</li>
+                                    <li>det(AB) = det(A) × det(B)</li>
+                                    <li>det(Aᵀ) = det(A)</li>
+                                    <li>det(kA) = kⁿ × det(A), n = ordo</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Invers Matriks 2x2 -->
+                    <div style="background:#fff3cd; border:1.5px solid #ffc107; border-radius:12px; padding:18px; margin-top:16px;">
+                        <p style="font-weight:700; color:#856404; margin-bottom:10px; font-size:1rem;"><i class="bi bi-arrow-repeat"></i> Bonus: Invers Matriks 2×2</p>
+                        <p style="color:#555; font-size:0.9rem; margin-bottom:10px;">Invers A⁻¹ hanya ada jika det(A) ≠ 0. Rumusnya:</p>
+                        <div style="background:white; border-radius:8px; padding:14px; text-align:center; display:inline-block;">
+                            <div style="font-size:1.05rem; font-family:serif;">
+                                A⁻¹ = <sup>1</sup>/<sub>det(A)</sub> × ⌈ d &nbsp;−b ⌉<br>
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;⌊−c &nbsp; a ⌋
+                            </div>
+                        </div>
+                        <p style="color:#888; font-size:0.85rem; margin-top:10px; margin-bottom:0;">Berlaku: A × A⁻¹ = A⁻¹ × A = I (matriks identitas)</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- LATIHAN SOAL -->
+    <div class="container">
+        <div class="card" id="latihan" style="margin-left:220px;">
+            <div class="card-body">
+                <h2><i class="bi bi-pencil-fill text-danger"></i> Latihan Soal</h2>
+                <p>Uji pemahamanmu tentang Matriks dengan mengerjakan soal-soal berikut!</p>
+
+                <div style="margin-bottom:20px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                        <span style="font-size:0.9rem; color:#555;">Progress: <strong id="progress-text">0 / 10</strong></span>
+                        <span style="font-size:0.9rem; color:#555;">Skor sementara: <strong id="live-score">0</strong></span>
+                    </div>
+                    <div style="height:10px; background:#e9ecef; border-radius:10px; overflow:hidden;">
+                        <div id="progress-bar" style="height:100%; width:0%; background:linear-gradient(90deg,#667eea,#764ba2); border-radius:10px; transition:width 0.4s;"></div>
+                    </div>
+                </div>
+
+                <div id="soal-container"></div>
+
+                <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:24px;">
+                    <button id="btn-periksa" onclick="periksaJawaban()" style="background:linear-gradient(135deg,#667eea,#764ba2); color:white; border:none; padding:12px 28px; border-radius:10px; font-size:1rem; font-weight:600; cursor:pointer; box-shadow:0 4px 12px rgba(102,126,234,0.4);">
+                        <i class="bi bi-check-circle-fill"></i> Periksa Jawaban
+                    </button>
+                    <button onclick="resetLatihan()" style="background:#f8f9fa; color:#555; border:2px solid #dee2e6; padding:12px 28px; border-radius:10px; font-size:1rem; font-weight:600; cursor:pointer;">
+                        <i class="bi bi-arrow-counterclockwise"></i> Ulangi Latihan
+                    </button>
+                </div>
+
+                <div id="hasil-penilaian" style="display:none; margin-top:28px; padding:24px; border-radius:15px; text-align:center; background:linear-gradient(135deg,#f8f9fa,#e9ecef);">
+                    <div id="hasil-icon" style="font-size:3.5rem; margin-bottom:10px;"></div>
+                    <h3 id="hasil-judul" style="font-weight:700; margin-bottom:8px;"></h3>
+                    <p id="hasil-skor" style="font-size:1.2rem; color:#555; margin-bottom:4px;"></p>
+                    <p id="hasil-nilai" style="font-size:2rem; font-weight:800; margin-bottom:8px;"></p>
+                    <p id="hasil-predikat" style="font-size:1rem; font-weight:600; padding:6px 18px; border-radius:20px; display:inline-block; margin-bottom:12px;"></p>
+                    <p id="hasil-pesan" style="color:#666; font-size:0.95rem;"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay untuk menutup menu -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- JavaScript untuk Toggle Sidenav -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const closeBtn = document.getElementById('closeBtn');
+            const sidenav = document.getElementById('sidenav');
+            const overlay = document.getElementById('overlay');
+            function openNav() { sidenav.classList.add('active'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+            function closeNav() { sidenav.classList.remove('active'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+            if (hamburgerBtn) hamburgerBtn.addEventListener('click', openNav);
+            if (closeBtn) closeBtn.addEventListener('click', closeNav);
+            if (overlay) overlay.addEventListener('click', closeNav);
+            sidenav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { if (window.innerWidth <= 768) closeNav(); }));
+            window.addEventListener('resize', () => { if (window.innerWidth > 768) closeNav(); });
+        });
+    </script>
+
+    <script>
+    const bankSoal = [
+        { kategori:"Pengertian", soal:"Sebuah matriks berukuran 3×4 artinya matriks tersebut memiliki...", opsi:["3 kolom dan 4 baris","4 baris dan 3 kolom","3 baris dan 4 kolom","4 kolom dan 3 kolom"], jawaban:2, penjelasan:"Ordo m×n berarti m baris dan n kolom. Jadi 3×4 = 3 baris, 4 kolom." },
+        { kategori:"Jenis Matriks", soal:"Matriks yang memiliki jumlah baris sama dengan jumlah kolom disebut...", opsi:["Matriks baris","Matriks kolom","Matriks persegi","Matriks nol"], jawaban:2, penjelasan:"Matriks persegi adalah matriks dengan jumlah baris = jumlah kolom (ordo n×n)." },
+        { kategori:"Jenis Matriks", soal:"Matriks identitas ordo 2×2 adalah...", opsi:["[[0,0],[0,0]]","[[1,0],[0,1]]","[[1,1],[1,1]]","[[0,1],[1,0]]"], jawaban:1, penjelasan:"Matriks identitas memiliki nilai 1 pada diagonal utama dan 0 di posisi lainnya." },
+        { kategori:"Jenis Matriks", soal:"Matriks [[5, 2, 8]] adalah jenis matriks...", opsi:["Matriks persegi","Matriks kolom","Matriks baris","Matriks nol"], jawaban:2, penjelasan:"Matriks baris hanya memiliki satu baris dengan beberapa kolom." },
+        { kategori:"Operasi Matriks", soal:"Jika A = [[2,3],[1,4]] dan B = [[1,2],[3,0]], berapakah A + B?", opsi:["[[3,5],[4,4]]","[[3,5],[4,3]]","[[1,1],[2,4]]","[[3,6],[4,4]]"], jawaban:0, penjelasan:"Penjumlahan matriks: elemen seletak dijumlahkan. (2+1)=3, (3+2)=5, (1+3)=4, (4+0)=4 → [[3,5],[4,4]]" },
+        { kategori:"Operasi Matriks", soal:"Perkalian matriks A×B dapat dilakukan jika...", opsi:["Ordo A = Ordo B","Jumlah kolom A = jumlah baris B","Jumlah baris A = jumlah kolom B","Semua elemen A dan B sama"], jawaban:1, penjelasan:"Syarat perkalian A×B: jumlah kolom matriks A harus sama dengan jumlah baris matriks B." },
+        { kategori:"Operasi Matriks", soal:"Jika A = [[2,1],[3,4]] dan k = 3, berapakah 3A?", opsi:["[[6,3],[9,12]]","[[5,4],[6,7]]","[[6,1],[3,4]]","[[2,3],[3,4]]"], jawaban:0, penjelasan:"Perkalian skalar: semua elemen dikalikan 3. 3×[[2,1],[3,4]] = [[6,3],[9,12]]" },
+        { kategori:"Determinan", soal:"Jika A = [[4,2],[3,1]], berapakah det(A)?", opsi:["-2","-4","2","10"], jawaban:0, penjelasan:"det(A) = (4×1) - (2×3) = 4 - 6 = -2" },
+        { kategori:"Determinan", soal:"Jika A = [[5,3],[2,4]], berapakah det(A)?", opsi:["14","26","20","8"], jawaban:0, penjelasan:"det(A) = (5×4) - (3×2) = 20 - 6 = 14" },
+        { kategori:"Determinan", soal:"Matriks A = [[a,b],[c,d]]. Kapan matriks A tidak memiliki invers?", opsi:["Ketika a=d","Ketika det(A) = 0","Ketika b=c","Ketika a+d=0"], jawaban:1, penjelasan:"Matriks tidak memiliki invers (singular) ketika nilai determinannya = 0." }
+    ];
+
+    const badgeColor = { "Pengertian":"#007bff","Jenis Matriks":"#28a745","Operasi Matriks":"#fd7e14","Determinan":"#6f42c1" };
+    let soalAktif = [], sudahDiperiksa = false;
+
+    function acak(arr) { return [...arr].sort(() => Math.random() - 0.5); }
+
+    function renderSoal() {
+        soalAktif = acak(bankSoal);
+        sudahDiperiksa = false;
+        const c = document.getElementById('soal-container');
+        c.innerHTML = '';
+        document.getElementById('hasil-penilaian').style.display = 'none';
+        document.getElementById('btn-periksa').disabled = false;
+        document.getElementById('progress-text').textContent = `0 / ${soalAktif.length}`;
+        document.getElementById('live-score').textContent = '0';
+        document.getElementById('progress-bar').style.width = '0%';
+
+        soalAktif.forEach((s, i) => {
+            const div = document.createElement('div');
+            div.id = `soal-${i}`;
+            div.style.cssText = "margin-bottom:24px; background:#fff; border:1.5px solid #e9ecef; border-radius:12px; padding:20px; transition:border-color 0.3s;";
+            div.innerHTML = `
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                    <span style="background:${badgeColor[s.kategori]||'#555'}; color:#fff; font-size:0.75rem; padding:3px 10px; border-radius:20px; font-weight:600;">${s.kategori}</span>
+                    <span style="font-size:0.85rem; color:#888;">Soal ${i+1}</span>
+                </div>
+                <p style="font-weight:600; color:#2c3e50; margin-bottom:14px;">${s.soal}</p>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    ${s.opsi.map((o,j) => `
+                        <label id="lbl-${i}-${j}" style="display:flex; align-items:center; gap:10px; padding:10px 14px; border:2px solid #dee2e6; border-radius:10px; cursor:pointer; background:#fafafa; transition:all 0.2s; font-family:monospace;">
+                            <input type="radio" name="soal-${i}" value="${j}" onchange="updateProgress()" style="accent-color:#667eea; width:16px; height:16px; flex-shrink:0;">
+                            <span style="font-family:'Segoe UI',sans-serif;">${o}</span>
+                        </label>`).join('')}
+                </div>
+                <div id="penjelasan-${i}" style="display:none; margin-top:12px; padding:10px 14px; border-radius:8px; font-size:0.9rem;"></div>`;
+            c.appendChild(div);
+        });
+    }
+
+    function updateProgress() {
+        let n = 0;
+        soalAktif.forEach((_,i) => { if(document.querySelector(`input[name="soal-${i}"]:checked`)) n++; });
+        document.getElementById('progress-text').textContent = `${n} / ${soalAktif.length}`;
+        document.getElementById('progress-bar').style.width = `${(n/soalAktif.length)*100}%`;
+    }
+
+    function periksaJawaban() {
+        const belum = soalAktif.map((_,i) => document.querySelector(`input[name="soal-${i}"]:checked`) ? null : i+1).filter(Boolean);
+        if (belum.length) { alert(`Masih ada ${belum.length} soal belum dijawab: Soal nomor ${belum.join(', ')}`); return; }
+        sudahDiperiksa = true;
+        document.getElementById('btn-periksa').disabled = true;
+        let skor = 0;
+        soalAktif.forEach((s,i) => {
+            const dipilih = parseInt(document.querySelector(`input[name="soal-${i}"]:checked`).value);
+            document.querySelectorAll(`input[name="soal-${i}"]`).forEach(r => r.disabled = true);
+            s.opsi.forEach((_,j) => {
+                const lbl = document.getElementById(`lbl-${i}-${j}`);
+                lbl.style.cursor = 'default';
+                if (j === s.jawaban) { lbl.style.borderColor='#28a745'; lbl.style.background='#d4edda'; lbl.style.color='#155724'; }
+                if (j === dipilih && dipilih !== s.jawaban) { lbl.style.borderColor='#dc3545'; lbl.style.background='#f8d7da'; lbl.style.color='#721c24'; }
+            });
+            const penEl = document.getElementById(`penjelasan-${i}`);
+            const soalEl = document.getElementById(`soal-${i}`);
+            if (dipilih === s.jawaban) {
+                skor++;
+                soalEl.style.borderColor = '#28a745';
+                penEl.style.cssText = "display:block; margin-top:12px; padding:10px 14px; border-radius:8px; font-size:0.9rem; background:#d4edda; color:#155724; border:1px solid #28a745;";
+                penEl.innerHTML = `<i class="bi bi-check-circle-fill"></i> <strong>Benar!</strong> ${s.penjelasan}`;
+            } else {
+                soalEl.style.borderColor = '#dc3545';
+                penEl.style.cssText = "display:block; margin-top:12px; padding:10px 14px; border-radius:8px; font-size:0.9rem; background:#f8d7da; color:#721c24; border:1px solid #dc3545;";
+                penEl.innerHTML = `<i class="bi bi-x-circle-fill"></i> <strong>Salah.</strong> ${s.penjelasan}`;
+            }
+        });
+        document.getElementById('live-score').textContent = skor;
+        tampilkanHasil(skor, soalAktif.length, Math.round((skor/soalAktif.length)*100));
+        document.getElementById('hasil-penilaian').scrollIntoView({ behavior:'smooth', block:'center' });
+    }
+
+    function tampilkanHasil(skor, total, nilai) {
+        document.getElementById('hasil-penilaian').style.display = 'block';
+        const data = nilai>=90 ? ['🏆','Luar Biasa!','#28a745','A — Sangat Baik','#d4edda','#155724','Kamu menguasai materi Matriks dengan sangat baik!']
+            : nilai>=75 ? ['😊','Bagus Sekali!','#007bff','B — Baik','#cce5ff','#004085','Pemahaman kamu sudah baik. Pelajari kembali soal yang salah.']
+            : nilai>=60 ? ['🙂','Cukup Baik','#fd7e14','C — Cukup','#fff3cd','#856404','Sudah cukup paham. Pelajari ulang bagian yang masih salah!']
+            : ['💪','Perlu Belajar Lagi','#dc3545','D — Kurang','#f8d7da','#721c24','Jangan menyerah! Baca ulang materi lalu coba lagi ya!'];
+        document.getElementById('hasil-icon').textContent = data[0];
+        document.getElementById('hasil-judul').textContent = data[1];
+        document.getElementById('hasil-judul').style.color = data[2];
+        document.getElementById('hasil-skor').textContent = `Kamu menjawab benar ${skor} dari ${total} soal`;
+        document.getElementById('hasil-nilai').textContent = nilai;
+        document.getElementById('hasil-nilai').style.color = data[2];
+        const p = document.getElementById('hasil-predikat');
+        p.textContent = data[3]; p.style.background = data[4]; p.style.color = data[5];
+        document.getElementById('hasil-pesan').textContent = data[6];
+    }
+
+    function resetLatihan() {
+        renderSoal();
+        document.getElementById('latihan').scrollIntoView({ behavior:'smooth', block:'start' });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderSoal);
+    </script>
+</body>
+    <style>
+        /* Hamburger Button - Hanya muncul di mobile */
+        .hamburger-btn {
+            display: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1100;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 10px;
+            width: 50px;
+            height: 50px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+        }
+        .hamburger-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        .hamburger-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Close Button di dalam Sidenav */
+        .close-btn {
+            display: none;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #e74c3c;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        .close-btn:hover {
+            background: #c0392b;
+            transform: rotate(90deg);
+        }
+
+        /* Sidenav Styling */
+        .sidenav {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            padding-top: 80px;
+            border-right: 1px solid #ddd;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+        .sidenav h3 {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #ecf0f1;
+            font-weight: 600;
+        }
+        .sidenav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidenav ul li {
+            margin: 10px 0;
+        }
+        .sidenav ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            display: block;
+            padding: 12px 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+        .sidenav ul li a:hover {
+            background: #34495e;
+            color: #fff;
+            transform: translateX(5px);
+            border-left: 4px solid #3498db;
+        }
+
+        /* Overlay untuk menutup menu saat klik di luar */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Responsive Design untuk Mobile */
+        @media (max-width: 768px) {
+            .hamburger-btn { display: block; }
+            .close-btn { display: block; }
+            .sidenav { width: 280px; transform: translateX(-100%); padding-top: 60px; box-shadow: 2px 0 10px rgba(0,0,0,0.3); }
+            .sidenav.active { transform: translateX(0); }
+            #isi-materi { margin-left: 0 !important; padding: 20px 15px; }
+            .container { padding-top: 70px; }
+            #latihan { margin-left: 0 !important; }
+        }
+
+        /* Desktop - Sidenav selalu terlihat */
+        @media (min-width: 769px) {
+            .sidenav {
+                transform: translateX(0) !important;
+            }
+        }
+    </style>
+</html>

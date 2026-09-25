@@ -1,0 +1,46 @@
+{% extends "user/dashboard_user.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="mb-4">Materi: Ukuran Pemusatan Data</h1>
+    <p class="lead">Ukuran pemusatan data adalah sembarang ukuran yang menunjukkan pusat segugus data, yang telah diurutkan dari yang terkecil sampai yang terbesar atau sebaliknya.</p>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">1. Mean (Rata-rata)</h5>
+        </div>
+        <div class="card-body">
+            <p>Mean adalah nilai rata-rata dari sekumpulan data. Dihitung dengan menjumlahkan semua nilai data dan membaginya dengan banyaknya data.</p>
+            <p><strong>Rumus:</strong></p>
+            <p class="text-center"><code>Mean = (Jumlah semua nilai data) / (Banyaknya data)</code></p>
+            <p><strong>Contoh:</strong> Data: <code>2, 4, 4, 5, 7, 8</code></p>
+            <p>Mean = (2 + 4 + 4 + 5 + 7 + 8) / 6 = 30 / 6 = 5</p>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">2. Median (Nilai Tengah)</h5>
+        </div>
+        <div class="card-body">
+            <p>Median adalah nilai tengah dari data yang telah diurutkan. Jika jumlah data ganjil, median adalah nilai yang tepat di tengah. Jika genap, median adalah rata-rata dari dua nilai di tengah.</p>
+            <p><strong>Contoh (Data Ganjil):</strong> Data: <code>2, 3, <strong>4</strong>, 5, 7</code>. Median adalah <strong>4</strong>.</p>
+            <p><strong>Contoh (Data Genap):</strong> Data: <code>2, 4, <strong>4, 5</strong>, 7, 8</code>. Median adalah (4 + 5) / 2 = <strong>4.5</strong>.</p>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">3. Modus (Nilai yang Paling Sering Muncul)</h5>
+        </div>
+        <div class="card-body">
+            <p>Modus adalah nilai yang paling sering muncul dalam sekumpulan data.</p>
+            <p><strong>Contoh:</strong> Data: <code>2, 4, <strong>4</strong>, 5, 7, 8</code>. Modus dari data ini adalah <strong>4</strong> karena muncul sebanyak dua kali, lebih sering dari nilai lainnya.</p>
+            <p>Sebuah data bisa tidak memiliki modus, memiliki satu modus (unimodal), atau lebih dari satu modus (multimodal).</p>
+        </div>
+    </div>
+
+    <a href="{{ url_for('materi.materi_user') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Kembali ke Daftar Materi</a>
+
+</div>
+{% endblock %}

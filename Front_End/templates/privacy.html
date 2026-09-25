@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}MathThon | Kebijakan Privasi{% endblock %}</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <!-- Tailwind CSS (CDN) - ditambahkan tanpa build step -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          boxShadow: {
+            glow: '0 0 0 1px rgba(102,126,234,0.25), 0 18px 50px rgba(102,126,234,0.18)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+</head>
+
+<body style="background: linear-gradient(to bottom, black, rgb(66, 46, 100), grey);">
+
+  <header>
+    <nav class="wrapper animate__animated animate__fadeInDown">
+      <div class="brand animate__animated animate__fadeInLeft">
+        <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}" alt="MathThon Logo" class="photos">
+      </div>
+      <ul class="navigation">
+        <a class="nav-link" href="{{ url_for('main.home') }}">Beranda</a>
+        <a class="nav-link active" href="{{ url_for('main.privacy') }}">Privasi</a>
+        <a class="nav-link" href="{{ url_for('main.terms') }}">Syarat & Ketentuan</a>
+        <a class="nav-link" href="{{ url_for('main.about') }}">Tentang</a>
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Login/Register</a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+<li><a class="dropdown-item" href="{{ url_for('auth.register_user') }}">Register User</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('auth.login_user') }}">Login User</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('admin.login_admin') }}">Login Admin</a></li>
+          </ul>
+        </div>
+      </ul>
+      <button class="open-sidenav-btn" id="openSidenavBtn" onclick="openSidenav()">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <div id="sidenav-right" class="sidenav-right">
+        <span class="closebtn" onclick="closeSidenav()">&times;</span>
+        <a href="{{ url_for('main.home') }}">Beranda</a>
+        <a href="{{ url_for('main.privacy') }}" class="active">Privasi</a>
+        <a class="nav-link" href="{{ url_for('main.terms') }}">Syarat & Ketentuan</a>
+        <a href="{{ url_for('main.about') }}">Tentang</a>
+        <a href="{{ url_for('auth.register_user') }}">Register User</a>
+        <a href="{{ url_for('auth.login_user') }}">Login User</a>
+        <a href="{{ url_for('admin.login_admin') }}">Login Admin</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="content-section">
+    <div class="container" data-aos="fade-up">
+      <h2 class="page-title-large">Kebijakan Privasi MathThon</h2>
+      
+      <div class="content-card shadow-lg">
+        <h3 class="card-subtitle">Apa itu MathThon?</h3>
+        <p>MathThon adalah platform pembelajaran matematika daring yang dirancang untuk membantu siswa dari berbagai tingkat pendidikan dalam memahami konsep-konsep matematika dengan cara yang menyenangkan dan interaktif. Kami menyediakan berbagai sumber belajar, latihan soal, dan alat bantu visual untuk memudahkan proses belajar.</p>
+
+        <h3 class="card-subtitle">Kebijakan Privasi MathThon</h3>
+        <p>Kebijakan privasi ini menjelaskan bagaimana MathThon mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda saat menggunakan platform kami. Kami berkomitmen untuk melindungi privasi Anda dan memastikan bahwa data Anda digunakan hanya untuk tujuan yang sah.</p>
+
+        <h3 class="card-subtitle">1. Pengumpulan Data</h3>
+        <p>Kami mengumpulkan informasi berikut saat Anda menggunakan MathThon:</p>
+        <ul>
+          <li><strong>Data Pendaftaran:</strong> Nama, alamat email, kata sandi, dan informasi profil lainnya yang Anda berikan saat mendaftar.</li>
+          <li><strong>Data Penggunaan:</strong> Informasi tentang bagaimana Anda menggunakan platform, seperti materi yang diakses, skor latihan, dan waktu belajar.</li>
+          <li><strong>Data Teknis:</strong> Alamat IP, jenis perangkat, browser, dan data lokasi umum untuk analisis dan keamanan.</li>
+          <li><strong>Data Pembelajaran:</strong> Progress belajar, jawaban soal, dan analisis performa untuk personalisasi pengalaman belajar.</li>
+        </ul>
+
+        <h3 class="card-subtitle">2. Penggunaan Data</h3>
+        <p>Data yang kami kumpulkan digunakan untuk menyediakan dan meningkatkan layanan pembelajaran matematika, personalisasi konten, melacak progress belajar, menganalisis tren penggunaan, dan memastikan keamanan platform.</p>
+
+        <h3 class="card-subtitle">3. Pembagian Data</h3>
+        <p>Kami tidak menjual atau menyewakan data pribadi Anda kepada pihak ketiga. Data hanya dibagikan dengan persetujuan Anda, kepada penyedia layanan terpercaya untuk operasional platform, atau untuk mematuhi kewajiban hukum.</p>
+
+        <h3 class="card-subtitle">4. Keamanan Data</h3>
+        <p>Kami menerapkan langkah-langkah keamanan teknis seperti enkripsi data, akses terbatas bagi personel berwenang, dan pemantauan keamanan sistem secara berkala untuk melindungi data Anda.</p>
+
+        <h3 class="card-subtitle">5. Hak Pengguna</h3>
+        <p>Anda memiliki hak untuk mengakses, memperbaiki, menghapus, atau memindahkan data pribadi Anda. Anda juga dapat menolak pemrosesan data untuk tujuan tertentu dengan menghubungi kami.</p>
+
+        <h3 class="card-subtitle">6. Kontak Kami</h3>
+        <p>Jika Anda memiliki pertanyaan tentang kebijakan privasi ini, hubungi kami melalui:</p>
+        <ul>
+          <li>Email: privacy@maththon.com</li>
+          <li>WhatsApp: +62 812-3456-7890 (Admin Support)</li>
+        </ul>
+        <p><em>Terakhir diperbarui: Januari 2025</em></p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-4 bg-dark text-center text-white">
+    <div class="container">
+      <p class="mb-3">&copy; 2025 MathThon. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="{{ url_for('main.about') }}" class="text-white mx-2 text-decoration-none">Tentang MathThon</a> |
+        <a href="{{ url_for('main.privacy') }}" class="text-white mx-2 text-decoration-none">Kebijakan Privasi</a> |
+        <a href="{{ url_for('main.terms') }}" class="text-white mx-2 text-decoration-none">Syarat & Ketentuan</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+    
+    function openSidenav() {
+      document.getElementById("sidenav-right").classList.add("open");
+    }
+    function closeSidenav() {
+      document.getElementById("sidenav-right").classList.remove("open");
+    }
+  </script>
+</body>
+</html>

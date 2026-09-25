@@ -1,0 +1,335 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   MATHATHON - CUSTOMIZATION EXAMPLES
+   Uncomment & modify sesuai dengan needs Anda
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ───────────────────────────────────────────────────────────────────────────
+   EXAMPLE 1: Change Primary Accent Color dari Gold ke Blue
+   ─────────────────────────────────────────────────────────────────────────── */
+/*
+:root {
+    --mth-accent: #3498db;           // Bright Blue
+    --mth-accent-dim: rgba(52, 152, 219, 0.15);
+    --mth-accent-glow: rgba(52, 152, 219, 0.25);
+}
+*/
+
+/* ───────────────────────────────────────────────────────────────────────────
+   EXAMPLE 2: Change Typography - Use Different Fonts
+   ─────────────────────────────────────────────────────────────────────────── */
+/*
+:root {
+    --mth-font-display: 'Playfair Display', Georgia, serif;
+    --mth-font-body: 'Inter', system-ui, sans-serif;
+}
+*/
+
+/* ───────────────────────────────────────────────────────────────────────────
+   EXAMPLE 3: Make Animation Faster
+   ─────────────────────────────────────────────────────────────────────────── */
+/*
+:root {
+    --mth-transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+*/
+
+/* ───────────────────────────────────────────────────────────────────────────
+   EXAMPLE 4: Change Hero Background to Purple
+   ─────────────────────────────────────────────────────────────────────────── */
+/*
+.mth-hero {
+    background: linear-gradient(135deg, #2a0845 0%, #4a1a8f 50%, #1a0033 100%);
+}
+
+.sym {
+    color: rgba(138, 43, 226, 0.08);
+}
+
+.mth-pill {
+    color: #da70d6;
+    border-color: rgba(218, 112, 214, 0.4);
+    background: rgba(218, 112, 214, 0.08);
+}
+
+.mth-hero__title em {
+    color: #da70d6;
+}
+*/
+
+/* ───────────────────────────────────────────────────────────────────────────
+   EXAMPLE 5: Increase Border Radius untuk Style yang lebih Rounded
+   ─────────────────────────────────────────────────────────────────────────── */
+/*
+:root {
+    --mth-radius: 16px;     // Dari 12px
+    --mth-radius-lg: 28px;  // Dari 20px
+    --mth-radius-xl: 36px;  // Dari 28px
+}
+*/
+
+/* ───────────────────────────────────────────────────────────────────────────
+   EXAMPLE 6: Dark Mode - Complete Theme Switch
+   ─────────────────────────────────────────────────────────────────────────── */
+/*
+@media (prefers-color-scheme: dark) {
+    .mth-main {
+        background: #1a1a1a;
+    }
+    
+    .mth-card {
+        background: #2a2a2a;
+        border-color: #444;
+    }
+    
+    .mth-card__title {
+        color: #f0ede6;
+    }
+    
+    .mth-card__desc {
+        color: #bbb;
+    }
+}
+*/
+
+/* ───────────────────────────────────────────────────────────────────────────
+   EXAMPLE 7: Minimize Animations (untuk user preference)
+   ─────────────────────────────────────────────────────────────────────────── */
+/*
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+*/
+
+/* ───────────────────────────────────────────────────────────────────────────
+   EXAMPLE 8: Change Card Layout untuk Compact View
+   ─────────────────────────────────────────────────────────────────────────── */
+/*
+.mth-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.mth-card__body {
+    padding: 16px 16px 12px;
+}
+*/
+
+/* ───────────────────────────────────────────────────────────────────────────
+   EXAMPLE 9: Increase Card Hover Effect (lebih pronounced)
+   ─────────────────────────────────────────────────────────────────────────── */
+/*
+.mth-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.2), 0 0 0 2px rgba(200,169,110,0.4);
+}
+*/
+
+/* ───────────────────────────────────────────────────────────────────────────
+   EXAMPLE 10: Custom Status Badge Colors
+   ─────────────────────────────────────────────────────────────────────────── */
+/*
+.mth-card__badge--active {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+}
+
+.mth-card__badge--inactive {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+*/
+
+/* ───────────────────────────────────────────────────────────────────────────
+   EXAMPLE 11: Make Button More Prominent
+   ─────────────────────────────────────────────────────────────────────────── */
+/*
+.mth-card__btn {
+    background: linear-gradient(135deg, #c8a96e 0%, #e8c98e 100%);
+    color: #1a1e2a;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.mth-card__btn:hover {
+    background: linear-gradient(135deg, #e8c98e 0%, #f0d9a8 100%);
+}
+*/
+
+/* ───────────────────────────────────────────────────────────────────────────
+   EXAMPLE 12: Add Shadow to Search Bar
+   ─────────────────────────────────────────────────────────────────────────── */
+/*
+.mth-search {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.mth-search:focus {
+    box-shadow: 0 8px 32px rgba(200, 169, 110, 0.3);
+}
+*/
+
+/* ───────────────────────────────────────────────────────────────────────────
+   EXAMPLE 13: Change Section Title Color
+   ─────────────────────────────────────────────────────────────────────────── */
+/*
+.mth-section-header__title {
+    color: #c8a96e;
+    font-size: 2rem;
+}
+*/
+
+/* ───────────────────────────────────────────────────────────────────────────
+   EXAMPLE 14: Ombre Gradient untuk Cards
+   ─────────────────────────────────────────────────────────────────────────── */
+/*
+.mth-card {
+    background: linear-gradient(135deg, #fff 0%, #f9f7f3 100%);
+}
+
+.mth-card:hover {
+    background: linear-gradient(135deg, #fafaf8 0%, #f0ede6 100%);
+}
+*/
+
+/* ───────────────────────────────────────────────────────────────────────────
+   EXAMPLE 15: Glassmorphism Effect pada Search
+   ─────────────────────────────────────────────────────────────────────────── */
+/*
+.mth-search-wrap {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mth-search {
+    background: transparent;
+    border: none;
+}
+*/
+
+/* ───────────────────────────────────────────────────────────────────────────
+   EXAMPLE 16: Disable Animations (untuk better performance)
+   ─────────────────────────────────────────────────────────────────────────── */
+/*
+:root {
+    --mth-transition: none;
+}
+
+@keyframes cardIn {
+    from, to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+*/
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   QUICK REFERENCE - MAIN COLOR VARIABLES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/*
+PRIMARY COLORS:
+  --mth-bg: #0d0f14               (Hero background)
+  --mth-surface: #141720          (Secondary surface)
+  --mth-border: rgba(255,255,255,0.07)  (Subtle borders)
+
+ACCENT COLORS:
+  --mth-accent: #c8a96e           (Main accent - GOLD)
+  --mth-accent-dim: rgba(200,169,110,0.15)
+  --mth-accent-glow: rgba(200,169,110,0.25)
+
+STATUS COLORS:
+  --mth-green: #4ade80            (Active/Success)
+  --mth-red: #f87171              (Inactive/Error)
+
+TEXT COLORS:
+  --mth-text-1: #f0ede6           (Primary text)
+  --mth-text-2: #9a9488           (Secondary text)
+  --mth-text-3: #5a5650           (Tertiary text)
+
+FONTS:
+  --mth-font-display: 'Fraunces', Georgia, serif
+  --mth-font-body: 'DM Sans', system-ui, sans-serif
+
+SPACING & SIZING:
+  --mth-radius: 12px
+  --mth-radius-lg: 20px
+  --mth-radius-xl: 28px
+
+ANIMATION:
+  --mth-transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1)
+*/
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   COMMON CUSTOMIZATION SCENARIOS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Scenario 1: Light Mode Version */
+/*
+:root {
+    --mth-bg: #ffffff;
+    --mth-surface: #f5f5f5;
+    --mth-text-1: #1a1a1a;
+    --mth-text-2: #666666;
+}
+
+.mth-hero {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+}
+*/
+
+/* Scenario 2: Corporate/Professional Version */
+/*
+:root {
+    --mth-accent: #003366;        /* Navy Blue */
+    --mth-green: #006633;          /* Corporate Green */
+}
+
+.mth-card__badge--active {
+    background: rgba(0, 102, 51, 0.15);
+    color: #006633;
+}
+*/
+
+/* Scenario 3: Vibrant/Energy Version */
+/*
+:root {
+    --mth-accent: #ff6b6b;         /* Vibrant Red */
+    --mth-green: #51cf66;          /* Bright Green */
+}
+
+.mth-hero {
+    background: linear-gradient(135deg, #1a1625 0%, #2d1b35 100%);
+}
+*/
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HOW TO APPLY CUSTOMIZATIONS
+   ═══════════════════════════════════════════════════════════════════════════
+
+1. **Option A: Inline in materi_user.html**
+   Tambahkan custom :root di dalam <style> tag di HTML
+
+2. **Option B: Override in css_for_materi_user.css**
+   Add custom rules di akhir file
+
+3. **Option C: Create separate theme file**
+   Create theme.css dengan overrides, link setelah main CSS
+
+4. **Option D: Use CSS-in-JS (jika pakai framework)**
+   Inject computed styles via JavaScript
+
+TIPS:
+- Always check selector specificity
+- Use !important jika diperlukan untuk override
+- Test di multiple browsers
+- Check responsive behavior di mobile
+*/

@@ -1,0 +1,15 @@
+from pyngrok import ngrok
+try:
+        # BAGIAN 1: Membersihkan tunnel lama
+        for tunnel in ngrok.get_tunnels():
+            ngrok.disconnect(tunnel.public_url)
+            print(f" * Memutuskan tunnel ngrok yang ada: {tunnel.public_url}")
+    
+        # BAGIAN 2: Membuat tunnel baru (setelah bersih-bersih)
+        public_url = ngrok.connect(5000)
+        print(f" * Terhubung dengan ngrok. URL Publik: {public_url}")
+    
+        app.run(debug=True, use_reloader=False)
+finally:
+        # BAGIAN 3: Memastikan ngrok mati saat aplikasi berhenti
+        ngrok.kill() 

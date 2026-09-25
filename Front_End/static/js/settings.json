@@ -1,0 +1,9 @@
+{
+    "OLLAMA_API_KEY": "http://localhost:11434/api/generate",
+    "MODEL_NAME": "llama3.2:1b",
+    "editor.wrappingColumn": 80,
+    "editor.wordWrap": "on",
+    "window.zoomLevel": 0,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000
+}

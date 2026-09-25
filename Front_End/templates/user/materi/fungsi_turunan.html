@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fungsi Turunan - Materi Matematika</title>
+    <link rel="icon" href="{{url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/materi.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+    <header>
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Menu">
+            <i class="bi bi-list"></i>
+        </button>
+        
+        <nav>
+            <div id="sidenav" class="sidenav">
+                <button class="close-btn" id="closeBtn" aria-label="Close Menu">
+                    <i class="bi bi-x"></i>
+                </button>
+                <h3>Navigasi Turunan</h3>
+                <ul>
+                    <li><a href="{{url_for('user.dashboard_user')}}">Kembali ke Beranda</a></li>
+                    <li><a href="#definisi">Definisi</a></li>
+                    <li><a href="#aturan">Aturan Dasar</a></li>
+                    <li><a href="#contoh">Contoh Soal</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Materi: Fungsi Turunan</h1>
+        <div id="isi-materi" style="margin-left:220px;">
+            
+            <div class="card" id="definisi">
+                <div class="card-body">
+                    <h2><i class="bi bi-graph-up-arrow text-primary"></i> Definisi</h2>
+                    <p>Turunan adalah konsep dasar dalam kalkulus yang mengukur laju perubahan fungsi terhadap variabelnya.</p>
+                    <p>Secara matematis, turunan f(x) didefinisikan sebagai:</p>
+                    <blockquote class="blockquote">
+                        <code>f'(x) = lim (h→0) [f(x+h) - f(x)] / h</code>
+                    </blockquote>
+                </div>
+            </div>
+
+            <div class="card" id="aturan">
+                <div class="card-body">
+                    <h2><i class="bi bi-list-check text-success"></i> Aturan Dasar</h2>
+                    <ul>
+                        <li><strong>Konstanta:</strong> Jika f(x) = c, maka f'(x) = 0</li>
+                        <li><strong>Pangkat:</strong> Jika f(x) = x<sup>n</sup>, maka f'(x) = n·x<sup>n-1</sup></li>
+                        <li><strong>Penjumlahan:</strong> (u + v)' = u' + v'</li>
+                        <li><strong>Perkalian:</strong> (uv)' = u'v + uv'</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card" id="contoh">
+                <div class="card-body">
+                    <h2><i class="bi bi-pencil-square text-warning"></i> Contoh</h2>
+                    <p>Diberikan fungsi: <code>f(x) = 3x<sup>2</sup> + 2x + 1</code></p>
+                    <p>Maka turunannya adalah:</p>
+                    <ul>
+                        <li>Turunan 3x<sup>2</sup> = 3(2x) = 6x</li>
+                        <li>Turunan 2x = 2</li>
+                        <li>Turunan 1 = 0</li>
+                    </ul>
+                    <p>Hasil: <strong>f'(x) = 6x + 2</strong></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const closeBtn = document.getElementById('closeBtn');
+            const sidenav = document.getElementById('sidenav');
+            const overlay = document.getElementById('overlay');
+
+            function openNav() {
+                sidenav.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; 
+            }
+
+            function closeNav() {
+                sidenav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = ''; 
+            }
+
+            if (hamburgerBtn) hamburgerBtn.addEventListener('click', openNav);
+            if (closeBtn) closeBtn.addEventListener('click', closeNav);
+            if (overlay) overlay.addEventListener('click', closeNav);
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) closeNav();
+            });
+        });
+    </script>
+</body>
+<style>
+    /* Copy basic CSS from other template or rely on external css/materi.css */
+    /* We rely on static/css/materi.css based on the link tag, but can add inline for safety if needed */
+    .hamburger-btn { display: none; position: fixed; top: 15px; left: 15px; z-index: 1100; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; border-radius: 10px; width: 50px; height: 50px; color: white; font-size: 24px; cursor: pointer; }
+    .sidenav { height: 100%; width: 200px; position: fixed; top: 0; left: 0; background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%); padding-top: 80px; z-index: 1000; transition: transform 0.3s ease; }
+    .sidenav h3 { text-align: center; color: #ecf0f1; font-size: 1.2rem; margin-bottom: 1rem; }
+    .sidenav ul { list-style: none; padding: 0; }
+    .sidenav ul li a { color: #bdc3c7; text-decoration: none; display: block; padding: 12px 16px; transition: 0.3s; margin: 0 10px; border-radius: 4px; }
+    .sidenav ul li a:hover { background: #34495e; color: #fff; transform: translateX(5px); border-left: 4px solid #3498db; }
+    .close-btn { display: none; position: absolute; top: 15px; right: 15px; background: #e74c3c; border: none; border-radius: 50%; width: 40px; height: 40px; color: white; font-size: 24px; }
+    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; }
+    .overlay.active { display: block; }
+    @media (max-width: 768px) {
+        .hamburger-btn, .close-btn { display: block; }
+        .sidenav { transform: translateX(-100%); width: 280px; }
+        .sidenav.active { transform: translateX(0); }
+        #isi-materi { margin-left: 0 !important; }
+        .container { padding-top: 70px; }
+    }
+    @media (min-width: 769px) { .sidenav { transform: translateX(0) !important; } }
+</style>
+</html>

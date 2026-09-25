@@ -1,0 +1,29 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo HTMX</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+
+    <h1>Belajar HTMX</h1>
+
+    <!-- 
+      Sistem Kerjanya:
+      1. hx-get: Saat diklik, kirim permintaan GET ke /halo-htmx
+      2. hx-target: Masukkan hasil (HTML dari server) ke dalam elemen dengan ID 'konten-pesan'
+      3. hx-swap: Cara memasukkannya (innerHTML berarti mengganti isi di dalam div)
+    -->
+    <button hx-get="/halo-htmx" 
+            hx-target="#konten-pesan" 
+            hx-swap="innerHTML">
+        Klik Saya!
+    </button>
+
+    <div id="konten-pesan" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px;">
+        Pesan akan muncul di sini...
+    </div>
+
+</body>
+</html>

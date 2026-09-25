@@ -1,0 +1,14 @@
+{
+    "window.zoomLevel": 0,
+    "editor.fontsize": 14,
+    "editor.tabSize": 4,
+    "workbench.colorTheme": "Noctis Minimus",
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "files.associations": {
+        "*.html": "html",
+        "*.js": "javascript",
+        "*.css": "css",
+        "*.json": "json"
+    }
+}

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathThon | Dashboard User | Silahkan bebas untuk mempelajari apapun di sini  </title>
+    <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css_materi_user.css') }}">
+    <!-- PyScript -->
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="sidebar animate__animated animate__fadeInLeft">
+            <div class="header text-center p-3">
+                <img src="{{ photo_url }}" alt="User Avatar" class="rounded-circle"
+                     style="width: 80px; height: 80px; object-fit: cover; border: 2px solid #fff;">      
+                <h5 class="mt-2" style="color: white;">{{ users.name }}</h5>
+               <p id="datetime" style="color: white; font-size: 0.9em;"></p>
+            </div>
+            <ul class="list-unstyled ps-3 animate__animated animate__fadeInLeft">
+                <li><a href="{{ url_for('user.dashboard_user') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="{{ url_for('materi.materi_user') }}"><i class="fas fa-book"></i> Materi</a></li>
+                <li><a href="{{ url_for('user.ai_feature_user') }}"><i class="fas fa-robot"></i> Fitur AI (Alat Pembantu)</a></li>
+                <li><a href="{{ url_for('user.latihan_soal_user') }}"><i class="fas fa-pencil-alt"></i> Latihan Soal</a></li>
+                <li><a href="{{ url_for('user.progres_user') }}"><i class="fas fa-chart-line"></i> Progres</a></li>
+                <li><a href="{{ url_for('user.analyze_user') }}"><i class="fas fa-chart-line"></i> Analisis Hasil</a></li>
+                <li><a href="{{ url_for('user.calculator_user') }}"><i class="fas fa-chart-line"></i> Calculator</a></li>
+               <li><a href="{{ url_for('user.logout_user') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+            <button class="close-sidenav-btn btn btn-danger btn-sm" id="closeSidebarBtn">
+                <i class="bi bi-x"></i>
+            </button>
+            <br>
+            <div class="animate__animated animate__fadeInLeft">
+                <img src="{{url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png')}}" alt="MathThon Logo" class="mb-2" style="width: 50px; display: block; margin: 0 auto;">
+                <p style="color: white; font-size: 0.8em; text-align: center;">&copy; 2024 MathThon. All rights reserved.</p>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div id="content" class="main-content animate__animated animate__fadeInLeft">
+            <nav class="nav_1">
+                <button class="open-sidenav-btn" id="openSidebarBtn">
+                    <i class="bi bi-list"></i>
+                </button>
+                <ul style="list-style-type: none;">
+                        <li><a href="#" style="font-family:Impact,'Haettenschweiler', Arial Narrow Bold, sans-serif; font-size: 36px; text-decoration: none;color: rgb(62, 62, 62); text-shadow: 1px 1px 1px blue; transform: scale(0,1.2);">{{ users.username }}</a></li></ul>
+                    <hr>
+                 <button class="profiles_icon" id="goProfileBtn" type="button" title="Profil">
+  <i class="bi bi-person"></i>
+</button>
+
+<script>
+document.getElementById('goProfileBtn')
+  .addEventListener('click', function () {
+    // Menggunakan URL dari Flask
+    window.location.href = "{{ url_for('user.user_profile') }}";
+  });
+</script>
+            </nav>
+            <style>
+                .name_style {
+                    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size: 25px; text-decoration: none;color: rgb(62, 62, 62); text-shadow: 1px 1px 1px blue;  transform: scale(0,1.2); transition: 0.3s;
+                }
+                .name_style:hover {
+                    transition: 0.3s;
+                    color: rgb(13, 13, 13);
+                    text-shadow: 1px 1px 1px rgb(70, 70, 70);
+                }
+                .profiles_icon {
+                    background: #343a40;
+                    border: none;
+                    border-radius: 50%;
+                    font-size: 2.5rem;
+                    padding: 5px;
+                    cursor: pointer;
+                    position: relative;
+                    top: 1px;
+                    left: 10px;
+                    transition: 0.5s;
+                    z-index: 1050;
+                    color: white;
+                }
+                .profiles_icon:hover{
+                    background: #495057;
+                    transition:0.3s;
+                    transform: scale(1.1);
+                    top: 1px;
+                    left: 10px;
+                    z-index: 1050;
+                    color:rgb(62, 62, 62);
+                }
+                .kotak {
+                    background-color: #f4f7f6;
+                    padding: 20px;
+                    border-radius: 8px;
+                    width: 50%;
+                    margin: 0 auto;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                    margin-top: 30px;
+                    margin-bottom: 30px;
+                    margin-left: auto;
+                }
+                .kotak p {
+                    font-size: 1.2rem;
+                    color: #333;
+                }
+                .btn-materi-aktif {
+                    background-color: #007bff;
+                    color: #fff;
+                    border: none;
+                    border-radius: 5px;
+                    padding: 10px 20px;
+                    margin-bottom: 10px;
+                    cursor: pointer;
+                    transition: background 0.2s;
+                }
+                .btn-materi-aktif:hover {
+                    background-color: #0056b3;
+                }
+                .btn-materi-tdk-aktif {
+                    background-color: #6c757d;
+                    color: #fff;
+                    border: none;
+                    border-radius: 5px;
+                    padding: 10px 20px;
+                    margin-bottom: 10px;
+                    cursor: pointer;
+                    transition: background 0.2s;
+                }
+                .btn-materi-tdk-aktif:hover {
+                    background-color: #455a64;
+                }
+            </style>
+
+                    </nav>
+
+            <div class="container-fluid mt-3">
+    <h1 class="mb-4">Daftar Materi Pembelajaran</h1>
+    <p class="lead">Jelajahi berbagai topik matematika yang tersedia. Pilih materi yang ingin Anda pelajari.</p>
+
+    <div class="mb-4">
+        <input type="text" id="searchInput" class="form-control" placeholder="Cari materi berdasarkan judul atau deskripsi...">
+    </div>
+
+    <div class="kotak">
+        <a href="#">Tampilkan dan carilah semua materi yang anda inginkan</a>
+    </div>
+
+    <div class="kotak">
+        <button class="btn-materi-aktif" id="showActiveMateriBtn">Tampilkan Materi Matematika Aktif</button>
+        <div id="activeMateriList" style="margin-top: 20px; display: none;"></div>
+        <button class="btn-materi-tdk-aktif" id="showInactiveMateriBtn">Tampilkan materi yang tidak aktif</button>
+        <div id="inactiveMateriList" style="margin-top: 20px; display: none;"></div>
+    </div>
+
+    <br>
+
+    <div id="materiContainer" class="row mt-4"></div>
+
+    <div id="noResults" class="alert alert-warning mt-4" style="display: none;">
+        Materi tidak ditemukan.
+    </div>
+    <div class="d-flex justify-content-center mt-4">
+        
+    </div>
+
+    <div id="loading" class="text-center mt-5">
+        <div class="spinner-border text-primary" role="status"></div>
+        <p class="mt-2">Memuat data materi...</p>
+    </div>
+</div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", async function() {
+        const container = document.getElementById("materiContainer");
+        const loading = document.getElementById("loading");
+        const searchInput = document.getElementById("searchInput");
+
+        try {
+            const response = await fetch("/api/materi");
+            const data = await response.json();
+            loading.style.display = "none";
+
+            if (!data || data.length === 0) {
+                container.innerHTML = `
+                    <div class="alert alert-info" role="alert">
+                        Belum ada materi yang tersedia saat ini. Materi akan muncul di sini jika materi tersebut ada dalam sistem.
+                    </div>`;
+                return;
+            }
+
+            let allMateri = data; // Store all materi data
+
+            function renderMateri(materiList) {
+                container.innerHTML = ''; // Clear existing cards
+                if (materiList.length === 0) {
+                    document.getElementById("noResults").style.display = "block";
+                    return;
+                } else {
+                    document.getElementById("noResults").style.display = "none";
+                }
+
+                materiList.forEach(materi => {
+                    // Membuat URL endpoint berdasarkan Judul Materi
+                    // Ubah huruf kecil semua dan ganti spasi dengan underscore (_)
+                    // Contoh: "Fungsi Turunan" -> "fungsi_turunan"
+                    const identifier = materi.judul_materi.toLowerCase().trim().replace(/\s+/g, "_");
+                    const endpoint = `/user/materi/${identifier}`;
+                    
+                    const stars = `
+                        ${'<i class="bi bi-star-fill text-warning"></i>'.repeat(materi.rating)}
+                        ${'<i class="bi bi-star text-warning"></i>'.repeat(5 - materi.rating)}
+                    `;
+
+                    const card = `
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">${materi.judul_materi}</h5>
+                                    <br>
+                                    <p class="text-muted" style="font-size: 14px;">Deskripsi mengenai materi ini: </p>
+                                    <p style="font-family: times new roman; font-size: 17px; text-align: justify;">${materi.deskripsi}</p>
+                                    <div class="d-flex justify-content-between align-items-center mt-2">
+                                        <span class="badge ${materi.status === 'active' ? 'bg-success' : 'bg-secondary'}">
+                                            Status materi: ${materi.status.charAt(0).toUpperCase() + materi.status.slice(1)}
+                                        </span>
+                                        <br><br>
+                                        <div class="stars-container">Rating yang diberikan: ${stars}</div>
+                                        <br><br>
+                                      
+                                    </div>
+                                    <br><br><br>
+                                     <div class="mt-3">
+                                        <a href="${endpoint}" class="btn btn-primary btn-sm w-100">Pelajari Materi</a>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
+
+                    `;
+                    container.insertAdjacentHTML("beforeend", card);
+                });
+            }
+
+            renderMateri(allMateri); // Initial render
+
+            searchInput.addEventListener("keyup", function() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const filteredMateri = allMateri.filter(materi =>
+                    materi.judul_materi.toLowerCase().includes(searchTerm) ||
+                    materi.deskripsi.toLowerCase().includes(searchTerm)
+                );
+                renderMateri(filteredMateri);
+            });
+
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            loading.style.display = "none";
+            container.innerHTML = `
+                <div class="alert alert-danger" role="alert">
+                    Terjadi kesalahan saat memuat data materi.
+                </div>`;
+        }
+    });
+    </script>
+
+    <script>
+    let isActiveMateriVisible = false;
+    let isInactiveMateriVisible = false;
+
+    // Helper to fetch and group materi
+    async function fetchAndGroupMateri() {
+        try {
+            const response = await fetch("/api/materi");
+            const data = await response.json();
+            if (!data || !Array.isArray(data)) return { active: [], inactive: [] };
+            const active = data.filter(m => m.status === 'active');
+            const inactive = data.filter(m => m.status === 'inactive');
+            return { active, inactive };
+        } catch (e) {
+            return { active: [], inactive: [] };
+        }
+    }
+
+    document.getElementById("showActiveMateriBtn").addEventListener("click", async function() {
+        const activeMateriList = document.getElementById("activeMateriList");
+        const button = document.getElementById("showActiveMateriBtn");
+        if (isActiveMateriVisible) {
+            activeMateriList.style.display = "none";
+            button.textContent = "Tampilkan Materi Matematika Aktif";
+            isActiveMateriVisible = false;
+        } else {
+            activeMateriList.innerHTML = '';
+            activeMateriList.style.display = "block";
+            button.textContent = "Sembunyikan Materi Matematika Aktif";
+            // Fetch all materi and group
+            const { active } = await fetchAndGroupMateri();
+            if (!active || active.length === 0) {
+                activeMateriList.innerHTML = `<p>Tidak ada materi matematika aktif saat ini.</p>`;
+                isActiveMateriVisible = true;
+                return;
+            }
+            active.forEach(materi => {
+                const listItem = `
+                    <div class="mb-4 p-4 active-materi-item" style="border-left: 4px solid #007bff; border-radius: 8px; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); transition: all 0.5s cubic-bezier(.4,2,.6,1); opacity: 0; transform: translateY(30px);">
+                        <h5 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; color: #007bff; font-weight: 600; margin-bottom: 12px;">${materi.judul_materi}</h5>
+                        <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 15px; color: #555; text-align: justify; line-height: 1.6; margin: 0;">${materi.deskripsi}</p>
+                    </div>
+                    <br>`;
+                activeMateriList.insertAdjacentHTML("beforeend", listItem);
+            });
+            setTimeout(() => {
+                document.querySelectorAll('.active-materi-item').forEach((el, i) => {
+                    setTimeout(() => {
+                        el.style.opacity = 1;
+                        el.style.transform = 'translateY(0)';
+                    }, i * 100);
+                });
+            }, 50);
+            isActiveMateriVisible = true;
+        }
+    });
+    </script>
+
+    <script>
+    document.getElementById("showInactiveMateriBtn").addEventListener("click", async function() {
+        const inactiveMateriList = document.getElementById("inactiveMateriList");
+        const button = document.getElementById("showInactiveMateriBtn");
+        if (isInactiveMateriVisible) {
+            inactiveMateriList.style.display = "none";
+            button.textContent = "Tampilkan materi yang tidak aktif";
+            isInactiveMateriVisible = false;
+        } else {
+            inactiveMateriList.innerHTML = '';
+            inactiveMateriList.style.display = "block";
+            button.textContent = "Sembunyikan materi yang tidak aktif";
+            // Fetch all materi and group
+            const { inactive } = await fetchAndGroupMateri();
+            if (!inactive || inactive.length === 0) {
+                inactiveMateriList.innerHTML = `<p>Tidak ada materi matematika yang tidak aktif saat ini.</p>`;
+                isInactiveMateriVisible = true;
+                return;
+            }
+            inactive.forEach(materi => {
+                const listItem = `
+                    <div class="mb-4 p-4 inactive-materi-item" style="border-left: 4px solid #6c757d; border-radius: 8px; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); transition: all 0.5s cubic-bezier(.4,2,.6,1); opacity: 0; transform: translateY(30px);">
+                        <h5 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; color: #6c757d; font-weight: 600; margin-bottom: 12px;">${materi.judul_materi}</h5>
+                        <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 15px; color: #555; text-align: justify; line-height: 1.6; margin: 0;">${materi.deskripsi}</p>
+                    </div>
+                    <br>`;
+                inactiveMateriList.insertAdjacentHTML("beforeend", listItem);
+            });
+            setTimeout(() => {
+                document.querySelectorAll('.inactive-materi-item').forEach((el, i) => {
+                    setTimeout(() => {
+                        el.style.opacity = 1;
+                        el.style.transform = 'translateY(0)';
+                    }, i * 100);
+                });
+            }, 50);
+            isInactiveMateriVisible = true;
+        }
+    });
+    </script>
+
+
+
+    </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const openSidebarBtn = document.getElementById("openSidebarBtn");
+        const closeSidebarBtn = document.getElementById("closeSidebarBtn");
+        const sidebar = document.getElementById("sidebar");
+        const mainContent = document.getElementById("content");
+
+        if (openSidebarBtn && sidebar && mainContent) {
+            openSidebarBtn.addEventListener("click", function() {
+                sidebar.classList.add("active");
+                mainContent.classList.add("shifted-sm");
+            });
+        }
+
+        if (closeSidebarBtn && sidebar && mainContent) {
+            closeSidebarBtn.addEventListener("click", function() {
+                sidebar.classList.remove("active");
+                mainContent.classList.remove("shifted-sm");
+            });
+        }
+
+        // Smooth scrolling untuk anchor link #
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    });
+    </script>
+    <script>
+   
+    // Update tanggal dan waktu real-time
+    document.addEventListener("DOMContentLoaded", function () {
+        const datetimeEl = document.getElementById("datetime");
+        function updateDateTime() {
+            if (!datetimeEl) return;
+            const now = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            };
+            datetimeEl.textContent = now.toLocaleDateString('id-ID', options);
+        }
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const materiContainer = document.querySelector(".row.mt-4");
+        if (!materiContainer) return;
+
+        const materiCards = Array.from(materiContainer.children);
+        let currentIndex = 0;
+        const cardsPerPage = 3; // Number of cards to show at once
+
+        function showCards(startIndex) {
+            materiCards.forEach((card, index) => {
+                if (index >= startIndex && index < startIndex + cardsPerPage) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Initial display
+        showCards(currentIndex);
+
+        // Add navigation buttons (example, you'd need to add these to your HTML)
+        // For example:
+        // <button id="prevMateri">Previous</button>
+        // <button id="nextMateri">Next</button>
+
+        // document.getElementById("nextMateri").addEventListener("click", () => {
+        //     currentIndex = (currentIndex + cardsPerPage) % materiCards.length;
+        //     showCards(currentIndex);
+        // });
+    });
+    </script>
+
+    <style>
+        .horizontal-scroll-container {
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .horizontal-scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</body>
+</html>

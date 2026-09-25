@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathThon | Materi Matematika | Bangun Datar dan Bangun Ruang</title>
+    <link rel="icon" href="{{url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/materi.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+    <header>
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Menu">
+            <i class="bi bi-list"></i>
+        </button>
+        <nav>
+            <div id="sidenav" class="sidenav">
+                <button class="close-btn" id="closeBtn" aria-label="Close Menu">
+                    <i class="bi bi-x"></i>
+                </button>
+                <h3>Navigasi Materi</h3>
+                <ul>
+                    <li><a href="{{url_for('user.dashboard_user')}}">Kembali ke Beranda</a></li>
+                    <li><a href="#pendahuluan">Pendahuluan</a></li>
+                    <li><a href="#bangun-datar">Bangun Datar</a></li>
+                    <li><a href="#bangun-ruang">Bangun Ruang</a></li>
+                    <li><a href="#contoh">Contoh Soal</a></li>
+                    <li><a href="#latihan">Latihan Soal</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Materi: Bangun Datar & Bangun Ruang</h1>
+        <div id="isi-materi" style="margin-left:220px;">
+            <div class="card" id="pendahuluan">
+                <div id="isi-materi" style="margin-left:0px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                <div class="card-body" style="padding: 25px;">
+                <h2 style="color: #007bff;"><i class="bi bi-info-circle-fill"></i> Mengenal Geometri</h2>
+                <p>Pernahkah Anda memperhatikan bentuk ubin di lantai atau kotak kado di meja? Itulah <strong>Geometri</strong>. Secara sederhana, geometri adalah ilmu yang mempelajari tentang bentuk, ukuran, dan posisi benda di sekitar kita.</p>
+            
+                <p>Dunia geometri dibagi menjadi dua kelompok besar yang sangat mudah dibedakan:</p>
+            
+                <div class="row" style="display: flex; gap: 20px; margin-top: 20px;">
+                <div style="flex: 1; background-color: #f8f9fa; padding: 15px; border-left: 5px solid #007bff; border-radius: 5px;">
+                    <h3><strong>1. Bangun Datar (2 Dimensi)</strong></h3>
+                    <p>Bayangkan sebuah bentuk yang digambar di atas selembar kertas. Bentuk ini "rata" atau tipis, hanya memiliki <strong>panjang dan lebar</strong>.</p>
+                    <p><em>Contoh sederhana:</em> Layar TV (Persegi Panjang), Roda Sepeda (Lingkaran), atau Atap Rumah jika dilihat dari samping (Segitiga).</p>
+                </div>
+
+                <div style="flex: 1; background-color: #f8f9fa; padding: 15px; border-left: 5px solid #28a745; border-radius: 5px;">
+                    <h3><strong>2. Bangun Ruang (3 Dimensi)</strong></h3>
+                    <p>Berbeda dengan gambar di kertas, bangun ruang adalah benda yang bisa kita pegang, memiliki isi, dan menempati ruangan karena punya <strong>volume</strong>.</p>
+                    <p><em>Contoh sederhana:</em> Bola basket, kotak sepatu (Balok), kaleng susu (Tabung), atau dadu (Kubus).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <br><br>
+            <div class="card" id="bangun-datar">
+                <div class="card-body">
+                    <h2><i class="bi bi-square text-success"></i> Bangun Datar</h2>
+                    <p>Bangun datar adalah bagian dari bidang datar yang dibatasi oleh garis-garis lurus atau lengkung. Berikut adalah penjelasan mendalam mengenai jenis-jenis bangun datar beserta rumusnya:</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="border p-3 rounded bg-light">
+                                <h5>1. Persegi</h5>
+                                <br>
+                                <p style="text-align: justify;">Persegi adalah bangun datar dua dimensi yang dibentuk oleh empat buah rusuk yang sama panjang dan memiliki empat buah sudut yang kesemuanya adalah sudut siku-siku (90 derajat). Sifat utamanya adalah kemerataan pada setiap sisinya.</p>
+                                <hr>
+                                <strong>Rumus:</strong>
+                                <br><br>
+                                <p><em>Diketahui: Sisi = s</em></p>
+                                <ul>
+                                    <li><strong>Luas:</strong> L = s × s</li>
+                                    <li><strong>Keliling:</strong> K = 4 × s</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="border p-3 rounded bg-light">
+                                <h5>2. Persegi Panjang</h5>
+                                <br>
+                                <p style="text-align: justify">Persegi panjang adalah bangun datar dua dimensi yang dibentuk oleh dua pasang sisi yang masing-masing sama panjang dan sejajar dengan pasangannya, serta memiliki empat buah sudut yang kesemuanya adalah sudut siku-siku.</p>
+                                <hr>
+                                <strong>Rumus:</strong>
+                                <br><br>
+                                <p><em>Diketahui: Panjang = p, Lebar = l</em></p>
+                                <ul>
+                                    <li><strong>Luas:</strong> L = p × l</li>
+                                    <li><strong>Keliling:</strong> K = 2 × (p + l)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="border p-3 rounded bg-light">
+                                <h5>3. Segitiga</h5>
+                                <br>
+                                <p style="text-align: justify">Segitiga adalah bangun datar yang dibatasi oleh tiga buah sisi dan mempunyai tiga buah titik sudut. Jumlah ketiga sudut dalam segitiga selalu 180 derajat. Ada berbagai jenis segitiga seperti sama sisi, sama kaki, dan sembarang.</p>
+                                <hr>
+                                <strong>Rumus:</strong>
+                                <br><br>
+                                <p><em>Diketahui: Alas = a, Tinggi = t, Sisi = a, b, c</em></p>
+                                <ul>
+                                    <li><strong>Luas:</strong> L = ½ × a × t</li>
+                                    <li><strong>Keliling:</strong> K = a + b + c</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="border p-3 rounded bg-light">
+                                <h5>4. Lingkaran</h5>
+                                <br>
+                                <p style="text-align: justify;">Lingkaran adalah bangun datar yang terbentuk dari himpunan semua titik yang berjarak sama (jari-jari) dari sebuah titik pusat. Garis lurus yang menghubungkan dua titik pada lingkaran dan melewati titik pusat disebut diameter.</p>
+                                <hr>
+                                <strong>Rumus:</strong>
+                                <br><br>
+                                <p><em>Diketahui: Jari-jari = r, Diameter = d</em></p>
+                                <ul>
+                                    <li><strong>Luas:</strong> L = π × r²</li>
+                                    <li><strong>Keliling:</strong> K = 2 × π × r atau π × d</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="bangun-ruang">
+                <div class="card-body">
+                    <h2><i class="bi bi-box text-warning"></i> Bangun Ruang</h2>
+                    <p>Bangun ruang adalah bangun matematika yang memiliki isi atau volume. Bangun ruang sering juga disebut bangun tiga dimensi karena memiliki tiga komponen utama yaitu sisi, rusuk, dan titik sudut.</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="border p-3 rounded bg-light">
+                                <h5>1. Kubus</h5>
+                                <p style="text-align: justify;">Kubus adalah bangun ruang tiga dimensi yang dibatasi oleh enam bidang sisi yang kongruen berbentuk persegi. Kubus memiliki 12 rusuk yang sama panjang dan 8 titik sudut.</p>
+                                <hr>
+                                <strong>Rumus:</strong>
+                                <br><br>
+                                <p><em>Diketahui: Rusuk = s</em></p>
+                                <ul>
+                                    <li><strong>Volume:</strong> V = s³</li>
+                                    <li><strong>Luas Permukaan:</strong> LP = 6 × s²</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="border p-3 rounded bg-light">
+                                <h5>2. Balok</h5>
+                                <p style="text-align: justify;">Balok adalah bangun ruang tiga dimensi yang dibentuk oleh tiga pasang persegi atau persegi panjang, dengan paling tidak satu pasang di antaranya berukuran berbeda. Balok memiliki 6 sisi, 12 rusuk, dan 8 titik sudut.</p>
+                                <hr>
+                                <strong>Rumus:</strong>
+                                <br><br>
+                                <p><em>Diketahui: Panjang = p, Lebar = l, Tinggi = t</em></p>
+                                <ul>
+                                    <li><strong>Volume:</strong> V = p × l × t</li>
+                                    <li><strong>Luas Permukaan:</strong> LP = 2 × (pl + pt + lt)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="border p-3 rounded bg-light">
+                                <h5>3. Tabung</h5>
+                                <p style="text-align: justify;">Tabung atau silinder adalah bangun ruang tiga dimensi yang dibentuk oleh dua buah lingkaran identik yang sejajar dan sebuah persegi panjang yang mengelilingi kedua lingkaran tersebut.</p>
+                                <hr>
+                                <strong>Rumus:</strong>
+                                <br><br>
+                                <p><em>Diketahui: Jari-jari = r, Tinggi = t</em></p>
+                                <ul>
+                                    <li><strong>Volume:</strong> V = π × r² × t</li>
+                                    <li><strong>Luas Permukaan:</strong> LP = 2 × π × r × (r + t)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="border p-3 rounded bg-light">
+                                <h5>4. Bola</h5>
+                                <p style="text-align: justify;">Bola adalah bangun ruang tiga dimensi yang dibentuk oleh tak hingga lingkaran berjari-jari sama panjang dan berpusat pada satu titik yang sama. Bola hanya memiliki satu sisi lengkung tertutup.</p>
+                                <hr>
+                                <strong>Rumus:</strong>
+                                <br><br>
+                                <p><em>Diketahui: Jari-jari = r</em></p>
+                                <ul>
+                                    <li><strong>Volume:</strong> V = 4/3 × π × r³</li>
+                                    <li><strong>Luas Permukaan:</strong> LP = 4 × π × r²</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="contoh">
+                <div class="card-body">
+                    <h2><i class="bi bi-pencil-square text-info"></i> Contoh Soal</h2>
+                    <p><strong>Soal 1:</strong> Sebuah persegi memiliki panjang sisi 5 cm. Hitunglah luas dan kelilingnya!</p>
+                    <p><em>Jawab:</em></p>
+                    <ul>
+                        <li>Luas = 5 × 5 = 25 cm²</li>
+                        <li>Keliling = 4 × 5 = 20 cm</li>
+                    </ul>
+                    <hr>
+                    <p><strong>Soal 2:</strong> Sebuah balok memiliki panjang 10 cm, lebar 5 cm, dan tinggi 4 cm. Hitunglah volumenya!</p>
+                    <p><em>Jawab:</em></p>
+                    <ul>
+                        <li>Volume = p × l × t</li>
+                        <li>Volume = 10 × 5 × 4 = 200 cm³</li>
+                    </ul>
+                </div>
+            </div>
+
+        <!-- LATIHAN SOAL SECTION -->
+        <div class="card" id="latihan" style="margin-left:220px;">
+            <div class="card-body">
+                <h2><i class="bi bi-pencil-fill text-danger"></i> Latihan Soal</h2>
+                <p>Uji pemahamanmu tentang Bangun Datar dan Bangun Ruang dengan mengerjakan soal-soal di bawah ini. Pilih jawaban yang benar, lalu klik <strong>Periksa Jawaban</strong>.</p>
+
+                <!-- PROGRESS BAR -->
+                <div style="margin-bottom: 20px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                        <span style="font-size:0.9rem; color:#555;">Progress: <strong id="progress-text">0 / 10</strong></span>
+                        <span style="font-size:0.9rem; color:#555;">Skor sementara: <strong id="live-score">0</strong></span>
+                    </div>
+                    <div style="height:10px; background:#e9ecef; border-radius:10px; overflow:hidden;">
+                        <div id="progress-bar" style="height:100%; width:0%; background:linear-gradient(90deg,#667eea,#764ba2); border-radius:10px; transition:width 0.4s;"></div>
+                    </div>
+                </div>
+
+                <!-- SOAL CONTAINER -->
+                <div id="soal-container"></div>
+
+                <!-- TOMBOL -->
+                <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:24px;">
+                    <button id="btn-periksa" onclick="periksaJawaban()" style="background:linear-gradient(135deg,#667eea,#764ba2); color:white; border:none; padding:12px 28px; border-radius:10px; font-size:1rem; font-weight:600; cursor:pointer; box-shadow:0 4px 12px rgba(102,126,234,0.4); transition:all 0.2s;">
+                        <i class="bi bi-check-circle-fill"></i> Periksa Jawaban
+                    </button>
+                    <button id="btn-reset" onclick="resetLatihan()" style="background:#f8f9fa; color:#555; border:2px solid #dee2e6; padding:12px 28px; border-radius:10px; font-size:1rem; font-weight:600; cursor:pointer; transition:all 0.2s;">
+                        <i class="bi bi-arrow-counterclockwise"></i> Ulangi Latihan
+                    </button>
+                </div>
+
+                <!-- HASIL PENILAIAN -->
+                <div id="hasil-penilaian" style="display:none; margin-top:28px; padding:24px; border-radius:15px; text-align:center; background:linear-gradient(135deg,#f8f9fa,#e9ecef);">
+                    <div id="hasil-icon" style="font-size:3.5rem; margin-bottom:10px;"></div>
+                    <h3 id="hasil-judul" style="font-weight:700; margin-bottom:8px;"></h3>
+                    <p id="hasil-skor" style="font-size:1.2rem; color:#555; margin-bottom:4px;"></p>
+                    <p id="hasil-nilai" style="font-size:2rem; font-weight:800; margin-bottom:8px;"></p>
+                    <p id="hasil-predikat" style="font-size:1rem; font-weight:600; padding:6px 18px; border-radius:20px; display:inline-block; margin-bottom:12px;"></p>
+                    <p id="hasil-pesan" style="color:#666; font-size:0.95rem;"></p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const closeBtn = document.getElementById('closeBtn');
+            const sidenav = document.getElementById('sidenav');
+            const overlay = document.getElementById('overlay');
+
+            function openNav() {
+                sidenav.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; 
+            }
+
+            function closeNav() {
+                sidenav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = ''; 
+            }
+
+            if (hamburgerBtn) hamburgerBtn.addEventListener('click', openNav);
+            if (closeBtn) closeBtn.addEventListener('click', closeNav);
+            if (overlay) overlay.addEventListener('click', closeNav);
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) closeNav();
+            });
+            
+            // Close nav when clicking a link (mobile)
+            const navLinks = sidenav.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) closeNav();
+                });
+            });
+        });
+    </script>
+
+    <script>
+    /* ===================== DATA SOAL ===================== */
+    const bankSoal = [
+        // Bangun Datar
+        {
+            kategori: "Bangun Datar",
+            soal: "Sebuah persegi memiliki sisi 8 cm. Berapakah luas persegi tersebut?",
+            opsi: ["48 cm²", "64 cm²", "32 cm²", "16 cm²"],
+            jawaban: 1,
+            penjelasan: "Luas persegi = s × s = 8 × 8 = 64 cm²"
+        },
+        {
+            kategori: "Bangun Datar",
+            soal: "Persegi panjang memiliki panjang 12 cm dan lebar 5 cm. Berapakah kelilingnya?",
+            opsi: ["34 cm", "60 cm", "17 cm", "30 cm"],
+            jawaban: 0,
+            penjelasan: "Keliling persegi panjang = 2 × (p + l) = 2 × (12 + 5) = 2 × 17 = 34 cm"
+        },
+        {
+            kategori: "Bangun Datar",
+            soal: "Sebuah segitiga memiliki alas 10 cm dan tinggi 6 cm. Berapakah luasnya?",
+            opsi: ["60 cm²", "16 cm²", "30 cm²", "20 cm²"],
+            jawaban: 2,
+            penjelasan: "Luas segitiga = ½ × a × t = ½ × 10 × 6 = 30 cm²"
+        },
+        {
+            kategori: "Bangun Datar",
+            soal: "Lingkaran memiliki jari-jari 7 cm. Berapakah kelilingnya? (π = 22/7)",
+            opsi: ["44 cm", "154 cm", "22 cm", "88 cm"],
+            jawaban: 0,
+            penjelasan: "Keliling lingkaran = 2 × π × r = 2 × (22/7) × 7 = 44 cm"
+        },
+        {
+            kategori: "Bangun Datar",
+            soal: "Sebuah persegi memiliki keliling 36 cm. Berapakah panjang sisinya?",
+            opsi: ["12 cm", "6 cm", "9 cm", "18 cm"],
+            jawaban: 2,
+            penjelasan: "Keliling = 4 × s → s = K ÷ 4 = 36 ÷ 4 = 9 cm"
+        },
+        // Bangun Ruang
+        {
+            kategori: "Bangun Ruang",
+            soal: "Sebuah kubus memiliki rusuk sepanjang 5 cm. Berapakah volumenya?",
+            opsi: ["75 cm³", "150 cm³", "25 cm³", "125 cm³"],
+            jawaban: 3,
+            penjelasan: "Volume kubus = s³ = 5 × 5 × 5 = 125 cm³"
+        },
+        {
+            kategori: "Bangun Ruang",
+            soal: "Sebuah balok berukuran p = 8 cm, l = 4 cm, t = 3 cm. Berapakah volumenya?",
+            opsi: ["96 cm³", "48 cm³", "64 cm³", "120 cm³"],
+            jawaban: 0,
+            penjelasan: "Volume balok = p × l × t = 8 × 4 × 3 = 96 cm³"
+        },
+        {
+            kategori: "Bangun Ruang",
+            soal: "Sebuah tabung memiliki jari-jari 7 cm dan tinggi 10 cm. Berapakah volumenya? (π = 22/7)",
+            opsi: ["220 cm³", "1.540 cm³", "440 cm³", "770 cm³"],
+            jawaban: 1,
+            penjelasan: "Volume tabung = π × r² × t = (22/7) × 49 × 10 = 1.540 cm³"
+        },
+        {
+            kategori: "Bangun Ruang",
+            soal: "Kubus memiliki rusuk 6 cm. Berapakah luas permukaannya?",
+            opsi: ["36 cm²", "216 cm²", "72 cm²", "108 cm²"],
+            jawaban: 1,
+            penjelasan: "Luas permukaan kubus = 6 × s² = 6 × 36 = 216 cm²"
+        },
+        {
+            kategori: "Bangun Ruang",
+            soal: "Sebuah bola memiliki jari-jari 6 cm. Berapakah luas permukaannya? (π = 3,14)",
+            opsi: ["75,36 cm²", "300,69 cm²", "452,16 cm²", "226,08 cm²"],
+            jawaban: 2,
+            penjelasan: "Luas permukaan bola = 4 × π × r² = 4 × 3,14 × 36 = 452,16 cm²"
+        }
+    ];
+
+    let soalAktif = [];
+    let sudahDiperiksa = false;
+
+    /* ===================== RENDER SOAL ===================== */
+    function acakSoal(arr) {
+        return [...arr].sort(() => Math.random() - 0.5);
+    }
+
+    function renderSoal() {
+        soalAktif = acakSoal(bankSoal);
+        sudahDiperiksa = false;
+        const container = document.getElementById('soal-container');
+        container.innerHTML = '';
+        document.getElementById('hasil-penilaian').style.display = 'none';
+        document.getElementById('btn-periksa').disabled = false;
+        document.getElementById('progress-text').textContent = `0 / ${soalAktif.length}`;
+        document.getElementById('live-score').textContent = '0';
+        document.getElementById('progress-bar').style.width = '0%';
+
+        soalAktif.forEach((s, i) => {
+            const badgeColor = s.kategori === "Bangun Datar" ? "#007bff" : "#fd7e14";
+            const badgeLabel = s.kategori;
+            const div = document.createElement('div');
+            div.className = 'soal-item';
+            div.id = `soal-${i}`;
+            div.style.cssText = "margin-bottom:24px; background:#fff; border:1.5px solid #e9ecef; border-radius:12px; padding:20px; transition: border-color 0.3s;";
+            div.innerHTML = `
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                    <span style="background:${badgeColor}; color:#fff; font-size:0.75rem; padding:3px 10px; border-radius:20px; font-weight:600;">${badgeLabel}</span>
+                    <span style="font-size:0.85rem; color:#888;">Soal ${i + 1}</span>
+                </div>
+                <p style="font-weight:600; color:#2c3e50; margin-bottom:14px; font-size:1rem;">${s.soal}</p>
+                <div class="opsi-container" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    ${s.opsi.map((o, j) => `
+                        <label id="label-${i}-${j}" style="display:flex; align-items:center; gap:10px; padding:10px 14px; border:2px solid #dee2e6; border-radius:10px; cursor:pointer; transition:all 0.2s; background:#fafafa;">
+                            <input type="radio" name="soal-${i}" value="${j}" onchange="updateProgress()" style="accent-color:#667eea; width:16px; height:16px;">
+                            <span style="font-size:0.95rem;">${o}</span>
+                        </label>
+                    `).join('')}
+                </div>
+                <div id="penjelasan-${i}" style="display:none; margin-top:12px; padding:10px 14px; border-radius:8px; font-size:0.9rem;"></div>
+            `;
+            container.appendChild(div);
+
+            // Hover effects
+            div.querySelectorAll('label').forEach(lbl => {
+                lbl.addEventListener('mouseenter', () => { if(!sudahDiperiksa) lbl.style.borderColor = '#667eea'; lbl.style.background = '#f0f2ff'; });
+                lbl.addEventListener('mouseleave', () => { if(!sudahDiperiksa && !lbl.querySelector('input').checked) { lbl.style.borderColor = '#dee2e6'; lbl.style.background = '#fafafa'; } });
+            });
+        });
+    }
+
+    /* ===================== UPDATE PROGRESS ===================== */
+    function updateProgress() {
+        let dijawab = 0;
+        soalAktif.forEach((_, i) => {
+            if (document.querySelector(`input[name="soal-${i}"]:checked`)) dijawab++;
+        });
+        const total = soalAktif.length;
+        document.getElementById('progress-text').textContent = `${dijawab} / ${total}`;
+        document.getElementById('progress-bar').style.width = `${(dijawab / total) * 100}%`;
+    }
+
+    /* ===================== PERIKSA JAWABAN ===================== */
+    function periksaJawaban() {
+        // Cek apakah semua soal dijawab
+        let belumDijawab = [];
+        soalAktif.forEach((_, i) => {
+            if (!document.querySelector(`input[name="soal-${i}"]:checked`)) belumDijawab.push(i + 1);
+        });
+        if (belumDijawab.length > 0) {
+            alert(`Masih ada ${belumDijawab.length} soal yang belum dijawab: Soal nomor ${belumDijawab.join(', ')}`);
+            return;
+        }
+
+        sudahDiperiksa = true;
+        let skor = 0;
+        document.getElementById('btn-periksa').disabled = true;
+
+        soalAktif.forEach((s, i) => {
+            const dipilih = parseInt(document.querySelector(`input[name="soal-${i}"]:checked`).value);
+            const benar = s.jawaban;
+            const soalEl = document.getElementById(`soal-${i}`);
+            const penjelasanEl = document.getElementById(`penjelasan-${i}`);
+
+            // Disable semua radio
+            document.querySelectorAll(`input[name="soal-${i}"]`).forEach(r => r.disabled = true);
+
+            s.opsi.forEach((_, j) => {
+                const lbl = document.getElementById(`label-${i}-${j}`);
+                lbl.style.cursor = 'default';
+                if (j === benar) {
+                    lbl.style.borderColor = '#28a745';
+                    lbl.style.background = '#d4edda';
+                    lbl.style.color = '#155724';
+                }
+                if (j === dipilih && dipilih !== benar) {
+                    lbl.style.borderColor = '#dc3545';
+                    lbl.style.background = '#f8d7da';
+                    lbl.style.color = '#721c24';
+                }
+            });
+
+            if (dipilih === benar) {
+                skor++;
+                soalEl.style.borderColor = '#28a745';
+                penjelasanEl.style.background = '#d4edda';
+                penjelasanEl.style.color = '#155724';
+                penjelasanEl.style.border = '1px solid #28a745';
+                penjelasanEl.innerHTML = `<i class="bi bi-check-circle-fill"></i> <strong>Benar!</strong> ${s.penjelasan}`;
+            } else {
+                soalEl.style.borderColor = '#dc3545';
+                penjelasanEl.style.background = '#f8d7da';
+                penjelasanEl.style.color = '#721c24';
+                penjelasanEl.style.border = '1px solid #dc3545';
+                penjelasanEl.innerHTML = `<i class="bi bi-x-circle-fill"></i> <strong>Salah.</strong> ${s.penjelasan}`;
+            }
+            penjelasanEl.style.display = 'block';
+        });
+
+        // Update progress
+        const total = soalAktif.length;
+        document.getElementById('live-score').textContent = skor;
+        document.getElementById('progress-bar').style.width = '100%';
+
+        // Tampilkan hasil
+        const nilai = Math.round((skor / total) * 100);
+        tampilkanHasil(skor, total, nilai);
+
+        // Scroll ke hasil
+        document.getElementById('hasil-penilaian').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    /* ===================== TAMPILKAN HASIL ===================== */
+    function tampilkanHasil(skor, total, nilai) {
+        const hasilEl = document.getElementById('hasil-penilaian');
+        hasilEl.style.display = 'block';
+
+        let icon, judul, warnaNilai, predikat, warnaPredikat, pesan;
+
+        if (nilai >= 90) {
+            icon = '🏆'; judul = 'Luar Biasa!';
+            warnaNilai = '#28a745'; predikat = 'A — Sangat Baik';
+            warnaPredikat = '#d4edda'; warnaTextPredikat = '#155724';
+            pesan = 'Kamu menguasai materi Bangun Datar dan Bangun Ruang dengan sangat baik! Pertahankan terus!';
+        } else if (nilai >= 75) {
+            icon = '😊'; judul = 'Bagus Sekali!';
+            warnaNilai = '#007bff'; predikat = 'B — Baik';
+            warnaPredikat = '#cce5ff'; warnaTextPredikat = '#004085';
+            pesan = 'Pemahaman kamu sudah baik. Pelajari kembali soal yang salah untuk menjadi lebih sempurna.';
+        } else if (nilai >= 60) {
+            icon = '🙂'; judul = 'Cukup Baik';
+            warnaNilai = '#fd7e14'; predikat = 'C — Cukup';
+            warnaPredikat = '#fff3cd'; warnaTextPredikat = '#856404';
+            pesan = 'Kamu sudah cukup memahami materi. Coba pelajari ulang bagian yang masih salah ya!';
+        } else {
+            icon = '💪'; judul = 'Perlu Belajar Lagi';
+            warnaNilai = '#dc3545'; predikat = 'D — Kurang';
+            warnaPredikat = '#f8d7da'; warnaTextPredikat = '#721c24';
+            pesan = 'Jangan menyerah! Baca kembali materi di atas lalu coba ulangi latihan ini. Kamu pasti bisa!';
+        }
+
+        document.getElementById('hasil-icon').textContent = icon;
+        document.getElementById('hasil-judul').textContent = judul;
+        document.getElementById('hasil-judul').style.color = warnaNilai;
+        document.getElementById('hasil-skor').textContent = `Kamu menjawab benar ${skor} dari ${total} soal`;
+        document.getElementById('hasil-nilai').textContent = nilai;
+        document.getElementById('hasil-nilai').style.color = warnaNilai;
+        const predikatEl = document.getElementById('hasil-predikat');
+        predikatEl.textContent = predikat;
+        predikatEl.style.background = warnaPredikat;
+        predikatEl.style.color = warnaTextPredikat;
+        document.getElementById('hasil-pesan').textContent = pesan;
+    }
+
+    /* ===================== RESET ===================== */
+    function resetLatihan() {
+        renderSoal();
+        document.getElementById('latihan').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', renderSoal);
+    </script>
+</body>
+<style>
+    /* Styling consistent with other materi pages */
+    body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .hamburger-btn { display: none; position: fixed; top: 15px; left: 15px; z-index: 1100; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; border-radius: 10px; width: 50px; height: 50px; color: white; font-size: 24px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .sidenav { height: 100%; width: 200px; position: fixed; top: 0; left: 0; background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%); padding-top: 80px; z-index: 1000; transition: transform 0.3s ease; box-shadow: 2px 0 5px rgba(0,0,0,0.1); }
+    .sidenav h3 { text-align: center; color: #ecf0f1; font-size: 1.2rem; margin-bottom: 1.5rem; font-weight: 600; padding: 0 10px; }
+    .sidenav ul { list-style: none; padding: 0; }
+    .sidenav ul li a { color: #bdc3c7; text-decoration: none; display: block; padding: 12px 20px; transition: 0.3s; font-size: 0.95rem; border-left: 4px solid transparent; }
+    .sidenav ul li a:hover { background: #34495e; color: #fff; transform: translateX(5px); border-left: 4px solid #3498db; }
+    .close-btn { display: none; position: absolute; top: 15px; right: 15px; background: #e74c3c; border: none; border-radius: 50%; width: 40px; height: 40px; color: white; font-size: 24px; cursor: pointer; }
+    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; }
+    .overlay.active { display: block; }
+    
+    .container { padding-top: 20px; padding-bottom: 40px; }
+    h1 { color: #2c3e50; margin-bottom: 30px; font-weight: 700; text-align: center; }
+    .card { border: none; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px; transition: transform 0.3s; background: white; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+    .card-body h2 { font-size: 1.5rem; margin-bottom: 20px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+    .card-body p { color: #555; line-height: 1.7; }
+    
+    @media (max-width: 768px) {
+        .hamburger-btn, .close-btn { display: block; }
+        .sidenav { transform: translateX(-100%); width: 280px; }
+        .sidenav.active { transform: translateX(0); }
+        #isi-materi { margin-left: 0 !important; }
+        .container { padding-top: 80px; }
+        h1 { font-size: 1.8rem; }
+        #latihan { margin-left: 0 !important; }
+        .opsi-container { grid-template-columns: 1fr !important; }
+    }
+    @media (min-width: 769px) { .sidenav { transform: translateX(0) !important; } }
+</style>
+</html>

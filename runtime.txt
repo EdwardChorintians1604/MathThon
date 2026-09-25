@@ -1,0 +1,52 @@
+python-3.13.0
+
+Waduh, nah ini dia! Ini contoh klasik dari masalah False Positive pada sistem moderasi atau guardrail AI.
+
+Pertanyaan Anda padahal murni akademis dan 100% akademik matematika:
+
+"Berikan saya penjelasan mengenai Hukum Euler dalam dunia matematika dan implementasinya..."
+
+Namun, AI justru merespons dengan:
+
+"Maaf, tetapi saya tidak dapat membantu dengan pertanyaan yang mencakup topik seksual atau kontroversial..."
+
+🔍 Mengapa Hal Ini Bisa Terjadi?
+Ada dua penyebab utama mengapa AI Anda tiba-tiba "kebingungan":
+
+1. Terlalu Terkontaminasi oleh Riwayat Obrolan (Chat History / Context Poisoning)
+AI generatif (LLM) membaca keseluruhan riwayat obrolan di atasnya sebagai konteks untuk menghasilkan respon berikutnya.
+Karena tepat sebelum pertanyaan Euler Anda memasukkan kalimat vulgar/NSFW ("Bool mas Rusdi..."), safety filter bawaan API/model menganggap keseluruhan percakapan ini sudah berada di zona berbahaya (kontaminasi konteks), sehingga pertanyaan sah seperti "Hukum Euler" pun kena dampaknya dan terblokir secara otomatis.
+
+2. Sistem Guardrail / System Instruction Terlalu Sensitif (Over-Triggered)
+Filter moderasi di sistem Anda diset dengan batas ambang (threshold) yang terlalu kaku. Ketika ada histori kata sensitif di atas, sistem langsung memblokir pesan baru tanpa mengevaluasi prompt terbaru secara terpisah.
+
+🛠️ Bagaimana Cara Memperbaikinya?
+Jika Anda yang mengembangkan backend AI ini, berikut solusi untuk mengatasi masalah tersebut:
+
+Pisahkan Evaluasi Moderasi (Sanitize Input Separately):
+
+Saat menerima prompt baru dari user, kirim prompt baru itu saja ke fungsi/API moderasi terlebih dahulu tanpa membawa seluruh riwayat chat sebelumnya.
+
+Jika prompt baru aman (seperti "Hukum Euler"), baru teruskan ke LLM beserta histori obrolan.
+
+Gunakan Chat Isolation / Session Clearing:
+
+Jika pengguna sempat memasukkan kata kasar/NSFW dan ditolak oleh AI, sebaiknya pesan kasar tersebut tidak dimasukkan ke dalam daftar history memory yang dikirimkan kembali ke LLM pada turn berikutnya.
+
+Perbaiki System Prompt / Instruction:
+Tambahkan instruksi tegas di system prompt:
+
+Plaintext
+Evaluasi setiap prompt baru dari pengguna berdasarkan niat pesan terbaru tersebut. 
+Meskipun terdapat riwayat sensitif di atas, jika pengguna mengajukan pertanyaan matematika yang sah dan akademis (seperti Hukum Euler, Kalkulus, dsb.), jawablah pertanyaan matematika tersebut secara profesional tanpa menuduhnya melanggar aturan.
+🧪 Tes Cepat untuk Membuktikan
+Coba klik tombol + Chat Baru di bagian kiri atas, lalu langsung tanyakan soal Hukum Euler tersebut di obrolan yang bersih dari riwayat lama. Pasti AI-nya akan menjawab dengan lancar dan benar!  
+
+Waduh, dari tangkapan layar ini terlihat masalah yang jauh lebih serius (halusinasi fatal / AI Hallucination) dari sekadar false positive guardrail.Mari kita bedah apa yang terjadi di jawaban AI tersebut:🚨 Masalah Utama: Halusinasi Logika MatematikaMeskipun AI menjawab pertanyaan "Hukum Euler", isi penjelasannya 100% salah secara konsep matematika:Aritmatika (Sangat Keliru):AI menulis: a × b = a + (a-1) + ... + 1. Ini bukan rumus perkalian maupun Hukum Euler, melainkan deret penjumlahan bilangan bulat hingga 1.AI menulis: a / b = a - (b-1). Ini sama sekali tidak ada hubungannya dengan pembagian matematika maupun konsep Euler.Persamaan Linier & Matriks:Penjelasan mengenai y' = ay + b disajikan secara acak tanpa mengaitkan ke rumus identitas Euler ($e^{ix} = \cos x + i \sin x$) atau Metode Euler (Euler's Method untuk PD biasa).Gagal Rendering LaTeX:Di layar atas terlihat kode LaTeX polos seperti \begin{aligned}, \begincases}, dan \vdots tidak ter-render dengan rapi menjadi format persamaan matematika, melainkan hanya tercetak sebagai teks mentah (raw code).🔍 Mengapa AI Bisa Menjawab Seliar Ini?Model (MathThon Flash) Mengalami Confusion: Karena pada chat history sebelumnya model ini menerima banyak input acak/kasar, konteks pembelajarannya menjadi "rusak" (poisoned context), sehingga saat diminta menjelaskan topik rumit seperti Hukum Euler, model tersebut hanya menggabungkan kata-kata acak (token guessing) agar terlihat seperti jawaban matematika.Format Library Belum Terpasang di Frontend: Tampilan \begin{aligned} yang mentah menandakan bahwa di frontend aplikasi Anda belum terpasang renderer matematika seperti MathJax atau KaTeX.🛠️ Langkah Perbaikan yang Perlu Dilakukan1. Pasang Library Render LaTeX (Sisi UI)Agar rumus matematika tampil cantik dan mudah dibaca, tambahkan pustaka KaTeX atau MathJax pada komponen React/HTML yang menampilkan pesan AI:JavaScript// Contoh jika menggunakan React + KaTeX
+import 'katex/dist/katex.min.css';
+import { InlineMath, BlockMath } from 'react-katex';
+2. Perbaiki System Prompt untuk Penalaran MatematikaTambahkan batasan ketat pada system prompt backend AI Anda:PlaintextAnda adalah asisten matematika presisi tinggi. 
+- Jika Anda tidak yakin dengan definisi atau rumus matematika (seperti Hukum Euler), katakan bahwa Anda perlu memverifikasi daripada memberikan rumus yang salah.
+- Gunakan format LaTeX yang bersih untuk semua persamaan matematika.
+- Jangan mengarang definisi matematika baru.
+3. Reset Memory Chat Saat Topik BerubahPastikan ada mekanisme bagi sistem untuk mengosongkan memory context lama jika pengguna memulai topik yang sama sekali baru atau menekan tombol + Chat Baru.

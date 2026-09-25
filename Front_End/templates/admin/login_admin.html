@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathThon | Login Sebagai Admin </title>
+    <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;500&display=swap">
+
+    <!-- Tailwind CSS (CDN) - ditambahkan tanpa build step -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            boxShadow: {
+              glow: '0 0 0 1px rgba(102,126,234,0.25), 0 18px 50px rgba(102,126,234,0.18)'
+            }
+          }
+        }
+      };
+    </script>
+
+    <style>
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #202530, #2a5298 70%, #52cfeb 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .login-admin-card {
+            background: rgb(255, 255, 255);
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,.37);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 32px;
+            border: 1px solid rgba(255,255,255,0.22);
+            padding: 2.5rem 2rem 2rem 2rem;
+            width: 100%;
+            max-width: 400px;
+            margin: 2rem 1rem;
+            position: relative;
+            animation: fadeInDown 1s;
+        }
+        .login-admin-card .admin-logo {
+            display: block;
+            margin: 0 auto 1rem;
+            width: 58px;
+            height: 58px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            object-fit: cover;
+        }
+        .login-admin-card h2 {
+            font-weight: 700;
+            color: #26315f;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 2rem;
+            letter-spacing: .03em;
+        }
+        .input-group {
+            margin-bottom: 1.4rem;
+        }
+        .input-group-text {
+            background: transparent;
+            border: none;
+            color: #3252a8;
+            font-size: 1.1rem;
+        }
+        .form-control {
+            border: none;
+            border-bottom: 2px solid #3252a8;
+            background: transparent;
+            color: #233145;
+            border-radius: 0;
+            font-size: 1.08rem;
+            transition: box-shadow 0.25s;
+            padding-left: .35rem;
+        }
+        .form-control:focus {
+            box-shadow: 0 2px 8px #b8e1ff44;
+            border-bottom: 2px solid #1e3c72;
+            background: transparent;
+        }
+        label {
+            font-weight: 600;
+            color: #26315f;
+            margin-bottom: .2rem;
+        }
+        .login-admin-card button {
+            width: 100%;
+            background: linear-gradient(90deg, #3252a8 50%, #34d2fa 100%);
+            color: #fff;
+            border: none;
+            border-radius: 22px;
+            padding: .80rem;
+            font-weight: 600;
+            font-size: 1.12rem;
+            margin-top: .6rem;
+            box-shadow: 0 4px 12px rgba(50,82,168,.12);
+            transition: transform .09s, box-shadow .09s;
+        }
+        .login-admin-card button:hover, .login-admin-card button:focus {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(50,82,168,.18);
+            background: linear-gradient(90deg, #1e3c72 70%, #34d2fa 100%);
+        }
+        .login-admin-card .return-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.3rem;
+            color: #25375c;
+            font-weight: 500;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: color .15s;
+        }
+        .login-admin-card .return-link:hover {
+            color: #086cbb;
+            text-decoration: underline;
+        }
+        .login-admin-card .error-message {
+            color: #d72323;
+            background: #ffededbb;
+            padding: .5rem 1rem;
+            border-radius: 6px;
+            font-size: .96rem;
+            margin-bottom: 1.1rem;
+            text-align: center;
+            border-left: 4px solid #d72323a1;
+        }
+        @media (max-width: 600px) {
+            .login-admin-card {
+                padding: 1.5rem .8rem 1.5rem .8rem;
+                max-width: 96vw;
+            }
+            .login-admin-card h2 { font-size: 1.2rem; }
+        }
+        @keyframes fadeInDown {
+          from { opacity: 0; transform: translateY(-32px);}
+          to { opacity: 1; transform: translateY(0);}
+        }
+    </style>
+</head>
+<body>
+    <section class="login-admin-card animate__animated animate__fadeInDown">
+        <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}"
+             alt="logo maththon" class="admin-logo animate__animated animate__fadeIn" />
+        <h2 class="animate__animated animate__fadeInDown animate__delay-1s">
+            Login Admin MathThon
+        </h2>
+        <form method="POST" action="{{ url_for('admin.login_admin') }}" autocomplete="off">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            {% if error %}
+                <div class="error-message animate__animated animate__shakeX animate__repeat-1">{{ error }}</div>
+            {% endif %}
+            <div class="mb-3">
+                <label for="username" class="form-label">Username Admin <span style="color: #cf2323">*</span></label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person-circle"></i></span>
+                    <input type="text" autocomplete="username" class="form-control" id="username" name="username" required placeholder="Masukkan username Anda">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password <span style="color: #cf2323">*</span></label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                    <input type="password" autocomplete="current-password" class="form-control" id="password" name="password" required placeholder="Masukkan password Anda">
+                </div>
+            </div>
+            <button type="submit" class="animate__animated animate__pulse animate__delay-2s">Login</button>
+            <a class="return-link" href="{{ url_for('main.home') }}"><i class="bi bi-arrow-bar-left"></i> Kembali ke Beranda</a>
+        </form>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

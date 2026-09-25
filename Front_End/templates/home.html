@@ -1,0 +1,2703 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}MathThon | Selamat datang di MathThon, tempat belajar matematika yang menyenangkan dan efektif{% endblock %}</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Custom CSS -->
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <!-- Tailwind CSS (CDN) - ditambahkan tanpa build step -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          boxShadow: {
+            glow: '0 0 0 1px rgba(102,126,234,0.25), 0 18px 50px rgba(102,126,234,0.18)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+  <!-- PyScript -->
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <!-- Chart.js (pastikan versi sesuai) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+  <!-- Google Analytics - Ganti 'G-XXXXXXXXXX' dengan Measurement ID Anda -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+
+    // Fungsi untuk melacak event
+    function trackEvent(eventName, eventCategory, eventLabel) {
+      gtag('event', eventName, { 'event_category': eventCategory, 'event_label': eventLabel });
+    }
+  </script>
+  {% block head %}{% endblock %}
+</head>
+
+<body>
+
+  <!-- ===========================
+       🔹 NAVBAR
+  ============================ -->
+  <header>
+    <nav class="wrapper animate__animated animate__fadeInDown animate__pulse bg-[rgba(30,30,47,0.95)] shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+    <div class="brand animate__animated animate__fadeInLeft flex items-center gap-2">
+      <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}" alt="Erantus Paripurna Samaloisa" class="photos animate__animated animate__bounceIn rounded-full border border-white/70" />
+    </div>
+    <ul class="navigation">
+      <a class="nav-link active hover:bg-white/10 active:bg-white/10" href="#">Beranda</a>
+
+      <a class="nav-link" href="#about">Tentang</a>
+      <a class="nav-link" href="#fact">Fakta</a>
+      <a class="nav-link" href="#team">Tim</a>
+      <a class="nav-link" href="#statistics">Statistik</a>
+      <a class="nav-link" href="#fitur">Fitur</a>
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Login/Register</a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+          <li><a class="dropdown-item" href="{{ url_for('auth.register_user') }}" onclick="trackEvent('click', 'Navigation', 'Register User')">Register sebagai User</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('auth.login_user') }}" onclick="trackEvent('click', 'Navigation', 'Login User')">Login sebagai User</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('admin.login_admin') }}" onclick="trackEvent('click', 'Navigation', 'Login Admin')">Login sebagai Admin</a></li>
+        </ul>
+      </div>
+    </ul>
+    <button class="open-sidenav-btn" id="openSidenavBtn" onclick="openSidenav()">
+      <i class="bi bi-list"></i>
+    </button>
+
+    <div id="sidenav-right" class="sidenav-right animate__animated animate__fadeInRight">
+      <span class="closebtn" onclick="closeSidenav()">&times;</span>
+      <h1 class="my_text">MathThon</h1>
+      <a href="#" class="active">Beranda</a>
+      <a href="#about">Tentang</a>
+      <a href="#fact">Fakta</a>
+      <a href="#team">Tim</a>
+      <a href="#statistics">Statistik</a>
+      <a href="#fitur">Fitur</a>
+      <div class="dropdown">
+       <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Login/Register</a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+<li><a class="dropdown-item" href="{{ url_for('auth.register_user') }}" onclick="trackEvent('click', 'Navigation', 'Register User')">Register sebagai User</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('auth.login_user') }}" onclick="trackEvent('click', 'Navigation', 'Login User')">Login sebagai User</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('admin.login_admin') }}" onclick="trackEvent('click', 'Navigation', 'Login Admin')">Login sebagai Admin</a></li>
+        </ul>
+      </div>
+      <br>
+      <br>
+      <br>
+    </div>
+  </nav>
+</header>
+      <br>
+ <script>
+                function openSidenav() {
+                    document.getElementById("sidenav-right").classList.add("open");
+                }
+                function closeSidenav() {
+                    document.getElementById("sidenav-right").classList.remove("open");
+                }
+                document.addEventListener("DOMContentLoaded", function() {
+                    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                        anchor.addEventListener('click', function (e) {
+                            const href = this.getAttribute('href');
+                            if (href && href.startsWith('#')) {
+                                e.preventDefault();
+                                const target = document.querySelector(href);
+                                if (target) {
+                                    target.scrollIntoView({
+                                        behavior: 'smooth'
+                                    });
+                                }
+                            }
+                        });
+                    });
+                    // Animasi portfolio-item saat muncul di viewport
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('animate__animated', 'animate__zoomIn');
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.2 });
+                    document.querySelectorAll('.portfolio-item').forEach(item => {
+                        observer.observe(item);
+                    });
+                    // Animasi about-section dan contact-section saat muncul
+                    const fadeSections = document.querySelectorAll('.about-section, .contact-section');
+                    fadeSections.forEach(section => {
+                        section.classList.add('animate__animated');
+                        // Ganti animasi fade-left menjadi bounceIn
+                        section.classList.remove('animate__fadeInLeft');
+                        section.classList.add('animate__bounceIn');
+                    });
+                    // Animasi footer saat muncul
+                    const footer = document.querySelector('footer');
+                    if (footer) {
+                        footer.classList.add('animate__animated', 'animate__fadeInUp');
+                    }
+                });
+            </script>
+</header>
+
+  <!-- Hero Section -->
+  <section class="welcome-section">
+    <div class="hero-maker flex flex-col items-center justify-center text-center px-4 py-16">
+      <h1 data-aos="fade-up" class="fw-bold mb-4 text-4xl md:text-6xl text-white drop-shadow-lg">
+        Selamat Datang di <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">MathThon</span>
+      </h1>
+      <p data-aos="fade-up" data-aos-delay="200" class="lead text-lg md:text-xl text-gray-200 max-w-2xl mb-8">
+        Platform interaktif untuk latihan dan pengembangan kemampuan matematika Anda secara menyenangkan.
+      </p>
+      <a href="#about" data-aos="fade-up" data-aos-delay="400" class="btn btn-primary btn-lg rounded-full px-8 py-3 font-semibold shadow-glow hover:scale-105 transition-transform duration-300">
+        Pelajari Lebih Lanjut
+      </a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-features-section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-4 about-content" data-aos="fade-up">
+          <h2 class="section-title">Tentang MathThon</h2>
+          <p class="writing">MathThon adalah platform interaktif untuk belajar, berlatih, dan menantang diri di bidang matematika, sangat cocok untuk siswa, mahasiswa, dan siapa pun yang ingin meningkatkan kemampuan berhitung.</p>
+          </div>
+        <div class="col-lg-8 features-scroll-container" data-aos="fade-up">
+          <div class="features-wrapper">
+            <div class="feature-card">
+              <i class="fa-solid fa-calculator fa-3x text-primary mb-3"></i>
+              <h5>Latihan Soal Adaptif</h5>
+              <p>Soal akan menyesuaikan kemampuanmu agar pembelajaran lebih efektif.</p>
+            </div>
+            <div class="feature-card">
+              <i class="fa-solid fa-chart-line fa-3x text-primary mb-3"></i>
+              <h5>Analisis Perkembangan</h5>
+              <p>Pantau grafik kemajuanmu dan ketahui topik yang perlu diperbaiki.</p>
+            </div>
+            <div class="feature-card">
+              <i class="fa-solid fa-users fa-3x text-primary mb-3"></i>
+              <h5>Komunitas Belajar</h5>
+              <p>Gabung dengan pengguna lain untuk berdiskusi dan berbagi solusi.</p>
+            </div>
+            <div class="feature-card">
+              <i class="fa-solid fa-robot fa-3x text-primary mb-3"></i>
+              <h5>Tools yang Memadai</h5>
+              <p>Fitur AI, kalkulator, dan alat bantu lainnya untuk mendukung proses belajar.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section (Dihapus karena digabung dengan About) -->
+  <section id="features" class="features-section" style="display:none;"></section>
+
+
+  <style>
+    :root{
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --accent: #0d6efd;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --damn: #0b919e;
+}
+.container{
+  max-width:980px;
+  margin:32px auto;
+  padding:20px;
+}
+
+.hero{
+  text-align:center;
+  margin-bottom:20px;
+}
+.hero h1{margin:0;font-size:1.6rem}
+.hero .subtitle{color:var(--muted);margin-top:6px}
+
+.slider{
+  background:transparent;
+  border-radius:12px;
+  padding:18px;
+  min-height:380px;
+  position:relative;
+}
+
+/* slides */
+.slide{
+  display:none;
+  padding:12px;
+  background:var(--damn);
+  border-radius:8px;
+  box-shadow:0 6px 18px rgba(15,23,42,0.06);
+   scroll-behavior: smooth;
+      overflow-x: auto; /* HAPUS BARIS INI */
+    overflow: auto; /* TAMBAH INI */
+      scrollbar-width: thin;
+      scrollbar-color: #888 transparent;
+}
+.slide.active{
+  display:block;
+  animation:fadeIn 0.5s;
+}
+
+.cards{
+  display:flex;
+  gap:12px;
+  margin-top:12px;
+  flex-wrap:wrap;
+}
+.card{
+  flex:1 1 28%;
+  min-width:180px;
+  background:linear-gradient(180deg, rgba(255,255,255,1), rgba(250,250,250,1));
+  border-radius:8px;
+  padding:18px;
+  text-align:center;
+  color:var(--text);
+  transition: ease-in-out 0.5s;
+  box-shadow:0 3px 10px rgba(15,23,42,0.04);
+}
+.card:hover{
+  box-shadow:0 6px 18px rgba(15,23,42,0.1);
+  transform:translateY(-4px);
+}
+
+.card h4{margin:8px 0 6px}
+.card p{color:var(--muted);font-size:0.95rem}
+
+/* chart image */
+.chart-image{
+  display:block;
+  max-width:100%;
+  height:70vh;
+  border-radius:8px;
+  box-shadow:0 6px 18px rgba(15,23,42,0.06);
+}
+
+/* controls */
+.controls{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  transition: ease-in-out 0.5s;
+  margin-top:14px;
+}
+
+.control-btn{
+  background: linear-gradient(90deg, #4f8cff 50%, #56d364 100%);
+  border:1px solid #e6e9ef;
+  padding:8px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  color: white;
+  font-weight:600;
+  box-shadow:0 2px 6px rgba(15,23,42,0.04);
+}
+.control-btn:active{transform:translateY(1px)}
+.dots{display:flex;gap:6px}
+.dot{
+  width:10px;height:10px;border-radius:50%;background:#d1d5db;cursor:pointer;
+}
+.dot.active{background:var(--accent)}
+.caption{color:var(--bg);margin-top:8px; font-size:0.9rem; text-align:center;}
+.download{
+  display:inline-block;margin-top:12px;padding:8px 12px;border-radius:8px;background:var(--accent);color:white;text-decoration:none;font-weight:600;
+}
+@media screen and (max-width:768px) {
+      .about-logo {
+      max-width: 100px;
+      margin-top: 38px;
+      margin-left: 100px;
+      opacity: 0.8;
+    }
+}
+  </style>
+  <br>
+  <br>
+  <br>
+
+<section id="slider" class="slider" data-aos="fade-up">
+  <!-- Slide 1 -->
+  <article class="slide active" data-aos="fade-up" data-index="0" aria-hidden="false" id="fact">
+    <h2 style="text-align: center;">Fakta Pahit Tentang Pendidikan dan dunia Matematika di Indonesia</h2>
+    <div class="cards">
+      <div class="card">
+        <i class="fa-solid fa-brain fa-2x"></i>
+        <h4>Kemampuan Menalar dan Menghitung</h4>
+        <p>Lebih dari 80% siswa mengalami kesulitan dalam memahami konsep dasar matematika.</p>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-people-group fa-2x"></i>
+        <h4>Matematika Menakutkan bagi Sebagian Orang</h4>
+        <p>Sekitar 70% pelajar menganggap matematika sebagai pelajaran yang paling menantang dan menimbulkan kecemasan.</p>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-book fa-2x"></i>
+        <h4>Kurangnya Literasi Mengenai Matematika</h4>
+        <p>Kurangnya literasi mengenai matematika di Indonesia menjadi salah satu faktor yang mempengaruhi kualitas pendidikan matematika.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- Slide 2: Grafik Enrolment dan Literasi -->
+<article class="slide" data-index="1" aria-hidden="true" style="overflow-y:auto;max-height:90vh;">
+  <h2 style="display: flex; align-items: center; gap: 8px; font-size:2rem; text-align: center; justify-content: center;">
+    <span style="background: linear-gradient(90deg,#4f8cff 50%,#56d364 100%); background-clip: text; -webkit-background-clip: text;-webkit-text-fill-color: transparent;">📊 Tren Enrolment & Literasi Indonesia</span>
+  </h2>
+  <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+    <div class="card" style="background: white; border-radius: 15px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); overflow: hidden;">
+      <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 30px;">
+        <h3 style="margin: 0; font-size: 1.4em; display: flex; align-items: center; gap: 10px;">
+          📈 Statistik Pendidikan per Provinsi
+        </h3>
+        <p style="margin: 5px 0 0 0; opacity: 0.9; font-size: 0.95em;">
+          Sumber Data: Kementerian Pendidikan dan Kebudayaan
+        </p>
+      </div>
+      <div class="card-body" style="padding: 30px;">
+        <!-- Controls -->
+        <div class="controls" style="display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap;">
+          <button class="enrolment-control-btn active" onclick="enrolmentChangeChartType('bar')" style="padding: 12px 20px; border: none; background: #4CAF50; color: white; border-radius: 8px; cursor: pointer; transition: all 0.3s; font-weight: bold;">
+            📊 Diagram Batang
+          </button>
+          <button class="enrolment-control-btn" onclick="enrolmentChangeChartType('line')" style="padding: 12px 20px; border: none; background: #2196F3; color: white; border-radius: 8px; cursor: pointer; transition: all 0.3s; font-weight: bold;">
+            📈 Diagram Garis
+          </button>
+          <button class="enrolment-control-btn" onclick="enrolmentToggleDataset()" style="padding: 12px 20px; border: none; background: #FF9800; color: white; border-radius: 8px; cursor: pointer; transition: all 0.3s; font-weight: bold;">
+            🔄 Ganti Metrik
+          </button>
+          <button class="enrolment-control-btn" onclick="enrolmentExportChartData()" style="padding: 12px 20px; border: none; background: #9C27B0; color: white; border-radius: 8px; cursor: pointer; transition: all 0.3s; font-weight: bold;">
+            📥 Export Data
+          </button>
+        </div>
+
+        <!-- Chart Container -->
+        <div class="chart-container">
+          <canvas id="enrolmentChart"></canvas>
+        </div>
+
+        <!-- Summary Stats -->
+        <div class="summary-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 25px;">
+          <div class="stat-card" style="background: linear-gradient(135deg, #4CAF50, #45a049); color: white; padding: 20px; border-radius: 12px; text-align: center;">
+            <div style="font-size: 2em; font-weight: bold;" id="enrolment-stat-total-siswa">-</div>
+            <div style="font-size: 0.9em;">Total Siswa</div>
+          </div>
+          <div class="stat-card" style="background: linear-gradient(135deg, #f44336, #d32f2f); color: white; padding: 20px; border-radius: 12px; text-align: center;">
+            <div style="font-size: 2em; font-weight: bold;" id="enrolment-stat-total-putus">-</div>
+            <div style="font-size: 0.9em;">Putus Sekolah</div>
+          </div>
+          <div class="stat-card" style="background: linear-gradient(135deg, #FF9800, #F57C00); color: white; padding: 20px; border-radius: 12px; text-align: center;">
+            <div style="font-size: 2em; font-weight: bold;" id="enrolment-stat-total-mengulang">-</div>
+            <div style="font-size: 0.9em;">Mengulang</div>
+          </div>
+          <div class="stat-card" style="background: linear-gradient(135deg, #2196F3, #1976D2); color: white; padding: 20px; border-radius: 12px; text-align: center;">
+            <div style="font-size: 2em; font-weight: bold;" id="enrolment-stat-total-provinsi">-</div>
+            <div style="font-size: 0.9em;">Provinsi</div>
+          </div>
+        </div>
+
+        <!-- Detailed Analysis -->
+        <div class="analysis-container" style="background: #f8f9fa; padding: 25px; border-radius: 12px; border-left: 5px solid #667eea;">
+          <h4 style="margin-top: 0; color: #333; display: flex; align-items: center; gap: 8px;">
+            📊 Analisis Detail
+          </h4>
+          <div id="enrolmentDetailedAnalysis" style="line-height: 1.6;">
+            <!-- Analysis content will be populated by JavaScript -->
+          </div>
+        </div>
+
+        <!-- CSV Info -->
+        <div class="csv-info" style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-radius: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+            <span style="font-weight: bold; color: #1976D2;">ℹ️ Informasi Dataset</span>
+          </div>
+          <div style="font-size: 0.9em; color: #555;">
+            <p style="margin: 5px 0;"><strong>File Source:</strong> <code>kelayakan-pendidikan-indonesia.csv</code></p>
+            <p style="margin: 5px 0;"><strong>Kolom Tersedia:</strong> <span id="enrolmentAvailableFields">-</span></p>
+            <p style="margin: 5px 0;"><strong>Update Terakhir:</strong> <span id="enrolmentDataUpdateInfo">-</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caption" style="text-align: center; margin-top: 20px; color: #666; font-size: 14px; line-height: 1.5;">
+      <p>Grafik interaktif ini dibuat dengan <strong>Chart.js</strong> • Data diproses secara real-time dari dataset pendidikan Indonesia</p>
+      <p style="font-size: 13px; margin-top: 5px;">📍 <em>Gunakan hover pada chart untuk detail nilai • Scroll horizontal untuk melihat lebih banyak provinsi</em></p>
+    </div>
+  </div>
+
+  <!-- Error Display -->
+  <div id="enrolmentCsvError" style="display: none; background: #ffebee; color: #c62828; padding: 15px; border-radius: 8px; margin: 15px auto; max-width: 800px; text-align: center;"></div>
+  <!-- slide 2 CSS -->
+  <style>
+    /* Base Chart Container */
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 450px;
+      margin-bottom: 25px;
+      transition: height 0.3s ease;
+    }
+
+    .enrolment-control-btn {
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    .enrolment-control-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .enrolment-control-btn.active {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transform: scale(1.05);
+    }
+
+    .stat-card {
+      transition: transform 0.3s ease;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Grid Khusus Analisis Detail */
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* === Responsivitas Dinamis (300px - 1150px) === */
+    
+    @media (max-width: 1150px) {
+      .container { padding: 0 10px; }
+      .chart-container { height: 400px; }
+    }
+
+    @media (max-width: 992px) {
+      .summary-grid { 
+        grid-template-columns: 1fr 1fr !important;
+        gap: 15px !important; 
+      }
+      .card-header { padding: 15px 20px !important; }
+    }
+
+    @media (max-width: 768px) {
+      .controls { gap: 8px; }
+      .chart-container { height: 320px; }
+      .analysis-grid { grid-template-columns: 1fr; gap: 10px; }
+      .card-body { padding: 20px !important; }
+    }
+
+    @media (max-width: 480px) {
+      /* Optimal untuk iPhone SE dan HP layar kecil 300px+ */
+      .summary-grid { 
+        grid-template-columns: 1fr !important; 
+      }
+      .chart-container { height: 260px; }
+      .enrolment-control-btn { 
+        width: 100%; 
+        margin-bottom: 5px; 
+        padding: 10px !important;
+        font-size: 0.85rem;
+      }
+      .card-header h3 { font-size: 1.1em !important; }
+      .stat-card { padding: 15px !important; }
+      .stat-card div:first-child { font-size: 1.5em !important; }
+      .analysis-container { padding: 15px !important; }
+      
+      /* Mencegah teks meluap di layar sangat sempit (300px) */
+      .card-body { padding: 15px !important; }
+      p, span { font-size: 0.85rem; }
+    }
+  </style>
+
+  <script>
+    // Data dan konfigurasi chart - menggunakan namespace yang unik
+    const enrolmentChartData = {
+      provinsi: ['DKI Jakarta', 'Jawa Barat', 'Jawa Timur', 'Yogyakarta', 'Bali', 'Sumatera Utara', 'Sulawesi Selatan', 'Kalimantan Timur', 'Riau', 'Banten'],
+      jumlahSiswa: [1250000, 2850000, 2450000, 450000, 350000, 850000, 950000, 550000, 650000, 1200000],
+      jumlahPutusSekolah: [12500, 42800, 36700, 4500, 4200, 12700, 14200, 8250, 9750, 18000],
+      jumlahMengulang: [18700, 57000, 49000, 6750, 5250, 17000, 19000, 11000, 13000, 24000]
+    };
+
+    // Variabel dengan prefix yang unik
+    let enrolmentCurrentChartType = 'bar';
+    let enrolmentCurrentDataset = 'jumlahSiswa';
+    let enrolmentChartInstance = null;
+
+    const enrolmentDatasetConfig = {
+      'jumlahSiswa': {
+        label: 'Jumlah Siswa',
+        color: 'rgba(54, 162, 235, 0.8)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        unit: ' siswa'
+      },
+      'jumlahPutusSekolah': {
+        label: 'Putus Sekolah',
+        color: 'rgba(255, 99, 132, 0.8)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        unit: ' siswa'
+      },
+      'jumlahMengulang': {
+        label: 'Mengulang',
+        color: 'rgba(255, 159, 64, 0.8)',
+        borderColor: 'rgba(255, 159, 64, 1)',
+        unit: ' siswa'
+      }
+    };
+
+    // Inisialisasi chart
+    document.addEventListener('DOMContentLoaded', function() {
+      enrolmentInitializeChart();
+      enrolmentUpdateStatistics();
+      enrolmentUpdateDatasetInfo();
+    });
+
+    function enrolmentInitializeChart() {
+      const ctx = document.getElementById('enrolmentChart').getContext('2d');
+      
+      if (enrolmentChartInstance) {
+        enrolmentChartInstance.destroy();
+      }
+
+      const config = enrolmentGetChartConfig();
+      enrolmentChartInstance = new Chart(ctx, config);
+      enrolmentUpdateDetailedAnalysis();
+      enrolmentUpdateActiveButtons();
+    }
+
+    function enrolmentGetChartConfig() {
+      const currentConfig = enrolmentDatasetConfig[enrolmentCurrentDataset];
+      
+      return {
+        type: enrolmentCurrentChartType,
+        data: {
+          labels: enrolmentChartData.provinsi,
+          datasets: [{
+            label: currentConfig.label,
+            data: enrolmentChartData[enrolmentCurrentDataset],
+            backgroundColor: enrolmentCurrentChartType === 'bar' ? currentConfig.color : currentConfig.color.replace('0.8', '0.2'),
+            borderColor: currentConfig.borderColor,
+            borderWidth: 3,
+            fill: enrolmentCurrentChartType === 'line',
+            tension: 0.4,
+            pointBackgroundColor: currentConfig.borderColor,
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            pointRadius: 6,
+            pointHoverRadius: 10
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              titleColor: '#fff',
+              bodyColor: '#fff',
+              borderColor: currentConfig.borderColor,
+              borderWidth: 2,
+              cornerRadius: 8,
+              callbacks: {
+                label: function(context) {
+                  return `${currentConfig.label}: ${context.parsed.y.toLocaleString('id-ID')}${currentConfig.unit}`;
+                }
+              }
+            },
+            title: {
+              display: true,
+              text: `${currentConfig.label} per Provinsi`,
+              font: {
+                size: 18,
+                weight: 'bold',
+                family: 'Arial'
+              },
+              padding: 20,
+              color: '#333'
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: currentConfig.label,
+                font: {
+                  weight: 'bold',
+                  size: 14
+                }
+              },
+              grid: {
+                color: 'rgba(0,0,0,0.1)'
+              },
+              ticks: {
+                callback: function(value) {
+                  if (value >= 1000000) {
+                    return (value / 1000000).toFixed(1) + 'Jt';
+                  } else if (value >= 1000) {
+                    return (value / 1000).toFixed(0) + 'Rb';
+                  }
+                  return value;
+                }
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'Provinsi',
+                font: {
+                  weight: 'bold',
+                  size: 14
+                }
+              },
+              grid: {
+                display: false
+              }
+            }
+          },
+          animation: {
+            duration: 1200,
+            easing: 'easeOutQuart'
+          },
+          interaction: {
+            intersect: false,
+            mode: 'index'
+          }
+        }
+      };
+    }
+
+    function enrolmentChangeChartType(type) {
+      enrolmentCurrentChartType = type;
+      enrolmentInitializeChart();
+    }
+
+    function enrolmentToggleDataset() {
+      const datasets = ['jumlahSiswa', 'jumlahPutusSekolah', 'jumlahMengulang'];
+      const currentIndex = datasets.indexOf(enrolmentCurrentDataset);
+      enrolmentCurrentDataset = datasets[(currentIndex + 1) % datasets.length];
+      enrolmentInitializeChart();
+    }
+
+    function enrolmentUpdateActiveButtons() {
+      document.querySelectorAll('.enrolment-control-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      const activeBtn = document.querySelector(`.enrolment-control-btn[onclick="enrolmentChangeChartType('${enrolmentCurrentChartType}')"]`);
+      if (activeBtn) {
+        activeBtn.classList.add('active');
+      }
+    }
+
+    function enrolmentUpdateStatistics() {
+      const totalSiswa = enrolmentChartData.jumlahSiswa.reduce((a, b) => a + b, 0);
+      const totalPutus = enrolmentChartData.jumlahPutusSekolah.reduce((a, b) => a + b, 0);
+      const totalMengulang = enrolmentChartData.jumlahMengulang.reduce((a, b) => a + b, 0);
+      const totalProvinsi = enrolmentChartData.provinsi.length;
+
+      document.getElementById('enrolment-stat-total-siswa').textContent = (totalSiswa / 1000000).toFixed(1) + 'Jt';
+      document.getElementById('enrolment-stat-total-putus').textContent = totalPutus.toLocaleString('id-ID');
+      document.getElementById('enrolment-stat-total-mengulang').textContent = totalMengulang.toLocaleString('id-ID');
+      document.getElementById('enrolment-stat-total-provinsi').textContent = totalProvinsi;
+    }
+
+    function enrolmentUpdateDetailedAnalysis() {
+      const data = enrolmentChartData[enrolmentCurrentDataset];
+      const currentConfig = enrolmentDatasetConfig[enrolmentCurrentDataset];
+      const maxValue = Math.max(...data);
+      const minValue = Math.min(...data);
+      const maxProvince = enrolmentChartData.provinsi[data.indexOf(maxValue)];
+      const minProvince = enrolmentChartData.provinsi[data.indexOf(minValue)];
+      const average = (data.reduce((a, b) => a + b, 0) / data.length).toFixed(0);
+      
+      const percentageAboveAverage = ((data.filter(val => val > average).length / data.length) * 100).toFixed(1);
+      const gap = maxValue - minValue;
+
+      document.getElementById('enrolmentDetailedAnalysis').innerHTML = `
+        <div class="analysis-grid">
+          <div>
+            <p><strong>🏆 Tertinggi:</strong> ${maxProvince} (${maxValue.toLocaleString('id-ID')}${currentConfig.unit})</p>
+            <p><strong>📉 Terendah:</strong> ${minProvince} (${minValue.toLocaleString('id-ID')}${currentConfig.unit})</p>
+            <p><strong>📐 Rata-rata:</strong> ${parseInt(average).toLocaleString('id-ID')}${currentConfig.unit}</p>
+          </div>
+          <div>
+            <p><strong>📏 Selisih:</strong> ${gap.toLocaleString('id-ID')}${currentConfig.unit}</p>
+            <p><strong>📈 Di Atas Rata-rata:</strong> ${percentageAboveAverage}% provinsi</p>
+            <p><strong>🎯 Tren:</strong> ${enrolmentGetTrendAnalysis(enrolmentCurrentDataset)}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function enrolmentGetTrendAnalysis(dataset) {
+      const trends = {
+        'jumlahSiswa': 'Kepadatan siswa tertinggi di Jawa Barat',
+        'jumlahPutusSekolah': 'Tingkat putus sekolah perlu perhatian khusus',
+        'jumlahMengulang': 'Perlu peningkatan kualitas pembelajaran'
+      };
+      return trends[dataset] || 'Data menunjukkan variasi antar provinsi';
+    }
+
+    function enrolmentUpdateDatasetInfo() {
+      const fields = ['Provinsi', 'Jumlah Siswa', 'Putus Sekolah', 'Mengulang'];
+      document.getElementById('enrolmentAvailableFields').textContent = fields.join(', ');
+      document.getElementById('enrolmentDataUpdateInfo').textContent = new Date().toLocaleDateString('id-ID', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    }
+
+    function enrolmentExportChartData() {
+      const headers = ['Provinsi', ...Object.values(enrolmentDatasetConfig).map(config => config.label)];
+      const csvData = enrolmentChartData.provinsi.map((provinsi, index) => {
+        return [
+          provinsi,
+          enrolmentChartData.jumlahSiswa[index],
+          enrolmentChartData.jumlahPutusSekolah[index],
+          enrolmentChartData.jumlahMengulang[index]
+        ];
+      });
+      
+      const csvContent = [headers, ...csvData]
+        .map(row => row.join(','))
+        .join('\n');
+      
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.setAttribute('hidden', '');
+      a.setAttribute('href', url);
+      a.setAttribute('download', `data_pendidikan_enrolment_${new Date().toISOString().split('T')[0]}.csv`);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      
+      // Show success message
+      enrolmentShowTempMessage('✅ Data enrolment berhasil diexport!', 'success');
+    }
+
+    function enrolmentShowTempMessage(message, type) {
+      const messageDiv = document.createElement('div');
+      messageDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#4CAF50' : '#f44336'};
+        color: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 1000;
+        font-weight: bold;
+      `;
+      messageDiv.textContent = message;
+      document.body.appendChild(messageDiv);
+      
+      setTimeout(() => {
+        document.body.removeChild(messageDiv);
+      }, 3000);
+    }
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+      if (enrolmentChartInstance) {
+        enrolmentChartInstance.resize();
+      }
+    });
+  </script>
+</article>
+
+<!-- Slide 3: Grafik Statis -->
+<article class="slide" data-index="2" aria-hidden="true">
+    <h2 style="text-align: center;">Grafik Statis: Indikator Pendidikan per Provinsi</h2>
+    <div class="container">
+        <h1 class="chart-title">Skor Pemahaman Matematika PISA 2018</h1>
+        <p class="chart-subtitle">Berdasarkan Bentuk Satuan Pendidikan di Indonesia</p>
+        
+        <div class="controls">
+            <button class="math-control-btn active" onclick="changeMathChartType('bar')">📊 Diagram Batang</button>
+            <button class="math-control-btn" onclick="changeMathChartType('line')">📈 Diagram Garis</button>
+            <button class="math-control-btn export-btn" onclick="exportMathData()">📥 Export Data CSV</button>
+        </div>
+        
+        <div class="chart-container">
+            <canvas id="mathScoreChart"></canvas>
+        </div>
+        
+        <div class="summary" id="mathScoreSummary">
+            <!-- Summary akan diisi oleh JavaScript -->
+        </div>
+        
+        <p class="caption">Data sumber: Nilai Skor Pemahaman Matematika pada PISA berdasarkan Bentuk Satuan Pendidikan, Tahun 2018</p>
+        <a class="download" href="skor-pemahaman-matematika.xlsx" download>📊 Download Data Excel Asli</a>
+      </div>
+    </div>'
+    <!-- slide 3 CSS -->
+    <style>
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .control-btn {
+            padding: 10px 16px;
+            border: none;
+            background: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        .control-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+        .control-btn.active {
+            background: #2E7D32;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .summary {
+            background: #f8f9fa;
+            padding: 20px;
+            width: 100%;
+            height: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0).1;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #4CAF50;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+    </style>
+    
+    <script>
+// Data dari file Excel - Skor Pemahaman Matematika PISA 2018
+const mathScoreData = {
+    labels: ['SMP', 'MTs', 'SMA', 'MA', 'SMK'],
+    datasets: [{
+        label: 'Skor Matematika PISA 2018',
+        data: [353.14, 358.62, 426.89, 366.58, 380.57],
+        backgroundColor: [
+            'rgba(255, 99, 132, 0.8)',
+            'rgba(54, 162, 235, 0.8)',
+            'rgba(255, 205, 86, 0.8)',
+            'rgba(75, 192, 192, 0.8)',
+            'rgba(153, 102, 255, 0.8)'
+        ],
+        borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 205, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)'
+        ],
+        borderWidth: 2,
+        borderRadius: 5
+    }]
+};
+
+// Variabel global
+let currentChartType = 'bar';
+let mathScoreChart = null;
+
+// Inisialisasi chart saat dokumen siap
+document.addEventListener('DOMContentLoaded', function() {
+    initializeMathScoreChart();
+    setupMathScoreEventListeners();
+});
+
+function initializeMathScoreChart() {
+    const ctx = document.getElementById('mathScoreChart').getContext('2d');
+    
+    // Hancurkan chart sebelumnya jika ada
+    if (mathScoreChart) {
+        mathScoreChart.destroy();
+    }
+    
+    const config = {
+        type: currentChartType,
+        data: mathScoreData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `Skor: ${context.parsed.y.toFixed(2)}`;
+                        },
+                        afterLabel: function(context) {
+                            const data = mathScoreData.datasets[0].data;
+                            const maxScore = Math.max(...data);
+                            const minScore = Math.min(...data);
+                            const currentScore = context.parsed.y;
+                            
+                            if (currentScore === maxScore) {
+                                return '🏆 Tertinggi';
+                            } else if (currentScore === minScore) {
+                                return '📉 Terendah';
+                            }
+                            return '';
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Skor Pemahaman Matematika PISA 2018',
+                    font: {
+                        size: 18,
+                        weight: 'bold',
+                        family: 'Arial'
+                    },
+                    padding: 20
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    min: 340,
+                    max: 440,
+                    title: {
+                        display: true,
+                        text: 'Skor Matematika',
+                        font: {
+                            weight: 'bold',
+                            size: 14
+                        }
+                    },
+                    grid: {
+                        color: 'rgba(0,0,0,0.1)'
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return value.toFixed(0);
+                        }
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Bentuk Satuan Pendidikan',
+                        font: {
+                            weight: 'bold',
+                            size: 14
+                        }
+                    },
+                    grid: {
+                        display: false
+                    }
+                }
+            },
+            animation: {
+                duration: 1500,
+                easing: 'easeOutQuart'
+            }
+        }
+    };
+
+    // Konfigurasi khusus untuk line chart
+    if (currentChartType === 'line') {
+        config.data.datasets[0].backgroundColor = 'rgba(54, 162, 235, 0.2)';
+        config.data.datasets[0].borderColor = 'rgba(54, 162, 235, 1)';
+        config.data.datasets[0].borderWidth = 4;
+        config.data.datasets[0].pointBackgroundColor = [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 205, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)'
+        ];
+        config.data.datasets[0].pointBorderColor = '#fff';
+        config.data.datasets[0].pointBorderWidth = 2;
+        config.data.datasets[0].pointRadius = 6;
+        config.data.datasets[0].fill = true;
+        config.data.datasets[0].tension = 0.4;
+    }
+
+    mathScoreChart = new Chart(ctx, config);
+    updateMathScoreSummary();
+    updateMathScoreActiveButtons();
+}
+
+// Setup event listeners
+function setupMathScoreEventListeners() {
+    window.addEventListener('resize', function() {
+        if (mathScoreChart) {
+            mathScoreChart.resize();
+        }
+    });
+}
+
+// Fungsi untuk mengganti tipe chart
+function changeMathChartType(type) {
+    currentChartType = type;
+    initializeMathScoreChart();
+}
+
+// Update tombol aktif
+function updateMathScoreActiveButtons() {
+    const buttons = document.querySelectorAll('.math-control-btn');
+    buttons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.onclick && btn.onclick.toString().includes(`changeMathChartType('${currentChartType}')`)) {
+            btn.classList.add('active');
+        }
+    });
+}
+
+// Update summary dengan analisis mendalam
+function updateMathScoreSummary() {
+    const data = mathScoreData.datasets[0].data;
+    const labels = mathScoreData.labels;
+    
+    const maxScore = Math.max(...data);
+    const minScore = Math.min(...data);
+    const maxInstitution = labels[data.indexOf(maxScore)];
+    const minInstitution = labels[data.indexOf(minScore)];
+    const average = (data.reduce((a, b) => a + b, 0) / data.length).toFixed(2);
+    
+    // Analisis peringkat
+    const sortedData = [...data].sort((a, b) => b - a);
+    const rankings = data.map(score => sortedData.indexOf(score) + 1);
+    
+    // Analisis gap
+    const gap = (maxScore - minScore).toFixed(2);
+    const gapPercentage = ((gap / average) * 100).toFixed(1);
+    
+    document.getElementById('mathScoreSummary').innerHTML = `
+        <div class="math-summary-content">
+            <h3>📊 Analisis Skor Matematika PISA 2018</h3>
+            
+            <div class="summary-stats" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 15px 0;">
+                <div class="stat-card" style="background: linear-gradient(135deg, #4CAF50, #45a049); color: white; padding: 15px; border-radius: 8px;">
+                    <div style="font-size: 24px; font-weight: bold;">${maxScore.toFixed(0)}</div>
+                    <div style="font-size: 12px;">🏆 ${maxInstitution}</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52); color: white; padding: 15px; border-radius: 8px;">
+                    <div style="font-size: 24px; font-weight: bold;">${minScore.toFixed(0)}</div>
+                    <div style="font-size: 12px;">📉 ${minInstitution}</div>
+                </div>
+            </div>
+            
+            <div class="detailed-analysis" style="margin-top: 15px;">
+                <p><strong>📐 Rata-rata Skor:</strong> ${average} poin</p>
+                <p><strong>📏 Selisih Tertinggi-Terendah:</strong> ${gap} poin (${gapPercentage}% dari rata-rata)</p>
+                
+                <div style="margin-top: 10px; background: #f8f9fa; padding: 10px; border-radius: 5px;">
+                    <strong>🎯 Urutan Peringkat:</strong>
+                    ${rankings.map((rank, index) => 
+                        `<div style="margin: 5px 0; padding: 5px; background: ${rank === 1 ? '#d4edda' : rank === data.length ? '#f8d7da' : '#fff3cd'}; border-radius: 3px;">
+                            ${rank}. ${labels[index]}: ${data[index].toFixed(2)} poin
+                         </div>`
+                    ).join('')}
+                </div>
+                
+                <p style="margin-top: 10px; font-style: italic; color: #666;">
+                    <strong>💡 Insight:</strong> ${maxInstitution} menunjukkan performa terbaik dengan selisih ${(maxScore - average).toFixed(2)} poin di atas rata-rata.
+                </p>
+            </div>
+        </div>
+    `;
+}
+
+// Fungsi untuk mengekspor data sebagai CSV
+function exportMathData() {
+    const headers = ['Bentuk Satuan Pendidikan', 'Skor Matematika PISA 2018'];
+    const csvData = mathScoreData.labels.map((label, index) => {
+        return [label, mathScoreData.datasets[0].data[index].toFixed(2)];
+    });
+    
+    const csvContent = [headers, ...csvData]
+        .map(row => row.join(','))
+        .join('\n');
+    
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.setAttribute('hidden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', 'skor_matematika_pisa_2018.csv');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+// Fungsi untuk mendapatkan data chart saat ini
+function getCurrentMathChartData() {
+    return {
+        type: currentChartType,
+        data: mathScoreData.datasets[0].data,
+        labels: mathScoreData.labels,
+        maxScore: Math.max(...mathScoreData.datasets[0].data),
+        minScore: Math.min(...mathScoreData.datasets[0].data),
+        average: (mathScoreData.datasets[0].data.reduce((a, b) => a + b, 0) / mathScoreData.datasets[0].data.length).toFixed(2)
+    };
+}
+    </script>
+    </article>
+
+  <article class="slide" data-index="3" aria-hidden="true">
+    <div class="container">
+        <h1 class="chart-title">Trend Skor PISA Indonesia per Bidang (2006-2022)</h1>
+        <p style="text-align: center; color: #666;">Data berdasarkan OECD - Visualisasi Poligon Area</p>
+        
+        <div class="chart-container">
+            <canvas id="pisaAreaChart"></canvas>
+        </div>
+        
+        <div class="summary" id="pisaSummary">
+            <!-- Summary akan diisi oleh JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Data untuk grafik poligon yang lebih kompleks
+        const pisaData = {
+            labels: ['Matematika', 'Membaca', 'Sains'],
+            datasets: [{
+                label: 'Skor PISA 2022',
+                data: [375, 382, 396],
+                backgroundColor: 'rgba(147, 51, 234, 0.2)',
+                borderColor: 'rgba(147, 51, 234, 1)',
+                borderWidth: 3,
+                pointBackgroundColor: [
+                    'rgba(239, 68, 68, 1)',
+                    'rgba(34, 197, 94, 1)',
+                    'rgba(59, 130, 246, 1)'
+                ],
+                pointBorderColor: '#fff',
+                pointBorderWidth: 3,
+                pointRadius: 10,
+                pointHoverRadius: 14,
+                fill: true,
+                tension: 0.3
+            }]
+        };
+
+        // Konfigurasi dengan gradient
+        const ctx = document.getElementById('pisaAreaChart').getContext('2d');
+        
+        // Buat gradient untuk area
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(147, 51, 234, 0.4)');
+        gradient.addColorStop(1, 'rgba(147, 51, 234, 0.1)');
+
+        pisaData.datasets[0].backgroundColor = gradient;
+
+        const config = {
+            type: 'line',
+            data: pisaData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: 'rgba(147, 51, 234, 1)',
+                        borderWidth: 2,
+                        cornerRadius: 8,
+                        callbacks: {
+                            label: function(context) {
+                                return ` ${context.label}: ${context.parsed.y} poin`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 360,
+                        max: 410,
+                        title: {
+                            display: true,
+                            text: 'Skor PISA',
+                            font: {
+                                weight: 'bold',
+                                size: 14,
+                                family: 'Arial'
+                            },
+                            color: '#333'
+                        },
+                        grid: {
+                            color: 'rgba(0,0,0,0.05)'
+                        },
+                        ticks: {
+                            stepSize: 10,
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Bidang Studi',
+                            font: {
+                                weight: 'bold',
+                                size: 14,
+                                family: 'Arial'
+                            },
+                            color: '#333'
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+                elements: {
+                    line: {
+                        tension: 0.3
+                    },
+                    point: {
+                        hoverBackgroundColor: '#fff'
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                },
+                animation: {
+                    duration: 1500,
+                    easing: 'easeOutQuart'
+                }
+            }
+        };
+
+        const pisaChart = new Chart(ctx, config);
+
+        // Update summary dengan styling yang lebih baik
+        function updateSummary() {
+            const data = pisaData.datasets[0].data;
+            const maxScore = Math.max(...data);
+            const minScore = Math.min(...data);
+            const maxSubject = pisaData.labels[data.indexOf(maxScore)];
+            const minSubject = pisaData.labels[data.indexOf(minScore)];
+            const average = (data.reduce((a, b) => a + b, 0) / data.length).toFixed(1);
+            const difference = maxScore - minScore;
+            
+            document.getElementById('pisaSummary').innerHTML = `
+                <div class="pisa-summary-container">
+                    <h3>📈 Performance Analysis</h3>
+                    <div class="pisa-summary-grid">
+                        <div class="pisa-stat-box">
+                            <div class="pisa-stat-value" style="color: #4ade80;">${maxScore}</div>
+                            <div class="pisa-stat-label">🏆 ${maxSubject}</div>
+                        </div>
+                        <div class="pisa-stat-box">
+                            <div class="pisa-stat-value" style="color: #fbbf24;">${average}</div>
+                            <div class="pisa-stat-label">📐 Rata-rata</div>
+                        </div>
+                        <div class="pisa-stat-box">
+                            <div class="pisa-stat-value" style="color: #f87171;">${minScore}</div>
+                            <div class="pisa-stat-label">📉 ${minSubject}</div>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="pisa-summary-footer">
+                        Variasi skor: <strong>${difference} poin</strong> | Sains unggul ${difference} poin dari Matematika
+                    </div>
+                </div>
+            `;
+        }
+
+        updateSummary();
+    </script>
+    <p class="caption">Visualisasi poligon area menunjukkan distribusi dan tren skor PISA Indonesia dengan gradien warna yang menarik.</p>
+    <a class="download" href="https://data.goodstats.id/statistic/perbandingan-skor-pisa-indonesia-dari-tahun-ke-tahun-alami-penurunan-pada-2022-TKKZ3" target="_blank" rel="noopener noreferrer">📊 Lihat Data Lengkap di GoodStats.id</a>
+    
+    <style>
+        /* --- Chart Container & Controls (Slide 6/7) --- */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 420px;
+            margin: 25px 0;
+            transition: height 0.3s ease;
+        }
+
+        .data-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .data-controls .btn {
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: 1px solid #e2e8f0;
+            background: white;
+            color: #475569;
+            font-size: 0.95rem;
+        }
+
+        .data-controls .btn.active {
+            background: #0d6efd;
+            color: white;
+            border-color: #0d6efd;
+            box-shadow: 0 4px 6px -1px rgba(13, 110, 253, 0.3);
+        }
+
+        .indicator-select {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #0d6efd;
+            background-color: #f8fafc;
+            color: #0d6efd;
+            font-weight: 600;
+        }
+
+        .data-info {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid #0d6efd;
+            margin-top: 25px;
+            text-align: left;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* --- PISA Summary Styles --- */
+        .pisa-summary-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; padding: 2rem; border-radius: 15px; margin-top: 20px;
+        }
+        .pisa-summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; text-align: center; }
+        .pisa-stat-box { background: rgba(255,255,255,0.2); padding: 1.25rem; border-radius: 10px; }
+
+        /* --- Responsivitas Dinamis (300px - 1150px) --- */
+        @media (max-width: 1150px) {
+            .chart-container { height: 380px; }
+            .container { padding: 0 15px; }
+        }
+
+        @media (max-width: 768px) {
+            .chart-container { height: 320px; }
+            .pisa-summary-grid { grid-template-columns: 1fr; }
+            .data-controls .btn { padding: 8px 14px; font-size: 0.9rem; }
+            .data-info { padding: 15px; }
+        }
+
+        @media (max-width: 480px) {
+            .chart-container { height: 260px; }
+            .data-controls { flex-direction: column; align-items: stretch; gap: 8px; }
+            .data-controls .btn, .indicator-select { width: 100%; text-align: center; }
+            .data-info h3 { font-size: 1.1rem; }
+            .data-info p { font-size: 0.85rem; }
+        }
+
+        @media (max-width: 350px) {
+            .chart-container { height: 220px; }
+            .chart-title { font-size: 1.2rem !important; }
+        }
+
+        .graphic {
+            width: 100%;
+            height: 65vh;
+            border: none;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow-y: hidden;
+        }
+        .caption {
+            color: #64748b;
+            margin-top: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .download {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        .download:hover {
+            transform: translateY(-2px);
+        }
+        .chart-container {
+            position: relative;
+            height: 420px;
+            margin: 25px 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 25px;
+        }
+        .chart-title {
+            text-align: center;
+            color: #1e293b;
+            margin-bottom: 8px;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+    </style>
+</article>
+
+  <article class="slide" data-index="4" aria-hidden="true">
+    <h2>Distribusi Skor PISA Indonesia</h2>
+    <div class="chart-container">
+      <canvas id="pisaPieChart"></canvas>
+    </div>
+    <p class="caption">Grafik ini dihasilkan secara dinamis menggunakan <strong>Chart.js</strong> untuk menunjukkan proporsi skor antar bidang studi.</p>
+    <button class="download" onclick="exportPisaPieData()" style="border:none; cursor:pointer;">📥 Export Data Distribusi</button>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const pisaPieCtx = document.getElementById('pisaPieChart').getContext('2d');
+        new Chart(pisaPieCtx, {
+          type: 'pie',
+          data: {
+            labels: ['Matematika', 'Membaca', 'Sains'],
+            datasets: [{
+              data: [375, 382, 396],
+              backgroundColor: [
+                'rgba(239, 68, 68, 0.8)', // Merah - Matematika
+                'rgba(34, 197, 94, 0.8)',  // Hijau - Membaca
+                'rgba(59, 130, 246, 0.8)'   // Biru - Sains
+              ],
+              borderColor: '#fff',
+              borderWidth: 2
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: { padding: 20, font: { size: 14 } }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(context) {
+                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                    const percentage = ((context.parsed / total) * 100).toFixed(1);
+                    return ` ${context.label}: ${context.parsed} (${percentage}%)`;
+                  }
+                }
+              }
+            }
+          }
+        });
+      });
+
+      function exportPisaPieData() {
+        const rows = [
+          ["Bidang", "Skor"],
+          ["Matematika", 375],
+          ["Membaca", 382],
+          ["Sains", 396]
+        ];
+        let csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "pisa_distribusi_skor.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    </script>
+  </article>
+
+    
+  <article class="slide" data-index="5" aria-hidden="true">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <h2 class="chart-title">TIMSS 2023 Average Scores by Country</h2>
+      <div class="timss-scroll-container">
+        <div class="chart-container timss-wrapper">
+          <canvas id="timssChart"></canvas>
+        </div>
+      </div>
+      <script>
+                // ===============================
+        // DATA (ISI SESUAI GAMBAR ANDA)
+        // ===============================
+        const countries = [
+        "Singapore","Chinese Taipei","Korea, Rep. of","Hong Kong SAR","Japan","Macao SAR",
+        "Chinese Taipei (again?)","Lithuania","Turkey","England","Poland","Ireland",
+        "Romania","Netherlands","Latvia","Italy","Norway","Czech Republic",
+        "Sweden","Bulgaria","Finland","Australia","Germany","Denmark","Serbia",
+        "Belgium (Flemish)","Hungary","United States","Portugal","Slovak Republic",
+        "Cyprus","Slovenia","Italy (again?)","Armenia","Albania","Canada",
+        "United Arab Emirates","Spain","Georgia","Azerbaijan","New Zealand",
+        "Belgium (French)","Kazakhstan","France","Montenegro","North Macedonia",
+        "Qatar","Bahrain","Bosnia & Herzegovina","Chile","Uzbekistan","Jordan",
+        "Iran","Oman","Saudi Arabia","Brazil","Morocco","Kuwait","South Africa"
+        ];
+
+        const scores = [
+        610,600,595,590,580,575,560,555,550,545,540,538,
+        536,534,532,530,528,526,
+        524,523,522,521,520,519,518,
+        517,516,514,512,511,
+        509,508,507,505,503,501,
+        499,497,495,492,490,
+        488,487,485,480,475,470,
+        460,455,445,435,430,420,
+        400,380,360
+        ];
+
+        // ===============================
+        // CHART CONFIGURATION
+        // ===============================
+
+        // Generate gradient color for bars
+        function getGradient(ctx, chartArea) {
+            const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+            gradient.addColorStop(0, "#9acd32");
+            gradient.addColorStop(0.5, "#1e90ff");
+            gradient.addColorStop(1, "#4b0082");
+            return gradient;
+        }
+
+        let timssChart = null;
+
+        function initTIMSSChart() {
+            if (timssChart) return; // Prevent multiple initializations
+            const ctx = document.getElementById('timssChart');
+            if (!ctx) return;
+            const context = ctx.getContext('2d');
+            timssChart = new Chart(context, {
+                type: 'bar',
+                data: {
+                    labels: countries,
+                    datasets: [{
+                        label: "Average Score",
+                        data: scores,
+                        backgroundColor: function(context) {
+                            const chart = context.chart;
+                            const {ctx, chartArea} = chart;
+
+                            if (!chartArea) return "#888";
+                            return getGradient(ctx, chartArea);
+                        },
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: true }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 45,
+                                font: { size: 10 }
+                            },
+                            grid: { display: false }
+                        },
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: "Average Score",
+                                font: { size: 14 }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize chart when slide becomes active
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        const target = mutation.target;
+                        if (target.classList.contains('active') && target.querySelector('#timssChart')) {
+                            initTIMSSChart();
+                        }
+                    }
+                });
+            });
+
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => {
+                observer.observe(slide, { attributes: true });
+            });
+        });
+      </script>
+   
+    <p class="caption">Grafik interaktif ini disematkan dari <a href="https://data.goodstats.id" target="_blank" rel="noopener noreferrer">GoodStats.id</a>, platform data terbuka Indonesia.</p>
+    <a class="download" href="https://data.goodstats.id/statistic/timss-2023-average-scores-by-country-BKXQ4D" target="_blank" rel="noopener noreferrer">Lihat di GoodStats.id</a>
+
+  </article>
+  
+  <article class="slide" data-index="6" aria-hidden="true">
+    <h2>Visualisasi Data Kelayakan Pendidikan Indonesia</h2>
+        
+        <div class="data-controls">
+            <button class="btn active" data-chart="multi">Multi-Indikator</button>
+            <button class="btn" data-chart="single">Per Indikator</button>
+            <button class="btn" data-chart="comparison">Perbandingan Provinsi</button>
+        </div>
+        
+        <div class="chart-container">
+            <canvas id="educationChart"></canvas>
+        </div>
+        
+        <div class="data-info">
+            <h3>📊 Informasi Data</h3>
+            <div id="data-summary">
+                <p>Memuat data pendidikan Indonesia...</p>
+            </div>
+        </div>
+        
+        <p class="caption">Grafik interaktif ini menampilkan data kelayakan pendidikan Indonesia berdasarkan provinsi.</p>
+        <a class="download" href="#" target="_blank" rel="noopener noreferrer">Lihat Data Lengkap</a>
+        <script>
+          // ===============================
+        // DATA PENDIDIKAN INDONESIA (CONTOH)
+        // ===============================
+        const provinces = [
+            "Aceh", "Sumatera Utara", "Sumatera Barat", "Riau", "Jambi", 
+            "Sumatera Selatan", "Bengkulu", "Lampung", "Kep. Bangka Belitung", "Kep. Riau",
+            "DKI Jakarta", "Jawa Barat", "Jawa Tengah", "DI Yogyakarta", "Jawa Timur",
+            "Banten", "Bali", "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Kalimantan Barat",
+            "Kalimantan Tengah", "Kalimantan Selatan", "Kalimantan Timur", "Kalimantan Utara",
+            "Sulawesi Utara", "Sulawesi Tengah", "Sulawesi Selatan", "Sulawesi Tenggara", "Gorontalo",
+            "Sulawesi Barat", "Maluku", "Maluku Utara", "Papua Barat", "Papua"
+        ];
+
+        // Data indikator pendidikan (contoh)
+        const educationData = {
+            "Rasio Guru-Murid": [12, 14, 15, 13, 11, 16, 14, 15, 13, 12, 10, 11, 14, 13, 12, 15, 14, 16, 17, 15, 14, 13, 12, 14, 13, 15, 14, 16, 15, 14, 16, 17, 18, 19],
+            "Angka Partisipasi Kasar": [95, 92, 94, 93, 91, 90, 92, 93, 94, 95, 98, 96, 94, 97, 95, 93, 94, 90, 88, 89, 91, 92, 93, 90, 92, 91, 93, 90, 89, 88, 85, 84, 82, 80],
+            "Angka Melek Huruf": [98, 97, 98, 96, 95, 94, 95, 96, 97, 98, 99, 98, 97, 99, 98, 96, 97, 94, 92, 93, 95, 96, 97, 94, 96, 95, 97, 94, 93, 92, 90, 89, 87, 85],
+            "Rata-rata Nilai UN": [75, 72, 74, 73, 71, 70, 72, 73, 74, 75, 78, 76, 74, 77, 75, 73, 74, 70, 68, 69, 71, 72, 73, 70, 72, 71, 73, 70, 69, 68, 65, 64, 62, 60],
+            "Angka Putus Sekolah": [2.1, 2.5, 2.3, 2.4, 2.6, 2.8, 2.5, 2.4, 2.3, 2.2, 1.5, 1.8, 2.2, 1.6, 1.9, 2.3, 2.2, 2.8, 3.2, 3.0, 2.7, 2.5, 2.3, 2.8, 2.6, 2.7, 2.4, 2.8, 3.0, 3.1, 3.5, 3.7, 4.0, 4.5]
+        };
+
+        const indicators = Object.keys(educationData);
+        let currentChart = null;
+
+        // ===============================
+        // FUNGSI UTAMA
+        // ===============================
+        function initChart() {
+            // Hapus chart sebelumnya jika ada
+            if (currentChart) {
+                currentChart.destroy();
+            }
+            
+            const ctx = document.getElementById('educationChart').getContext('2d');
+            const activeChart = document.querySelector('.btn.active').dataset.chart;
+            
+            if (activeChart === 'multi') {
+                createMultiIndicatorChart(ctx);
+            } else if (activeChart === 'single') {
+                createSingleIndicatorChart(ctx, indicators[0]);
+            } else if (activeChart === 'comparison') {
+                createComparisonChart(ctx);
+            }
+            
+            updateDataSummary(activeChart);
+        }
+
+        // ===============================
+        // CHART MULTI-INDIKATOR
+        // ===============================
+        function createMultiIndicatorChart(ctx) {
+            const datasets = indicators.map((indicator, idx) => {
+                const color = `hsl(${idx * 360 / indicators.length}, 70%, 50%)`;
+                return {
+                    label: indicator,
+                    data: educationData[indicator],
+                    backgroundColor: color,
+                    borderColor: color,
+                    borderWidth: 1
+                };
+            });
+            
+            currentChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: provinces,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Perbandingan Semua Indikator Pendidikan per Provinsi',
+                            font: { size: 16 }
+                        },
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                maxRotation: 70,
+                                minRotation: 70,
+                                font: { size: 10 }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Provinsi'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Nilai'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ===============================
+        // CHART PER INDIKATOR
+        // ===============================
+        function createSingleIndicatorChart(ctx, indicator) {
+            // Generate gradient color
+            function getGradient(chartArea) {
+                const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                gradient.addColorStop(0, "#9acd32");
+                gradient.addColorStop(0.5, "#1e90ff");
+                gradient.addColorStop(1, "#4b0082");
+                return gradient;
+            }
+            
+            currentChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: provinces,
+                    datasets: [{
+                        label: indicator,
+                        data: educationData[indicator],
+                        backgroundColor: function(context) {
+                            const chart = context.chart;
+                            const {chartArea} = chart;
+                            if (!chartArea) return "#888";
+                            return getGradient(chartArea);
+                        },
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: `Indikator: ${indicator}`,
+                            font: { size: 16 }
+                        },
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                maxRotation: 70,
+                                minRotation: 70,
+                                font: { size: 10 }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Provinsi'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: indicator
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ===============================
+        // CHART PERBANDINGAN PROVINSI
+        // ===============================
+        function createComparisonChart(ctx) {
+            // Pilih 5 provinsi secara acak untuk perbandingan
+            const selectedProvinces = [];
+            const selectedIndices = [];
+            
+            while (selectedIndices.length < 5) {
+                const randomIndex = Math.floor(Math.random() * provinces.length);
+                if (!selectedIndices.includes(randomIndex)) {
+                    selectedIndices.push(randomIndex);
+                    selectedProvinces.push(provinces[randomIndex]);
+                }
+            }
+            
+            const datasets = indicators.map((indicator, idx) => {
+                const color = `hsl(${idx * 360 / indicators.length}, 70%, 50%)`;
+                const data = selectedIndices.map(i => educationData[indicator][i]);
+                
+                return {
+                    label: indicator,
+                    data: data,
+                    backgroundColor: color,
+                    borderColor: color,
+                    borderWidth: 1
+                };
+            });
+            
+            currentChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: selectedProvinces,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Perbandingan Indikator Pendidikan di 5 Provinsi',
+                            font: { size: 16 }
+                        },
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Provinsi'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Nilai'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ===============================
+        // UPDATE INFORMASI DATA
+        // ===============================
+        function updateDataSummary(chartType) {
+            const summaryElement = document.getElementById('data-summary');
+            let summaryHTML = '';
+            
+            if (chartType === 'multi') {
+                summaryHTML = `
+                    <p><strong>Visualisasi Multi-Indikator:</strong> Menampilkan semua indikator pendidikan untuk setiap provinsi.</p>
+                    <p><strong>Jumlah Provinsi:</strong> ${provinces.length}</p>
+                    <p><strong>Jumlah Indikator:</strong> ${indicators.length}</p>
+                `;
+            } else if (chartType === 'single') {
+                const currentIndicator = document.querySelector('.btn.active').dataset.indicator || indicators[0];
+                const values = educationData[currentIndicator];
+                const avg = (values.reduce((a, b) => a + b, 0) / values.length).toFixed(2);
+                const max = Math.max(...values);
+                const min = Math.min(...values);
+                
+                summaryHTML = `
+                    <p><strong>Indikator:</strong> ${currentIndicator}</p>
+                    <p><strong>Rata-rata:</strong> ${avg}</p>
+                    <p><strong>Nilai Tertinggi:</strong> ${max}</p>
+                    <p><strong>Nilai Terendah:</strong> ${min}</p>
+                `;
+            } else if (chartType === 'comparison') {
+                summaryHTML = `
+                    <p><strong>Perbandingan Provinsi:</strong> Menampilkan perbandingan 5 provinsi secara acak.</p>
+                    <p><strong>Metode:</strong> Pemilihan provinsi dilakukan secara acak untuk memberikan gambaran variasi data.</p>
+                `;
+            }
+            
+            summaryElement.innerHTML = summaryHTML;
+        }
+
+        // ===============================
+        // EVENT LISTENERS
+        // ===============================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inisialisasi chart pertama
+            initChart();
+            
+            // Event listeners untuk tombol kontrol
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    initChart();
+                });
+            });
+            
+            // Event listener khusus untuk indikator tunggal
+            document.querySelector('.btn[data-chart="single"]').addEventListener('click', function() {
+                // Tambah dropdown untuk memilih indikator
+                const dataControls = document.querySelector('.data-controls');
+                if (!document.querySelector('.indicator-select')) {
+                    const select = document.createElement('select');
+                    select.className = 'btn indicator-select';
+                    select.innerHTML = indicators.map(ind => 
+                        `<option value="${ind}">${ind}</option>`
+                    ).join('');
+                    
+                    select.addEventListener('change', function() {
+                        if (document.querySelector('.btn[data-chart="single"]').classList.contains('active')) {
+                            if (currentChart) currentChart.destroy();
+                            const ctx = document.getElementById('educationChart').getContext('2d');
+                            createSingleIndicatorChart(ctx, this.value);
+                            updateDataSummary('single');
+                        }
+                    });
+                    
+                    dataControls.appendChild(select);
+                }
+            });
+        });
+        </script>
+  </article>
+  <!-- Controls -->
+  <div class="controls">
+    <button class="control-btn" id="prevBtn">Previous</button>
+    <div class="dots">
+      <span class="dot active" data-slide="0"></span>
+      <span class="dot" data-slide="1"></span>
+      <span class="dot" data-slide="2"></span>
+      <span class="dot" data-slide="3"></span>
+      <span class="dot" data-slide="4"></span>
+      <span class="dot" data-slide="5"></span>
+      <span class="dot" data-slide="6"></span>
+    </div>
+    <button class="control-btn" id="nextBtn">Next</button>
+  </div>
+</section>
+
+<!-- Script untuk navigasi slide -->
+<script>
+  // SMOOTH SLIDE ANIMATION LOGIC
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  let currentSlide = 0;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+      slide.setAttribute('aria-hidden', i !== index);
+      if (dots[i]) dots[i].classList.toggle('active', i === index);
+    });
+    currentSlide = index;
+  }
+
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    // Tambahkan kelas untuk animasi
+    showSlide((currentSlide + 1) % slides.length);
+  });
+
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    // Tambahkan kelas untuk animasi
+    showSlide((currentSlide - 1 + slides.length) % slides.length);
+  });
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const index = parseInt(dot.dataset.slide);
+      showSlide(index);
+    });
+  });
+  // Set initial slide for accessibility
+  showSlide(0);
+</script>
+
+<br>
+  <!-- Team Section -->
+  <section id="team" class="py-5">
+    <div class="team-maker">
+      <h2 data-aos="fade-up" class="fw-bold mb-1" style="color:white">Terima Kasih kepada Teman-teman yang membantu: </h2>
+      <div class="team-grid">
+        <div class="team-member" data-aos="fade-down">
+          <img src="{{ url_for('static', filename='image/Edward_James_Kenway.png') }}" class="foto" alt="Erantus P. Samaloisa">
+          <h5 class="Nama">Erantus P. Samaloisa</h5>
+          <p class="deskripsi">Founder & Developer</p>
+        </div>
+        <div class="team-member" data-aos="fade-up">
+          <img src="{{ url_for('static', filename='image/Thoufiq_Jabbar_Silton.png') }}" class="foto" alt="Thoufiq Jabbar Silton">
+          <h5 class="Nama">Thoufiq Jabbar Silton</h5>
+          <p class="deskripsi">Data Scientist</p>
+        </div>
+        <div class="team-member" data-aos="fade-up">
+          <img src="{{ url_for('static', filename='image/ANisa.png') }}" class="foto" alt="Anisa Betsaida Pasaribu">
+          <h5 class="Nama">Anisa Betsaida Pasaribu</h5>
+          <p class="deskripsi">Mathematician</p>
+        </div>
+        <div class="team-member" data-aos="fade-up">
+          <img src="{{ url_for('static', filename='image/mahez.png') }}" class="foto" alt="Maheza Novrauyuda">
+          <h5 class="Nama">Maheza Novrauyuda</h5>
+          <p class="deskripsi">AI Engineer</p>
+        </div>
+        <div class="team-member" data-aos="fade-up">
+          <img src="{{ url_for('static', filename='image/Alwi.png') }}" class="foto" alt="Maheza Novrauyuda">
+          <h5 class="Nama">Muhammad Almusyahwi</h5>
+          <p class="deskripsi">Content Creator</p>
+        </div>
+        <div class="team-member" data-aos="fade-up">
+          <img src="{{ url_for('static', filename='image/Rofiq_Yulhari.png') }}" class="foto" alt="Maheza Novrauyuda">
+          <h5 class="Nama">Rofiq Mahdi Yulhari</h5>
+          <p class="deskripsi">Video Editor, Multimedia Expert</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Statistics Section -->
+  <section id="statistics" class="py-5" style="background-color: #1a1a2e; color: white;">
+    <div class="container" data-aos="fade-up">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h2 class="fw-bold mb-3">Kepercayaan Pengguna MathThon</h2>
+          <p class="lead mb-4">Kami bangga melihat pertumbuhan komunitas pembelajar matematika yang antusias. Berikut adalah gambaran singkat dari perjalanan kita bersama.</p>
+          <div class="d-flex gap-3">
+            <div class="stat-badge p-2 px-3 rounded-pill bg-primary bg-opacity-10 border border-primary">
+              <i class="bi bi-shield-fill-check me-2 text-primary"></i> <small>Sistem Terverifikasi</small>
+            </div>
+            <div class="stat-badge p-2 px-3 rounded-pill bg-warning bg-opacity-10 border border-warning">
+              <i class="bi bi-star-fill me-2 text-warning"></i> <small>Community Choice</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="row g-4">
+            <!-- User Stat -->
+            <div class="col-sm-6">
+              <div class="stat-card p-4 rounded-4 shadow-sm h-100" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);">
+                <div class="stat-icon mb-3">
+                  <i class="bi bi-people-fill fs-1 text-primary"></i>
+                </div>
+                <h3 class="fw-bold counter" data-target="{{ user_count }}">0</h3>
+                <p class="text-white-50 mb-0">Pengguna Terdaftar</p>
+              </div>
+            </div>
+            <!-- Feedback Stat -->
+            <div class="col-sm-6">
+              <div class="stat-card p-4 rounded-4 shadow-sm h-100" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);">
+                <div class="stat-icon mb-3">
+                  <i class="bi bi-chat-heart-fill fs-1 text-warning"></i>
+                </div>
+                <h3 class="fw-bold counter" data-target="{{ chat_count }}">0</h3>
+                <p class="text-white-50 mb-0">Percakapan antar AI dengan User</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Stats Counter Animation
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200; // The lower the slower
+
+    const runCounters = () => {
+      counters.forEach(counter => {
+        const updateCount = () => {
+          const target = +counter.getAttribute('data-target');
+          const count = +counter.innerText;
+          const inc = target / speed;
+
+          if (count < target) {
+            counter.innerText = Math.ceil(count + inc);
+            setTimeout(updateCount, 1);
+          } else {
+            counter.innerText = target;
+          }
+        };
+        updateCount();
+      });
+    };
+
+    // Trigger animation when section is in view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          runCounters();
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const statsSection = document.querySelector('#statistics');
+    if (statsSection) observer.observe(statsSection);
+  </script>
+
+  <style>
+    .testimonials-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 60px 0;
+    color: white; 
+}
+
+.testimonials-maker {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.testimonials-maker h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 700;
+    color: white;
+}
+
+.testimonials-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.testimonial-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+}
+
+.testimonial-card p {
+    font-style: italic;
+    color: #333;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.testimonial-card h6 {
+    color: #555;
+    font-weight: 600;
+    text-align: right;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .testimonials-container {
+        grid-template-columns: 1fr;
+    }
+}
+  </style>
+
+  
+  <section id="fitur" class="py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" data-aos="fade-up">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-5 text-white">Kenapa Mesti MathThon?</h2>
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card h-100 text-center p-4 bg-white rounded-4 shadow-lg border-0">
+            <div class="icon-wrapper mb-3">
+              <span>
+                <i class="bi bi-shield-check text-primary fs-1">
+              </i>
+              </span>
+            </div>
+            <h5 class="fw-bold text-dark">Akses Data Terpercaya</h5>
+            <p class="text-muted">Kami menyediakan data pendidikan yang akurat dan terpercaya untuk analisis mendalam.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card h-100 text-center p-4 bg-white rounded-4 shadow-lg border-0">
+              <div class="icon-wrapper mb-3">
+                <span><i class="bi bi-bar-chart-line-fill text-primary fs-1">
+              </i></span>
+              </div>
+            <h5 class="fw-bold text-dark">Visualisasi Interaktif</h5>
+            <p class="text-muted">Grafik dan visualisasi data yang interaktif memudahkan pemahaman informasi kompleks.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" class="orang">
+          <div class="feature-card h-100 text-center p-4 bg-white rounded-4 shadow-lg border-0">
+            <div class="icon-wrapper mb-3">
+              <span><i class="bi bi-person-heart text-primary fs-1">
+              </i></span>
+            </div>
+            <h5 class="fw-bold text-dark">User-Friendly</h5>
+            <p class="text-muted">Antarmuka yang intuitif dan mudah digunakan untuk semua kalangan pengguna.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card h-100 text-center p-4 bg-white rounded-4 shadow-lg border-0">
+            <div class="icon-wrapper mb-3">
+              <span><i class="bi bi-people-fill text-primary fs-1">   </i></span>
+            </div>
+            <h5 class="fw-bold text-dark">Dukungan Komunitas</h5>
+            <p class="text-muted">Bergabung dengan komunitas kami untuk berbagi pengetahuan dan pengalaman.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card h-100 text-center p-4 bg-white rounded-4 shadow-lg border-0">
+            <div class="icon-wrapper mb-3">
+              <span><i class="bi bi-gift-fill text-primary fs-1">
+              </i></span>
+            </div>
+            <h5 class="fw-bold text-dark">Akses Gratis</h5>
+            <p class="text-muted">Nikmati akses gratis ke semua fitur dan sumber daya kami tanpa biaya.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <style>
+    .gambar_why {
+      width: 120px;
+      height: 100px;
+    }
+    @media (max-width: 1199px) {
+      .gambar_why {
+        width: 100px;
+        height: 80px;
+      }
+    }
+    @media (max-width: 991px) {
+      .gambar_why {
+        width: 80px;
+        height: 60px;
+      }
+    }
+    @media (max-width: 767px) {
+      .gambar_why {
+        width: 60px;
+        height: 40px;
+      }
+    }
+    @media (max-width: 575px) {
+      .gambar_why {
+        width: 40px;
+        height: 20px;
+      }
+    }
+    @media (max-width: 320px) {
+      .gambar_why {
+        width: 20px;
+        height: 10px;
+      }
+    }
+    </style>
+
+  <!-- Footer -->
+  <footer class="elegant-footer">
+    <!-- Main Footer Content -->
+    <div class="footer-main">
+      <div class="container">
+        <div class="row g-5">
+          <!-- Brand Section -->
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-brand">
+              <h5 class="fw-bold mb-3">
+                <span style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                  📐 MathThon
+                </span>
+              </h5>
+              <p class="footer-description">Platform pembelajaran matematika interaktif dengan data pendidikan terpercaya dan visualisasi yang menarik.</p>
+              <div class="social-links mt-4">
+                <a href="#" class="social-icon" title="Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="social-icon" title="Twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="social-icon" title="Instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="social-icon" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="col-lg-4 col-md-6">
+            <h6 class="footer-title fw-bold mb-4">Menu Cepat</h6>
+            <ul class="footer-links">
+              <li><a href="{{ url_for('main.about')}}" class="footer-link">📌 Tentang MathThon</a></li>
+              <li><a href="{{ url_for('main.privacy')}}" class="footer-link">🔒 Kebijakan Privasi</a></li>
+              <li><a href="{{ url_for('main.terms')}}" class="footer-link">📋 Syarat & Ketentuan</a></li>
+              <li><a href="#contactModal" data-bs-toggle="modal" class="footer-link">💬 Hubungi Kami</a></li>
+              <li><a href="{{ url_for('main.home')}}" class="footer-link"> Kembali ke Halaman Utama</a>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="col-lg-4 col-md-6">
+            <h6 class="footer-title fw-bold mb-4">Hubungi Kami</h6>
+            <div class="contact-info">
+              <p class="contact-item">
+                <i class="bi bi-envelope-fill me-2 text-gradient"></i>
+                <span>info@maththon.com</span>
+              </p>
+              <p class="contact-item">
+                <i class="bi bi-telephone-fill me-2 text-gradient"></i>
+                <span>+62 XXX-XXXX-XXXX</span>
+              </p>
+              <p class="contact-item">
+                <i class="bi bi-geo-alt-fill me-2 text-gradient"></i>
+                <span>Indonesia</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <hr class="footer-divider my-5">
+
+        <!-- Bottom Section -->
+        <div class="row align-items-center">
+          <div class="col-md-6 text-center text-md-start">
+            <p class="mb-0 copyright">
+              &copy; <span id="year">2025</span> <strong>MathThon</strong>. Semua hak dilindungi.
+            </p>
+          </div>
+          <div class="col-md-6">
+            <div class="footer-credits text-center text-md-end">
+              <p class="mb-0" style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                Dibuat dengan <span style="color: #ff6b6b;">❤</span> oleh tim MathThon
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Footer Styles -->
+  <style>
+    .elegant-footer {
+      background: linear-gradient(135deg, #0f172a 0%, #1a1a2e 50%, #16213e 100%);
+      color: #e0e0e0;
+      padding: 60px 0 0;
+      margin-top: auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .elegant-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.5), transparent);
+    }
+
+    .footer-main {
+      padding: 60px 0 40px;
+    }
+
+    .footer-brand {
+      opacity: 0.95;
+    }
+
+    .footer-brand h5 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-description {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(102, 126, 234, 0.15);
+      border: 1px solid rgba(102, 126, 234, 0.3);
+      border-radius: 8px;
+      color: #667eea;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+    }
+
+    .social-icon:hover {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-color: transparent;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+    }
+
+    .footer-title {
+      color: white;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-link {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      font-size: 0.95rem;
+    }
+
+    .footer-link:hover {
+      color: #667eea;
+      padding-left: 8px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact-item {
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .contact-item:hover {
+      color: white;
+      transform: translateX(5px);
+    }
+
+    .contact-item i {
+      color: #667eea;
+      min-width: 20px;
+    }
+
+    .footer-divider {
+      border-color: rgba(255, 255, 255, 0.1);
+      opacity: 0.5;
+    }
+
+    .copyright {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+    }
+
+    .copyright strong {
+      color: white;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .footer-credits {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .elegant-footer {
+        padding: 40px 0 0;
+      }
+
+      .footer-main {
+        padding: 40px 0 30px;
+      }
+
+      .footer-brand,
+      .footer-brand h5 {
+        text-align: center;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+
+      .footer-title {
+        text-align: center;
+      }
+
+      .footer-links {
+        text-align: center;
+      }
+
+      .contact-info {
+        align-items: center;
+        text-align: center;
+      }
+
+      .footer-link:hover {
+        padding-left: 0;
+      }
+
+      .contact-item:hover {
+        transform: none;
+      }
+    }
+  </style>
+
+  <!-- Modal Popup Kontak -->
+  <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content shadow-lg" style="background: linear-gradient(135deg, #0f172a 0%, #1a1a2e 100%); border: 1px solid rgba(102, 126, 234, 0.3);">
+        <!-- Header -->
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold text-white" id="contactModalLabel">📞 Hubungi Kami</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <!-- Body -->
+        <div class="modal-body">
+          <p class="mb-4 text-white-50">
+            Silakan hubungi salah satu admin untuk mendapatkan bantuan yang Anda butuhkan.
+          </p>
+          <ul class="list-group list-group-flush" style="background: transparent;">
+            <li class="list-group-item d-flex justify-content-between align-items-center" style="background: rgba(102, 126, 234, 0.1); border: 1px solid rgba(102, 126, 234, 0.2); border-radius: 8px; margin-bottom: 12px; padding: 15px;">
+              <div>
+                <strong class="text-white">Admin 1</strong><br>
+                <small class="text-white-50">Customer Support</small>
+              </div>
+              <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-success btn-sm">
+                <i class="bi bi-whatsapp"></i> WhatsApp
+              </a>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" style="background: rgba(102, 126, 234, 0.1); border: 1px solid rgba(102, 126, 234, 0.2); border-radius: 8px; margin-bottom: 12px; padding: 15px;">
+              <div>
+                <strong class="text-white">Admin 2</strong><br>
+                <small class="text-white-50">Teknis / Error Sistem</small>
+              </div>
+              <a href="https://wa.me/6289876543210" target="_blank" class="btn btn-success btn-sm">
+                <i class="bi bi-whatsapp"></i> WhatsApp
+              </a>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" style="background: rgba(102, 126, 234, 0.1); border: 1px solid rgba(102, 126, 234, 0.2); border-radius: 8px; padding: 15px;">
+              <div>
+                <strong class="text-white">Admin 3</strong><br>
+                <small class="text-white-50">Layanan Informasi</small>
+              </div>
+              <a href="https://wa.me/6281122334455" target="_blank" class="btn btn-success btn-sm">
+                <i class="bi bi-whatsapp"></i> WhatsApp
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Footer -->
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+  <!-- Footer Scripts -->
+  <script>
+    // Update year automatically
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <style>
+    .nigga {
+      color: white;
+      text-decoration: none;
+      list-style: none;
+    }
+  </style>
+</body>
+</html>

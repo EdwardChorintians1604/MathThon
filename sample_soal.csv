@@ -1,0 +1,21 @@
+content;answer;difficulty;topic_name
+Jika x + 5 = 12, berapa nilai x?;7;easy;Persamaan Linear
+Selesaikan sistem persamaan: 2x + y = 5, x - y = 1;x=2, y=1;medium;Persamaan Linear
+Tentukan akar-akar dari x² - 5x + 6 = 0;x=2 atau x=3;medium;Persamaan Kuadrat
+Jika f(x) = 2x + 3, tentukan f(5);13;easy;Fungsi dan Grafik
+Berapa nilai diskriminan dari x² + 2x + 1 = 0?;0;medium;Persamaan Kuadrat
+Tentukan turunan dari f(x) = 3x²;6x;hard;Fungsi dan Grafik
+Matriks apa hasil dari [[1,2],[3,4]] + [[5,6],[7,8]]?;[[6,8],[10,12]];easy;Operasi Matriks
+Berapa determinan dari [[1,2],[3,4]]?;-2;medium;Determinan dan Invers
+Hitung [[1,2],[3,4]] x [[5,6],[7,8]];[[19,22],[43,50]];hard;Operasi Matriks
+Tentukan invers dari [[2,1],[5,3]];[[3,-1],[-5,2]];hard;Determinan dan Invers
+Hasil dari 45 + 67 adalah?;112;easy;Penjumlahan/Pengurangan
+Berapa 100 - 37?;63;easy;Penjumlahan/Pengurangan
+12 x 13 = ?;156;easy;Perkalian/Pembagian
+144 ÷ 12 = ?;12;easy;Perkalian/Pembagian
+Jika 2x + 3y = 13 dan x + 2y = 8, tentukan x dan y;x=2, y=3;medium;Persamaan Linear
+Faktorkan x² + 5x + 6;(x+2)(x+3);hard;Persamaan Kuadrat
+Diberikan f(x) = -x² + 4x. Tentukan nilai maksimum;4;hard;Fungsi dan Grafik
+Dan 234 + 456 + 789 sama dengan?;1479;medium;Penjumlahan/Pengurangan
+5³ + 2³ = ?;133;medium;Operasi Campuran
+(6 + 4) × (10 - 5) ÷ 2 = ?;25;medium;Operasi Campuran

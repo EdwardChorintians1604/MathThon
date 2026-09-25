@@ -1,0 +1,348 @@
+{% extends "user/dashboard_user.html" %}
+
+{% block title %}MathThon | Latihan MathThon Untuk Semua Kalangan {% endblock %}
+{% block head_links %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/css_for_AI.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<!-- AOS - Animate on Scroll -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<!-- Marked.js for markdown parsing -->
+<script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/lib/marked.umd.js"></script>
+<!-- KaTeX for math rendering -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<style>
+    :root {
+        --glass-bg: rgba(255, 255, 255, 0.7);
+        --glass-border: rgba(255, 255, 255, 0.3);
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --accent-clr: #764ba2;
+    }
+
+    .topic-container {
+        padding: 2rem 0;
+        animation: fadeIn 0.8s ease-out;
+    }
+
+    .page-header {
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+
+    .page-title {
+        font-weight: 800;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1rem;
+    }
+
+    .topic-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .topic-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        padding: 2rem;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        text-decoration: none;
+        color: #2d3436;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .topic-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: var(--primary-gradient);
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
+        transform-origin: left;
+    }
+
+    .topic-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        color: #2d3436;
+    }
+
+    .topic-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .topic-icon {
+        width: 60px;
+        height: 60px;
+        background: var(--primary-gradient);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .topic-name {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 0.8rem;
+    }
+
+    .topic-desc {
+        font-size: 0.95rem;
+        color: #636e72;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .progress-section {
+        margin-top: auto;
+    }
+
+    .progress-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--accent-clr);
+    }
+
+    .progress {
+        height: 8px;
+        border-radius: 10px;
+        background-color: rgba(0,0,0,0.05);
+    }
+
+    .progress-bar {
+        background: var(--primary-gradient);
+        border-radius: 10px;
+        transition: width 0.5s ease-in-out;
+    }
+
+    .btn-start {
+        margin-top: 1.5rem;
+        border-radius: 12px;
+        font-weight: 600;
+        padding: 0.8rem;
+        transition: all 0.3s ease;
+        border: none;
+        background: var(--primary-gradient);
+        color: white;
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+    .btn-start:hover {
+        opacity: 0.9;
+        color: white;
+        transform: scale(1.02);
+    }
+
+    .search-container {
+        position: relative;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .search-icon {
+        position: absolute;
+        top: 50%;
+        left: 1.2rem;
+        transform: translateY(-50%);
+        color: #b0a8c0;
+        pointer-events: none;
+        transition: color 0.3s ease;
+    }
+
+    #searchInput {
+        padding: 0.9rem 1.2rem 0.9rem 3rem;
+        border-radius: 50px;
+        border: 1px solid var(--glass-border);
+        background-color: var(--glass-bg);
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+        .topic-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="topic-container container">
+    <div class="page-header" data-aos="fade-up">
+        <h1 class="page-title display-4">Latihan Soal Adaptif</h1>
+        <p class="lead text-muted">Tingkatkan kemampuan matematika Anda dengan soal-soal yang menyesuaikan dengan tingkat pemahaman Anda. Anda bisa mencari latihan soal dalam materi matematika yang sudah ditentukan di sini dengan mengetik nama materi yang sudah disediakan. </p>
+    </div>
+    <br>
+    <div class="mb-5 search-container" data-aos="fade-up" data-aos-delay="100">
+        <i class="bi bi-search search-icon"></i>
+        <input type="text" id="searchInput" class="form-control" placeholder="Cari materi berdasarkan judul atau deskripsi...">
+    </div>
+
+    <div class="topic-grid">
+        {% if topics %}
+            {% for topic in topics %}
+            {% set progress = 0 %}
+            {% if topic.questions_answered and topic.questions_answered > 0 and topic.correct_answers is not none %}
+                {% set progress = ((topic.correct_answers / topic.questions_answered) * 100) | round | int %}
+            {% endif %}
+            
+            <div class="topic-item" data-aos="fade-up" data-aos-delay="{{ loop.index * 100 }}">
+                <a href="{{ url_for('latihan.latihan_topic', topic_id=topic.id) }}" class="topic-card">
+                    <div class="card-content">
+                        <div class="topic-icon">
+                            {% if 'Matriks' in topic.name %}
+                                <i class="bi bi-grid-3x3"></i>
+                            {% elif 'Kabataku' in topic.name %}
+                                <i class="bi bi-plus-slash-minus"></i>
+                            {% elif 'Aljabar' in topic.name %}
+                                <i class="bi bi-heptagon"></i>
+                            {% else %}
+                                <i class="bi bi-book"></i>
+                            {% endif %}
+                        </div>
+                        <h5 class="topic-name">{{ topic.name }}</h5>
+                        <p class="topic-desc">{{ topic.description or 'Uji pemahaman Anda pada topik ini dengan soal-soal menantang.' }}</p>
+                    </div>
+
+                    <div class="progress-section">
+                        <div class="progress-label">
+                            <span>Akurasi Anda</span>
+                            <span>{{ progress }}%</span>
+                        </div>
+                        <div class="btn-start mt-4">
+                            Mulai Latihan <i class="bi bi-arrow-right ms-1"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12 text-center" data-aos="fade-up">
+                <div class="alert alert-info py-4 glass-card">
+                    <i class="bi bi-info-circle display-4 d-block mb-3"></i>
+                    <h4>Belum Ada Topik Latihan</h4>
+                    <p>Sabar ya! Tim pendidik kami sedang menyiapkan materi latihan terbaik untuk Anda.</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const topicItems = document.querySelectorAll('.topic-item');
+
+        if (searchInput) {
+            let logSearchTimeout;
+            searchInput.addEventListener('keyup', function() {
+                const searchTerm = this.value.toLowerCase();
+                let visibleCount = 0;
+
+                topicItems.forEach(item => {
+                    const topicName = item.querySelector('.topic-name');
+                    const topicDesc = item.querySelector('.topic-desc');
+                    
+                    if (topicName && topicDesc) {
+                        const name = topicName.textContent.toLowerCase();
+                        const desc = topicDesc.textContent.toLowerCase();
+                        
+                        if (name.includes(searchTerm) || desc.includes(searchTerm)) {
+                            item.style.display = '';
+                            visibleCount++;
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    }
+                });
+
+                // Show "no results" message if needed
+                const grid = document.querySelector('.topic-grid');
+                let noResultsMsg = document.getElementById('noResultsMsg');
+                if (visibleCount === 0 && searchTerm.length > 0) {
+                    if (!noResultsMsg) {
+                        noResultsMsg = document.createElement('div');
+                        noResultsMsg.id = 'noResultsMsg';
+                        noResultsMsg.className = 'col-12 text-center';
+                        noResultsMsg.innerHTML = `
+                            <div class="alert alert-warning py-4">
+                                <i class="bi bi-search display-4 d-block mb-3"></i>
+                                <h4>Tidak ada hasil pencarian</h4>
+                                <p>Coba gunakan kata kunci yang berbeda.</p>
+                            </div>
+                        `;
+                        grid.appendChild(noResultsMsg);
+                    }
+                } else if (noResultsMsg) {
+                    noResultsMsg.remove();
+                }
+
+                // Debounce activity log request to backend
+                clearTimeout(logSearchTimeout);
+                if (searchTerm.trim().length >= 3) {
+                    logSearchTimeout = setTimeout(() => {
+                        const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
+                        const csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : '';
+                        
+                        fetch('/user/log_activity', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRFToken': csrfToken
+                            },
+                            body: JSON.stringify({
+                                activity_type: 'latihan',
+                                description: `Mencari latihan soal dengan kata kunci: "${searchTerm.trim()}"`
+                            })
+                        }).catch(err => console.error("Error logging exercise search:", err));
+                    }, 1200);
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

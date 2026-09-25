@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathThon | Progres Belajar</title>
+    <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css_for_progres_user.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css_for_dashboard_user.css') }}">
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideInUp 0.6s ease-out;
+        }
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .stat-card.success { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .stat-card.warning { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .stat-card.info { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .stat-card h3 { 
+            font-size: 2rem; 
+            font-weight: bold; 
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover h3 {
+            font-size: 2.2rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .stat-card p { 
+            font-size: 0.95rem; 
+            opacity: 0.9;
+            margin: 0;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 30px;
+            animation: fadeIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .progress-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+            animation: slideInLeft 0.5s ease-out;
+        }
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .progress-item:hover {
+            background: #e9ecef;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left-color: #764ba2;
+            transform: translateX(5px);
+        }
+        .progress-item h6 {
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .progress-item .progress {
+            height: 10px;
+            border-radius: 5px;
+            background: #e9ecef;
+            overflow: hidden;
+        }
+        .progress-item .progress-bar {
+            transition: all 0.5s ease;
+        }
+        
+        .card {
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.6s ease-out;
+        }
+        .card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            padding: 15px;
+        }
+        .card-header h5 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        
+        .main-content {
+            margin-left: 270px;
+            width: calc(100% - 270px);
+            transition: all 0.3s ease;
+            padding-bottom: 50px;
+        }
+        
+        .main-content header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .stat-card {
+                padding: 15px;
+            }
+            .stat-card h3 {
+                font-size: 1.8rem;
+            }
+            .chart-container {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+            .sidebar {
+                display: none !important;
+            }
+            .sidebar.active {
+                display: block !important;
+                position: fixed;
+                left: 0;
+                top: 0;
+                z-index: 999;
+                width: 250px;
+            }
+            .stat-card {
+                padding: 12px;
+                margin-bottom: 15px;
+            }
+            .stat-card h3 {
+                font-size: 1.5rem;
+            }
+            .stat-card p {
+                font-size: 0.85rem;
+            }
+            .stat-card:hover h3 {
+                font-size: 1.6rem;
+            }
+            .chart-container {
+                height: 280px;
+            }
+            .row {
+                margin-right: -8px;
+                margin-left: -8px;
+            }
+            .col-md-3, .col-md-6, .col-lg-6, .col-sm-6 {
+                padding-right: 8px;
+                padding-left: 8px;
+            }
+            .card-header h5 {
+                font-size: 1rem;
+            }
+            .progress-item {
+                padding: 12px;
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container-fluid {
+                padding: 12px !important;
+            }
+            .stat-card {
+                padding: 10px;
+                margin-bottom: 12px;
+            }
+            .stat-card h3 {
+                font-size: 1.3rem;
+            }
+            .stat-card p {
+                font-size: 0.8rem;
+            }
+            .card-header h5 {
+                font-size: 0.95rem;
+            }
+            .chart-container {
+                height: 250px;
+            }
+            header {
+                padding: 10px !important;
+            }
+            header h4 {
+                font-size: 1.1rem;
+            }
+            .progress-item h6 {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="sidebar animate__animated animate__fadeInLeft">
+            <div class="header text-center p-3">
+                <img src="{{ photo_url }}" alt="User Avatar" class="rounded-circle"
+                     style="width: 80px; height: 80px; object-fit: cover; border: 2px solid #fff;">
+                <h5 class="mt-2" style="color: white;">{{ users.name }}</h5>
+                <p id="datetime" style="color: white; font-size: 0.9em;"></p>
+            </div>
+            <ul class="list-unstyled ps-3 animate__animated animate__fadeInLeft">
+                <li><a href="{{ url_for('user.dashboard_user') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="{{ url_for('materi.materi_user') }}"><i class="fas fa-book"></i> Materi</a></li>
+                <li><a href="{{ url_for('user.ai_feature') }}"><i class="fas fa-robot"></i> Fitur AI (Alat Pembantu)</a></li>
+                <li><a href="{{ url_for('user.latihan') }}"><i class="fas fa-pencil-alt"></i> Latihan Soal</a></li>
+                <li><a href="{{ url_for('user.progres_user') }}" class="active"><i class="fas fa-chart-line"></i> Progres</a></li>
+                <li><a href="{{ url_for('user.analyze') }}"><i class="fas fa-chart-bar"></i> Analisis Hasil</a></li>
+                <li><a href="{{ url_for('user.calculator') }}"><i class="fas fa-calculator"></i> Calculator</a></li>
+                <li><a href="{{ url_for('auth.logout_user') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+            <button class="close-sidenav-btn btn btn-secondary btn-sm" id="closeSidebarBtn">
+                <i class="bi bi-x"></i>
+            </button>
+            <br>
+            <div class="animate__animated animate__fadeInLeft">
+                <img src="{{url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png')}}" alt="MathThon Logo" class="mb-2" style="width: 50px; display: block; margin: 0 auto;">
+                <p style="color: white; font-size: 0.8em; text-align: center;">&copy; 2024 MathThon. All rights reserved.</p>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div id="mainContent" class="main-content animate__animated animate__fadeInLeft">
+            <header class="d-flex justify-content-between align-items-center p-3 bg-light">
+                <button class="open-sidenav-btn btn btn-primary btn-sm" id="openSidebarBtn">
+                    <i class="bi bi-list"></i>
+                </button>
+                <h4 class="m-0">📊 Progres Belajar</h4>
+                <div></div>
+            </header>
+
+            <div class="container-fluid p-4">
+                <!-- Header Section -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h2 class="mb-2">Progres Belajar Anda, <strong>{{ users.name }}</strong>! 📈</h2>
+                                <p class="text-muted">Pantau perkembangan belajar Anda secara real-time</p>
+                            </div>
+                            <div id="loading-indicator" class="text-center" style="display: none;">
+                                <div class="spinner-border text-primary sm" role="status" style="width: 2rem; height: 2rem;">
+                                    <span class="visually-hidden">Memuat...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics Cards -->
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stat-card success">
+                            <i class="fas fa-book-open" style="font-size: 2rem;"></i>
+                            <h3 id="materi-selesai">-</h3>
+                            <p>Materi Selesai</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stat-card">
+                            <i class="fas fa-pencil-alt" style="font-size: 2rem;"></i>
+                            <h3 id="soal-dikerjakan">-</h3>
+                            <p>Soal Dikerjakan</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stat-card warning">
+                            <i class="fas fa-percentage" style="font-size: 2rem;"></i>
+                            <h3 id="akurasi-total">-</h3>
+                            <p>Akurasi Total</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stat-card info">
+                            <i class="fas fa-star" style="font-size: 2rem;"></i>
+                            <h3 id="total-poin">-</h3>
+                            <p>Total Poin</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress by Topic -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-list"></i> Progres Berdasarkan Topik</h5>
+                            </div>
+                            <div class="card-body" id="progress-topics">
+                                <div class="text-center">
+                                    <div class="spinner-border text-primary mb-3" role="status">
+                                        <span class="visually-hidden">Memuat...</span>
+                                    </div>
+                                    <p class="text-muted">Memuat data progres...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Overall Progress Chart -->
+                <div class="row mt-4">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-chart-bar"></i> Progres Mingguan</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="progressChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-pie-chart"></i> Distribusi Topik</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="topicChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Motivational Section -->
+                <div class="row mt-4 mb-4">
+                    <div class="col-12">
+                        <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                            <div class="card-body text-center">
+                                <h4><i class="fas fa-fire"></i> Terus Semangat!</h4>
+                                <p id="motivasi" style="font-size: 1.1rem; margin: 15px 0;">Anda sedang dalam perjalanan menuju kesuksesan matematika!</p>
+                                <a href="{{ url_for('user.latihan') }}" class="btn btn-light btn-lg mt-2">
+                                    <i class="fas fa-arrow-right"></i> Lanjutkan Belajar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap & Charts JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- JavaScript Logic for Progress Data -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Data simulasi - dalam praktik akan didapat dari backend
+        const progressData = {
+            materi_selesai: 8,
+            soal_dikerjakan: 45,
+            akurasi_total: 78,
+            total_poin: 1250,
+            topics: {
+                'Aljabar': {selesai: 3, total: 5, akurasi: 85},
+                'Geometri': {selesai: 2, total: 4, akurasi: 72},
+                'Trigonometri': {selesai: 2, total: 3, akurasi: 80},
+                'Kalkulus': {selesai: 1, total: 5, akurasi: 65}
+            }
+        };
+
+        function safeSetText(elementId, value) {
+            const elem = document.getElementById(elementId);
+            if (elem) {
+                elem.textContent = value;
+            }
+        }
+
+        function safeSetHtml(elementId, htmlContent) {
+            const elem = document.getElementById(elementId);
+            if (elem) {
+                elem.innerHTML = htmlContent;
+            }
+        }
+
+        function renderProgressData() {
+            try {
+                // Update statistics
+                safeSetText('materi-selesai', progressData.materi_selesai);
+                safeSetText('soal-dikerjakan', progressData.soal_dikerjakan);
+                safeSetText('akurasi-total', progressData.akurasi_total + "%");
+                safeSetText('total-poin', progressData.total_poin + " pts");
+
+                // Render topics progress
+                let topicsHtml = "";
+                for (const [topic, info] of Object.entries(progressData.topics)) {
+                    const selesai = info.selesai;
+                    const total = info.total;
+                    const akurasi = info.akurasi;
+                    const progressPct = (selesai / total) * 100;
+
+                    topicsHtml += '<div class="progress-item">';
+                    topicsHtml += `<h6>${topic}</h6>`;
+                    topicsHtml += '<div class="progress">';
+                    topicsHtml += `<div class="progress-bar" role="progressbar" `;
+                    topicsHtml += `style="width: ${progressPct}%; background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);" `;
+                    topicsHtml += `aria-valuenow="${progressPct}" aria-valuemin="0" aria-valuemax="100">`;
+                    topicsHtml += `${selesai}/${total} - Akurasi: ${akurasi}%`;
+                    topicsHtml += '</div></div></div>';
+                }
+
+                safeSetHtml('progress-topics', topicsHtml);
+
+                // Motivational messages
+                const motivasiList = [
+                    "Anda sedang dalam perjalanan menuju kesuksesan matematika!",
+                    "Konsistensi adalah kunci! Terus latihan setiap hari.",
+                    `Anda sudah menempuh ${progressData.akurasi_total}% dari target akurasi 90%!`,
+                    "Jangan menyerah! Kesulitan hari ini adalah kekuatan besok."
+                ];
+                const motivasiText = motivasiList[Math.floor(Math.random() * motivasiList.length)];
+                safeSetText('motivasi', motivasiText);
+
+                console.log("Progress data rendered successfully!");
+            } catch (e) {
+                console.error(`Error rendering progress data: ${e}`);
+            }
+        }
+
+        renderProgressData();
+    });
+    </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const openSidebarBtn = document.getElementById("openSidebarBtn");
+        const closeSidebarBtn = document.getElementById("closeSidebarBtn");
+        const sidebar = document.querySelector(".sidebar");
+        const mainContent = document.getElementById("mainContent");
+        const loadingIndicator = document.getElementById("loading-indicator");
+
+        // Sidebar Toggle
+        if (openSidebarBtn && sidebar) {
+            openSidebarBtn.addEventListener("click", function() {
+                sidebar.classList.add("active");
+                mainContent.classList.add("shifted-sm");
+            });
+        }
+
+        if (closeSidebarBtn && sidebar) {
+            closeSidebarBtn.addEventListener("click", function() {
+                sidebar.classList.remove("active");
+                mainContent.classList.remove("shifted-sm");
+            });
+        }
+
+        // DateTime Update
+        const datetimeEl = document.getElementById("datetime");
+        function updateDateTime() {
+            if (!datetimeEl) return;
+            const now = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            };
+            datetimeEl.textContent = now.toLocaleDateString('id-ID', options);
+        }
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+
+        // Show loading indicator briefly
+        if (loadingIndicator) {
+            loadingIndicator.style.display = 'block';
+            setTimeout(() => {
+                loadingIndicator.style.display = 'none';
+            }, 1500);
+        }
+
+        // Initialize Charts with error handling
+        try {
+            initCharts();
+        } catch (error) {
+            console.error("Error initializing charts:", error);
+        }
+
+        // AOS Animation
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                once: false,
+                mirror: true
+            });
+        }
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && sidebar && sidebar.classList.contains('active')) {
+                sidebar.classList.remove("active");
+                mainContent.classList.remove("shifted-sm");
+            }
+        });
+    });
+
+    // Chart Instances
+    let progressChartInstance = null;
+    let topicChartInstance = null;
+
+    function initCharts() {
+        try {
+            // Weekly Progress Chart
+            const progressCtx = document.getElementById('progressChart');
+            if (progressCtx && !progressChartInstance) {
+                progressChartInstance = new Chart(progressCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
+                        datasets: [{
+                            label: 'Soal Dikerjakan',
+                            data: [5, 8, 6, 9, 7, 10, 8],
+                            backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                            borderColor: 'rgba(102, 126, 234, 1)',
+                            borderWidth: 2,
+                            borderRadius: 5,
+                            hoverBackgroundColor: 'rgba(102, 126, 234, 1)',
+                            hoverBorderWith: 3,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: {
+                            duration: 1500,
+                            easing: 'easeInOutQuart',
+                            delay: (ctx) => {
+                                let delay = 0;
+                                if (ctx.type === 'data') {
+                                    delay = ctx.dataIndex * 100 + ctx.datasetIndex * 100;
+                                }
+                                return delay;
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: true,
+                                labels: { font: { size: 12 }, padding: 15 },
+                                animation: { duration: 1000 }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0,0,0,0.8)',
+                                padding: 12,
+                                titleFont: { size: 14 },
+                                bodyFont: { size: 12 },
+                                borderColor: '#667eea',
+                                borderWidth: 1,
+                                displayColors: true,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': ' + context.parsed.y + ' soal';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: { font: { size: 11 } },
+                                grid: { color: 'rgba(200, 200, 200, 0.1)' }
+                            },
+                            x: {
+                                ticks: { font: { size: 11 } },
+                                grid: { display: false }
+                            }
+                        },
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    }
+                });
+                console.log("Progress Chart initialized successfully");
+            }
+        } catch (error) {
+            console.error("Error initializing progress chart:", error);
+        }
+
+        try {
+            // Topic Distribution Pie Chart
+            const topicCtx = document.getElementById('topicChart');
+            if (topicCtx && !topicChartInstance) {
+                topicChartInstance = new Chart(topicCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Aljabar', 'Geometri', 'Trigonometri', 'Kalkulus'],
+                        datasets: [{
+                            data: [8, 6, 7, 5],
+                            backgroundColor: [
+                                'rgba(102, 126, 234, 0.8)',
+                                'rgba(17, 153, 142, 0.8)',
+                                'rgba(240, 147, 251, 0.8)',
+                                'rgba(79, 172, 254, 0.8)'
+                            ],
+                            borderColor: [
+                                'rgba(102, 126, 234, 1)',
+                                'rgba(17, 153, 142, 1)',
+                                'rgba(240, 147, 251, 1)',
+                                'rgba(79, 172, 254, 1)'
+                            ],
+                            borderWidth: 2,
+                            hoverBorderWidth: 3,
+                            hoverOffset: 10
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: {
+                            animateRotate: true,
+                            animateScale: false,
+                            duration: 1500,
+                            easing: 'easeInOutQuart'
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { 
+                                    font: { size: 12 },
+                                    padding: 15,
+                                    usePointStyle: true,
+                                    pointStyle: 'circle'
+                                },
+                                animation: { duration: 1000 }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0,0,0,0.8)',
+                                padding: 12,
+                                titleFont: { size: 14 },
+                                bodyFont: { size: 12 },
+                                borderColor: '#667eea',
+                                borderWidth: 1,
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        if (label) label += ': ';
+                                        label += context.parsed + ' soal';
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        interaction: {
+                            mode: 'average',
+                            intersect: false
+                        }
+                    }
+                });
+                console.log("Topic Chart initialized successfully");
+            }
+        } catch (error) {
+            console.error("Error initializing topic chart:", error);
+        }
+    }
+
+    // Smooth scrolling untuk anchor link
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
+    </script>
+
+</body>
+</html>

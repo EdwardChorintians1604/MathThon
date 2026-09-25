@@ -1,0 +1,689 @@
+{% extends "user/dashboard_user.html" %}
+
+{% block title %}MathThon | Kalkulator Python AI{% endblock %}
+
+{% block head_links %}
+    {{ super() }}
+    <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css_for_dashboard_user.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/solid.min.css">
+    <title>MathThon | Kalkulator Python AI</title>
+{% endblock %}
+{% block content %}
+
+<div class="calc-header-section animate__animated animate__fadeIn">
+    <div class="container-fluid">
+        <div class="d-flex align-items-center gap-3 mb-2">
+            <div class="icon-box">
+                <i class="fas fa-calculator text-accent"></i>
+            </div>
+            <div>
+                <h2 class="m-0 fw-bold text-white">Kalkulator Pintar</h2>
+                <p class="m-0 text-muted-custom">Selesaikan ekspresi matematika kompleks dengan engine Python AI</p>
+            </div>
+        </div>
+        <div class="header-line"></div>
+    </div>
+</div>
+
+<div class="calc-wrapper">
+
+    <!-- Animated background blobs -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <div class="calc-layout">
+
+        <!-- LEFT: Calculator -->
+        <div class="calculator-panel">
+
+            <div class="panel-header">
+                <div class="brand">
+                    <div class="brand-icon"><i class="fab fa-python"></i></div>
+                    <div class="brand-text">
+                        <span class="brand-name">MathThon Calculator</span>
+                        <span class="brand-sub">Python AI Engine</span>
+                    </div>
+                </div>
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    <span>Online</span>
+                </div>
+            </div>
+
+            <!-- Display -->
+            <div class="display-wrap">
+                <div class="display-top">
+                    <span class="display-label">INPUT</span>
+                    <div id="loading-spinner" class="calc-spinner" style="display:none;">
+                        <div class="spin-ring"></div>
+                    </div>
+                </div>
+                <input type="text" id="display" placeholder="Ketik ekspresi..." autocomplete="off" spellcheck="false">
+                <div id="live-preview" class="live-preview"></div>
+                <div class="display-hint">Contoh: <code>10 kombinasi 2</code> &middot; <code>sin(45)</code> &middot; <code>sqrt(144)</code></div>
+            </div>
+
+            <!-- Button Grid -->
+            <div class="buttons-grid">
+
+                <!-- Row 1: Memory & Advanced -->
+                <button class="btn-mem" data-insert="Ans">
+                    <span class="btn-label">Ans</span>
+                    <span class="btn-sub">memori</span>
+                </button>
+                <button class="btn-sci" data-insert="exp(">
+                    <span class="btn-label">EXP</span>
+                    <span class="btn-sub">eˣ</span>
+                </button>
+                <button class="btn-sci" data-insert=" mod ">
+                    <span class="btn-label">mod</span>
+                    <span class="btn-sub">sisa</span>
+                </button>
+                <button class="btn-sci" data-insert=" % ">
+                    <span class="btn-label">%</span>
+                    <span class="btn-sub">persen</span>
+                </button>
+
+                <!-- Row 2: Functions -->
+                <button class="btn-sci" data-insert="abs(">
+                    <span class="btn-label">|x|</span>
+                    <span class="btn-sub">abs</span>
+                </button>
+                <button class="btn-sci" data-insert="exp(">
+                    <span class="btn-label">eˣ</span>
+                    <span class="btn-sub">exp</span>
+                </button>
+                <button class="btn-sci" data-insert="(">
+                    <span class="btn-label">(</span>
+                </button>
+                <button class="btn-sci" data-insert=")">
+                    <span class="btn-label">)</span>
+                </button>
+
+                <!-- Row 3: Trig -->
+                <button class="btn-trig" data-insert="sin(">
+                    <span class="btn-label">sin</span>
+                    <span class="btn-sub">derajat</span>
+                </button>
+                <button class="btn-trig" data-insert="cos(">
+                    <span class="btn-label">cos</span>
+                    <span class="btn-sub">derajat</span>
+                </button>
+                <button class="btn-trig" data-insert="tan(">
+                    <span class="btn-label">tan</span>
+                    <span class="btn-sub">derajat</span>
+                </button>
+                <button class="btn-trig" data-insert="log10(">
+                    <span class="btn-label">log</span>
+                    <span class="btn-sub">basis 10</span>
+                </button>
+
+                <!-- Row 4: More functions -->
+                <button class="btn-trig" data-insert="log(">
+                    <span class="btn-label">ln</span>
+                    <span class="btn-sub">natural</span>
+                </button>
+                <button class="btn-trig" data-insert="^">
+                    <span class="btn-label">xʸ</span>
+                    <span class="btn-sub">pangkat</span>
+                </button>
+                <button class="btn-trig" data-insert="sqrt(">
+                    <span class="btn-label">&#x221A;</span>
+                    <span class="btn-sub">akar</span>
+                </button>
+                <button class="btn-trig" data-insert="!">
+                    <span class="btn-label">n!</span>
+                    <span class="btn-sub">faktorial</span>
+                </button>
+
+                <!-- Row 5: Constants & Combinatorics -->
+                <button class="btn-const" data-insert="pi">
+                    <span class="btn-label">&#x03C0;</span>
+                    <span class="btn-sub">3.14&hellip;</span>
+                </button>
+                <button class="btn-const" data-insert="e">
+                    <span class="btn-label">e</span>
+                    <span class="btn-sub">2.71&hellip;</span>
+                </button>
+                <button class="btn-comb" data-insert=" Kombinasi ">
+                    <span class="btn-label">nCr</span>
+                    <span class="btn-sub">kombinasi</span>
+                </button>
+                <button class="btn-comb" data-insert=" Permutasi ">
+                    <span class="btn-label">nPr</span>
+                    <span class="btn-sub">permutasi</span>
+                </button>
+
+                <!-- Divider -->
+                <div class="grid-divider"></div>
+
+                <!-- Row 6: Delete, Clear, Operators -->
+                <button class="btn-delete" data-action="back">
+                    <i class="fas fa-backspace"></i>
+                </button>
+                <button class="btn-clear" data-action="clear">
+                    <span class="btn-label">AC</span>
+                </button>
+                <button class="btn-op" data-insert=" / ">&#247;</button>
+                <button class="btn-op" data-insert=" * ">&#215;</button>
+
+                <button class="btn-num" data-insert="7">7</button>
+                <button class="btn-num" data-insert="8">8</button>
+                <button class="btn-num" data-insert="9">9</button>
+                <button class="btn-op" data-insert=" - ">&minus;</button>
+
+                <button class="btn-num" data-insert="4">4</button>
+                <button class="btn-num" data-insert="5">5</button>
+                <button class="btn-num" data-insert="6">6</button>
+                <button class="btn-op" data-insert=" + ">+</button>
+
+                <button class="btn-num" data-insert="1">1</button>
+                <button class="btn-num" data-insert="2">2</button>
+                <button class="btn-num" data-insert="3">3</button>
+                <button class="btn-equal" data-action="calculate" style="grid-row: span 2;">=</button>
+
+                <button class="btn-num" data-insert="0" style="grid-column: span 2;">0</button>
+                <button class="btn-num" data-insert=".">.</button>
+
+            </div>
+        </div>
+
+        <!-- RIGHT: History + Guide -->
+        <div class="history-panel">
+            <div class="history-header">
+                <div class="history-title">
+                    <i class="fas fa-clock-rotate-left"></i>
+                    <span>Riwayat</span>
+                </div>
+                <button id="clear-history" class="clear-hist-btn" title="Hapus semua">
+                    <i class="fas fa-trash-can"></i>
+                </button>
+            </div>
+
+            <div class="history-scroll">
+                <ul id="history-list">
+                    <li class="empty-msg">
+                        <div class="empty-icon"><i class="fas fa-calculator"></i></div>
+                        <p>Belum ada perhitungan</p>
+                        <span>Hasil akan muncul di sini</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="quick-guide">
+                <div class="guide-title"><i class="fas fa-lightbulb"></i> Tips Cepat</div>
+                <div class="guide-items">
+                    <div class="guide-item"><code>10 kombinasi 2</code><span>= 45</span></div>
+                    <div class="guide-item"><code>5!</code><span>= 120</span></div>
+                    <div class="guide-item"><code>sin(90)</code><span>= 1</span></div>
+                    <div class="guide-item"><code>2^10</code><span>= 1024</span></div>
+                    <div class="guide-item"><code>50%</code><span>= 0.5</span></div>
+                    <div class="guide-item"><code>Ans + 5</code><span>lanjutkan</span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+/* Header Section Styles */
+.calc-header-section {
+    padding: 20px 0 10px 0;
+    margin-bottom: 10px;
+}
+.icon-box {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 229, 160, 0.1);
+    border: 1px solid rgba(0, 229, 160, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+.text-accent { color: #00e5a0; }
+.text-muted-custom { color: rgba(180, 190, 230, 0.6); font-size: 0.9rem; }
+.header-line {
+    height: 2px;
+    width: 100px;
+    background: linear-gradient(90deg, #00e5a0, transparent);
+    margin-top: 15px;
+    border-radius: 2px;
+}
+
+/* Existing Styles */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --bg-deep:      #0a0e1a;
+    --bg-panel:     rgba(15, 20, 40, 0.75);
+    --bg-card:      rgba(20, 27, 55, 0.6);
+    --bg-btn:       rgba(30, 38, 70, 0.8);
+    --bg-btn-hov:   rgba(45, 56, 100, 0.9);
+    --bg-num:       rgba(22, 30, 58, 0.9);
+    --bg-num-hov:   rgba(35, 46, 85, 1);
+
+    --accent:       #00e5a0;
+    --accent-dim:   rgba(0, 229, 160, 0.15);
+    --accent-glow:  rgba(0, 229, 160, 0.4);
+    --orange:       #ff9a3c;
+    --orange-dim:   rgba(255, 154, 60, 0.15);
+    --purple:       #a78bfa;
+    --purple-dim:   rgba(167, 139, 250, 0.15);
+    --teal:         #38bdf8;
+    --teal-dim:     rgba(56, 189, 248, 0.15);
+    --red:          #ff6b6b;
+    --red-dim:      rgba(255, 107, 107, 0.15);
+    --gold:         #fbbf24;
+    --gold-dim:     rgba(251, 191, 36, 0.15);
+
+    --txt:          #e8eeff;
+    --txt-muted:    rgba(180, 190, 230, 0.5);
+    --txt-hint:     rgba(140, 155, 200, 0.35);
+    --border:       rgba(100, 120, 200, 0.12);
+    --border-focus: rgba(0, 229, 160, 0.45);
+
+    --font-ui:   'Outfit', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+    --tr: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.calc-wrapper {
+    min-height: 100vh;
+    background: var(--bg-deep);
+    background-image:
+        radial-gradient(ellipse 80% 60% at 15% 10%, rgba(0,229,160,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 85% 85%, rgba(167,139,250,0.08) 0%, transparent 60%);
+    font-family: var(--font-ui);
+    padding: 32px 20px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 45px;
+    border-style: solid; border-width: 1px; border-color: rgba(255,255,255,0.1);
+  
+}
+
+/* Background animated blobs */
+.bg-blob { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; }
+.blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,229,160,0.07), transparent 70%); top: -150px; left: -150px; animation: blobf 10s ease-in-out infinite; }
+.blob-2 { width: 350px; height: 350px; background: radial-gradient(circle, rgba(167,139,250,0.09), transparent 70%); bottom: -80px; right: -80px; animation: blobf 12s ease-in-out infinite reverse; }
+.blob-3 { width: 280px; height: 280px; background: radial-gradient(circle, rgba(56,189,248,0.06), transparent 70%); top: 40%; left: 40%; animation: blobf 8s ease-in-out infinite 4s; }
+@keyframes blobf { 0%,100%{transform:translate(0,0) scale(1)} 40%{transform:translate(25px,-20px) scale(1.06)} 70%{transform:translate(-15px,18px) scale(0.96)} }
+
+.calc-layout {
+    max-width: 980px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 320px;
+    gap: 20px; align-items: start;
+    position: relative; z-index: 1;
+   
+}
+
+/* Panels */
+.calculator-panel,
+.history-panel {
+    background: var(--bg-panel);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(100,120,200,0.06);
+    animation: panelIn 0.5s cubic-bezier(0.4,0,0.2,1) both;
+}
+.history-panel { animation-delay: 0.12s; }
+@keyframes panelIn { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+.calculator-panel { padding: 24px; }
+.history-panel { display: flex; flex-direction: column; }
+
+/* Brand header */
+.panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-icon {
+    width: 44px; height: 44px; border-radius: 13px;
+    background: var(--accent-dim); border: 1px solid rgba(0,229,160,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem; color: var(--accent);
+    box-shadow: 0 0 18px rgba(0,229,160,0.18);
+}
+.brand-text { display: flex; flex-direction: column; gap: 2px; }
+.brand-name { font-size: 1.1rem; font-weight: 700; color: var(--txt); letter-spacing: 0.01em; }
+.brand-sub  { font-size: 0.68rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
+
+.status-badge {
+    display: flex; align-items: center; gap: 7px;
+    background: rgba(0,229,160,0.07); border: 1px solid rgba(0,229,160,0.2);
+    border-radius: 20px; padding: 5px 13px;
+    font-size: 0.72rem; color: var(--accent); font-weight: 600; letter-spacing: 0.04em;
+}
+.status-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 8px var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.55;transform:scale(0.75)} }
+
+/* Display */
+.display-wrap {
+    background: rgba(4, 7, 18, 0.65);
+    border: 1px solid var(--border);
+    border-radius: 14px; padding: 16px 20px 13px;
+    margin-bottom: 18px; position: relative;
+    transition: border-color var(--tr), box-shadow var(--tr);
+}
+.display-wrap:focus-within {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(0,229,160,0.07), inset 0 0 24px rgba(0,229,160,0.025);
+}
+.display-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.display-label { font-size: 0.62rem; letter-spacing: 0.18em; font-weight: 600; color: var(--txt-hint); text-transform: uppercase; font-family: var(--font-mono); }
+
+#display {
+    width: 100%; border: none; background: transparent;
+    font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 700;
+    text-align: right; color: var(--txt); outline: none;
+    font-family: var(--font-mono); letter-spacing: -0.02em;
+    caret-color: var(--accent);
+}
+#display::placeholder { color: var(--txt-hint); font-weight: 400; font-size: 1rem; letter-spacing: 0; }
+
+.live-preview {
+    text-align: right; font-family: var(--font-mono);
+    font-size: 1rem; color: var(--accent);
+    min-height: 20px; font-weight: 400; opacity: 0.9;
+    transition: opacity var(--tr);
+}
+.display-hint {
+    font-size: 0.68rem; color: var(--txt-hint); margin-top: 9px;
+    border-top: 1px solid rgba(100,120,200,0.08); padding-top: 8px;
+}
+.display-hint code {
+    font-family: var(--font-mono); color: var(--teal);
+    background: rgba(56,189,248,0.08); padding: 1px 5px; border-radius: 3px; font-size: 0.66rem;
+}
+
+.calc-spinner { width: 20px; height: 20px; }
+.spin-ring { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--accent-dim); border-top-color: var(--accent); animation: spin 0.65s linear infinite; }
+@keyframes spin { to{transform:rotate(360deg)} }
+
+/* Button Grid */
+.buttons-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
+.grid-divider { grid-column: 1/-1; height: 1px; background: var(--border); margin: 3px 0; }
+
+.buttons-grid button {
+    border: 1px solid transparent; border-radius: 10px;
+    padding: 9px 4px; cursor: pointer;
+    transition: all var(--tr);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 2px; position: relative; overflow: hidden;
+    font-family: var(--font-ui); min-height: 52px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+}
+.buttons-grid button::after {
+    content:''; position:absolute; inset:0; background:white; opacity:0;
+    transition:opacity 0.08s; border-radius:inherit;
+}
+.buttons-grid button:active::after { opacity: 0.07; }
+.buttons-grid button:active { transform: scale(0.93); }
+
+.btn-label { font-size: 0.95rem; font-weight: 600; line-height: 1; }
+.btn-sub   { font-size: 0.57rem; opacity: 0.5; letter-spacing: 0.03em; }
+
+/* Num */
+.btn-num { background: var(--bg-num); border-color: rgba(80,100,180,0.1); color: var(--txt); font-size: 1.1rem; font-weight: 600; }
+.btn-num:hover { background: var(--bg-num-hov); border-color: rgba(100,130,210,0.22); }
+
+/* Op */
+.btn-op { background: var(--orange-dim); border-color: rgba(255,154,60,0.18); color: var(--orange); font-size: 1.25rem; font-weight: 700; }
+.btn-op:hover { background: rgba(255,154,60,0.24); border-color: rgba(255,154,60,0.38); }
+
+/* Sci */
+.btn-sci { background: var(--bg-btn); border-color: rgba(80,100,180,0.1); color: var(--txt); }
+.btn-sci:hover { background: var(--bg-btn-hov); border-color: rgba(100,130,210,0.28); }
+
+/* Trig */
+.btn-trig { background: var(--teal-dim); border-color: rgba(56,189,248,0.14); color: var(--teal); }
+.btn-trig:hover { background: rgba(56,189,248,0.22); border-color: rgba(56,189,248,0.32); }
+
+/* Const */
+.btn-const { background: var(--gold-dim); border-color: rgba(251,191,36,0.18); color: var(--gold); }
+.btn-const .btn-label { font-size: 1.2rem; }
+.btn-const:hover { background: rgba(251,191,36,0.22); border-color: rgba(251,191,36,0.38); }
+
+/* Comb */
+.btn-comb { background: var(--purple-dim); border-color: rgba(167,139,250,0.18); color: var(--purple); }
+.btn-comb:hover { background: rgba(167,139,250,0.22); border-color: rgba(167,139,250,0.38); }
+
+/* Mem */
+.btn-mem { background: rgba(0,229,160,0.07); border-color: rgba(0,229,160,0.18); color: var(--accent); }
+.btn-mem:hover { background: rgba(0,229,160,0.14); border-color: rgba(0,229,160,0.38); }
+
+/* Delete */
+.btn-delete { background: var(--red-dim); border-color: rgba(255,107,107,0.18); color: var(--red); font-size: 0.95rem; }
+.btn-delete:hover { background: rgba(255,107,107,0.22); border-color: rgba(255,107,107,0.38); }
+
+/* Clear */
+.btn-clear { background: rgba(255,107,107,0.18); border-color: rgba(255,107,107,0.25); color: var(--red); font-weight: 700; }
+.btn-clear:hover { background: rgba(255,107,107,0.28); border-color: rgba(255,107,107,0.45); }
+
+/* Equal */
+.btn-equal {
+    background: linear-gradient(150deg, #00e5a0 0%, #00b87a 100%);
+    border-color: rgba(0,229,160,0.4); color: #001c10;
+    font-size: 1.7rem; font-weight: 800;
+    box-shadow: 0 8px 24px rgba(0,229,160,0.32);
+}
+.btn-equal:hover {
+    background: linear-gradient(150deg, #00ffb3 0%, #00d48a 100%);
+    box-shadow: 0 12px 32px rgba(0,229,160,0.48);
+    transform: translateY(-2px);
+}
+.btn-equal:active { transform: scale(0.93) translateY(0); }
+
+/* Animations */
+.error-shake { animation: shake 0.35s ease-in-out; border-color: var(--red) !important; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-7px)} 40%{transform:translateX(7px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+
+@keyframes resultFlash { 0%{color:var(--accent);text-shadow:0 0 22px var(--accent-glow)} 100%{color:var(--txt);text-shadow:none} }
+.result-flash { animation: resultFlash 0.7s ease-out forwards; }
+
+/* History Panel */
+.history-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 20px 15px; border-bottom: 1px solid var(--border);
+}
+.history-title { display: flex; align-items: center; gap: 9px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--txt-muted); }
+.history-title i { color: var(--accent); }
+
+.clear-hist-btn {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--txt-muted); border-radius: 8px;
+    width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 0.78rem; transition: all var(--tr);
+}
+.clear-hist-btn:hover { background: var(--red-dim); border-color: var(--red); color: var(--red); }
+
+.history-scroll { overflow-y: auto; max-height: 280px; }
+.history-scroll::-webkit-scrollbar { width: 3px; }
+.history-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+#history-list { list-style: none; }
+
+.empty-msg {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 30px 20px; text-align: center; gap: 6px;
+}
+.empty-icon { font-size: 1.8rem; color: var(--txt-hint); margin-bottom: 6px; }
+.empty-msg p  { color: var(--txt-muted); font-size: 0.82rem; font-weight: 500; }
+.empty-msg span { color: var(--txt-hint); font-size: 0.7rem; }
+
+.history-item {
+    padding: 11px 20px; border-bottom: 1px solid var(--border);
+    cursor: pointer; transition: background var(--tr);
+    animation: histIn 0.22s ease-out;
+}
+.history-item:hover { background: rgba(0,229,160,0.04); }
+@keyframes histIn { from{opacity:0;transform:translateX(8px)} to{opacity:1;transform:translateX(0)} }
+.history-query { font-size: 0.75rem; color: var(--txt-muted); font-family: var(--font-mono); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px; }
+.history-result { font-size: 1rem; font-weight: 700; text-align: right; color: var(--accent); font-family: var(--font-mono); }
+
+/* Quick Guide */
+.quick-guide { border-top: 1px solid var(--border); padding: 16px 20px; }
+.guide-title { font-size: 0.67rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--txt-muted); font-weight: 600; margin-bottom: 11px; display: flex; align-items: center; gap: 6px; }
+.guide-title i { color: var(--gold); }
+.guide-items { display: flex; flex-direction: column; gap: 7px; }
+.guide-item { display: flex; justify-content: space-between; align-items: center; }
+.guide-item code { font-family: var(--font-mono); color: var(--teal); font-size: 0.72rem; background: var(--teal-dim); padding: 2px 7px; border-radius: 4px; }
+.guide-item span { color: var(--txt-muted); font-size: 0.75rem; }
+
+/* Responsive */
+@media (max-width: 820px) {
+    .calc-layout { grid-template-columns: 1fr; max-width: 480px; }
+}
+@media (max-width: 480px) {
+    .calc-wrapper { padding: 14px 10px; }
+    .calculator-panel { padding: 16px; }
+    .buttons-grid { gap: 5px; }
+    .buttons-grid button { min-height: 46px; }
+    .btn-label { font-size: 0.85rem; }
+    #display { font-size: 1.5rem; }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const display     = document.getElementById("display");
+    const preview     = document.getElementById("live-preview");
+    const historyList = document.getElementById("history-list");
+    const spinner     = document.getElementById("loading-spinner");
+    const btns        = document.querySelectorAll(".buttons-grid button");
+
+    // --- LOCAL PREVIEW — 0 server requests ---
+    function localPreview(expression) {
+        if (!expression.trim()) { preview.textContent = ""; return; }
+        try {
+            let expr = expression
+                .replace(/,/g, '.')
+                .replace(/\^/g, '**')
+                .replace(/\bpi\b/g, String(Math.PI))
+                .replace(/\be\b/g, String(Math.E))
+                .replace(/sqrt\(/g, 'Math.sqrt(')
+                .replace(/\babs\(/g, 'Math.abs(')
+                .replace(/\bsin\(/g, 'Math.sin(Math.PI/180*')
+                .replace(/\bcos\(/g, 'Math.cos(Math.PI/180*')
+                .replace(/\btan\(/g, 'Math.tan(Math.PI/180*')
+                .replace(/\blog10\(/g, 'Math.log10(')
+                .replace(/\blog\(/g, 'Math.log(')
+                .replace(/\bexp\(/g, 'Math.exp(')
+                .replace(/(\d+)!/g, (_, n) => factorial(parseInt(n)))
+                .replace(/(\d+(\.\d+)?)\s*%(?!\s*[\d(])/g, '($1/100)')
+                .replace(/\s+mod\s+/gi, '%');
+
+            if (/kombinasi|permutasi|nCr|nPr|comb|perm|Ans/i.test(expr)) {
+                preview.textContent = ""; return;
+            }
+            const result = Function('"use strict"; return (' + expr + ')')();
+            if (isFinite(result) && !isNaN(result)) {
+                const fmt = Number.isInteger(result) ? result : parseFloat(result.toFixed(10));
+                preview.textContent = "= " + fmt;
+            } else { preview.textContent = ""; }
+        } catch { preview.textContent = ""; }
+    }
+
+    function factorial(n) {
+        if (n < 0 || n > 170) return NaN;
+        let r = 1; for (let i = 2; i <= n; i++) r *= i; return r;
+    }
+
+    // --- SERVER CALL — only on = or Enter ---
+    async function calculatePython(expression) {
+        if (!expression.trim()) return;
+        spinner.style.display = "block";
+        try {
+            const response = await fetch("{{ url_for('api.calculate_api') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ expression })
+            });
+            const data = await response.json();
+            spinner.style.display = "none";
+            if (data.status === 'success') {
+                display.value = data.result;
+                display.classList.add("result-flash");
+                setTimeout(() => display.classList.remove("result-flash"), 700);
+                preview.textContent = "";
+                addToHistory(expression, data.result);
+            } else { triggerError(); }
+        } catch (err) {
+            console.error(err);
+            spinner.style.display = "none";
+            triggerError();
+        }
+    }
+
+    // --- EVENTS ---
+    btns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const insert = btn.dataset.insert;
+            const action = btn.dataset.action;
+            if (insert) {
+                insertAtCursor(insert); localPreview(display.value);
+            } else if (action === "clear") {
+                display.value = ""; preview.textContent = "";
+            } else if (action === "back") {
+                display.value = display.value.slice(0, -1); localPreview(display.value);
+            } else if (action === "calculate") {
+                calculatePython(display.value);
+            }
+            display.focus();
+        });
+    });
+
+    display.addEventListener("keyup", (e) => {
+        if (e.key === "Enter") calculatePython(display.value);
+        else localPreview(display.value);
+    });
+
+    // --- UTILS ---
+    function insertAtCursor(val) {
+        const s = display.selectionStart, e = display.selectionEnd;
+        display.value = display.value.substring(0, s) + val + display.value.substring(e);
+        display.selectionStart = display.selectionEnd = s + val.length;
+    }
+
+    function addToHistory(expr, res) {
+        const empty = document.querySelector(".empty-msg");
+        if (empty) empty.remove();
+        const li = document.createElement("li");
+        li.className = "history-item";
+        li.innerHTML = '<div class="history-query">' + expr + '</div><div class="history-result">= ' + res + '</div>';
+        li.onclick = () => { display.value = res; display.focus(); };
+        historyList.insertBefore(li, historyList.firstChild);
+    }
+
+    document.getElementById("clear-history").onclick = () => {
+        historyList.innerHTML = '<li class="empty-msg"><div class="empty-icon"><i class="fas fa-calculator"></i></div><p>Belum ada perhitungan</p><span>Hasil akan muncul di sini</span></li>';
+    };
+
+    function triggerError() {
+        display.classList.add("error-shake");
+        display.style.color = "var(--red)";
+        setTimeout(() => { display.classList.remove("error-shake"); display.style.color = ""; }, 420);
+    }
+});
+</script>
+
+{% endblock %}

@@ -1,0 +1,122 @@
+{% extends "user/dashboard_user.html" %}
+
+{% block title %}MathThon | Pengaturan Akun{% endblock %}
+
+{% block head_links %}
+    {{ super() }}
+    <style>
+        .settings-card {
+            transition: all 0.3s ease-in-out;
+        }
+        .settings-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+        }
+        .profile-pic-preview {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border: 3px solid #dee2e6;
+        }
+        .danger-zone {
+            border-color: #dc3545;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="mb-4">Pengaturan Akun</h1>
+    <p class="lead mb-5">Kelola informasi profil, pengaturan keamanan, dan preferensi akun Anda di sini.</p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="row g-4">
+        <!-- Profile Information -->
+        <div class="col-lg-8">
+            <div class="card h-100 shadow-sm settings-card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-user-edit me-2"></i>Informasi Profil</h5>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('user.update_profile') }}" method="POST">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ users.name }}" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="born_place" class="form-label">Tempat Lahir</label>
+                                <input type="text" class="form-control" id="born_place" name="born_place" value="{{ users.born_place or '' }}">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="born_date" class="form-label">Tanggal Lahir</label>
+                                <input type="date" class="form-control" id="born_date" name="born_date" value="{{ users.born_date.strftime('%Y-%m-%d') if users.born_date else '' }}">
+                            </div>
+                        </div>
+                         <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ users.email }}" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Picture -->
+        <div class="col-lg-4">
+            <div class="card h-100 shadow-sm settings-card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-camera me-2"></i>Foto Profil</h5>
+                </div>
+                <div class="card-body text-center">
+                    <img src="{{ photo_url }}" alt="User Avatar" class="rounded-circle mb-3 profile-pic-preview">
+                    <form action="{{ url_for('user.update_photo') }}" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="foto" class="form-label">Ganti Foto</label>
+                            <input class="form-control" type="file" id="foto" name="foto" accept="image/*" required>
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Unggah Foto Baru</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Change Password -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm settings-card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-key me-2"></i>Ubah Password</h5>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('user.change_password') }}" method="POST">
+                        <div class="mb-3">
+                            <label for="current_password" class="form-label">Password Saat Ini</label>
+                            <input type="password" class="form-control" id="current_password" name="current_password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new_password" class="form-label">Password Baru</label>
+                            <input type="password" class="form-control" id="new_password" name="new_password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirm_password" class="form-label">Konfirmasi Password Baru</label>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                        </div>
+                        <button type="submit" class="btn btn-warning">Ubah Password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

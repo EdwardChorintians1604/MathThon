@@ -1,0 +1,483 @@
+{% extends "user/dashboard_user.html" %}
+
+{% block title %}MathThon | Fitur AI | Fitur yang memudahkan anda bisa menyelesaikan masalah yang berkenan dengan
+Matematika{% endblock %}
+
+{% block head_links %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/css_for_AI.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<!-- Marked.js for markdown parsing -->
+<script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/lib/marked.umd.js"></script>
+<!-- KaTeX for math rendering -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+    <style>
+        /* Hide global dashboard headers on this page */
+        .main-content > .container-fluid > .title,
+        .main-content > .container-fluid > p:first-of-type {
+            display: none !important;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-card.success { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .stat-card.warning { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .stat-card.info { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .stat-card h3 { font-size: 2rem; font-weight: bold; margin: 10px 0; }
+        .stat-card p { font-size: 0.95rem; opacity: 0.9; }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 30px;
+        }
+        
+        .category-progress {
+            margin-bottom: 15px;
+        }
+        .category-progress label {
+            font-weight: 500;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .category-progress .progress {
+            height: 10px;
+            border-radius: 5px;
+            background: #e9ecef;
+        }
+        
+        .recommendation-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .recommendation-item:hover {
+            background: #e7f0ff;
+            border-left-color: #764ba2;
+        }
+        .recommendation-item i {
+            color: #667eea;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .weak-area {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .card {
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+        }
+    </style>
+
+            <div class="p-2">
+                <!-- Header Section -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h2 class="mb-2">Analisis Hasil Belajar Anda, <strong>{{ users.name }}</strong>! 🎯</h2>
+                        <p class="text-muted">Pantau perkembangan belajar Anda dan identifikasi area untuk ditingkatkan</p>
+                    </div>
+                </div>
+
+                <!-- Statistics Cards -->
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stat-card success">
+                            <i class="fas fa-check-circle" style="font-size: 2rem;"></i>
+                            <h3 id="total-problems">-</h3>
+                            <p>Total Soal Dikerjakan</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stat-card">
+                            <i class="fas fa-percentage" style="font-size: 2rem;"></i>
+                            <h3 id="accuracy-percent">-</h3>
+                            <p>Akurasi Jawaban</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stat-card info">
+                            <i class="fas fa-star" style="font-size: 2rem;"></i>
+                            <h3 id="streak-count">-</h3>
+                            <p>Soal Benar Berturut</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stat-card warning">
+                            <i class="fas fa-fire" style="font-size: 2rem;"></i>
+                            <h3 id="improvement-percent">-</h3>
+                            <p>Peningkatan Progres</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="row">
+                    <!-- Accuracy Trend Chart -->
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5><i class="fas fa-line-chart"></i> Tren Akurasi 7 Hari Terakhir</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="accuracyChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Performance Chart -->
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5><i class="fas fa-pie-chart"></i> Akurasi Per Kategori</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="categoryChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Analysis -->
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5><i class="fas fa-bar-chart"></i> Progres Per Topik</h5>
+                            </div>
+                            <div class="card-body" id="topic-progress">
+                                <p class="text-muted">Memuat data...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weak Areas -->
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5><i class="fas fa-exclamation-triangle"></i> Area yang Perlu Ditingkatkan</h5>
+                            </div>
+                            <div class="card-body" id="weak-areas">
+                                <p class="text-muted">Memuat data...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-lightbulb"></i> Rekomendasi Untuk Peningkatan</h5>
+                            </div>
+                            <div class="card-body" id="recommendations">
+                                <p class="text-muted">Memuat rekomendasi...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        AOS.init();
+        loadAnalysisData();
+    });
+
+    // Global Chart Instances
+    let accuracyChartInstance = null;
+    let categoryChartInstance = null;
+
+    // Load Analysis Data from Backend
+    async function loadAnalysisData() {
+        try {
+            const response = await fetch('/api/analysis-data', {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            if (!response.ok) {
+                // Use fallback data jika API tidak available
+                loadFallbackData();
+                return;
+            }
+
+            const data = await response.json();
+            if (data.status === 'success') {
+                populateAnalysis(data.data);
+            } else {
+                loadFallbackData();
+            }
+        } catch (error) {
+            console.error('Error loading analysis data:', error);
+            loadFallbackData();
+        }
+    }
+
+    // Populate Analysis UI with Data
+    function populateAnalysis(data) {
+        // Update Statistics
+        document.getElementById('total-problems').textContent = data.totalProblems || 0;
+        document.getElementById('accuracy-percent').textContent = (data.accuracy || 0).toFixed(1) + '%';
+        document.getElementById('streak-count').textContent = data.bestStreak || 0;
+        document.getElementById('improvement-percent').textContent = '+' + (data.improvement || 0).toFixed(1) + '%';
+
+        // Accuracy Trend Chart
+        renderAccuracyChart(data.accuracyTrend || []);
+
+        // Category Performance Chart
+        renderCategoryChart(data.categoryPerformance || []);
+
+        // Topic Progress
+        renderTopicProgress(data.topicProgress || []);
+
+        // Weak Areas
+        renderWeakAreas(data.weakAreas || []);
+
+        // Recommendations
+        renderRecommendations(data.recommendations || []);
+    }
+
+    // Render Accuracy Trend Chart
+    function renderAccuracyChart(trendData) {
+        const ctx = document.getElementById('accuracyChart').getContext('2d');
+        
+        if (accuracyChartInstance) {
+            accuracyChartInstance.destroy();
+        }
+
+        accuracyChartInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: trendData.map(d => d.date) || ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Akurasi (%)',
+                    data: trendData.map(d => d.accuracy) || [65, 70, 75, 72, 80, 85, 88],
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#667eea',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true, position: 'top' }
+                },
+                scales: {
+                    y: { beginAtZero: true, max: 100 }
+                }
+            }
+        });
+    }
+
+    // Render Category Chart
+    function renderCategoryChart(categoryData) {
+        const ctx = document.getElementById('categoryChart').getContext('2d');
+        
+        if (categoryChartInstance) {
+            categoryChartInstance.destroy();
+        }
+
+        const categories = categoryData.map(c => c.name) || ['Aljabar', 'Geometri', 'Trigonometri', 'Statistik'];
+        const accuracies = categoryData.map(c => c.accuracy) || [85, 75, 65, 80];
+
+        categoryChartInstance = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: categories,
+                datasets: [{
+                    data: accuracies,
+                    backgroundColor: [
+                        '#667eea',
+                        '#764ba2',
+                        '#f093fb',
+                        '#4facfe',
+                        '#00f2fe',
+                        '#43e97b'
+                    ],
+                    borderColor: '#fff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+    }
+
+    // Render Topic Progress
+    function renderTopicProgress(topics) {
+        const container = document.getElementById('topic-progress');
+        
+        if (!topics || topics.length === 0) {
+            container.innerHTML = '<p class="text-muted">Belum ada data topik</p>';
+            return;
+        }
+
+        let html = '';
+        topics.forEach(topic => {
+            const percentage = topic.accuracy || 0;
+            const color = percentage >= 80 ? 'success' : percentage >= 60 ? 'warning' : 'danger';
+            
+            html += `
+                <div class="category-progress">
+                    <label>
+                        <span>${topic.name}</span>
+                        <span class="text-${color}">${percentage}%</span>
+                    </label>
+                    <div class="progress">
+                        <div class="progress-bar bg-${color}" style="width: ${percentage}%;"></div>
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    }
+
+    // Render Weak Areas
+    function renderWeakAreas(weakAreas) {
+        const container = document.getElementById('weak-areas');
+        
+        if (!weakAreas || weakAreas.length === 0) {
+            container.innerHTML = '<p class="text-success"><i class="fas fa-check-circle"></i> Tidak ada area yang perlu ditingkatkan! Bagus sekali! 🎉</p>';
+            return;
+        }
+
+        let html = '<p class="mb-3">Fokus pada area berikut untuk meningkatkan pemahaman:</p>';
+        weakAreas.slice(0, 5).forEach((area, index) => {
+            html += `
+                <div class="weak-area">
+                    <strong>${index + 1}. ${area.topic}</strong>
+                    <p class="mb-1"><small>${area.description}</small></p>
+                    <small class="text-danger">Akurasi: ${area.accuracy}% (${area.errorCount} kesalahan)</small>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    }
+
+    // Render Recommendations
+    function renderRecommendations(recommendations) {
+        const container = document.getElementById('recommendations');
+        
+        if (!recommendations || recommendations.length === 0) {
+            const defaultRecommendations = [
+                { icon: 'fas fa-book', title: 'Pelajari Materi', description: 'Buka bagian Materi untuk mempelajari konsep yang belum dipahami' },
+                { icon: 'fas fa-pencil-alt', title: 'Latihan Lebih Banyak', description: 'Kerjakan latihan soal secara berkala untuk meningkatkan pemahaman' },
+                { icon: 'fas fa-robot', title: 'Gunakan AI Helper', description: 'Manfaatkan fitur AI untuk mendapat penjelasan langkah demi langkah' }
+            ];
+            recommendations = defaultRecommendations;
+        }
+
+        let html = '';
+        recommendations.forEach(rec => {
+            html += `
+                <div class="recommendation-item">
+                    <i class="${rec.icon || 'fas fa-check'}"></i>
+                    <strong>${rec.title}</strong>
+                    <p class="mb-0 mt-1" style="margin-left: 30px;">${rec.description}</p>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html || '<p class="text-muted">Tidak ada rekomendasi</p>';
+    }
+
+    // Fallback Data (jika API tidak available)
+    function loadFallbackData() {
+        const fallbackData = {
+            totalProblems: 45,
+            accuracy: 78.5,
+            bestStreak: 12,
+            improvement: 15.3,
+            accuracyTrend: [
+                { date: 'Mon', accuracy: 65 },
+                { date: 'Tue', accuracy: 70 },
+                { date: 'Wed', accuracy: 75 },
+                { date: 'Thu', accuracy: 72 },
+                { date: 'Fri', accuracy: 80 },
+                { date: 'Sat', accuracy: 85 },
+                { date: 'Sun', accuracy: 88 }
+            ],
+            categoryPerformance: [
+                { name: 'Aljabar', accuracy: 85 },
+                { name: 'Geometri', accuracy: 75 },
+                { name: 'Trigonometri', accuracy: 65 },
+                { name: 'Statistik', accuracy: 80 }
+            ],
+            topicProgress: [
+                { name: 'Persamaan Linear', accuracy: 90 },
+                { name: 'Persamaan Kuadrat', accuracy: 75 },
+                { name: 'Teorema Pythagoras', accuracy: 80 },
+                { name: 'Trigonometri Dasar', accuracy: 65 }
+            ],
+            weakAreas: [
+                { topic: 'Persamaan Kuadrat', description: 'Kesulitan dalam menggunakan rumus abc', accuracy: 60, errorCount: 6 },
+                { topic: 'Trigonometri Dasar', description: 'Kurang paham dengan sudut dan radian', accuracy: 65, errorCount: 5 }
+            ],
+            recommendations: [
+                { icon: 'fas fa-book', title: 'Pelajari Persamaan Kuadrat', description: 'Fokus pada materi persamaan kuadrat dan berbagai metode penyelesaiannya' },
+                { icon: 'fas fa-pencil-alt', title: 'Latihan Trigonometri', description: 'Tingkatkan pemahaman trigonometri dengan mengerjakan lebih banyak soal' },
+                { icon: 'fas fa-robot', title: 'Gunakan AI Helper', description: 'Tanyakan AI untuk penjelasan detail tentang konsep yang sulit' }
+            ]
+        };
+
+        populateAnalysis(fallbackData);
+    }
+    </script>
+    
+{% endblock %}

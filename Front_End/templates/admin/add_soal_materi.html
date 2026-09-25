@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathThon Admin | Penambahan soal pada setiap materi matematika </title>
+    <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+ 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --secondary: #0ea5e9;
+            --success: #10b981;
+            --danger: #ef4444;
+            --bg: #0f1724;
+            --text: #eef2ff;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--bg) 0%, #1a2840 100%);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, sans-serif;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        
+        .admin-header {
+            background: rgba(15, 23, 36, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 20px 0;
+            margin-bottom: 40px;
+        }
+        
+        .admin-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            color: var(--text);
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 8px;
+        }
+        
+        .form-control, .form-select {
+            background: rgba(26, 35, 50, 0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text);
+            padding: 12px 16px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            background: rgba(26, 35, 50, 0.9);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+            color: var(--text);
+        }
+        
+        .form-control::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), #6d28d9);
+            border: none;
+            padding: 12px 28px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.3);
+            background: linear-gradient(90deg, #6d28d9, #5521c4);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+        }
+        
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.25);
+        }
+        
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: var(--primary);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .alert {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #6ee7b7;
+            border-radius: 10px;
+            padding: 16px;
+        }
+        
+        .alert-danger {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+        }
+        
+        .difficulty-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .difficulty-easy {
+            background: rgba(16, 185, 129, 0.2);
+            color: #6ee7b7;
+        }
+        
+        .difficulty-medium {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+        }
+        
+        .difficulty-hard {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+        }
+        
+        .soal-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .soal-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 10px;
+        }
+        
+        .soal-item small {
+            color: rgba(255,255,255,0.6);
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Header -->
+    <div class="admin-header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="admin-title mb-2">
+                        <i class="bi bi-pencil-square"></i> Tambah Soal Materi
+                    </h1>
+                    <p class="text-muted mb-0">Kelola soal latihan untuk setiap materi</p>
+                </div>
+                <a href="{{ url_for('admin.dashboard_admin') }}" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Kembali
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container" id="mainContent"
+        data-topics-url="{{ url_for('admin.get_topics') }}"
+        data-stats-url="{{ url_for('admin.get_soal_stats') }}"
+        data-create-topic-url="{{ url_for('admin.create_topic') }}"
+        data-import-csv-url="{{ url_for('admin.import_soal_csv') }}">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Alert Messages -->
+                <div id="alertContainer"></div>
+
+                <!-- Form Tambah Soal -->
+                <div class="card mb-4">
+                    <div class="card-body p-4">
+                        <div class="section-title">
+                            <i class="bi bi-plus-circle"></i> Tambah Soal Baru
+                        </div>
+
+                        <form id="addSoalForm" method="POST" action="{{ url_for('admin.add_soal_materi') }}">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                            <!-- Materi Selection -->
+                            <div class="mb-4">
+                                <label for="materis" class="form-label">
+                                    <i class="bi bi-book"></i> Pilih Materi
+                                </label>
+                                <select class="form-select" id="materis" name="materi_id" required>
+                                    <option value="">-- Pilih Materi --</option>
+                                    {% for materi in materis %}
+                                    <option value="{{ materi.id }}">{{ materi.judul_materi }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <!-- Topic Selection (akan di-populate via AJAX) -->
+                            <div class="mb-4">
+                                <label for="topics" class="form-label">
+                                    <i class="bi bi-tag"></i> Topik/Bab
+                                </label>
+                                <select class="form-select" id="topics" name="topic_id" required>
+                                    <option value="">-- Pilih Materi Dahulu --</option>
+                                </select>
+                                <small class="text-muted d-block mt-2">
+                                    Topik tidak ditemukan? <a href="#" data-bs-toggle="modal" data-bs-target="#createTopicModal" class="text-decoration-none">Buat Topik Baru</a>
+                                </small>
+                            </div>
+
+                            <!-- Form Row: Soal & Jawaban -->
+                            <div class="form-row">
+                                <div>
+                                    <label for="soalContent" class="form-label">
+                                        <i class="bi bi-chat-left-text"></i> Pertanyaan
+                                    </label>
+                                    <textarea class="form-control" id="soalContent" name="content" rows="4" 
+                                              placeholder="Masukkan pertanyaan/soal..." required></textarea>
+                                </div>
+                                <div>
+                                    <label for="soalAnswer" class="form-label">
+                                        <i class="bi bi-check-circle"></i> Jawaban
+                                    </label>
+                                    <textarea class="form-control" id="soalAnswer" name="answer" rows="4" 
+                                              placeholder="Masukkan jawaban yang benar..." required></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Difficulty Level -->
+                            <div class="mb-4 mt-4">
+                                <label for="difficulty" class="form-label">
+                                    <i class="bi bi-speedometer2"></i> Tingkat Kesulitan
+                                </label>
+                                <div class="btn-group w-100" role="group">
+                                    <input type="radio" name="difficulty" value="easy" id="diffEasy" class="btn-check" checked>
+                                    <label for="diffEasy" class="btn btn-outline-success w-100">Mudah</label>
+                                    
+                                    <input type="radio" name="difficulty" value="medium" id="diffMedium" class="btn-check">
+                                    <label for="diffMedium" class="btn btn-outline-warning w-100">Sedang</label>
+                                    
+                                    <input type="radio" name="difficulty" value="hard" id="diffHard" class="btn-check">
+                                    <label for="diffHard" class="btn btn-outline-danger w-100">Sulit</label>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-primary w-100 py-3 mt-4">
+                                <i class="bi bi-plus-lg"></i> Tambah Soal
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Bulk Import Section -->
+                <div class="card">
+                    <div class="card-body p-4">
+                        <div class="section-title">
+                            <i class="bi bi-cloud-upload"></i> Import Soal Massal
+                        </div>
+
+                        <div class="alert alert-info mb-3">
+                            <i class="bi bi-info-circle"></i>
+                            <strong>Format CSV:</strong> content,answer,difficulty,topic_name
+                        </div>
+
+                        <form id="bulkImportForm" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="csvFile" class="form-label">
+                                    <i class="bi bi-file-earmark-spreadsheet"></i> Upload File CSV
+                                </label>
+                                <input type="file" class="form-control" id="csvFile" name="csv_file" 
+                                       accept=".csv" required>
+                                <small class="text-muted d-block mt-2">
+                                    Pilih materi di atas sebelum mengimpor.
+                                </small>
+                            </div>
+
+                            <button type="submit" class="btn btn-secondary w-100">
+                                <i class="bi bi-upload"></i> Import CSV
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar: Statistik & Daftar Topik -->
+            <div class="col-lg-4">
+                <!-- Statistics Card -->
+                <div class="card mb-4">
+                    <div class="card-body p-4">
+                        <div class="section-title">
+                            <i class="bi bi-bar-chart"></i> Statistik Soal
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-6 mb-3">
+                                <div class="h4" id="totalSoal">-</div>
+                                <small class="text-muted">Total Soal</small>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div class="h4" id="totalTopik">-</div>
+                                <small class="text-muted">Total Topik</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Topics List -->
+                <div class="card">
+                    <div class="card-body p-4">
+                        <div class="section-title">
+                            <i class="bi bi-list-ul"></i> Daftar Topik
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover align-middle" style="font-size: 0.85rem;">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Topik</th>
+                                        <th>Materi Utama</th>
+                                        <th class="text-center">Soal</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="topicsTableBody">
+                                    {% for row in topics_table_data %}
+                                    <tr>
+                                        <td class="fw-bold">{{ row.topic_name }}</td>
+                                        <td class="text-info">{{ row.judul_materi }}</td>
+                                        <td class="text-center"><span class="badge bg-secondary">{{ row.soal_count }}</span></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Create Topic -->
+    <div class="modal fade" id="createTopicModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background: #1e293b; border-radius: 12px;">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title">Buat Topik Baru</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="createTopicForm">
+                    <div class="modal-body">
+                        <p class="text-muted small">Topik akan ditambahkan ke materi <strong id="materiForTopic"></strong>.</p>
+                        <div class="mb-3">
+                            <label for="topicName" class="form-label">Nama Topik</label>
+                            <input type="text" class="form-control" id="topicName" placeholder="Contoh: Persamaan Linear" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="topicDesc" class="form-label">Deskripsi</label>
+                            <textarea class="form-control" id="topicDesc" rows="3" placeholder="Deskripsi singkat topik..."></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-secondary">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Buat Topik</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Element selectors
+        const mainContainer = document.getElementById('mainContent');
+        const materiSelect = document.getElementById('materis');
+        const topicsSelect = document.getElementById('topics');
+        const topicsTableBody = document.getElementById('topicsTableBody');
+        const addSoalForm = document.getElementById('addSoalForm');
+        const createTopicForm = document.getElementById('createTopicForm');
+        const bulkImportForm = document.getElementById('bulkImportForm');
+        const alertContainer = document.getElementById('alertContainer');
+        const totalSoalEl = document.getElementById('totalSoal');
+        const totalTopikEl = document.getElementById('totalTopik');
+        const createTopicModalEl = document.getElementById('createTopicModal');
+        const createTopicModal = new bootstrap.Modal(createTopicModalEl);
+        const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+
+        // URL Templates from data attributes
+        const topicsUrl = mainContainer.dataset.topicsUrl;
+        const statsUrl = mainContainer.dataset.statsUrl;
+        const createTopicUrl = mainContainer.dataset.createTopicUrl;
+        const importCsvUrl = mainContainer.dataset.importCsvUrl;
+
+        // --- Utility Functions ---
+        function showAlert(type, message, duration = 7000) {
+            const alertEl = document.createElement('div');
+            alertEl.className = `alert alert-${type} alert-dismissible fade show`;
+            alertEl.role = 'alert';
+            alertEl.innerHTML = `${message}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
+            alertContainer.innerHTML = '';
+            alertContainer.appendChild(alertEl);
+
+            if (duration) {
+                setTimeout(() => {
+                    const bsAlert = bootstrap.Alert.getOrCreateInstance(alertEl);
+                    if (bsAlert) bsAlert.close();
+                }, duration);
+            }
+        }
+
+        async function apiCall(url, method = 'GET', body = null, headers = {}) {
+            const finalHeaders = { 'X-CSRF-Token': csrfToken, ...headers };
+            if (!(body instanceof FormData)) {
+                finalHeaders['Content-Type'] = 'application/json';
+            }
+            
+            const fetchOptions = {
+                method,
+                headers: finalHeaders
+            };
+            
+            if (body !== null) {
+                fetchOptions.body = (body instanceof FormData) ? body : JSON.stringify(body);
+            }
+
+            const response = await fetch(url, fetchOptions);
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ message: 'Terjadi kesalahan internal' }));
+                throw new Error(errorData.message || 'Respons server tidak valid');
+            }
+            return response.json();
+        }
+
+        // --- Core Logic ---
+        async function fetchAndPopulateTopics(materiId) {
+            topicsSelect.innerHTML = '<option value="">Memuat topik...</option>';
+            topicsTableBody.innerHTML = '<tr><td colspan="3" class="text-center">Memuat...</td></tr>';
+
+            if (!materiId) {
+                topicsSelect.innerHTML = '<option value="">-- Pilih Materi Dahulu --</option>';
+                topicsTableBody.innerHTML = '<tr><td colspan="3" class="text-center text-muted">Pilih materi untuk melihat topik</td></tr>';
+                return;
+            }
+
+            try {
+                const url = topicsUrl + '?materi_id=' + materiId;
+                const topics = await apiCall(url);
+                
+                let topicOptionsHtml = '';
+                if (topics.length > 0) {
+                    topicOptionsHtml = '<option value="">-- Pilih Topik --</option>';
+                    topics.forEach(topic => {
+                        topicOptionsHtml += `<option value="${topic.id}">${topic.topic_name}</option>`;
+                    });
+                } else {
+                    topicOptionsHtml = '<option value="">-- Belum ada topik (Buat baru) --</option>';
+                }
+                topicsSelect.innerHTML = topicOptionsHtml;
+
+                let tableHtml = '';
+                if (topics.length > 0) {
+                    topics.forEach(topic => {
+                        tableHtml += `
+                            <tr>
+                                <td class="fw-bold">${topic.topic_name}</td>
+                                <td class="text-info">${topic.judul_materi}</td>
+                                <td class="text-center"><span class="badge bg-secondary">${topic.soal_count}</span></td>
+                            </tr>`;
+                    });
+                }
+                topicsTableBody.innerHTML = tableHtml || '<tr><td colspan="3" class="text-center text-muted">Belum ada topik.</td></tr>';
+            } catch (error) {
+                showAlert('danger', `Gagal memuat topik: ${error.message}`);
+                topicsSelect.innerHTML = '<option value="">-- Gagal Memuat --</option>';
+            }
+        }
+
+        async function fetchAndPopulateStats(materiId) {
+            totalSoalEl.textContent = '-';
+            totalTopikEl.textContent = '-';
+            if (!materiId) return;
+
+            try {
+                const url = statsUrl + '?materi_id=' + materiId;
+                const stats = await apiCall(url);
+                totalSoalEl.textContent = stats.total_soal ?? 0;
+                totalTopikEl.textContent = stats.total_topik ?? 0;
+            } catch (error) {
+                console.error('Error fetching stats:', error);
+            }
+        }
+
+        // --- Event Listeners ---
+        materiSelect.addEventListener('change', function() {
+            const materiId = this.value;
+            fetchAndPopulateTopics(materiId);
+            fetchAndPopulateStats(materiId);
+        });
+
+        addSoalForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Menambahkan...';
+
+            try {
+                const data = await apiCall(this.action, 'POST', new FormData(this));
+                showAlert('success', 'Soal berhasil ditambahkan!');
+                this.reset();
+                const materiId = materiSelect.value;
+                if (materiId) {
+                    fetchAndPopulateStats(materiId);
+                    fetchAndPopulateTopics(materiId);
+                }
+            } catch (error) {
+                showAlert('danger', `Gagal menambahkan soal: ${error.message}`);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="bi bi-plus-lg"></i> Tambah Soal';
+            }
+        });
+        
+        createTopicModalEl.addEventListener('show.bs.modal', function() {
+            const selectedMateri = materiSelect.options[materiSelect.selectedIndex];
+            document.getElementById('materiForTopic').textContent = selectedMateri ? selectedMateri.text : 'Tidak ada';
+        });
+
+        createTopicForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const materiId = materiSelect.value;
+            if (!materiId) {
+                showAlert('warning', 'Pilih materi terlebih dahulu.');
+                return;
+            }
+            btn.disabled = true;
+            btn.innerHTML = 'Membuat...';
+            
+            try {
+                const body = {
+                    materi_id: materiId,
+                    name: document.getElementById('topicName').value,
+                    description: document.getElementById('topicDesc').value
+                };
+                const data = await apiCall(createTopicUrl, 'POST', body);
+                showAlert('success', 'Topik baru berhasil dibuat!');
+                createTopicModal.hide();
+                this.reset();
+                await fetchAndPopulateTopics(materiId);
+                topicsSelect.value = data.topic.id; // Auto-select new topic
+            } catch (error) {
+                showAlert('danger', `Gagal membuat topik: ${error.message}`);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Buat Topik';
+            }
+        });
+
+        bulkImportForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const materiId = materiSelect.value;
+            if (!materiId) {
+                showAlert('warning', 'Pilih materi sebelum mengimpor.');
+                return;
+            }
+            btn.disabled = true;
+            btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Mengimpor...';
+
+            try {
+                const formData = new FormData(this);
+                formData.append('materi_id', materiId);
+                const data = await apiCall(importCsvUrl, 'POST', formData, {});
+                showAlert('success', `Impor selesai: ${data.success_count} berhasil, ${data.failure_count} gagal.`);
+                fetchAndPopulateStats(materiId);
+                fetchAndPopulateTopics(materiId);
+            } catch (error) {
+                showAlert('danger', `Gagal mengimpor: ${error.message}`);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="bi bi-upload"></i> Import CSV';
+            }
+        });
+
+    });
+    </script>
+</body>
+</html>

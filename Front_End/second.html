@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.8.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2025.8.1/core.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="icon" href="Foto_edward.jpg">
+    <link rel="stylesheet" href="my_style.css">
+    <title>Edward Christiano James | Portfolio</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, black, rgb(66, 46, 100), grey);
+            background-position: center;
+            background-size: cover;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            animation: fadeInBody 1.2s;
+        }
+        @keyframes fadeInBody {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 15px;
+            font-weight: bold;
+            color: #FFD700;
+            letter-spacing: 2px;
+        }
+        nav.wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 32px;
+            background: rgba(30,30,47,0.95);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            animation: slideInDown 1s;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        @media (max-width: 700px) {
+            nav.wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 12px 8vw;
+            }
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+            }
+        }
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: -1vw;
+            margin-bottom: 2vw;
+            color: #fff;
+            text-align: center;
+            height: 100vh;
+            animation: fadeInUp 1.2s;
+        }
+        .hero img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 4px solid #353535;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+            animation: bounceIn 1.2s;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        /* Hover effect for profile photo */
+        .hero img:hover {
+            transform: scale(1.08) rotate(-3deg);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), 0 0 0 8px rgba(34, 1, 143, 0.15);
+            cursor: pointer;
+            animation: none !important;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 2px crimson;
+            animation: fadeInDown 1.2s;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 1.5rem auto;
+            text-shadow: 1px 1px 2px #000;
+            animation: fadeIn 1.6s;
+        }
+        .section-title {
+            color: #FFD700;
+            text-align: center;
+            margin-top: 3vw;
+            margin-bottom: 1vw;
+            font-size: 2rem;
+            letter-spacing: 1px;
+            animation: fadeInUp 1.2s;
+        }
+        .portfolio-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2vw;
+            justify-content: center;
+            margin: 2vw 0 4vw 0;
+        }
+        .portfolio-item {
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            overflow: hidden;
+            width: 300px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            animation: zoomIn 1s;
+        }
+        .portfolio-item:hover {
+            transform: scale(1.04) translateY(-4px);
+            box-shadow: 0 8px 32px 0 rgba(67, 233, 123, 0.18), 0 0 0 4px rgba(255, 215, 0, 0.12);
+            animation: none !important;
+        }
+        .portfolio-item .item-content {
+            padding: 1rem;
+        }
+        .portfolio-item h3 {
+            margin: 0 0 0.5rem 0;
+            color: #FFD700;
+        }
+        .portfolio-item p {
+            color: #fff;
+            font-size: 1rem;
+            margin: 0;
+        }
+        .contact-section {
+            max-width: 600px;
+            margin: 3vw auto 4vw auto;
+            background-color: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 2vw 3vw;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            animation: fadeInRight 1.2s;
+            border-style: dashed;
+        }
+        .contact-section h2 {
+            color: #FFD700;
+            margin-bottom: 1vw;
+        }
+        .contact-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 1vw;
+        }
+        .contact-links a {
+            color: #FFD700;
+            font-size: 2rem;
+            transition: color 0.2s;
+            animation: pulse 2s infinite;
+        }
+        .contact-links a:hover {
+            color: #fff;
+        }
+        footer {
+            text-align: center;
+            color: #FFD700;
+            background: rgba(30,30,47,0.95);
+            padding: 1.5rem 0 1rem 0;
+            margin-top: 3vw;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            animation: fadeInUp 1.2s;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="wrapper animate__animated animate__fadeInDown animate__pulse animate__duration-1s profile-photo-hover">
+            <div class="brand animate__animated animate__fadeInLeft animate__pulse animate__duration-1s profile-photo-hover">
+                <span><img src="Foto_edward.jpg" alt="Erantus Paripurna Samaloisa" class="photos animate__animated animate__bounceIn animate__duration-1s profile-photo-hover"></span>
+                
+            </div>
+            <div class="navigation">
+                <a class="nav-link animate__animated animate__fadeInDown" style="animation-delay:0.2s" href="#about"><i class="bi bi-person"></i> Tentang</a>
+                <a class="nav-link animate__animated animate__fadeInDown" style="animation-delay:0.4s" href="#my_skill"><i class="bi bi-skill"></i> Skill</a>
+                <a class="nav-link animate__animated animate__fadeInDown" style="animation-delay:0.6s" href="#portfolio"><i class="bi bi-briefcase"></i> Portfolio</a>
+                <a class="nav-link animate__animated animate__fadeInDown" style="animation-delay:0.8s" href="#contact"><i class="bi bi-envelope"></i> Kontak</a>
+            </div>
+
+            <!-- Sidenav trigger button for mobile/tablet -->
+            <button class="open-sidenav-btn animate__animated animate__fadeIn" id="openSidenavBtn" onclick="openSidenav()" >
+                <i class="bi bi-menu-button-fill"></i>
+            </button>
+
+            <!-- Sidenav for mobile/tablet -->
+            <div id="sidenav-right" class="sidenav-right animate__animated animate__fadeInRight">
+                <span class="closebtn" onclick="closeSidenav()">&times;</span>
+                <a href="#about" onclick="closeSidenav()" class="animate__animated animate__fadeInRight" style="animation-delay:0.1s"><i class="bi bi-person"></i>  Tentang</a>
+                <a href="#my_skill" onclick="closeSidenav()" class="animate__animated animate__fadeInRight" style="animation-delay:0.2s"><i class="bi bi-book"></i>  Skill</a>
+                <a href="#portfolio" onclick="closeSidenav()" class="animate__animated animate__fadeInRight" style="animation-delay:0.3s"><i class="bi bi-briefcase"></i>  Portfolio</a>
+                <a href="#contact" onclick="closeSidenav()" class="animate__animated animate__fadeInRight" style="animation-delay:0.4s"><i class="bi bi-envelope"></i>  Kontak</a>
+            </div>
+
+            <style>
+                .navigation {
+                    display: flex;
+                    gap: 1.5rem;
+                    align-items: center;
+                    margin-left: 39vw;
+                }
+                .nav-link {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    padding: 0.75rem 1.25rem;
+                    border-radius: 8px;
+                    transition: all 0.3s ease;
+                    color: rgb(221, 255, 0);
+                    animation: fadeInUp 1.4s;
+                    text-decoration: none;
+                    font-weight: 500;
+                }
+                .nav-link:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    transform: translateY(-2px);
+                }
+                .sidenav-right {
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    height: 100vh;
+                    width: 0;
+                    z-index: 2000;
+                    background: linear-gradient(to top, #23233d, #1e1e2f);
+                    overflow-x: hidden;
+                    transition: width 0.4s;
+                    padding-top: 60px;
+                    box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+                }
+                .sidenav-right.open {
+                    width: 260px;
+                }
+                .sidenav-right a {
+                    padding: 12px 32px;
+                    text-decoration: none;
+                    font-size: 20px;
+                    color: #fff;
+                    display: block;
+                    transition: 0.2s;
+                    margin-top: 10px;
+                }
+                .sidenav-right a:hover {
+                    background: rgba(255,255,255,0.08);
+                    color: #FFD700;
+                }
+                .sidenav-right .closebtn {
+                    position: absolute;
+                    top: 16px;
+                    right: 50vw;
+                    font-size: 50px;
+                    color: #fff;
+                    cursor: pointer;
+                    background: transparent;
+                    transition: all 0.6s ease-in-out;
+                }
+                .sidenav-right .closebtn:hover {
+                    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+                    color: #23233d;
+                    border-radius: 12px;
+                    transition: background 0.3s, color 0.3s;
+                }
+                .open-sidenav-btn {
+                    position: absolute;
+                    top: 20px;
+                    right: 18px;
+                    z-index: 2100;
+                    background: #23233d;
+                    color: #fff;
+                    border: none;
+                    border-radius: 50%;
+                    font-size: 2rem;
+                    width: 48px;
+                    height: 48px;
+                    cursor: pointer;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+                    transition: background 0.2s, color 0.2s;
+                }
+                .open-sidenav-btn:hover {
+                    background: #FFD700;
+                    color: #23233d;
+                }
+                @media (max-width: 992px) {
+                    .navigation {
+                        display: none !important;
+                    }
+                    .open-sidenav-btn {
+                        display: flex;
+                        top: 20px;
+                        right: 18px;
+                    }
+                    .sidenav-right {
+                        padding-top: 60px;
+                    }
+                    .sidenav-right a {
+                        font-size: 18px;
+                        padding: 12px 24px;
+                    }
+                    .sidenav-right .closebtn {
+                    position: absolute;
+                    top: 10px;
+                    right: 200px;
+                    font-size: 50px;
+                    color: #fff;
+                    cursor: pointer;
+                }
+                }
+                @media (min-width: 576px) and (max-width: 768px) {
+                    .sidenav-right.open {
+                        width: 290px;
+                        min-width: 180px;
+                        max-width: 320px;
+                    }
+                    .sidenav-right a {
+                        font-size: 17px;
+                        padding: 12px 18px;
+                    }
+                    .sidenav-right .closebtn {
+                    position: absolute;
+                    top: 10px;
+                    right: 30vw;
+                    font-size: 50px;
+                    color: #fff;
+                    cursor: pointer;
+                }
+                }
+                @media (min-width: 300px) and (max-width: 575px) {
+                    .sidenav-right.open {
+                        width: 290px;
+                        min-width: 180px;
+                        max-width: 320px;
+                    }
+                    .sidenav-right a {
+                        font-size: 17px;
+                        padding: 12px 18px;
+                    }
+                    .sidenav-right .closebtn {
+                    position: absolute;
+                    top: 10px;
+                    right: 200px;
+                    font-size: 50px;
+                    color: #fff;
+                    cursor: pointer;
+                }
+                }
+                @media (min-width: 993px) {
+                    .sidenav-right,
+                    .open-sidenav-btn {
+                        display: none !important;
+                    }
+                    .navigation {
+                        display: flex !important;
+                    }
+                }
+            </style>
+            <script>
+                function openSidenav() {
+                    document.getElementById("sidenav-right").classList.add("open");
+                }
+                function closeSidenav() {
+                    document.getElementById("sidenav-right").classList.remove("open");
+                }
+                document.addEventListener("DOMContentLoaded", function() {
+                    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                        anchor.addEventListener('click', function (e) {
+                            const href = this.getAttribute('href');
+                            if (href && href.startsWith('#')) {
+                                e.preventDefault();
+                                const target = document.querySelector(href);
+                                if (target) {
+                                    target.scrollIntoView({
+                                        behavior: 'smooth'
+                                    });
+                                }
+                            }
+                        });
+                    });
+                    // Animasi portfolio-item saat muncul di viewport
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('animate__animated', 'animate__zoomIn');
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.2 });
+                    document.querySelectorAll('.portfolio-item').forEach(item => {
+                        observer.observe(item);
+                    });
+                    // Animasi about-section dan contact-section saat muncul
+                    const fadeSections = document.querySelectorAll('.about-section, .contact-section');
+                    fadeSections.forEach(section => {
+                        section.classList.add('animate__animated');
+                        // Ganti animasi fade-left menjadi bounceIn
+                        section.classList.remove('animate__fadeInLeft');
+                        section.classList.add('animate__bounceIn');
+                    });
+                    // Animasi footer saat muncul
+                    const footer = document.querySelector('footer');
+                    if (footer) {
+                        footer.classList.add('animate__animated', 'animate__fadeInUp');
+                    }
+                });
+            </script>
+        </nav>
+    </header>
+
+    <section class="hero animate__animated animate__fadeInUp">
+        <img src="mine.jpg" alt="Erantus Paripurna Samaloisa" class="animate__animated animate__bounceIn animate__duration-3s profile-photo-hover">
+        <h1 class="animate__animated animate__fadeInDown">Erantus Paripurna Samaloisa</h1>
+        <p class="animate__animated animate__fadeIn">Halo! Saya Erantus (atau bisa dipanggil sebagai Edward, James, Alex, atau Kenway), seorang pengembang web dan penggemar teknologi. Saya suka membangun aplikasi web yang kreatif dan fungsional. Selamat datang di portfolio saya!</p>
+        <a href="mailto:samaloisaerantusparipurna@email.com" title="Email" class="cool-btn animate__animated animate__pulse animate__infinite">
+            <i class="bi bi-envelope-fill"></i> Mail and Hire me
+        </a>
+        <style>
+            .cool-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5em;
+                padding: 0.75em 2em;
+                font-size: 1.2rem;
+                font-family: 'Segoe UI', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                color: #fff;
+                background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+                border: none;
+                border-radius: 40px;
+                box-shadow: 0 4px 20px rgba(34, 197, 94, 0.2);
+                text-decoration: none;
+                transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+                cursor: pointer;
+                font-weight: 600;
+                letter-spacing: 1px;
+                margin-top: 1.5em;
+            }
+            .cool-btn:hover, .cool-btn:focus {
+                background: linear-gradient(90deg, #38f9d7 0%, #43e97b 100%);
+                transform: translateY(-3px) scale(1.04);
+                box-shadow: 0 8px 32px rgba(34, 197, 94, 0.35);
+                text-decoration: none;
+                color: #fff;
+            }
+            .cool-btn i {
+                font-size: 1.3em;
+                margin-right: 0.3em;
+                transition: ease-in-out 0.6s;
+            }
+        </style>
+    </section>
+
+    <section class="Tentang" id="about">
+        <h2 class="animate__animated animate__fadeInDown" style="color: #43e97b; font-size: 2.3rem; margin-bottom: 18px; letter-spacing: 1.5px; text-shadow: 0 2px 12px #38f9d7;">Tentang Saya</h2>
+        <img src="Foto_edward.jpg" alt="Edward Christiano James" class="about-photos">
+        <br>
+        <p class="animate__animated animate__fadeInUp" style="font-size: 1.18rem; color: #fff; line-height: 1.8; text-align: justify; max-width: 700px; margin: 0 auto; background: rgba(255,255,255,0.04); border-radius: 10px; padding: 18px 20px; box-shadow: 0 2px 12px rgba(67,233,123,0.08); transition: background 0.3s;">
+            Saya adalah seorang <span style="color:#FFD700; font-weight:600;">web developer</span> yang berpengalaman dalam membangun website modern menggunakan <span style="color:#43e97b; font-weight:600;">HTML</span>, <span style="color:#43e97b; font-weight:600;">CSS</span>, <span style="color:#43e97b; font-weight:600;">JavaScript</span>, dan <span style="color:#43e97b; font-weight:600;">PHP</span>.
+            Saya juga memiliki minat dalam <span style="color:#FFD700; font-weight:600;">Pemrograman Python</span> untuk perancangan AI (Fuzzy Logic dan NLP).
+            Selain itu, saya senang <span style="color:#43e97b; font-weight:600;">belajar hal baru</span> di dunia teknologi dan <span style="color:#FFD700; font-weight:600;">berbagi pengetahuan</span> dengan orang lain.
+        </p>
+    </section>
+    <br>
+    
+    <section class="about-section" id="my_skill">
+        <h2 class="my_header">Skill Saya</h2>
+        <p class="my_paragraph">
+            Beberapa skill yang saya miliki   
+        </p>
+        <div class="horizontal-scroll">
+            <div class="container">
+                <div class="portfolio-item animate__animated animate__zoomIn">
+                    <div class="image-wrapper">
+                        <img src="python_pictures.png" alt="Python">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="paragraph">Python</h3>
+                        <p class="paragraph">Bahasa Pemrograman yang serba bisa, multifungsi, dinamsis, dan sangat bersahabat</p>
+                        <button onclick="showPopup('python')" class="info-btn">
+                            <i class="bi bi-info-circle"></i> Lihat Detail
+                        </button>
+                    </div>
+                </div>
+                <div class="portfolio-item animate__animated animate__zoomIn">
+                    <div class="image-wrapper">
+                        <img src="java.png" alt="Project 1">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="paragraph">Java</h3>
+                        <p class="paragraph">Bahasa Pemrograman andalan untuk pengembangan aplikasi berbasis objek.</p>
+                        <button onclick="showPopup('java')" class="info-btn">
+                            <i class="bi bi-info-circle"></i> Lihat Details
+                        </button>
+                    </div>
+                </div>
+                <div class="portfolio-item animate__animated animate__zoomIn">
+                    <div class="image-wrapper">
+                        <img src="html css js.png" alt="Project 1">
+                    </div> 
+                    <div class="item-content">
+                        <h3 class="paragraph">HTML + CSS + JS</h3>
+                        <p class="paragraph">Tri-Komponen utama yang sering digunakan oleh para programmer untuk merancang website.</p>
+                        <button onclick="showPopup('webdev')" class="info-btn">
+                            <i class="bi bi-info-circle"></i> Lihat Detail
+                        </button>
+                    </div>
+                </div>
+                <div class="portfolio-item animate__animated animate__zoomIn">
+                    <div class="image-wrapper">
+                        <img src="PHP.jpg" alt="Project 1">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="paragraph">PHP</h3>
+                        <p class="paragraph">Bahasa Pemrograman yang sering digunakan untuk Back-End dan Database</p>
+                        <button onclick="showPopup('php')" class="info-btn">
+                            <i class="bi bi-info-circle"></i> Lihat Detail
+                        </button>
+                    </div>
+                </div>
+                <div class="portfolio-item animate__animated animate__zoomIn">
+                    <div class="image-wrapper">
+                        <img src="reactjs.png" alt="Project 1">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="paragraph">ReactJS</h3>
+                        <p class="paragraph">Framework dari JavaScript yang menjadi andalan para programmer untuk Front-End Development</p>
+                        <button onclick="showPopup('react')" class="info-btn">
+                            <i class="bi bi-info-circle"></i> Lihat Detail
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-buttons">
+                    <button class="scroll-btn left" onclick="scrollContainer('left')">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button class="scroll-btn right" onclick="scrollContainer('right')">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+                <style>
+                    .horizontal-scroll {
+                        position: relative;
+                        overflow: hidden;
+                        padding: 30px 0;
+                        max-width: 1200px;
+                        margin: 0 auto;
+                    }
+
+                    .container {
+                        display: flex;
+                        gap: 2.5rem;
+                        transition: transform 0.4s ease-out;
+                        padding: 0 40px;
+                    }
+
+                    .scroll-buttons {
+                        display: flex;
+                        justify-content: center;
+                        gap: 1rem;
+                        margin-top: 20px;
+                        padding: 0 20px;
+                    }
+
+                    .scroll-btn {
+                        background: linear-gradient(145deg, #43e97b, #38f9d7);
+                        color: white;
+                        border: none;
+                        border-radius: 50%;
+                        width: 48px;
+                        height: 48px;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1.5rem;
+                        transition: all 0.3s ease;
+                        box-shadow: 0 4px 15px rgba(67, 233, 123, 0.3);
+                        opacity: 0.9;
+                    }
+
+                    .scroll-btn:hover {
+                        background: linear-gradient(145deg, #38f9d7, #43e97b);
+                        transform: scale(1.1);
+                        box-shadow: 0 6px 20px rgba(67, 233, 123, 0.4);
+                        opacity: 1;
+                    }
+
+                    .scroll-btn:active {
+                        transform: scale(0.95);
+                    }
+
+                    @media (max-width: 768px) {
+                        .container {
+                            gap: 1.5rem;
+                            padding: 0 20px;
+                        }
+                        
+                        .scroll-btn {
+                            width: 40px;
+                            height: 40px;
+                            font-size: 1.2rem;
+                        }
+                    }
+                </style>
+                <script>
+                    function scrollContainer(direction) {
+                        const container = document.querySelector('.container');
+                        const scrollAmount = 300;
+                        
+                        // Get current scroll position, defaulting to 0 if not set
+                        let currentPosition = parseInt(container.style.transform.replace('translateX(', '').replace('px)', '') || 0);
+                        
+                        // Calculate new position based on direction
+                        if (direction === 'left') {
+                            // When scrolling left, increase position but don't go beyond 0
+                            currentPosition = Math.min(0, currentPosition + scrollAmount);
+                        } else if (direction === 'right') {
+                            // Get container and its parent widths
+                            const containerWidth = container.scrollWidth;
+                            const parentWidth = container.parentElement.clientWidth;
+                            
+                            // Calculate maximum scroll distance (container width minus visible width)
+                            const maxScroll = -(containerWidth - parentWidth);
+                            
+                            // When scrolling right, decrease position but don't go beyond maxScroll
+                            currentPosition = Math.max(maxScroll, currentPosition - scrollAmount);
+                        }
+
+                        // Apply the new position
+                        container.style.transform = `translateX(${currentPosition}px)`;
+                    }
+                </script>
+    </section>
+
+    <!-- Popup container moved outside section -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup" onclick="closePopup()">&times;</span>
+            <h3 id="popup-title"></h3>
+            <p id="popup-description"></p>
+        </div>
+    </div>
+
+    <style>
+    .info-btn {
+        padding: 8px 16px;
+        background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+        border: none;
+        border-radius: 20px;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+        transition: transform 0.2s;
+    }
+
+    .info-btn:hover {
+        transform: scale(1.05);
+    }
+
+    .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        z-index: 1000;
+    }
+
+    .popup-content {
+        position: relative;
+        background: white;
+        box-shadow: 12px 12px 24px rgba(0,0,0,0.3);
+        width: 80%;
+        max-width: 500px;
+        margin: 20vh auto;
+        padding: 20px;
+        border-radius: 10px;
+        border-style: hidden;
+        color: black;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .close-popup {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 24px;
+        cursor: pointer;
+    }
+    </style>
+
+    <script>
+    const toolsInfo = {
+        python: {
+            title: "Python Tools",
+            description: "Python merupakan bahasa pemrograman favorit saya untuk membuat AI Assistant. Adapun beberapa library yang saya gunakan dalam Python, seperti Pyttsx3 untuk text-to-speech, Speech-Recognition untuk speech-to-text, NLTK untuk pemrosesan bahasa alami, FuzzyWuzzy untuk logika fuzzy, dan Tkinter untuk GUI."
+        },
+        java: {
+            title: "Java Programming Language ",
+            description: "Java merupakan bahasa pemrograman yang saya gunakan untuk mengembangkan aplikasi berbasis objek. Beberapa tools yang saya gunakan dalam Java antara lain:\n- Eclipse IDE\n- IntelliJ IDEA\n- Maven untuk manajemen proyek\n- JUnit untuk testing\n- JavaFX untuk GUI development"
+        },
+        webdev: {
+            title: "Web Development Tools",
+            description: "Web Development melibatkan penggunaan HTML, CSS, dan JavaScript untuk merancang website. Beberapa tools yang saya gunakan dalam web development antara lain:\n- Visual Studio Code\n- Chrome DevTools\n- Bootstrap untuk desain responsif\n- jQuery untuk manipulasi DOM\n- Git dan GitHub untuk version control"
+        },
+        php: {
+            title: "PHP Programming Language",
+            description: "PHP merupakan bahasa pemrograman yang saya gunakan untuk pengembangan back-end dan database. Beberapa tools yang saya gunakan dalam PHP antara lain:\n- XAMPP atau WAMP untuk server lokal\n- Composer untuk manajemen dependensi\n- Laravel sebagai framework PHP\n- phpMyAdmin untuk manajemen database MySQL\n- Postman untuk testing API"
+        },
+        react: {
+            title: "ReactJS Framework",
+            description: "React-JS adalah framework andalan saya untuk pengembangan front-end. Beberapa tools yang saya gunakan dalam ReactJS antara lain:\n- Create React App untuk memulai proyek\n- React Router untuk navigasi\n- Redux untuk manajemen state\n- Axios untuk melakukan HTTP requests\n- Jest dan React Testing Library untuk testing komponen"
+        }
+    };
+
+    function showPopup(tool) {
+        const popup = document.getElementById('popup');
+        const title = document.getElementById('popup-title');
+        const description = document.getElementById('popup-description');
+        
+        title.textContent = toolsInfo[tool].title;
+        description.textContent = toolsInfo[tool].description;
+        
+        popup.style.display = 'block';
+    }
+
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
+
+    const description = document.getElementById('popup-description');
+        
+        // Mengatur style untuk deskripsi popup menggunakan JavaScript
+        description.style.lineHeight = '1.6';
+        description.style.fontSize = '16px';
+        description.style.color = '#333';
+        description.style.textAlign= 'justify';
+
+        // Memproses teks deskripsi untuk mengubah newline menjadi <br> dan membuat daftar
+        const rawDescription = toolsInfo[tool].description;
+        const formattedDescription = rawDescription
+            .replace(/\s*\+\s*\n\s*-\s*/g, '</li><li>') // Mengubah pemisah item daftar
+            .replace(/:\s*\n\s*-\s*/, ':<ul><li>')      // Memulai daftar setelah colon
+            .replace(/\n/g, '<br>');                   // Mengganti sisa newline
+
+        // Menutup tag ul jika ada
+        if (formattedDescription.includes('<ul><li>')) {
+            description.innerHTML = formattedDescription + '</li></ul>';
+        } else {
+            description.innerHTML = formattedDescription;
+        }
+        
+        popup.style.display = 'block';
+    
+
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
+
+    // Menutup popup jika user mengklik di luar konten
+    window.onclick = function(event) {
+        const popup = document.getElementById('popup');
+        if (event.target == popup) {
+            popup.style.display = "none";
+        }
+    }
+    </script>
+    <br>
+    <br>
+   <section class="portfolio-section" data-aos="fade-up">
+    <br>
+        <h2 class="section-title animate__animated animate__fadeInUp" id="portfolio">Portfolio dan Project Saya</h2>
+    <div class="portfolio-gallery">
+        <div class="portfolio-item animate__animated animate__zoomIn animate__duration-1s">
+            <img src="Darkfly Indonesian Automotive (2).png" alt="Project 1">
+            <div class="item-content">
+                <h3 class="paragraph">MentawaiUs</h3>
+                <p class="paragraph">Website informasi destinasi wisata di Kepulauan Mentawai, menampilkan galeri foto dan peta interaktif.</p>
+                <br>
+                <button class="button animate__animated animate__pulse animate__infinite">
+                    <a href="https://github.com/EdwardChorintians1604" target="_github" style="font-family:'Courier New', Courier, monospace; font-size: 10px; color: black; text-decoration: none;">
+                        <i class="bi bi-globe"></i> Silahkan Kunjungi
+                    </a>
+                </button>
+            </div>
+        </div>
+        <div class="portfolio-item animate__animated animate__zoomIn animate__duration-1s">
+            <img src="Toko Masabuk Jaya.png" alt="Project 2">
+            <div class="item-content">
+                <h3 class="paragraph">MathThon</h3>
+                <p class="paragraph">Aplikasi berbasis Website yang dirancang untuk membantu siapapun dalam mengerjakan matematika, berupa operasi KABATAKU, dan dilengkapi dengan fitur pembelajaran interaktif.</p>
+                <br>
+                <button class="button animate__animated animate__pulse animate__infinite">
+                    <a href="https://github.com/EdwardChorintians1604" target="_github" style="font-family:'Courier New', Courier, monospace; font-size: 10px; color: black; text-decoration: none;">
+                    <i class="bi bi-globe"></i> Silahkan Kunjungi
+                </a>
+                </button>
+                
+            </div>
+        </div>
+        <div class="portfolio-item animate__animated animate__zoomIn animate__duration-1s">
+            <img src="Darkfly Indonesian Automotive (1).png" alt="Project 3">
+            <div class="item-content">
+                <h3 class="paragraph">Baymax AI Assistant</h3>
+                <p class="paragraph">Sistem program AI Assistant sederhana berbasis Python</p>
+                <br>
+                <button class="button animate__animated animate__pulse animate__infinite">
+                    <a href="https://github.com/EdwardChorintians1604" target="_github" style="font-family:'Courier New', Courier, monospace; font-size: 10px; color: black; text-decoration: none;">
+                        <i class="bi bi-github"> Silahkan Kunjungi</i>
+                    </a>
+                </button>
+            </div>
+        </div>
+        <div class="portfolio-item animate__animated animate__zoomIn animate__duration-1s">
+            <img src="UKM IT Cybernetix.png" alt="Project 3">
+            <div class="item-content">
+                <h3 class="paragraph">Graphic Designing</h3>
+                <p class="paragraph">Beberapa karya desain grafis yang telah dirancang menggunakan Canva (Flyer, Logo, Banner, dsb..) </p>
+                <br>
+                <button class="button animate__animated animate__pulse animate__infinite">
+                    <a href="https://github.com/EdwardChorintians1604" target="_canva" style="font-family:'Courier New', Courier, monospace; font-size: 10px; color: black; text-decoration: none;">
+                        <i class="bi bi-pencil-square"> Silahkan Kunjungi</i>
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+
+   </section> 
+   
+    <section class="contact-section animate__animated animate__fadeInRight" id="contact" data-aos="zoom-in">
+        <h2>Kontak</h2>
+        <p>Silakan hubungi saya melalui media sosial berikut:</p>
+        <div class="contact-links">
+            <a href="https://web.facebook.com/profile.php?id=100085449590343" target="_blank" title="Facebook" class="animate__animated animate__pulse animate__infinite"><i class="bi bi-facebook"></i></a>
+            <a href="https://github.com/EdwardChorintians1604" target="_blank" title="GitHub" class="animate__animated animate__pulse animate__infinite"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com/in/edward-james-kenway-24b660342/" target="_blank" title="LinkedIn" class="animate__animated animate__pulse animate__infinite"><i class="bi bi-linkedin"></i></a>
+            <a href="https://instagram.com/edward_kenway_1604" target="_blank" title="Instagram" class="animate__animated animate__pulse animate__infinite"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.youtube.com/@edwardchori" target="_blank" title="YouTube" class="animate__animated animate__pulse animate__infinite"><i class="bi bi-youtube"></i></a>
+            <a href="https://wa.me/6282169762552" target="_blank" title="WhatsApp" class="animate__animated animate__pulse animate__infinite"><i class="bi bi-whatsapp"></i></a>
+            <a href="https://developers.google.com/profile/u/107920796383412821253?hl=id" target="_blank" title="Google Developer" class="animate__animated animate__pulse animate__infinite"><i class="bi bi-google"></i></a>
+        </div>
+        <br>
+
+        <h4>You can mail me in here: </h4>
+<form id="contact-form" 
+    style="display: flex; flex-direction: column; align-items: center; gap: 1em; max-width: 350px; margin: 0 auto;">
+    Name:
+    <input 
+        type="text"
+        name="from_name"
+        placeholder="Your name"
+        required
+        style="padding: 10px 15px; border-radius: 8px; border: none; width: 100%; background-color: silver; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+    Email Address: 
+    <input
+        type="email"
+        name="from_email"
+        placeholder="Your email address"
+        required
+        style="padding: 10px 15px; border-radius: 8px; border: none; width: 100%; background-color: silver; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+    Message: 
+    <textarea
+        type="message"
+        name="message"
+        placeholder="Your message here..."
+        rows="10"
+        color="black"
+        style="padding: 9px 15px; border-radius: 8px; border: none; width: 100%; background-color: silver; box-shadow: 0 2px 8px rgba(0,0,0,0.1); color:#000; resize: none;" required></textarea>
+
+    
+    <button
+        type="submit"
+        style="padding: 10px 20px; border-radius: 8px; border: none; background: #43e97b; color: #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: background 0.3s;">
+        <i class="bi bi-send-fill"></i> Send
+    </button>
+</form>
+
+<!-- Load EmailJS SDK -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+  // Initialize EmailJS
+  (function() {
+    emailjs.init({
+      publicKey: "oUV9p1Q2XhvlqlSiy",
+    });
+  })();
+
+  // Handle form submission
+  document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    emailjs.sendForm("service_87iudes", "template_j4aphhq", this)
+      .then(() => {
+        alert("✅ Pesan berhasil dikirim!");
+        this.reset();
+      }, (error) => {
+        console.error("❌ Gagal mengirim pesan:", error);
+        alert("Terjadi kesalahan. Coba lagi nanti.");
+      });
+  });
+</script>
+
+        <script>
+            function updateCurrentTime() {
+            const timeElement = document.getElementById("current-time");
+            if (timeElement) {
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const day = String(now.getDate()).padStart(2, '0');
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                
+                const formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+                timeElement.innerText = `Waktu saat ini: ${formattedTime}`;
+            }
+            }
+
+            // Update the time immediately on load
+            updateCurrentTime();
+            
+            // Update the time every second to make it real-time
+            setInterval(updateCurrentTime, 1000);
+        </script>
+        <div id="current-time" style="font-size: 1.1rem; color: #fff; margin-top: 1em;">
+            Waktu saat ini: ...
+        </div>
+        
+    </section>
+
+    <footer class="animate__animated animate__fadeInUp">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+            <div style="font-size: 1.1rem; color: #FFD700;">
+                &copy; 2025 Erantus Paripurna Samaloisa. All rights reserved.
+            </div>
+            <div style="font-size: 0.95rem; color: #fff; margin-top: 0.2em;">
+            <div style="font-size: 0.9rem; color: #aaa; margin-top: 0.2em;">
+                <a href="#about" style="color:#FFD700; text-decoration:underline; margin:0 0.5em;">Tentang</a> |
+                <a href="#my_skill" style="color:#FFD700; text-decoration:underline; margin:0 0.5em;">Skill</a> |
+                <a href="#portfolio" style="color:#FFD700; text-decoration:underline; margin:0 0.5em;">Portfolio</a> |
+                <a href="#contact" style="color:#FFD700; text-decoration:underline; margin:0 0.5em;">Kontak</a>
+            </div>
+        </div>
+    </footer>
+
+<script>
+  AOS.init({
+    duration: 1000, // durasi animasi (ms)
+    once: true      // hanya animasi pertama kali muncul
+  });
+</script>
+
+</body>
+</html

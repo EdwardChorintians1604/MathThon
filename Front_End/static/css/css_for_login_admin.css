@@ -1,0 +1,81 @@
+body {
+    background: linear-gradient(135deg, #164863 0%, #427D9D 100%);
+    font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 400px;
+    margin: 100px auto 0 auto;
+    padding: 0;
+}
+
+.card {
+    border-radius: 18px;
+    border: none;
+    box-shadow: 0 8px 24px rgba(30,60,120,0.12), 0 1.5px 4px rgba(34,56,83,0.10);
+    background: #ffffff;
+}
+
+.card-body {
+    padding: 2.5rem;
+}
+
+h3 {
+    font-family: 'Tangerine', cursive, sans-serif;
+    font-size: 2.2rem;
+    color: #164863;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    color: #427D9D;
+    font-weight: 600;
+}
+
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #c2d1f0;
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+    transition: border-color 0.2s;
+}
+
+.form-control:focus {
+    border-color: #427D9D;
+    box-shadow: 0 0 0 2px #427D9d40;
+}
+
+.btn-primary {
+    background-color: #164863;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.65rem;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 12px rgba(66,125,157,0.08);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #427D9D;
+    box-shadow: 0 6px 18px rgba(66,125,157,0.17);
+}
+
+@media (max-width: 575.98px) {
+    .container {
+        margin-top: 40px !important;
+        padding: 10px;
+    }
+    .card-body {
+        padding: 1.1rem;
+    }
+    h3 {
+        font-size: 1.4rem;
+    }
+}

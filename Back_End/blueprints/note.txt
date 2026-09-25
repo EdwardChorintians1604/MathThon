@@ -1,0 +1,2 @@
+# Back_End/blueprints/auth.py
+# This file will contain authentication-related routes (login, register, logout).

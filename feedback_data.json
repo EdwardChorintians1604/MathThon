@@ -1,0 +1,212 @@
+[
+    {
+        "timestamp": "2026-07-19 16:10:41",
+        "user": "Anonymous",
+        "features": [],
+        "comment": "",
+        "analysis": {
+            "category": "General",
+            "status": "Neutral",
+            "similarity": "0.00%",
+            "recommendation": "Terima kasih atas feedback Anda. Kami akan meninjau saran Anda."
+        }
+    },
+    {
+        "timestamp": "2026-04-14 16:58:25",
+        "user": "Abil Nugraha",
+        "features": [
+            "F1",
+            "F3",
+            "F10",
+            "F8",
+            "F7"
+        ],
+        "comment": "Tolong perbaiki UI/UX-nya serta Error yang sering terjadi ",
+        "analysis": {
+            "category": "Performa",
+            "status": "Sangat Baik",
+            "similarity": "100.00%",
+            "recommendation": "Kecepatan akses optimal. Pastikan optimasi server tetap stabil seiring bertambahnya trafik."
+        }
+    },
+    {
+        "timestamp": "2026-03-23 05:45:34",
+        "user": "Eddie Querrera",
+        "features": [
+            "F1",
+            "F8",
+            "F4"
+        ],
+        "comment": "Tolong perbaiki sidenav nya ",
+        "analysis": {
+            "category": "Performa",
+            "status": "Isu Optimasi",
+            "similarity": "100.00%",
+            "recommendation": "Optimasi rendering Chart.js. Gunakan data lazy loading atau kurangi kompleksitas visual pada grafik berat."
+        }
+    },
+    {
+        "timestamp": "2026-03-17 21:54:56",
+        "user": "Gerrard Von Bursten",
+        "features": [
+            "F9",
+            "F6",
+            "F10"
+        ],
+        "comment": "Tolong perbaiki materi pelajaran matematikanya, karena tidak valid untuk implementasi nyata dalam dunia industri",
+        "analysis": {
+            "category": "Konten Materi",
+            "status": "Perlu Penyederhanaan",
+            "similarity": "100.00%",
+            "recommendation": "Gunakan bahasa yang lebih ramah pemula (ELI5). Tambahkan lebih banyak studi kasus dunia nyata."
+        }
+    },
+    {
+        "timestamp": "2026-01-29 03:09:14",
+        "user": "Edward ",
+        "features": [
+            "F1",
+            "F7",
+            "F4"
+        ],
+        "comment": "Tolong Perbaiki Bug-nya, khawatirnya nanti akan ada serangan atau celah masuk yang akan menghancurkan website ini dari dalam",
+        "analysis": {
+            "category": "Performa",
+            "status": "Kritis",
+            "similarity": 1.0,
+            "recommendation": "Periksa ukuran aset (gambar/JS). Optimasi query database dan cek error logs server."
+        }
+    },
+    {
+        "timestamp": "2026-01-29 03:12:34",
+        "user": "Anonymous",
+        "features": [],
+        "comment": "",
+        "analysis": {
+            "category": "General",
+            "status": "Neutral",
+            "similarity": 0,
+            "recommendation": "Terima kasih atas feedback Anda."
+        }
+    },
+    {
+        "timestamp": "2026-01-29 03:16:53",
+        "user": "Jericho",
+        "features": [
+            "F7",
+            "F3",
+            "F10",
+            "F6",
+            "F11"
+        ],
+        "comment": "Tolong, untuk bagian materi, bug, dan loading nya harus ditingkatkan kembali",
+        "analysis": {
+            "category": "Performa",
+            "status": "Positif",
+            "similarity": 1.0,
+            "recommendation": "Optimasi infrastruktur saat ini sudah baik. Pertahankan penggunaan CDN dan caching."
+        }
+    },
+    {
+        "timestamp": "2026-01-29 03:29:43",
+        "user": "Jessica",
+        "features": [
+            "F4",
+            "F8",
+            "F2"
+        ],
+        "comment": "Tolong untuk navigasinya diperbaiki lagi",
+        "analysis": {
+            "category": "Desain & UI",
+            "status": "Negatif",
+            "similarity": 1.0,
+            "recommendation": "Lakukan audit UI. Sederhanakan navigasi dan perbaiki kontras warna."
+        }
+    },
+    {
+        "timestamp": "2026-01-29 04:24:53",
+        "user": "Wendi Al-Ashar",
+        "features": [
+            "F12",
+            "F4",
+            "F6",
+            "F11",
+            "F7"
+        ],
+        "comment": "Pertama-tama, ada beberapa hal yang mesti diperhatikan, yakni font yang buruk, lalu grafik lag, lalu materi yang cukup rumit untuk dipahami, serta error dan bug yang susah dihilangkan, tolong perbaiki!!!",
+        "analysis": {
+            "category": "Performa",
+            "status": "Isu Optimasi",
+            "similarity": 1.0,
+            "recommendation": "Optimasi rendering Chart.js. Gunakan data lazy loading atau kurangi kompleksitas visual pada grafik berat."
+        }
+    },
+    {
+        "timestamp": "2026-02-15 14:51:58",
+        "user": "Patricia Sigalingging",
+        "features": [
+            "F11",
+            "F8",
+            "F7",
+            "F4",
+            "F10"
+        ],
+        "comment": "Tolong perbaiki layarnya secepatnya",
+        "analysis": {
+            "category": "Performa",
+            "status": "Isu Optimasi",
+            "similarity": 1.0,
+            "recommendation": "Optimasi rendering Chart.js. Gunakan data lazy loading atau kurangi kompleksitas visual pada grafik berat."
+        }
+    },
+    {
+        "timestamp": "2026-02-21 23:17:12",
+        "user": "Erantus P. Sam",
+        "features": [
+            "F12",
+            "F10",
+            "F8",
+            "F2"
+        ],
+        "comment": "Tolong perbaiki kembali tampilan responsif-nya, sehingga ketika website dibuka, otomatis akan kelihatan bagus, tampil elegan dan menarik untuk dilihat",
+        "analysis": {
+            "category": "Desain & UI",
+            "status": "Perlu Perbaikan UX",
+            "similarity": 1.0,
+            "recommendation": "Evaluasi hirarki informasi. Perbaiki kontras warna teks dan sederhanakan alur navigasi agar lebih intuitif."
+        }
+    },
+    {
+        "timestamp": "2026-03-04 23:27:11",
+        "user": "Jasmine Jae",
+        "features": [
+            "F11",
+            "F7",
+            "F8"
+        ],
+        "comment": "Tolong perkuatkan sistem keamanannya",
+        "analysis": {
+            "category": "Teknis & Bug",
+            "status": "Kritis",
+            "similarity": 1.0,
+            "recommendation": "Lakukan debugging pada function JavaScript terkait. Unit testing diperlukan untuk fitur kalkulator."
+        }
+    },
+    {
+        "timestamp": "2026-03-16 05:46:04",
+        "user": "Marzuki Ilsha Hidayat",
+        "features": [
+            "F2",
+            "F4",
+            "F10",
+            "F7"
+        ],
+        "comment": "Tolong untuk desain web-nya ditingkatkan lagi",
+        "analysis": {
+            "category": "Performa",
+            "status": "Isu Optimasi",
+            "similarity": 1.0,
+            "recommendation": "Optimasi rendering Chart.js. Gunakan data lazy loading atau kurangi kompleksitas visual pada grafik berat."
+        }
+    }
+]

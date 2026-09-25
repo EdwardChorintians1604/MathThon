@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathThon | Dashboard User</title>
+    <link rel="icon"
+        href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css_for_dashboard_user.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    {% block head_links %}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {% endblock %}
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="sidebar">
+            <div class="header text-center p-3 animate__animated animate__fadeInLeft">
+                <img src="{{ photo_url }}" alt="User Avatar" class="rounded-circle"
+                    style="width: 80px; height: 80px; object-fit: cover; border: 2px solid #c8a96e; box-shadow: 0 0 15px rgba(200, 169, 110, 0.4);">
+                <h5 class="mt-2" style="color: white;">{{ users.name }}</h5>
+                <p id="datetime" style="color: #94a3b8; font-size: 0.85em; font-weight: 500;"></p>
+            </div>
+            <ul class="list-unstyled ps-3 animate__animated animate__fadeInLeft">
+                <li><a href="{{ url_for('user.dashboard_user') }}"
+                        class="{{ 'active' if request.endpoint and 'dashboard_user' in request.endpoint else '' }}"><i
+                            class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+                <li><a href="{{ url_for('materi.materi_user') }}"
+                        class="{{ 'active' if request.endpoint and 'materi_user' in request.endpoint else '' }}"><i
+                            class="fas fa-book"></i> <span>Materi</span></a></li>
+                <li><a href="{{ url_for('user.ai_feature') }}"
+                        class="{{ 'active' if request.endpoint and 'ai_feature' in request.endpoint else '' }}"><i
+                            class="fas fa-robot"></i> <span>Fitur AI</span></a></li>
+                <li><a href="{{ url_for('user.latihan') }}"
+                        class="{{ 'active' if request.endpoint and 'latihan' in request.endpoint else '' }}"><i
+                            class="fas fa-pencil-alt"></i> <span>Latihan Soal</span></a></li>
+                <li><a href="{{ url_for('user.progres_user') }}"
+                        class="{{ 'active' if request.endpoint and 'progres_user' in request.endpoint else '' }}"><i
+                            class="fas fa-chart-line"></i> <span>Progres</span></a></li>
+                <li><a href="{{ url_for('user.analyze') }}"
+                        class="{{ 'active' if request.endpoint and 'analyze' in request.endpoint else '' }}"><i
+                            class="fas fa-list-alt"></i> <span>Analisis Hasil</span></a></li>
+                <li><a href="{{ url_for('user.feedback') }}"
+                        class="{{ 'active' if request.endpoint and 'feedback' in request.endpoint else '' }}"><i
+                            class="fas fa-comment"></i> <span>Feedback</span></a></li>
+                <li><a href="{{ url_for('user.calculator') }}"
+                        class="{{ 'active' if request.endpoint and 'calculator' in request.endpoint else '' }}"><i
+                            class="fas fa-calculator"></i> <span>Calculator</span></a></li>
+                <li><a href="{{ url_for('auth.logout_user') }}" id="logoutLink"><i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span></a></li>
+            </ul>
+            <button class="close-sidenav-btn" id="closeSidebarBtn" title="Tutup Menu">
+                <i class="bi bi-x"></i>
+            </button>
+            <br>
+            <div class="animate__animated animate__fadeInLeft text-center">
+                <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}"
+                    alt="MathThon Logo" class="mb-2"
+                    style="width: 50px; display: block; margin: 0 auto; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));">
+                <p style="text-align:center;color: #a0b3c9; font-size: 0.75em;">&copy; 2024 MathThon. All rights
+                    reserved.</p>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div id="content" class="main-content animate__animated animate__fadeInLeft">
+            <nav class="nav_1">
+                <button class="open-sidenav-btn" id="openSidebarBtn">
+                    <i class="bi bi-list"></i>
+                </button>
+                <div class="d-flex align-items-center ms-auto">
+                    <a href="{{ url_for('user.profile') }}" class="name_style me-3">{{ users.username }}</a>
+                    <!-- <button class="profiles_icon" id="goProfileBtn" type="button" title="Lihat Profil Saya">
+                        <img src="{{ photo_url }}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                        <span class="pulse-ring"></span>
+                    </button> -->
+                </div>
+            </nav>
+
+            <style>
+                /* Header Navigation Styles */
+                .name_style {
+                    font-family: 'Plus Jakarta Sans', sans-serif;
+                    font-size: 0.95rem;
+                    font-weight: 700;
+                    text-decoration: none;
+                    color: #0f172a;
+                    transition: all 0.3s ease;
+                }
+
+                .name_style:hover {
+                    color: #c8a96e;
+                }
+
+                .profiles_icon {
+                    width: 44px;
+                    height: 44px;
+                    padding: 0;
+                    background: #fff;
+                    border: 2px solid #c8a96e;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    position: relative;
+                    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                    z-index: 10;
+                    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+                }
+
+                .profiles_icon:hover {
+                    transform: scale(1.1) rotate(4deg);
+                    border-color: #c8a96e;
+                    box-shadow: 0 8px 20px rgba(200, 169, 110, 0.3);
+                }
+
+                .pulse-ring {
+                    content: '';
+                    width: 100%;
+                    height: 100%;
+                    background: #c8a96e;
+                    border-radius: 50%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: -1;
+                    animation: pulse 2s infinite;
+                    opacity: 0;
+                }
+
+                @keyframes pulse {
+                    0% {
+                        transform: scale(1);
+                        opacity: 0.4;
+                    }
+
+                    100% {
+                        transform: scale(1.4);
+                        opacity: 0;
+                    }
+                }
+            </style>
+
+            <div class="container-fluid px-4 py-4">
+                {% block content %}
+                {% set stats = stats | default({
+                'latihan_selesai': 0,
+                'latihan_selesai_percentage': 0,
+                'akurasi': 0,
+                'akurasi_percentage': 0,
+                'streak': 0,
+                'streak_percentage': 0
+                }) %}
+
+                <style>
+                    /* =========================================================================
+                       DASHBOARD USER - PREMIUM REDESIGN
+                       ========================================================================= */
+
+                    #content .container-fluid {
+                        max-width: 1440px;
+                        margin-inline: auto;
+                        padding-inline: clamp(12px, 2vw, 24px) !important;
+                    }
+
+                    /* === WELCOME BANNER === */
+                    .welcome-banner {
+                        position: relative;
+                        padding: 44px 48px;
+                        border-radius: 28px;
+                        overflow: hidden;
+                        background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #111827 100%);
+                        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.15);
+                        border: 1px solid rgba(255, 255, 255, 0.05);
+                        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                        margin-bottom: 0;
+                    }
+
+                    .welcome-banner:hover {
+                        transform: translateY(-4px);
+                        box-shadow: 0 20px 48px rgba(15, 23, 42, 0.25);
+                        border-color: rgba(200, 169, 110, 0.2);
+                    }
+
+                    .welcome-banner h1 {
+                        font-family: 'Plus Jakarta Sans', sans-serif;
+                        font-size: clamp(1.6rem, 4vw, 2.2rem);
+                        font-weight: 800;
+                        letter-spacing: -0.5px;
+                        margin-bottom: 8px;
+                        color: #ffffff;
+                    }
+
+                    .welcome-banner p {
+                        font-family: 'Plus Jakarta Sans', sans-serif;
+                        font-size: 0.95rem;
+                        opacity: 0.8;
+                        margin: 0;
+                        color: #94a3b8;
+                    }
+
+                    .welcome-banner img {
+                        max-height: 140px;
+                        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                        filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.3));
+                    }
+
+                    .welcome-banner:hover img {
+                        transform: translateY(-6px) scale(1.05);
+                    }
+
+                    .banner-shape {
+                        position: absolute;
+                        right: -50px;
+                        bottom: -50px;
+                        width: 260px;
+                        height: 260px;
+                        background: radial-gradient(circle, rgba(200, 169, 110, 0.1) 0%, transparent 70%);
+                        border-radius: 50%;
+                        pointer-events: none;
+                    }
+
+                    .welcome-banner::before {
+                        content: "";
+                        position: absolute;
+                        top: -50px;
+                        left: -50px;
+                        width: 220px;
+                        height: 220px;
+                        background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+                        border-radius: 50%;
+                        pointer-events: none;
+                    }
+
+                    /* === STAT CARDS === */
+                    .stat-card {
+                        background: #ffffff;
+                        border-radius: 24px !important;
+                        border: 1px solid rgba(15, 23, 42, 0.06) !important;
+                        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02) !important;
+                        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                        position: relative;
+                        overflow: hidden;
+                    }
+
+                    .stat-card:hover {
+                        transform: translateY(-6px);
+                        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08) !important;
+                        border-color: rgba(200, 169, 110, 0.25) !important;
+                    }
+
+                    .stat-card .card-body {
+                        padding: 28px !important;
+                    }
+
+                    .stat-card .icon-box {
+                        width: 56px;
+                        height: 56px;
+                        border-radius: 16px !important;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-shrink: 0;
+                        font-size: 20px;
+                        transition: all 0.3s ease;
+                    }
+
+                    .stat-card:hover .icon-box {
+                        transform: scale(1.08) rotate(-4deg);
+                    }
+
+                    .stat-card p.text-muted {
+                        font-size: 0.72rem;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        letter-spacing: 1.5px;
+                        color: #64748b !important;
+                        margin-bottom: 6px;
+                    }
+
+                    .stat-card h2 {
+                        font-size: 2.4rem !important;
+                        font-weight: 800;
+                        letter-spacing: -0.5px;
+                        line-height: 1;
+                        color: #0f172a !important;
+                    }
+
+                    .stat-card .progress {
+                        height: 4px !important;
+                        border-radius: 100px;
+                        background: #f1f5f9;
+                        margin-top: 20px;
+                        overflow: hidden;
+                    }
+
+                    .stat-card .progress-bar {
+                        border-radius: 100px;
+                        background: linear-gradient(90deg, #3b82f6 0%, #1d4ed8 100%);
+                    }
+
+                    .col-md-4:nth-child(2) .progress-bar {
+                        background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+                    }
+
+                    .col-md-4:nth-child(3) .progress-bar {
+                        background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+                    }
+
+                    /* === SECTION TITLE === */
+                    .section-title {
+                        font-weight: 800;
+                        color: #0f172a;
+                        font-size: 1.1rem;
+                        letter-spacing: -0.3px;
+                        margin-top: 40px;
+                        margin-bottom: 20px;
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                    }
+
+                    .section-title::before {
+                        content: "";
+                        display: inline-block;
+                        width: 4px;
+                        height: 20px;
+                        background: #c8a96e;
+                        border-radius: 100px;
+                    }
+
+                    /* === QUICK ACTIONS (Horizontal Scroll) === */
+                    .horizontal-scroll-wrapper {
+                        overflow-x: auto;
+                        padding-bottom: 8px;
+                        scrollbar-width: thin;
+                        scrollbar-color: rgba(15, 23, 42, 0.1) transparent;
+                    }
+
+                    .horizontal-scroll-wrapper::-webkit-scrollbar {
+                        height: 5px;
+                    }
+
+                    .horizontal-scroll-wrapper::-webkit-scrollbar-track {
+                        background: transparent;
+                    }
+
+                    .horizontal-scroll-wrapper::-webkit-scrollbar-thumb {
+                        background: rgba(15, 23, 42, 0.1);
+                        border-radius: 100px;
+                    }
+
+                    .quick-actions-container {
+                        display: flex;
+                        gap: 20px;
+                    }
+
+                    .quick-action-item {
+                        min-width: 220px;
+                        flex-shrink: 0;
+                    }
+
+                    .quick-action-card {
+                        display: flex;
+                        flex-direction: column;
+                        padding: 26px 22px;
+                        background: #ffffff;
+                        border-radius: 22px;
+                        text-decoration: none;
+                        border: 1px solid rgba(15, 23, 42, 0.05);
+                        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
+                    }
+
+                    .quick-action-card:hover {
+                        transform: translateY(-6px);
+                        box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+                        border-color: rgba(200, 169, 110, 0.3);
+                    }
+
+                    .quick-action-card h6 {
+                        font-weight: 700;
+                        font-size: 0.95rem;
+                        color: #0f172a;
+                        margin: 16px 0 6px 0;
+                        transition: color 0.3s;
+                    }
+
+                    .quick-action-card:hover h6 {
+                        color: #c8a96e;
+                    }
+
+                    .quick-action-card p {
+                        font-size: 0.8rem;
+                        color: #64748b;
+                        margin: 0;
+                        line-height: 1.4;
+                    }
+
+                    .action-icon {
+                        width: 52px;
+                        height: 52px;
+                        border-radius: 16px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        font-size: 20px;
+                        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                    }
+
+                    .quick-action-card:hover .action-icon {
+                        transform: scale(1.1) rotate(-3deg);
+                    }
+
+                    /* === CARD MODERN (Aktivitas) === */
+                    .card-modern {
+                        background: #ffffff;
+                        border-radius: 24px;
+                        border: 1px solid rgba(15, 23, 42, 0.05);
+                        box-shadow: 0 4px 24px rgba(15, 23, 42, 0.02);
+                        overflow: hidden;
+                        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                        height: 100%;
+                    }
+
+                    .card-modern:hover {
+                        box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+                    }
+
+                    .card-modern-header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 24px 28px 18px;
+                        border-bottom: 1px solid #f1f5f9;
+                    }
+
+                    .card-modern-header h5 {
+                        font-weight: 800;
+                        font-size: 1rem;
+                        color: #0f172a;
+                        display: flex;
+                        align-items: center;
+                        margin: 0;
+                    }
+
+                    .card-modern-header a {
+                        font-size: 0.8rem;
+                        font-weight: 700;
+                        color: #c8a96e;
+                        text-decoration: none;
+                        padding: 6px 14px;
+                        border-radius: 100px;
+                        background: rgba(200, 169, 110, 0.08);
+                        transition: all 0.3s;
+                    }
+
+                    .card-modern-header a:hover {
+                        background: #c8a96e;
+                        color: #0f172a;
+                    }
+
+                    /* === ACTIVITY LIST === */
+                    .activity-list {
+                        padding: 12px 16px;
+                    }
+
+                    .activity-item {
+                        display: flex;
+                        align-items: center;
+                        padding: 14px 16px;
+                        border-radius: 16px;
+                        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                        gap: 16px;
+                        border-bottom: 1px solid rgba(15, 23, 42, 0.02);
+                    }
+
+                    .activity-item:last-child {
+                        border-bottom: none;
+                    }
+
+                    .activity-item:hover {
+                        background-color: #f8fafc;
+                        transform: translateX(6px);
+                    }
+
+                    .activity-icon {
+                        width: 42px;
+                        height: 42px;
+                        border-radius: 12px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        font-size: 16px;
+                        flex-shrink: 0;
+                        transition: all 0.3s;
+                    }
+
+                    .activity-item:hover .activity-icon {
+                        transform: scale(1.08) rotate(3deg);
+                    }
+
+                    .activity-content {
+                        flex: 1;
+                        min-width: 0;
+                    }
+
+                    .activity-content h6 {
+                        margin: 0 0 2px 0;
+                        font-weight: 700;
+                        font-size: 0.9rem;
+                        color: #0f172a;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+
+                    .activity-content p {
+                        margin: 0;
+                        font-size: 0.78rem;
+                        color: #64748b;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+
+                    .activity-time {
+                        font-size: 0.72rem;
+                        color: #94a3b8;
+                        white-space: nowrap;
+                        font-weight: 600;
+                    }
+
+                    .activity-list .text-center {
+                        padding: 48px 24px;
+                    }
+
+                    .activity-list .text-center i {
+                        font-size: 2.8rem;
+                        color: #cbd5e1;
+                        margin-bottom: 16px;
+                        display: block;
+                    }
+
+                    .activity-list .text-center h6 {
+                        font-weight: 700;
+                        color: #475569;
+                        margin-bottom: 6px;
+                        font-size: 0.95rem;
+                    }
+
+                    .activity-list .text-center p {
+                        font-size: 0.82rem;
+                        color: #94a3b8;
+                        margin-bottom: 18px;
+                    }
+
+                    /* === TIPS CARD === */
+                    .tips-card {
+                        background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+                        color: white;
+                        border-radius: 24px;
+                        padding: 36px 30px;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        border: 1px solid rgba(255, 255, 255, 0.05);
+                        box-shadow: 0 12px 36px rgba(15, 23, 42, 0.2);
+                        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                    }
+
+                    .tips-card:hover {
+                        transform: translateY(-6px);
+                        box-shadow: 0 20px 48px rgba(15, 23, 42, 0.35);
+                        border-color: rgba(200, 169, 110, 0.25);
+                    }
+
+                    .tips-card h5 {
+                        color: #c8a96e;
+                        font-weight: 800;
+                        font-size: 0.8rem;
+                        text-transform: uppercase;
+                        letter-spacing: 2px;
+                        margin-bottom: 24px;
+                    }
+
+                    .tips-quote {
+                        font-style: italic;
+                        font-size: 0.98rem;
+                        line-height: 1.7;
+                        color: #e2e8f0;
+                        flex: 1;
+                        margin-bottom: 20px;
+                        text-align: center;
+                        font-weight: 300;
+                    }
+
+                    .tips-author {
+                        font-size: 0.78rem;
+                        font-weight: 700;
+                        color: #c8a96e;
+                        text-transform: uppercase;
+                        letter-spacing: 1.5px;
+                        margin-bottom: 24px;
+                        text-align: center;
+                    }
+
+                    .tips-button {
+                        display: block;
+                        text-align: center;
+                        padding: 13px 20px;
+                        border-radius: 100px;
+                        border: 1.5px solid rgba(200, 169, 110, 0.4);
+                        color: #c8a96e;
+                        text-decoration: none;
+                        font-size: 0.85rem;
+                        font-weight: 700;
+                        transition: all 0.3s ease;
+                        background: rgba(200, 169, 110, 0.05);
+                    }
+
+                    .tips-button:hover {
+                        background: #c8a96e;
+                        color: #0f172a;
+                        border-color: #c8a96e;
+                        box-shadow: 0 4px 15px rgba(200, 169, 110, 0.3);
+                    }
+
+                    /* === QUOTE ANIMATION === */
+                    .quote-wrapper {
+                        overflow: hidden;
+                        position: relative;
+                        min-height: 140px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 12px;
+                    }
+
+                    .slide-text {
+                        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+                        animation: slideInRight 0.6s forwards;
+                    }
+
+                    .quote-avatar {
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        border: 3px solid #c8a96e;
+                        margin: 0 auto 12px;
+                        display: block;
+                        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+                        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                    }
+
+                    .tips-card:hover .quote-avatar {
+                        transform: rotate(5deg) scale(1.05);
+                        box-shadow: 0 12px 30px rgba(200, 169, 110, 0.4);
+                    }
+
+                    @keyframes slideInRight {
+                        from {
+                            transform: translateX(40px);
+                            opacity: 0;
+                        }
+
+                        to {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                    }
+
+                    /* === COLOR OVERRIDES (activity icons) === */
+                    .activity-icon.bg-primary,
+                    .action-icon.bg-primary {
+                        background-color: #3b82f6 !important;
+                    }
+
+                    .activity-icon.bg-success,
+                    .action-icon.bg-success {
+                        background-color: #10b981 !important;
+                    }
+
+                    .activity-icon.bg-warning,
+                    .action-icon.bg-warning {
+                        background-color: #f59e0b !important;
+                    }
+
+                    .activity-icon.bg-info,
+                    .action-icon.bg-info {
+                        background-color: #06b6d4 !important;
+                    }
+
+                    .activity-icon.bg-danger,
+                    .action-icon.bg-danger {
+                        background-color: #ef4444 !important;
+                    }
+
+                    .activity-icon.bg-secondary,
+                    .action-icon.bg-secondary {
+                        background-color: #64748b !important;
+                    }
+
+                    /* === RESPONSIVE MEDIA QUERIES === */
+                    @media (max-width: 992px) {
+                        #content .container-fluid {
+                            padding-inline: 12px !important;
+                        }
+
+                        .welcome-banner {
+                            padding: 32px 30px;
+                        }
+                    }
+
+                    @media (max-width: 768px) {
+                        #content .container-fluid {
+                            padding-inline: 8px !important;
+                            padding-top: 12px !important;
+                        }
+
+                        .welcome-banner img {
+                            display: none;
+                        }
+
+                        .welcome-banner {
+                            padding: 28px 24px;
+                        }
+
+                        .quick-actions-container {
+                            gap: 14px;
+                        }
+
+                        .quick-action-item {
+                            min-width: 180px;
+                        }
+                    }
+
+                    @media (max-width: 480px) {
+                        .welcome-banner h1 {
+                            font-size: 1.4rem;
+                        }
+
+                        .quick-action-card {
+                            padding: 20px 16px;
+                        }
+
+                        .card-modern-header {
+                            flex-direction: column;
+                            align-items: flex-start;
+                            gap: 12px;
+                        }
+                    }
+                </style>
+
+                <!-- ── Welcome Banner ── -->
+                <div class="welcome-banner mb-4 animate__animated animate__fadeInDown">
+                    <div class="d-flex justify-content-between align-items-center position-relative z-2">
+                        <div>
+                            <h1 class="fw-bold text-white mb-2">Halo, {{ users.name.split()[0] }}! 👋</h1>
+                            <p class="text-white-50 mb-0">Siap untuk menaklukkan tantangan matematika hari ini?</p>
+                        </div>
+                        <div class="d-none d-md-block">
+                            <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}"
+                                alt="Mascot" style="height:130px; filter:drop-shadow(0 10px 20px rgba(0,0,0,0.25));">
+                        </div>
+                    </div>
+                    <div class="banner-shape"></div>
+                </div>
+                <br>
+
+                <!-- ── Stat Cards ── -->
+                <div class="row g-3 mb-4 animate__animated animate__fadeInUp">
+                    <div class="col-md-4">
+                        <div class="card stat-card h-100 border-0 shadow-sm overflow-hidden">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div>
+                                        <p class="text-muted mb-1 fw-medium text-uppercase small">Latihan Selesai</p>
+                                        <h2 class="fw-bold mb-0">{{ stats.latihan_selesai }}</h2>
+                                    </div>
+                                    <div class="icon-box bg-primary bg-opacity-10 text-primary">
+                                        <i class="fas fa-tasks fa-lg"></i>
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-primary" role="progressbar"
+                                        style="width: {{ stats.latihan_selesai_percentage }}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="col-md-4">
+                        <div class="card stat-card h-100 border-0 shadow-sm overflow-hidden">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div>
+                                        <p class="text-muted mb-1 fw-medium text-uppercase small">Akurasi</p>
+                                        <h2 class="fw-bold mb-0">{{ stats.akurasi }}%</h2>
+                                    </div>
+                                    <div class="icon-box bg-success bg-opacity-10 text-success">
+                                        <i class="fas fa-bullseye fa-lg"></i>
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar"
+                                        style="width:{{ stats.akurasi_percentage }}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="col-md-4">
+                        <div class="card stat-card h-100 border-0 shadow-sm overflow-hidden">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div>
+                                        <p class="text-muted mb-1 fw-medium text-uppercase small">Streak</p>
+                                        <h2 class="fw-bold mb-0">{{ stats.streak }} <span
+                                                class="fs-6 text-muted fw-normal">Hari</span></h2>
+                                    </div>
+                                    <div class="icon-box bg-warning bg-opacity-10 text-warning">
+                                        <i class="fas fa-fire fa-lg"></i>
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" role="progressbar"
+                                        style="width: {{ stats.streak_percentage }}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+
+                <!-- ── Menu Utama ── -->
+                <h5 class="section-title">Menu Utama</h5>
+                <div class="horizontal-scroll-wrapper mb-4">
+                    <div class="quick-actions-container">
+                        <div class="quick-action-item">
+                            <a href="{{ url_for('user.latihan') }}" class="quick-action-card">
+                                <div class="action-icon bg-primary"><i class="fas fa-pencil-alt"></i></div>
+                                <h6>Latihan Soal</h6>
+                                <p>Kerjakan soal latihan</p>
+                            </a>
+                        </div>
+                        <div class="quick-action-item">
+                            <a href="{{ url_for('materi.materi_user') }}" class="quick-action-card">
+                                <div class="action-icon bg-success"><i class="fas fa-book"></i></div>
+                                <h6>Materi</h6>
+                                <p>Pelajari modul belajar</p>
+                            </a>
+                        </div>
+                        <div class="quick-action-item">
+                            <a href="{{ url_for('user.ai_feature') }}?show=conversations" class="quick-action-card"
+                                id="nav-ai-conversations">
+                                <div class="action-icon bg-info"><i class="fas fa-robot"></i></div>
+                                <h6>Tanya AI</h6>
+                                <p>Buka daftar chat AI</p>
+                            </a>
+                        </div>
+                        <div class="quick-action-item">
+                            <a href="{{ url_for('user.calculator') }}" class="quick-action-card">
+                                <div class="action-icon bg-warning"><i class="fas fa-calculator"></i></div>
+                                <h6>Kalkulator</h6>
+                                <p>Hitung rumus kompleks</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <!-- ── Aktivitas & Tips ── -->
+                <h5 class="section-title">Aktivitas & Tips</h5>
+                <div class="row g-4 mb-4">
+                    <!-- Aktivitas -->
+                    <div class="col-lg-8">
+                        <div class="card-modern">
+                            <div class="card-modern-header">
+                                <h5><i class="fas fa-history me-2 text-primary"></i>Riwayat Aktivitas Terbaru</h5>
+                                <a href="#">Lihat Log Penuh</a>
+                            </div>
+                            <div class="activity-list">
+                                {% if recent_activities %}
+                                {% for activity in recent_activities %}
+                                <div class="activity-item">
+                                    <div class="activity-icon {{ activity.bg_class|default('bg-primary') }}">
+                                        <i class="{{ activity.icon|default('fas fa-check') }}"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <h6>{{ activity.title }}</h6>
+                                        <p>{{ activity.description }}</p>
+                                    </div>
+                                    <span class="activity-time">{{ activity.time_ago }}</span>
+                                </div>
+                                {% endfor %}
+                                {% else %}
+                                <div class="text-center">
+                                    <i class="fas fa-clipboard-list"></i>
+                                    <h6>Belum ada aktivitas tercatat</h6>
+                                    <p>Mulai kerjakan latihan atau pelajari materi untuk melihat riwayat Anda di sini.
+                                    </p>
+                                    <a href="{{ url_for('user.latihan') }}"
+                                        class="btn btn-sm btn-primary rounded-pill px-4">
+                                        Mulai Aktivitas Baru
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Tips -->
+                    <div class="col-lg-4">
+                        <div class="tips-card">
+                            <h5>✦ Tips Hari Ini</h5>
+                            <div class="quote-wrapper">
+                                <img id="quote-img"
+                                    src="https://cdn.britannica.com/59/23359-050-BDE4C6BA/Albert-Einstein.jpg"
+                                    alt="Scientist" class="quote-avatar">
+                                <p class="tips-quote" id="quote-text">"Matematika murni adalah puisi dari gagasan
+                                    logis."</p>
+                                <p class="tips-author" id="quote-author">— Albert Einstein —</p>
+                            </div>
+                            <p
+                                style="text-align: center; color: white; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; opacity: 0.8; margin-top: 15px;">
+                                Apakah Anda sudah siap untuk belajar? Tekan tombol di bawah untuk mempelajari lebih
+                                lanjut. Semoga Beruntung!
+                            </p>
+                            <a href="{{ url_for('materi.materi_user') }}" class="tips-button mt-3">
+                                Pelajari Materi Matematika di sini →
+                            </a>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const openSidebarBtn = document.getElementById("openSidebarBtn");
+            const closeSidebarBtn = document.getElementById("closeSidebarBtn");
+            const sidebar = document.getElementById("sidebar");
+            const mainContent = document.getElementById("content");
+
+            if (openSidebarBtn && sidebar && mainContent) {
+                openSidebarBtn.addEventListener("click", function () {
+                    sidebar.classList.add("active");
+                    mainContent.classList.add("shifted-sm");
+                });
+            }
+
+            if (closeSidebarBtn && sidebar && mainContent) {
+                closeSidebarBtn.addEventListener("click", function () {
+                    sidebar.classList.remove("active");
+                    mainContent.classList.remove("shifted-sm");
+                });
+            }
+
+            // Smooth scrolling untuk anchor link #
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        // Update tanggal dan waktu real-time
+        document.addEventListener("DOMContentLoaded", function () {
+            const datetimeEl = document.getElementById("datetime");
+            function updateDateTime() {
+                if (!datetimeEl) return;
+                const now = new Date();
+                const options = {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                };
+                datetimeEl.textContent = now.toLocaleDateString('id-ID', options);
+            }
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+        });
+
+        // === Logic untuk Scroll Kata Bijak Otomatis ===
+        document.addEventListener("DOMContentLoaded", function () {
+            const scientists = [
+                { q: "Matematika murni adalah puisi dari gagasan logis.", a: "Albert Einstein", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Albert_Einstein_Head.jpg/120px-Albert_Einstein_Head.jpg" },
+                { q: "Jika saya melihat lebih jauh, itu karena saya berdiri di bahu raksasa.", a: "Isaac Newton", img: "https://greekreporter.com/wp-content/uploads/2025/02/portrait-of-isaac-newton-credit-godfrey-kneller-pd-1.jpg" },
+                { q: "Optimisme adalah bentuk keberanian yang paling diperlukan dalam ilmu pengetahuan.", a: "J. Robert Oppenheimer", img: "https://cdn.britannica.com/93/249993-050-67337109/Julius-Robert-Oppenheimer-Special-Senate-Committee-on-Atomic-Energy-May-12-1945.jpg" },
+                { q: "Matematika adalah ratu ilmu pengetahuan dan teori bilangan adalah ratu matematika.", a: "Carl Friedrich Gauss", img: "https://www.despertarsabiendo.com/wp-content/uploads/2023/09/Retrato-Carl-Friedrich-Gauss-Pintura-1024x559.png" },
+                { q: "Kita hanya bisa melihat jarak pendek ke depan, tetapi banyak hal yang perlu dilakukan.", a: "Alan Turing", img: "https://images.interestingengineering.com/engineers/cover/Qcg7HuMnqibj9VbHYdWrug4BNnQJGwQvNxm6jGRL.png" },
+                { q: "Sebuah persamaan tidak berarti apa-apa bagiku kecuali ia mengekspresikan pikiran Tuhan.", a: "Srinivasa Ramanujan", img: "https://i.pinimg.com/originals/11/22/26/112226f83c0a2f6f14e3fb9778aaa8f9.jpg" },
+                { q: "Angka menguasai alam semesta.", a: "Pythagoras", img: "https://th.bing.com/th/id/OIP.rclKVJL3QtEnEuGCdhAZqgHaHa?w=198&h=198&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" },
+                { q: "Beri aku tempat untuk berdiri, dan aku akan menggerakkan bumi.", a: "Archimedes dari Syracuse", img: "https://th.bing.com/th/id/OIP.7WLL5pu0TsxTT7jxyrtAogHaJC?w=153&h=187&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" },
+                { q: "Ketertarikan pada ilmu, dan perlindungan Tuhan terhadap kaum terpelajar... mendorongku menyusun karya yang paling mudah dan paling berguna dalam al-jabr wal-muqabala.", a: "Al-Khwarizmi", img: "https://th.bing.com/th/id/OIP.DYLV2u0vwyZCQcgHmbUkkAHaE9?w=267&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" },
+                { q: "Imajinasi adalah fakultas penemuan, di atas segalanya.", a: "Ada Lovelace", img: "https://tse1.mm.bing.net/th/id/OIP.XezT4UaTdaXl2YzoWx9e9gHaE7?rs=1&pid=ImgDetMain&o=7&rm=3" },
+                { q: "Matematika adalah seni memberi nama pada pola.", a: "G.H. Hardy", img: "https://tse3.mm.bing.net/th/id/OIP.JR7iX8FYI7sD0WRcVojL3gHaIu?rs=1&pid=ImgDetMain&o=7&rm=3" },
+                { q: "Hukum alam adalah pikiran matematis Tuhan.", a: "Euclid", img: "https://cdn.britannica.com/46/8446-050-BC92B998/Euclid-woodcut-1584.jpg" },
+                { q: "Kecantikan matematika terletak pada kesederhanaan dan keabadiannya.", a: "Henri Poincaré", img: "https://th.bing.com/th/id/OIP.97xvE30msoe2LktIN0lMzQHaJ-?w=186&h=251&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" },
+                { q: "Matematika adalah kunci untuk memahami dunia di sekitar kita.", a: "Roger Bacon", img: "https://th.bing.com/th/id/OIP.fd_pzLvu7gJGriWKu20ukAHaJR?w=202&h=253&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" },
+                { q: "Dalam matematika, kita tidak hanya menemukan jawaban, tetapi juga keindahan.", a: "Sophie Germain", img: "https://th.bing.com/th/id/OIP.4J-MaGy4KXhVjiL5Wh_e3wHaK9?w=124&h=184&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" },
+                { q: "Matematika adalah jembatan antara imajinasi dan realitas.", a: "Leonhard Euler", img: "https://th.bing.com/th/id/OIP.cZ_0_RThxh6zkBvBKIKpegHaFF?w=257&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" },
+                { q: "Matematika adalah bahasa universal yang menghubungkan semua disiplin ilmu.", a: "David Hilbert", img: "https://th.bing.com/th/id/OIP.E4xbhC_1PN950jfbWbgP4QHaE8?w=284&h=189&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" },
+                { q: "Matematika adalah seni yang paling murni dan paling abstrak.", a: "Bertrand Russell", img: "https://cambridgeppf.org/wp-content/uploads/2025/11/bertrand_russell_photo.jpg" },
+                { q: "Matematika adalah alat untuk memahami keajaiban alam semesta.", a: "Carl Sagan", img: "https://facts.net/wp-content/uploads/2023/09/18-unbelievable-facts-about-carl-sagan-1695960698.jpg" },
+                { q: "Matematika adalah cara kita berbicara dengan alam semesta.", a: "Neil deGrasse Tyson", img: "https://tse4.mm.bing.net/th/id/OIP.kDvMkylivy6g3Y5Zgl4KSAHaEo?rs=1&pid=ImgDetMain&o=7&rm=3" },
+                { q: "Matematika adalah bahasa yang digunakan untuk menjelaskan segala sesuatu, dari bintang di langit hingga partikel terkecil di bumi.", a: "Stephen Hawking", img: "https://www.19fortyfive.com/wp-content/uploads/2026/01/Stephen-Hawking-1200x675.jpg" },
+                { q: "Matematika adalah bahasa Tuhan untuk memahami alam semesta.", a: "Galileo Galilei", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Justus_Sustermans_-_Portrait_of_Galileo_Galilei%2C_1636.jpg/120px-Justus_Sustermans_-_Portrait_of_Galileo_Galilei%2C_1636.jpg" }
+            ];
+
+            let currentQuote = 0;
+            const qPicture = document.getElementById("quote-img");
+            const qText = document.getElementById("quote-text");
+            const qAuthor = document.getElementById("quote-author");
+
+            function rotateQuote() {
+                if (!qText || !qAuthor || !qPicture) return;
+
+                currentQuote = (currentQuote + 1) % scientists.length;
+                const scientist = scientists[currentQuote];
+
+                // Fade out semua
+                qText.style.opacity = 0;
+                qAuthor.style.opacity = 0;
+                qPicture.style.opacity = 0;
+
+                setTimeout(() => {
+                    qText.textContent = `"${scientist.q}"`;
+                    qAuthor.textContent = `— ${scientist.a} —`;
+                    qPicture.src = scientist.img;
+                    qPicture.alt = scientist.a;
+
+                    qText.style.opacity = 1;
+                    qAuthor.style.opacity = 1;
+                    qPicture.style.opacity = 1;
+
+                    qText.classList.remove('slide-text');
+                    void qText.offsetWidth;
+                    qText.classList.add('slide-text');
+                }, 600);
+            }
+
+            setInterval(rotateQuote, 10000); // Bergeser setiap 10 detik
+
+            // Tambah CSS transisi untuk gambar
+            const style = document.createElement('style');
+            style.textContent = `
+            #quote-img {
+                transition: opacity 0.6s ease !important;
+            }
+        `;
+            document.head.appendChild(style);
+        });
+    </script>
+
+    <script>
+        // Menambahkan konfirmasi saat tombol logout diklik
+        document.addEventListener('DOMContentLoaded', function () {
+            const logoutLink = document.getElementById('logoutLink');
+            if (logoutLink) {
+                logoutLink.addEventListener('click', function (event) {
+                    // Mencegah link langsung dieksekusi
+                    event.preventDefault();
+                    // Tampilkan dialog konfirmasi
+                    if (confirm('Apakah Anda yakin ingin keluar?')) {
+                        // Jika pengguna setuju, arahkan ke URL logout
+                        window.location.href = this.href;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

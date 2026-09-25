@@ -1,0 +1,28 @@
+body {
+    background: url('../image/gambar-matetmatika.jpeg') no-repeat center center/cover;
+    color: #fff;
+    text-align: center;
+    padding: 60px 20px;
+    position: relative;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+.register {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    margin: auto;
+}
+.register h2 {
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+.input-box {
+    margin-bottom: 20px;
+    text-align: left;
+    position: relative;
+    width: 100%;
+}

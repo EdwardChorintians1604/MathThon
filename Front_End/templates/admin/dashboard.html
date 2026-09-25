@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathThon | Dashboard Admin </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+    <!-- animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        body {
+            background-color: #e9ecef; /* Light gray background */
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        .navbar {
+            background-color: #ffffff !important; /* White navbar background */
+            box-shadow: 0 4px 8px rgba(0,0,0,.05);
+        }
+        .navbar-brand {
+            font-weight: 600;
+            color: #343a40 !important; /* Darker text for brand */
+        }
+        .navbar-brand img {
+            margin-right: 8px;
+            border-radius: 50%;
+        }
+        .card-icon {
+            font-size: 3rem;
+            color: #0d6efd;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white mb-4">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('admin.dashboard_admin') }}">
+            <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+            MathThon Admin
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('admin.manage_users') }}">
+                        <i class="bi bi-person-lines-fill"></i> Kelola Pengguna
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('admin.export_database') }}">
+                        <i class="bi bi-database-down"></i> Ekspor Database
+                    </a>
+                </li>
+            </ul>
+        </div>
+        </a>
+        <div class="d-flex">
+            <a href="{{ url_for('admin.logout_admin') }}" class="btn btn-outline-danger">
+                <i class="bi bi-box-arrow-right"></i> Logout
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h1 class="mb-4 text-center text-primary animate__animated animate__fadeInDown">Selamat Datang, Admin!</h1>
+    <p class="lead text-center mb-5 animate__animated animate__fadeIn animate__delay-1s">Gunakan dashboard ini untuk mengelola aplikasi MathThon.</p>
+    <div class="row">
+        <div class="col-md-6 col-lg-6 mb-4 d-flex">
+            <div class="card flex-fill shadow-sm border-0 animate__animated animate__zoomIn">
+                <div class="card-body text-center d-flex flex-column">
+                    <i class="bi bi-database-down card-icon mb-3"></i>
+                    <h5 class="card-title">Manajemen Database</h5>
+                    <p class="card-text">Unduh salinan lengkap dari database aplikasi untuk keperluan backup atau analisis.</p>
+                    <a href="{{ url_for('admin.export_database') }}" class="btn btn-primary mt-auto w-75 mx-auto">
+                        <i class="bi bi-download"></i> Ekspor Database (.db)
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6 mb-4 d-flex">
+            <div class="card flex-fill shadow-sm border-0 animate__animated animate__zoomIn animate__delay-1s">
+                <div class="card-body text-center d-flex flex-column">
+                    <i class="bi bi-people card-icon mb-3"></i>
+                    <h5 class="card-title">Manajemen Pengguna</h5>
+                    <p class="card-text">Kelola akun pengguna, lihat progres, dan atur izin akses.</p>
+                    <a href="{{ url_for('admin.manage_users') }}" class="btn btn-primary mt-auto w-75 mx-auto">
+                        <i class="bi bi-people-fill"></i> Kelola Pengguna
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6 mb-4 d-flex">
+            <div class="card flex-fill shadow-sm border-0 animate__animated animate__zoomIn animate__delay-2s">
+                <div class="card-body text-center d-flex flex-column">
+                    <i class="bi bi-book card-icon mb-3"></i>
+                    <h5 class="card-title">Manajemen Materi</h5>
+                    <p class="card-text">Kelola materi, lihat progres, dan atur izin akses.</p>
+                    <a href="{{ url_for('admin.manage_materi') }}" class="btn btn-primary mt-auto w-75 mx-auto">
+                        <i class="bi bi-book"></i> Kelola Materi
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6 mb-4 d-flex">
+            <div class="card flex-fill shadow-sm border-0 animate__animated animate__zoomIn animate__delay-3s">
+                <div class="card-body text-center d-flex flex-column">
+                    <i class="bi bi-list card-icon mb-3"></i>
+                    <h5 class="card-title">Manajemen Analisis Hasil</h5>
+                    <p class="card-text">Kelola analisis hasil, lihat progres, dan atur izin akses.</p>
+                    <a href="{{ url_for('admin.manage_analisis_hasil') }}" class="btn btn-primary mt-auto w-75 mx-auto">
+                        <i class="bi bi-list"></i> Kelola Analisis Hasil
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6 mb-4 d-flex">
+            <div class="card flex-fill shadow-sm border-0 animate__animated animate__zoomIn animate__delay-4s">
+                <div class="card-body text-center d-flex flex-column">
+                    <i class="bi bi-person-lines-fill card-icon mb-3"></i>
+                    <h5 class="card-title">Manajemen Feedback User</h5>
+                    <p class="card-text">Kelola Feedback, lihat nilai feedback, dan ambil keputusan yang tepat untuk memperbaiki laman situs dan sistem pada website ini segera</p>
+                    <a href="{{ url_for('admin.manage_feedback') }}" class="btn btn-primary mt-auto w-75 mx-auto">
+                        <i class="bi bi-chat-left-dots"></i> Kelola Feedback Sekarang
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6 mb-4 d-flex">
+            <div class="card flex-fill shadow-sm border-0 animate__animated animate__zoomIn animate__delay-4s">
+                <div class="card-body text-center d-flex flex-column">
+                    <i class="bi bi-shield-check card-icon mb-3"></i>
+                    <h5 class="card-title">Deteksi Serangan atau Bug yang akan mengancam website ini</h5>
+                    <p class="card-text">Website ini juga tidak luput dari serangan atau ancaman dan Bug yang akan mengancam website ini, maka website ini juga membutuhkan keamanan yang tinggi</p>
+                    <a href="{{ url_for('admin.crime_detection') }}" class="btn btn-primary mt-auto w-75 mx-auto">
+                        <i class="bi bi-shield-check"></i> Deteksi Serangan Sekarang
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6 mb-4 d-flex">
+            <div class="card flex-fill shadow-sm border-0 animate__animated animate__zoomIn animate__delay-4s">
+                <div class="card-body text-center d-flex flex-column">
+                    <i class="bi bi-list-check card-icon mb-3"></i>
+                    <h5 class="card-title">Tambahkan soal atau latihan</h5>
+                    <p class="card-text">Tambahkan soal di sini agar anda dapat meng-handle semua soal atau latihan yang ada di sini</p>
+                    <a href="{{url_for('admin.add_soal_materi')}}" class="btn btn-primary mt-auto w-75 mx-auto">
+                        <i class="bi bi-shield-check"></i> Tambahkan latihan
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="mt-auto py-3 bg-light text-center">
+    <div class="container">
+        <span class="text-muted">&copy; 2025 MathThon Admin. All rights reserved.</span>
+    </div>
+</footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

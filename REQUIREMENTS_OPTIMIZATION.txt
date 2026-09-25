@@ -1,0 +1,67 @@
+# ============================================================================
+# REQUIREMENTS.TXT - MathThon AI Optimization
+# ============================================================================
+# Dependencies untuk implementasi 5 tahapan optimasi AI MathThon
+# 
+# Install dengan: pip install -r requirements.txt
+# ============================================================================
+
+# ─────────────────────────────────────────────────────
+# EXISTING DEPENDENCIES (Already in your project)
+# ─────────────────────────────────────────────────────
+
+Flask==2.3.0
+Flask-Session==0.5.0
+python-dotenv==1.0.0
+mysql-connector-python==8.0.33
+google-generativeai==0.3.0  # For Gemini API
+
+# ─────────────────────────────────────────────────────
+# NEW DEPENDENCIES (For Optimization Tahapan 1-5)
+# ─────────────────────────────────────────────────────
+
+# TAHAP 3: Chat Memory Optimization
+# (No additional deps - uses built-in Python)
+
+# TAHAP 4: RAG System dengan ChromaDB
+chromadb==0.4.10
+
+# TAHAP 5: Hybrid Calculation Engine dengan SymPy
+sympy==1.12
+
+# ─────────────────────────────────────────────────────
+# OPTIONAL: For Enhanced Features
+# ─────────────────────────────────────────────────────
+
+# For plotting/visualization (if you add graph plotting)
+# matplotlib==3.7.0
+# numpy==1.24.0
+
+# For async operations (if you optimize with async)
+# aiohttp==3.8.0
+# asyncio-context==1.0.0
+
+# For monitoring & profiling
+# psutil==5.9.0
+
+# ─────────────────────────────────────────────────────
+# DEVELOPMENT DEPENDENCIES (Optional, for testing/debugging)
+# ─────────────────────────────────────────────────────
+
+pytest==7.3.0          # For unit testing
+pytest-cov==4.1.0      # For coverage reports
+black==23.3.0          # For code formatting
+flake8==6.0.0          # For linting
+pylint==2.17.0         # For code analysis
+
+# ─────────────────────────────────────────────────────
+# VERSION NOTES
+# ─────────────────────────────────────────────────────
+#
+# chromadb==0.4.10      → Latest stable (2024)
+# sympy==1.12           → Latest stable with good math support
+# Flask==2.3.0          → LTS version
+# google-generativeai    → Update to latest for Gemini API
+#
+# For production, test each version thoroughly before deploying!
+# ─────────────────────────────────────────────────────

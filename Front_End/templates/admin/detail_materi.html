@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ materi.judul_materi }} | MathThon</title>
+    <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css_materi_user.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js"></script>
+    <style>
+        #materi-content h1 { color: #0984e3; margin-top: 30px; margin-bottom: 20px; font-size: 2rem; }
+        #materi-content h2 { color: #00b894; margin-top: 25px; margin-bottom: 15px; font-size: 1.5rem; }
+        #materi-content h3 { color: #6c5ce7; margin-top: 20px; margin-bottom: 10px; font-size: 1.2rem; }
+        #materi-content p { line-height: 1.8; color: #2d3436; margin-bottom: 15px; }
+        #materi-content code { background: #f1f2f6; padding: 2px 6px; border-radius: 4px; color: #d63031; }
+        #materi-content pre { background: #2d3436; color: #dfe6e9; padding: 15px; border-radius: 8px; overflow-x: auto; }
+        #materi-content ul, #materi-content ol { margin-bottom: 15px; padding-left: 30px; }
+        #materi-content li { margin-bottom: 8px; line-height: 1.6; }
+        #materi-content blockquote { border-left: 4px solid #0984e3; padding-left: 15px; color: #636e72; margin: 20px 0; }
+        .materi-card { background: linear-gradient(135deg, #f8fafc 0%, #dff9fb 100%); border-radius: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="sidebar animate__animated animate__fadeInLeft">
+            <div class="header text-center p-3">
+                <img src="{{ photo_url }}" alt="User Avatar" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover; border: 2px solid #fff;">      
+                <h5 class="mt-2" style="color: white;">{{ users.name }}</h5>
+               <p id="datetime" style="color: white; font-size: 0.9em;"></p>
+            </div>
+            <ul class="list-unstyled ps-3 animate__animated animate__fadeInLeft">
+                <li><a href="{{ url_for('admin.dashboard_admin') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="{{ url_for('admin.manage_materi') }}"><i class="fas fa-book"></i> Materi</a></li>
+                <li><a href="{{ url_for('admin.manage_users') }}"><i class="fas fa-users"></i> Pengguna</a></li>
+                <li><a href="{{ url_for('admin.add_soal_materi') }}"><i class="fas fa-pencil-alt"></i> Latihan Soal</a></li>
+                <li><a href="{{ url_for('admin.logout_admin') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+            <button class="close-sidenav-btn btn btn-secondary btn-sm" id="closeSidebarBtn">
+                <i class="bi bi-x"></i>
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <div id="content" class="main-content">
+            <nav class="nav_1">
+                <button class="open-sidenav-btn" id="openSidebarBtn">
+                    <i class="bi bi-list"></i>
+                </button>
+                <ul style="list-style-type: none;">
+                    <li><a href="#" style="font-size: 36px; text-decoration: none; color: rgb(62, 62, 62);">{{ users.username }}</a></li>
+                </ul>
+            </nav>
+
+            <div class="container mt-5 mb-5">
+                <div class="materi-card p-5">
+                    <h1 class="mb-3" style="font-family:'Tangerine',cursive; font-size:3rem; color:#0984e3;">{{ materi.judul_materi }}</h1>
+                    
+                    {% if materi.image_url %}
+                    <div class="text-center mb-4">
+                        <img src="{{ materi.image_url }}" alt="{{ materi.judul_materi }}" class="img-fluid" style="max-width:400px; border-radius:12px; box-shadow:0 4px 12px #b2bec3;">
+                    </div>
+                    {% endif %}
+                    
+                    <div class="alert alert-info" role="alert">
+                        <strong>Deskripsi:</strong> {{ materi.deskripsi }}
+                    </div>
+                    
+                    <div id="materi-content" style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);"></div>
+                    <script type="application/json" id="materi-content-json">{{ materi.content|default('', true)|tojson }}</script>
+
+                    <div class="mt-5">
+                        <a href="{{ url_for('admin.manage_materi') }}" class="btn btn-secondary btn-lg">
+                            <i class="bi bi-arrow-left"></i> Kembali ke Daftar Materi
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      (function () {
+        var el = document.getElementById('materi-content-json');
+        var rawContent = el ? JSON.parse(el.textContent || '""') : '';
+        if (rawContent && typeof marked !== 'undefined' && marked.parse) {
+          document.getElementById('materi-content').innerHTML = marked.parse(rawContent);
+          if (typeof renderMathInElement === 'function') {
+            renderMathInElement(document.getElementById('materi-content'), {
+              delimiters: [
+                { left: '$$', right: '$$', display: true },
+                { left: '$', right: '$', display: false }
+              ]
+            });
+          }
+        }
+      })();
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const openSidebarBtn = document.getElementById("openSidebarBtn");
+            const closeSidebarBtn = document.getElementById("closeSidebarBtn");
+            const sidebar = document.querySelector(".sidebar");
+            const mainContent = document.getElementById("content");
+
+            if (openSidebarBtn && sidebar) {
+                openSidebarBtn.addEventListener("click", function() {
+                    sidebar.classList.add("active");
+                });
+            }
+
+            if (closeSidebarBtn && sidebar) {
+                closeSidebarBtn.addEventListener("click", function() {
+                    sidebar.classList.remove("active");
+                });
+            }
+        });
+    </script>
+</body>
+</html>

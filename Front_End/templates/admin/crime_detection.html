@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MathThon Admin | Keamanan & Deteksi Kejahatan</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --card-bg: #1e293b;
+      --accent-red: #ef4444;
+      --accent-yellow: #f59e0b;
+      --accent-blue: #3b82f6;
+    }
+    body {
+      background-color: var(--bg-dark);
+      color: #f8fafc;
+      font-family: 'Inter', sans-serif;
+    }
+    .stats-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 15px;
+      transition: transform 0.3s ease;
+    }
+    .stats-card:hover {
+      transform: translateY(-5px);
+    }
+    .table-dark-custom {
+      background: var(--card-bg);
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    .severity-CRITICAL { color: #fecaca; background: #991b1b; padding: 2px 8px; border-radius: 5px; }
+    .severity-HIGH { color: #fef3c7; background: #92400e; padding: 2px 8px; border-radius: 5px; }
+    .nav-link { color: #94a3b8; }
+    .nav-link:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-transparent border-bottom border-secondary mb-4">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="{{ url_for('admin.dashboard_admin') }}">
+      <i class="bi bi-shield-shaded me-2"></i>Security Center
+    </a>
+    <div class="ms-auto">
+      <a href="{{ url_for('admin.dashboard_admin') }}" class="btn btn-sm btn-outline-light">Kembali ke Dashboard</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container pb-5">
+  <div class="row mb-4">
+    <div class="col-12">
+      <h2 class="animate__animated animate__fadeInLeft">Monitoring Keamanan & Deteksi Ancaman</h2>
+      <p class="text-secondary opacity-75">Pemantauan real-time terhadap SQL Injection, DDoS, dan aktivitas mencurigakan lainnya.</p>
+    </div>
+  </div>
+
+  <!-- Stats Grid -->
+  <div class="row g-4 mb-5">
+    <div class="col-md-4">
+      <div class="stats-card p-4 text-center">
+        <h6 class="text-secondary mb-2">Total Insiden Terdeteksi</h6>
+        <h2 class="fw-bold text-blue">{{ summary.total }}</h2>
+        <i class="bi bi-activity text-blue"></i>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stats-card p-4 text-center border-danger">
+        <h6 class="text-secondary mb-2">Ancaman Kritis (Blokir)</h6>
+        <h2 class="fw-bold text-danger">{{ summary.critical }}</h2>
+        <i class="bi bi-shield-x text-danger"></i>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stats-card p-4 text-center">
+        <h6 class="text-secondary mb-2">Status Sistem</h6>
+        <h2 class="fw-bold text-success">Aktif & Aman</h2>
+        <i class="bi bi-check-circle-fill text-success"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logs Table -->
+  <div class="row">
+    <div class="col-12">
+      <div class="table-dark-custom p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h5 class="mb-0"><i class="bi bi-list-task me-2"></i>Log Aktivitas Mencurigakan</h5>
+          <button class="btn btn-sm btn-outline-primary" onclick="loadLogs()"><i class="bi bi-arrow-clockwise"></i> Refresh</button>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-dark table-hover align-middle">
+            <thead>
+              <tr>
+                <th>Waktu</th>
+                <th>Tipe Serangan</th>
+                <th>IP Address</th>
+                <th>Tingkat Bahaya</th>
+                <th>Detail</th>
+              </tr>
+            </thead>
+            <tbody id="securityLogsBody">
+              <tr>
+                <td colspan="5" class="text-center py-5">
+                  <div class="spinner-border text-primary" role="status"></div>
+                  <p class="mt-2">Memuat Log...</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+async function loadLogs() {
+    try {
+        const response = await fetch('/api/security/logs');
+        const logs = await response.json();
+        const tbody = document.getElementById('securityLogsBody');
+        
+        if (logs.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" class="text-center py-4">Belum ada insiden terdeteksi. Sistem aman.</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = logs.reverse().map(log => `
+            <tr class="animate__animated animate__fadeIn">
+                <td class="small">${log.timestamp}</td>
+                <td><span class="badge bg-dark border border-secondary">${log.attack_type}</span></td>
+                <td class="font-monospace small text-info">${log.ip}</td>
+                <td><span class="severity-${log.severity}">${log.severity}</span></td>
+                <td class="small opacity-75">${log.details}</td>
+            </tr>
+        `).join('');
+    } catch (err) {
+        console.error('Gagal memuat log:', err);
+    }
+}
+
+// Load logs on start
+loadLogs();
+// Auto refresh every 30 seconds
+setInterval(loadLogs, 30000);
+</script>
+
+</body>
+</html>

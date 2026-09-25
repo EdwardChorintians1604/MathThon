@@ -1,0 +1,79 @@
+document.addEventListener("DOMContentLoaded", function() {
+    const chatbox = document.getElementById("chatbox");
+    const msgInput = document.getElementById("msg");
+    const sendBtn = document.getElementById("send");
+    const userAvatarUrl = "{{ photo_url }}";
+    const aiAvatarUrl = "{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}";
+
+    function addMessage(sender, message, avatarUrl) {
+        const msgDiv = document.createElement("div");
+        msgDiv.classList.add("chat-message", sender === "user" ? "user-msg" : "ai-msg", "fade-in");
+
+        const avatar = `<img src="${avatarUrl}" alt="${sender}" class="avatar">`;
+        const sanitized = message.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br>");
+        const bubble = `<div class="message-bubble">${sanitized}</div>`;
+
+        msgDiv.innerHTML = sender === "user" ? bubble + avatar : avatar + bubble;
+        chatbox.appendChild(msgDiv);
+        chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    function showTypingIndicator() {
+        const typingDiv = document.createElement("div");
+        typingDiv.id = "typing-indicator";
+        typingDiv.classList.add("chat-message", "ai-msg");
+        typingDiv.innerHTML = `
+            <img src="${aiAvatarUrl}" class="avatar" alt="AI">
+            <div class="message-bubble">
+                <span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>
+            </div>
+        `;
+        chatbox.appendChild(typingDiv);
+        chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    function hideTypingIndicator() {
+        const typing = document.getElementById("typing-indicator");
+        if (typing) typing.remove();
+    }
+
+    async function handleSend() {
+        const message = msgInput.value.trim();
+        if (!message) return;
+
+        addMessage("user", message, userAvatarUrl);
+        msgInput.value = "";
+        msgInput.style.height = "auto";
+        showTypingIndicator();
+
+        try {
+            const response = await fetch("{{ url_for('solve_word_problem') }}", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message })
+            });
+
+            hideTypingIndicator();
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || "Gagal memproses.");
+
+            addMessage("ai", data.response, aiAvatarUrl);
+        } catch (err) {
+            hideTypingIndicator();
+            addMessage("ai", "⚠️ Maaf, terjadi kesalahan. Silakan coba lagi nanti.", aiAvatarUrl);
+        }
+    }
+
+    sendBtn.addEventListener("click", handleSend);
+    msgInput.addEventListener("keydown", e => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            handleSend();
+        }
+    });
+
+    msgInput.addEventListener("input", function() {
+        this.style.height = "auto";
+        this.style.height = (this.scrollHeight) + "px";
+    });
+});

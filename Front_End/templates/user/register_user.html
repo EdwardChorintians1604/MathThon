@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathThon | Registrasi Pengguna Baru</title>
+    <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to top, rgb(0, 0, 0), rgb(100, 96, 96));
+            background-size: cover;
+            background-position: center;
+        }
+        .box {
+            /* Class 'box' pada input type email, bisa dihapus atau disesuaikan */
+            width: 100%;
+            height: 50px;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 1em;
+            color: #fff;
+            padding: 0 1px;
+        }
+
+        .register {
+            position: relative;
+            width: 400px;
+            /* Hapus height: auto agar form menyesuaikan konten */
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, .5);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: bounce 0.6s ease-in-out;
+        }
+
+        .register::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(270deg, #9a9899, #6a6e71, #2f3632, #000000);
+            background-size: 400% 400%;
+            animation: gradientBG 20s linear infinite;
+            border-radius: 20px;
+            z-index: -1;
+        }
+        .register form {
+            padding: 40px; 
+            width: 100%; /* Pastikan form mengisi lebar register box */
+        }
+
+        .register h2 {
+            font-size: 2em;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 30px; 
+        }
+
+        .input-box {
+            position: relative;
+            width: 100%; 
+            margin: 25px 0; 
+            border-bottom: 2px solid #fff;
+            padding-top: 15px; /* Tambahkan padding agar label memiliki ruang saat floating */
+        }
+
+        .input-box label {
+            position: absolute;
+            top: 15px; /* Sesuaikan posisi awal label */
+            left: 5px;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 1em;
+            pointer-events: none;
+            transition: .5s;
+        }
+
+        .input-box input:focus~label,
+        .input-box input:valid~label,
+        .input-box input:not([value=""])~label {
+            /* Tambahkan :not([value=""]) untuk input yang sudah diisi */
+            top: 0px; 
+            font-size: 0.8em; 
+        }
+
+        .input-box input {
+            width: 100%;
+            height: 50px;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 1em;
+            color: #fff;
+            padding: 0 5px; 
+            /* Tambahkan margin-top agar tidak tumpang tindih dengan label */
+            margin-top: 5px; 
+        }
+
+        .input-box input[type="date"] {
+            color: #fff; 
+            padding-right: 30px; /* Tambahkan padding agar ikon kalender terlihat */
+        }
+
+        .input-box input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1); 
+        }
+        
+        /* Style untuk input file yang lebih baik */
+        .input-box input[type="file"] {
+            padding: 10px 5px;
+            height: auto;
+            border: 1px solid rgba(255, 255, 255, 0.5); /* Beri batas visual */
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .register button {
+            width: 100%;
+            height: 45px;
+            background: #fff;
+            border: none;
+            outline: none;
+            border-radius: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+            cursor: pointer;
+            font-size: 1em;
+            color: #000;
+            font-weight: 600;
+            margin-top: 20px; 
+        }
+    </style>
+</head>
+<body>
+<section class="register">
+    <form action="{{ url_for('auth.register_user') }}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <h2>Registrasi Untuk Pengguna Baru</h2>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}" style="color: white; text-align: center; padding: 10px; border: 1px solid crimson; border-radius: 5px; margin-bottom: 15px;">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="input-box">
+            <label for="name">Nama Lengkap Anda: *</label>
+            <input type="text" id="name" name="name" required value="{{ request.form.get('name', '') }}">
+        </div>
+        
+        <div class="input-box">
+            <label for="born_place">Tempat Lahir Anda:</label>
+            <input type="text" id="born_place" name="born_place" value="{{ request.form.get('born_place', '') }}">
+        </div>
+        
+        <div class="input-box">
+            <label for="username">Username Anda: *</label>
+            <input type="text" id="username" name="username" required value="{{ request.form.get('username', '') }}">
+        </div>
+        
+        <div class="input-box">
+            <label for="born_date">Tanggal lahir:</label>
+             <input type="date" id="date" name="born_date" value="{{ request.form.get('date', '') }}">
+        </div>
+        
+        <div class="input-box">
+            <label for="email">Email Anda: *</label>
+            <input class="box" type="email" id="email" name="email" required value="{{ request.form.get('email', '') }}">
+        </div>
+        
+        <div class="input-box">
+            <label for="password">Password: *</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        
+        <div class="input-box">
+            <label for="file">Masukkan Foto Anda:</label>
+            <br>
+            <br>
+            <input type="file" name="foto" accept="image/*">
+        </div>
+        
+        <button type="submit" style="font-size: 20px; color: rgb(36, 9, 156);">Register</button>
+
+        <div class="divider">
+            <span>ATAU</span>
+        </div>
+
+        <!-- Google Sign-In Button -->
+        <div id="g_id_onload"
+             data-client_id="{{ config.GOOGLE_CLIENT_ID }}"
+             data-callback="handleCredentialResponse"
+             data-context="signup"
+             style="display: none;">
+        </div>
+        <div class="g_id_signin"
+             data-type="standard"
+             data-shape="rectangular"
+             data-theme="outline"
+             data-text="signup_with"
+             data-size="large"
+             data-logo_alignment="left"></div>
+
+        <br>
+        
+        <div style="text-align: center; margin-bottom: 15px;">
+            <a href="{{ url_for('auth.login_user') }}" style="font-size: 20px; color: white; text-decoration: none;">Sudah punya akun? Login</a>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 15px;">
+            <a href="{{ url_for('main.home') }}" style="font-size: 20px; color: white; text-decoration: none;">Kembali ke Beranda</a>
+        </div>
+        
+    </form>
+    <style>
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            margin: 20px 0;
+        }
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid rgba(255, 255, 255, .5);
+        }
+        .divider span { padding: 0 10px; }
+    </style>
+</section>
+<script>
+    function handleCredentialResponse(response) {
+        var csrfInput = document.querySelector('input[name="csrf_token"]');
+        var csrfToken = csrfInput ? csrfInput.value : '';
+        var headers = { 'Content-Type': 'application/json' };
+        if (csrfToken) headers['X-CSRFToken'] = csrfToken;
+
+        fetch("{{ url_for('auth.google_login') }}", {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify({ token: response.credential }),
+            credentials: 'same-origin'
+        })
+        .then(function(res) {
+            return res.text().then(function(text) {
+                try {
+                    return { ok: res.ok, data: JSON.parse(text) };
+                } catch (e) {
+                    return { ok: false, data: { error: res.status === 400 ? 'Request tidak valid. Coba refresh halaman.' : 'Terjadi kesalahan server.' } };
+                }
+            });
+        })
+        .then(function(result) {
+            var data = result.data;
+            if (result.ok && data.redirect) {
+                window.location.href = data.redirect;
+            } else {
+                alert(data.error || 'Terjadi kesalahan saat login dengan Google.');
+            }
+        })
+        .catch(function(error) {
+            console.error('Error:', error);
+            alert('Tidak dapat terhubung ke server. Coba lagi nanti.');
+        });
+    }
+
+    // Tampilkan tombol Google setelah library dimuat
+    window.onload = function() {
+        if (document.getElementById('g_id_onload')) {
+            document.getElementById('g_id_onload').style.display = 'block';
+        }
+    }
+</script>
+
+</body>
+</html>

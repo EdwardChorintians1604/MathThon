@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>MathThon | Dashboard User | Silahkan bebas untuk mempelajari apapun di sini </title>
+    <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    .feedback-container {
+        padding: 120px 20px 60px;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+    .feedback-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 40px;
+        max-width: 800px;
+        margin: 0 auto;
+        color: #fff;
+    }
+    .feature-option {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid transparent;
+        border-radius: 10px;
+        padding: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .feature-option:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    .feature-option.active {
+        background: rgba(255, 215, 0, 0.2);
+        border-color: #ffd700;
+        color: #ffd700;
+    }
+    .btn-submit {
+        background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+        border: none;
+        color: #000;
+        font-weight: bold;
+        padding: 15px 40px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 20px;
+    }
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    }
+    .back-home-btn {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 10px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    .back-home-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: #ffd700;
+        border-color: #ffd700;
+    }
+  </style>
+</head>
+<body>
+    <div class="feedback-container">
+        <div class="feedback-card shadow-lg">
+            <h2 class="text-center mb-4">Feedback Anda Sangat Berarti</h2>
+            <div class="mb-3">
+                <a href="{{url_for('user.dashboard_user')}}" class="back-home-btn">
+                    <i class="fas fa-arrow-left me-2"></i> Kembali ke Beranda
+                </a>
+            </div>
+            <br>
+            <p class="text-center text-light opacity-75 mb-5">Bantu kami meningkatkan MathThon dengan memberikan penilaian Anda.</p>
+            
+            <form id="feedbackForm">
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Apa yang Anda rasakan tentang MathThon hari ini?</label>
+                    <div class="row g-3">
+                        <!-- UI & UX -->
+                        <div class="col-6 col-md-4">
+                            <div class="feature-option" data-feature="F1">
+                                <i class="fas fa-crown mb-2 text-warning"></i><br>UI Premium
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="feature-option" data-feature="F9">
+                                <i class="fas fa-magic mb-2 text-info"></i><br>Animasi Halus
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="feature-option" data-feature="F2">
+                                <i class="fas fa-map-signs mb-2 text-danger"></i><br>Navigasi Bingung
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="feature-option" data-feature="F12">
+                                <i class="fas fa-eye-slash mb-2 text-warning"></i><br>Font/Warna Buruk
+                            </div>
+                        </div>
+
+                        <!-- Performa -->
+                        <div class="col-6 col-md-4">
+                            <div class="feature-option" data-feature="F3">
+                                <i class="fas fa-rocket mb-2 text-success"></i><br>Loading Cepat
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="feature-option" data-feature="F4">
+                                <i class="fas fa-tachometer-alt mb-2 text-danger"></i><br>Grafik Lag
+                            </div>
+                        </div>
+
+                        <!-- Konten & Edukasi -->
+                        <div class="col-6 col-md-4">
+                            <div class="feature-option" data-feature="F5">
+                                <i class="fas fa-book-open mb-2 text-primary"></i><br>Materi Lengkap
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="feature-option" data-feature="F6">
+                                <i class="fas fa-brain mb-2 text-warning"></i><br>Materi Rumit
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="feature-option" data-feature="F10">
+                                <i class="fas fa-lightbulb mb-2 text-info"></i><br>Kurang Contoh Nyata
+                            </div>
+                        </div>
+
+                        <!-- Teknis -->
+                        <div class="col-6 col-md-4">
+                            <div class="feature-option" data-feature="F7">
+                                <i class="fas fa-exclamation-triangle mb-2 text-danger"></i><br>Error/Bug
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="feature-option" data-feature="F11">
+                                <i class="fas fa-calculator mb-2 text-warning"></i><br>Kalkulator Salah
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="feature-option" data-feature="F8">
+                                <i class="fas fa-mobile-alt mb-2 text-info"></i><br>Isu Sidenav HP
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="userName" class="form-label fw-bold">Nama (Opsional)</label>
+                    <input type="text" class="form-control bg-dark border-secondary text-white" id="userName" placeholder="Nama Anda">
+                </div>
+
+                <div class="mb-4">
+                    <label for="userComment" class="form-label fw-bold">Komentar Tambahan</label>
+                    <textarea class="form-control bg-dark border-secondary text-white" id="userComment" rows="4" placeholder="Tuliskan saran atau pesan Anda..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-submit">Kirim Feedback Sekarang</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="resultModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white border-secondary">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title text-warning">Analisis Feedback CBR</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="analysisResult">
+                        <p><strong>Kategori:</strong> <span id="resCategory"></span></p>
+                        <p><strong>Status:</strong> <span id="resStatus"></span></p>
+                        <p><strong>Rekomendasi Sistem:</strong></p>
+                        <div class="p-3 bg-secondary bg-opacity-25 rounded border border-secondary" id="resRec"></div>
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const selectedFeatures = new Set();
+        const options = document.querySelectorAll('.feature-option');
+
+        options.forEach(opt => {
+            opt.addEventListener('click', () => {
+                const featureId = opt.dataset.feature;
+                if (selectedFeatures.has(featureId)) {
+                    selectedFeatures.delete(featureId);
+                    opt.classList.remove('active');
+                } else {
+                    selectedFeatures.add(featureId);
+                    opt.classList.add('active');
+                }
+            });
+        });
+
+        document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('.btn-submit');
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Menganalisis...';
+            btn.disabled = true;
+
+            const payload = {
+                name: document.getElementById('userName').value || 'Anonymous',
+                comment: document.getElementById('userComment').value,
+                features: Array.from(selectedFeatures)
+            };
+
+            try {
+                // Menggunakan url_for agar link selalu benar sesuai definisi di Python
+                const response = await fetch("{{ url_for('feedback.submit_feedback_route') }}", {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    document.getElementById('resCategory').textContent = data.analysis.category;
+                    document.getElementById('resStatus').textContent = data.analysis.status;
+                    document.getElementById('resRec').textContent = data.analysis.recommendation;
+                    
+                    const modal = new bootstrap.Modal(document.getElementById('resultModal'));
+                    modal.show();
+                    
+                    // Reset form
+                    e.target.reset();
+                    selectedFeatures.clear();
+                    options.forEach(o => o.classList.remove('active'));
+                }
+            } catch (err) {
+                alert('Gagal mengirim feedback. Pastikan server aktif.');
+            } finally {
+                btn.innerHTML = 'Kirim Feedback Sekarang';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,380 @@
+{% extends "user/dashboard_user.html" %}
+
+{% block title %}MathThon | Daftar Materi Pembelajaran{% endblock %}
+
+{% block head_links %}
+{{ super() }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/css_for_materi_user.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<!-- ═══════════════════════════════════════════════════════ HERO HEADER -->
+<div class="mth-hero animate__animated animate__fadeIn">
+  <div class="mth-hero__grid-overlay"></div>
+  <div class="mth-hero__floating-symbols">
+    <span class="sym sym--pi">π</span>
+    <span class="sym sym--sigma">Σ</span>
+    <span class="sym sym--sqrt">√</span>
+    <span class="sym sym--delta">Δ</span>
+    <span class="sym sym--inf">∞</span>
+    <span class="sym sym--theta">θ</span>
+    <span class="sym sym--lambda">λ</span>
+    <span class="sym sym--phi">φ</span>
+  </div>
+  <div class="mth-hero__content">
+    <div class="mth-hero__eyebrow">
+      <span class="mth-pill">MathThon Universe</span>
+    </div>
+    <h1 class="mth-hero__title">Eksplorasi<br><em>Dunia Matematika</em></h1>
+    <p class="mth-hero__subtitle">Pilih materi, kuasai konsep, dan jadilah ahli matematika yang sesungguhnya.</p>
+
+    <!-- Search bar di dalam hero -->
+    <div class="mth-search-wrap">
+      <i class="bi bi-search mth-search-icon"></i>
+      <input type="text" id="searchInput" class="mth-search"
+        placeholder="Cari materi berdasarkan judul atau deskripsi...">
+      <span class="mth-search-shortcut">⌘ K</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ MAIN CONTENT -->
+<div class="mth-main">
+
+  <!-- Toggle Panel -->
+  <div class="mth-toggle-panel">
+    <div class="mth-toggle-panel__inner">
+      <div class="mth-toggle-group">
+        <button class="mth-toggle-btn mth-toggle-btn--active" id="showActiveMateriBtn">
+          <span class="mth-toggle-btn__dot mth-toggle-btn__dot--active"></span>
+          Materi Aktif
+          <i class="bi bi-chevron-down mth-toggle-btn__chevron" id="activeChevron"></i>
+        </button>
+        <button class="mth-toggle-btn mth-toggle-btn--inactive" id="showInactiveMateriBtn">
+          <span class="mth-toggle-btn__dot mth-toggle-btn__dot--inactive"></span>
+          Materi Tidak Aktif
+          <i class="bi bi-chevron-down mth-toggle-btn__chevron" id="inactiveChevron"></i>
+        </button>
+      </div>
+      <!-- Stats strip -->
+      <div class="mth-stats-strip" id="statsStrip" style="display:none;">
+        <div class="mth-stat"><span class="mth-stat__num" id="totalCount">0</span><span class="mth-stat__label">Total</span></div>
+        <div class="mth-stat__divider"></div>
+        <div class="mth-stat"><span class="mth-stat__num mth-stat__num--active" id="activeCount">0</span><span class="mth-stat__label">Aktif</span></div>
+        <div class="mth-stat__divider"></div>
+        <div class="mth-stat"><span class="mth-stat__num mth-stat__num--inactive" id="inactiveCount">0</span><span class="mth-stat__label">Nonaktif</span></div>
+      </div>
+    </div>
+
+    <!-- Dropdown list aktif -->
+    <div id="activeMateriList" class="mth-dropdown-list" style="display: none;"></div>
+    <!-- Dropdown list tidak aktif -->
+    <div id="inactiveMateriList" class="mth-dropdown-list mth-dropdown-list--inactive" style="display: none;"></div>
+  </div>
+
+  <!-- Section label -->
+  <div class="mth-section-header">
+    <h2 class="mth-section-header__title">Semua Materi</h2>
+    <div class="mth-section-header__line"></div>
+  </div>
+
+  <!-- Loading -->
+  <div id="loading" class="mth-loading">
+    <div class="mth-loading__spinner">
+      <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="25" cy="25" r="20" fill="none" stroke="var(--mth-accent)" stroke-width="3" stroke-dasharray="100 28" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <p class="mth-loading__text">Memuat data materi<span class="mth-ellipsis"></span></p>
+  </div>
+
+  <!-- Grid kartu materi -->
+  <div id="materiContainer" class="mth-grid"></div>
+
+  <!-- Pesan kosong -->
+  <div id="noResults" class="mth-empty" style="display: none;">
+    <div class="mth-empty__icon">∅</div>
+    <p class="mth-empty__text">Materi tidak ditemukan.</p>
+    <p class="mth-empty__sub">Coba kata kunci lain atau hapus filter pencarian.</p>
+  </div>
+
+</div><!-- /mth-main -->
+
+<!-- ═══════════════════════════════════════════════════════ SCRIPT -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // ── Elemen DOM ──────────────────────────────────────────────
+    const container          = document.getElementById("materiContainer");
+    const loading            = document.getElementById("loading");
+    const searchInput        = document.getElementById("searchInput");
+    const showActiveBtn      = document.getElementById("showActiveMateriBtn");
+    const activeListEl       = document.getElementById("activeMateriList");
+    const showInactiveBtn    = document.getElementById("showInactiveMateriBtn");
+    const inactiveListEl     = document.getElementById("inactiveMateriList");
+    const noResults          = document.getElementById("noResults");
+
+    let allMateri        = [];
+    let isActiveVisible  = false;
+    let isInactiveVisible = false;
+
+    // ── Render kartu materi utama ────────────────────────────────
+    function renderMateriCards(list) {
+        container.innerHTML = "";
+        noResults.style.display = list.length === 0 ? "block" : "none";
+
+        list.forEach((materi, index) => {
+            const safeSlug = materi.slug || materi.judul_materi.toLowerCase().replace(/\s+/g, '-');
+            const endpoint = `/user/materi/${safeSlug}`;
+
+            const stars = Array.from({length: 5}, (_, i) =>
+                `<i class="bi ${i < materi.rating ? 'bi-star-fill' : 'bi-star'}"></i>`
+            ).join('');
+
+            const isInactive  = materi.status === 'inactive';
+
+            const card = document.createElement('div');
+            card.className = `mth-card${isInactive ? ' mth-card--inactive' : ''}`;
+            card.style.animationDelay = `${index * 80}ms`;
+            card.innerHTML = `
+                <div class="mth-card__accent"></div>
+                <div class="mth-card__body">
+                  <div class="mth-card__top">
+                    <span class="mth-card__badge ${isInactive ? 'mth-card__badge--inactive' : 'mth-card__badge--active'}">
+                      ${isInactive ? 'Nonaktif' : 'Aktif'}
+                    </span>
+                    <div class="mth-card__stars">${stars}</div>
+                  </div>
+                  <h3 class="mth-card__title">${materi.judul_materi}</h3>
+                  <p class="mth-card__desc">${materi.deskripsi || '—'}</p>
+                  <div class="mth-card__footer">
+                    <a href="${isInactive ? 'javascript:void(0)' : endpoint}"
+                       class="mth-card__btn${isInactive ? ' mth-card__btn--locked' : ''}"
+                       ${isInactive ? `onclick="alert('Maaf, materi ini sedang tidak aktif atau belum tersedia.')"` : ''}>
+                      ${isInactive
+                        ? '<i class="bi bi-lock-fill"></i> Belum Tersedia'
+                        : '<i class="bi bi-play-circle-fill"></i> Pelajari Sekarang'}
+                    </a>
+                  </div>
+                </div>`;
+            container.appendChild(card);
+        });
+    }
+
+    // ── Render daftar teks (aktif / tidak aktif) ─────────────────
+    function renderMateriList(listEl, list, type) {
+        listEl.innerHTML = '';
+        if (!list || list.length === 0) {
+            listEl.innerHTML = `<p class="mth-dropdown-list__empty">Tidak ada materi ${type} saat ini.</p>`;
+            return;
+        }
+        list.forEach((materi, i) => {
+            const el = document.createElement('div');
+            el.className = 'mth-list-item';
+            el.style.transitionDelay = `${i * 60}ms`;
+            el.innerHTML = `
+                <div class="mth-list-item__num">${String(i + 1).padStart(2, '0')}</div>
+                <div class="mth-list-item__content">
+                  <h4 class="mth-list-item__title">${materi.judul_materi}</h4>
+                  <p class="mth-list-item__desc">${materi.deskripsi || '—'}</p>
+                </div>`;
+            listEl.appendChild(el);
+            requestAnimationFrame(() => el.classList.add('mth-list-item--visible'));
+        });
+    }
+
+    // ── Event: search ────────────────────────────────────────────
+    let logSearchTimeout;
+    searchInput.addEventListener("keyup", function () {
+        const term = this.value.toLowerCase();
+        renderMateriCards(allMateri.filter(m =>
+            (m.judul_materi || '').toLowerCase().includes(term) ||
+            (m.deskripsi    || '').toLowerCase().includes(term)
+        ));
+
+        // Debounce activity log request to backend
+        clearTimeout(logSearchTimeout);
+        if (term.trim().length >= 3) {
+            logSearchTimeout = setTimeout(() => {
+                const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
+                const csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : '';
+                
+                fetch('/user/log_activity', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken
+                    },
+                    body: JSON.stringify({
+                        activity_type: 'materi',
+                        description: `Mencari materi dengan kata kunci: "${term.trim()}"`
+                    })
+                }).catch(err => console.error("Error logging search:", err));
+            }, 1200);
+        }
+    });
+
+    // ── Event: tombol aktif ──────────────────────────────────────
+    showActiveBtn.addEventListener("click", function () {
+        isActiveVisible = !isActiveVisible;
+        activeListEl.style.display = isActiveVisible ? "block" : "none";
+        document.getElementById('activeChevron').style.transform = isActiveVisible ? 'rotate(180deg)' : '';
+        this.setAttribute('aria-expanded', isActiveVisible);
+        
+        // Toggle active visual class
+        this.classList.toggle('mth-toggle-btn--active');
+        this.classList.toggle('mth-toggle-btn--inactive');
+        
+        if (isActiveVisible)
+            renderMateriList(activeListEl, allMateri.filter(m => m.status === 'active'), 'aktif');
+    });
+
+    // ── Event: tombol tidak aktif ────────────────────────────────
+    showInactiveBtn.addEventListener("click", function () {
+        isInactiveVisible = !isInactiveVisible;
+        inactiveListEl.style.display = isInactiveVisible ? "block" : "none";
+        document.getElementById('inactiveChevron').style.transform = isInactiveVisible ? 'rotate(180deg)' : '';
+        this.setAttribute('aria-expanded', isInactiveVisible);
+        
+        // Toggle active visual class
+        this.classList.toggle('mth-toggle-btn--active');
+        this.classList.toggle('mth-toggle-btn--inactive');
+        
+        if (isInactiveVisible)
+            renderMateriList(inactiveListEl, allMateri.filter(m => m.status === 'inactive'), 'tidak aktif');
+    });
+
+    // ── Sidebar toggle ───────────────────────────────────────────
+    const openSidebarBtn  = document.getElementById("openSidebarBtn");
+    const closeSidebarBtn = document.getElementById("closeSidebarBtn");
+    const sidebar         = document.getElementById("sidebar");
+    const mainContent     = document.getElementById("content");
+
+    openSidebarBtn?.addEventListener("click", () => {
+        sidebar?.classList.add("active");
+        mainContent?.classList.add("shifted-sm");
+    });
+    closeSidebarBtn?.addEventListener("click", () => {
+        sidebar?.classList.remove("active");
+        mainContent?.classList.remove("shifted-sm");
+    });
+
+    // ── Real-time datetime ───────────────────────────────────────
+    const datetimeEl = document.getElementById("datetime");
+    if (datetimeEl) {
+        const update = () => datetimeEl.textContent = new Date()
+            .toLocaleDateString('id-ID', {
+                weekday:'long', year:'numeric', month:'long',
+                day:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit'
+            });
+        update();
+        setInterval(update, 1000);
+    }
+
+    // ── Smooth scroll ────────────────────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const target = document.querySelector(a.getAttribute('href'));
+            if (target) { e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
+        });
+    });
+
+    // ── FETCH UTAMA ──────────────────────────────────────────────
+    async function initialize() {
+        try {
+            const res = await fetch("/api/materi");
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+            const data = await res.json();
+            loading.style.display = "none";
+
+            if (!Array.isArray(data) || data.length === 0) {
+                container.innerHTML = `<div class="mth-empty"><div class="mth-empty__icon">∅</div><p class="mth-empty__text">Belum ada materi yang tersedia saat ini.</p></div>`;
+                return;
+            }
+
+            allMateri = data;
+
+            // Update stats
+            const activeN   = allMateri.filter(m => m.status === 'active').length;
+            const inactiveN = allMateri.length - activeN;
+            document.getElementById('totalCount').textContent   = allMateri.length;
+            document.getElementById('activeCount').textContent  = activeN;
+            document.getElementById('inactiveCount').textContent = inactiveN;
+            document.getElementById('statsStrip').style.display = 'flex';
+
+            renderMateriCards(allMateri);
+
+        } catch (err) {
+            console.error("Gagal fetch materi:", err);
+            loading.style.display = "none";
+            container.innerHTML = `
+                <div class="mth-error">
+                  <i class="bi bi-exclamation-triangle-fill"></i>
+                  <p>Terjadi kesalahan saat memuat data materi.</p>
+                  <small>${err.message}</small>
+                </div>`;
+        }
+    }
+
+    initialize();
+});
+</script>
+
+<!-- Enhanced Scripts for Better UX -->
+<script>
+// Search Debouncing for better performance
+function debounce(func, delay) {
+    let timeoutId;
+    return function(...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
+// Keyboard Shortcut Support
+document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) searchInput.focus();
+    }
+});
+
+// Intersection Observer for lazy animations
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.mth-card').forEach(card => {
+    observer.observe(card);
+});
+
+// Enhanced accessibility: close dropdowns on escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const activeBtn = document.querySelector('[aria-expanded="true"]');
+        if (activeBtn) activeBtn.click();
+    }
+});
+
+// Add smooth scroll back to top on page load
+window.addEventListener('load', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+{% endblock %}

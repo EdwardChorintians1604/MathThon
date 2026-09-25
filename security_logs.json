@@ -1,0 +1,42 @@
+[
+    {
+        "timestamp": "2026-01-29 04:08:23",
+        "ip": "127.0.0.1",
+        "path": "/login",
+        "method": "GET",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: ' OR 1=1 --...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0"
+    },
+    {
+        "timestamp": "2026-01-29 04:15:30",
+        "ip": "127.0.0.1",
+        "path": "/login",
+        "method": "GET",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: ' OR 1=1 --...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0"
+    },
+    {
+        "timestamp": "2026-01-29 04:19:44",
+        "ip": "127.0.0.1",
+        "path": "/login",
+        "method": "GET",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: ' OR 1=1 --...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-01-29 12:42:58",
+        "ip": "192.168.100.117",
+        "path": "/api/feedback/list",
+        "method": "GET",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: 1'; DROP TABLE users; --...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0"
+    }
+]

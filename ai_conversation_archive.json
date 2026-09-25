@@ -1,0 +1,92 @@
+[
+  {
+    "id": "1be30c7c-f67e-4074-8b9f-7dd1b4015c4e",
+    "title": "Percakapan AI (Proyek Pertama)",
+    "messages": [
+      "You : Halo, AI!",
+      "AI : Halo, ada yang bisa saya bantu?",
+      "You : Hitung 2+2",
+      "AI : Jawabannya adalah 4"
+    ],
+    "timestamp": "2026-01-09 12:09:31"
+  },
+  {
+    "id": "abe1f970-c333-40c1-a740-a7c4031a88ae",
+    "title": "Proyek Pertama - Akar",
+    "messages": [
+      "You : Berapa akar dari 16?",
+      "AI : Akar dari 16 adalah 4"
+    ],
+    "timestamp": "2026-01-09 12:09:18"
+  },
+  {
+    "id": "2b100111-cea2-4cf9-bacd-cc4ec313d3fe",
+    "title": "Barisan Geometri - Pembelajaran Matematika SMA",
+    "messages": [
+      "You : Coba beritahu kepada saya mengenai barisan dan deret geometri",
+      "AI : Berikut adalah penjelasan singkat tentang barisan dan deret geometri:\n\n**Barisan:**\n\nBarisan adalah sebuah perangkat geometric yang terdiri dari setiap angka dalam bentuk aritmatika, yaitu:\n\na, a+d, a+2d, ..., an\n\ndimana n adalah nomor angka dan d adalah diffusi. Barisan dapat diartikan sebagai \"nomor angka bergerak ke kiri\" dan umum digunakan untuk menjelaskan fenomena yang terkait dengan pergerakan bilangan.\n\n**Deret Geometri:**\n\nDeret geometri adalah sebuah perangkat geometric yang terdiri dari setiap angka dalam bentuk aritmatika, yaitu:\n\n1, 2, 4, 8, 16, 32, ...\n\ndimana n adalah nomor angka dan d adalah diffusi. Deret geometri dapat diartikan sebagai \"nomor angka bergerak ke kiri dengan suatu ketepatan tertentu\" dan umum digunakan untuk menjelaskan fenomena yang terkait dengan pergerakan bilangan alam.\n\n**Caranya Membuat Barisan dan Deret Geometri:**\n\nBerikut adalah cara membuat barisan dan deret geometri:\n\n* Gunakan rumus dasar a = na-n+1, di mana n adalah nomor angka dan d adalah diffusi.\n* Buatlah grafik dari grafik yang terdapat pada fungsi tersebut.\n\n**Contoh Contoh:**\n\n* Barisan: 2, 4, 8, 16, 32...\n* Deret Geometri: 1, 2, 4, 8, 16, ...\n\nSemoga penjelasan di atas dapat membantu Anda memahami barisan dan deret geometri!",
+      "You : Bagaimana cara mengoperasikan barisan atau deret geometri apabila angkanya berupa akar (seperti akar 25, akar 45, dsb)",
+      "AI : Untuk mengoperasikan barisan atau deret geometri dengan menggunakan angka sebagai bagian dari deret tersebut, kita dapat menuliskannya dalam bentuk formula:\n\nn(x) = x * r^n\n\ndimana:\n- n(x) adalah fungsi dari pilihan (deret)\n- x merupakan parameter yang disebut \"differensial\" atau \"rumus\"\n- r adalah konstanta (tidak bergantung pada x)\n\nUntuk menghitung rata-rata (aritmatika), medan (kedalaman) dan rumus akhir, kita dapat menggunakan beberapa formula berikut:\n\n1. Rata-rata (Arithmatika):\n\nrata-rata = n / 2\n\nMisalnya: deret geometri a, b, c, ... dengan rasio dari setiap angka ke angka sebelumnya adalah 3/4.\n\n- Rata-rata = 5 / 2\n- Rata-rata = 2,50\n\n2. Medan (Kedalaman):\n\nmedan = n * rata-rata\n\nMisalnya: deret geometri a, b, c, ... dengan rasio dari setiap angka ke angka sebelumnya adalah 3/4.\n\n- Medan = 5 * 2,50\n- Medan = 12,5\n\n3. Rumus Akhir:\n\nrumus akhir = n * (rata-rata ^ n - 1) / (n-1)\n\nMisalnya: deret geometri a, b, c, ... dengan rasio dari setiap angka ke angka sebelumnya adalah 3/4.\n\n- Rumus akhir = 5 * ((2,50)^5 - 1) / 4\n- Rumus akhir ≈ 21,08\n\nDengan demikian, kita dapat menghitung berbagai parameter dalam deret geometri menggunakan konsep dasar ini.",
+      "You : Bagaimana cara mengoperasikan barisan atau deret geometri apabila angkanya berupa akar (seperti sqrt(25), sqrt(45), dsb)",
+      "AI : Untuk mengoperasikan barisan atau deret geometri dengan angka-angka yang berakar (seperti \\sqrt{n}, \\tan(n), dsb), Anda dapat melakukan langkah-langkah berikut:\n\n1.  **Perhatikan Konstitusi Akar**: Jika akar dalam sebuah deret geometri adalah konstanta, maka deret tersebut merupakan konstanta geometris.\n2.  **Rangkumi Poin-Tengah**: Deret geometri dengan angka-angka yang berakar dapat dilakukan jika Anda menemukan poin-tengah dari akarnya (misalnya \\sqrt{25} = 5). Setelah menemukan poin-tengah, Anda dapat menggunakan konstitusi poin-tengah sebagai dasar untuk mengoperasikan deret geometri.\n3.  **Perhitungkan Rumus Deret Geometris**: Pada umumnya, rumus deret geometris adalah: A(n) = Ar^2 * (1 - r), atau A(n) = An / (n + 1).\n4.  **Pahami Konstitusi Akar**: Untuk mengoperasikan barisan geometri dengan akar yang berakar, Anda perlu menemukan konstitusi poin-tengah dari akar tersebut.\n5.  **Perhitungkan Rumus Baris Geometris**: Setelah menemukan konstitusi poin-tengah, Anda dapat menggunakan rumus baris geometri untuk mengoperasikan barisan geometri dengan angka-angka yang berakar.\n\nContoh:\n\n*   Jika Anda ingin mengoperasikan deret geometri dengan akar \\sqrt{25} = 5, maka poin-tengah dari akar tersebut adalah (1 + √2) / 2.\n*   Rumus baris geometri untuk deret ini dapat ditulis sebagai: A(n) = Ar^2 * (1 - r)\n \nDengan demikian, Anda telah mengoperasikan barisan geometri dengan angka-angka yang berakar.",
+      "You : Terimakasih, Tuhan Yesus memberkati",
+      "You : Terimakasih, Tuhan Yesus Memberkati",
+      "AI : Baik, berikut adalah jawaban secara singkat dan rinci:\n\n1. **Apakah kamu membutuhkan bantuan?**\n2. **Bagaimana aku bisa membantu?** (opsional)\n3. **Apa yang ingin kamu lakukan selanjutnya?**",
+      "You : Nanti Saja",
+      "You : Fungsi Turunan",
+      "AI : Berikut adalah contoh fungsi turunan dalam matematika:\n\n**1. Fungsi Turunan (Derivative)**\n\nFungsi turunan merupakan metode untuk menghitung kemajuan atau perubahan suatu variabel pada pertengahan dari interval tertentu. Dalam bahasa sederhana, fungsi turunan dapat diartikan sebagai \"apa perbedaan antara dua titik pada interval yang sama\".\n\n**Contoh:**\n\nJika f(x) = 2x^3 - 5x + 3\n\nFungsi turunan dari x = a ke x = b adalah:\n\nf'(a) = (b-a)(3(2)^2 - 1)\n= (b-a)(9 - 1)\n= (b-a)(8)\n\nJadi, perbedaan antara f(x) pada titik-titik (a, b) dan (0, 1) adalah:\n\nf'(0) = 8\nf'(1) = 5\n\n**2. Fungsi Turunan Diferensial**\n\nFungsi turunan diferensial merupakan ukuran kemajuan pada interval tertentu. Dalam bahasa sederhana, fungsi turunan diferensial dapat diartikan sebagai \"apa perbedaan antara dua titik pada interval yang sama\".\n\n**Contoh:**\n\nJika f(x) = 2x^3 - 5x + 3\n\nFungsi turunan diferensial dari x = a ke x = b adalah:\n\nf'(x) = lim (h → 0) [f(a+h) - f(a)] / h\n= lim (h → 0) [(2(h^3) - 5(h) + 3) - (2a^3 - 5a + 3)] / h\n\nJika a = b, maka f'(x) sama dengan f(x)."
+    ],
+    "timestamp": "2026-01-09 18:28:37"
+  },
+  {
+    "id": "207b2f9d-b18d-4dd4-b41b-32b670ecbfd6",
+    "title": "Konsep Kabataku dalam MTK",
+    "messages": [
+      "You : Jelaskan kepada saya mengenai Konsep KaBaTaKu (x : + -) dalam dunia matematika",
+      "AI : Maaf, saya tidak bisa menjawab pertanyaan Anda tentang konsep \"KaBaTaKu\" yang mungkin tidak sesuai dengan standar bahasa Indonesia. Namun, saya bisa membantu menjelaskan konsep yang terkait dengan operasi aritmatik dan operasi matematika umum.\n\nDalam dunia matematika, operasi aritmatika adalah perintah matematika yang digunakan untuk melakukan operasi berupa penambahan, pengurangan, perkalian, pembagian, atau ekspresi logis. Operasi matematika dapat dilakukan pada angka-angka, nilai fungsional (misalnya fungsi), dan bahkan interval waktu.\n\n\"KaBaTaKu\" mungkin adalah istilah yang tidak umum digunakan dalam konteks operasi matematika, tetapi jika Anda ingin menjelaskan konsep \"sama-sama\", saya bisa membantu. Dalam contoh sederhana, \"sama-sama\" berarti sama dengan atau semakin besar/besar dari yang awal.\n\nContohnya:\n\n- Jika kita memiliki dua angka: 5 dan -3.\n- Operasi \"KaBaTaKu\" dapat dilakukan terhadap angka-angka ini seperti ini:\n +5\n-3\n+ (tambahkan 5 ke -3)\n- (kurangkan 5 dari -3)\n\nDalam contoh di atas, \"sama-sama\" berarti hasilnya adalah: 2\n\nNamun, jika Anda ingin menjelaskan konsep yang lebih kompleks atau umum, saya bisa membantu. Berikut beberapa contoh:\n\n- Operasi operasional matematika dapat dilakukan pada individu, kelompok, atau sistem.\n- Setiap angka memiliki nilai sendiri dan dapat digunakan dalam berbagai operasi matematika.\n- Nilai fungsional (misalnya fungsi) dapat digunakan untuk menggambarkan hubungan antara variabel.\n\nJika Anda ingin mempelajari lebih lanjut tentang konsep \"KaBaTaKu\" atau operasional matematika umum, saya bisa membantu.",
+      "You : Selesaikan soal berikut: \n\n3 + ((78 * 5)/12) * ((34-23)/(23-12))",
+      "You : Selesaikan soal berikut: 3 + ((78 * 5)/12) * ((34-23)/(23-12))",
+      "AI : Berikut adalah langkah-langkah untuk menjawab pertanyaan tersebut:\n\n1. Pecah matematika dalam dua operasi:\n - Penjumlahan: 3 + 78\n - Pengurangan: (78 * 5)/12, (34-23)/(23-12)\n2. Ulangi proses dari hasilnya:\n   - Penjumlahan: 81\n   - Pengurangan: 10/4, 11/11\n3. Lakukan perkalian:\n   - 0,25 \n4. Lakikan penambahan:\n   - 81 + 0.25\n5. Ulangi proses dari hasilnya:\n   - 81,575"
+    ],
+    "timestamp": "2026-01-09 18:09:56"
+  },
+  {
+    "id": "3d46bab3-5676-43f6-88a1-7f0c8d506728",
+    "title": "Trigonometri",
+    "messages": [
+      "You : Apa itu trigonometri?",
+      "AI : Trigonometri adalah salah satu bidang matematika yang menekankan pada studi dan aplikasi trikoid, yaitu trikoid yang memiliki sisi tegak lurus (perpaduan dua garis yang memanjangkan diri mereka sendiri). Trikoid ini sering digunakan untuk menganalisis berbagai hal dalam kehidupan sehari-hari.\n\nTrigonometri memiliki beberapa tujuan utama, yaitu:\n\n1. **Menghitung jarak** (distantia): Untuk menentukan panjang seseorang atau sesuatu yang terletak di atas permukaan.\n2. **Menghitung sudut** (angle): Untuk menghitung sudut antara dua garis yang memanjangkan diri mereka sendiri.\n3. **Menghitung tinggi atau lebar** (altitude, breadth): Untuk menentukan panjang seseorang atau sesuatu yang terletak di atas permukaan.\n\nTrigonometri juga memiliki beberapa konsep dasar yang unik, seperti:\n\n* **Sinus, kosinus, dan tangent**: Konsep-trigonometri ini memungkinkan kita untuk menghitung nilai trigonometris dari sudut antara dua garis.\n* **Fungsi sinus, kosinus, dan tangent**: Fungsi-fungsini ini digunakan untuk menghitung nilai trigonometris pada berbagai sudut.\n\nContoh aplikasi trigonometri:\n\n* **Pendakian**: Menggunakan trigonometri untuk menentukan jarak antara pegunungan atau gunung dengan tempat tinggal.\n* **Inovasi industri**: Menggunakan trigonometri untuk menghitung ukuran dan bentuk produk industri, seperti baut atau mobil.\n* **Edukasi**: Menggunakan trigonometri untuk menjelaskan konsep-konsep dasar yang terkait dengan alam dan fisika.\n\nDalam rangka meningkatkan keterampilan matematika siswa, trigonometri dapat menjadi salah satu bidang yang menarik dan penting dalam kehidupan sehari-hari.",
+      "You : Bagaimana cara menghitung Sin, Cos, dan Tan?",
+      "AI : Berikut adalah langkah-langkah untuk menghitung Sine (Sin), Cosine (Cos), dan Tangent (Tan):\n\n**Sine (Sin)**\n\n1. Pastikan kedua nilai dalam Sine adalah positif\n2. Gunakan rumus: `Sin(x) = a / b`\n\t* a adalah sinusama dimasa bergerak ke arah yang sama dengan sudut yang ditanya\n\t* b adalah sinusama dimasa bergerak ke arah yang berlawanan dengan sudut yang ditanya\n3. Jika a dan b memiliki besarnya yang berbeda, maka Sine akan mengalami kesalahan (sinusama tidak dapat dibagi 0)\n\n**Cosine (Cos)**\n\n1. Pastikan kedua nilai dalam Cosine adalah positif\n2. Gunakan rumus: `Cos(x) = a / b`\n\t* a adalah kosinus sama dimasa bergerak ke arah yang sama dengan sudut yang ditanya\n\t* b adalah kosinus sama dimasa bergerak ke arah yang berlawanan dengan sudut yang ditanya\n3. Jika a dan b memiliki besarnya yang berbeda, maka Cosine akan mengalami kesalahan (cosinus tidak dapat dibagi 0)\n\n**Tangent (Tan)**\n\n1. Pastikan kedua nilai dalam Tangent adalah positif atau negatif\n2. Gunakan rumus: `Tan(x) = sin(x) / cos(x)`\n\t* Sin x adalah sinusama sama pada sudut x\n\t* Cos x adalah kosinus sama pada sudut x\n3. Jika Sin x dan Cos x memiliki besarnya yang berbeda, maka Tangent akan mengalami kesalahan (tanin tidak dapat dibagi 0)\n\nContoh:\n\nJika kita ingin mengetahui Sine dari sudut A, dengan sinusama sama pada 60 derajat, maka a = 1 dan b = 1.\n\nRumus: Sin(60°) = 1 / 1\nHasil: Sin(60°) = 1\n\nJika kita ingin mengetahui Cosine dari sudut A, dengan sinusama sama pada 120 derajat, maka a = -1 dan b = 1.\n\nRumus: Cos(120°) = -1 / 1\nHasil: Cos(120°) = -1\n\nJika kita ingin mengetahui Tangent dari sudut A, dengan sinusama sama pada 90 derajat, maka a = sin(90°) = 1 dan b = cos(90°) = 0.\n\nRumus: Tan(90°) = 1 / 0\nHasil: Tan(90°) = Infty\n\nPerlu diingat bahwa Tangent tidak dapat dibagi 0, sehingga hasilnya akan mengalami kesalahan jika a dan b memiliki besarnya yang berbeda.",
+      "You : Coba jelaskan kepadaku mengenai deret geometri dan deret aritmatika, dan apa perbedaannya?",
+      "AI : Berikut penjelasan tentang dua jenis deret:\n\n**Deret Geometri**\n\nDeret geometri adalah sebuah deret yang terdiri dari banyak angka yang dikurangi secara bertahap. Deret ini memiliki rumus `a, ar, ar^2, ar^3,...` atau `a, ar, ar^2, ar^3, ...`.\n\nContoh:\n1. 2, 4, 8, 16,...\n2. Rumus: `hasil = a * r^n`\n3. Perhatikan rumus di atas. Deret geometri ini dapat berubah sesuai dengan nilai dari ekspresi di bawahnya. Misalnya jika n=2 maka hasilnya adalah 2*4 = 8, n=3 maka hasilnya adalah 2*4*9 = 72, dan sebagainya.\n\n**Deret Aritmatika**\n\nDeret aritmatika adalah sebuah deret yang terdiri dari banyak angka yang dikurangi secara bertahap. Deret ini memiliki rumus `a, a+b, a+2b,...` atau `a, a+b, a+2b, ...`.\n\nContoh:\n1. 2, 4, 6, 8,...\n2. Rumus: `hasil = a + (n-1)*b`\n3. Perhatikan rumus di atas. Deret aritmatika ini juga dapat berubah sesuai dengan nilai dari ekspresi di bawahnya. Misalnya jika n=2 maka hasilnya adalah 2+1*4 = 10, n=3 maka hasilnya adalah 2+1*6 = 12, dan sebagainya.\n\nPerbedaan antara kedua jenis deret tersebut:\n\n- Deret geometri memiliki rumus `hasil = a * r^n`, sedangkan deret aritmatika memiliki rumus `hasil = a + (n-1)*b`.\n- Deret geometri dapat berubah sesuai dengan nilai dari ekspresi di bawahnya, sedangkan deret aritmatika tidak dapat berubah.\n- Deret geometri sering digunakan untuk menyelesaikan masalah seperti persamaan matematika dan perhitungan waktu, sedangkan deret aritmatika sering digunakan untuk menyelesaikan masalah matematika dan analisis data."
+    ],
+    "timestamp": "2026-01-09 21:21:08"
+  },
+  {
+    "id": "2c5fd76b-3a28-457e-ae75-025a44fb5911",
+    "title": "Trigonometri - Sin, Cos, Tan dan Penerapannya dalam ruang lingkup masyarakat",
+    "messages": [
+      "You : Hallo, saya ingin belajar mengenai Sin, Cos, dan Tan. Berikan saya penjelasan mengenai contoh penerapannya dalam kehidupan masyarakat!",
+      "AI : Baiklah, mari kita mulai dengan memahami konsep-konsep trigonometrik yang penting: Sin, Cos, dan Tan.\n\n**Sin**\n\nSin (sinus) adalah nilai samping dari sudut di sebuah bidang. Nilainya menunjukkan seberapa kuat sinar yang terjadi pada sudut tersebut. Dengan demikian, Sin dapat diketahui dengan menggunakan senar atau korek api.\n\nContoh:\n\n* Jika suatu objek melelehkan beratnya 50 kg dalam waktu 2 detik, maka jaraknya dari bumi dapat dihitung dengan menggunakan Sin.\n* Jika Anda memiliki tangan yang panjang 60 cm dan ingin mengetahui garisaning suara yang Anda dengar saat terdengar musik, maka Anda dapat menggunakan Sin untuk menghitung jarak antara kaki dan ear.\n\n**Cos**\n\nCos (kosinus) adalah nilai atas dari sudut di sebuah bidang. Nilainya menunjukkan seberapa kuat kosinusa yang terjadi pada sudut tersebut. Dengan demikian, Cos dapat diketahui dengan menggunakan senar atau korek api.\n\nContoh:\n\n* Jika suatu objek melelehkan beratnya 50 kg dalam waktu 2 detik, maka jaraknya dari bumi dapat dihitung dengan menggunakan Cos.\n* Jika Anda memiliki tangan yang panjang 60 cm dan ingin mengetahui garisaning suara yang Anda dengar saat terdengar musik, maka Anda dapat menggunakan Cos untuk menghitung jarak antara kaki dan ear.\n\n**Tan**\n\nTan (tangensi) adalah nilai bawah dari sudut di sebuah bidang. Nilainya menunjukkan seberapa kuat tanjakan yang terjadi pada sudut tersebut. Dengan demikian, Tan dapat diketahui dengan menggunakan senar atau korek api.\n\nContoh:\n\n* Jika suatu objek melelehkan beratnya 50 kg dalam waktu 2 detik, maka jaraknya dari bumi dapat dihitung dengan menggunakan Tan.\n* Jika Anda memiliki tangan yang panjang 60 cm dan ingin mengetahui garisaning suara yang Anda dengar saat terdengar musik, maka Anda dapat menggunakan Tan untuk menghitung jarak antara kaki dan ear.\n\n**Praktikum**\n\nBanyak praktikum yang dilakukan dalam kehidupan sehari-hari, seperti:\n\n* Menggunakan senar atau korek api untuk mengetahui jarak antara objek dengan bumi atau matahari.\n* Menggunakan kosinusa untuk mengetahui garisaning suara yang Anda dengar saat terdengar musik.\n* Menggunakan tangensi untuk mengetahui jarak antara kaki dan ear.\n\nDengan memahami konsep-konsep trigonometrik tersebut, Anda dapat menyesuaikan diri dengan situasi-situasi kehidupan sehari-hari dan menggunakan informasinya untuk membuat keputusan-keputusan yang tepat."
+    ],
+    "timestamp": "2026-01-13 20:02:33"
+  },
+  {
+    "id": "069c1b70-7fe4-4088-84d8-a275dcfcd170",
+    "title": "Limit - Pertanyaan yang harus dijawab",
+    "messages": [
+      "You : Selesaikan soal berikut: \n\nlimit x -> 12\n\n((2x * 60)/1000) + (12 * 5x^2)",
+      "AI : Berikut adalah langkah-langkah penyelesaian:\n\n1. **Perhatikan rumus yang diberikan**\n\nRumus: ((2x * 60)/1000) + (12 * 5x^2)\n\n2. **Substitusikan nilai x = 12**\n\nKarena limit x -> 12, kita akan menggunakan nilai x = 12.\n\n*   Untuk nilai 1, kita mulai dengan mengurutakannya terlebih dahulu:\n    -   (2 * 12) * 60\n    -   24 * 60\n    -   1440\n3. **Hitung hasilnya**\n\nUntuk nilai 2, kita melakukan operasi matematika:\n    -   12 * 5 * (12^2)\n    -   12 * 5 * 144\n    -   8640\n\nJadi, rumus menjadi:\n\nhasil = 1440 + 8640"
+    ],
+    "timestamp": "2026-01-14 00:08:53"
+  },
+  {
+    "id": "2662f8b9-43d7-4a88-8fe9-db10152539a1",
+    "title": "Vektor",
+    "messages": [
+      "You : Buatkan saya tabel sin, cos, tan beserta nilainya!"
+    ],
+    "timestamp": "2026-01-14 21:18:11"
+  }
+]

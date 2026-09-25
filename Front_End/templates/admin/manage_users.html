@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - MathThon</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --primary-dark: #1d4ed8;
+            --danger: #dc2626;
+            --danger-light: #fef2f2;
+            --warning: #d97706;
+            --warning-light: #fffbeb;
+            --success: #16a34a;
+            --success-light: #f0fdf4;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-500: #64748b;
+            --gray-700: #334155;
+            --gray-900: #0f172a;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+            --shadow-md: 0 4px 16px rgba(0,0,0,.08);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,.10);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: var(--gray-100);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--gray-900);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── NAVBAR ── */
+        .navbar {
+            background: #ffffff !important;
+            box-shadow: 0 1px 0 var(--gray-200);
+            padding: 0.75rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--gray-900) !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .navbar-brand img {
+            border-radius: 50%;
+            border: 2px solid var(--gray-200);
+        }
+        .nav-link {
+            color: var(--gray-500) !important;
+            font-weight: 500;
+            font-size: 0.875rem;
+            padding: 0.5rem 0.75rem !important;
+            border-radius: var(--radius-sm);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav-link:hover {
+            color: var(--primary) !important;
+            background: var(--primary-light);
+        }
+        .btn-logout {
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 0.45rem 1rem;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid var(--danger);
+            color: var(--danger);
+            background: transparent;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+        .btn-logout:hover {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        /* ── PAGE HEADER ── */
+        .page-header {
+            background: #fff;
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1.75rem 0;
+            margin-bottom: 2rem;
+        }
+        .page-header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin: 0 0 4px;
+        }
+        .page-header p {
+            color: var(--gray-500);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        .badge-count {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 99px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        /* ── SEARCH ── */
+        .search-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .search-wrapper .bi-search {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-500);
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+        .search-wrapper input {
+            padding-left: 38px;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid var(--gray-200);
+            font-size: 0.9rem;
+            height: 44px;
+            background: #fff;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .search-wrapper input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+            outline: none;
+        }
+
+        /* ── TABLE ── */
+        .table-card {
+            background: #fff;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+        .table {
+            margin: 0;
+            font-size: 0.875rem;
+        }
+        .table thead th {
+            background: var(--gray-900);
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 14px 16px;
+            border: none;
+            white-space: nowrap;
+        }
+        .table tbody tr {
+            border-bottom: 1px solid var(--gray-100);
+            transition: background 0.15s;
+        }
+        .table tbody tr:hover { background: var(--gray-50); }
+        .table tbody td, .table tbody th {
+            padding: 14px 16px;
+            vertical-align: middle;
+            border: none;
+            color: var(--gray-700);
+        }
+        .table tbody th { font-weight: 600; color: var(--gray-500); font-size: 0.8rem; }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gray-200);
+        }
+        .user-name { font-weight: 600; color: var(--gray-900); }
+        .user-username { font-size: 0.8rem; color: var(--gray-500); }
+        .user-email { font-size: 0.82rem; }
+
+        /* ── ACTION BUTTONS ── */
+        .btn-view {
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid #d97706;
+            color: #d97706;
+            background: var(--warning-light);
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+        .btn-view:hover {
+            background: #d97706;
+            color: #fff;
+            border-color: #d97706;
+        }
+        .btn-del {
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid var(--danger);
+            color: var(--danger);
+            background: var(--danger-light);
+            transition: all 0.2s;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+        .btn-del:hover {
+            background: var(--danger);
+            color: #fff;
+        }
+        .action-group { display: flex; gap: 6px; flex-wrap: wrap; }
+
+        /* ── EMPTY STATE ── */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--gray-500);
+        }
+        .empty-state i { font-size: 3rem; opacity: 0.3; margin-bottom: 1rem; }
+
+        /* ── STATS ── */
+        .stats-section { margin: 2.5rem 0; }
+        .stats-section h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1.25rem;
+        }
+        .stat-card {
+            background: #fff;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            height: 100%;
+        }
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .stat-icon.blue { background: var(--primary-light); color: var(--primary); }
+        .stat-icon.green { background: var(--success-light); color: var(--success); }
+        .stat-info .label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--gray-500);
+            margin-bottom: 4px;
+        }
+        .stat-info .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            line-height: 1;
+        }
+
+        .chart-card {
+            background: #fff;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            height: 100%;
+        }
+        .chart-card h5 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--gray-700);
+            text-align: center;
+            margin-bottom: 1.25rem;
+        }
+        .chart-wrapper {
+            position: relative;
+            height: 260px;
+        }
+
+        /* ── MODAL ── */
+        .modal-content {
+            border-radius: var(--radius);
+            border: none;
+            box-shadow: var(--shadow-lg);
+        }
+        .modal-header {
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1.25rem 1.5rem;
+        }
+        .modal-title { font-weight: 700; font-size: 1rem; }
+        .modal-body { padding: 1.25rem 1.5rem; color: var(--gray-700); font-size: 0.9rem; }
+        .modal-footer { border-top: 1px solid var(--gray-200); padding: 1rem 1.5rem; }
+
+        /* ── FOOTER ── */
+        footer {
+            margin-top: auto;
+            background: #fff;
+            border-top: 1px solid var(--gray-200);
+            padding: 1.25rem 0;
+            font-size: 0.82rem;
+            color: var(--gray-500);
+            text-align: center;
+        }
+
+        /* ── NO-RESULT ROW ── */
+        #noResultRow { display: none; }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('admin.dashboard_admin') }}">
+            <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}"
+                 alt="Logo" width="32" height="32">
+            MathThon Admin
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto me-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('admin.manage_users') }}">
+                        <i class="bi bi-person-lines-fill"></i> Kelola Pengguna
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('admin.manage_feedback') }}">
+                        <i class="bi bi-chat-left-text-fill"></i> Kelola Feedback
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('admin.export_database') }}">
+                        <i class="bi bi-database-down"></i> Ekspor Database
+                    </a>
+                </li>
+            </ul>
+            <a href="{{ url_for('admin.logout_admin') }}" class="btn-logout">
+                <i class="bi bi-box-arrow-right"></i> Logout
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- ═══════════════ PAGE HEADER ═══════════════ -->
+<div class="page-header">
+    <div class="container">
+        <h1>
+            Manajemen Pengguna
+            <span class="badge-count">{{ users | length }} pengguna</span>
+        </h1>
+        <p>Kelola akun pengguna, lihat detail, dan hapus jika diperlukan.</p>
+    </div>
+</div>
+
+<!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+<div class="container flex-grow-1">
+
+    <!-- Search -->
+    <div class="search-wrapper">
+        <i class="bi bi-search"></i>
+        <input type="text" id="searchInput" class="form-control"
+               placeholder="Cari berdasarkan nama atau username…">
+    </div>
+
+    {% if users %}
+    <!-- Table -->
+    <div class="table-card">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="text-align:center;">#</th>
+                        <th style="text-align:center;">Foto</th>
+                        <th>Nama</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Tempat Lahir</th>
+                        <th>Tanggal Lahir</th>
+                        <th style="text-align:center;">Interaksi</th>
+                        <th style="text-align:center;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    {% for user in users %}
+                    <tr>
+                        <th scope="row" style="text-align:center; color: var(--gray-400);">{{ user.id }}</th>
+                        <td style="text-align:center;">
+                            {% if user.photo_url %}
+                                <img src="{{ user.photo_url }}" alt="Foto" class="avatar">
+                            {% else %}
+                                <img src="{{ url_for('static', filename='image/default_profile.png') }}"
+                                     alt="Default" class="avatar">
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span class="user-name">{{ user.name }}</span>
+                        </td>
+                        <td>
+                            <span class="user-username">@{{ user.username }}</span>
+                        </td>
+                        <td class="user-email">{{ user.email }}</td>
+                        <td>{{ user.born_place or '—' }}</td>
+                        <td>{{ user.born_date or '—' }}</td>
+                        <td style="text-align:center;">
+                            {% if user.analysis and user.analysis.total_sessions is not none %}
+                                <span class="badge bg-info text-dark">{{ user.analysis.total_sessions }} Sesi</span>
+                            {% else %}
+                                <span class="text-muted">0</span>
+                            {% endif %}
+                        </td>
+                        <td style="text-align:center;">
+                            <div class="action-group" style="justify-content:center;">
+                                <a href="{{ url_for('admin.view_user', user_id=user.id) }}"
+                                   class="btn-view">
+                                    <i class="bi bi-eye-fill"></i> Lihat
+                                </a>
+                                <button type="button" class="btn-del"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deleteUserModal"
+                                        data-user-name="{{ user.name }} (@{{ user.username }})"
+                                        data-delete-url="{{ url_for('admin.delete_user', user_id=user.id) }}">
+                                    <i class="bi bi-trash3"></i> Hapus
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr id="noResultRow">
+                        <td colspan="8" style="text-align:center; padding: 2.5rem; color: var(--gray-500);">
+                            <i class="bi bi-search" style="font-size:1.5rem; opacity:.4; display:block; margin-bottom:8px;"></i>
+                            Tidak ada pengguna yang cocok dengan pencarian.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% else %}
+    <!-- Empty state -->
+    <div class="table-card">
+        <div class="empty-state">
+            <i class="bi bi-people d-block"></i>
+            <p class="fw-600 mb-1">Belum ada pengguna terdaftar</p>
+            <p style="font-size:.85rem;">Pengguna yang mendaftar akan muncul di sini.</p>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ═══════════════ STATISTIK ═══════════════ -->
+    <div class="stats-section">
+        <h2>Statistik Pengguna & Interaksi</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <div class="stat-icon blue"><i class="bi bi-people-fill"></i></div>
+                    <div class="stat-info">
+                        <div class="label">Total Pengguna</div>
+                        <div class="value">{{ total_users|default(0) }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <div class="stat-icon green"><i class="bi bi-person-check-fill"></i></div>
+                    <div class="stat-info">
+                        <div class="label">Pengguna Aktif</div>
+                        <div class="value">{{ active_users|default(0) }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="chart-card">
+                    <h5>Distribusi Interaksi</h5>
+                    <div class="chart-wrapper">
+                        <canvas id="userChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /.container -->
+<br>
+<br>
+<br>
+<!-- ═══════════════ MODAL HAPUS ═══════════════ -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1"
+     aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteUserModalLabel">
+                    <i class="bi bi-exclamation-triangle-fill text-danger me-2"></i>
+                    Konfirmasi Hapus Pengguna
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin menghapus pengguna
+                <strong id="deleteUserName"></strong>?
+                <br><span style="font-size:.82rem; color:var(--danger);">Tindakan ini tidak dapat dibatalkan.</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm"
+                        data-bs-dismiss="modal">Batal</button>
+                <form id="deleteUserForm" method="POST" style="display:inline;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash3 me-1"></i>Hapus
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+    &copy; 2025 MathThon Admin. All rights reserved.
+</footer>
+
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* ── Search ── */
+    const searchInput = document.getElementById("searchInput");
+    const tbody = document.getElementById("userTableBody");
+    const noResultRow = document.getElementById("noResultRow");
+
+    if (searchInput && tbody) {
+        searchInput.addEventListener("input", function () {
+            const term = this.value.trim().toLowerCase();
+            let visibleCount = 0;
+
+            Array.from(tbody.rows).forEach(function (row) {
+                if (row.id === "noResultRow") return;
+                // col index 2 = Nama, col index 3 = Username
+                const nama     = row.cells[2] ? row.cells[2].textContent.toLowerCase() : "";
+                const username = row.cells[3] ? row.cells[3].textContent.toLowerCase() : "";
+                const match = !term || nama.includes(term) || username.includes(term);
+                row.style.display = match ? "" : "none";
+                if (match) visibleCount++;
+            });
+
+            if (noResultRow) {
+                noResultRow.style.display = visibleCount === 0 ? "" : "none";
+            }
+        });
+    }
+
+    /* ── Delete Modal ── */
+    const deleteModal = document.getElementById("deleteUserModal");
+    if (deleteModal) {
+        deleteModal.addEventListener("show.bs.modal", function (event) {
+            const btn        = event.relatedTarget;
+            const userName   = btn.getAttribute("data-user-name");
+            const deleteUrl  = btn.getAttribute("data-delete-url");
+
+            deleteModal.querySelector("#deleteUserName").textContent  = userName;
+            deleteModal.querySelector("#deleteUserForm").action       = deleteUrl;
+        });
+    }
+
+    /* ── Doughnut Chart ── */
+    const canvas = document.getElementById("userChart");
+    if (canvas) {
+        const active   = parseInt("{{ active_users|default(0) }}");
+        const total    = parseInt("{{ total_users|default(0) }}");
+        const inactive = Math.max(total - active, 0);
+
+        new Chart(canvas.getContext("2d"), {
+            type: "doughnut",
+            data: {
+                labels: ["Aktif", "Tidak Aktif"],
+                datasets: [{
+                    data: [active, inactive],
+                    backgroundColor: ["#2563eb", "#e2e8f0"],
+                    borderColor:     ["#1d4ed8", "#cbd5e1"],
+                    borderWidth: 2,
+                    hoverOffset: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: "68%",
+                plugins: {
+                    legend: {
+                        position: "bottom",
+                        labels: {
+                            font: { family: "'Plus Jakarta Sans', sans-serif", size: 12 },
+                            padding: 16,
+                            usePointStyle: true,
+                            pointStyleWidth: 10
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (ctx) {
+                                const pct = total > 0
+                                    ? ((ctx.raw / total) * 100).toFixed(1)
+                                    : 0;
+                                return ` ${ctx.label}: ${ctx.raw} (${pct}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>

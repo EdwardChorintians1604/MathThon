@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Catatan:
+  - File ini disediakan sebagai "placeholder" jika nanti kamu pakai pipeline build Tailwind.
+  - Untuk sekarang kita akan pakai Tailwind via CDN pada template agar tidak perlu build.
+*/
+

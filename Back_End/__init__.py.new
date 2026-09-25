@@ -1,0 +1,115 @@
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_wtf.csrf import CSRFProtect
+from flask_cors import CORS
+from flask_limiter import Limiter
+from Back_End.config import Config
+from Back_End.models import db, init_db_schema
+from Back_End.utils import *
+from Back_End.bug_and_crime_detection.bug_and_crime_detection import limiter, init_security_logging, security_middleware
+from Back_End.security_for_web import *
+from Back_End.progres_user import register_progres_routes
+from Back_End.materi_user import register_materi_routes
+
+# Global instances
+db = SQLAlchemy()
+csrf = CSRFProtect()
+# Removed redundant limiter - using imported one from security module
+
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
+    
+    # Extensions
+    db.init_app(app)
+    csrf.init_app(app)
+    limiter.init_app(app)
+    
+    # CORS
+    CORS(app, origins=Config.ALLOWED_ORIGINS, supports_credentials=True)
+    
+    # Security
+    init_security_logging()
+    generate_key()
+    
+    # Middleware
+    @app.before_request
+    def security_checks():
+        if request.path.startswith('/static/'):
+            return
+        return security_middleware()
+    
+    @app.after_request
+    def security_headers(response):
+        response.headers["X-Frame-Options"] = "DENY"
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["X-XSS-Protection"] = "1; mode=block"
+        response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+        return response
+    
+    @app.errorhandler(429)
+    def ratelimit_handler(e):
+        if request.path.startswith('/api/'):
+            return jsonify({"success": False, "error": "Too Many Requests"}), 429
+        return render_template("error_security.html", title="Rate Limited", message=str(e), code=429), 429
+    
+    @app.errorhandler(403)
+    def forbidden_handler(e):
+        return render_template("error_security.html", title="Forbidden", message=str(e), code=403), 403
+    
+    @app.context_processor
+    def inject_user():
+        class UserContext:
+            def __init__(self, user_id):
+                self.id = user_id
+                self.is_authenticated = user_id is not None
+        user_id = session.get('user_id')
+        from flask_wtf.csrf import generate_csrf
+        return dict(current_user=UserContext(user_id), csrf_token=generate_csrf())
+    
+    @app.teardown_appcontext
+    def teardown_db(exception):
+        conn = g.pop('db_conn', None)
+        if conn:
+            close_db_connection(conn)
+    
+    # Init DB
+    with app.app_context():
+        init_db_schema(app)
+    
+    # Register Blueprints (ALL routes moved)
+    from .routes.main import main_bp
+    app.register_blueprint(main_bp)
+    
+    from .routes.admin import admin_bp
+    app.register_blueprint(admin_bp, url_prefix='/admin')
+    
+    from .routes.user import user_bp
+    app.register_blueprint(user_bp, url_prefix='/user')
+    
+    from .routes.api import api_bp
+    app.register_blueprint(api_bp, url_prefix='/api')
+    
+    from .routes.latihan import latihan_bp
+    app.register_blueprint(latihan_bp)
+    
+    from .routes.materi import materi_bp
+    app.register_blueprint(materi_bp)
+    
+    from .routes.ai_routes import ai_bp
+    app.register_blueprint(ai_bp)
+    
+    # Existing register functions
+    register_progres_routes(app)
+    register_materi_routes(app)
+    
+    # External if exists
+    try:
+        from MathThon_Math_Lesson.back_end_math.app import get_external_blueprint
+        app.register_blueprint(get_external_blueprint(), url_prefix='/math_lesson')
+    except:
+        pass
+    
+    logging.info("✅ All blueprints registered. App refactored!")
+    return app
+
