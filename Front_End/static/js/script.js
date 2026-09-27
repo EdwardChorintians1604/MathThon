@@ -11,6 +11,8 @@ function showSlide(index) {
   slides[index].classList.add('active');
   dots[index].classList.add('active');
   currentSlide = index;
+  // Dispatch custom event for responsive slide charts
+  window.dispatchEvent(new CustomEvent('slideChanged', { detail: { slideIndex: index } }));
 }
 
 function nextSlide() {

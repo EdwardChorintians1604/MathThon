@@ -261,33 +261,8 @@
 </head>
 <body>
     <div class="wrapper">
-        <!-- Sidebar -->
-        <nav id="sidebar" class="sidebar animate__animated animate__fadeInLeft">
-            <div class="header text-center p-3">
-                <img src="{{ photo_url }}" alt="User Avatar" class="rounded-circle"
-                     style="width: 80px; height: 80px; object-fit: cover; border: 2px solid #fff;">
-                <h5 class="mt-2" style="color: white;">{{ users.name }}</h5>
-                <p id="datetime" style="color: white; font-size: 0.9em;"></p>
-            </div>
-            <ul class="list-unstyled ps-3 animate__animated animate__fadeInLeft">
-                <li><a href="{{ url_for('user.dashboard_user') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="{{ url_for('materi.materi_user') }}"><i class="fas fa-book"></i> Materi</a></li>
-                <li><a href="{{ url_for('user.ai_feature') }}"><i class="fas fa-robot"></i> Fitur AI (Alat Pembantu)</a></li>
-                <li><a href="{{ url_for('user.latihan') }}"><i class="fas fa-pencil-alt"></i> Latihan Soal</a></li>
-                <li><a href="{{ url_for('user.progres_user') }}" class="active"><i class="fas fa-chart-line"></i> Progres</a></li>
-                <li><a href="{{ url_for('user.analyze') }}"><i class="fas fa-chart-bar"></i> Analisis Hasil</a></li>
-                <li><a href="{{ url_for('user.calculator') }}"><i class="fas fa-calculator"></i> Calculator</a></li>
-                <li><a href="{{ url_for('auth.logout_user') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-            </ul>
-            <button class="close-sidenav-btn btn btn-secondary btn-sm" id="closeSidebarBtn">
-                <i class="bi bi-x"></i>
-            </button>
-            <br>
-            <div class="animate__animated animate__fadeInLeft">
-                <img src="{{url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png')}}" alt="MathThon Logo" class="mb-2" style="width: 50px; display: block; margin: 0 auto;">
-                <p style="color: white; font-size: 0.8em; text-align: center;">&copy; 2024 MathThon. All rights reserved.</p>
-            </div>
-        </nav>
+        <!-- Sidebar Component -->
+        {% include "user/components/sidebar.html" %}
 
         <!-- Main Content -->
         <div id="mainContent" class="main-content animate__animated animate__fadeInLeft">

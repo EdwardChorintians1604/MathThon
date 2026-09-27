@@ -27,9 +27,7 @@ class LLMClient:
             if not GEMINI_AVAILABLE:
                 raise RuntimeError("google-generativeai tidak terinstall. Install dengan: pip install google-generativeai")
             self.api_key = api_key or os.getenv("GEMINI_API_KEY")
-            raw_model = model or os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
-            if raw_model in ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-2.5-flash", "gemini-1.0-pro"]:
-                raw_model = "gemini-3.6-flash"
+            raw_model = model or os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
             self.model = raw_model
             if not self.api_key:
                 raise RuntimeError("GEMINI_API_KEY tidak ditemukan. Tambahkan ke .env atau ke app.config.")
@@ -136,7 +134,7 @@ class LLMClient:
                             gemini_messages.append({"role": gemini_role, "parts": [{"text": content}]})
 
                     candidate_models = [self.model]
-                    for fallback_m in ["gemini-3.6-flash", "gemini-flash-latest", "gemini-pro-latest"]:
+                    for fallback_m in ["gemini-3.8-flash", "gemini-3.7-flash", "gemini-3.6-flash"]:
                         if fallback_m not in candidate_models:
                             candidate_models.append(fallback_m)
 
@@ -184,6 +182,10 @@ class LLMClient:
             except Exception as e:
                 last_exc = e
                 logging.warning("LLM generate attempt %d failed: %s", attempt, e)
+                # Jika terkena HTTP 429 / Quota limit, langsung beralih ke fallback agar user tidak menunggu
+                if "429" in str(e) or "quota" in str(e).lower():
+                    logging.warning("Gemini mencapai kuota/rate limit 429, langsung beralih ke fallback tanpa jeda berulang.")
+                    break
                 time.sleep(0.6 * attempt)
                 continue
 

@@ -14,7 +14,7 @@ class Config:
     
     # Gemini AI
     GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
-    GEMINI_MODEL = os.environ.get('GEMINI_MODEL', 'gemini-1.5-flash')
+    GEMINI_MODEL = os.environ.get('GEMINI_MODEL', 'gemini-3.8-flash')
     AI_SYSTEM_PROMPT = os.environ.get('AI_SYSTEM_PROMPT', "Anda adalah asisten matematika yang membantu menyelesaikan soal secara langkah demi langkah.")
     
     # Google OAuth

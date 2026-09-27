@@ -80,27 +80,9 @@ body {
 .sidebar ul li {
     position: relative;
 }
+/* Legacy sidebar rules neutralized for modern components/sidebar.html */
 .sidebar ul li a {
-    display: flex;
-    align-items: center;
-    color: #bdc3c7;
-    padding: 12px 20px;
     text-decoration: none;
-    transition: all 0.3s;
-    font-size: 1rem;
-}
-.sidebar ul li a:hover,
-.sidebar ul li a.active {
-    background-color: #34495e;
-    color: #fff;
-    border-left: 4px solid #3498db;
-    transform: translateX(5px);
-}
-.sidebar ul li a i {
-    margin-right: 15px;
-    font-size: 1.2rem;
-    width: 20px;
-    text-align: center;
 }
 .sidebar.collapsed ul li a span {
     display: none;

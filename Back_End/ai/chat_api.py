@@ -1,3 +1,4 @@
+from __future__ import annotations
 import os
 import re
 import logging
@@ -45,6 +46,28 @@ SYSTEM_PROMPT = r"""
 Kamu adalah MathThon AI, tutor matematika tingkat akademik yang ramah, analitis, mendalam, dan berakurasi sangat tinggi.
 Tugas utamamu adalah membimbing pengguna memahami matematika secara menyeluruh dengan penjelasan logis, terstruktur, dan edukatif.
 
+BATASAN TOPIK DAN KEBIJAKAN KHUSUS (WAJIB DIPATUHI):
+Kamu HANYA melayani topik MATEMATIKA (Aritmatika, Aljabar, Geometri, Trigonometri, Kalkulus, Statistika, Peluang, Matriks, Logika Matematika, Analisis Real/Kompleks, dan persoalan sains terapan yang berbasis perhitungan matematis).
+
+JIKA PENGGUNA MEMBERIKAN PERTANYAAN ATAU KALIMAT YANG TIDAK BERKAITAN DENGAN MATEMATIKA:
+(Contoh non-matematika: resep makanan/masakan, politik/pemerintahan, olahraga, hiburan/film/musik, zodiak/ramalan, curhat pribadi/asmara, sastra/puisi non-matematis, coding aplikasi umum tanpa matematika, tips gaya hidup, dsb.)
+KAMU DILARANG MENJAWAB TOPIK NON-MATEMATIKA TERSEBUT!
+Sebaliknya, kamu WAJIB menjawab dengan penolakan sopan, meminta pengguna mengetik ulang pertanyaan bertema matematika, dan menyertakan peringatan kehati-hatian LLM dengan format persis seperti ini:
+
+⚠️ **Pertanyaan di Luar Topik Matematika Terdeteksi**
+
+Kalimat atau pertanyaan yang Anda masukkan **tidak memiliki kaitan dengan materi atau persoalan matematika**.
+
+Sebagai **MathThon AI**, sistem ini dirancang dan dilatih khusus untuk mendampingi Anda dalam memahami dan menyelesaikan persoalan matematika (seperti Aritmatika, Aljabar, Geometri, Trigonometri, Kalkulus, Statistika, Peluang, Matriks, dan Logika Matematika).
+
+👉 **Silakan ketik ulang pertanyaan Anda** dengan topik atau persoalan matematika yang ingin Anda diskusikan atau selesaikan.
+
+---
+> ⚠️ **Peringatan Penting:** 
+> Model bahasa (LLM) seperti ini bisa saja memberikan kesalahan informasi atau perhitungan. Tolong selalu cek dan periksa kembali (*double-check*) setiap hasil maupun langkah penyelesaian yang diberikan.
+
+Pengecualian: Salam sapaan pendek seperti "Halo", "Hai", "Selamat pagi" dijawab dengan ramah sembari langsung menyambut pengguna untuk menanyakan materi atau soal matematika.
+
 PRINSIP PENJELASAN MENDALAM:
 1. STRUKTUR PENJELASAN RUNTUT:
    - Konsep & Rumus Kunci: Kenalkan rumus, aturan, atau teorema yang dipakai (misal: Aturan Rantai Turunan, Integral Parsial, Sifat Matriks).
@@ -62,6 +85,130 @@ PRINSIP PENJELASAN MENDALAM:
    - Gunakan $$...$$ untuk matematika blok/display (misal: $$f'(x) = 3x^2 + 4x - 5$$).
    - Matriks selalu gunakan \begin{pmatrix} ... \end{pmatrix} atau \begin{bmatrix} ... \end{bmatrix} dalam $$...$$.
 """
+
+# ==============================================================================
+# FILTER & VALIDATOR TOPIK MATEMATIKA
+# ==============================================================================
+
+NON_MATH_RESPONSE = (
+    "⚠️ **Pertanyaan di Luar Topik Matematika Terdeteksi**\n\n"
+    "Kalimat atau pertanyaan yang Anda masukkan **tidak memiliki kaitan dengan materi atau persoalan matematika**.\n\n"
+    "Sebagai **MathThon AI**, sistem ini dirancang dan dilatih khusus untuk mendampingi Anda dalam memahami dan menyelesaikan persoalan matematika (seperti Aritmatika, Aljabar, Geometri, Trigonometri, Kalkulus, Statistika, Peluang, Matriks, dan Logika Matematika).\n\n"
+    "👉 **Silakan ketik ulang pertanyaan Anda** dengan topik atau persoalan matematika yang ingin Anda diskusikan atau selesaikan.\n\n"
+    "---\n"
+    "> ⚠️ **Peringatan Penting:**\n"
+    "> Model bahasa (LLM) seperti ini bisa saja memberikan kesalahan informasi atau perhitungan. Tolong selalu cek dan periksa kembali (*double-check*) setiap hasil maupun langkah penyelesaian yang diberikan."
+)
+
+def check_math_relevance(text: str) -> tuple[bool, str | None]:
+    """
+    Mendeteksi apakah input pengguna mengacu pada matematika atau topik di luar matematika.
+    Mengembalikan (is_math_or_greeting, rejection_message).
+    """
+    clean = text.lower().strip()
+    if not clean:
+        return True, None
+
+    # 1. Salam / Sapaan wajar atau pertanyaan seputar asisten
+    greetings = {
+        'halo', 'hai', 'hi', 'hey', 'hello', 'assalamualaikum', 'assalamu alaikum',
+        'selamat pagi', 'selamat siang', 'selamat sore', 'selamat malam',
+        'p', 'tes', 'test', 'siapa kamu', 'kamu siapa', 'bisa apa', 'fitur apa',
+        'terima kasih', 'makasih', 'thanks', 'thank you', 'ok', 'oke', 'sip', 'siap'
+    }
+    if clean in greetings or any(clean.startswith(g) and len(clean.split()) <= 4 for g in ['halo', 'hai', 'hi', 'selamat', 'assalam']):
+        return True, None
+
+    # 2. Indikator Matematika Kuat
+    math_symbols = set("+-*/=^\\()[]{}<>%∫∑√π°²³≤≥≠±≈÷×")
+    has_math_symbol = any(c in math_symbols for c in clean)
+    has_number = any(c.isdigit() for c in clean)
+
+    math_keywords = {
+        # Cabang Matematika
+        'matematika', 'math', 'aljabar', 'algebra', 'geometri', 'geometry',
+        'trigonometri', 'trigonometry', 'kalkulus', 'calculus', 'turunan',
+        'derivative', 'integral', 'matriks', 'matrix', 'vektor', 'vector',
+        'statistika', 'statistik', 'statistics', 'aritmatika', 'arithmetic',
+        # Topik & Konsep
+        'persamaan', 'equation', 'pertidaksamaan', 'fungsi', 'function', 'sudut', 'angle',
+        'segitiga', 'triangle', 'lingkaran', 'circle', 'persegi', 'square',
+        'kubus', 'cube', 'balok', 'tabung', 'bola', 'sphere', 'kerucut', 'cone',
+        'prisma', 'limas', 'trapesium', 'jajargenjang', 'belah ketupat', 'layang-layang',
+        'luas', 'area', 'keliling', 'perimeter', 'volume', 'rata-rata', 'mean',
+        'median', 'modus', 'mode', 'peluang', 'probability', 'permutasi',
+        'kombinasi', 'deret', 'series', 'barisan', 'sequence', 'notasi',
+        'eksponen', 'exponent', 'logaritma', 'logarithm', 'ln',
+        'pecahan', 'fraction', 'desimal', 'decimal', 'faktor', 'fpb', 'kpk',
+        'diferensial', 'himpunan', 'limit', 'polinomial', 'variabel',
+        'koefisien', 'determinan', 'invers', 'inverse', 'pythagoras', 'pitagoras',
+        'sinus', 'cosinus', 'tangen', 'sin', 'cos', 'tan', 'sec', 'csc', 'cot',
+        'persen', 'sigma', 'gradien', 'slope', 'koordinat', 'cartesius', 'kartesius',
+        'akar', 'pangkat', 'kuadrat', 'kubik', 'teorema', 'dalil', 'rumus', 'formula',
+        'grafik', 'relasi', 'domain', 'kodomain', 'parabola', 'elips', 'hiperbola',
+        'dimensi', 'kuartil', 'desil', 'persentil', 'varians', 'deviasi', 'distribusi',
+        'diagram', 'bilangan', 'prima', 'rasional', 'irasional', 'cacah', 'bulat',
+        'skalar', 'dot', 'cross', 'spldv', 'spltv', 'spl', 'substitusi', 'eliminasi',
+        # Kata Perintah & Soal Matematika
+        'hitung', 'menghitung', 'perhitungan', 'pecahkan', 'selesaikan', 'tentukan',
+        'carilah', 'cari', 'berapakah', 'berapa', 'soal', 'hasil dari', 'nilai dari',
+        'simpangan', 'faktorial', 'asimtot', 'gradien'
+    }
+
+    words = set(re.findall(r'\b[a-zA-Z0-9_]+\b', clean))
+    has_math_keyword = bool(words & math_keywords)
+
+    # Kata kunci kontekstual pertanyaan perhitungan
+    has_math_context = any(k in clean for k in [
+        'berapa', 'hitung', 'jika', 'tentukan', 'nilai', 'panjang', 'tinggi',
+        'lebar', 'jari-jari', 'diameter', 'alas', 'rusuk', 'kelipatan', 'rasio', 'skala'
+    ])
+
+    if has_math_keyword or (has_number and (has_math_symbol or has_math_context)):
+        return True, None
+
+    # Jika mengandung simbol matematika yang jelas (misal 2+2 atau x^2)
+    if has_math_symbol and (has_number or any(c in clean for c in ['x', 'y', 'z', 'a', 'b', 'c'])):
+        return True, None
+
+    # 3. Kata kunci eksplisit non-matematika
+    explicit_non_math_keywords = {
+        'resep', 'memasak', 'masak', 'bumbu', 'goreng', 'tumis', 'rendang',
+        'nasi', 'kue', 'roti', 'dapur', 'minuman', 'makanan', 'kuliner', 'restoran',
+        'presiden', 'menteri', 'partai', 'pemilu', 'pilpres', 'dpr', 'politik',
+        'perang', 'militer', 'kebijakan', 'negara', 'pemerintah', 'hukum',
+        'lagu', 'lirik', 'chord', 'penyanyi', 'artis', 'film', 'bioskop',
+        'aktor', 'aktris', 'sinopsis', 'anime', 'manga', 'drakor', 'netflix',
+        'game', 'gaming', 'puisi', 'cerpen', 'dongeng', 'pantun', 'cerita',
+        'cinta', 'pacar', 'romantis', 'galau', 'curhat', 'asmara', 'zodiak',
+        'ramalan', 'shio', 'tarot', 'skincare', 'makeup', 'kucing', 'anjing',
+        'hewan', 'wisata', 'liburan', 'hotel', 'pantai', 'gunung', 'pesawat',
+        'cuaca', 'hujan', 'panas', 'mendung', 'baju', 'fashion', 'sepatu',
+        'olahraga', 'sepakbola', 'futsal', 'badminton', 'basket', 'timnas',
+        'lucu', 'lelucon', 'joke', 'komedi', 'motivasi', 'tidur', 'lelah'
+    }
+
+    has_non_math_keyword = bool(words & explicit_non_math_keywords)
+    if has_non_math_keyword:
+        return False, NON_MATH_RESPONSE
+
+    # 4. Kalimat non-matematika umum tanpa ada satupun unsur matematika
+    if len(clean) >= 6 and not has_math_keyword and not has_math_symbol and not has_number:
+        non_math_markers = [
+            'siapa', 'kenapa', 'mengapa', 'dimana', 'kapan', 'bagaimana cara',
+            'ceritakan', 'tuliskan', 'buatkan', 'buat', 'rekomendasi', 'rekomendasikan',
+            'apa yang dimaksud dengan', 'jelaskan tentang', 'opini', 'pendapatmu',
+            'menurutmu', 'saran', 'tips', 'tau gak', 'tahu tidak', 'apakah kamu',
+            'kamu suka', 'kamu bisa', 'hari ini', 'saya lagi', 'aku lagi'
+        ]
+        if any(marker in clean for marker in non_math_markers):
+            return False, NON_MATH_RESPONSE
+
+        # Kalimat panjang (>= 4 kata) tanpa satu pun indikasi matematika
+        if len(clean.split()) >= 4:
+            return False, NON_MATH_RESPONSE
+
+    return True, None
 
 # ==============================================================================
 # KONVERTER: LaTeX → Unicode
@@ -531,6 +678,27 @@ def chat():
                 if cursor: cursor.close()
                 if conn:   close_db_connection(conn)
 
+        # --- GUARD: CEK RELEVANSI MATEMATIKA ---
+        is_math, non_math_reply = check_math_relevance(user_message)
+        if not is_math and non_math_reply:
+            ai_reply = non_math_reply
+            if conversation_id and user_id:
+                conn = cursor = None
+                try:
+                    conn   = get_db_connection(current_app)
+                    cursor = conn.cursor()
+                    cursor.execute(
+                        "INSERT INTO chat_messages (conversation_id, role, content) VALUES (%s, %s, %s)",
+                        (conversation_id, 'assistant', ai_reply)
+                    )
+                    conn.commit()
+                except Exception as e:
+                    current_app.logger.error(f"Error saving AI rejection reply: {e}")
+                finally:
+                    if cursor: cursor.close()
+                    if conn:   close_db_connection(conn)
+            return jsonify({"reply": ai_reply, "response": ai_reply, "is_non_math": True})
+
         # --- HYBRID ENGINE: Try SymPy first for math problems ---
         ai_reply = None
         calculation_used = False
@@ -694,6 +862,11 @@ def chat_ai_logic(data: dict) -> dict:
         return {'error': 'Pesan tidak boleh kosong'}
 
     user_message = preprocess_user_input(user_message)
+
+    # --- GUARD: CEK RELEVANSI MATEMATIKA ---
+    is_math, non_math_reply = check_math_relevance(user_message)
+    if not is_math and non_math_reply:
+        return {'response': non_math_reply, 'reply': non_math_reply, 'is_non_math': True}
 
     system_content = SYSTEM_PROMPT
     table = current_app.config.get('TABLE')

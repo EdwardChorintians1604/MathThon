@@ -3,687 +3,1976 @@
 {% block title %}MathThon | Kalkulator Python AI{% endblock %}
 
 {% block head_links %}
-    {{ super() }}
-    <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/css_for_dashboard_user.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/solid.min.css">
-    <title>MathThon | Kalkulator Python AI</title>
+{{ super() }}
+<link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/css_for_dashboard_user.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 {% endblock %}
+
 {% block content %}
 
-<div class="calc-header-section animate__animated animate__fadeIn">
-    <div class="container-fluid">
-        <div class="d-flex align-items-center gap-3 mb-2">
-            <div class="icon-box">
-                <i class="fas fa-calculator text-accent"></i>
+<!-- HERO TITLE BAR -->
+<div class="calc-hero-header animate__animated animate__fadeIn">
+    <div class="calc-header-inner">
+        <div class="calc-title-group">
+            <div class="calc-icon-glow">
+                <i class="fas fa-square-root-variable"></i>
             </div>
             <div>
-                <h2 class="m-0 fw-bold text-white">Kalkulator Pintar</h2>
-                <p class="m-0 text-muted-custom">Selesaikan ekspresi matematika kompleks dengan engine Python AI</p>
+                <div class="calc-badge-row">
+                    <span class="calc-status-badge">
+                        <span class="pulse-dot"></span> Python AI Engine v2.4
+                    </span>
+                    <span class="calc-tech-pill"><i class="fas fa-bolt"></i> Realtime Preview</span>
+                </div>
+                <h1 class="calc-main-title">Kalkulator Cerdas MathThon</h1>
+                <p class="calc-subtitle">Evaluasi aljabar, trigonometri, faktorial, dan kombinatorika secara presisi dan
+                    instan.</p>
             </div>
         </div>
-        <div class="header-line"></div>
+        <div class="calc-header-actions">
+            <button id="btn-sound-toggle" class="calc-action-pill" title="Toggle Efek Suara Haptic">
+                <i class="fas fa-volume-high" id="sound-icon"></i>
+                <span id="sound-label">Suara Aktif</span>
+            </button>
+            <button id="btn-mode-deg-rad" class="calc-action-pill mode-pill" title="Ubah Mode Sudut">
+                <span class="mode-tag active" id="mode-deg">DEG</span>
+                <span class="mode-divider">/</span>
+                <span class="mode-tag" id="mode-rad">RAD</span>
+            </button>
+        </div>
     </div>
 </div>
 
-<div class="calc-wrapper">
+<!-- MAIN CALCULATOR WRAPPER -->
+<div class="calc-container-wrap">
+    <!-- Ambient glowing backgrounds -->
+    <div class="glow-orb orb-emerald"></div>
+    <div class="glow-orb orb-indigo"></div>
+    <div class="glow-orb orb-amber"></div>
 
-    <!-- Animated background blobs -->
-    <div class="bg-blob blob-1"></div>
-    <div class="bg-blob blob-2"></div>
-    <div class="bg-blob blob-3"></div>
+    <div class="calc-grid-layout">
 
-    <div class="calc-layout">
+        <!-- ================= LEFT: CALCULATOR MACHINE ================= -->
+        <div class="calc-panel-card">
 
-        <!-- LEFT: Calculator -->
-        <div class="calculator-panel">
-
-            <div class="panel-header">
-                <div class="brand">
-                    <div class="brand-icon"><i class="fab fa-python"></i></div>
-                    <div class="brand-text">
-                        <span class="brand-name">MathThon Calculator</span>
-                        <span class="brand-sub">Python AI Engine</span>
+            <!-- Console Topbar -->
+            <div class="calc-console-top">
+                <div class="console-brand">
+                    <div class="console-logo">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div>
+                        <span class="console-name">MathThon Matrix</span>
+                        <span class="console-sub">Precision Floating-Point</span>
                     </div>
                 </div>
-                <div class="status-badge">
-                    <span class="status-dot"></span>
-                    <span>Online</span>
+                <div class="console-controls">
+                    <button class="top-action-btn" id="btn-copy-input" title="Salin Ekspresi">
+                        <i class="far fa-copy"></i>
+                    </button>
+                    <button class="top-action-btn" id="btn-quick-clear" title="Kosongkan Layar">
+                        <i class="fas fa-rotate-left"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- Display -->
-            <div class="display-wrap">
-                <div class="display-top">
-                    <span class="display-label">INPUT</span>
+            <!-- OLED Screen Console -->
+            <div class="oled-screen" id="oled-screen">
+                <div class="oled-topline">
+                    <div class="oled-indicators">
+                        <span class="ind-pill" id="screen-mode-ind">DEG</span>
+                        <span class="ind-pill ind-math">MATH READY</span>
+                        <span class="ind-pill ind-ans" id="screen-ans-ind" style="display:none;">ANS: <b
+                                id="val-ans-ind">0</b></span>
+                    </div>
                     <div id="loading-spinner" class="calc-spinner" style="display:none;">
-                        <div class="spin-ring"></div>
+                        <span class="spinner-ring"></span>
                     </div>
                 </div>
-                <input type="text" id="display" placeholder="Ketik ekspresi..." autocomplete="off" spellcheck="false">
-                <div id="live-preview" class="live-preview"></div>
-                <div class="display-hint">Contoh: <code>10 kombinasi 2</code> &middot; <code>sin(45)</code> &middot; <code>sqrt(144)</code></div>
+
+                <!-- Input Expression Box -->
+                <div class="oled-input-row">
+                    <input type="text" id="display" placeholder="Ketik soal atau klik tombol..." autocomplete="off"
+                        spellcheck="false" aria-label="Input ekspresi kalkulator">
+                </div>
+
+                <!-- Live Result Preview -->
+                <div class="oled-preview-row">
+                    <div class="live-preview-box">
+                        <span class="preview-symbol" id="preview-symbol">=</span>
+                        <span id="live-preview" class="live-preview-text">0</span>
+                    </div>
+                </div>
+
+                <!-- Interactive Quick Chips -->
+                <div class="oled-chips-bar">
+                    <span class="chip-label"><i class="fas fa-sparkles"></i> Coba:</span>
+                    <button type="button" class="sample-chip" data-sample="10 kombinasi 2">10 nCr 2</button>
+                    <button type="button" class="sample-chip" data-sample="sin(45) + cos(45)">sin(45)+cos(45)</button>
+                    <button type="button" class="sample-chip" data-sample="sqrt(144) * 2^3">√144 × 2³</button>
+                    <button type="button" class="sample-chip" data-sample="5! mod 7">5! mod 7</button>
+                </div>
             </div>
 
-            <!-- Button Grid -->
-            <div class="buttons-grid">
+            <!-- KEYPAD BUTTONS GRID -->
+            <div class="calc-keypad">
 
-                <!-- Row 1: Memory & Advanced -->
-                <button class="btn-mem" data-insert="Ans">
-                    <span class="btn-label">Ans</span>
-                    <span class="btn-sub">memori</span>
+                <!-- ROW 1: Memory & Advanced -->
+                <button type="button" class="btn-calc btn-mem" data-insert="Ans">
+                    <span class="k-label">Ans</span>
+                    <span class="k-sub">memori</span>
                 </button>
-                <button class="btn-sci" data-insert="exp(">
-                    <span class="btn-label">EXP</span>
-                    <span class="btn-sub">eˣ</span>
+                <button type="button" class="btn-calc btn-sci" data-insert="abs(">
+                    <span class="k-label">|x|</span>
+                    <span class="k-sub">mutlak</span>
                 </button>
-                <button class="btn-sci" data-insert=" mod ">
-                    <span class="btn-label">mod</span>
-                    <span class="btn-sub">sisa</span>
+                <button type="button" class="btn-calc btn-sci" data-insert=" mod ">
+                    <span class="k-label">mod</span>
+                    <span class="k-sub">modulo</span>
                 </button>
-                <button class="btn-sci" data-insert=" % ">
-                    <span class="btn-label">%</span>
-                    <span class="btn-sub">persen</span>
-                </button>
-
-                <!-- Row 2: Functions -->
-                <button class="btn-sci" data-insert="abs(">
-                    <span class="btn-label">|x|</span>
-                    <span class="btn-sub">abs</span>
-                </button>
-                <button class="btn-sci" data-insert="exp(">
-                    <span class="btn-label">eˣ</span>
-                    <span class="btn-sub">exp</span>
-                </button>
-                <button class="btn-sci" data-insert="(">
-                    <span class="btn-label">(</span>
-                </button>
-                <button class="btn-sci" data-insert=")">
-                    <span class="btn-label">)</span>
+                <button type="button" class="btn-calc btn-sci" data-insert=" % ">
+                    <span class="k-label">%</span>
+                    <span class="k-sub">persen</span>
                 </button>
 
-                <!-- Row 3: Trig -->
-                <button class="btn-trig" data-insert="sin(">
-                    <span class="btn-label">sin</span>
-                    <span class="btn-sub">derajat</span>
+                <!-- ROW 2: Functions & Parenthesis -->
+                <button type="button" class="btn-calc btn-sci" data-insert="exp(">
+                    <span class="k-label">eˣ</span>
+                    <span class="k-sub">eksponen</span>
                 </button>
-                <button class="btn-trig" data-insert="cos(">
-                    <span class="btn-label">cos</span>
-                    <span class="btn-sub">derajat</span>
+                <button type="button" class="btn-calc btn-sci" data-insert="^">
+                    <span class="k-label">xʸ</span>
+                    <span class="k-sub">pangkat</span>
                 </button>
-                <button class="btn-trig" data-insert="tan(">
-                    <span class="btn-label">tan</span>
-                    <span class="btn-sub">derajat</span>
+                <button type="button" class="btn-calc btn-bracket" data-insert="(">
+                    <span class="k-label">(</span>
+                    <span class="k-sub">buka</span>
                 </button>
-                <button class="btn-trig" data-insert="log10(">
-                    <span class="btn-label">log</span>
-                    <span class="btn-sub">basis 10</span>
-                </button>
-
-                <!-- Row 4: More functions -->
-                <button class="btn-trig" data-insert="log(">
-                    <span class="btn-label">ln</span>
-                    <span class="btn-sub">natural</span>
-                </button>
-                <button class="btn-trig" data-insert="^">
-                    <span class="btn-label">xʸ</span>
-                    <span class="btn-sub">pangkat</span>
-                </button>
-                <button class="btn-trig" data-insert="sqrt(">
-                    <span class="btn-label">&#x221A;</span>
-                    <span class="btn-sub">akar</span>
-                </button>
-                <button class="btn-trig" data-insert="!">
-                    <span class="btn-label">n!</span>
-                    <span class="btn-sub">faktorial</span>
+                <button type="button" class="btn-calc btn-bracket" data-insert=")">
+                    <span class="k-label">)</span>
+                    <span class="k-sub">tutup</span>
                 </button>
 
-                <!-- Row 5: Constants & Combinatorics -->
-                <button class="btn-const" data-insert="pi">
-                    <span class="btn-label">&#x03C0;</span>
-                    <span class="btn-sub">3.14&hellip;</span>
+                <!-- ROW 3: Trigonometry & Logarithm -->
+                <button type="button" class="btn-calc btn-trig" data-insert="sin(">
+                    <span class="k-label">sin</span>
+                    <span class="k-sub">sudut</span>
                 </button>
-                <button class="btn-const" data-insert="e">
-                    <span class="btn-label">e</span>
-                    <span class="btn-sub">2.71&hellip;</span>
+                <button type="button" class="btn-calc btn-trig" data-insert="cos(">
+                    <span class="k-label">cos</span>
+                    <span class="k-sub">sudut</span>
                 </button>
-                <button class="btn-comb" data-insert=" Kombinasi ">
-                    <span class="btn-label">nCr</span>
-                    <span class="btn-sub">kombinasi</span>
+                <button type="button" class="btn-calc btn-trig" data-insert="tan(">
+                    <span class="k-label">tan</span>
+                    <span class="k-sub">sudut</span>
                 </button>
-                <button class="btn-comb" data-insert=" Permutasi ">
-                    <span class="btn-label">nPr</span>
-                    <span class="btn-sub">permutasi</span>
+                <button type="button" class="btn-calc btn-trig" data-insert="log10(">
+                    <span class="k-label">log</span>
+                    <span class="k-sub">basis 10</span>
                 </button>
 
-                <!-- Divider -->
-                <div class="grid-divider"></div>
-
-                <!-- Row 6: Delete, Clear, Operators -->
-                <button class="btn-delete" data-action="back">
-                    <i class="fas fa-backspace"></i>
+                <!-- ROW 4: Natural Log, Sqrt, Factorial, Const -->
+                <button type="button" class="btn-calc btn-trig" data-insert="log(">
+                    <span class="k-label">ln</span>
+                    <span class="k-sub">natural</span>
                 </button>
-                <button class="btn-clear" data-action="clear">
-                    <span class="btn-label">AC</span>
+                <button type="button" class="btn-calc btn-trig" data-insert="sqrt(">
+                    <span class="k-label">√</span>
+                    <span class="k-sub">akar</span>
                 </button>
-                <button class="btn-op" data-insert=" / ">&#247;</button>
-                <button class="btn-op" data-insert=" * ">&#215;</button>
+                <button type="button" class="btn-calc btn-trig" data-insert="!">
+                    <span class="k-label">n!</span>
+                    <span class="k-sub">faktorial</span>
+                </button>
+                <button type="button" class="btn-calc btn-const" data-insert="pi">
+                    <span class="k-label">π</span>
+                    <span class="k-sub">3.1415</span>
+                </button>
 
-                <button class="btn-num" data-insert="7">7</button>
-                <button class="btn-num" data-insert="8">8</button>
-                <button class="btn-num" data-insert="9">9</button>
-                <button class="btn-op" data-insert=" - ">&minus;</button>
+                <!-- ROW 5: Constants & Combinatorics -->
+                <button type="button" class="btn-calc btn-const" data-insert="e">
+                    <span class="k-label">e</span>
+                    <span class="k-sub">2.7182</span>
+                </button>
+                <button type="button" class="btn-calc btn-comb" data-insert=" Kombinasi ">
+                    <span class="k-label">nCr</span>
+                    <span class="k-sub">kombinasi</span>
+                </button>
+                <button type="button" class="btn-calc btn-comb" data-insert=" Permutasi ">
+                    <span class="k-label">nPr</span>
+                    <span class="k-sub">permutasi</span>
+                </button>
+                <button type="button" class="btn-calc btn-delete" data-action="back"
+                    title="Hapus Karakter Terakhir (Backspace)">
+                    <i class="fas fa-delete-left"></i>
+                    <span class="k-sub">DEL</span>
+                </button>
 
-                <button class="btn-num" data-insert="4">4</button>
-                <button class="btn-num" data-insert="5">5</button>
-                <button class="btn-num" data-insert="6">6</button>
-                <button class="btn-op" data-insert=" + ">+</button>
+                <!-- KEYPAD DIVIDER -->
+                <div class="keypad-separator"></div>
 
-                <button class="btn-num" data-insert="1">1</button>
-                <button class="btn-num" data-insert="2">2</button>
-                <button class="btn-num" data-insert="3">3</button>
-                <button class="btn-equal" data-action="calculate" style="grid-row: span 2;">=</button>
+                <!-- ROW 6: Standard Keypad & Operations -->
+                <button type="button" class="btn-calc btn-clear" data-action="clear" title="Hapus Semua">
+                    <span class="k-label">AC</span>
+                    <span class="k-sub">bersihkan</span>
+                </button>
+                <button type="button" class="btn-calc btn-op" data-insert=" / " title="Bagi">
+                    <span class="k-label">÷</span>
+                </button>
+                <button type="button" class="btn-calc btn-op" data-insert=" * " title="Kali">
+                    <span class="k-label">×</span>
+                </button>
+                <button type="button" class="btn-calc btn-op" data-insert=" - " title="Kurang">
+                    <span class="k-label">−</span>
+                </button>
 
-                <button class="btn-num" data-insert="0" style="grid-column: span 2;">0</button>
-                <button class="btn-num" data-insert=".">.</button>
+                <!-- ROW 7: Numbers 7, 8, 9 & Plus -->
+                <button type="button" class="btn-calc btn-num" data-insert="7">7</button>
+                <button type="button" class="btn-calc btn-num" data-insert="8">8</button>
+                <button type="button" class="btn-calc btn-num" data-insert="9">9</button>
+                <button type="button" class="btn-calc btn-op" data-insert=" + " title="Tambah">
+                    <span class="k-label">+</span>
+                </button>
+
+                <!-- ROW 8: Numbers 4, 5, 6 & Equal (Span 2 Rows) -->
+                <button type="button" class="btn-calc btn-num" data-insert="4">4</button>
+                <button type="button" class="btn-calc btn-num" data-insert="5">5</button>
+                <button type="button" class="btn-calc btn-num" data-insert="6">6</button>
+                <button type="button" class="btn-calc btn-equal" data-action="calculate" style="grid-row: span 2;"
+                    title="Hitung Hasil (Enter)">
+                    <span class="equal-glow"></span>
+                    <span class="k-label-equal">=</span>
+                </button>
+
+                <!-- ROW 9: Numbers 1, 2, 3 -->
+                <button type="button" class="btn-calc btn-num" data-insert="1">1</button>
+                <button type="button" class="btn-calc btn-num" data-insert="2">2</button>
+                <button type="button" class="btn-calc btn-num" data-insert="3">3</button>
+
+                <!-- ROW 10: 0 and Decimal Point -->
+                <button type="button" class="btn-calc btn-num btn-zero" data-insert="0"
+                    style="grid-column: span 2;">0</button>
+                <button type="button" class="btn-calc btn-num" data-insert=".">.</button>
 
             </div>
         </div>
 
-        <!-- RIGHT: History + Guide -->
-        <div class="history-panel">
-            <div class="history-header">
-                <div class="history-title">
+        <!-- ================= RIGHT: INTELLIGENT PANEL ================= -->
+        <div class="intel-panel-card">
+
+            <!-- Panel Navigation Tabs -->
+            <div class="intel-tabs">
+                <button type="button" class="intel-tab active" id="tab-btn-history" onclick="switchIntelTab('history')">
                     <i class="fas fa-clock-rotate-left"></i>
                     <span>Riwayat</span>
-                </div>
-                <button id="clear-history" class="clear-hist-btn" title="Hapus semua">
-                    <i class="fas fa-trash-can"></i>
+                    <span class="tab-badge" id="hist-count">0</span>
+                </button>
+                <button type="button" class="intel-tab" id="tab-btn-guide" onclick="switchIntelTab('guide')">
+                    <i class="fas fa-book-bookmark"></i>
+                    <span>Rumus Cepat</span>
                 </button>
             </div>
 
-            <div class="history-scroll">
-                <ul id="history-list">
-                    <li class="empty-msg">
-                        <div class="empty-icon"><i class="fas fa-calculator"></i></div>
-                        <p>Belum ada perhitungan</p>
-                        <span>Hasil akan muncul di sini</span>
-                    </li>
-                </ul>
-            </div>
+            <!-- TAB 1: HISTORY CONTENT -->
+            <div class="tab-pane active" id="pane-history">
+                <div class="pane-header-action">
+                    <span class="pane-label">Kalkulasi Sesi Ini</span>
+                    <button type="button" id="clear-history" class="clear-hist-pill" title="Hapus Riwayat">
+                        <i class="fas fa-trash-can"></i> Bersihkan
+                    </button>
+                </div>
 
-            <div class="quick-guide">
-                <div class="guide-title"><i class="fas fa-lightbulb"></i> Tips Cepat</div>
-                <div class="guide-items">
-                    <div class="guide-item"><code>10 kombinasi 2</code><span>= 45</span></div>
-                    <div class="guide-item"><code>5!</code><span>= 120</span></div>
-                    <div class="guide-item"><code>sin(90)</code><span>= 1</span></div>
-                    <div class="guide-item"><code>2^10</code><span>= 1024</span></div>
-                    <div class="guide-item"><code>50%</code><span>= 0.5</span></div>
-                    <div class="guide-item"><code>Ans + 5</code><span>lanjutkan</span></div>
+                <div class="history-scroll-box">
+                    <ul id="history-list" class="history-items-list">
+                        <li class="empty-state-box">
+                            <div class="empty-icon-wrap">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <h5>Belum Ada Riwayat</h5>
+                            <p>Perhitungan yang Anda lakukan akan tersimpan di sini secara otomatis.</p>
+                        </li>
+                    </ul>
                 </div>
             </div>
+
+            <!-- TAB 2: GUIDE / CHEAT SHEET CONTENT -->
+            <div class="tab-pane" id="pane-guide">
+                <div class="pane-header-action">
+                    <span class="pane-label">Formula & Contoh Format</span>
+                </div>
+
+                <div class="guide-scroll-box">
+                    <div class="guide-card-item" onclick="insertExample('15 kombinasi 3')">
+                        <div class="guide-meta">
+                            <span class="guide-badge comb">KOMBINATORIKA</span>
+                            <span class="guide-desc">Kombinasi nCr</span>
+                        </div>
+                        <div class="guide-code-row">
+                            <code>15 kombinasi 3</code>
+                            <span class="guide-res">= 455</span>
+                        </div>
+                    </div>
+
+                    <div class="guide-card-item" onclick="insertExample('7 permutasi 2')">
+                        <div class="guide-meta">
+                            <span class="guide-badge perm">PERMUTASI</span>
+                            <span class="guide-desc">Permutasi nPr</span>
+                        </div>
+                        <div class="guide-code-row">
+                            <code>7 permutasi 2</code>
+                            <span class="guide-res">= 42</span>
+                        </div>
+                    </div>
+
+                    <div class="guide-card-item" onclick="insertExample('sin(30) + cos(60)')">
+                        <div class="guide-meta">
+                            <span class="guide-badge trig">TRIGONOMETRI</span>
+                            <span class="guide-desc">Sinus & Cosinus</span>
+                        </div>
+                        <div class="guide-code-row">
+                            <code>sin(30) + cos(60)</code>
+                            <span class="guide-res">= 1</span>
+                        </div>
+                    </div>
+
+                    <div class="guide-card-item" onclick="insertExample('sqrt(625) + 3^4')">
+                        <div class="guide-meta">
+                            <span class="guide-badge alg">ALJABAR</span>
+                            <span class="guide-desc">Akar & Pangkat</span>
+                        </div>
+                        <div class="guide-code-row">
+                            <code>sqrt(625) + 3^4</code>
+                            <span class="guide-res">= 106</span>
+                        </div>
+                    </div>
+
+                    <div class="guide-card-item" onclick="insertExample('6! / (4! * 2!)')">
+                        <div class="guide-meta">
+                            <span class="guide-badge fact">FAKTORIAL</span>
+                            <span class="guide-desc">Pecahan Faktorial</span>
+                        </div>
+                        <div class="guide-code-row">
+                            <code>6! / (4! * 2!)</code>
+                            <span class="guide-res">= 15</span>
+                        </div>
+                    </div>
+
+                    <div class="guide-card-item" onclick="insertExample('100 * 25%')">
+                        <div class="guide-meta">
+                            <span class="guide-badge perc">PERSENTASE</span>
+                            <span class="guide-desc">Perhitungan Persen</span>
+                        </div>
+                        <div class="guide-code-row">
+                            <code>100 * 25%</code>
+                            <span class="guide-res">= 25</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="guide-footer-tip">
+                    <i class="fas fa-hand-pointer"></i> Klik salah satu kartu di atas untuk langsung mencoba!
+                </div>
+            </div>
+
+            <!-- Quick Engine Status Bar -->
+            <div class="intel-footer-bar">
+                <div class="footer-stat">
+                    <span class="stat-dot"></span>
+                    <span>SymPy Precision Grounding</span>
+                </div>
+                <div class="footer-stat-right">
+                    <span>Double Check Enabled</span>
+                </div>
+            </div>
+
         </div>
 
     </div>
 </div>
 
+<!-- ================= MODERN ULTRA-LUXURY STYLES ================= -->
 <style>
-/* Header Section Styles */
-.calc-header-section {
-    padding: 20px 0 10px 0;
-    margin-bottom: 10px;
-}
-.icon-box {
-    width: 50px;
-    height: 50px;
-    background: rgba(0, 229, 160, 0.1);
-    border: 1px solid rgba(0, 229, 160, 0.2);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-}
-.text-accent { color: #00e5a0; }
-.text-muted-custom { color: rgba(180, 190, 230, 0.6); font-size: 0.9rem; }
-.header-line {
-    height: 2px;
-    width: 100px;
-    background: linear-gradient(90deg, #00e5a0, transparent);
-    margin-top: 15px;
-    border-radius: 2px;
-}
+    /* CSS RESET & TOKENS */
+    :root {
+        --calc-bg-base: #070913;
+        --calc-bg-card: rgba(14, 18, 36, 0.72);
+        --calc-bg-inner: rgba(9, 12, 25, 0.85);
+        --calc-border: rgba(255, 255, 255, 0.08);
+        --calc-border-focus: rgba(16, 185, 129, 0.45);
 
-/* Existing Styles */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        --calc-emerald: #10b981;
+        --calc-emerald-light: #34d399;
+        --calc-emerald-dim: rgba(16, 185, 129, 0.12);
+        --calc-emerald-glow: rgba(16, 185, 129, 0.35);
 
-:root {
-    --bg-deep:      #0a0e1a;
-    --bg-panel:     rgba(15, 20, 40, 0.75);
-    --bg-card:      rgba(20, 27, 55, 0.6);
-    --bg-btn:       rgba(30, 38, 70, 0.8);
-    --bg-btn-hov:   rgba(45, 56, 100, 0.9);
-    --bg-num:       rgba(22, 30, 58, 0.9);
-    --bg-num-hov:   rgba(35, 46, 85, 1);
+        --calc-cyan: #06b6d4;
+        --calc-cyan-dim: rgba(6, 182, 212, 0.12);
+        --calc-purple: #8b5cf6;
+        --calc-purple-dim: rgba(139, 92, 246, 0.12);
+        --calc-amber: #f59e0b;
+        --calc-amber-dim: rgba(245, 158, 11, 0.14);
+        --calc-rose: #f43f5e;
+        --calc-rose-dim: rgba(244, 63, 94, 0.14);
 
-    --accent:       #00e5a0;
-    --accent-dim:   rgba(0, 229, 160, 0.15);
-    --accent-glow:  rgba(0, 229, 160, 0.4);
-    --orange:       #ff9a3c;
-    --orange-dim:   rgba(255, 154, 60, 0.15);
-    --purple:       #a78bfa;
-    --purple-dim:   rgba(167, 139, 250, 0.15);
-    --teal:         #38bdf8;
-    --teal-dim:     rgba(56, 189, 248, 0.15);
-    --red:          #ff6b6b;
-    --red-dim:      rgba(255, 107, 107, 0.15);
-    --gold:         #fbbf24;
-    --gold-dim:     rgba(251, 191, 36, 0.15);
+        --calc-num-bg: rgba(21, 27, 52, 0.75);
+        --calc-num-hover: rgba(32, 41, 78, 0.95);
+        --calc-num-text: #f1f5f9;
 
-    --txt:          #e8eeff;
-    --txt-muted:    rgba(180, 190, 230, 0.5);
-    --txt-hint:     rgba(140, 155, 200, 0.35);
-    --border:       rgba(100, 120, 200, 0.12);
-    --border-focus: rgba(0, 229, 160, 0.45);
+        --calc-text-main: #f8fafc;
+        --calc-text-dim: #94a3b8;
+        --calc-text-muted: #64748b;
 
-    --font-ui:   'Outfit', sans-serif;
-    --font-mono: 'Space Mono', monospace;
-    --tr: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.calc-wrapper {
-    min-height: 100vh;
-    background: var(--bg-deep);
-    background-image:
-        radial-gradient(ellipse 80% 60% at 15% 10%, rgba(0,229,160,0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 85% 85%, rgba(167,139,250,0.08) 0%, transparent 60%);
-    font-family: var(--font-ui);
-    padding: 32px 20px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 45px;
-    border-style: solid; border-width: 1px; border-color: rgba(255,255,255,0.1);
-  
-}
-
-/* Background animated blobs */
-.bg-blob { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; }
-.blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,229,160,0.07), transparent 70%); top: -150px; left: -150px; animation: blobf 10s ease-in-out infinite; }
-.blob-2 { width: 350px; height: 350px; background: radial-gradient(circle, rgba(167,139,250,0.09), transparent 70%); bottom: -80px; right: -80px; animation: blobf 12s ease-in-out infinite reverse; }
-.blob-3 { width: 280px; height: 280px; background: radial-gradient(circle, rgba(56,189,248,0.06), transparent 70%); top: 40%; left: 40%; animation: blobf 8s ease-in-out infinite 4s; }
-@keyframes blobf { 0%,100%{transform:translate(0,0) scale(1)} 40%{transform:translate(25px,-20px) scale(1.06)} 70%{transform:translate(-15px,18px) scale(0.96)} }
-
-.calc-layout {
-    max-width: 980px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 320px;
-    gap: 20px; align-items: start;
-    position: relative; z-index: 1;
-   
-}
-
-/* Panels */
-.calculator-panel,
-.history-panel {
-    background: var(--bg-panel);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(100,120,200,0.06);
-    animation: panelIn 0.5s cubic-bezier(0.4,0,0.2,1) both;
-}
-.history-panel { animation-delay: 0.12s; }
-@keyframes panelIn { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
-
-.calculator-panel { padding: 24px; }
-.history-panel { display: flex; flex-direction: column; }
-
-/* Brand header */
-.panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
-.brand { display: flex; align-items: center; gap: 12px; }
-.brand-icon {
-    width: 44px; height: 44px; border-radius: 13px;
-    background: var(--accent-dim); border: 1px solid rgba(0,229,160,0.3);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.25rem; color: var(--accent);
-    box-shadow: 0 0 18px rgba(0,229,160,0.18);
-}
-.brand-text { display: flex; flex-direction: column; gap: 2px; }
-.brand-name { font-size: 1.1rem; font-weight: 700; color: var(--txt); letter-spacing: 0.01em; }
-.brand-sub  { font-size: 0.68rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
-
-.status-badge {
-    display: flex; align-items: center; gap: 7px;
-    background: rgba(0,229,160,0.07); border: 1px solid rgba(0,229,160,0.2);
-    border-radius: 20px; padding: 5px 13px;
-    font-size: 0.72rem; color: var(--accent); font-weight: 600; letter-spacing: 0.04em;
-}
-.status-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--accent); box-shadow: 0 0 8px var(--accent);
-    animation: pulse 2s ease-in-out infinite;
-}
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.55;transform:scale(0.75)} }
-
-/* Display */
-.display-wrap {
-    background: rgba(4, 7, 18, 0.65);
-    border: 1px solid var(--border);
-    border-radius: 14px; padding: 16px 20px 13px;
-    margin-bottom: 18px; position: relative;
-    transition: border-color var(--tr), box-shadow var(--tr);
-}
-.display-wrap:focus-within {
-    border-color: var(--border-focus);
-    box-shadow: 0 0 0 3px rgba(0,229,160,0.07), inset 0 0 24px rgba(0,229,160,0.025);
-}
-.display-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-.display-label { font-size: 0.62rem; letter-spacing: 0.18em; font-weight: 600; color: var(--txt-hint); text-transform: uppercase; font-family: var(--font-mono); }
-
-#display {
-    width: 100%; border: none; background: transparent;
-    font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 700;
-    text-align: right; color: var(--txt); outline: none;
-    font-family: var(--font-mono); letter-spacing: -0.02em;
-    caret-color: var(--accent);
-}
-#display::placeholder { color: var(--txt-hint); font-weight: 400; font-size: 1rem; letter-spacing: 0; }
-
-.live-preview {
-    text-align: right; font-family: var(--font-mono);
-    font-size: 1rem; color: var(--accent);
-    min-height: 20px; font-weight: 400; opacity: 0.9;
-    transition: opacity var(--tr);
-}
-.display-hint {
-    font-size: 0.68rem; color: var(--txt-hint); margin-top: 9px;
-    border-top: 1px solid rgba(100,120,200,0.08); padding-top: 8px;
-}
-.display-hint code {
-    font-family: var(--font-mono); color: var(--teal);
-    background: rgba(56,189,248,0.08); padding: 1px 5px; border-radius: 3px; font-size: 0.66rem;
-}
-
-.calc-spinner { width: 20px; height: 20px; }
-.spin-ring { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--accent-dim); border-top-color: var(--accent); animation: spin 0.65s linear infinite; }
-@keyframes spin { to{transform:rotate(360deg)} }
-
-/* Button Grid */
-.buttons-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
-.grid-divider { grid-column: 1/-1; height: 1px; background: var(--border); margin: 3px 0; }
-
-.buttons-grid button {
-    border: 1px solid transparent; border-radius: 10px;
-    padding: 9px 4px; cursor: pointer;
-    transition: all var(--tr);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 2px; position: relative; overflow: hidden;
-    font-family: var(--font-ui); min-height: 52px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.25);
-}
-.buttons-grid button::after {
-    content:''; position:absolute; inset:0; background:white; opacity:0;
-    transition:opacity 0.08s; border-radius:inherit;
-}
-.buttons-grid button:active::after { opacity: 0.07; }
-.buttons-grid button:active { transform: scale(0.93); }
-
-.btn-label { font-size: 0.95rem; font-weight: 600; line-height: 1; }
-.btn-sub   { font-size: 0.57rem; opacity: 0.5; letter-spacing: 0.03em; }
-
-/* Num */
-.btn-num { background: var(--bg-num); border-color: rgba(80,100,180,0.1); color: var(--txt); font-size: 1.1rem; font-weight: 600; }
-.btn-num:hover { background: var(--bg-num-hov); border-color: rgba(100,130,210,0.22); }
-
-/* Op */
-.btn-op { background: var(--orange-dim); border-color: rgba(255,154,60,0.18); color: var(--orange); font-size: 1.25rem; font-weight: 700; }
-.btn-op:hover { background: rgba(255,154,60,0.24); border-color: rgba(255,154,60,0.38); }
-
-/* Sci */
-.btn-sci { background: var(--bg-btn); border-color: rgba(80,100,180,0.1); color: var(--txt); }
-.btn-sci:hover { background: var(--bg-btn-hov); border-color: rgba(100,130,210,0.28); }
-
-/* Trig */
-.btn-trig { background: var(--teal-dim); border-color: rgba(56,189,248,0.14); color: var(--teal); }
-.btn-trig:hover { background: rgba(56,189,248,0.22); border-color: rgba(56,189,248,0.32); }
-
-/* Const */
-.btn-const { background: var(--gold-dim); border-color: rgba(251,191,36,0.18); color: var(--gold); }
-.btn-const .btn-label { font-size: 1.2rem; }
-.btn-const:hover { background: rgba(251,191,36,0.22); border-color: rgba(251,191,36,0.38); }
-
-/* Comb */
-.btn-comb { background: var(--purple-dim); border-color: rgba(167,139,250,0.18); color: var(--purple); }
-.btn-comb:hover { background: rgba(167,139,250,0.22); border-color: rgba(167,139,250,0.38); }
-
-/* Mem */
-.btn-mem { background: rgba(0,229,160,0.07); border-color: rgba(0,229,160,0.18); color: var(--accent); }
-.btn-mem:hover { background: rgba(0,229,160,0.14); border-color: rgba(0,229,160,0.38); }
-
-/* Delete */
-.btn-delete { background: var(--red-dim); border-color: rgba(255,107,107,0.18); color: var(--red); font-size: 0.95rem; }
-.btn-delete:hover { background: rgba(255,107,107,0.22); border-color: rgba(255,107,107,0.38); }
-
-/* Clear */
-.btn-clear { background: rgba(255,107,107,0.18); border-color: rgba(255,107,107,0.25); color: var(--red); font-weight: 700; }
-.btn-clear:hover { background: rgba(255,107,107,0.28); border-color: rgba(255,107,107,0.45); }
-
-/* Equal */
-.btn-equal {
-    background: linear-gradient(150deg, #00e5a0 0%, #00b87a 100%);
-    border-color: rgba(0,229,160,0.4); color: #001c10;
-    font-size: 1.7rem; font-weight: 800;
-    box-shadow: 0 8px 24px rgba(0,229,160,0.32);
-}
-.btn-equal:hover {
-    background: linear-gradient(150deg, #00ffb3 0%, #00d48a 100%);
-    box-shadow: 0 12px 32px rgba(0,229,160,0.48);
-    transform: translateY(-2px);
-}
-.btn-equal:active { transform: scale(0.93) translateY(0); }
-
-/* Animations */
-.error-shake { animation: shake 0.35s ease-in-out; border-color: var(--red) !important; }
-@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-7px)} 40%{transform:translateX(7px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
-
-@keyframes resultFlash { 0%{color:var(--accent);text-shadow:0 0 22px var(--accent-glow)} 100%{color:var(--txt);text-shadow:none} }
-.result-flash { animation: resultFlash 0.7s ease-out forwards; }
-
-/* History Panel */
-.history-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 20px 15px; border-bottom: 1px solid var(--border);
-}
-.history-title { display: flex; align-items: center; gap: 9px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--txt-muted); }
-.history-title i { color: var(--accent); }
-
-.clear-hist-btn {
-    background: transparent; border: 1px solid var(--border);
-    color: var(--txt-muted); border-radius: 8px;
-    width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
-    cursor: pointer; font-size: 0.78rem; transition: all var(--tr);
-}
-.clear-hist-btn:hover { background: var(--red-dim); border-color: var(--red); color: var(--red); }
-
-.history-scroll { overflow-y: auto; max-height: 280px; }
-.history-scroll::-webkit-scrollbar { width: 3px; }
-.history-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-#history-list { list-style: none; }
-
-.empty-msg {
-    display: flex; flex-direction: column; align-items: center;
-    padding: 30px 20px; text-align: center; gap: 6px;
-}
-.empty-icon { font-size: 1.8rem; color: var(--txt-hint); margin-bottom: 6px; }
-.empty-msg p  { color: var(--txt-muted); font-size: 0.82rem; font-weight: 500; }
-.empty-msg span { color: var(--txt-hint); font-size: 0.7rem; }
-
-.history-item {
-    padding: 11px 20px; border-bottom: 1px solid var(--border);
-    cursor: pointer; transition: background var(--tr);
-    animation: histIn 0.22s ease-out;
-}
-.history-item:hover { background: rgba(0,229,160,0.04); }
-@keyframes histIn { from{opacity:0;transform:translateX(8px)} to{opacity:1;transform:translateX(0)} }
-.history-query { font-size: 0.75rem; color: var(--txt-muted); font-family: var(--font-mono); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px; }
-.history-result { font-size: 1rem; font-weight: 700; text-align: right; color: var(--accent); font-family: var(--font-mono); }
-
-/* Quick Guide */
-.quick-guide { border-top: 1px solid var(--border); padding: 16px 20px; }
-.guide-title { font-size: 0.67rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--txt-muted); font-weight: 600; margin-bottom: 11px; display: flex; align-items: center; gap: 6px; }
-.guide-title i { color: var(--gold); }
-.guide-items { display: flex; flex-direction: column; gap: 7px; }
-.guide-item { display: flex; justify-content: space-between; align-items: center; }
-.guide-item code { font-family: var(--font-mono); color: var(--teal); font-size: 0.72rem; background: var(--teal-dim); padding: 2px 7px; border-radius: 4px; }
-.guide-item span { color: var(--txt-muted); font-size: 0.75rem; }
-
-/* Responsive */
-@media (max-width: 820px) {
-    .calc-layout { grid-template-columns: 1fr; max-width: 480px; }
-}
-@media (max-width: 480px) {
-    .calc-wrapper { padding: 14px 10px; }
-    .calculator-panel { padding: 16px; }
-    .buttons-grid { gap: 5px; }
-    .buttons-grid button { min-height: 46px; }
-    .btn-label { font-size: 0.85rem; }
-    #display { font-size: 1.5rem; }
-}
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const display     = document.getElementById("display");
-    const preview     = document.getElementById("live-preview");
-    const historyList = document.getElementById("history-list");
-    const spinner     = document.getElementById("loading-spinner");
-    const btns        = document.querySelectorAll(".buttons-grid button");
-
-    // --- LOCAL PREVIEW — 0 server requests ---
-    function localPreview(expression) {
-        if (!expression.trim()) { preview.textContent = ""; return; }
-        try {
-            let expr = expression
-                .replace(/,/g, '.')
-                .replace(/\^/g, '**')
-                .replace(/\bpi\b/g, String(Math.PI))
-                .replace(/\be\b/g, String(Math.E))
-                .replace(/sqrt\(/g, 'Math.sqrt(')
-                .replace(/\babs\(/g, 'Math.abs(')
-                .replace(/\bsin\(/g, 'Math.sin(Math.PI/180*')
-                .replace(/\bcos\(/g, 'Math.cos(Math.PI/180*')
-                .replace(/\btan\(/g, 'Math.tan(Math.PI/180*')
-                .replace(/\blog10\(/g, 'Math.log10(')
-                .replace(/\blog\(/g, 'Math.log(')
-                .replace(/\bexp\(/g, 'Math.exp(')
-                .replace(/(\d+)!/g, (_, n) => factorial(parseInt(n)))
-                .replace(/(\d+(\.\d+)?)\s*%(?!\s*[\d(])/g, '($1/100)')
-                .replace(/\s+mod\s+/gi, '%');
-
-            if (/kombinasi|permutasi|nCr|nPr|comb|perm|Ans/i.test(expr)) {
-                preview.textContent = ""; return;
-            }
-            const result = Function('"use strict"; return (' + expr + ')')();
-            if (isFinite(result) && !isNaN(result)) {
-                const fmt = Number.isInteger(result) ? result : parseFloat(result.toFixed(10));
-                preview.textContent = "= " + fmt;
-            } else { preview.textContent = ""; }
-        } catch { preview.textContent = ""; }
+        --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
+        --anim-tr: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    function factorial(n) {
-        if (n < 0 || n > 170) return NaN;
-        let r = 1; for (let i = 2; i <= n; i++) r *= i; return r;
+    /* HERO HEADER */
+    .calc-hero-header {
+        margin-bottom: 22px;
     }
 
-    // --- SERVER CALL — only on = or Enter ---
-    async function calculatePython(expression) {
-        if (!expression.trim()) return;
-        spinner.style.display = "block";
-        try {
-            const response = await fetch("{{ url_for('api.calculate_api') }}", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': document.querySelector('meta[name="csrf-token"]').content
-                },
-                body: JSON.stringify({ expression })
-            });
-            const data = await response.json();
-            spinner.style.display = "none";
-            if (data.status === 'success') {
-                display.value = data.result;
-                display.classList.add("result-flash");
-                setTimeout(() => display.classList.remove("result-flash"), 700);
-                preview.textContent = "";
-                addToHistory(expression, data.result);
-            } else { triggerError(); }
-        } catch (err) {
-            console.error(err);
-            spinner.style.display = "none";
-            triggerError();
+    .calc-header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(139, 92, 246, 0.04) 50%, rgba(14, 18, 36, 0.6) 100%);
+        border: 1px solid var(--calc-border);
+        border-radius: 20px;
+        padding: 20px 24px;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+
+    .calc-title-group {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .calc-icon-glow {
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.1));
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        color: var(--calc-emerald-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        box-shadow: 0 0 24px rgba(16, 185, 129, 0.2);
+        flex-shrink: 0;
+    }
+
+    .calc-badge-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 5px;
+    }
+
+    .calc-status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: var(--calc-emerald-light);
+        background: var(--calc-emerald-dim);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        padding: 2px 10px;
+        border-radius: 999px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+    }
+
+    .pulse-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--calc-emerald-light);
+        box-shadow: 0 0 8px var(--calc-emerald-light);
+        animation: pulseDot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseDot {
+
+        0%,
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        50% {
+            opacity: 0.4;
+            transform: scale(0.8);
         }
     }
 
-    // --- EVENTS ---
-    btns.forEach(btn => {
-        btn.addEventListener("click", () => {
-            const insert = btn.dataset.insert;
-            const action = btn.dataset.action;
-            if (insert) {
-                insertAtCursor(insert); localPreview(display.value);
-            } else if (action === "clear") {
-                display.value = ""; preview.textContent = "";
-            } else if (action === "back") {
-                display.value = display.value.slice(0, -1); localPreview(display.value);
-            } else if (action === "calculate") {
+    .calc-tech-pill {
+        font-size: 0.72rem;
+        color: var(--calc-cyan);
+        background: var(--calc-cyan-dim);
+        border: 1px solid rgba(6, 182, 212, 0.25);
+        padding: 2px 10px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .calc-main-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #c8a96e;
+        margin: 0;
+        letter-spacing: -0.02em;
+        font-family: var(--font-sans);
+    }
+
+    .calc-subtitle {
+        margin: 2px 0 0;
+        font-size: 0.85rem;
+        color: var(--calc-text-dim);
+    }
+
+    .calc-header-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .calc-action-pill {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--calc-border);
+        color: var(--calc-text-dim);
+        padding: 8px 14px;
+        border-radius: 12px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        transition: all var(--anim-tr);
+    }
+
+    .calc-action-pill:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .mode-pill {
+        padding: 6px 12px;
+    }
+
+    .mode-tag {
+        font-weight: 700;
+        font-size: 0.75rem;
+        color: var(--calc-text-muted);
+        transition: color 0.15s ease;
+    }
+
+    .mode-tag.active {
+        color: var(--calc-emerald-light);
+        text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+    }
+
+    .mode-divider {
+        color: var(--calc-border);
+        margin: 0 4px;
+    }
+
+    /* MAIN LAYOUT WRAPPER */
+    .calc-container-wrap {
+        position: relative;
+        border-radius: 28px;
+        background: var(--calc-bg-base);
+        padding: 24px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Ambient glow blobs */
+    .glow-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .orb-emerald {
+        width: 450px;
+        height: 450px;
+        background: radial-gradient(circle, rgba(16, 185, 129, 0.08), transparent 70%);
+        top: -100px;
+        left: -100px;
+    }
+
+    .orb-indigo {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(139, 92, 246, 0.09), transparent 70%);
+        bottom: -80px;
+        right: 15%;
+    }
+
+    .orb-amber {
+        width: 250px;
+        height: 250px;
+        background: radial-gradient(circle, rgba(245, 158, 11, 0.06), transparent 70%);
+        top: 30%;
+        right: -50px;
+    }
+
+    .calc-grid-layout {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1.35fr 1fr;
+        gap: 24px;
+        align-items: start;
+    }
+
+    /* PANELS SHARED STYLING */
+    .calc-panel-card,
+    .intel-panel-card {
+        background: var(--calc-bg-card);
+        backdrop-filter: blur(28px);
+        -webkit-backdrop-filter: blur(28px);
+        border: 1px solid var(--calc-border);
+        border-radius: 24px;
+        padding: 24px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        transition: border-color var(--anim-tr);
+    }
+
+    .calc-panel-card:hover,
+    .intel-panel-card:hover {
+        border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    /* CONSOLE TOPBAR */
+    .calc-console-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 18px;
+    }
+
+    .console-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .console-logo {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(6, 182, 212, 0.1));
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        color: var(--calc-emerald-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.15rem;
+    }
+
+    .console-name {
+        display: block;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.01em;
+    }
+
+    .console-sub {
+        display: block;
+        font-size: 0.68rem;
+        color: var(--calc-emerald-light);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    .console-controls {
+        display: flex;
+        gap: 6px;
+    }
+
+    .top-action-btn {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--calc-border);
+        color: var(--calc-text-dim);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.82rem;
+        transition: all var(--anim-tr);
+    }
+
+    .top-action-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-1px);
+    }
+
+    /* OLED SCREEN CONSOLE */
+    .oled-screen {
+        background: var(--calc-bg-inner);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 18px;
+        padding: 16px 20px 14px;
+        margin-bottom: 22px;
+        box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.6), 0 4px 20px rgba(0, 0, 0, 0.3);
+        position: relative;
+        transition: border-color var(--anim-tr), box-shadow var(--anim-tr);
+    }
+
+    .oled-screen:focus-within {
+        border-color: var(--calc-border-focus);
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.08), inset 0 2px 12px rgba(0, 0, 0, 0.7);
+    }
+
+    .oled-topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+
+    .oled-indicators {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .ind-pill {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        padding: 2px 6px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        color: var(--calc-text-muted);
+    }
+
+    .ind-math {
+        color: var(--calc-emerald-light);
+        border-color: rgba(16, 185, 129, 0.25);
+        background: rgba(16, 185, 129, 0.08);
+    }
+
+    .ind-ans {
+        color: var(--calc-cyan);
+        border-color: rgba(6, 182, 212, 0.25);
+    }
+
+    .calc-spinner {
+        width: 16px;
+        height: 16px;
+    }
+
+    .spinner-ring {
+        display: block;
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(16, 185, 129, 0.2);
+        border-top-color: var(--calc-emerald-light);
+        border-radius: 50%;
+        animation: spinRing 0.6s linear infinite;
+    }
+
+    @keyframes spinRing {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .oled-input-row {
+        margin-bottom: 4px;
+    }
+
+    #display {
+        width: 100%;
+        border: none;
+        background: transparent;
+        font-family: var(--font-mono);
+        font-size: clamp(1.4rem, 2.6vw, 1.95rem);
+        font-weight: 700;
+        color: #ffffff;
+        text-align: right;
+        outline: none;
+        letter-spacing: -0.01em;
+        caret-color: var(--calc-emerald-light);
+    }
+
+    #display::placeholder {
+        color: rgba(148, 163, 184, 0.3);
+        font-weight: 400;
+        font-size: 0.95rem;
+        font-family: var(--font-sans);
+    }
+
+    .oled-preview-row {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        min-height: 24px;
+        margin-bottom: 8px;
+    }
+
+    .live-preview-box {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--font-mono);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--calc-emerald-light);
+        background: rgba(16, 185, 129, 0.07);
+        padding: 2px 10px;
+        border-radius: 6px;
+        border: 1px solid rgba(16, 185, 129, 0.18);
+        transition: opacity var(--anim-tr);
+    }
+
+    .preview-symbol {
+        opacity: 0.6;
+        font-size: 0.9rem;
+    }
+
+    .oled-chips-bar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        overflow-x: auto;
+        padding-top: 8px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .oled-chips-bar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .chip-label {
+        font-size: 0.68rem;
+        color: var(--calc-text-muted);
+        font-weight: 600;
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .sample-chip {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        color: var(--calc-text-dim);
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-size: 0.68rem;
+        font-family: var(--font-mono);
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.15s ease;
+    }
+
+    .sample-chip:hover {
+        background: var(--calc-cyan-dim);
+        border-color: rgba(6, 182, 212, 0.35);
+        color: var(--calc-cyan);
+        transform: translateY(-1px);
+    }
+
+    /* KEYPAD GRID */
+    .calc-keypad {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+
+    .keypad-separator {
+        grid-column: 1 / -1;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+        margin: 4px 0;
+    }
+
+    /* BUTTON BASE */
+    .btn-calc {
+        border: 1px solid transparent;
+        border-radius: 12px;
+        padding: 10px 4px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        font-family: var(--font-sans);
+        min-height: 52px;
+        position: relative;
+        overflow: hidden;
+        transition: all var(--anim-tr);
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    .btn-calc:active {
+        transform: scale(0.94);
+    }
+
+    .k-label {
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1;
+        color: var(--calc-text-main);
+    }
+
+    .k-sub {
+        font-size: 0.58rem;
+        font-weight: 500;
+        opacity: 0.55;
+        letter-spacing: 0.02em;
+        text-transform: lowercase;
+    }
+
+    /* NUMBER BUTTONS */
+    .btn-num {
+        background: var(--calc-num-bg);
+        border-color: rgba(255, 255, 255, 0.06);
+        color: var(--calc-num-text);
+        font-size: 1.15rem;
+        font-weight: 700;
+    }
+
+    .btn-num:hover {
+        background: var(--calc-num-hover);
+        border-color: rgba(255, 255, 255, 0.16);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    }
+
+    /* OPERATOR BUTTONS (÷, ×, −, +) */
+    .btn-op {
+        background: var(--calc-amber-dim);
+        border-color: rgba(245, 158, 11, 0.22);
+        color: var(--calc-amber);
+    }
+
+    .btn-op .k-label {
+        font-size: 1.35rem;
+        color: var(--calc-amber);
+    }
+
+    .btn-op:hover {
+        background: rgba(245, 158, 11, 0.22);
+        border-color: rgba(245, 158, 11, 0.45);
+        box-shadow: 0 0 16px rgba(245, 158, 11, 0.25);
+        transform: translateY(-1px);
+    }
+
+    /* SCIENTIFIC & BRACKETS */
+    .btn-sci,
+    .btn-bracket {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.07);
+        color: var(--calc-text-dim);
+    }
+
+    .btn-sci:hover,
+    .btn-bracket:hover {
+        background: rgba(255, 255, 255, 0.09);
+        border-color: rgba(255, 255, 255, 0.18);
+        color: #ffffff;
+    }
+
+    /* TRIGONOMETRY */
+    .btn-trig {
+        background: var(--calc-cyan-dim);
+        border-color: rgba(6, 182, 212, 0.18);
+        color: var(--calc-cyan);
+    }
+
+    .btn-trig .k-label {
+        color: var(--calc-cyan);
+    }
+
+    .btn-trig:hover {
+        background: rgba(6, 182, 212, 0.22);
+        border-color: rgba(6, 182, 212, 0.4);
+        box-shadow: 0 0 16px rgba(6, 182, 212, 0.2);
+    }
+
+    /* CONSTANTS */
+    .btn-const {
+        background: rgba(251, 191, 36, 0.08);
+        border-color: rgba(251, 191, 36, 0.18);
+        color: #fbbf24;
+    }
+
+    .btn-const .k-label {
+        color: #fbbf24;
+        font-size: 1.15rem;
+    }
+
+    .btn-const:hover {
+        background: rgba(251, 191, 36, 0.18);
+        border-color: rgba(251, 191, 36, 0.38);
+    }
+
+    /* COMBINATORICS */
+    .btn-comb {
+        background: var(--calc-purple-dim);
+        border-color: rgba(139, 92, 246, 0.2);
+        color: #a78bfa;
+    }
+
+    .btn-comb .k-label {
+        color: #a78bfa;
+    }
+
+    .btn-comb:hover {
+        background: rgba(139, 92, 246, 0.22);
+        border-color: rgba(139, 92, 246, 0.42);
+        box-shadow: 0 0 16px rgba(139, 92, 246, 0.2);
+    }
+
+    /* MEMORY (Ans) */
+    .btn-mem {
+        background: var(--calc-emerald-dim);
+        border-color: rgba(16, 185, 129, 0.22);
+        color: var(--calc-emerald-light);
+    }
+
+    .btn-mem .k-label {
+        color: var(--calc-emerald-light);
+    }
+
+    .btn-mem:hover {
+        background: rgba(16, 185, 129, 0.22);
+        border-color: rgba(16, 185, 129, 0.45);
+        box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);
+    }
+
+    /* DELETE & CLEAR */
+    .btn-delete {
+        background: var(--calc-rose-dim);
+        border-color: rgba(244, 63, 94, 0.2);
+        color: var(--calc-rose);
+    }
+
+    .btn-delete:hover {
+        background: rgba(244, 63, 94, 0.24);
+        border-color: rgba(244, 63, 94, 0.45);
+    }
+
+    .btn-clear {
+        background: rgba(244, 63, 94, 0.15);
+        border-color: rgba(244, 63, 94, 0.3);
+        color: var(--calc-rose);
+    }
+
+    .btn-clear .k-label {
+        color: #ff6b81;
+    }
+
+    .btn-clear:hover {
+        background: rgba(244, 63, 94, 0.28);
+        border-color: rgba(244, 63, 94, 0.5);
+        box-shadow: 0 0 18px rgba(244, 63, 94, 0.3);
+    }
+
+    /* HERO EQUAL BUTTON (=) */
+    .btn-equal {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        border: 1px solid rgba(16, 185, 129, 0.5);
+        color: #042f1a;
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .k-label-equal {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: #ffffff;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        z-index: 1;
+    }
+
+    .equal-glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.4), transparent 70%);
+        opacity: 0.6;
+        transition: opacity 0.2s ease;
+    }
+
+    .btn-equal:hover {
+        background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+        box-shadow: 0 8px 30px rgba(16, 185, 129, 0.55);
+        transform: translateY(-2px);
+    }
+
+    .btn-equal:active {
+        transform: translateY(0) scale(0.96);
+    }
+
+    /* RIGHT PANEL: INTEL & HISTORY */
+    .intel-tabs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--calc-border);
+    }
+
+    .intel-tab {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--calc-border);
+        color: var(--calc-text-dim);
+        padding: 9px 12px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: all var(--anim-tr);
+    }
+
+    .intel-tab.active {
+        background: rgba(16, 185, 129, 0.12);
+        border-color: rgba(16, 185, 129, 0.35);
+        color: var(--calc-emerald-light);
+    }
+
+    .tab-badge {
+        background: rgba(16, 185, 129, 0.2);
+        color: var(--calc-emerald-light);
+        font-size: 0.68rem;
+        padding: 1px 6px;
+        border-radius: 999px;
+        font-family: var(--font-mono);
+    }
+
+    .tab-pane {
+        display: none;
+        animation: fadeInPane 0.25s ease;
+    }
+
+    .tab-pane.active {
+        display: block;
+    }
+
+    @keyframes fadeInPane {
+        from {
+            opacity: 0;
+            transform: translateY(6px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .pane-header-action {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+    }
+
+    .pane-label {
+        font-size: 0.72rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--calc-text-muted);
+    }
+
+    .clear-hist-pill {
+        background: transparent;
+        border: 1px solid var(--calc-border);
+        color: var(--calc-text-muted);
+        font-size: 0.72rem;
+        padding: 4px 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all var(--anim-tr);
+    }
+
+    .clear-hist-pill:hover {
+        background: var(--calc-rose-dim);
+        border-color: var(--calc-rose);
+        color: var(--calc-rose);
+    }
+
+    /* HISTORY LIST */
+    .history-scroll-box {
+        max-height: 410px;
+        overflow-y: auto;
+        padding-right: 4px;
+    }
+
+    .history-scroll-box::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .history-scroll-box::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
+
+    .history-items-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .empty-state-box {
+        text-align: center;
+        padding: 40px 16px;
+        color: var(--calc-text-muted);
+    }
+
+    .empty-icon-wrap {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--calc-border);
+        margin: 0 auto 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        color: var(--calc-text-muted);
+    }
+
+    .empty-state-box h5 {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--calc-text-dim);
+        margin-bottom: 4px;
+    }
+
+    .empty-state-box p {
+        font-size: 0.78rem;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    .hist-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--calc-border);
+        border-radius: 14px;
+        padding: 12px 14px;
+        cursor: pointer;
+        transition: all var(--anim-tr);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        animation: slideInHist 0.2s ease-out;
+    }
+
+    @keyframes slideInHist {
+        from {
+            opacity: 0;
+            transform: translateY(-8px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .hist-card:hover {
+        background: rgba(16, 185, 129, 0.06);
+        border-color: rgba(16, 185, 129, 0.3);
+        transform: translateX(3px);
+    }
+
+    .hist-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .hist-expr {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--calc-text-dim);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 80%;
+    }
+
+    .hist-action-use {
+        font-size: 0.65rem;
+        color: var(--calc-emerald-light);
+        opacity: 0;
+        transition: opacity 0.15s ease;
+    }
+
+    .hist-card:hover .hist-action-use {
+        opacity: 1;
+    }
+
+    .hist-res {
+        font-family: var(--font-mono);
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--calc-emerald-light);
+        text-align: right;
+    }
+
+    /* GUIDE / CHEAT SHEET */
+    .guide-scroll-box {
+        max-height: 380px;
+        overflow-y: auto;
+        padding-right: 4px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .guide-scroll-box::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .guide-scroll-box::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
+
+    .guide-card-item {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--calc-border);
+        border-radius: 12px;
+        padding: 10px 14px;
+        cursor: pointer;
+        transition: all var(--anim-tr);
+    }
+
+    .guide-card-item:hover {
+        background: rgba(6, 182, 212, 0.07);
+        border-color: rgba(6, 182, 212, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .guide-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 6px;
+    }
+
+    .guide-badge {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        padding: 2px 6px;
+        border-radius: 4px;
+    }
+
+    .guide-badge.comb {
+        color: #a78bfa;
+        background: var(--calc-purple-dim);
+    }
+
+    .guide-badge.perm {
+        color: var(--calc-cyan);
+        background: var(--calc-cyan-dim);
+    }
+
+    .guide-badge.trig {
+        color: var(--calc-emerald-light);
+        background: var(--calc-emerald-dim);
+    }
+
+    .guide-badge.alg {
+        color: var(--calc-amber);
+        background: var(--calc-amber-dim);
+    }
+
+    .guide-badge.fact {
+        color: #f43f5e;
+        background: var(--calc-rose-dim);
+    }
+
+    .guide-badge.perc {
+        color: #38bdf8;
+        background: rgba(56, 189, 248, 0.12);
+    }
+
+    .guide-desc {
+        font-size: 0.72rem;
+        color: var(--calc-text-muted);
+    }
+
+    .guide-code-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .guide-code-row code {
+        font-family: var(--font-mono);
+        color: #e2e8f0;
+        font-size: 0.82rem;
+    }
+
+    .guide-res {
+        font-family: var(--font-mono);
+        color: var(--calc-emerald-light);
+        font-weight: 600;
+        font-size: 0.85rem;
+    }
+
+    .guide-footer-tip {
+        margin-top: 12px;
+        padding-top: 10px;
+        border-top: 1px solid var(--calc-border);
+        font-size: 0.72rem;
+        color: var(--calc-text-muted);
+        text-align: center;
+    }
+
+    .guide-footer-tip i {
+        color: var(--calc-amber);
+    }
+
+    /* INTEL FOOTER STATUS */
+    .intel-footer-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 18px;
+        padding-top: 14px;
+        border-top: 1px solid var(--calc-border);
+        font-size: 0.7rem;
+        color: var(--calc-text-muted);
+    }
+
+    .footer-stat {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .stat-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--calc-emerald-light);
+        box-shadow: 0 0 6px var(--calc-emerald-light);
+    }
+
+    /* ANIMATIONS & FLASH */
+    .error-shake {
+        animation: calcShake 0.4s ease-in-out;
+        border-color: var(--calc-rose) !important;
+    }
+
+    @keyframes calcShake {
+
+        0%,
+        100% {
+            transform: translateX(0);
+        }
+
+        20% {
+            transform: translateX(-8px);
+        }
+
+        40% {
+            transform: translateX(8px);
+        }
+
+        60% {
+            transform: translateX(-5px);
+        }
+
+        80% {
+            transform: translateX(5px);
+        }
+    }
+
+    .result-glow-flash {
+        animation: flashResult 0.6s ease-out;
+    }
+
+    @keyframes flashResult {
+        0% {
+            color: var(--calc-emerald-light);
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
+        }
+
+        100% {
+            color: #ffffff;
+            text-shadow: none;
+        }
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 992px) {
+        .calc-grid-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .intel-panel-card {
+            margin-top: 10px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .calc-container-wrap {
+            padding: 14px 10px;
+            border-radius: 20px;
+        }
+
+        .calc-panel-card,
+        .intel-panel-card {
+            padding: 16px 12px;
+            border-radius: 18px;
+        }
+
+        .calc-keypad {
+            gap: 6px;
+        }
+
+        .btn-calc {
+            min-height: 48px;
+            padding: 6px 2px;
+        }
+
+        .k-label {
+            font-size: 0.9rem;
+        }
+
+        #display {
+            font-size: 1.45rem;
+        }
+    }
+</style>
+
+<!-- ================= ROBUST & DELIGHTFUL JAVASCRIPT ================= -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const display = document.getElementById("display");
+        const preview = document.getElementById("live-preview");
+        const previewSymbol = document.getElementById("preview-symbol");
+        const historyList = document.getElementById("history-list");
+        const spinner = document.getElementById("loading-spinner");
+        const btns = document.querySelectorAll(".calc-keypad button");
+        const histCountBadge = document.getElementById("hist-count");
+        const oledScreen = document.getElementById("oled-screen");
+        const screenAnsInd = document.getElementById("screen-ans-ind");
+        const valAnsInd = document.getElementById("val-ans-ind");
+        const btnModeDegRad = document.getElementById("btn-mode-deg-rad");
+        const modeDegTag = document.getElementById("mode-deg");
+        const modeRadTag = document.getElementById("mode-rad");
+        const screenModeInd = document.getElementById("screen-mode-ind");
+
+        let isDegMode = true;
+        let soundEnabled = true;
+        let calculationHistory = [];
+        let lastResult = null;
+
+        // --- SYNTHETIC HAPTIC AUDIO (Pure Web Audio API, Zero Latency) ---
+        let audioCtx = null;
+        function playClickBeep(freq = 600, duration = 0.035, type = 'sine') {
+            if (!soundEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) { }
+        }
+
+        // Toggle Sound Button
+        const btnSound = document.getElementById("btn-sound-toggle");
+        const soundIcon = document.getElementById("sound-icon");
+        const soundLabel = document.getElementById("sound-label");
+        btnSound.addEventListener("click", () => {
+            soundEnabled = !soundEnabled;
+            if (soundEnabled) {
+                soundIcon.className = "fas fa-volume-high";
+                soundLabel.textContent = "Suara Aktif";
+                playClickBeep(800, 0.05);
+            } else {
+                soundIcon.className = "fas fa-volume-xmark";
+                soundLabel.textContent = "Mute";
+            }
+        });
+
+        // Toggle DEG / RAD Mode
+        btnModeDegRad.addEventListener("click", () => {
+            isDegMode = !isDegMode;
+            if (isDegMode) {
+                modeDegTag.classList.add("active");
+                modeRadTag.classList.remove("active");
+                screenModeInd.textContent = "DEG";
+            } else {
+                modeRadTag.classList.add("active");
+                modeDegTag.classList.remove("active");
+                screenModeInd.textContent = "RAD";
+            }
+            playClickBeep(700, 0.04);
+            localPreview(display.value);
+        });
+
+        // --- LOCAL REALTIME PREVIEW (Client-Side, zero network latency) ---
+        function localPreview(expression) {
+            if (!expression.trim()) {
+                preview.textContent = "0";
+                previewSymbol.style.opacity = "0.3";
+                return;
+            }
+
+            try {
+                let expr = expression
+                    .replace(/,/g, '.')
+                    .replace(/\^/g, '**')
+                    .replace(/\bpi\b/gi, String(Math.PI))
+                    .replace(/\be\b/gi, String(Math.E))
+                    .replace(/sqrt\(/gi, 'Math.sqrt(')
+                    .replace(/\babs\(/gi, 'Math.abs(')
+                    .replace(/(\d+)!/g, (_, n) => factorial(parseInt(n)))
+                    .replace(/(\d+(\.\d+)?)\s*%(?!\s*[\d(])/g, '($1/100)')
+                    .replace(/\s+mod\s+/gi, '%');
+
+                // Trigonometry with DEG / RAD awareness
+                const trigMultiplier = isDegMode ? '(Math.PI/180*' : '(';
+                expr = expr
+                    .replace(/\bsin\(/gi, 'Math.sin(' + trigMultiplier)
+                    .replace(/\bcos\(/gi, 'Math.cos(' + trigMultiplier)
+                    .replace(/\btan\(/gi, 'Math.tan(' + trigMultiplier)
+                    .replace(/\blog10\(/gi, 'Math.log10(')
+                    .replace(/\blog\(/gi, 'Math.log(')
+                    .replace(/\bexp\(/gi, 'Math.exp(');
+
+                // Handle Ans in local preview
+                if (/Ans/i.test(expr)) {
+                    if (lastResult !== null) expr = expr.replace(/Ans/gi, String(lastResult));
+                    else { preview.textContent = "…"; return; }
+                }
+
+                // Kombinasi & Permutasi client preview
+                if (/kombinasi|nCr|c/i.test(expr)) {
+                    expr = expr.replace(/(\d+)\s*(?:kombinasi|nCr|c)\s*(\d+)/gi, (_, n, r) => clientComb(parseInt(n), parseInt(r)));
+                }
+                if (/permutasi|nPr|p/i.test(expr)) {
+                    expr = expr.replace(/(\d+)\s*(?:permutasi|nPr|p)\s*(\d+)/gi, (_, n, r) => clientPerm(parseInt(n), parseInt(r)));
+                }
+
+                const result = Function('"use strict"; return (' + expr + ')')();
+                if (isFinite(result) && !isNaN(result)) {
+                    const formatted = Number.isInteger(result) ? result : parseFloat(result.toFixed(8));
+                    preview.textContent = formatted;
+                    previewSymbol.style.opacity = "1";
+                } else {
+                    preview.textContent = "…";
+                    previewSymbol.style.opacity = "0.3";
+                }
+            } catch {
+                preview.textContent = "…";
+                previewSymbol.style.opacity = "0.3";
+            }
+        }
+
+        function factorial(n) {
+            if (n < 0 || n > 170) return NaN;
+            let r = 1; for (let i = 2; i <= n; i++) r *= i; return r;
+        }
+
+        function clientComb(n, r) {
+            if (r < 0 || r > n) return 0;
+            return factorial(n) / (factorial(r) * factorial(n - r));
+        }
+
+        function clientPerm(n, r) {
+            if (r < 0 || r > n) return 0;
+            return factorial(n) / factorial(n - r);
+        }
+
+        // --- CSRF TOKEN HELPER ---
+        function getCSRFToken() {
+            const meta = document.querySelector('meta[name="csrf-token"]');
+            return meta ? meta.content : '';
+        }
+
+        // --- SERVER CALCULATION (Exact Python Engine) ---
+        async function calculatePython(expression) {
+            if (!expression.trim()) return;
+            spinner.style.display = "block";
+            playClickBeep(520, 0.05, 'triangle');
+
+            try {
+                const response = await fetch("{{ url_for('api.calculate_api') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCSRFToken()
+                    },
+                    body: JSON.stringify({ expression })
+                });
+
+                const data = await response.json();
+                spinner.style.display = "none";
+
+                if (data.status === 'success') {
+                    const finalResult = data.result;
+                    lastResult = finalResult;
+
+                    // Tampilkan di input dengan efek glow
+                    display.value = finalResult;
+                    display.classList.add("result-glow-flash");
+                    setTimeout(() => display.classList.remove("result-glow-flash"), 600);
+
+                    // Update memory indicator
+                    screenAnsInd.style.display = "inline-flex";
+                    valAnsInd.textContent = finalResult.length > 8 ? finalResult.slice(0, 8) + '…' : finalResult;
+
+                    preview.textContent = finalResult;
+                    previewSymbol.style.opacity = "1";
+                    playClickBeep(880, 0.08, 'sine');
+
+                    addToHistory(expression, finalResult);
+                } else {
+                    triggerError();
+                }
+            } catch (err) {
+                console.error("Calculator Engine Error:", err);
+                spinner.style.display = "none";
+                triggerError();
+            }
+        }
+
+        function triggerError() {
+            oledScreen.classList.add("error-shake");
+            display.style.color = "var(--calc-rose)";
+            playClickBeep(240, 0.15, 'sawtooth');
+            setTimeout(() => {
+                oledScreen.classList.remove("error-shake");
+                display.style.color = "";
+            }, 420);
+        }
+
+        // --- KEYPAD BUTTON EVENTS ---
+        btns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                const insert = btn.dataset.insert;
+                const action = btn.dataset.action;
+
+                if (insert) {
+                    playClickBeep(650, 0.03);
+                    insertAtCursor(insert);
+                    localPreview(display.value);
+                } else if (action === "clear") {
+                    playClickBeep(450, 0.04);
+                    display.value = "";
+                    localPreview("");
+                } else if (action === "back") {
+                    playClickBeep(400, 0.03);
+                    const s = display.selectionStart;
+                    const e = display.selectionEnd;
+                    if (s !== e) {
+                        display.value = display.value.slice(0, s) + display.value.slice(e);
+                        display.selectionStart = display.selectionEnd = s;
+                    } else if (s > 0) {
+                        display.value = display.value.slice(0, s - 1) + display.value.slice(s);
+                        display.selectionStart = display.selectionEnd = s - 1;
+                    }
+                    localPreview(display.value);
+                } else if (action === "calculate") {
+                    calculatePython(display.value);
+                }
+
+                display.focus();
+            });
+        });
+
+        display.addEventListener("input", () => {
+            localPreview(display.value);
+        });
+
+        display.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
                 calculatePython(display.value);
             }
-            display.focus();
         });
+
+        // Helper: Insert text at current cursor
+        function insertAtCursor(val) {
+            const s = display.selectionStart || display.value.length;
+            const e = display.selectionEnd || display.value.length;
+            display.value = display.value.substring(0, s) + val + display.value.substring(e);
+            display.selectionStart = display.selectionEnd = s + val.length;
+        }
+
+        // --- HISTORY HANDLING ---
+        function addToHistory(expr, res) {
+            const empty = document.querySelector(".empty-state-box");
+            if (empty) empty.remove();
+
+            calculationHistory.unshift({ expr, res, time: new Date() });
+            histCountBadge.textContent = calculationHistory.length;
+
+            const li = document.createElement("li");
+            li.className = "hist-card";
+            li.innerHTML = `
+            <div class="hist-top">
+                <span class="hist-expr">${escapeHtml(expr)}</span>
+                <span class="hist-action-use"><i class="fas fa-arrow-turn-down"></i> Gunakan</span>
+            </div>
+            <div class="hist-res">= ${escapeHtml(res)}</div>
+        `;
+            li.onclick = () => {
+                playClickBeep(600, 0.04);
+                display.value = res;
+                localPreview(res);
+                display.focus();
+            };
+
+            historyList.insertBefore(li, historyList.firstChild);
+        }
+
+        document.getElementById("clear-history").onclick = () => {
+            calculationHistory = [];
+            histCountBadge.textContent = "0";
+            historyList.innerHTML = `
+            <li class="empty-state-box">
+                <div class="empty-icon-wrap"><i class="fas fa-calculator"></i></div>
+                <h5>Belum Ada Riwayat</h5>
+                <p>Perhitungan yang Anda lakukan akan tersimpan di sini secara otomatis.</p>
+            </li>
+        `;
+            playClickBeep(450, 0.05);
+        };
+
+        // --- HEADER BUTTONS ---
+        document.getElementById("btn-quick-clear").onclick = () => {
+            display.value = "";
+            localPreview("");
+            playClickBeep(450, 0.04);
+            display.focus();
+        };
+
+        document.getElementById("btn-copy-input").onclick = () => {
+            if (!display.value.trim()) return;
+            navigator.clipboard.writeText(display.value).then(() => {
+                playClickBeep(900, 0.06);
+                showToast("Ekspresi disalin ke papan klip!", "success");
+            });
+        };
+
+        // Sample chips click
+        document.querySelectorAll(".sample-chip").forEach(chip => {
+            chip.addEventListener("click", () => {
+                const sample = chip.getAttribute("data-sample");
+                display.value = sample;
+                localPreview(sample);
+                playClickBeep(650, 0.04);
+                display.focus();
+            });
+        });
+
+        window.insertExample = function (expr) {
+            display.value = expr;
+            localPreview(expr);
+            playClickBeep(650, 0.04);
+            display.focus();
+            // Switch to history tab to see result or focus input
+            switchIntelTab('history');
+        };
+
+        window.switchIntelTab = function (tabName) {
+            const btnHist = document.getElementById("tab-btn-history");
+            const btnGuide = document.getElementById("tab-btn-guide");
+            const paneHist = document.getElementById("pane-history");
+            const paneGuide = document.getElementById("pane-guide");
+
+            if (tabName === 'history') {
+                btnHist.classList.add("active");
+                btnGuide.classList.remove("active");
+                paneHist.classList.add("active");
+                paneGuide.classList.remove("active");
+            } else {
+                btnGuide.classList.add("active");
+                btnHist.classList.remove("active");
+                paneGuide.classList.add("active");
+                paneHist.classList.remove("active");
+            }
+            playClickBeep(700, 0.03);
+        };
+
+        function escapeHtml(str) {
+            return String(str).replace(/[&<>"']/g, m => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            })[m]);
+        }
+
+        function showToast(msg, type = "info") {
+            const toast = document.createElement("div");
+            toast.style.cssText = `
+            position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+            background: rgba(14, 18, 36, 0.95); border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 0.82rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: var(--font-sans);
+            display: flex; align-items: center; gap: 8px; animation: fadeInToast 0.3s ease;
+        `;
+            toast.innerHTML = `<i class="fas fa-circle-check" style="color:#10b981;"></i> ${msg}`;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = "0";
+                toast.style.transition = "opacity 0.3s ease";
+                setTimeout(() => toast.remove(), 300);
+            }, 2200);
+        }
     });
-
-    display.addEventListener("keyup", (e) => {
-        if (e.key === "Enter") calculatePython(display.value);
-        else localPreview(display.value);
-    });
-
-    // --- UTILS ---
-    function insertAtCursor(val) {
-        const s = display.selectionStart, e = display.selectionEnd;
-        display.value = display.value.substring(0, s) + val + display.value.substring(e);
-        display.selectionStart = display.selectionEnd = s + val.length;
-    }
-
-    function addToHistory(expr, res) {
-        const empty = document.querySelector(".empty-msg");
-        if (empty) empty.remove();
-        const li = document.createElement("li");
-        li.className = "history-item";
-        li.innerHTML = '<div class="history-query">' + expr + '</div><div class="history-result">= ' + res + '</div>';
-        li.onclick = () => { display.value = res; display.focus(); };
-        historyList.insertBefore(li, historyList.firstChild);
-    }
-
-    document.getElementById("clear-history").onclick = () => {
-        historyList.innerHTML = '<li class="empty-msg"><div class="empty-icon"><i class="fas fa-calculator"></i></div><p>Belum ada perhitungan</p><span>Hasil akan muncul di sini</span></li>';
-    };
-
-    function triggerError() {
-        display.classList.add("error-shake");
-        display.style.color = "var(--red)";
-        setTimeout(() => { display.classList.remove("error-shake"); display.style.color = ""; }, 420);
-    }
-});
 </script>
 
 {% endblock %}

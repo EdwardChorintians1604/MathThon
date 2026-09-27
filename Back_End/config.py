@@ -23,7 +23,7 @@ class Config:
     OLLAMA_API_KEY = "http://localhost:11434/api/generate"
     MODEL_NAME = os.getenv('MODEL_NAME', 'phi4-mini:latest')
     GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
-    GEMINI_MODEL = os.getenv('GEMINI_MODEL', 'gemini-1.5-flash')
+    GEMINI_MODEL = os.getenv('GEMINI_MODEL', 'gemini-3.8-flash')
     AI_SYSTEM_PROMPT = os.getenv("AI_SYSTEM_PROMPT", "Anda adalah asisten matematika yang membantu menyelesaikan soal secara langkah demi langkah.")
     
     # Email SMTP
@@ -51,5 +51,7 @@ class Config:
     # Template/Static Folders
     TEMPLATE_FOLDER = os.path.join(os.path.dirname(__file__), "../Front_End/templates")
     STATIC_FOLDER = os.path.join(os.path.dirname(__file__), "../Front_End/static")
+    TEMPLATES_AUTO_RELOAD = True
+    SEND_FILE_MAX_AGE_DEFAULT = 0
     
     CSV_PATH = os.path.join(os.path.dirname(__file__), '..', '..', 'Front_End', 'IndonesiaEduaction.csv')
