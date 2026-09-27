@@ -4,7 +4,7 @@ import re
 import logging
 from flask import request, jsonify, current_app, session
 from ..db.database_mysql import get_db_connection, close_db_connection
-from .llm_client import LLMClient
+from .llm_client import LLMClient, RateLimitExceededError
 
 # ✅ INTEGRASI SEMUA KOMPONEN CERDAS
 from .rag_system import RAGSystem, create_system_prompt_with_rag_context
@@ -29,9 +29,15 @@ except ImportError:
 
 logger = logging.getLogger(__name__)
 
-# ✅ INISIALISASI KOMPONEN DI LEVEL GLOBAL (LEBIH EFISIEN)
-# Pastikan path ini benar dan bisa ditulis oleh aplikasi
-RAG_SYSTEM = RAGSystem(persist_dir="./chroma_db_prod") if CHROMA_AVAILABLE else None
+# ✅ INISIALISASI KOMPONEN DI LEVEL GLOBAL
+RAG_SYSTEM = None
+if CHROMA_AVAILABLE:
+    try:
+        RAG_SYSTEM = RAGSystem(persist_dir="./chroma_db_prod")
+    except Exception as e:
+        logger.warning(f"ChromaDB initialization skipped or failed: {e}")
+        RAG_SYSTEM = None
+
 MEMORY_OPTIMIZER = ChatMemoryOptimizer(max_context_messages=10, max_tokens=8000)
 HYBRID_ENGINE = HybridCalculationEngine() if HYBRID_ENGINE_AVAILABLE else None
 
@@ -605,11 +611,17 @@ def enhance_ai_response(response: str) -> str:
 # ==============================================================================
 
 def preprocess_user_input(text: str) -> str:
-    """Sanitize dan normalize input user."""
+    """Sanitize dan normalize input user dengan tetap menjaga struktur alinea/paragraf."""
     if not text:
         return ""
-    text = ' '.join(text.split())
-    text = text.replace('<', '<').replace('>', '>')
+    # Normalisasi line endings (CRLF -> LF)
+    text = text.replace('\r\n', '\n').replace('\r', '\n')
+    # Bersihkan spasi horizontal berlebih pada tiap baris tanpa menghilangkan baris baru
+    lines = [re.sub(r'[ \t]+', ' ', line).strip() for line in text.split('\n')]
+    text = '\n'.join(lines)
+    # Batasi baris kosong berurutan maksimal 2 (pemisah antar paragraf)
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    # Standardisasi karakter kutip
     text = text.replace('\u201c', '"').replace('\u201d', '"')
     text = text.replace('\u2018', "'").replace('\u2019', "'")
     return text.strip()
@@ -718,7 +730,6 @@ def chat():
                     
                     # Kirim ke LLM HANYA untuk penjelasan, bukan perhitungan ulang
                     explanation_system_prompt = SYSTEM_PROMPT + "\n\n[PENTING: Anda diberi hasil perhitungan yang sudah akurat dari mesin simbolik. Tugas Anda HANYA menjelaskan langkah-langkahnya dalam bahasa yang mudah dimengerti, BUKAN menghitung ulang.]"
-                    client = LLMClient(provider="gemini")
                     explanation_prompt = f"Hasil perhitungan SymPy:\n{sympy_output}\n\nPengguna bertanya: {user_message}\n\nJelaskan hasil ini dengan narasi yang jelas dan mudah dipahami."
                     
                     messages = [
@@ -726,15 +737,18 @@ def chat():
                         *conversation_history,
                         {"role": "user", "content": explanation_prompt},
                     ]
-                    ai_reply = client.generate(
-                        messages=messages, 
-                        temperature=0.3, 
-                        top_p=0.95, 
-                        max_output_tokens=8192
-                    ).strip()
-                    
-                    # Prepend SymPy result to explanation
-                    ai_reply = f"{sympy_output}\n\n**Penjelasan:**\n{ai_reply}"
+                    try:
+                        client = LLMClient(provider="gemini")
+                        explanation_text = client.generate(
+                            messages=messages, 
+                            temperature=0.3, 
+                            top_p=0.95, 
+                            max_output_tokens=8192
+                        ).strip()
+                        ai_reply = f"{sympy_output}\n\n**Penjelasan Langkah Penyelesaian:**\n{explanation_text}"
+                    except Exception as llm_err:
+                        logger.warning(f"LLM explanation error ({llm_err}). Menggunakan hasil langsung dari SymPy engine.")
+                        ai_reply = f"{sympy_output}\n\n**Solusi Matematis Terverifikasi:**\nHasil di atas dihitung secara akurat dan eksak menggunakan mesin komputasi simbolik MathThon."
                     
             except Exception as e:
                 logger.warning(f"Hybrid engine error (fallback to pure LLM): {e}")
@@ -755,8 +769,6 @@ def chat():
                 rag_context=rag_context
             )
 
-            client   = LLMClient(provider="gemini")
-            
             # Middleware: bungkus input user agar AI fokus pada soal pengguna
             formatted_user_input = process_user_query(user_message)
             
@@ -766,12 +778,27 @@ def chat():
                 {"role": "user",   "content": formatted_user_input},
             ]
             
-            ai_reply = client.generate(
-                messages=messages, 
-                temperature=0.3, 
-                top_p=0.95,
-                max_output_tokens=8192
-            ).strip()
+            try:
+                client = LLMClient(provider="gemini")
+                ai_reply = client.generate(
+                    messages=messages, 
+                    temperature=0.3, 
+                    top_p=0.95,
+                    max_output_tokens=8192
+                ).strip()
+            except RateLimitExceededError as rle:
+                logger.warning(f"Rate limit exceeded on all Gemini models: {rle}")
+                ai_reply = (
+                    "⚠️ **Layanan AI Sedang Mengalami Antrean (Batas Kuota Tercapai)**\n\n"
+                    "Kuota panggilan per menit dari penyedia AI cloud saat ini sedang penuh. "
+                    "Silakan kirim ulang pertanyaan Anda dalam **30–45 detik**, atau gunakan fitur **Kalkulator Simbolik MathThon** untuk perhitungan instan."
+                )
+            except Exception as e:
+                logger.error(f"LLM generation failed: {e}")
+                ai_reply = (
+                    "⚠️ **Koneksi Model AI Mengalami Gangguan**\n\n"
+                    "Sistem tidak dapat terhubung ke model AI saat ini. Silakan coba kirim ulang pertanyaan Anda beberapa saat lagi."
+                )
 
         if not ai_reply:
             ai_reply = "(AI tidak memberikan jawaban)"
@@ -889,6 +916,9 @@ def chat_ai_logic(data: dict) -> dict:
         else:
             ai_reply = enhance_ai_response(ai_reply)
         return {'response': ai_reply, 'reply': ai_reply}
+    except RateLimitExceededError as rle:
+        rate_msg = "⚠️ **Layanan AI Sedang Mengalami Antrean (Batas Kuota Tercapai)**\n\nKuota panggilan per menit dari penyedia AI cloud saat ini sedang penuh. Silakan coba kembali dalam 30–45 detik."
+        return {'response': rate_msg, 'reply': rate_msg}
     except Exception as e:
         current_app.logger.error(f'chat_ai_logic error: {e}')
         return {'error': str(e)}

@@ -18,26 +18,41 @@ def index():
 
 @admin_bp.route("/login_admin", methods=["GET", "POST"])
 def login_admin():
+    """Portal Terpadu: Seluruh autentikasi disatukan ke portal terpadu (auth.login_user)."""
+    if session.get('admin_logged_in'):
+        return redirect(url_for('admin.dashboard_admin'))
+    if session.get('user_id'):
+        return redirect(url_for('user.dashboard_user'))
+
     if request.method == "POST":
+        # Jika ada form POST langsung ke /admin/login_admin, verifikasi dengan aman
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "").strip()
         ADMIN_USERNAME = os.getenv('ADMIN_USERNAME', 'Edward_Kenway')
         ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD', 'Mentawai160604')
-        # For static admin credentials, direct comparison is clearer and more efficient.
-        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+        import secrets
+        if secrets.compare_digest(username, ADMIN_USERNAME) and secrets.compare_digest(password, ADMIN_PASSWORD):
+            session.clear()
+            session.permanent = True
             session['admin_logged_in'] = True
+            session['username'] = ADMIN_USERNAME
+            session['role'] = 'admin'
+            session['name'] = 'Administrator'
             flash("Login admin berhasil!", "success")
             return redirect(url_for('admin.dashboard_admin'))
-        logging.warning(f"Gagal login admin dengan username: '{username}'")
-        return render_template("admin/login_admin.html", error="Username atau password salah.")
-    return render_template("admin/login_admin.html")
+        flash("Username atau password admin salah.", "danger")
+        return redirect(url_for('auth.login_user'))
+
+    return redirect(url_for('auth.login_user'))
 
 @admin_bp.route("/logout")
 @admin_required
 def logout_admin():
     session.pop('admin_logged_in', None)
+    session.pop('username', None)
+    session.pop('role', None)
     flash("Logout berhasil.", "success")
-    return redirect(url_for('admin.login_admin'))
+    return redirect(url_for('auth.login_user'))
 
 @admin_bp.route("/dashboard")
 @admin_required

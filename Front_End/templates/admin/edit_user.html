@@ -3,69 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Pengguna - MathThon Admin</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <title>Edit Pengguna | MathThon Admin</title>
+    
+    <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+    
+    <!-- Bootstrap 5 & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <!-- Unified Admin CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css_for_dashboard_admin.css') }}">
+    
     <style>
-        body {
-            background-color: #e9ecef;
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        .edit-user-card {
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid var(--adm-border);
+            box-shadow: var(--adm-shadow-md);
+            overflow: hidden;
         }
-        .navbar {
-            background-color: #ffffff !important;
-            box-shadow: 0 4px 8px rgba(0,0,0,.05);
+        .edit-user-header {
+            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+            border-bottom: 1px solid var(--adm-border);
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .edit-user-body {
+            padding: 2.25rem 2rem;
         }
     </style>
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body class="admin-dashboard-body d-flex flex-column min-vh-100">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white mb-4">
+<!-- Glassmorphic Navbar -->
+<nav class="navbar navbar-expand-lg admin-navbar">
     <div class="container">
-        <a class="navbar-brand" href="{{ url_for('admin.dashboard_admin') }}">
-            <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-            MathThon Admin
+        <a class="admin-brand" href="{{ url_for('admin.dashboard_admin') }}">
+            <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}" 
+                 alt="Logo MathThon" 
+                 class="admin-brand-logo">
+            <span>MathThon <small class="text-primary" style="font-size: 0.85rem; font-weight: 600;">Admin</small></span>
         </a>
+
+        <div class="ms-auto d-flex align-items-center gap-2">
+            <a href="{{ url_for('admin.manage_users') }}" class="btn btn-sm btn-outline-secondary rounded-pill px-3">
+                <i class="bi bi-arrow-left me-1"></i> Kembali ke Daftar Pengguna
+            </a>
+        </div>
     </div>
 </nav>
 
-<div class="container">
-    <h1 class="mb-4">Edit Pengguna</h1>
+<!-- Content -->
+<main class="container my-4 my-md-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="edit-user-card animate__animated animate__fadeInUp">
+                <div class="edit-user-header">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="card-icon-squircle" style="width: 48px; height: 48px; background: var(--grad-indigo); font-size: 1.3rem;">
+                            <i class="bi bi-person-gear"></i>
+                        </div>
+                        <div>
+                            <h4 class="fw-bold mb-0" style="font-family: 'Outfit', sans-serif;">Edit Profil Pengguna</h4>
+                            <p class="text-muted small mb-0">Ubah informasi akun dan data identitas siswa</p>
+                        </div>
+                    </div>
+                    <span class="badge bg-light text-dark border">ID #{{ user.id }}</span>
+                </div>
 
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <form method="POST" action="{{ url_for('admin.edit_user', user_id=user.id) }}">
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nama</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{ user.name }}" required>
+                <div class="edit-user-body">
+                    <form method="POST" action="{{ url_for('admin.edit_user', user_id=user.id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label fw-semibold">Nama Lengkap <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ user.name }}" required placeholder="Nama lengkap pengguna">
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="username" class="form-label fw-semibold">Username <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light text-muted border-end-0">@</span>
+                                    <input type="text" class="form-control border-start-0 ps-0" id="username" name="username" value="{{ user.username }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label fw-semibold">Alamat Email <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required placeholder="nama@email.com">
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label for="born_place" class="form-label fw-semibold">Tempat Lahir</label>
+                                <input type="text" class="form-control" id="born_place" name="born_place" value="{{ user.born_place or '' }}" placeholder="Kota kelahiran">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="born_date" class="form-label fw-semibold">Tanggal Lahir</label>
+                                <input type="date" class="form-control" id="born_date" name="born_date" value="{{ user.born_date or '' }}">
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center gap-3 pt-3 border-top">
+                            <button type="submit" class="btn btn-primary px-4 py-2 rounded-3 fw-semibold d-inline-flex align-items-center gap-2" style="background: var(--grad-indigo); border: none;">
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span>Simpan Perubahan</span>
+                            </button>
+                            <a href="{{ url_for('admin.manage_users') }}" class="btn btn-outline-secondary px-4 py-2 rounded-3 fw-semibold">
+                                Batal
+                            </a>
+                        </div>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
-                </div>
-                <div class="mb-3">
-                    <label for="born_place" class="form-label">Tempat Lahir</label>
-                    <input type="text" class="form-control" id="born_place" name="born_place" value="{{ user.born_place }}">
-                </div>
-                <div class="mb-3">
-                    <label for="born_date" class="form-label">Tanggal Lahir</label>
-                    <input type="date" class="form-control" id="born_date" name="born_date" value="{{ user.born_date }}">
-                </div>
-                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                <a href="{{ url_for('admin.manage_users') }}" class="btn btn-secondary">Batal</a>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+</main>
 
-<footer class="mt-auto py-3 bg-light text-center">
-    <div class="container">
-        <span class="text-muted">&copy; 2025 MathThon Admin. All rights reserved.</span>
+<!-- Footer -->
+<footer class="admin-footer mt-auto">
+    <div class="container text-center">
+        <span>&copy; 2025-2026 <strong>MathThon Admin</strong>. All rights reserved.</span>
     </div>
 </footer>
 

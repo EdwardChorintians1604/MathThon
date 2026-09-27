@@ -1,10 +1,10 @@
 import os
 from Back_End.__init__ import create_app
-from pyngrok import ngrok
+
+# Instance aplikasi Flask untuk Gunicorn (Render/Production) dan server lokal
+app = create_app()
 
 if __name__ == "__main__":
-    app = create_app()
-    
     # Konfigurasi dari environment variable
     flask_env = os.getenv('FLASK_ENV', 'development')
     port = int(os.getenv('PORT', 5000))

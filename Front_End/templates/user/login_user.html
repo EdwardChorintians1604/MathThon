@@ -1,186 +1,188 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathThon | Login Pengguna</title>
+    <title>MathThon | Portal Masuk Terpadu</title>
+    
+    <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-        * {
-            margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif;
-        }
-        body {
-            display: flex; justify-content: center; align-items: center; min-height: 100vh;
-            background: linear-gradient(to top, rgb(0, 0, 0), rgb(100, 96, 96));
-            background-size: cover; background-position: center; animation: fadeIn 1s ease-in-out;
-        }
-        .login-box {
-            position: relative; width: 400px; background: transparent;
-            border: 2px solid rgba(255, 255, 255, .5); border-radius: 20px;
-            backdrop-filter: blur(15px); display: flex; justify-content: center;
-            align-items: center; padding: 40px;
-        }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .login-box h2 {
-            font-size: 2em; color: #fff; text-align: center; margin-bottom: 20px;
-        }
-        .input-box {
-            position: relative; width: 100%; margin: 25px 0;
-            border-bottom: 2px solid #fff;
-            padding-top: 10px;
-        }
-        .input-box label {
-            position: absolute; top: 15px; left: 5px;
-            color: #fff; font-size: 1em; pointer-events: none; transition: .5s;
-        }
-        .input-box input:focus~label,
-        .input-box input:not(:placeholder-shown)~label {
-            top: -10px;
-            font-size: 0.8em;
-        }
-        .input-box input {
-            width: 100%; height: 50px; background: transparent; border: none;
-            outline: none; font-size: 1em; color: #fff; padding: 0 5px;
-        }
-        .input-box input::placeholder {
-            color: transparent;
-        }
-        .btn-submit {
-            width: 100%; height: 45px; background: #fff; border: none;
-            outline: none; border-radius: 40px; cursor: pointer;
-            font-size: 1em; color: #000; font-weight: 600;
-        }
-        .divider {
-            display: flex; align-items: center; text-align: center;
-            color: #fff; margin: 20px 0;
-        }
-        .divider::before, .divider::after {
-            content: ''; flex: 1; border-bottom: 1px solid rgba(255, 255, 255, .5);
-        }
-        .divider span { padding: 0 10px; }
-        .register-link, .home-link, .reset-password-link {
-            text-align: center; margin-top: 15px;
-        }
-        .register-link a, .home-link a, .reset-password-link a {
-            color: white; text-decoration: none; font-weight: 600;
-        }
-        .register-link a:hover, .home-link a:hover, .reset-password-link a:hover {
-            text-decoration: underline;
-        }
-        .alert {
-            color: white; text-align: center; padding: 10px;
-            border: 1px solid crimson; border-radius: 5px; margin-bottom: 15px;
-        }
-    </style>
+    
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    <!-- Bootstrap Icons & Animate.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <!-- Modern User Auth CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css_for_login_user.css') }}">
 </head>
-<body>
-<section class="login-box">
-    <form action="{{ url_for('auth.login_user') }}" method="POST">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <h2>Login Pengguna</h2>
+<body class="auth-body">
+    <!-- Ambient Glow Orbs -->
+    <div class="auth-glow-orb auth-glow-1"></div>
+    <div class="auth-glow-orb auth-glow-2"></div>
 
+    <!-- Login Card Container -->
+    <section class="auth-card auth-card-login animate__animated animate__fadeInDown">
+        <!-- Live Security Sentinel Beacon -->
+        <div class="security-shield-banner">
+            <span class="radar-beacon"></span>
+            <span>Security Sentinel v2.4 • Anti-SQLi & Threat Defense Active</span>
+        </div>
+
+        <!-- Logo -->
+        <div class="auth-logo-wrapper">
+            <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}"
+                 alt="Logo MathThon" class="auth-logo animate__animated animate__zoomIn" />
+        </div>
+
+        <!-- Header Titles -->
+        <div class="auth-header-text">
+            <h2>Portal Masuk <span class="highlight">Terpadu</span></h2>
+            <p class="auth-subtitle">Satu gerbang masuk aman untuk Pengguna & Administrator</p>
+        </div>
+
+        <!-- Interactive Role Classifier Pill -->
+        <div class="role-badge-container">
+            <span id="roleDetectionBadge" class="role-badge-pill role-detecting">
+                <i class="bi bi-cpu"></i> <span>Mendeteksi Peran Otomatis...</span>
+            </span>
+        </div>
+
+        <!-- Client-Side Security Alert Banner -->
+        <div id="clientSecurityAlert" class="auth-alert auth-alert-danger" style="display: none;"></div>
+
+        <!-- Flashed Alerts from Backend -->
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                    <div class="auth-alert auth-alert-{{ category }} animate__animated animate__shakeX">
+                        <i class="bi bi-info-circle-fill"></i>
+                        <span>{{ message }}</span>
+                    </div>
                 {% endfor %}
             {% endif %}
         {% endwith %}
 
-        <div class="input-box">
-            <input type="text" id="username" name="username" required placeholder=" ">
-            <label for="username">Username *</label>
-        </div>
-        
-        <div class="input-box">
-            <input type="password" id="password" name="password" required placeholder=" ">
-            <label for="password">Password *</label>
-        </div>
-        
-        <button type="submit" class="btn-submit">Login</button>
+        <!-- Form Login Terpadu -->
+        <form id="unifiedLoginForm" action="{{ url_for('auth.login_user') }}" method="POST" autocomplete="on">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-        <div class="divider">
-            <span>ATAU</span>
-        </div>
+            <!-- Anti-Bot Honeypot Trap (Invisible) -->
+            <input type="text" id="website_url_hp" name="website_url_hp" class="visually-hidden-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <input type="hidden" id="client_timestamp" name="client_timestamp" value="">
 
-        <!-- Google Sign-In Button -->
-        <div id="g_id_onload"
-             data-client_id="{{ config.GOOGLE_CLIENT_ID }}"
-             data-callback="handleCredentialResponse"
-             data-context="signin"
-             style="display: none;">
-        </div>
-        <div class="g_id_signin"
-             data-type="standard"
-             data-shape="rectangular"
-             data-theme="outline"
-             data-text="signin_with"
-             data-size="large"
-             data-logo_alignment="left">
-        </div>
+            <!-- Username or Email Field -->
+            <div class="auth-field-group">
+                <label for="username">Username atau Email <span style="color: #f87171;">*</span></label>
+                <div class="auth-input-wrapper">
+                    <i class="bi bi-person-fill auth-input-icon"></i>
+                    <input type="text" class="auth-input" id="username" name="username" required placeholder="Masukkan username atau email Anda" autocomplete="username">
+                </div>
+            </div>
 
-        <div class="register-link">
-            <p><a href="{{ url_for('auth.register_user') }}">Belum punya akun? Daftar</a></p>
-        </div>
+            <!-- Password Field -->
+            <div class="auth-field-group">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.45rem;">
+                    <label for="password" style="margin-bottom: 0;">Password <span style="color: #f87171;">*</span></label>
+                    <a href="{{ url_for('auth.forget_password_user') }}" class="auth-link" style="font-size: 0.8rem;">Lupa password?</a>
+                </div>
+                <div class="auth-input-wrapper">
+                    <i class="bi bi-shield-lock-fill auth-input-icon"></i>
+                    <input type="password" class="auth-input" id="password" name="password" required placeholder="Masukkan kata sandi Anda" autocomplete="current-password">
+                    <button type="button" class="auth-password-toggle" id="togglePasswordBtn" aria-label="Toggle password visibility">
+                        <i class="bi bi-eye-slash" id="togglePasswordIcon"></i>
+                    </button>
+                </div>
+            </div>
 
-        <div class="reset-password-link">
-            <p><a href="{{ url_for('auth.forget_password_user') }}">Lupa Password</a></p>
-        </div>
+            <!-- Submit Button -->
+            <button type="submit" class="auth-btn-submit" id="btnSubmitLogin">
+                <span>Masuk Sekarang</span>
+                <i class="bi bi-arrow-right"></i>
+            </button>
 
-        <div class="home-link">
-            <p><a href="{{ url_for('main.home') }}">Kembali ke Beranda</a></p>
-        </div>
-    </form>
-</section>
+            <!-- Divider -->
+            <div class="auth-divider">
+                <span>Atau Masuk Dengan</span>
+            </div>
 
-<script>
-    function handleCredentialResponse(response) {
-        const csrfInput = document.querySelector('input[name="csrf_token"]');
-        const csrfToken = csrfInput ? csrfInput.value : '';
-        const headers = {
-            'Content-Type': 'application/json'
-        };
-        if (csrfToken) headers['X-CSRFToken'] = csrfToken;
+            <!-- Google Sign-In Button -->
+            <div class="auth-google-wrapper">
+                <div id="g_id_onload"
+                     data-client_id="{{ config.GOOGLE_CLIENT_ID }}"
+                     data-callback="handleCredentialResponse"
+                     data-context="signin"
+                     style="display: none;">
+                </div>
+                <div class="g_id_signin"
+                     data-type="standard"
+                     data-shape="rectangular"
+                     data-theme="outline"
+                     data-text="signin_with"
+                     data-size="large"
+                     data-logo_alignment="left">
+                </div>
+            </div>
 
-        fetch("{{ url_for('auth.google_login') }}", {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify({ token: response.credential }),
-            credentials: 'same-origin'
-        })
-        .then(function(res) {
-            return res.text().then(function(text) {
-                try {
-                    return { ok: res.ok, data: JSON.parse(text) };
-                } catch (e) {
-                    return { ok: false, data: { error: res.status === 400 ? 'Request tidak valid. Coba refresh halaman.' : 'Terjadi kesalahan server.' } };
+            <!-- Links -->
+            <div class="auth-links">
+                <p style="margin: 0;">Belum punya akun? <a href="{{ url_for('auth.register_user') }}" class="auth-link"><strong>Daftar Akun Baru</strong></a></p>
+                <a href="{{ url_for('main.home') }}" class="auth-return-link" style="margin-top: 0.85rem;">
+                    <i class="bi bi-arrow-left"></i> Kembali ke Beranda
+                </a>
+            </div>
+        </form>
+    </section>
+
+    <!-- Google Sign-In Script Handler -->
+    <script>
+        function handleCredentialResponse(response) {
+            const csrfInput = document.querySelector('input[name="csrf_token"]');
+            const csrfToken = csrfInput ? csrfInput.value : '';
+            const headers = {
+                'Content-Type': 'application/json'
+            };
+            if (csrfToken) headers['X-CSRFToken'] = csrfToken;
+
+            fetch("{{ url_for('auth.google_login') }}", {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({ token: response.credential }),
+                credentials: 'same-origin'
+            })
+            .then(function(res) {
+                return res.text().then(function(text) {
+                    try {
+                        return { ok: res.ok, data: JSON.parse(text) };
+                    } catch (e) {
+                        return { ok: false, data: { error: res.status === 400 ? 'Request tidak valid. Coba refresh halaman.' : 'Terjadi kesalahan server.' } };
+                    }
+                });
+            })
+            .then(function(result) {
+                var data = result.data;
+                if (result.ok && data.redirect) {
+                    window.location.href = data.redirect;
+                } else {
+                    alert(data.error || 'Terjadi kesalahan saat login dengan Google.');
                 }
+            })
+            .catch(function(error) {
+                console.error('Error Google Auth:', error);
+                alert('Tidak dapat terhubung ke server Google. Coba lagi nanti.');
             });
-        })
-        .then(function(result) {
-            var data = result.data;
-            if (result.ok && data.redirect) {
-                window.location.href = data.redirect;
-            } else {
-                alert(data.error || 'Terjadi kesalahan saat login dengan Google.');
-            }
-        })
-        .catch(function(error) {
-            console.error('Error:', error);
-            alert('Tidak dapat terhubung ke server. Coba lagi nanti.');
-        });
-    }
-
-    // Tampilkan tombol Google setelah library dimuat
-    window.onload = function() {
-        if (document.getElementById('g_id_onload')) {
-            document.getElementById('g_id_onload').style.display = 'block';
         }
-    }
-</script>
 
+        window.addEventListener('load', function() {
+            if (document.getElementById('g_id_onload')) {
+                document.getElementById('g_id_onload').style.display = 'block';
+            }
+        });
+    </script>
+
+    <!-- Client-Side Security Sentinel Engine -->
+    <script src="{{ url_for('static', filename='js/security_sentinel.js') }}"></script>
 </body>
 </html>

@@ -13,6 +13,10 @@ except ImportError:
     genai = None
     GEMINI_AVAILABLE = False
 
+class RateLimitExceededError(Exception):
+    """Exception khusus saat seluruh kuota API LLM (Gemini/Ollama) mencapai batas limit."""
+    pass
+
 class LLMClient:
     def __init__(self, provider: str = "ollama", api_url: str | None = None, api_key: str | None = None, model: str | None = None, max_retries: int = 2):
         self.provider = provider.lower()
@@ -26,11 +30,18 @@ class LLMClient:
         elif self.provider == "gemini":
             if not GEMINI_AVAILABLE:
                 raise RuntimeError("google-generativeai tidak terinstall. Install dengan: pip install google-generativeai")
-            self.api_key = api_key or os.getenv("GEMINI_API_KEY")
-            raw_model = model or os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
-            self.model = raw_model
-            if not self.api_key:
+            
+            # Dukungan multi-key pool (dipisahkan koma) untuk memaksimalkan kuota gratis
+            raw_keys = os.getenv("GEMINI_API_KEYS") or os.getenv("GEMINI_API_KEY") or api_key or ""
+            self.api_keys = [k.strip() for k in raw_keys.split(",") if k.strip()]
+            self.current_key_idx = 0
+            
+            if not self.api_keys:
                 raise RuntimeError("GEMINI_API_KEY tidak ditemukan. Tambahkan ke .env atau ke app.config.")
+            
+            self.api_key = self.api_keys[0]
+            raw_model = model or os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+            self.model = raw_model
             genai.configure(api_key=self.api_key)
         else:
             raise ValueError("Provider harus 'ollama' atau 'gemini'")
@@ -134,7 +145,8 @@ class LLMClient:
                             gemini_messages.append({"role": gemini_role, "parts": [{"text": content}]})
 
                     candidate_models = [self.model]
-                    for fallback_m in ["gemini-3.8-flash", "gemini-3.7-flash", "gemini-3.6-flash"]:
+                    # Urutan model Google resmi dengan kuota terpisah
+                    for fallback_m in ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-flash-8b", "gemini-2.0-flash-lite", "gemini-1.5-pro"]:
                         if fallback_m not in candidate_models:
                             candidate_models.append(fallback_m)
 
@@ -171,8 +183,25 @@ class LLMClient:
                         except Exception as m_err:
                             last_model_error = m_err
                             err_str = str(m_err).lower()
-                            if "404" in err_str or "not found" in err_str:
-                                logging.warning("Model %s 404 not found, mencoba fallback model berikutnya...", mod_name)
+                            
+                            # Jika 429 atau kuota habis pada model ini:
+                            if any(k in err_str for k in ["429", "quota", "resource_exhausted", "rate_limit"]):
+                                logging.warning("Model %s terkena kuota/rate limit 429. Mencoba model dengan kuota terpisah...", mod_name)
+                                # Coba rotate ke API Key cadangan jika tersedia
+                                if len(self.api_keys) > 1 and self.current_key_idx + 1 < len(self.api_keys):
+                                    self.current_key_idx += 1
+                                    genai.configure(api_key=self.api_keys[self.current_key_idx])
+                                    logging.info("Beralih ke API Key cadangan #%d untuk model %s", self.current_key_idx + 1, mod_name)
+                                    # Coba ulang model yang sama dengan kunci baru
+                                    try:
+                                        retry_model = genai.GenerativeModel(mod_name, system_instruction=system_instruction) if system_instruction else genai.GenerativeModel(mod_name)
+                                        res = retry_model.generate_content(gemini_messages, generation_config=genai.types.GenerationConfig(temperature=temperature, max_output_tokens=max_output_tokens, top_p=top_p, stop_sequences=gemini_stop_sequences))
+                                        return self._extract_text(res)
+                                    except Exception:
+                                        pass
+                                continue
+                            elif "404" in err_str or "not found" in err_str:
+                                logging.warning("Model %s tidak ditemukan (404), beralih ke model berikutnya...", mod_name)
                                 continue
                             raise m_err
 
@@ -182,9 +211,9 @@ class LLMClient:
             except Exception as e:
                 last_exc = e
                 logging.warning("LLM generate attempt %d failed: %s", attempt, e)
-                # Jika terkena HTTP 429 / Quota limit, langsung beralih ke fallback agar user tidak menunggu
-                if "429" in str(e) or "quota" in str(e).lower():
-                    logging.warning("Gemini mencapai kuota/rate limit 429, langsung beralih ke fallback tanpa jeda berulang.")
+                # Jika terkena 429 di semua model kandidat, hentikan retry loop cloud dan beralih ke fallback
+                if "429" in str(e) or "quota" in str(e).lower() or "resource_exhausted" in str(e).lower():
+                    logging.warning("Seluruh model Gemini telah mencapai kuota/rate limit 429. Beralih ke fallback...")
                     break
                 time.sleep(0.6 * attempt)
                 continue
@@ -192,10 +221,13 @@ class LLMClient:
         # Fallback darurat ke Ollama lokal jika Gemini bermasalah
         if self.provider == "gemini":
             try:
-                logging.info("Gemini gagal setelah retry, mencoba fallback ke Ollama lokal...")
+                logging.info("Gemini gagal / habis kuota, mencoba fallback ke Ollama lokal...")
                 ollama_client = LLMClient(provider="ollama")
                 return ollama_client.generate(prompt=prompt, messages=messages, temperature=temperature, top_p=top_p, max_output_tokens=max_output_tokens)
             except Exception as ollama_err:
                 logging.warning("Fallback ke Ollama juga gagal: %s", ollama_err)
+
+        if "429" in str(last_exc) or "quota" in str(last_exc).lower():
+            raise RateLimitExceededError("Batas kuota penggunaan Gemini API tercapai pada semua model.")
 
         raise RuntimeError(f"LLM request failed after retries: {last_exc}")

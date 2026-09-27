@@ -74,11 +74,10 @@
       <a class="nav-link" href="#statistics">Statistik</a>
       <a class="nav-link" href="#fitur">Fitur</a>
       <div class="dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Login/Register</a>
+        <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Masuk / Daftar</a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
-          <li><a class="dropdown-item" href="{{ url_for('auth.register_user') }}" onclick="trackEvent('click', 'Navigation', 'Register User')">Register sebagai User</a></li>
-          <li><a class="dropdown-item" href="{{ url_for('auth.login_user') }}" onclick="trackEvent('click', 'Navigation', 'Login User')">Login sebagai User</a></li>
-          <li><a class="dropdown-item" href="{{ url_for('admin.login_admin') }}" onclick="trackEvent('click', 'Navigation', 'Login Admin')">Login sebagai Admin</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('auth.login_user') }}" onclick="trackEvent('click', 'Navigation', 'Login Terpadu')"><i class="bi bi-box-arrow-in-right me-2"></i>Masuk (Portal Terpadu)</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('auth.register_user') }}" onclick="trackEvent('click', 'Navigation', 'Register User')"><i class="bi bi-person-plus me-2"></i>Daftar Akun Baru</a></li>
         </ul>
       </div>
     </ul>
@@ -96,11 +95,10 @@
       <a href="#statistics">Statistik</a>
       <a href="#fitur">Fitur</a>
       <div class="dropdown">
-       <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Login/Register</a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
-<li><a class="dropdown-item" href="{{ url_for('auth.register_user') }}" onclick="trackEvent('click', 'Navigation', 'Register User')">Register sebagai User</a></li>
-          <li><a class="dropdown-item" href="{{ url_for('auth.login_user') }}" onclick="trackEvent('click', 'Navigation', 'Login User')">Login sebagai User</a></li>
-          <li><a class="dropdown-item" href="{{ url_for('admin.login_admin') }}" onclick="trackEvent('click', 'Navigation', 'Login Admin')">Login sebagai Admin</a></li>
+        <a class="nav-link dropdown-toggle" href="#" id="loginDropdownMobile" role="button" data-bs-toggle="dropdown" aria-expanded="false">Masuk / Daftar</a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdownMobile">
+          <li><a class="dropdown-item" href="{{ url_for('auth.login_user') }}" onclick="trackEvent('click', 'Navigation', 'Login Terpadu')"><i class="bi bi-box-arrow-in-right me-2"></i>Masuk (Portal Terpadu)</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('auth.register_user') }}" onclick="trackEvent('click', 'Navigation', 'Register User')"><i class="bi bi-person-plus me-2"></i>Daftar Akun Baru</a></li>
         </ul>
       </div>
       <br>

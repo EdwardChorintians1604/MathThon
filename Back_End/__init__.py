@@ -19,17 +19,15 @@ from Back_End.routes.security_for_web import login_required, admin_required, use
 from Back_End.db.database_mysql import close_db_connection
 
 # Global
-db = SQLAlchemy()
 csrf = CSRFProtect()
-# Removed redundant limiter - using imported one from security module
+# Limiter imported from security module
 
 def create_app(test_config=None):
     app = Flask(__name__, template_folder=Config.TEMPLATE_FOLDER, static_folder=Config.STATIC_FOLDER)
     
+    app.config.from_object(Config)
     if test_config:
         app.config.update(test_config)
-    else:
-        app.config.from_object(Config)
     
     # Extensions
     db.init_app(app)

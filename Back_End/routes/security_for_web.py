@@ -124,8 +124,8 @@ def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if 'admin_logged_in' not in session:
-            flash('Anda harus login sebagai administrator untuk mengakses halaman ini.', 'danger')
-            return redirect(url_for('admin.login_admin'))
+            flash('Anda harus masuk sebagai administrator untuk mengakses halaman ini.', 'danger')
+            return redirect(url_for('auth.login_user'))
         return f(*args, **kwargs)
     return decorated_function
 

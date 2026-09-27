@@ -5,12 +5,27 @@ import os
 load_dotenv()
 
 # Menggunakan variabel lingkungan untuk konfigurasi database agar lebih aman dan fleksibel
-config = {
-    'host': os.getenv('DB_HOST', 'localhost'),
-    'user': os.getenv('DB_USER', 'root'),
-    'password': os.getenv('DB_PASSWORD', ''),
-    'database': os.getenv('DB_NAME', 'maththon_db')
-}
+db_url = os.getenv('DATABASE_URL')
+if db_url:
+    from urllib.parse import urlparse, unquote
+    p = urlparse(db_url)
+    config = {
+        'host': p.hostname or 'localhost',
+        'port': p.port or 3306,
+        'user': unquote(p.username or 'root'),
+        'password': unquote(p.password or ''),
+        'database': (p.path or '/maththon_db').lstrip('/'),
+        'ssl_disabled': False
+    }
+else:
+    config = {
+        'host': os.getenv('MYSQL_HOST') or os.getenv('DB_HOST', 'localhost'),
+        'port': int(os.getenv('MYSQL_PORT') or os.getenv('DB_PORT', 3306)),
+        'user': os.getenv('MYSQL_USER') or os.getenv('DB_USER', 'root'),
+        'password': os.getenv('MYSQL_PASSWORD') or os.getenv('DB_PASSWORD', ''),
+        'database': os.getenv('MYSQL_DB') or os.getenv('DB_NAME', 'maththon_db'),
+        'ssl_disabled': False
+    }
 
 try:
     conn = mysql.connector.connect(**config)

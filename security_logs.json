@@ -38,5 +38,195 @@
         "severity": "CRITICAL",
         "details": "Pattern matched in: 1'; DROP TABLE users; --...",
         "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0"
+    },
+    {
+        "timestamp": "2026-09-27 15:14:10",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "Admin Authentication",
+        "severity": "INFO",
+        "details": "Admin 'Edward_Kenway' berhasil login melalui Portal Terpadu dari IP 127.0.0.1",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 15:14:10",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: ' OR '1'='1...",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 15:14:10",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: admin' --...",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 15:14:10",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: ' UNION SELECT 1, 'admin', 'pass' --...",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 15:14:10",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: '; DROP TABLE users; --...",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 15:14:10",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: ' OR 1=1 #...",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 15:19:58",
+        "ip": "127.0.0.1",
+        "path": "/admin/login_admin",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: ' OR '1'='1...",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 15:19:58",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "Admin Authentication",
+        "severity": "INFO",
+        "details": "Admin 'Edward_Kenway' berhasil login melalui Portal Terpadu dari IP 127.0.0.1",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 15:25:36",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "Admin Authentication",
+        "severity": "INFO",
+        "details": "Admin 'Edward_Kenway' berhasil login melalui Portal Terpadu dari IP 127.0.0.1",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 15:25:37",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: ' OR '1'='1...",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 15:25:37",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: admin' --...",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 15:25:37",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: ' UNION SELECT 1, 'admin', 'pass' --...",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 15:25:37",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: '; DROP TABLE users; --...",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 15:25:37",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: ' OR 1=1 #...",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 16:07:29",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "Admin Authentication",
+        "severity": "INFO",
+        "details": "Admin 'Edward_Kenway' berhasil masuk melalui Portal Terpadu dari IP 127.0.0.1",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 16:07:29",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: admin' OR '1'='1...",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 16:08:43",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "Admin Authentication",
+        "severity": "INFO",
+        "details": "Admin 'Edward_Kenway' berhasil masuk melalui Portal Terpadu dari IP 127.0.0.1",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 16:08:43",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: admin' OR '1'='1...",
+        "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 16:08:43",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "Bot Attack (Honeypot)",
+        "severity": "CRITICAL",
+        "details": "Bot terperangkap mengisi field honeypot dari IP 127.0.0.1",
+        "user_agent": "Werkzeug/3.1.5"
     }
 ]

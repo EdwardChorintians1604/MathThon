@@ -51,12 +51,17 @@
 
         /* ─── Navbar ─── */
         .navbar {
-            background-color: #ffffff !important;
-            box-shadow: 0 4px 8px rgba(0,0,0,.05);
+            background-color: rgba(10, 13, 20, 0.85) !important;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0,0,0,.35);
             position: relative;
             z-index: 100;
         }
-        .navbar-brand { font-weight: 600; color: #343a40 !important; }
+        .navbar-brand { font-weight: 700; color: #ffffff !important; font-family: 'Syne', sans-serif; }
+        .nav-link { color: #94a3b8 !important; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        .nav-link:hover, .nav-link.active { color: #63b3ed !important; }
 
         /* ─── Page container ─── */
         .container { position: relative; z-index: 1; }

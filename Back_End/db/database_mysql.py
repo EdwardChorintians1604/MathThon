@@ -5,13 +5,15 @@ import logging
 logger = logging.getLogger(__name__)
 
 def get_db_connection(app):
-    """Membuat koneksi ke database MySQL"""
+    """Membuat koneksi ke database MySQL (Mendukung port custom dan SSL untuk Aiven)"""
     try:
         conn = mysql.connector.connect(
-            host=app.config['MYSQL_HOST'],
-            user=app.config['MYSQL_USER'],
-            password=app.config['MYSQL_PASSWORD'],
-            database=app.config['MYSQL_DB']
+            host=app.config.get('MYSQL_HOST', 'localhost'),
+            port=int(app.config.get('MYSQL_PORT', 3306)),
+            user=app.config.get('MYSQL_USER', 'root'),
+            password=app.config.get('MYSQL_PASSWORD', ''),
+            database=app.config.get('MYSQL_DB', 'maththon_db'),
+            ssl_disabled=False
         )
         return conn
     except mysql.connector.Error as e:

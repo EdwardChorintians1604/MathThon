@@ -3,246 +3,304 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathThon Admin | Penambahan soal pada setiap materi matematika </title>
+    <title>MathThon Admin | Manajemen & Tambah Soal Materi</title>
+    
+    <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
- 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    
+    <!-- Bootstrap 5 & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <!-- Unified Admin CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css_for_dashboard_admin.css') }}">
+    
     <style>
-        :root {
-            --primary: #7c3aed;
-            --secondary: #0ea5e9;
-            --success: #10b981;
-            --danger: #ef4444;
-            --bg: #0f1724;
-            --text: #eef2ff;
+        .form-card {
+            background: #ffffff;
+            border-radius: 22px;
+            border: 1px solid var(--adm-border);
+            box-shadow: var(--adm-shadow-md);
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
         }
-        
-        body {
-            background: linear-gradient(135deg, var(--bg) 0%, #1a2840 100%);
-            color: var(--text);
-            font-family: 'Inter', -apple-system, sans-serif;
-            min-height: 100vh;
-            padding: 20px 0;
+        .form-card:hover {
+            box-shadow: var(--adm-shadow-lg);
         }
-        
-        .admin-header {
-            background: rgba(15, 23, 36, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            padding: 20px 0;
-            margin-bottom: 40px;
-        }
-        
-        .admin-title {
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
-            color: var(--text);
-        }
-        
-        .form-label {
-            font-weight: 600;
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 8px;
-        }
-        
-        .form-control, .form-select {
-            background: rgba(26, 35, 50, 0.8);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: var(--text);
-            padding: 12px 16px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-        
-        .form-control:focus, .form-select:focus {
-            background: rgba(26, 35, 50, 0.9);
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
-            color: var(--text);
-        }
-        
-        .form-control::placeholder {
-            color: rgba(255,255,255,0.4);
-        }
-        
-        .btn-primary {
-            background: linear-gradient(90deg, var(--primary), #6d28d9);
-            border: none;
-            padding: 12px 28px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.3);
-            background: linear-gradient(90deg, #6d28d9, #5521c4);
-            color: white;
-        }
-        
-        .btn-secondary {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: var(--text);
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-        
-        .btn-danger {
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #fca5a5;
-        }
-        
-        .btn-danger:hover {
-            background: rgba(239, 68, 68, 0.25);
-        }
-        
-        .section-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 20px;
+        .form-card-header {
+            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+            border-bottom: 1px solid var(--adm-border);
+            padding: 1.35rem 1.75rem;
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-        
-        .section-title i {
-            color: var(--primary);
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        
-        @media (max-width: 768px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .alert {
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #6ee7b7;
-            border-radius: 10px;
-            padding: 16px;
-        }
-        
-        .alert-danger {
-            background: rgba(239, 68, 68, 0.15);
-            border-color: rgba(239, 68, 68, 0.3);
-            color: #fca5a5;
-        }
-        
-        .difficulty-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-        
-        .difficulty-easy {
-            background: rgba(16, 185, 129, 0.2);
-            color: #6ee7b7;
-        }
-        
-        .difficulty-medium {
-            background: rgba(245, 158, 11, 0.2);
-            color: #fbbf24;
-        }
-        
-        .difficulty-hard {
-            background: rgba(239, 68, 68, 0.2);
-            color: #fca5a5;
-        }
-        
-        .soal-list {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        
-        .soal-item {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.06);
-            padding: 16px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            display: flex;
             justify-content: space-between;
-            align-items: start;
-            gap: 10px;
         }
-        
-        .soal-item small {
-            color: rgba(255,255,255,0.6);
+        .form-card-body {
+            padding: 1.75rem;
+        }
+
+        /* Difficulty Selector Radio Cards */
+        .difficulty-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.85rem 0.6rem;
+            border-radius: 14px;
+            border: 1.5px solid var(--adm-border);
+            background: #ffffff;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: center;
+            gap: 4px;
+            user-select: none;
+        }
+        .difficulty-card .diff-icon {
+            font-size: 1.35rem;
+            line-height: 1;
+            transition: transform 0.25s ease;
+        }
+        .difficulty-card .diff-label {
+            font-weight: 700;
+            font-size: 0.88rem;
+        }
+        .difficulty-card:hover {
+            border-color: #cbd5e1;
+            transform: translateY(-2px);
+        }
+
+        .btn-check:checked + .difficulty-card-easy {
+            background: #ecfdf5;
+            border-color: #10b981;
+            color: #065f46;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.2);
+        }
+        .btn-check:checked + .difficulty-card-easy .diff-icon {
+            color: #10b981;
+            transform: scale(1.15);
+        }
+
+        .btn-check:checked + .difficulty-card-medium {
+            background: #fffbeb;
+            border-color: #f59e0b;
+            color: #92400e;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.2);
+        }
+        .btn-check:checked + .difficulty-card-medium .diff-icon {
+            color: #f59e0b;
+            transform: scale(1.15);
+        }
+
+        .btn-check:checked + .difficulty-card-hard {
+            background: #fef2f2;
+            border-color: #ef4444;
+            color: #991b1b;
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.2);
+        }
+        .btn-check:checked + .difficulty-card-hard .diff-icon {
+            color: #ef4444;
+            transform: scale(1.15);
+        }
+
+        /* KPI / Stat Mini Cards */
+        .stat-kpi-card {
+            background: #ffffff;
+            border-radius: 18px;
+            border: 1px solid var(--adm-border);
+            padding: 1.15rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--adm-shadow-sm);
+            transition: all 0.25s ease;
+        }
+        .stat-kpi-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--adm-shadow-md);
+            border-color: var(--adm-border-hover);
+        }
+        .stat-kpi-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            box-shadow: 0 6px 14px -2px rgba(0, 0, 0, 0.12);
+        }
+        .stat-kpi-num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.65rem;
+            font-weight: 800;
+            color: var(--adm-text-main);
+            line-height: 1.1;
+        }
+        .stat-kpi-lbl {
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--adm-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 3px;
+        }
+
+        /* Topics Table Container */
+        .topics-table-wrapper {
+            max-height: 380px;
+            overflow-y: auto;
+            border-radius: 14px;
+            border: 1px solid var(--adm-border);
+            background: #ffffff;
+        }
+        .topics-table thead th {
+            position: sticky;
+            top: 0;
+            background: #f8fafc;
+            z-index: 2;
+            font-size: 0.76rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--adm-text-muted);
+            border-bottom: 1px solid var(--adm-border);
+            padding: 0.75rem 1rem;
+        }
+        .topics-table tbody td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid var(--adm-border-subtle);
+            font-size: 0.88rem;
+        }
+        .topics-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .topics-table tbody tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        /* CSV Dropzone Style */
+        .csv-guide-box {
+            background: #f0fdf4;
+            border: 1px dashed #86efac;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+        }
+
+        /* Modal Overrides */
+        .modal-content {
+            border-radius: 22px;
+            border: 1px solid var(--adm-border);
+            box-shadow: var(--adm-shadow-lg);
+            overflow: hidden;
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+            border-bottom: 1px solid var(--adm-border);
+            padding: 1.25rem 1.75rem;
+        }
+        .modal-body {
+            padding: 1.75rem;
+        }
+        .modal-footer {
+            background: #f8fafc;
+            border-top: 1px solid var(--adm-border);
+            padding: 1rem 1.75rem;
         }
     </style>
 </head>
-<body>
-    <!-- Admin Header -->
-    <div class="admin-header">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <h1 class="admin-title mb-2">
-                        <i class="bi bi-pencil-square"></i> Tambah Soal Materi
-                    </h1>
-                    <p class="text-muted mb-0">Kelola soal latihan untuk setiap materi</p>
-                </div>
-                <a href="{{ url_for('admin.dashboard_admin') }}" class="btn btn-secondary">
-                    <i class="bi bi-arrow-left"></i> Kembali
-                </a>
-            </div>
+<body class="admin-dashboard-body d-flex flex-column min-vh-100">
+
+<!-- Glassmorphic Navbar -->
+<nav class="navbar navbar-expand-lg admin-navbar">
+    <div class="container">
+        <a class="admin-brand" href="{{ url_for('admin.dashboard_admin') }}">
+            <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}" 
+                 alt="Logo MathThon" 
+                 class="admin-brand-logo">
+            <span>MathThon <small class="text-primary" style="font-size: 0.85rem; font-weight: 600;">Admin</small></span>
+        </a>
+
+        <div class="ms-auto d-flex align-items-center gap-2">
+            <a href="{{ url_for('admin.manage_materi') }}" class="btn btn-sm btn-outline-secondary rounded-pill px-3">
+                <i class="bi bi-journal-text me-1"></i> Daftar Materi
+            </a>
+            <a href="{{ url_for('admin.dashboard_admin') }}" class="btn btn-sm btn-primary rounded-pill px-3">
+                <i class="bi bi-speedometer2 me-1"></i> Dashboard
+            </a>
         </div>
     </div>
+</nav>
 
-    <!-- Main Content -->
-    <div class="container" id="mainContent"
-        data-topics-url="{{ url_for('admin.get_topics') }}"
-        data-stats-url="{{ url_for('admin.get_soal_stats') }}"
-        data-create-topic-url="{{ url_for('admin.create_topic') }}"
-        data-import-csv-url="{{ url_for('admin.import_soal_csv') }}">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <!-- Alert Messages -->
-                <div id="alertContainer"></div>
+<!-- Page Header Hero -->
+<header class="container pt-4 pb-2">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+        <div>
+            <div class="hero-pill-badge mb-2">
+                <span class="pulse"></span>
+                <span>Bank Soal & Kurikulum</span>
+            </div>
+            <h2 class="fw-bold mb-1" style="font-family: 'Outfit', sans-serif; letter-spacing: -0.02em;">
+                Tambah Soal & Bank Latihan
+            </h2>
+            <p class="text-muted small mb-0">
+                Kelola soal latihan interaktif, organisir topik per materi, atau lakukan impor berkas CSV secara massal.
+            </p>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn btn-sm btn-outline-primary rounded-pill px-3 shadow-sm" data-bs-toggle="modal" data-bs-target="#createTopicModal">
+                <i class="bi bi-folder-plus me-1"></i> Buat Topik Baru
+            </button>
+        </div>
+    </div>
+</header>
 
-                <!-- Form Tambah Soal -->
-                <div class="card mb-4">
-                    <div class="card-body p-4">
-                        <div class="section-title">
-                            <i class="bi bi-plus-circle"></i> Tambah Soal Baru
+<!-- Main Content Container with Data Attributes for JS AJAX -->
+<main class="container my-4" id="mainContent"
+    data-topics-url="{{ url_for('admin.get_topics') }}"
+    data-stats-url="{{ url_for('admin.get_soal_stats') }}"
+    data-create-topic-url="{{ url_for('admin.create_topic') }}"
+    data-import-csv-url="{{ url_for('admin.import_soal_csv') }}">
+
+    <div class="row g-4">
+        <!-- Left Column: Form Tambah Soal & Import CSV -->
+        <div class="col-lg-7">
+            <!-- Dynamic Alert Container for JS feedback -->
+            <div id="alertContainer"></div>
+
+            <!-- Card 1: Form Tambah Soal Baru -->
+            <div class="form-card mb-4 animate__animated animate__fadeInUp">
+                <div class="form-card-header">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="card-icon-squircle" style="width: 44px; height: 44px; background: var(--grad-violet); font-size: 1.25rem;">
+                            <i class="bi bi-pencil-square"></i>
                         </div>
+                        <div>
+                            <h5 class="fw-bold mb-0" style="font-family: 'Outfit', sans-serif;">Formulir Tambah Soal</h5>
+                            <p class="text-muted small mb-0">Masukkan rincian pertanyaan dan kunci jawaban</p>
+                        </div>
+                    </div>
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-1 rounded-pill">
+                        Single Entry
+                    </span>
+                </div>
 
-                        <form id="addSoalForm" method="POST" action="{{ url_for('admin.add_soal_materi') }}">
-                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="form-card-body">
+                    <form id="addSoalForm" method="POST" action="{{ url_for('admin.add_soal_materi') }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
+                        <!-- Row: Materi & Topic -->
+                        <div class="row g-3 mb-3">
                             <!-- Materi Selection -->
-                            <div class="mb-4">
-                                <label for="materis" class="form-label">
-                                    <i class="bi bi-book"></i> Pilih Materi
+                            <div class="col-md-6">
+                                <label for="materis" class="form-label fw-semibold">
+                                    <i class="bi bi-journal-bookmark text-primary me-1"></i> Pilih Materi <span class="text-danger">*</span>
                                 </label>
-                                <select class="form-select" id="materis" name="materi_id" required>
+                                <select class="form-select form-select-lg fs-6" id="materis" name="materi_id" required>
                                     <option value="">-- Pilih Materi --</option>
                                     {% for materi in materis %}
                                     <option value="{{ materi.id }}">{{ materi.judul_materi }}</option>
@@ -250,393 +308,531 @@
                                 </select>
                             </div>
 
-                            <!-- Topic Selection (akan di-populate via AJAX) -->
-                            <div class="mb-4">
-                                <label for="topics" class="form-label">
-                                    <i class="bi bi-tag"></i> Topik/Bab
-                                </label>
-                                <select class="form-select" id="topics" name="topic_id" required>
+                            <!-- Topic Selection -->
+                            <div class="col-md-6">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <label for="topics" class="form-label fw-semibold mb-0">
+                                        <i class="bi bi-tags text-primary me-1"></i> Topik / Bab <span class="text-danger">*</span>
+                                    </label>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#createTopicModal" class="small text-decoration-none fw-semibold">
+                                        + Topik Baru
+                                    </a>
+                                </div>
+                                <select class="form-select form-select-lg fs-6" id="topics" name="topic_id" required>
                                     <option value="">-- Pilih Materi Dahulu --</option>
                                 </select>
-                                <small class="text-muted d-block mt-2">
-                                    Topik tidak ditemukan? <a href="#" data-bs-toggle="modal" data-bs-target="#createTopicModal" class="text-decoration-none">Buat Topik Baru</a>
-                                </small>
                             </div>
+                        </div>
 
-                            <!-- Form Row: Soal & Jawaban -->
-                            <div class="form-row">
-                                <div>
-                                    <label for="soalContent" class="form-label">
-                                        <i class="bi bi-chat-left-text"></i> Pertanyaan
+                        <!-- Pertanyaan -->
+                        <div class="mb-3">
+                            <label for="soalContent" class="form-label fw-semibold">
+                                <i class="bi bi-chat-left-text text-primary me-1"></i> Isi Pertanyaan / Soal <span class="text-danger">*</span>
+                            </label>
+                            <textarea class="form-control" id="soalContent" name="content" rows="4" 
+                                      placeholder="Tuliskan pertanyaan soal latihan matematika di sini..." required></textarea>
+                            <div class="form-text text-muted">Gunakan kalimat yang jelas dan sertakan parameter/angka bila ada.</div>
+                        </div>
+
+                        <!-- Jawaban -->
+                        <div class="mb-4">
+                            <label for="soalAnswer" class="form-label fw-semibold">
+                                <i class="bi bi-check2-circle text-success me-1"></i> Kunci Jawaban / Solusi <span class="text-danger">*</span>
+                            </label>
+                            <textarea class="form-control" id="soalAnswer" name="answer" rows="3" 
+                                      placeholder="Masukkan kunci jawaban atau pembahasan ringkas..." required></textarea>
+                        </div>
+
+                        <!-- Difficulty Level Selector -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold d-block mb-2">
+                                <i class="bi bi-speedometer2 text-primary me-1"></i> Tingkat Kesulitan Soal <span class="text-danger">*</span>
+                            </label>
+                            <div class="row g-2">
+                                <div class="col-4">
+                                    <input type="radio" class="btn-check" name="difficulty" id="diffEasy" value="easy" checked>
+                                    <label class="difficulty-card difficulty-card-easy w-100" for="diffEasy">
+                                        <div class="diff-icon text-success"><i class="bi bi-emoji-smile"></i></div>
+                                        <span class="diff-label">Mudah</span>
+                                        <small class="text-muted" style="font-size: 0.72rem;">Dasar / Teori</small>
                                     </label>
-                                    <textarea class="form-control" id="soalContent" name="content" rows="4" 
-                                              placeholder="Masukkan pertanyaan/soal..." required></textarea>
                                 </div>
-                                <div>
-                                    <label for="soalAnswer" class="form-label">
-                                        <i class="bi bi-check-circle"></i> Jawaban
+                                <div class="col-4">
+                                    <input type="radio" class="btn-check" name="difficulty" id="diffMedium" value="medium">
+                                    <label class="difficulty-card difficulty-card-medium w-100" for="diffMedium">
+                                        <div class="diff-icon text-warning"><i class="bi bi-speedometer"></i></div>
+                                        <span class="diff-label">Sedang</span>
+                                        <small class="text-muted" style="font-size: 0.72rem;">Aplikasi Rumus</small>
                                     </label>
-                                    <textarea class="form-control" id="soalAnswer" name="answer" rows="4" 
-                                              placeholder="Masukkan jawaban yang benar..." required></textarea>
+                                </div>
+                                <div class="col-4">
+                                    <input type="radio" class="btn-check" name="difficulty" id="diffHard" value="hard">
+                                    <label class="difficulty-card difficulty-card-hard w-100" for="diffHard">
+                                        <div class="diff-icon text-danger"><i class="bi bi-fire"></i></div>
+                                        <span class="diff-label">Sulit</span>
+                                        <small class="text-muted" style="font-size: 0.72rem;">Analisis / HOTS</small>
+                                    </label>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Difficulty Level -->
-                            <div class="mb-4 mt-4">
-                                <label for="difficulty" class="form-label">
-                                    <i class="bi bi-speedometer2"></i> Tingkat Kesulitan
-                                </label>
-                                <div class="btn-group w-100" role="group">
-                                    <input type="radio" name="difficulty" value="easy" id="diffEasy" class="btn-check" checked>
-                                    <label for="diffEasy" class="btn btn-outline-success w-100">Mudah</label>
-                                    
-                                    <input type="radio" name="difficulty" value="medium" id="diffMedium" class="btn-check">
-                                    <label for="diffMedium" class="btn btn-outline-warning w-100">Sedang</label>
-                                    
-                                    <input type="radio" name="difficulty" value="hard" id="diffHard" class="btn-check">
-                                    <label for="diffHard" class="btn btn-outline-danger w-100">Sulit</label>
-                                </div>
-                            </div>
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-semibold shadow-sm d-flex align-items-center justify-content-center gap-2">
+                            <i class="bi bi-plus-circle fs-5"></i> Simpan & Tambahkan Soal
+                        </button>
+                    </form>
+                </div>
+            </div>
 
-                            <!-- Submit Button -->
-                            <button type="submit" class="btn btn-primary w-100 py-3 mt-4">
-                                <i class="bi bi-plus-lg"></i> Tambah Soal
-                            </button>
-                        </form>
+            <!-- Card 2: Bulk Import CSV -->
+            <div class="form-card animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                <div class="form-card-header">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="card-icon-squircle" style="width: 44px; height: 44px; background: var(--grad-cyan); font-size: 1.25rem;">
+                            <i class="bi bi-cloud-arrow-up"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-0" style="font-family: 'Outfit', sans-serif;">Impor Soal Massal (CSV)</h5>
+                            <p class="text-muted small mb-0">Unggah banyak butir soal sekaligus dalam hitungan detik</p>
+                        </div>
                     </div>
+                    <span class="badge bg-info-subtle text-info-emphasis border border-info-subtle px-3 py-1 rounded-pill">
+                        Bulk Import
+                    </span>
                 </div>
 
-                <!-- Bulk Import Section -->
-                <div class="card">
-                    <div class="card-body p-4">
-                        <div class="section-title">
-                            <i class="bi bi-cloud-upload"></i> Import Soal Massal
-                        </div>
-
-                        <div class="alert alert-info mb-3">
-                            <i class="bi bi-info-circle"></i>
-                            <strong>Format CSV:</strong> content,answer,difficulty,topic_name
-                        </div>
-
-                        <form id="bulkImportForm" enctype="multipart/form-data">
-                            <div class="mb-3">
-                                <label for="csvFile" class="form-label">
-                                    <i class="bi bi-file-earmark-spreadsheet"></i> Upload File CSV
-                                </label>
-                                <input type="file" class="form-control" id="csvFile" name="csv_file" 
-                                       accept=".csv" required>
-                                <small class="text-muted d-block mt-2">
-                                    Pilih materi di atas sebelum mengimpor.
-                                </small>
+                <div class="form-card-body">
+                    <!-- Format Instructions Box -->
+                    <div class="csv-guide-box mb-3">
+                        <div class="d-flex align-items-start gap-2">
+                            <i class="bi bi-info-circle-fill text-success fs-5 mt-1"></i>
+                            <div>
+                                <div class="fw-bold text-success-emphasis small">Panduan Header Kolom CSV:</div>
+                                <div class="d-flex flex-wrap gap-1 mt-1">
+                                    <span class="badge bg-white text-dark border px-2 py-1 font-monospace">content</span>
+                                    <span class="badge bg-white text-dark border px-2 py-1 font-monospace">answer</span>
+                                    <span class="badge bg-white text-dark border px-2 py-1 font-monospace">difficulty</span>
+                                    <span class="badge bg-white text-dark border px-2 py-1 font-monospace">topic_name</span>
+                                </div>
+                                <div class="text-muted small mt-2">
+                                    <em>Nilai difficulty: <code>easy</code>, <code>medium</code>, atau <code>hard</code>. Pastikan materi di atas sudah dipilih sebelum mengimpor.</em>
+                                </div>
                             </div>
+                        </div>
+                    </div>
 
-                            <button type="submit" class="btn btn-secondary w-100">
-                                <i class="bi bi-upload"></i> Import CSV
-                            </button>
-                        </form>
+                    <form id="bulkImportForm" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="csvFile" class="form-label fw-semibold">
+                                <i class="bi bi-file-earmark-spreadsheet text-primary me-1"></i> Berkas File CSV <span class="text-danger">*</span>
+                            </label>
+                            <input type="file" class="form-control form-control-lg fs-6" id="csvFile" name="csv_file" accept=".csv" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-outline-secondary w-100 py-2 rounded-pill fw-semibold d-flex align-items-center justify-content-center gap-2">
+                            <i class="bi bi-upload"></i> Proses Unggah CSV
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Sidebar Statistik & Daftar Topik -->
+        <div class="col-lg-5">
+            <!-- KPI Mini Cards -->
+            <div class="row g-3 mb-4 animate__animated animate__fadeInRight">
+                <div class="col-6">
+                    <div class="stat-kpi-card">
+                        <div class="stat-kpi-icon" style="background: var(--grad-violet);">
+                            <i class="bi bi-patch-question"></i>
+                        </div>
+                        <div>
+                            <div class="stat-kpi-num" id="totalSoal">-</div>
+                            <div class="stat-kpi-lbl">Total Soal</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="stat-kpi-card">
+                        <div class="stat-kpi-icon" style="background: var(--grad-cyan);">
+                            <i class="bi bi-bookmarks"></i>
+                        </div>
+                        <div>
+                            <div class="stat-kpi-num" id="totalTopik">-</div>
+                            <div class="stat-kpi-lbl">Total Topik</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Sidebar: Statistik & Daftar Topik -->
-            <div class="col-lg-4">
-                <!-- Statistics Card -->
-                <div class="card mb-4">
-                    <div class="card-body p-4">
-                        <div class="section-title">
-                            <i class="bi bi-bar-chart"></i> Statistik Soal
+            <!-- Card: Topics List -->
+            <div class="form-card animate__animated animate__fadeInRight" style="animation-delay: 0.1s;">
+                <div class="form-card-header">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="card-icon-squircle" style="width: 44px; height: 44px; background: var(--grad-emerald); font-size: 1.25rem;">
+                            <i class="bi bi-list-check"></i>
                         </div>
-                        <div class="row text-center">
-                            <div class="col-6 mb-3">
-                                <div class="h4" id="totalSoal">-</div>
-                                <small class="text-muted">Total Soal</small>
-                            </div>
-                            <div class="col-6 mb-3">
-                                <div class="h4" id="totalTopik">-</div>
-                                <small class="text-muted">Total Topik</small>
-                            </div>
+                        <div>
+                            <h5 class="fw-bold mb-0" style="font-family: 'Outfit', sans-serif;">Daftar Topik & Soal</h5>
+                            <p class="text-muted small mb-0">Distribusi soal pada materi aktif</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Topics List -->
-                <div class="card">
-                    <div class="card-body p-4">
-                        <div class="section-title">
-                            <i class="bi bi-list-ul"></i> Daftar Topik
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-dark table-hover align-middle" style="font-size: 0.85rem;">
-                                <thead>
-                                    <tr>
-                                        <th>Nama Topik</th>
-                                        <th>Materi Utama</th>
-                                        <th class="text-center">Soal</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="topicsTableBody">
+                <div class="form-card-body p-3">
+                    <div class="topics-table-wrapper">
+                        <table class="table topics-table align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Nama Topik</th>
+                                    <th>Materi Utama</th>
+                                    <th class="text-center">Jumlah Soal</th>
+                                </tr>
+                            </thead>
+                            <tbody id="topicsTableBody">
+                                {% if topics_table_data and topics_table_data|length > 0 %}
                                     {% for row in topics_table_data %}
                                     <tr>
-                                        <td class="fw-bold">{{ row.topic_name }}</td>
-                                        <td class="text-info">{{ row.judul_materi }}</td>
-                                        <td class="text-center"><span class="badge bg-secondary">{{ row.soal_count }}</span></td>
+                                        <td class="fw-semibold text-dark">{{ row.topic_name }}</td>
+                                        <td class="text-secondary small">{{ row.judul_materi }}</td>
+                                        <td class="text-center">
+                                            <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle px-2 py-1">
+                                                {{ row.soal_count }} soal
+                                            </span>
+                                        </td>
                                     </tr>
                                     {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3" class="text-center text-muted py-4">
+                                            <i class="bi bi-inbox fs-3 d-block mb-1 text-secondary opacity-50"></i>
+                                            Belum ada data topik yang terdaftar.
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="p-2 text-center text-muted small">
+                        <i class="bi bi-info-circle me-1"></i> Data tabel akan otomatis tersaring saat Anda memilih materi.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Tips Card -->
+            <div class="form-card mt-4 p-3 bg-white animate__animated animate__fadeInRight" style="animation-delay: 0.15s;">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="card-icon-squircle" style="width: 38px; height: 38px; background: var(--grad-amber); font-size: 1.1rem; flex-shrink: 0;">
+                        <i class="bi bi-lightbulb"></i>
+                    </div>
+                    <div class="small">
+                        <strong class="d-block text-dark">Tips Pembuatan Soal:</strong>
+                        <span class="text-muted">Kombinasikan tingkat kesulitan mudah (teori konsep), sedang (perhitungan), dan sulit (studi kasus) agar latihan komprehensif.</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</main>
 
-    <!-- Modal Create Topic -->
-    <div class="modal fade" id="createTopicModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="background: #1e293b; border-radius: 12px;">
-                <div class="modal-header border-secondary">
-                    <h5 class="modal-title">Buat Topik Baru</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+<!-- Modal: Create Topic -->
+<div class="modal fade" id="createTopicModal" tabindex="-1" aria-labelledby="createTopicModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="card-icon-squircle" style="width: 38px; height: 38px; background: var(--grad-indigo); font-size: 1.1rem;">
+                        <i class="bi bi-folder-plus"></i>
+                    </div>
+                    <div>
+                        <h5 class="modal-title fw-bold mb-0" id="createTopicModalLabel" style="font-family: 'Outfit', sans-serif;">Buat Topik Baru</h5>
+                        <p class="text-muted small mb-0">Tambahkan bab pembahasan pada materi pilihan</p>
+                    </div>
                 </div>
-                <form id="createTopicForm">
-                    <div class="modal-body">
-                        <p class="text-muted small">Topik akan ditambahkan ke materi <strong id="materiForTopic"></strong>.</p>
-                        <div class="mb-3">
-                            <label for="topicName" class="form-label">Nama Topik</label>
-                            <input type="text" class="form-control" id="topicName" placeholder="Contoh: Persamaan Linear" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="topicDesc" class="form-label">Deskripsi</label>
-                            <textarea class="form-control" id="topicDesc" rows="3" placeholder="Deskripsi singkat topik..."></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer border-secondary">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Buat Topik</button>
-                    </div>
-                </form>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
             </div>
+            <form id="createTopicForm">
+                <div class="modal-body">
+                    <div class="alert alert-primary-subtle border border-primary-subtle rounded-3 py-2 px-3 mb-3 d-flex align-items-center gap-2">
+                        <i class="bi bi-info-circle text-primary"></i>
+                        <span class="small">Topik akan ditambahkan ke materi: <strong id="materiForTopic" class="text-primary">-</strong></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="topicName" class="form-label fw-semibold">Nama Topik / Bab <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="topicName" placeholder="Contoh: Persamaan Linear Satu Variabel" required>
+                    </div>
+                    <div class="mb-0">
+                        <label for="topicDesc" class="form-label fw-semibold">Deskripsi Singkat (Opsional)</label>
+                        <textarea class="form-control" id="topicDesc" rows="3" placeholder="Penjelasan singkat mengenai materi dalam bab ini..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary rounded-pill px-4 fw-semibold shadow-sm">
+                        <i class="bi bi-check-lg me-1"></i> Buat Topik
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Element selectors
-        const mainContainer = document.getElementById('mainContent');
-        const materiSelect = document.getElementById('materis');
-        const topicsSelect = document.getElementById('topics');
-        const topicsTableBody = document.getElementById('topicsTableBody');
-        const addSoalForm = document.getElementById('addSoalForm');
-        const createTopicForm = document.getElementById('createTopicForm');
-        const bulkImportForm = document.getElementById('bulkImportForm');
-        const alertContainer = document.getElementById('alertContainer');
-        const totalSoalEl = document.getElementById('totalSoal');
-        const totalTopikEl = document.getElementById('totalTopik');
-        const createTopicModalEl = document.getElementById('createTopicModal');
-        const createTopicModal = new bootstrap.Modal(createTopicModalEl);
-        const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+<!-- Bootstrap 5 Bundle JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-        // URL Templates from data attributes
-        const topicsUrl = mainContainer.dataset.topicsUrl;
-        const statsUrl = mainContainer.dataset.statsUrl;
-        const createTopicUrl = mainContainer.dataset.createTopicUrl;
-        const importCsvUrl = mainContainer.dataset.importCsvUrl;
+<!-- Page Logic JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Element selectors
+    const mainContainer = document.getElementById('mainContent');
+    const materiSelect = document.getElementById('materis');
+    const topicsSelect = document.getElementById('topics');
+    const topicsTableBody = document.getElementById('topicsTableBody');
+    const addSoalForm = document.getElementById('addSoalForm');
+    const createTopicForm = document.getElementById('createTopicForm');
+    const bulkImportForm = document.getElementById('bulkImportForm');
+    const alertContainer = document.getElementById('alertContainer');
+    const totalSoalEl = document.getElementById('totalSoal');
+    const totalTopikEl = document.getElementById('totalTopik');
+    const createTopicModalEl = document.getElementById('createTopicModal');
+    const createTopicModal = new bootstrap.Modal(createTopicModalEl);
+    const csrfToken = document.querySelector('input[name="csrf_token"]').value;
 
-        // --- Utility Functions ---
-        function showAlert(type, message, duration = 7000) {
-            const alertEl = document.createElement('div');
-            alertEl.className = `alert alert-${type} alert-dismissible fade show`;
-            alertEl.role = 'alert';
-            alertEl.innerHTML = `${message}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
-            alertContainer.innerHTML = '';
-            alertContainer.appendChild(alertEl);
+    // URL Templates from data attributes
+    const topicsUrl = mainContainer.dataset.topicsUrl;
+    const statsUrl = mainContainer.dataset.statsUrl;
+    const createTopicUrl = mainContainer.dataset.createTopicUrl;
+    const importCsvUrl = mainContainer.dataset.importCsvUrl;
 
-            if (duration) {
-                setTimeout(() => {
-                    const bsAlert = bootstrap.Alert.getOrCreateInstance(alertEl);
-                    if (bsAlert) bsAlert.close();
-                }, duration);
-            }
+    // --- Utility Functions ---
+    function showAlert(type, message, duration = 6000) {
+        const alertEl = document.createElement('div');
+        const alertClass = type === 'danger' ? 'alert-danger' : (type === 'success' ? 'alert-success' : 'alert-warning');
+        alertEl.className = `alert ${alertClass} alert-dismissible fade show rounded-3 shadow-sm mb-3`;
+        alertEl.role = 'alert';
+        alertEl.innerHTML = `
+            <div class="d-flex align-items-center gap-2">
+                <i class="bi ${type === 'success' ? 'bi-check-circle-fill' : (type === 'danger' ? 'bi-exclamation-triangle-fill' : 'bi-info-circle-fill')} fs-5"></i>
+                <div>${message}</div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        alertContainer.innerHTML = '';
+        alertContainer.appendChild(alertEl);
+
+        if (duration) {
+            setTimeout(() => {
+                const bsAlert = bootstrap.Alert.getOrCreateInstance(alertEl);
+                if (bsAlert) bsAlert.close();
+            }, duration);
         }
+    }
 
-        async function apiCall(url, method = 'GET', body = null, headers = {}) {
-            const finalHeaders = { 'X-CSRF-Token': csrfToken, ...headers };
-            if (!(body instanceof FormData)) {
-                finalHeaders['Content-Type'] = 'application/json';
-            }
-            
-            const fetchOptions = {
-                method,
-                headers: finalHeaders
-            };
-            
-            if (body !== null) {
-                fetchOptions.body = (body instanceof FormData) ? body : JSON.stringify(body);
-            }
-
-            const response = await fetch(url, fetchOptions);
-
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({ message: 'Terjadi kesalahan internal' }));
-                throw new Error(errorData.message || 'Respons server tidak valid');
-            }
-            return response.json();
+    async function apiCall(url, method = 'GET', body = null, headers = {}) {
+        const finalHeaders = { 'X-CSRF-Token': csrfToken, ...headers };
+        if (!(body instanceof FormData)) {
+            finalHeaders['Content-Type'] = 'application/json';
         }
-
-        // --- Core Logic ---
-        async function fetchAndPopulateTopics(materiId) {
-            topicsSelect.innerHTML = '<option value="">Memuat topik...</option>';
-            topicsTableBody.innerHTML = '<tr><td colspan="3" class="text-center">Memuat...</td></tr>';
-
-            if (!materiId) {
-                topicsSelect.innerHTML = '<option value="">-- Pilih Materi Dahulu --</option>';
-                topicsTableBody.innerHTML = '<tr><td colspan="3" class="text-center text-muted">Pilih materi untuk melihat topik</td></tr>';
-                return;
-            }
-
-            try {
-                const url = topicsUrl + '?materi_id=' + materiId;
-                const topics = await apiCall(url);
-                
-                let topicOptionsHtml = '';
-                if (topics.length > 0) {
-                    topicOptionsHtml = '<option value="">-- Pilih Topik --</option>';
-                    topics.forEach(topic => {
-                        topicOptionsHtml += `<option value="${topic.id}">${topic.topic_name}</option>`;
-                    });
-                } else {
-                    topicOptionsHtml = '<option value="">-- Belum ada topik (Buat baru) --</option>';
-                }
-                topicsSelect.innerHTML = topicOptionsHtml;
-
-                let tableHtml = '';
-                if (topics.length > 0) {
-                    topics.forEach(topic => {
-                        tableHtml += `
-                            <tr>
-                                <td class="fw-bold">${topic.topic_name}</td>
-                                <td class="text-info">${topic.judul_materi}</td>
-                                <td class="text-center"><span class="badge bg-secondary">${topic.soal_count}</span></td>
-                            </tr>`;
-                    });
-                }
-                topicsTableBody.innerHTML = tableHtml || '<tr><td colspan="3" class="text-center text-muted">Belum ada topik.</td></tr>';
-            } catch (error) {
-                showAlert('danger', `Gagal memuat topik: ${error.message}`);
-                topicsSelect.innerHTML = '<option value="">-- Gagal Memuat --</option>';
-            }
-        }
-
-        async function fetchAndPopulateStats(materiId) {
-            totalSoalEl.textContent = '-';
-            totalTopikEl.textContent = '-';
-            if (!materiId) return;
-
-            try {
-                const url = statsUrl + '?materi_id=' + materiId;
-                const stats = await apiCall(url);
-                totalSoalEl.textContent = stats.total_soal ?? 0;
-                totalTopikEl.textContent = stats.total_topik ?? 0;
-            } catch (error) {
-                console.error('Error fetching stats:', error);
-            }
-        }
-
-        // --- Event Listeners ---
-        materiSelect.addEventListener('change', function() {
-            const materiId = this.value;
-            fetchAndPopulateTopics(materiId);
-            fetchAndPopulateStats(materiId);
-        });
-
-        addSoalForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = this.querySelector('button[type="submit"]');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Menambahkan...';
-
-            try {
-                const data = await apiCall(this.action, 'POST', new FormData(this));
-                showAlert('success', 'Soal berhasil ditambahkan!');
-                this.reset();
-                const materiId = materiSelect.value;
-                if (materiId) {
-                    fetchAndPopulateStats(materiId);
-                    fetchAndPopulateTopics(materiId);
-                }
-            } catch (error) {
-                showAlert('danger', `Gagal menambahkan soal: ${error.message}`);
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="bi bi-plus-lg"></i> Tambah Soal';
-            }
-        });
         
-        createTopicModalEl.addEventListener('show.bs.modal', function() {
-            const selectedMateri = materiSelect.options[materiSelect.selectedIndex];
-            document.getElementById('materiForTopic').textContent = selectedMateri ? selectedMateri.text : 'Tidak ada';
-        });
+        const fetchOptions = {
+            method,
+            headers: finalHeaders
+        };
+        
+        if (body !== null) {
+            fetchOptions.body = (body instanceof FormData) ? body : JSON.stringify(body);
+        }
 
-        createTopicForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = this.querySelector('button[type="submit"]');
-            const materiId = materiSelect.value;
-            if (!materiId) {
-                showAlert('warning', 'Pilih materi terlebih dahulu.');
-                return;
-            }
-            btn.disabled = true;
-            btn.innerHTML = 'Membuat...';
+        const response = await fetch(url, fetchOptions);
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({ message: 'Terjadi kesalahan internal' }));
+            throw new Error(errorData.message || 'Respons server tidak valid');
+        }
+        return response.json();
+    }
+
+    // --- Core Logic ---
+    async function fetchAndPopulateTopics(materiId) {
+        topicsSelect.innerHTML = '<option value="">Memuat topik...</option>';
+        topicsTableBody.innerHTML = '<tr><td colspan="3" class="text-center py-4 text-muted"><div class="spinner-border spinner-border-sm text-primary me-2"></div>Memuat daftar topik...</td></tr>';
+
+        if (!materiId) {
+            topicsSelect.innerHTML = '<option value="">-- Pilih Materi Dahulu --</option>';
+            topicsTableBody.innerHTML = '<tr><td colspan="3" class="text-center text-muted py-4"><i class="bi bi-inbox fs-3 d-block mb-1 text-secondary opacity-50"></i>Pilih materi di atas untuk melihat topik terkait.</td></tr>';
+            return;
+        }
+
+        try {
+            const url = topicsUrl + '?materi_id=' + encodeURIComponent(materiId);
+            const topics = await apiCall(url);
             
-            try {
-                const body = {
-                    materi_id: materiId,
-                    name: document.getElementById('topicName').value,
-                    description: document.getElementById('topicDesc').value
-                };
-                const data = await apiCall(createTopicUrl, 'POST', body);
-                showAlert('success', 'Topik baru berhasil dibuat!');
-                createTopicModal.hide();
-                this.reset();
-                await fetchAndPopulateTopics(materiId);
-                topicsSelect.value = data.topic.id; // Auto-select new topic
-            } catch (error) {
-                showAlert('danger', `Gagal membuat topik: ${error.message}`);
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = 'Buat Topik';
+            let topicOptionsHtml = '';
+            if (topics.length > 0) {
+                topicOptionsHtml = '<option value="">-- Pilih Topik --</option>';
+                topics.forEach(topic => {
+                    topicOptionsHtml += `<option value="${topic.id}">${topic.topic_name}</option>`;
+                });
+            } else {
+                topicOptionsHtml = '<option value="">-- Belum ada topik (Buat baru) --</option>';
             }
-        });
+            topicsSelect.innerHTML = topicOptionsHtml;
 
-        bulkImportForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = this.querySelector('button[type="submit"]');
-            const materiId = materiSelect.value;
-            if (!materiId) {
-                showAlert('warning', 'Pilih materi sebelum mengimpor.');
-                return;
+            let tableHtml = '';
+            if (topics.length > 0) {
+                topics.forEach(topic => {
+                    tableHtml += `
+                        <tr>
+                            <td class="fw-semibold text-dark">${topic.topic_name}</td>
+                            <td class="text-secondary small">${topic.judul_materi}</td>
+                            <td class="text-center">
+                                <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle px-2 py-1">
+                                    ${topic.soal_count} soal
+                                </span>
+                            </td>
+                        </tr>`;
+                });
             }
-            btn.disabled = true;
-            btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Mengimpor...';
+            topicsTableBody.innerHTML = tableHtml || '<tr><td colspan="3" class="text-center text-muted py-4"><i class="bi bi-inbox fs-3 d-block mb-1 text-secondary opacity-50"></i>Belum ada topik pada materi ini.</td></tr>';
+        } catch (error) {
+            showAlert('danger', `Gagal memuat topik: ${error.message}`);
+            topicsSelect.innerHTML = '<option value="">-- Gagal Memuat --</option>';
+            topicsTableBody.innerHTML = '<tr><td colspan="3" class="text-center text-danger py-4">Gagal memuat topik. Silakan refresh halaman.</td></tr>';
+        }
+    }
 
-            try {
-                const formData = new FormData(this);
-                formData.append('materi_id', materiId);
-                const data = await apiCall(importCsvUrl, 'POST', formData, {});
-                showAlert('success', `Impor selesai: ${data.success_count} berhasil, ${data.failure_count} gagal.`);
-                fetchAndPopulateStats(materiId);
-                fetchAndPopulateTopics(materiId);
-            } catch (error) {
-                showAlert('danger', `Gagal mengimpor: ${error.message}`);
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="bi bi-upload"></i> Import CSV';
-            }
-        });
+    async function fetchAndPopulateStats(materiId) {
+        totalSoalEl.textContent = '-';
+        totalTopikEl.textContent = '-';
+        if (!materiId) return;
 
+        try {
+            const url = statsUrl + '?materi_id=' + encodeURIComponent(materiId);
+            const stats = await apiCall(url);
+            totalSoalEl.textContent = stats.total_soal ?? 0;
+            totalTopikEl.textContent = stats.total_topik ?? 0;
+        } catch (error) {
+            console.error('Error fetching stats:', error);
+        }
+    }
+
+    // --- Event Listeners ---
+    materiSelect.addEventListener('change', function() {
+        const materiId = this.value;
+        fetchAndPopulateTopics(materiId);
+        fetchAndPopulateStats(materiId);
     });
-    </script>
+
+    addSoalForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = this.querySelector('button[type="submit"]');
+        const originalHtml = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<div class="spinner-border spinner-border-sm me-2"></div> Menambahkan Soal...';
+
+        try {
+            await apiCall(this.action, 'POST', new FormData(this));
+            showAlert('success', 'Soal latihan baru berhasil ditambahkan!');
+            
+            // Keep selected materi and topic for convenient multiple entry
+            const currentMateri = materiSelect.value;
+            const currentTopic = topicsSelect.value;
+            
+            this.reset();
+            
+            if (currentMateri) {
+                materiSelect.value = currentMateri;
+                await fetchAndPopulateStats(currentMateri);
+                await fetchAndPopulateTopics(currentMateri);
+                topicsSelect.value = currentTopic;
+            }
+        } catch (error) {
+            showAlert('danger', `Gagal menambahkan soal: ${error.message}`);
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = originalHtml;
+        }
+    });
+    
+    createTopicModalEl.addEventListener('show.bs.modal', function() {
+        const selectedMateri = materiSelect.options[materiSelect.selectedIndex];
+        document.getElementById('materiForTopic').textContent = (selectedMateri && selectedMateri.value) ? selectedMateri.text : 'Pilih materi terlebih dahulu';
+    });
+
+    createTopicForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = this.querySelector('button[type="submit"]');
+        const originalHtml = btn.innerHTML;
+        const materiId = materiSelect.value;
+        
+        if (!materiId) {
+            showAlert('warning', 'Pilih materi terlebih dahulu pada form sebelum membuat topik.');
+            createTopicModal.hide();
+            return;
+        }
+        
+        btn.disabled = true;
+        btn.innerHTML = '<div class="spinner-border spinner-border-sm me-1"></div> Membuat...';
+        
+        try {
+            const body = {
+                materi_id: materiId,
+                name: document.getElementById('topicName').value,
+                description: document.getElementById('topicDesc').value
+            };
+            const data = await apiCall(createTopicUrl, 'POST', body);
+            showAlert('success', `Topik baru "${data.topic.name}" berhasil dibuat!`);
+            createTopicModal.hide();
+            this.reset();
+            await fetchAndPopulateTopics(materiId);
+            await fetchAndPopulateStats(materiId);
+            topicsSelect.value = data.topic.id; // Auto-select new topic
+        } catch (error) {
+            showAlert('danger', `Gagal membuat topik: ${error.message}`);
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = originalHtml;
+        }
+    });
+
+    bulkImportForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = this.querySelector('button[type="submit"]');
+        const originalHtml = btn.innerHTML;
+        const materiId = materiSelect.value;
+        
+        if (!materiId) {
+            showAlert('warning', 'Pilih materi terlebih dahulu pada pilihan di atas sebelum mengimpor berkas CSV.');
+            materiSelect.focus();
+            return;
+        }
+        
+        btn.disabled = true;
+        btn.innerHTML = '<div class="spinner-border spinner-border-sm me-2"></div> Mengimpor Berkas CSV...';
+
+        try {
+            const formData = new FormData(this);
+            formData.append('materi_id', materiId);
+            const data = await apiCall(importCsvUrl, 'POST', formData, {});
+            showAlert('success', `Impor CSV selesai! ${data.success_count} soal berhasil dimasukkan, ${data.failure_count} gagal.`);
+            this.reset();
+            fetchAndPopulateStats(materiId);
+            fetchAndPopulateTopics(materiId);
+        } catch (error) {
+            showAlert('danger', `Gagal mengimpor berkas CSV: ${error.message}`);
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = originalHtml;
+        }
+    });
+
+    // If a materi is preselected, load its stats & topics
+    if (materiSelect.value) {
+        fetchAndPopulateTopics(materiSelect.value);
+        fetchAndPopulateStats(materiSelect.value);
+    }
+});
+</script>
 </body>
 </html>

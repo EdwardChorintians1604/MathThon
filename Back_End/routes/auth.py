@@ -1,69 +1,101 @@
- # e:\MathThon\Back_End\blueprints\auth.py
+# e:\MathThon\Back_End\routes\auth.py
 import os
 import uuid
 import logging
 import traceback
+import secrets
+import re
 from datetime import datetime
 
+import bleach
 import mysql.connector
 from flask import (
-    Blueprint, render_template, request, flash, redirect, url_for, session, jsonify, current_app
+    Blueprint, render_template, request, flash, redirect, url_for, session, jsonify, current_app, abort
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 
-# Adjust imports to be relative from the blueprint's location
+# Database & Security
 from Back_End.db.database_mysql import get_db_connection, close_db_connection, execute_insert, execute_query
 from Back_End.routes.security_for_web import user_required
+from Back_End.bug_and_crime_detection.bug_and_crime_detection import limiter, SQLI_PATTERNS, log_incident
 
 # Create a Blueprint
-# The 'user' prefix will be handled by url_prefix
 auth_bp = Blueprint('auth', __name__, template_folder='../../Front_End/templates')
 
 @auth_bp.route("/register_user", methods=["GET"])
 def register_user():
-# Tampilkan form registrasi
+    """Tampilkan form pendaftaran akun pengguna baru."""
     return render_template("user/register_user.html")
 
 @auth_bp.route("/register_user", methods=["POST"])
+@limiter.limit("5 per minute")
 def submit_register_user():
-    # Ambil data dari form
-    name = request.form.get("name")
-    born_place = request.form.get("born_place")
-    username = request.form.get("username")
-    born_date = request.form.get("born_date")
-    if born_date == "":
-        born_date = None
-    else:
-        try:
-            # Coba parse tanggal ke format YYYY-MM-DD
-            born_date = datetime.strptime(born_date, '%Y-%m-%d').date()
-        except ValueError:
-            logging.warning(f"Invalid date format for born_date: {born_date}. Setting to None.")
-            born_date = None
-    
-    email = request.form.get("email")
-    password = request.form.get("password")
-    photo = request.files.get("foto") # Pastikan form pakai name="foto"
+    """
+    Pendaftaran Pengguna Baru:
+    - Pre-filter anti-SQLi dan sanitasi input via bleach.
+    - Mencegah impersonasi identitas administrator.
+    - Query insert berparameter murni (%s) ke MySQL.
+    """
+    raw_name = request.form.get("name", "")
+    raw_born_place = request.form.get("born_place", "")
+    raw_username = request.form.get("username", "")
+    raw_born_date = request.form.get("born_date", "")
+    raw_email = request.form.get("email", "")
+    password = request.form.get("password", "")
+    photo = request.files.get("foto")
 
-    # --- Validasi input wajib ---
+    # 1. Anti-SQL Injection & Sanitasi
+    combined_inputs = f"{raw_name} {raw_born_place} {raw_username} {raw_email}"
+    for pattern in SQLI_PATTERNS:
+        if re.search(pattern, combined_inputs):
+            log_incident("SQL Injection on Registration", "CRITICAL", f"Pola SQLi pada form register dari IP {request.remote_addr}: {bleach.clean(raw_username)[:40]}")
+            flash("Karakter atau format input terlarang terdeteksi demi keamanan database.", "danger")
+            return redirect(url_for('auth.register_user'))
+
+    name = bleach.clean(raw_name).strip()
+    born_place = bleach.clean(raw_born_place).strip() if raw_born_place else None
+    username = bleach.clean(raw_username).strip()
+    email = bleach.clean(raw_email).strip().lower()
+
+    born_date = None
+    if raw_born_date and raw_born_date.strip():
+        try:
+            born_date = datetime.strptime(raw_born_date.strip(), '%Y-%m-%d').date()
+        except ValueError:
+            logging.warning(f"Format tanggal lahir tidak valid: {raw_born_date}")
+            born_date = None
+
+    # Validasi field wajib
     if not all([name, username, email, password]):
         flash("Semua field yang bertanda * wajib diisi.", "danger")
         return redirect(url_for('auth.register_user'))
 
-    # --- Hash password ---
+    if len(password) < 6:
+        flash("Kata sandi minimal 6 karakter demi keamanan akun.", "danger")
+        return redirect(url_for('auth.register_user'))
+
+    # Proteksi nama akun Otoritas
+    ADMIN_USERNAME = os.getenv('ADMIN_USERNAME', 'Edward_Kenway')
+    if username.lower() == ADMIN_USERNAME.lower() or 'admin' in username.lower():
+        flash("Username tersebut dicadangkan untuk otoritas sistem dan tidak dapat digunakan.", "danger")
+        return redirect(url_for('auth.register_user'))
+
+    # Hash kata sandi pengguna
     hashed_password = generate_password_hash(password)
 
-    # --- Penanganan Foto ---
-    foto_data = "uploads/default.jpg"  # Default photo path
-
+    # Penanganan file foto
+    foto_data = "uploads/default.jpg"
     try:
         if photo and photo.filename.strip() != "":
-            # Gunakan UUID untuk nama file unik
-            file_extension = os.path.splitext(photo.filename)[1]
+            from Back_End.bug_and_crime_detection.bug_and_crime_detection import validate_file_safety
+            if not validate_file_safety(photo):
+                flash("File foto tidak memenuhi kriteria keamanan sistem.", "danger")
+                return redirect(url_for('auth.register_user'))
+
+            file_extension = os.path.splitext(photo.filename)[1].lower()
             unique_filename = str(uuid.uuid4()) + file_extension
-            # Use current_app.static_folder for consistency
             upload_dir = os.path.join(current_app.static_folder, 'uploads')
             os.makedirs(upload_dir, exist_ok=True)
             foto_path = os.path.join(upload_dir, unique_filename)
@@ -71,10 +103,10 @@ def submit_register_user():
             foto_data = f'uploads/{unique_filename}'
     except Exception as e:
         logging.error(f"Gagal menyimpan foto: {e}")
-        flash("Gagal menyimpan foto.", "danger")
+        flash("Gagal memproses file foto profil.", "danger")
         return redirect(url_for('auth.register_user'))
 
-    # --- Simpan ke database ---
+    # Simpan ke database via parameterized query
     conn = None
     try:
         conn = get_db_connection(current_app)
@@ -86,69 +118,175 @@ def submit_register_user():
         execute_insert(conn, query, params)
         conn.commit()
 
-        flash("Registrasi berhasil! Silakan login.", "success")
+        flash("Pendaftaran akun berhasil! Silakan masuk ke Portal Terpadu.", "success")
         return redirect(url_for('auth.login_user'))
 
     except mysql.connector.Error as err:
         if err.errno == 1062:
-            error_message = "Username atau Email sudah terdaftar."
+            error_message = "Username atau Email sudah terdaftar. Silakan gunakan yang lain."
         else:
-            error_message = f"Registrasi gagal karena kesalahan database: {err.msg}"
+            error_message = f"Registrasi gagal karena kendala database: {err.msg}"
 
-        logging.error(f"Registration error: {err}")
+        logging.error(f"Registration database error: {err}")
         flash(error_message, "danger")
         return redirect(url_for('auth.register_user'))
 
     except Exception as e:
         logging.error(f"General error during registration: {e}")
-        flash("Registrasi gagal karena kesalahan tak terduga.", "danger")
+        flash("Pendaftaran gagal karena kendala tak terduga.", "danger")
         return redirect(url_for('auth.register_user'))
 
     finally:
         if conn:
             conn.close()
 
-@auth_bp.route("/login_user", methods=["GET", "POST"])
-def login_user():
-    if request.method == "POST":
-        username = request.form.get("username")
-        password = request.form.get("password")
 
-        if not username or not password:
-            flash("Username dan password wajib diisi.", "danger")
+@auth_bp.route("/login", methods=["GET", "POST"])
+@auth_bp.route("/login_user", methods=["GET", "POST"])
+@limiter.limit("10 per minute")
+def login_user():
+    """
+    Portal Masuk Terpadu MathThon (Integrated Role-Aware Login Engine):
+    - Otomatis mendeteksi role akun: Administrator atau Pengguna Biasa (Siswa/Umum).
+    - Memisahkan kredensial admin dan user secara cerdas dan aman dari timing attack.
+    - Parameterized MySQL query 100% immune terhadap SQL Injection.
+    - Anti-bot Honeypot trap & submission timestamp heuristics.
+    - Flask-Limiter proteksi anti-brute force per IP address.
+    """
+    # Jika sesi sudah aktif, langsung arahkan ke dashboard yang sesuai
+    if session.get('admin_logged_in'):
+        return redirect(url_for('admin.dashboard_admin'))
+    if session.get('user_id'):
+        return redirect(url_for('user.dashboard_user'))
+
+    if request.method == "POST":
+        identifier = request.form.get("username", "").strip()
+        password = request.form.get("password", "").strip()
+        honeypot = request.form.get("website_url_hp", "").strip()
+
+        # 1. Anti-Bot Honeypot Trap
+        if honeypot:
+            log_incident("Bot Attack (Honeypot)", "CRITICAL", f"Bot terperangkap mengisi field honeypot dari IP {request.remote_addr}")
+            flash("Akses diblokir: Terdeteksi bot otomatis.", "danger")
+            return render_template("user/login_user.html"), 403
+
+        # 2. Validasi input wajib
+        if not identifier or not password:
+            flash("Username/Email dan password wajib diisi.", "danger")
             return render_template("user/login_user.html")
 
+        # 3. Pre-Filter Anti-SQL Injection & Signature Scanning
+        raw_combined = f"{identifier} {password}"
+        is_sqli = False
+        for pattern in SQLI_PATTERNS:
+            if re.search(pattern, raw_combined):
+                is_sqli = True
+                break
+
+        if is_sqli:
+            sanitized_id = bleach.clean(identifier)[:60]
+            log_incident(
+                attack_type="SQL Injection Attempt on Login",
+                severity="CRITICAL",
+                details=f"Pola SQLi terdeteksi pada login dari IP {request.remote_addr}: {sanitized_id}"
+            )
+            flash("Akses ditolak: Aktivitas mencurigakan terdeteksi oleh sistem keamanan MathThon.", "danger")
+            return render_template("user/login_user.html"), 403
+
+        # 4. RESOLUSI IDENTITAS (ALGORITMA DETEKSI ROLE)
+        # -------------------------------------------------------------
+        # Tahap A: Deteksi Apakah Kredensial Administrator
+        ADMIN_USERNAME = os.getenv('ADMIN_USERNAME', 'Edward_Kenway')
+        ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD', 'Mentawai160604')
+
+        # Bandingkan kredensial secara konstan (aman dari side-channel timing attack)
+        is_admin_identifier = secrets.compare_digest(identifier, ADMIN_USERNAME)
+        is_admin_password = secrets.compare_digest(password, ADMIN_PASSWORD)
+
+        if is_admin_identifier:
+            if is_admin_password:
+                # Berhasil otentikasi sebagai Administrator
+                session.clear()
+                session.permanent = True
+                session['admin_logged_in'] = True
+                session['username'] = ADMIN_USERNAME
+                session['role'] = 'admin'
+                session['name'] = 'Administrator'
+
+                log_incident(
+                    attack_type="Admin Authentication",
+                    severity="INFO",
+                    details=f"Admin '{ADMIN_USERNAME}' berhasil masuk melalui Portal Terpadu dari IP {request.remote_addr}"
+                )
+                logging.info(f"[SECURITY] Administrator login successful: {ADMIN_USERNAME} (IP: {request.remote_addr})")
+                flash(f"Login berhasil! Selamat datang di Portal Administrator, {ADMIN_USERNAME}.", "success")
+                return redirect(url_for('admin.dashboard_admin'))
+            else:
+                # Identifier admin cocok tapi password salah
+                log_incident(
+                    attack_type="Failed Admin Login",
+                    severity="HIGH",
+                    details=f"Gagal login akun admin '{ADMIN_USERNAME}' dari IP {request.remote_addr}"
+                )
+                logging.warning(f"[SECURITY] Percobaan login admin gagal untuk '{ADMIN_USERNAME}' dari IP {request.remote_addr}")
+                flash("Username/Email atau kata sandi tidak valid.", "danger")
+                return render_template("user/login_user.html")
+
+        # -------------------------------------------------------------
+        # Tahap B: Deteksi Akun Pengguna Terdaftar di Database MySQL
         conn = None
         try:
             conn = get_db_connection(current_app)
             cursor = conn.cursor(dictionary=True)
-            cursor.execute("SELECT id, username, password FROM users WHERE username = %s", (username,))
+            # Parameterized Query murni: memisahkan SQL query dari parameter input pengguna (kebal SQLi)
+            cursor.execute(
+                "SELECT id, name, username, email, password, photo FROM users WHERE username = %s OR email = %s",
+                (identifier, identifier.lower())
+            )
             user = cursor.fetchone()
             cursor.close()
 
             if user and check_password_hash(user['password'], password):
+                # Berhasil otentikasi sebagai Pengguna (User)
                 session.clear()
+                session.permanent = True
                 session['user_id'] = user['id']
                 session['username'] = user['username']
-                
+                session['name'] = user.get('name') or user['username']
+                session['photo'] = user.get('photo') or 'uploads/default.jpg'
+                session['role'] = 'user'
+                session['admin_logged_in'] = False
+
                 from Back_End.routes.utils import log_user_activity
-                log_user_activity(current_app._get_current_object(), user['id'], 'login', 'Berhasil masuk ke dalam platform MathThon')
-                
-                flash("Login berhasil!", "success")
+                try:
+                    log_user_activity(
+                        current_app._get_current_object(),
+                        user['id'],
+                        'login',
+                        'Berhasil masuk ke dalam platform MathThon melalui Portal Terpadu'
+                    )
+                except Exception as log_err:
+                    logging.warning(f"Gagal mencatat log aktivitas login user: {log_err}")
+
+                logging.info(f"[SECURITY] User login successful: {user['username']} (ID: {user['id']})")
+                flash(f"Login berhasil! Selamat datang kembali, {user.get('name') or user['username']}.", "success")
                 return redirect(url_for('user.dashboard_user'))
-            else:
-                flash("Username atau password salah.", "danger")
-                return render_template("user/login_user.html")
 
         except mysql.connector.Error as err:
-            logging.error(f"Login error: {err}")
-            flash("Terjadi kesalahan pada server. Coba lagi nanti.", "danger")
+            logging.error(f"[SECURITY] Database query error saat autentikasi login: {err}")
+            flash("Terjadi kendala pada server database. Silakan coba kembali nanti.", "danger")
             return render_template("user/login_user.html")
         finally:
             if conn:
                 close_db_connection(conn)
 
-    # For GET request
+        # -------------------------------------------------------------
+        # Tahap C: Kredensial Tidak Ditemukan / Tidak Valid
+        logging.warning(f"[SECURITY] Login gagal untuk identitas '{bleach.clean(identifier)[:30]}' dari IP {request.remote_addr}")
+        flash("Username/Email atau kata sandi tidak valid.", "danger")
+        return render_template("user/login_user.html")
+
+    # Untuk GET request
     return render_template("user/login_user.html")
 
 @auth_bp.route("/google_login", methods=["POST"])
