@@ -4,11 +4,24 @@ import json
 import zipfile
 import hashlib
 import logging
+from typing import Optional, Dict, Any, List, Tuple, Union
 from datetime import datetime, timedelta
 import pandas as pd
 import mysql.connector
 from flask import current_app
 from Back_End.db.database_mysql import get_db_connection, close_db_connection
+from Back_End.db.db_security_ai import (
+    encrypt_bytes_aes256,
+    decrypt_bytes_aes256,
+    MAGIC_AES_HEADER,
+    calculate_sha256_checksum,
+    verify_backup_integrity,
+    audit_database_integrity_and_credentials,
+    analyze_query_sqli_ml,
+    detect_audit_log_anomalies,
+    analyze_query_cost_and_optimization,
+    predict_caching_workload
+)
 
 logger = logging.getLogger(__name__)
 
@@ -429,10 +442,15 @@ def generate_multi_table_csv_zip_bytes(app) -> io.BytesIO:
 # ==============================================================================
 # PERIODIC & SCHEDULED BACKUP ENGINE
 # ==============================================================================
-def create_backup_snapshot(app, backup_type: str = 'manual', backup_format: str = 'zip') -> dict:
+def create_backup_snapshot(app, backup_type: str = 'manual', backup_format: str = 'zip', encrypt_aes: bool = False, passphrase: Optional[str] = None) -> dict:
     """
     Membuat file snapshot backup fisik di folder backups/database/
-    dan mencatatnya di backup_registry.json serta menegakkan retention policy.
+    Mendukung:
+    - Format ZIP terkompresi (.sql.zip)
+    - Format SQL mentah (.sql)
+    - Enkripsi AES-256 (Data-at-Rest) (.sql.aes atau .zip.aes)
+    - Penghitungan otomatis SHA-256 Checksum untuk jaminan integritas
+    - Pencatatan di backup_registry.json serta penegakan retention policy.
     """
     backup_dir = get_backup_dir()
     now = datetime.now()
@@ -441,38 +459,58 @@ def create_backup_snapshot(app, backup_type: str = 'manual', backup_format: str 
 
     # Buat konten SQL dump
     sql_content = generate_full_sql_dump(app, include_data=True)
+    sql_bytes = sql_content.encode('utf-8')
 
-    if backup_format == 'zip':
-        filename = f"backup_{db_name}_{timestamp_slug}_{backup_type}.sql.zip"
-        file_path = os.path.join(backup_dir, filename)
-        sql_filename = f"backup_{db_name}_{timestamp_slug}_{backup_type}.sql"
+    is_aes = encrypt_aes or backup_format in {'aes', 'zip.aes', 'sql.aes'}
 
-        with zipfile.ZipFile(file_path, 'w', zipfile.ZIP_DEFLATED) as zf:
-            zf.writestr(sql_filename, sql_content.encode('utf-8'))
-    else:
-        filename = f"backup_{db_name}_{timestamp_slug}_{backup_type}.sql"
-        file_path = os.path.join(backup_dir, filename)
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(sql_content)
+    if backup_format in {'zip', 'zip.aes'}:
+        # Buat ZIP buffer di memori
+        zip_buf = io.BytesIO()
+        sql_inner_name = f"backup_{db_name}_{timestamp_slug}_{backup_type}.sql"
+        with zipfile.ZipFile(zip_buf, 'w', zipfile.ZIP_DEFLATED) as zf:
+            zf.writestr(sql_inner_name, sql_bytes)
+        raw_bytes = zip_buf.getvalue()
+
+        if is_aes:
+            filename = f"backup_{db_name}_{timestamp_slug}_{backup_type}.zip.aes"
+            file_path = os.path.join(backup_dir, filename)
+            encrypted_payload = encrypt_bytes_aes256(raw_bytes, passphrase=passphrase)
+            with open(file_path, 'wb') as f:
+                f.write(encrypted_payload)
+        else:
+            filename = f"backup_{db_name}_{timestamp_slug}_{backup_type}.sql.zip"
+            file_path = os.path.join(backup_dir, filename)
+            with open(file_path, 'wb') as f:
+                f.write(raw_bytes)
+    else: # sql
+        if is_aes:
+            filename = f"backup_{db_name}_{timestamp_slug}_{backup_type}.sql.aes"
+            file_path = os.path.join(backup_dir, filename)
+            encrypted_payload = encrypt_bytes_aes256(sql_bytes, passphrase=passphrase)
+            with open(file_path, 'wb') as f:
+                f.write(encrypted_payload)
+        else:
+            filename = f"backup_{db_name}_{timestamp_slug}_{backup_type}.sql"
+            file_path = os.path.join(backup_dir, filename)
+            with open(file_path, 'w', encoding='utf-8') as f:
+                f.write(sql_content)
 
     file_size = os.path.getsize(file_path)
 
     # Hitung SHA256 checksum untuk verifikasi integritas
-    sha256 = hashlib.sha256()
-    with open(file_path, 'rb') as f:
-        while chunk := f.read(8192):
-            sha256.update(chunk)
-    checksum = sha256.hexdigest()
+    checksum = calculate_sha256_checksum(file_path)
 
     record = {
         'id': f"bkp_{timestamp_slug}",
         'filename': filename,
-        'format': backup_format,
+        'format': 'zip.aes' if (backup_format in {'zip', 'zip.aes'} and is_aes) else ('sql.aes' if is_aes else backup_format),
         'type': backup_type, # 'manual', 'scheduled_daily', 'scheduled_weekly'
         'created_at': now.strftime("%Y-%m-%d %H:%M:%S"),
         'size_bytes': file_size,
         'size_formatted': format_file_size(file_size),
         'checksum': checksum,
+        'is_encrypted': is_aes,
+        'encryption': 'AES-256-CBC (PBKDF2)' if is_aes else 'None',
         'status': 'Tersedia'
     }
 
@@ -582,23 +620,37 @@ def restore_database_from_file_content(app, sql_content: str) -> dict:
                 pass
         return {'success': False, 'error': str(e)}
 
-def restore_database_from_archive(app, filename: str) -> dict:
-    """Memulihkan database langsung dari berkas snapshot di folder backups."""
+def restore_database_from_archive(app, filename: str, passphrase: Optional[str] = None) -> dict:
+    """Memulihkan database langsung dari berkas snapshot di folder backups, mendukung berkas terenkripsi AES-256."""
     backup_dir = get_backup_dir()
     file_path = os.path.join(backup_dir, filename)
 
     if not os.path.exists(file_path):
         return {'success': False, 'error': 'Berkas backup tidak ditemukan di server.'}
 
-    if filename.endswith('.zip'):
-        with zipfile.ZipFile(file_path, 'r') as zf:
-            sql_names = [n for n in zf.namelist() if n.endswith('.sql')]
-            if not sql_names:
-                return {'success': False, 'error': 'Arsip ZIP tidak berisi berkas .sql'}
-            sql_content = zf.read(sql_names[0]).decode('utf-8', errors='replace')
+    with open(file_path, 'rb') as f:
+        file_bytes = f.read()
+
+    # Periksa apakah terenkripsi AES-256 (ekstensi .aes atau header MAGIC_AES_HEADER)
+    if filename.endswith('.aes') or file_bytes.startswith(MAGIC_AES_HEADER):
+        try:
+            file_bytes = decrypt_bytes_aes256(file_bytes, passphrase=passphrase)
+        except Exception as dec_err:
+            logger.error(f"Failed to decrypt AES-256 backup {filename}: {dec_err}")
+            return {'success': False, 'error': f"Gagal mendekripsi berkas AES-256: {dec_err}. Pastikan passphrase enkripsi benar."}
+
+    # Jika berkas merupakan arsip ZIP
+    if filename.endswith('.zip') or filename.endswith('.zip.aes') or file_bytes.startswith(b'PK\x03\x04'):
+        try:
+            with zipfile.ZipFile(io.BytesIO(file_bytes), 'r') as zf:
+                sql_names = [n for n in zf.namelist() if n.endswith('.sql')]
+                if not sql_names:
+                    return {'success': False, 'error': 'Arsip ZIP tidak berisi berkas .sql'}
+                sql_content = zf.read(sql_names[0]).decode('utf-8', errors='replace')
+        except Exception as zerr:
+            return {'success': False, 'error': f"Gagal membaca arsip ZIP: {zerr}"}
     else:
-        with open(file_path, 'r', encoding='utf-8', errors='replace') as f:
-            sql_content = f.read()
+        sql_content = file_bytes.decode('utf-8', errors='replace')
 
     return restore_database_from_file_content(app, sql_content)
 

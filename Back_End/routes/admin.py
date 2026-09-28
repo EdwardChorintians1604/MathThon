@@ -413,16 +413,25 @@ def export_database():
 @admin_bp.route("/database/backup/create", methods=["POST"])
 @admin_required
 def create_backup_route():
-    """Membuat snapshot backup database secara instan (Manual Snapshot)."""
+    """Membuat snapshot backup database secara instan (Manual Snapshot) dengan opsi enkripsi AES-256."""
     try:
         app_obj = current_app._get_current_object()
         data = request.get_json(silent=True) or {}
         backup_format = data.get('format', 'zip')
+        encrypt_aes = bool(data.get('encrypt_aes', False))
+        passphrase = data.get('passphrase', None)
 
-        record = create_backup_snapshot(app_obj, backup_type='manual', backup_format=backup_format)
+        record = create_backup_snapshot(
+            app_obj, 
+            backup_type='manual', 
+            backup_format=backup_format,
+            encrypt_aes=encrypt_aes,
+            passphrase=passphrase
+        )
+        enc_msg = " [Terenkripsi AES-256-CBC]" if record.get('is_encrypted') else ""
         return jsonify({
             'success': True,
-            'message': f"Snapshot backup `{record['filename']}` berhasil dibuat ({record['size_formatted']}).",
+            'message': f"Snapshot backup `{record['filename']}` berhasil dibuat ({record['size_formatted']}){enc_msg}.",
             'backup': record
         })
     except Exception as e:
@@ -465,11 +474,14 @@ def delete_backup_route(filename):
 @admin_bp.route("/database/backup/restore/<filename>", methods=["POST"])
 @admin_required
 def restore_backup_route(filename):
-    """Memulihkan database dari berkas snapshot yang tersimpan di server."""
+    """Memulihkan database dari berkas snapshot yang tersimpan di server (mendukung dekripsi AES-256)."""
     try:
         app_obj = current_app._get_current_object()
         safe_filename = os.path.basename(filename)
-        result = restore_database_from_archive(app_obj, safe_filename)
+        data = request.get_json(silent=True) or {}
+        passphrase = data.get('passphrase', None)
+
+        result = restore_database_from_archive(app_obj, safe_filename, passphrase=passphrase)
         if result['success']:
             return jsonify({
                 'success': True,
@@ -478,6 +490,114 @@ def restore_backup_route(filename):
         return jsonify({'success': False, 'error': result.get('error', 'Gagal memulihkan database.')}), 500
     except Exception as e:
         logging.error(f"Error restoring backup: {e}", exc_info=True)
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@admin_bp.route("/database/backup/verify/<filename>", methods=["POST"])
+@admin_required
+def verify_backup_route(filename):
+    """Memverifikasi integritas checksum SHA-256 dari berkas snapshot backup."""
+    try:
+        from Back_End.db.db_security_ai import verify_backup_integrity
+        safe_filename = os.path.basename(filename)
+        backup_dir = get_backup_dir()
+        file_path = os.path.join(backup_dir, safe_filename)
+        
+        registry = load_backup_registry()
+        expected_sha = None
+        for item in registry:
+            if item.get('filename') == safe_filename:
+                expected_sha = item.get('sha256')
+                break
+
+        res = verify_backup_integrity(file_path, expected_sha)
+        return jsonify(res)
+    except Exception as e:
+        logging.error(f"Error verifying backup: {e}", exc_info=True)
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@admin_bp.route("/database/ai/audit", methods=["GET"])
+@admin_required
+def audit_credentials_route():
+    """Audit Kriptografi Integritas Data & Kredensial Pengguna (Bcrypt, Argon2, PBKDF2, SHA-256)."""
+    try:
+        from Back_End.db.db_security_ai import audit_database_integrity_and_credentials
+        app_obj = current_app._get_current_object()
+        report = audit_database_integrity_and_credentials(app_obj)
+        return jsonify({'success': True, 'report': report})
+    except Exception as e:
+        logging.error(f"Error running credentials audit: {e}", exc_info=True)
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@admin_bp.route("/database/ai/sqli-inspect", methods=["POST"])
+@admin_required
+def sqli_inspect_route():
+    """Analisis SQL Injection menggunakan AI / ML Classification & Heuristic Vector Scanner."""
+    try:
+        from Back_End.db.db_security_ai import analyze_query_sqli_ml
+        data = request.get_json(silent=True) or {}
+        query = data.get('query', '')
+        if not query:
+            return jsonify({'success': False, 'error': 'Query tidak boleh kosong.'}), 400
+        analysis = analyze_query_sqli_ml(query)
+        return jsonify({'success': True, 'analysis': analysis})
+    except Exception as e:
+        logging.error(f"Error in SQLi inspection: {e}", exc_info=True)
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@admin_bp.route("/database/ai/anomalies", methods=["GET"])
+@admin_required
+def audit_anomalies_route():
+    """Deteksi Anomali pada Audit Log (Isolation Forest / Outlier Scoring)."""
+    try:
+        from Back_End.db.db_security_ai import detect_audit_log_anomalies
+        app_obj = current_app._get_current_object()
+        anomalies_report = detect_audit_log_anomalies(app_obj)
+        return jsonify({'success': True, 'report': anomalies_report})
+    except Exception as e:
+        logging.error(f"Error detecting anomalies: {e}", exc_info=True)
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@admin_bp.route("/database/ai/optimizer", methods=["GET"])
+@admin_required
+def query_optimizer_route():
+    """AI Query Optimizer & Cost-Based Optimizer (CBO / RL Execution Plan Advisor)."""
+    try:
+        from Back_End.db.db_security_ai import analyze_query_cost_and_optimization
+        app_obj = current_app._get_current_object()
+        opt_report = analyze_query_cost_and_optimization(app_obj)
+        return jsonify({'success': True, 'report': opt_report})
+    except Exception as e:
+        logging.error(f"Error in query optimization analysis: {e}", exc_info=True)
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@admin_bp.route("/database/ai/apply-index", methods=["POST"])
+@admin_required
+def apply_index_route():
+    """Eksekusi 1-Click Rekomendasi Indeks Hasil AI Optimizer."""
+    try:
+        from Back_End.db.db_security_ai import execute_recommended_index
+        app_obj = current_app._get_current_object()
+        data = request.get_json(silent=True) or {}
+        sql_statement = data.get('statement', '')
+        if not sql_statement or not sql_statement.strip().upper().startswith("CREATE INDEX"):
+            return jsonify({'success': False, 'error': 'Perintah tidak valid. Hanya CREATE INDEX yang diperbolehkan.'}), 400
+        res = execute_recommended_index(app_obj, sql_statement)
+        return jsonify(res)
+    except Exception as e:
+        logging.error(f"Error applying index: {e}", exc_info=True)
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@admin_bp.route("/database/ai/predictive-caching", methods=["GET"])
+@admin_required
+def predictive_caching_route():
+    """AI Predictive Caching & Workload Forecasting (Time-Series & Access Pattern Model)."""
+    try:
+        from Back_End.db.db_security_ai import predict_caching_workload
+        app_obj = current_app._get_current_object()
+        caching_report = predict_caching_workload(app_obj)
+        return jsonify({'success': True, 'report': caching_report})
+    except Exception as e:
+        logging.error(f"Error in predictive caching: {e}", exc_info=True)
         return jsonify({'success': False, 'error': str(e)}), 500
 
 @admin_bp.route("/database/backup/upload-restore", methods=["POST"])
@@ -754,6 +874,6 @@ def delete_materi(materi_id):
 @admin_bp.route("/export_to_csv")
 @admin_required
 def export_to_csv():
-    return render_template("admin/export_database.html")
+    return redirect(url_for("admin.export_database"))
 
 # ... (export_to_csv, export_to_sql, export_to_excel routes - full pandas/io logic)

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathThon Admin | Manajemen &amp; Backup Database</title>
+    <title>MathThon Admin | Manajemen, AI Security &amp; Backup Database</title>
     
     <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
@@ -34,7 +34,8 @@
             --db-amber: #f59e0b;
             --db-crimson: #ef4444;
             --db-cyan: #06b6d4;
-            --db-card-bg: rgba(255, 255, 255, 0.94);
+            --db-violet: #8b5cf6;
+            --db-card-bg: rgba(255, 255, 255, 0.96);
             --db-card-border: #e2e8f0;
             --db-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
             --db-shadow-hover: 0 20px 30px -10px rgba(15, 23, 42, 0.10), 0 10px 15px -5px rgba(15, 23, 42, 0.04);
@@ -49,7 +50,7 @@
 
         /* ─── Hero Section ─── */
         .db-hero {
-            padding: 2.25rem 0 1.5rem;
+            padding: 2rem 0 1.25rem;
         }
         .db-hero .hero-pill {
             display: inline-flex;
@@ -68,7 +69,7 @@
         }
         .db-hero h1 {
             font-family: var(--adm-font-display);
-            font-size: clamp(1.85rem, 3.5vw, 2.65rem);
+            font-size: clamp(1.85rem, 3.5vw, 2.5rem);
             font-weight: 800;
             color: var(--adm-text-main);
             line-height: 1.2;
@@ -81,10 +82,10 @@
             background-clip: text;
         }
         .db-hero .subtitle {
-            font-size: 0.98rem;
+            font-size: 0.95rem;
             color: var(--adm-text-muted);
-            max-width: 760px;
-            margin-bottom: 1.5rem;
+            max-width: 820px;
+            margin-bottom: 1.35rem;
             line-height: 1.6;
         }
 
@@ -103,7 +104,7 @@
             backdrop-filter: blur(12px);
             border: 1px solid var(--db-card-border);
             border-radius: var(--radius-lg);
-            padding: 1.35rem;
+            padding: 1.25rem;
             box-shadow: var(--db-shadow);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
@@ -125,13 +126,13 @@
             background: var(--card-accent, var(--grad-primary));
         }
         .telemetry-icon-box {
-            width: 52px;
-            height: 52px;
+            width: 50px;
+            height: 50px;
             border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: #ffffff;
             background: var(--card-accent, var(--grad-primary));
             box-shadow: 0 8px 16px -4px rgba(0,0,0,0.12);
@@ -139,14 +140,14 @@
         }
         .telemetry-content .telemetry-val {
             font-family: var(--adm-font-display);
-            font-size: 1.65rem;
+            font-size: 1.55rem;
             font-weight: 800;
             color: var(--adm-text-main);
             line-height: 1.1;
             margin-bottom: 0.25rem;
         }
         .telemetry-content .telemetry-lbl {
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             font-weight: 600;
             color: var(--adm-text-muted);
             text-transform: uppercase;
@@ -157,20 +158,23 @@
         .db-nav-tabs {
             border-bottom: 2px solid #e2e8f0;
             margin-bottom: 1.75rem;
-            gap: 0.5rem;
+            gap: 0.4rem;
+            overflow-x: auto;
+            flex-wrap: nowrap;
         }
         .db-nav-tabs .nav-link {
             border: none;
             color: var(--adm-text-muted);
             font-weight: 600;
-            font-size: 0.92rem;
-            padding: 0.85rem 1.4rem;
+            font-size: 0.90rem;
+            padding: 0.85rem 1.25rem;
             border-radius: var(--radius-md) var(--radius-md) 0 0;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             transition: all 0.2s ease;
             position: relative;
+            white-space: nowrap;
         }
         .db-nav-tabs .nav-link:hover {
             color: var(--adm-primary);
@@ -185,8 +189,8 @@
         .db-nav-tabs .nav-link .badge-count {
             background: #eff6ff;
             color: var(--adm-primary);
-            font-size: 0.75rem;
-            padding: 0.2rem 0.55rem;
+            font-size: 0.72rem;
+            padding: 0.15rem 0.5rem;
             border-radius: 9999px;
             font-family: var(--adm-font-mono);
         }
@@ -340,9 +344,85 @@
             border-radius: 4px;
             color: #475569;
         }
+
+        /* AI & Crypto Cards */
+        .ai-feature-card {
+            background: #ffffff;
+            border: 1px solid var(--adm-border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: all 0.25s ease;
+        }
+        .ai-feature-card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            border-color: #cbd5e1;
+        }
+        .ai-feature-card .card-head-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #fff;
+        }
+        .sql-console-area {
+            font-family: var(--adm-font-mono);
+            background: #0f172a;
+            color: #f8fafc;
+            border: 1px solid #334155;
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            font-size: 0.90rem;
+            min-height: 110px;
+            resize: vertical;
+        }
+        .sql-console-area:focus {
+            background: #0f172a;
+            color: #ffffff;
+            border-color: #3b82f6;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+        }
+        .vector-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.3rem 0.7rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #f1f5f9;
+            color: #475569;
+            margin: 0.2rem;
+        }
+        .vector-pill.active-danger {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+        .vector-pill.active-warning {
+            background: #fffbeb;
+            color: #d97706;
+            border: 1px solid #fde68a;
+        }
+        .vector-pill.active-safe {
+            background: #f0fdf4;
+            color: #16a34a;
+            border: 1px solid #bbf7d0;
+        }
     </style>
 </head>
 <body class="admin-dashboard-body d-flex flex-column min-vh-100">
+
+{# ─── JINJA2 SAFETY GUARDS: Fallbacks to prevent UndefinedError ─── #}
+{% set overview = overview if (overview is defined and overview) else {} %}
+{% set backups = backups if (backups is defined and backups) else [] %}
+{% set config = config if (config is defined and config) else {} %}
+{% set users = users if (users is defined and users) else {} %}
 
 <!-- ══════════════════════════════════════════════════════════════════════
      NAVBAR
@@ -393,7 +473,7 @@
                     <div class="admin-avatar">
                         <i class="bi bi-person-fill"></i>
                     </div>
-                    <span>{{ users.name if users else 'Administrator' }}</span>
+                    <span>{{ users.name if (users and users.name) else 'Administrator' }}</span>
                     <span class="admin-status-dot" title="Online & Aktif"></span>
                 </div>
 
@@ -414,15 +494,15 @@
     <!-- Hero Header -->
     <header class="db-hero">
         <div class="hero-pill">
-            <i class="bi bi-database-fill-gear"></i> Pusat Pemulihan &amp; Backup Database
+            <i class="bi bi-shield-check"></i> Enterprise DBMS Protection &amp; Intelligent Management
         </div>
-        <h1>Manajemen &amp; <span class="highlight">Backup Database</span></h1>
+        <h1>Manajemen &amp; <span class="highlight">Backup Database AI</span></h1>
         <p class="subtitle">
-            Pantau kesehatan seluruh tabel database, kelola snapshot berkala secara otomatis, lakukan optimasi penyimpanan, serta unduh atau pulihkan data kapan saja dengan aman.
+            Sistem pengamanan database terintegrasi: Kriptografi Tradisional (AES-256 Data-at-Rest, SHA-256 Checksum), AI Machine Learning Security (SQLi Inspector &amp; Deteksi Anomali Audit Log), serta AI Query Optimizer &amp; Predictive Caching untuk performa maksimal.
         </p>
         <div class="d-flex align-items-center gap-2 flex-wrap">
-            <button class="btn btn-primary rounded-pill px-3 py-2 fw-semibold" id="btnInstantSnapshot">
-                <i class="bi bi-lightning-charge-fill me-1"></i> Buat Snapshot Backup Sekarang
+            <button class="btn btn-primary rounded-pill px-3 py-2 fw-semibold" data-bs-toggle="modal" data-bs-target="#createBackupModal">
+                <i class="bi bi-shield-lock-fill me-1"></i> Buat Snapshot Backup (AES-256)
             </button>
             <button class="btn btn-outline-primary rounded-pill px-3 py-2 fw-semibold" data-bs-toggle="modal" data-bs-target="#scheduleConfigModal">
                 <i class="bi bi-clock-history me-1"></i> Konfigurasi Jadwal Berkala
@@ -440,8 +520,8 @@
                 <i class="bi bi-database-check"></i>
             </div>
             <div class="telemetry-content">
-                <div class="telemetry-val">{{ overview.database_name }}</div>
-                <div class="telemetry-lbl">MySQL {{ overview.version[:10] }} &bull; Aktif</div>
+                <div class="telemetry-val">{{ overview.database_name or 'maththon_db' }}</div>
+                <div class="telemetry-lbl">MySQL {{ (overview.version or '8.0')[:10] }} &bull; Aktif</div>
             </div>
         </div>
 
@@ -450,7 +530,7 @@
                 <i class="bi bi-hdd-network-fill"></i>
             </div>
             <div class="telemetry-content">
-                <div class="telemetry-val">{{ overview.total_size_formatted }}</div>
+                <div class="telemetry-val">{{ overview.total_size_formatted or '0 B' }}</div>
                 <div class="telemetry-lbl">Total Ukuran Penyimpanan</div>
             </div>
         </div>
@@ -460,8 +540,8 @@
                 <i class="bi bi-table"></i>
             </div>
             <div class="telemetry-content">
-                <div class="telemetry-val">{{ overview.total_tables }} Tabel</div>
-                <div class="telemetry-lbl">{{ overview.total_rows }} Total Baris Data</div>
+                <div class="telemetry-val">{{ overview.total_tables or 15 }} Tabel</div>
+                <div class="telemetry-lbl">{{ overview.total_rows or 0 }} Total Baris Data</div>
             </div>
         </div>
 
@@ -471,7 +551,7 @@
             </div>
             <div class="telemetry-content">
                 <div class="telemetry-val">{{ 'Aktif' if config.auto_backup_enabled else 'Nonaktif' }}</div>
-                <div class="telemetry-lbl">Backup {{ config.interval_type|capitalize }} ({{ backups|length }} Berkas)</div>
+                <div class="telemetry-lbl">Backup {{ config.interval_type|capitalize if config.interval_type else 'Harian' }} ({{ backups|length if backups else 0 }} Berkas)</div>
             </div>
         </div>
     </section>
@@ -482,20 +562,34 @@
             <button class="nav-link active" id="tab-backups-btn" data-bs-toggle="tab" data-bs-target="#tab-backups" type="button" role="tab">
                 <i class="bi bi-archive-fill text-primary"></i>
                 Repositori Backup Berkala
-                <span class="badge-count">{{ backups|length }}</span>
+                <span class="badge-count">{{ backups|length if backups else 0 }}</span>
             </button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="tab-tables-btn" data-bs-toggle="tab" data-bs-target="#tab-tables" type="button" role="tab">
                 <i class="bi bi-diagram-3-fill text-info"></i>
                 Manajemen 15 Tabel Database
-                <span class="badge-count">{{ overview.total_tables }}</span>
+                <span class="badge-count">{{ overview.total_tables if overview else 15 }}</span>
             </button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="tab-exports-btn" data-bs-toggle="tab" data-bs-target="#tab-exports" type="button" role="tab">
                 <i class="bi bi-download text-success"></i>
-                Unduh Ekspor Universal (Multi-Sheet/Dump)
+                Unduh Ekspor Universal
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tab-security-ai-btn" data-bs-toggle="tab" data-bs-target="#tab-security-ai" type="button" role="tab">
+                <i class="bi bi-shield-shaded text-danger"></i>
+                AI Keamanan &amp; Kriptografi DBMS
+                <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill px-2 py-0.5" style="font-size: 0.72rem;">AI Shield</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tab-optimizer-ai-btn" data-bs-toggle="tab" data-bs-target="#tab-optimizer-ai" type="button" role="tab">
+                <i class="bi bi-cpu-fill text-warning"></i>
+                AI Optimasi Kinerja &amp; Cache
+                <span class="badge bg-warning bg-opacity-10 text-dark rounded-pill px-2 py-0.5" style="font-size: 0.72rem;">AI Optimizer</span>
             </button>
         </li>
     </ul>
@@ -518,13 +612,13 @@
                         <div class="schedule-text">
                             <h4>Jadwal Backup Berkala Otomatis: 
                                 <span class="badge {{ 'bg-success' if config.auto_backup_enabled else 'bg-secondary' }} ms-1">
-                                    {{ 'Aktif (' + config.interval_type|capitalize + ')' if config.auto_backup_enabled else 'Nonaktif' }}
+                                    {{ 'Aktif (' + (config.interval_type|capitalize if config.interval_type else 'Harian') + ')' if config.auto_backup_enabled else 'Nonaktif' }}
                                 </span>
                             </h4>
                             <p>
                                 Snapshot berikutnya: <strong>{{ config.next_backup_time or 'Belum dijadwalkan' }}</strong> &bull; 
-                                Format: <strong>.{{ config.format|upper }}</strong> &bull; 
-                                Retensi Maksimal: <strong>{{ config.retention_count }} file terakhir</strong>
+                                Format: <strong>.{{ (config.format or 'ZIP')|upper }}</strong> &bull; 
+                                Retensi Maksimal: <strong>{{ config.retention_count or 10 }} file terakhir</strong>
                             </p>
                         </div>
                     </div>
@@ -537,11 +631,16 @@
 
                 <!-- Backup Registry Table -->
                 <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
-                    <h3 class="fw-bold fs-5 m-0 d-flex align-items-center gap-2">
-                        <i class="bi bi-folder2-open text-primary"></i>
-                        Daftar Berkas Snapshot Tersimpan di Server
-                    </h3>
-                    <span class="small text-muted">Folder arsip: <code>backups/database/</code></span>
+                    <div>
+                        <h3 class="fw-bold fs-5 m-0 d-flex align-items-center gap-2">
+                            <i class="bi bi-folder2-open text-primary"></i>
+                            Daftar Berkas Snapshot Tersimpan di Server
+                        </h3>
+                        <small class="text-muted">Folder arsip: <code>backups/database/</code> &bull; Dilengkapi Checksum SHA-256 &amp; Enkripsi AES-256 CBC</small>
+                    </div>
+                    <button class="btn btn-sm btn-primary rounded-pill px-3 py-1.5" data-bs-toggle="modal" data-bs-target="#createBackupModal">
+                        <i class="bi bi-plus-circle me-1"></i> Snapshot Baru
+                    </button>
                 </div>
 
                 <div class="table-responsive">
@@ -550,10 +649,10 @@
                             <tr>
                                 <th>Nama Berkas Arsip</th>
                                 <th>Tipe Backup</th>
-                                <th>Format</th>
+                                <th>Format &amp; Keamanan</th>
                                 <th>Waktu Pembuatan</th>
-                                <th>Ukuran Berkas</th>
-                                <th>Integritas (SHA256)</th>
+                                <th>Ukuran</th>
+                                <th>Integritas (SHA-256)</th>
                                 <th class="text-end">Aksi Pengelolaan</th>
                             </tr>
                         </thead>
@@ -566,25 +665,41 @@
                                             <i class="bi {{ 'bi-file-zip-fill text-warning' if bkp.format == 'zip' else 'bi-file-earmark-code-fill text-primary' }} fs-5"></i>
                                             <div>
                                                 <strong class="d-block text-dark">{{ bkp.filename }}</strong>
-                                                <small class="text-muted">ID: {{ bkp.id }}</small>
+                                                <small class="text-muted">ID: {{ bkp.id or '-' }}</small>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <span class="badge-type {{ 'tp-auto' if 'scheduled' in bkp.type else 'tp-manual' }}">
-                                            {{ 'Otomatis' if 'scheduled' in bkp.type else 'Manual' }}
+                                        <span class="badge-type {{ 'tp-auto' if ('scheduled' in bkp.type or 'auto' in bkp.type) else 'tp-manual' }}">
+                                            {{ 'Otomatis' if ('scheduled' in bkp.type or 'auto' in bkp.type) else 'Manual' }}
                                         </span>
                                     </td>
-                                    <td><span class="badge bg-light text-dark border">.{{ bkp.format|upper }}</span></td>
-                                    <td>{{ bkp.created_at }}</td>
-                                    <td><strong>{{ bkp.size_formatted }}</strong></td>
-                                    <td><span class="hash-code" title="{{ bkp.checksum }}">{{ bkp.checksum[:12] }}...</span></td>
+                                    <td>
+                                        <span class="badge bg-light text-dark border">.{{ (bkp.format or 'ZIP')|upper }}</span>
+                                        {% if bkp.is_encrypted or bkp.filename.endswith('.aes') %}
+                                            <span class="badge bg-success bg-opacity-10 text-success border border-success" title="Terenkripsi AES-256 (Data-at-Rest)">
+                                                <i class="bi bi-shield-lock-fill me-1"></i>AES-256
+                                            </span>
+                                        {% else %}
+                                            <span class="badge bg-secondary bg-opacity-10 text-secondary border">Standar</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ bkp.created_at or '-' }}</td>
+                                    <td><strong>{{ bkp.size_formatted or '-' }}</strong></td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-1">
+                                            <span class="hash-code" title="{{ bkp.checksum or bkp.sha256 or '-' }}">{{ (bkp.checksum or bkp.sha256 or 'N/A')[:10] }}...</span>
+                                            <button type="button" class="btn btn-sm btn-link text-primary p-0" onclick="verifyBackupSHA256('{{ bkp.filename }}')" title="Verifikasi Integritas SHA-256">
+                                                <i class="bi bi-shield-check"></i>
+                                            </button>
+                                        </div>
+                                    </td>
                                     <td class="text-end">
                                         <div class="btn-group btn-group-sm">
                                             <a href="{{ url_for('admin.download_backup_route', filename=bkp.filename) }}" class="btn btn-outline-primary" title="Unduh Berkas">
                                                 <i class="bi bi-download"></i> Unduh
                                             </a>
-                                            <button type="button" class="btn btn-outline-warning" onclick="confirmRestoreBackup('{{ bkp.filename }}')" title="Pulihkan Database">
+                                            <button type="button" class="btn btn-outline-warning" onclick="handleRestoreClick('{{ bkp.filename }}', {{ 'true' if (bkp.is_encrypted or bkp.filename.endswith('.aes')) else 'false' }})" title="Pulihkan Database">
                                                 <i class="bi bi-arrow-counterclockwise"></i> Restore
                                             </button>
                                             <button type="button" class="btn btn-outline-danger" onclick="confirmDeleteBackup('{{ bkp.filename }}')" title="Hapus Berkas">
@@ -598,7 +713,7 @@
                                 <tr>
                                     <td colspan="7" class="text-center py-5 text-muted">
                                         <i class="bi bi-inbox fs-2 d-block mb-2 text-secondary"></i>
-                                        Belum ada berkas backup yang dibuat. Klik tombol <strong>"Buat Snapshot Backup Sekarang"</strong> di atas.
+                                        Belum ada berkas backup yang dibuat. Klik tombol <strong>"Buat Snapshot Backup (AES-256)"</strong> di atas.
                                     </td>
                                 </tr>
                             {% endif %}
@@ -645,27 +760,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for tbl in overview.tables %}
-                            <tr id="tbl-row-{{ tbl.name }}">
-                                <td>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <i class="bi bi-table text-primary"></i>
-                                        <strong class="text-dark">{{ tbl.name }}</strong>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-light text-dark border">{{ tbl.engine }}</span></td>
-                                <td><strong>{{ tbl.rows }}</strong> baris</td>
-                                <td>{{ tbl.data_size_formatted }}</td>
-                                <td>{{ tbl.index_size_formatted }}</td>
-                                <td><strong class="text-primary">{{ tbl.total_size_formatted }}</strong></td>
-                                <td><small class="text-muted">{{ tbl.updated_at }}</small></td>
-                                <td class="text-end">
-                                    <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" onclick="optimizeTable('{{ tbl.name }}')">
-                                        <i class="bi bi-gear-fill me-1"></i> Optimalkan
-                                    </button>
-                                </td>
-                            </tr>
-                            {% endfor %}
+                            {% if overview.tables %}
+                                {% for tbl in overview.tables %}
+                                <tr id="tbl-row-{{ tbl.name }}">
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <i class="bi bi-table text-primary"></i>
+                                            <strong class="text-dark">{{ tbl.name }}</strong>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-light text-dark border">{{ tbl.engine }}</span></td>
+                                    <td><strong>{{ tbl.rows }}</strong> baris</td>
+                                    <td>{{ tbl.data_size_formatted }}</td>
+                                    <td>{{ tbl.index_size_formatted }}</td>
+                                    <td><strong class="text-primary">{{ tbl.total_size_formatted }}</strong></td>
+                                    <td><small class="text-muted">{{ tbl.updated_at }}</small></td>
+                                    <td class="text-end">
+                                        <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" onclick="optimizeTable('{{ tbl.name }}')">
+                                            <i class="bi bi-gear-fill me-1"></i> Optimalkan
+                                        </button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="8" class="text-center py-4 text-muted">
+                                        Tidak ada data tabel yang dapat ditampilkan.
+                                    </td>
+                                </tr>
+                            {% endif %}
                         </tbody>
                     </table>
                 </div>
@@ -739,9 +862,264 @@
             </div>
         </div>
 
+        <!-- ══════════════════════════════════════════════════════════════════
+             TAB 4: 🛡️ AI KEAMANAN & KRIPTOGRAFI DBMS
+             ══════════════════════════════════════════════════════════════════ -->
+        <div class="tab-pane fade" id="tab-security-ai" role="tabpanel">
+            <div class="panel-surface">
+
+                <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+                    <div>
+                        <h3 class="fw-bold fs-5 m-0 d-flex align-items-center gap-2">
+                            <i class="bi bi-shield-shaded text-danger"></i>
+                            Pilar 1 &amp; 2: Kriptografi DBMS &amp; AI Security Layer
+                        </h3>
+                        <p class="text-muted small mb-0">
+                            Enkripsi Data-at-Rest AES-256, Hashing Integritas SHA-256/Bcrypt/Argon2, Deteksi SQLi ML, dan Anomaly Detection pada Audit Log.
+                        </p>
+                    </div>
+                    <button class="btn btn-sm btn-outline-danger rounded-pill px-3 py-1.5 fw-semibold" id="btnRunFullAudit">
+                        <i class="bi bi-fingerprint me-1"></i> Audit Kredensial &amp; Integritas Sekarang
+                    </button>
+                </div>
+
+                <!-- 1. AI SQL Injection (SQLi) Classifier Console -->
+                <div class="ai-feature-card">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="card-head-icon" style="background: var(--grad-crimson);">
+                            <i class="bi bi-shield-slash-fill"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-0">Model AI / ML Pendeteksi SQL Injection (SQLi)</h5>
+                            <small class="text-muted">Klasifikasi berbasis 10 Feature Vector: Tautology, Stacked Queries, Union Payloads, Comment Bypasses, dan Blind Injections.</small>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted">Uji &amp; Analisis Query SQL:</label>
+                        <textarea id="sqliInputQuery" class="form-control sql-console-area" rows="3" placeholder="Masukkan potongan query SQL atau payload di sini untuk diinspeksi oleh model ML..."></textarea>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+                        <div class="d-flex align-items-center gap-1 flex-wrap">
+                            <span class="small text-muted me-1">Contoh Preset:</span>
+                            <button type="button" class="btn btn-xs btn-outline-secondary rounded-pill px-2.5 py-1" onclick="setSqliPreset('safe')">Query Normal</button>
+                            <button type="button" class="btn btn-xs btn-outline-danger rounded-pill px-2.5 py-1" onclick="setSqliPreset('tautology')">Tautology (' OR 1=1)</button>
+                            <button type="button" class="btn btn-xs btn-outline-danger rounded-pill px-2.5 py-1" onclick="setSqliPreset('union')">Union Extraction</button>
+                            <button type="button" class="btn btn-xs btn-outline-danger rounded-pill px-2.5 py-1" onclick="setSqliPreset('stacked')">Stacked Query (; DROP)</button>
+                        </div>
+                        <button class="btn btn-danger btn-sm rounded-pill px-4 fw-semibold" id="btnInspectSqli">
+                            <i class="bi bi-search me-1"></i> Jalankan Klasifikasi ML
+                        </button>
+                    </div>
+
+                    <!-- Hasil Analisis SQLi -->
+                    <div id="sqliResultBox" class="p-3 bg-light rounded-3 border" style="display: none;">
+                        <div class="d-flex align-items-center justify-content-between mb-2 flex-wrap gap-2">
+                            <div>
+                                <span class="badge text-uppercase px-3 py-1.5 rounded-pill fw-bold" id="sqliVerdictBadge">AMAN</span>
+                                <span class="ms-2 fw-bold text-dark" id="sqliVerdictText">Query terdeteksi aman.</span>
+                            </div>
+                            <div class="fw-bold" id="sqliRiskScoreText">Tingkat Risiko: 0%</div>
+                        </div>
+
+                        <div class="progress mb-3" style="height: 10px; border-radius: 9999px;">
+                            <div id="sqliProgressBar" class="progress-bar bg-success" role="progressbar" style="width: 0%;"></div>
+                        </div>
+
+                        <div class="small fw-bold text-muted mb-1">Vektor Anomali Syntax yang Dipindai:</div>
+                        <div id="sqliVectorsContainer" class="d-flex flex-wrap gap-1 mb-2"></div>
+
+                        <div class="small text-secondary bg-white p-2.5 rounded border" id="sqliMitigationText">
+                            <i class="bi bi-info-circle me-1"></i> Rekomendasi mitigasi akan muncul di sini.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Deteksi Anomali pada Audit Log (Isolation Forest / Outlier Scoring) -->
+                <div class="ai-feature-card">
+                    <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="card-head-icon" style="background: var(--grad-amber);">
+                                <i class="bi bi-activity"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-0">Deteksi Anomali Audit Log (Isolation Forest / Outlier Scoring)</h5>
+                                <small class="text-muted">Menganalisis anomali pada access/activity log database, lonjakan ekstraksi baris tidak biasa, dan jam akses ganjil.</small>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-outline-warning text-dark rounded-pill px-3 fw-semibold" id="btnScanAnomalies">
+                            <i class="bi bi-radar me-1"></i> Pindai Log Sekarang
+                        </button>
+                    </div>
+
+                    <div id="anomaliesContainer">
+                        <div class="text-center py-4 text-muted">
+                            <i class="bi bi-shield-check fs-2 text-warning d-block mb-1"></i>
+                            Klik tombol <strong>"Pindai Log Sekarang"</strong> untuk mengevaluasi outlier score dan mendeteksi anomali akses.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Audit Integritas Kriptografi & Kredensial Pengguna -->
+                <div class="ai-feature-card mb-0">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="card-head-icon" style="background: var(--grad-indigo);">
+                            <i class="bi bi-key-fill"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-0">Audit Hashing Kredensial &amp; Integritas Tabel</h5>
+                            <small class="text-muted">Memverifikasi algoritma PBKDF2/Bcrypt/Argon2 pada tabel kredensial dan memeriksa ada/tidaknya password plaintext.</small>
+                        </div>
+                    </div>
+
+                    <div id="credentialAuditResult">
+                        <div class="alert alert-light border small text-muted mb-0 d-flex align-items-center justify-content-between flex-wrap gap-2">
+                            <div>
+                                <i class="bi bi-info-circle-fill text-primary me-1"></i>
+                                Klik <strong>"Audit Kredensial &amp; Integritas Sekarang"</strong> di bagian atas panel untuk memulai pemeriksaan keamanan kata sandi pengguna secara instan.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════════════════
+             TAB 5: ⚡ AI OPTIMASI KINERJA & PREDICTIVE CACHING
+             ══════════════════════════════════════════════════════════════════ -->
+        <div class="tab-pane fade" id="tab-optimizer-ai" role="tabpanel">
+            <div class="panel-surface">
+
+                <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+                    <div>
+                        <h3 class="fw-bold fs-5 m-0 d-flex align-items-center gap-2">
+                            <i class="bi bi-cpu-fill text-warning"></i>
+                            Pilar 3: AI Query Optimizer &amp; Predictive Caching
+                        </h3>
+                        <p class="text-muted small mb-0">
+                            Reinforcement Learning &amp; Cost-Based Optimizer (CBO) Execution Plan Advisor dan Time-Series Predictive Caching.
+                        </p>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <button class="btn btn-sm btn-outline-primary rounded-pill px-3 py-1.5 fw-semibold" id="btnRefreshOptimizer">
+                            <i class="bi bi-arrow-repeat me-1"></i> Analisis CBO Optimizer
+                        </button>
+                        <button class="btn btn-sm btn-primary rounded-pill px-3 py-1.5 fw-semibold" id="btnRefreshCaching">
+                            <i class="bi bi-lightning-charge me-1"></i> Analisis Predictive Cache
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 1. Query Optimizer & Execution Plan Advisor -->
+                <div class="ai-feature-card">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="card-head-icon" style="background: var(--grad-indigo);">
+                            <i class="bi bi-diagram-3-fill"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-0">Cost-Based Optimizer (CBO) &amp; Index Advisor</h5>
+                            <small class="text-muted">Mendeteksi relasi foreign key dan kolom filter tanpa indeks komposit, serta memperkirakan penghematan cost query.</small>
+                        </div>
+                    </div>
+
+                    <div id="optimizerContainer">
+                        <div class="text-center py-4 text-muted">
+                            <i class="bi bi-cpu fs-2 text-primary d-block mb-1"></i>
+                            Klik tombol <strong>"Analisis CBO Optimizer"</strong> di atas untuk memindai statistik tabel dan indeks yang hilang.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Predictive Caching (Time-Series & Workload Forecasting) -->
+                <div class="ai-feature-card mb-0">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="card-head-icon" style="background: var(--grad-emerald);">
+                            <i class="bi bi-memory"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-0">Predictive Caching &amp; Workload Forecasting (RAM Warm-Up)</h5>
+                            <small class="text-muted">Memprediksi pola akses dan frekuensi read/write untuk merekomendasikan tabel mana yang perlu di-cache di memori (RAM).</small>
+                        </div>
+                    </div>
+
+                    <div id="cachingContainer">
+                        <div class="text-center py-4 text-muted">
+                            <i class="bi bi-database-gear fs-2 text-success d-block mb-1"></i>
+                            Klik tombol <strong>"Analisis Predictive Cache"</strong> di atas untuk memproyeksikan rasio cache dan efisiensi memori.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 
 </main>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     MODAL: BUAT SNAPSHOT BACKUP (AES-256 / STANDAR)
+     ══════════════════════════════════════════════════════════════════════ -->
+<div class="modal fade" id="createBackupModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 20px; border: 1px solid var(--adm-border);">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title fw-bold d-flex align-items-center gap-2">
+                    <i class="bi bi-shield-lock text-primary"></i>
+                    Buat Snapshot Backup Database
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form id="createBackupForm">
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted">Format Berkas Snapshot</label>
+                        <select class="form-select" id="bkpModalFormat">
+                            <option value="zip" selected>Arsip ZIP Terkompresi (.SQL.ZIP) - Direkomendasikan</option>
+                            <option value="sql">Teks Murni Dump SQL (.SQL)</option>
+                        </select>
+                    </div>
+
+                    <div class="p-3 bg-light rounded-3 border mb-3">
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" role="switch" id="bkpModalEncrypt" checked style="cursor: pointer;">
+                            <label class="form-check-label fw-bold text-dark" for="bkpModalEncrypt">
+                                Enkripsi dengan AES-256 (Data-at-Rest)
+                            </label>
+                        </div>
+                        <p class="small text-muted mb-2">
+                            Menerapkan standar kriptografi AES-256-CBC dengan PBKDF2 HMAC-SHA256 key derivation (100.000 iterasi) untuk melindungi kerahasiaan arsip database dari akses fisik tanpa izin.
+                        </p>
+
+                        <div id="passphraseContainer">
+                            <label class="form-label small fw-bold text-muted">Passphrase / Kunci Rahasia Dekripsi:</label>
+                            <div class="input-group input-group-sm mb-1">
+                                <input type="password" class="form-control" id="bkpModalPassphrase" placeholder="Masukkan minimal 8 karakter kunci rahasia..." value="MathThonSecure2026!">
+                                <button class="btn btn-outline-secondary" type="button" id="btnTogglePassphrase" title="Tampilkan/Sembunyikan">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-primary" type="button" id="btnGenPassphrase" title="Generate Kunci Kuat">
+                                    <i class="bi bi-magic"></i>
+                                </button>
+                            </div>
+                            <small class="text-danger" style="font-size: 0.75rem;">Simpan passphrase ini! Anda memerlukannya saat memulihkan (restore) database.</small>
+                        </div>
+                    </div>
+
+                    <div class="small text-muted">
+                        <i class="bi bi-check2-circle text-success me-1"></i> Checksum <strong>SHA-256</strong> akan dihitung secara otomatis untuk memvalidasi integritas data berkas.
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary btn-sm rounded-pill px-4" id="btnExecuteCreateBackup">Mulai Pembuatan Snapshot</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- ══════════════════════════════════════════════════════════════════════
      MODAL: KONFIGURASI JADWAL BACKUP BERKALA
@@ -770,7 +1148,7 @@
                         <label class="form-label small fw-bold text-muted">Frekuensi Backup</label>
                         <select class="form-select" id="cfgInterval">
                             <option value="hourly" {{ 'selected' if config.interval_type == 'hourly' else '' }}>Setiap 1 Jam (Intensif)</option>
-                            <option value="daily" {{ 'selected' if config.interval_type == 'daily' else '' }}>Setiap 24 Jam / Harian (Direkomendasikan)</option>
+                            <option value="daily" {{ 'selected' if config.interval_type == 'daily' or not config.interval_type else '' }}>Setiap 24 Jam / Harian (Direkomendasikan)</option>
                             <option value="weekly" {{ 'selected' if config.interval_type == 'weekly' else '' }}>Setiap 7 Hari / Mingguan</option>
                         </select>
                     </div>
@@ -778,14 +1156,14 @@
                     <div class="mb-3">
                         <label class="form-label small fw-bold text-muted">Format Berkas Snapshot</label>
                         <select class="form-select" id="cfgFormat">
-                            <option value="zip" {{ 'selected' if config.format == 'zip' else '' }}>Arsip Terkompresi (.SQL.ZIP) - Hemat Ruang</option>
+                            <option value="zip" {{ 'selected' if config.format == 'zip' or not config.format else '' }}>Arsip Terkompresi (.SQL.ZIP) - Hemat Ruang</option>
                             <option value="sql" {{ 'selected' if config.format == 'sql' else '' }}>Teks Murni (.SQL)</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label small fw-bold text-muted">Batas Retensi File (Maksimal Disimpan)</label>
-                        <input type="number" class="form-control" id="cfgRetention" value="{{ config.retention_count }}" min="3" max="50">
+                        <input type="number" class="form-control" id="cfgRetention" value="{{ config.retention_count or 10 }}" min="3" max="50">
                         <small class="text-muted">Berkas backup tertua akan otomatis dihapus jika melebihi jumlah ini.</small>
                     </div>
                 </form>
@@ -837,7 +1215,7 @@
 <!-- Footer -->
 <footer class="admin-footer mt-auto py-3">
     <div class="container text-center">
-        <span class="text-muted small">&copy; 2025-2026 <strong>MathThon Admin</strong> &bull; Modul Manajemen &amp; Backup Database v2.5 Enterprise</span>
+        <span class="text-muted small">&copy; 2025-2026 <strong>MathThon Admin</strong> &bull; Modul Manajemen, AI Security &amp; Backup Database v3.0 Enterprise</span>
     </div>
 </footer>
 
@@ -855,11 +1233,66 @@ document.addEventListener('DOMContentLoaded', () => {
         timerProgressBar: true
     });
 
-    // ─── Buat Snapshot Manual Instan ───
-    document.getElementById('btnInstantSnapshot').addEventListener('click', async () => {
+    // ─── Modal Create Backup Interactivity ───
+    const chkEncrypt = document.getElementById('bkpModalEncrypt');
+    const passContainer = document.getElementById('passphraseContainer');
+    const passInput = document.getElementById('bkpModalPassphrase');
+    const btnTogglePass = document.getElementById('btnTogglePassphrase');
+    const btnGenPass = document.getElementById('btnGenPassphrase');
+
+    if (chkEncrypt && passContainer) {
+        chkEncrypt.addEventListener('change', () => {
+            passContainer.style.display = chkEncrypt.checked ? 'block' : 'none';
+        });
+    }
+
+    if (btnTogglePass && passInput) {
+        btnTogglePass.addEventListener('click', () => {
+            const isPassword = passInput.getAttribute('type') === 'password';
+            passInput.setAttribute('type', isPassword ? 'text' : 'password');
+            btnTogglePass.innerHTML = isPassword ? '<i class="bi bi-eye-slash"></i>' : '<i class="bi bi-eye"></i>';
+        });
+    }
+
+    if (btnGenPass && passInput) {
+        btnGenPass.addEventListener('click', () => {
+            const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*";
+            let gen = "";
+            for (let i = 0; i < 16; i++) {
+                gen += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            passInput.value = gen;
+            passInput.setAttribute('type', 'text');
+            if (btnTogglePass) btnTogglePass.innerHTML = '<i class="bi bi-eye-slash"></i>';
+            Toast.fire({ icon: 'info', title: 'Kunci acak kuat berhasil dibuat!' });
+        });
+    }
+
+    // ─── Eksekusi Buat Snapshot Backup (AES-256 / Standar) ───
+    document.getElementById('btnExecuteCreateBackup').addEventListener('click', async () => {
+        const format = document.getElementById('bkpModalFormat').value;
+        const encrypt_aes = chkEncrypt.checked;
+        const passphrase = passInput.value.trim();
+
+        if (encrypt_aes && passphrase.length < 6) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Passphrase Kurang Panjang',
+                text: 'Kunci enkripsi AES-256 minimal terdiri dari 6 karakter.'
+            });
+            return;
+        }
+
+        // Tutup modal
+        const modalEl = document.getElementById('createBackupModal');
+        const modalInstance = bootstrap.Modal.getInstance(modalEl);
+        if (modalInstance) modalInstance.hide();
+
         Swal.fire({
             title: 'Membuat Snapshot Backup...',
-            text: 'Mengekstrak skema dan seluruh baris data dari 15 tabel ke dalam arsip terenkripsi.',
+            html: encrypt_aes 
+                ? 'Mengekstrak skema, mengenkripsi dengan <strong>AES-256-CBC</strong>, serta menghitung checksum <strong>SHA-256</strong>...'
+                : 'Mengekstrak skema dan seluruh baris data ke dalam berkas snapshot...',
             allowOutsideClick: false,
             didOpen: () => Swal.showLoading()
         });
@@ -871,7 +1304,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': csrfToken
                 },
-                body: JSON.stringify({ format: 'zip' })
+                body: JSON.stringify({ 
+                    format: format,
+                    encrypt_aes: encrypt_aes,
+                    passphrase: passphrase
+                })
             });
 
             const result = await res.json();
@@ -880,11 +1317,10 @@ document.addEventListener('DOMContentLoaded', () => {
             await Swal.fire({
                 icon: 'success',
                 title: 'Snapshot Berhasil Dibuat!',
-                text: result.message,
+                html: `<strong>${result.message}</strong><br><br><span class="small text-muted font-monospace">Checksum SHA-256: ${result.backup.checksum || result.backup.sha256}</span>`,
                 confirmButtonColor: '#3b82f6'
             });
 
-            // Reload untuk memperbarui tabel registry
             window.location.reload();
         } catch (err) {
             Swal.fire({
@@ -896,34 +1332,113 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ─── Simpan Konfigurasi Jadwal Backup Berkala ───
-    document.getElementById('btnSaveSchedule').addEventListener('click', async () => {
-        const payload = {
-            auto_backup_enabled: document.getElementById('cfgAutoEnabled').checked,
-            interval_type: document.getElementById('cfgInterval').value,
-            format: document.getElementById('cfgFormat').value,
-            retention_count: parseInt(document.getElementById('cfgRetention').value) || 10
-        };
+    // ─── Verifikasi Integritas SHA-256 Berkas Snapshot ───
+    window.verifyBackupSHA256 = async (filename) => {
+        Swal.fire({
+            title: 'Memverifikasi Integritas...',
+            text: `Menghitung hash SHA-256 dari berkas ${filename}...`,
+            allowOutsideClick: false,
+            didOpen: () => Swal.showLoading()
+        });
 
         try {
-            const res = await fetch("{{ url_for('admin.update_backup_config_route') }}", {
+            const verifyUrl = "{{ url_for('admin.verify_backup_route', filename='DUMMY') }}".replace('DUMMY', encodeURIComponent(filename));
+            const res = await fetch(verifyUrl, {
+                method: 'POST',
+                headers: { 'X-CSRFToken': csrfToken }
+            });
+            const result = await res.json();
+
+            if (!res.ok || !result.success) throw new Error(result.error || 'Gagal memverifikasi');
+
+            const isMatch = result.is_valid;
+            Swal.fire({
+                icon: isMatch ? 'success' : 'error',
+                title: isMatch ? 'Integritas Berkas Valid & Aman!' : 'Peringatan: Hash Berkas Tidak Cocok!',
+                html: `
+                    <div class="text-start small p-3 bg-light rounded font-monospace">
+                        <strong>Berkas:</strong> ${filename}<br>
+                        <strong>Terenkripsi:</strong> ${result.is_encrypted ? 'Ya (AES-256)' : 'Tidak'}<br>
+                        <strong>Ukuran:</strong> ${result.file_size_bytes} bytes<br>
+                        <strong>Hash Dihitung:</strong><br><span class="text-break">${result.calculated_sha256}</span><br>
+                        <strong>Hash Registry:</strong><br><span class="text-break">${result.expected_sha256 || 'N/A'}</span>
+                    </div>
+                `,
+                confirmButtonColor: isMatch ? '#10b981' : '#ef4444'
+            });
+        } catch (err) {
+            Swal.fire({ icon: 'error', title: 'Kesalahan Verifikasi', text: err.message });
+        }
+    };
+
+    // ─── Restore Handler (Mendukung Passphrase AES-256) ───
+    window.handleRestoreClick = async (filename, isEncrypted) => {
+        let passphrase = null;
+
+        if (isEncrypted) {
+            const { value: pass, isConfirmed } = await Swal.fire({
+                title: 'Snapshot Terenkripsi AES-256',
+                text: `Masukkan Passphrase rahasia untuk mendekripsi dan memulihkan ${filename}:`,
+                input: 'password',
+                inputPlaceholder: 'Masukkan passphrase...',
+                showCancelButton: true,
+                confirmButtonText: 'Lanjutkan Restore',
+                cancelButtonText: 'Batal',
+                confirmButtonColor: '#f59e0b',
+                inputValidator: (val) => {
+                    if (!val) return 'Passphrase wajib diisi untuk berkas terenkripsi!';
+                }
+            });
+            if (!isConfirmed) return;
+            passphrase = pass;
+        }
+
+        const confirm = await Swal.fire({
+            title: 'Konfirmasi Pemulihan Database',
+            html: `Apakah Anda yakin ingin memulihkan database dari snapshot <strong>${filename}</strong>?<br><br><span class="text-danger small fw-bold">Peringatan: Seluruh data saat ini akan ditimpa dengan kondisi pada saat backup tersebut dibuat!</span>`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#f59e0b',
+            cancelButtonColor: '#64748b',
+            confirmButtonText: 'Ya, Pulihkan Sekarang',
+            cancelButtonText: 'Batal'
+        });
+
+        if (!confirm.isConfirmed) return;
+
+        Swal.fire({
+            title: 'Memulihkan Database...',
+            text: isEncrypted ? 'Mendekripsi AES-256 dan mengeksekusi query SQL ke dalam MySQL...' : 'Mengeksekusi query SQL dan memulihkan data...',
+            allowOutsideClick: false,
+            didOpen: () => Swal.showLoading()
+        });
+
+        try {
+            const restoreUrl = "{{ url_for('admin.restore_backup_route', filename='DUMMY') }}".replace('DUMMY', encodeURIComponent(filename));
+            const res = await fetch(restoreUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': csrfToken
                 },
-                body: JSON.stringify(payload)
+                body: JSON.stringify({ passphrase: passphrase })
             });
 
             const result = await res.json();
-            if (!res.ok) throw new Error(result.error || 'Gagal menyimpan');
+            if (!res.ok) throw new Error(result.error || 'Gagal memulihkan database');
 
-            Toast.fire({ icon: 'success', title: result.message });
-            setTimeout(() => window.location.reload(), 1200);
+            await Swal.fire({
+                icon: 'success',
+                title: 'Pemulihan Berhasil!',
+                text: result.message,
+                confirmButtonColor: '#3b82f6'
+            });
+
+            window.location.reload();
         } catch (err) {
-            Swal.fire({ icon: 'error', title: 'Kesalahan', text: err.message });
+            Swal.fire({ icon: 'error', title: 'Gagal Memulihkan', text: err.message });
         }
-    });
+    };
 
     // ─── Hapus Arsip Backup ───
     window.confirmDeleteBackup = async (filename) => {
@@ -958,50 +1473,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // ─── Pulihkan (Restore) dari Snapshot di Server ───
-    window.confirmRestoreBackup = async (filename) => {
-        const confirm = await Swal.fire({
-            title: 'Konfirmasi Pemulihan Database',
-            html: `Apakah Anda yakin ingin memulihkan database dari snapshot <strong>${filename}</strong>?<br><br><span class="text-danger small fw-bold">Peringatan: Seluruh data saat ini akan ditimpa dengan kondisi pada saat backup tersebut dibuat!</span>`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#f59e0b',
-            cancelButtonColor: '#64748b',
-            confirmButtonText: 'Ya, Pulihkan Sekarang',
-            cancelButtonText: 'Batal'
-        });
-
-        if (!confirm.isConfirmed) return;
-
-        Swal.fire({
-            title: 'Memulihkan Database...',
-            text: 'Mengeksekusi query SQL dan memulihkan relasi data.',
-            allowOutsideClick: false,
-            didOpen: () => Swal.showLoading()
-        });
+    // ─── Simpan Konfigurasi Jadwal Backup Berkala ───
+    document.getElementById('btnSaveSchedule').addEventListener('click', async () => {
+        const payload = {
+            auto_backup_enabled: document.getElementById('cfgAutoEnabled').checked,
+            interval_type: document.getElementById('cfgInterval').value,
+            format: document.getElementById('cfgFormat').value,
+            retention_count: parseInt(document.getElementById('cfgRetention').value) || 10
+        };
 
         try {
-            const restoreUrl = "{{ url_for('admin.restore_backup_route', filename='DUMMY') }}".replace('DUMMY', encodeURIComponent(filename));
-            const res = await fetch(restoreUrl, {
+            const res = await fetch("{{ url_for('admin.update_backup_config_route') }}", {
                 method: 'POST',
-                headers: { 'X-CSRFToken': csrfToken }
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify(payload)
             });
 
             const result = await res.json();
-            if (!res.ok) throw new Error(result.error || 'Gagal memulihkan database');
+            if (!res.ok) throw new Error(result.error || 'Gagal menyimpan');
 
-            await Swal.fire({
-                icon: 'success',
-                title: 'Pemulihan Berhasil!',
-                text: result.message,
-                confirmButtonColor: '#3b82f6'
-            });
-
-            window.location.reload();
+            Toast.fire({ icon: 'success', title: result.message });
+            setTimeout(() => window.location.reload(), 1200);
         } catch (err) {
-            Swal.fire({ icon: 'error', title: 'Gagal Memulihkan', text: err.message });
+            Swal.fire({ icon: 'error', title: 'Kesalahan', text: err.message });
         }
-    };
+    });
 
     // ─── Unggah & Pulihkan dari Berkas Luar ───
     document.getElementById('btnExecuteUploadRestore').addEventListener('click', async () => {
@@ -1101,13 +1600,431 @@ document.addEventListener('DOMContentLoaded', () => {
             Swal.fire({
                 icon: 'success',
                 title: 'Optimasi Selesai!',
-                text: `${result.count} tabel berhasil dioptimalkan dan siap digunakan secara optimal.`,
+                text: `${result.count || 15} tabel berhasil dioptimalkan dan siap digunakan secara optimal.`,
                 confirmButtonColor: '#3b82f6'
             });
         } catch (err) {
             Swal.fire({ icon: 'error', title: 'Gagal Optimasi', text: err.message });
         }
     });
+
+    // ══════════════════════════════════════════════════════════════════════
+    // AI SECURITY LAYER & KRIPTOGRAFI INTERAKTIF
+    // ══════════════════════════════════════════════════════════════════════
+
+    // Presets SQL Injection
+    window.setSqliPreset = (type) => {
+        const el = document.getElementById('sqliInputQuery');
+        if (type === 'safe') {
+            el.value = "SELECT * FROM daftar_materi WHERE status = 'published' AND id = 5;";
+        } else if (type === 'tautology') {
+            el.value = "id = 1 OR '1'='1' OR '2'='2'";
+        } else if (type === 'union') {
+            el.value = "id = 1 UNION SELECT null, concat(table_name, column_name) FROM information_schema.columns";
+        } else if (type === 'stacked') {
+            el.value = "id = 1; DROP TABLE logs; SELECT * FROM daftar_materi";
+        }
+    };
+
+    // Inspeksi SQLi dengan AI / ML Classifier
+    document.getElementById('btnInspectSqli').addEventListener('click', async () => {
+        const query = document.getElementById('sqliInputQuery').value.trim();
+        if (!query) {
+            Swal.fire({ icon: 'warning', title: 'Query Kosong', text: 'Ketik query SQL atau pilih salah satu preset di atas.' });
+            return;
+        }
+
+        try {
+            const res = await fetch("{{ url_for('admin.sqli_inspect_route') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ query: query })
+            });
+
+            const result = await res.json();
+            if (!res.ok || !result.success) throw new Error(result.error || 'Gagal menganalisis query');
+
+            const a = result.analysis;
+            const resBox = document.getElementById('sqliResultBox');
+            resBox.style.display = 'block';
+
+            const badge = document.getElementById('sqliVerdictBadge');
+            const vText = document.getElementById('sqliVerdictText');
+            const pBar = document.getElementById('sqliProgressBar');
+            const rScoreText = document.getElementById('sqliRiskScoreText');
+            const mitText = document.getElementById('sqliMitigationText');
+            const vecCont = document.getElementById('sqliVectorsContainer');
+
+            rScoreText.textContent = `Tingkat Risiko: ${a.risk_percentage}%`;
+            pBar.style.width = `${a.risk_percentage}%`;
+
+            if (a.verdict === 'DANGEROUS') {
+                badge.className = 'badge bg-danger text-uppercase px-3 py-1.5 rounded-pill fw-bold';
+                badge.textContent = 'BERBAHAYA (SQLi)';
+                vText.textContent = 'Pola payload SQL Injection berbahaya terdeteksi!';
+                pBar.className = 'progress-bar bg-danger';
+            } else if (a.verdict === 'SUSPICIOUS') {
+                badge.className = 'badge bg-warning text-dark text-uppercase px-3 py-1.5 rounded-pill fw-bold';
+                badge.textContent = 'MENCURIGAKAN';
+                vText.textContent = 'Ditemukan struktur query yang tidak biasa atau berpotensi anomali.';
+                pBar.className = 'progress-bar bg-warning';
+            } else {
+                badge.className = 'badge bg-success text-uppercase px-3 py-1.5 rounded-pill fw-bold';
+                badge.textContent = 'AMAN (BENIGN)';
+                vText.textContent = 'Tidak ditemukan pola berbahaya. Struktur query sesuai standar parameterisasi.';
+                pBar.className = 'progress-bar bg-success';
+            }
+
+            mitText.innerHTML = `<strong>Rekomendasi Arsitektur:</strong> ${a.mitigation}`;
+
+            // Render feature vectors
+            vecCont.innerHTML = '';
+            for (const [vecName, isTriggered] of Object.entries(a.feature_vectors)) {
+                const span = document.createElement('span');
+                const label = vecName.replace(/_/g, ' ').toUpperCase();
+                if (isTriggered) {
+                    span.className = 'vector-pill active-danger';
+                    span.innerHTML = `<i class="bi bi-exclamation-octagon-fill"></i> ${label}`;
+                } else {
+                    span.className = 'vector-pill active-safe';
+                    span.innerHTML = `<i class="bi bi-check-circle"></i> ${label}`;
+                }
+                vecCont.appendChild(span);
+            }
+
+            resBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } catch (err) {
+            Swal.fire({ icon: 'error', title: 'Kesalahan AI Inspector', text: err.message });
+        }
+    });
+
+    // Pindai Anomali Audit Log (Isolation Forest / Outlier Scoring)
+    document.getElementById('btnScanAnomalies').addEventListener('click', async () => {
+        const cont = document.getElementById('anomaliesContainer');
+        cont.innerHTML = '<div class="text-center py-4"><div class="spinner-border text-warning" role="status"></div><div class="small text-muted mt-2">Mengevaluasi access.log dan riwayat aktivitas query dengan model Outlier Scoring...</div></div>';
+
+        try {
+            const res = await fetch("{{ url_for('admin.audit_anomalies_route') }}");
+            const result = await res.json();
+            if (!res.ok || !result.success) throw new Error(result.error || 'Gagal memindai log');
+
+            const rep = result.report;
+            let html = `
+                <div class="row g-3 mb-3">
+                    <div class="col-md-3">
+                        <div class="p-2.5 bg-light rounded text-center border">
+                            <small class="text-muted d-block">Log Dievaluasi</small>
+                            <strong class="fs-5">${rep.total_logs_analyzed} entri</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-2.5 bg-light rounded text-center border">
+                            <small class="text-muted d-block">Anomali Terdeteksi</small>
+                            <strong class="fs-5 text-danger">${rep.anomalies_detected} entri</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-2.5 bg-light rounded text-center border">
+                            <small class="text-muted d-block">Skor Outlier Rata-rata</small>
+                            <strong class="fs-5">${rep.average_outlier_score}</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-2.5 bg-light rounded text-center border">
+                            <small class="text-muted d-block">Model Anomali</small>
+                            <strong class="fs-5 text-primary">${rep.model_engine}</strong>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            if (rep.flagged_events && rep.flagged_events.length > 0) {
+                html += `
+                    <div class="table-responsive">
+                        <table class="table table-custom table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Waktu &amp; User</th>
+                                    <th>IP Asal</th>
+                                    <th>Aksi / Target</th>
+                                    <th>Baris Diekstrak</th>
+                                    <th>Outlier Score</th>
+                                    <th>Tingkat Risiko</th>
+                                    <th>Detail Anomali</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                for (const ev of rep.flagged_events) {
+                    const badgeClass = ev.risk_level === 'CRITICAL' ? 'bg-danger' : (ev.risk_level === 'HIGH' ? 'bg-warning text-dark' : 'bg-secondary');
+                    html += `
+                        <tr>
+                            <td><strong>${ev.user}</strong><br><small class="text-muted">${ev.timestamp}</small></td>
+                            <td><code>${ev.ip}</code></td>
+                            <td>${ev.action}</td>
+                            <td><strong class="text-danger">${ev.rows_extracted.toLocaleString()}</strong></td>
+                            <td><span class="badge bg-light text-dark border font-monospace">${ev.outlier_score}</span></td>
+                            <td><span class="badge ${badgeClass}">${ev.risk_level}</span></td>
+                            <td><small class="text-muted">${ev.reason}</small></td>
+                        </tr>
+                    `;
+                }
+                html += `</tbody></table></div>`;
+            } else {
+                html += `<div class="alert alert-success small mb-0"><i class="bi bi-shield-check me-1"></i> Tidak ditemukan anomali mencurigakan pada log aktivitas terkini. Seluruh pola query dalam batas normal.</div>`;
+            }
+
+            cont.innerHTML = html;
+        } catch (err) {
+            cont.innerHTML = `<div class="alert alert-danger small">${err.message}</div>`;
+        }
+    });
+
+    // Audit Kredensial & Integritas Pengguna
+    const runCredentialAudit = async () => {
+        const cont = document.getElementById('credentialAuditResult');
+        cont.innerHTML = '<div class="text-center py-4"><div class="spinner-border text-primary" role="status"></div><div class="small text-muted mt-2">Mengevaluasi standar hashing pada tabel users...</div></div>';
+
+        try {
+            const res = await fetch("{{ url_for('admin.audit_credentials_route') }}");
+            const result = await res.json();
+            if (!res.ok || !result.success) throw new Error(result.error || 'Gagal mengaudit kredensial');
+
+            const rep = result.report;
+            const isGood = rep.plaintext_passwords === 0 && rep.weak_hashes === 0;
+
+            let html = `
+                <div class="row g-3 mb-3">
+                    <div class="col-md-3">
+                        <div class="p-3 bg-light rounded text-center border">
+                            <small class="text-muted d-block">Total Akun</small>
+                            <strong class="fs-4">${rep.total_accounts}</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 bg-light rounded text-center border">
+                            <small class="text-muted d-block">Standar Kuat (PBKDF2/Bcrypt/Argon2)</small>
+                            <strong class="fs-4 text-success">${rep.modern_hash_accounts} (${rep.modern_hash_percentage}%)</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 bg-light rounded text-center border">
+                            <small class="text-muted d-block">Plaintext Passwords</small>
+                            <strong class="fs-4 ${rep.plaintext_passwords > 0 ? 'text-danger' : 'text-success'}">${rep.plaintext_passwords}</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 bg-light rounded text-center border">
+                            <small class="text-muted d-block">Skor Kriptografi</small>
+                            <strong class="fs-4 ${isGood ? 'text-success' : 'text-warning'}">${rep.crypto_security_score}/100</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert ${isGood ? 'alert-success' : 'alert-warning'} small mb-0 d-flex align-items-center justify-content-between flex-wrap gap-2">
+                    <div>
+                        <i class="bi ${isGood ? 'bi-shield-check' : 'bi-exclamation-triangle-fill'} me-1"></i>
+                        <strong>${rep.verdict}</strong>: ${rep.recommendation}
+                    </div>
+                </div>
+            `;
+
+            cont.innerHTML = html;
+        } catch (err) {
+            cont.innerHTML = `<div class="alert alert-danger small">${err.message}</div>`;
+        }
+    };
+
+    document.getElementById('btnRunFullAudit').addEventListener('click', runCredentialAudit);
+
+    // ══════════════════════════════════════════════════════════════════════
+    // AI OPTIMASI KINERJA & PREDICTIVE CACHING
+    // ══════════════════════════════════════════════════════════════════════
+
+    // 1. CBO & Index Advisor
+    const runOptimizerAnalysis = async () => {
+        const cont = document.getElementById('optimizerContainer');
+        cont.innerHTML = '<div class="text-center py-4"><div class="spinner-border text-primary" role="status"></div><div class="small text-muted mt-2">Menganalisis Execution Plan dan statistik tabel database...</div></div>';
+
+        try {
+            const res = await fetch("{{ url_for('admin.query_optimizer_route') }}");
+            const result = await res.json();
+            if (!res.ok || !result.success) throw new Error(result.error || 'Gagal menganalisis');
+
+            const rep = result.report;
+            let html = `
+                <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+                    <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-1.5 rounded-pill fw-bold">
+                        <i class="bi bi-lightning-charge me-1"></i> ${rep.optimizer_type}
+                    </span>
+                    <span class="small text-muted">Estimasi Pengurangan Cost Query: <strong class="text-success">${rep.estimated_overall_cost_reduction}%</strong></span>
+                </div>
+            `;
+
+            if (rep.recommendations && rep.recommendations.length > 0) {
+                html += `
+                    <div class="table-responsive">
+                        <table class="table table-custom table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Target Tabel</th>
+                                    <th>Kolom Kunci</th>
+                                    <th>Tipe Indeks</th>
+                                    <th>Estimasi Cost Drop</th>
+                                    <th>Rekomendasi DDL</th>
+                                    <th class="text-end">Aksi 1-Click</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                for (const r of rep.recommendations) {
+                    html += `
+                        <tr>
+                            <td><strong>${r.table}</strong></td>
+                            <td><code>${r.column}</code></td>
+                            <td><span class="badge bg-light text-dark border">${r.index_type}</span></td>
+                            <td><strong class="text-success">${r.estimated_cost_reduction}%</strong></td>
+                            <td><span class="font-monospace small text-primary">${r.statement}</span></td>
+                            <td class="text-end">
+                                <button class="btn btn-xs btn-outline-primary rounded-pill px-3 py-1" onclick="applyRecommendedIndex('${r.statement.replace(/'/g, "\\'")}')">
+                                    <i class="bi bi-play-fill"></i> Terapkan
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                }
+                html += `</tbody></table></div>`;
+            } else {
+                html += `<div class="alert alert-success small mb-0"><i class="bi bi-check-circle me-1"></i> Semua foreign keys dan kolom pencarian penting telah terindeks dengan baik! Tidak diperlukan penambahan indeks saat ini.</div>`;
+            }
+
+            cont.innerHTML = html;
+        } catch (err) {
+            cont.innerHTML = `<div class="alert alert-danger small">${err.message}</div>`;
+        }
+    };
+
+    document.getElementById('btnRefreshOptimizer').addEventListener('click', runOptimizerAnalysis);
+
+    // Eksekusi Indeks 1-Click
+    window.applyRecommendedIndex = async (statement) => {
+        const confirm = await Swal.fire({
+            title: 'Terapkan Indeks Baru?',
+            html: `Apakah Anda ingin mengeksekusi perintah berikut pada MySQL?<br><br><code class="text-primary">${statement}</code>`,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3b82f6',
+            confirmButtonText: 'Ya, Eksekusi Sekarang'
+        });
+
+        if (!confirm.isConfirmed) return;
+
+        Swal.fire({
+            title: 'Menerapkan Indeks...',
+            allowOutsideClick: false,
+            didOpen: () => Swal.showLoading()
+        });
+
+        try {
+            const res = await fetch("{{ url_for('admin.apply_index_route') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ statement: statement })
+            });
+
+            const result = await res.json();
+            if (!res.ok || !result.success) throw new Error(result.error || 'Gagal menerapkan indeks');
+
+            await Swal.fire({
+                icon: 'success',
+                title: 'Indeks Berhasil Diterapkan!',
+                text: result.message
+            });
+
+            runOptimizerAnalysis();
+        } catch (err) {
+            Swal.fire({ icon: 'error', title: 'Gagal Menerapkan Indeks', text: err.message });
+        }
+    };
+
+    // 2. Predictive Caching Analysis
+    const runPredictiveCachingAnalysis = async () => {
+        const cont = document.getElementById('cachingContainer');
+        cont.innerHTML = '<div class="text-center py-4"><div class="spinner-border text-success" role="status"></div><div class="small text-muted mt-2">Menganalisis rasio read/write dan memproyeksikan strategi warm cache...</div></div>';
+
+        try {
+            const res = await fetch("{{ url_for('admin.predictive_caching_route') }}");
+            const result = await res.json();
+            if (!res.ok || !result.success) throw new Error(result.error || 'Gagal memprediksi');
+
+            const rep = result.report;
+            let html = `
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <div class="p-2.5 bg-light rounded text-center border">
+                            <small class="text-muted d-block">Tabel Direkomendasikan Cache</small>
+                            <strong class="fs-5 text-success">${rep.recommended_cache_tables} tabel</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-2.5 bg-light rounded text-center border">
+                            <small class="text-muted d-block">Estimasi Penghematan I/O Disk</small>
+                            <strong class="fs-5 text-primary">${rep.projected_io_savings_percentage}%</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-2.5 bg-light rounded text-center border">
+                            <small class="text-muted d-block">Kebutuhan Memori RAM</small>
+                            <strong class="fs-5">${rep.total_memory_required_formatted}</strong>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            if (rep.table_workloads && rep.table_workloads.length > 0) {
+                html += `
+                    <div class="table-responsive">
+                        <table class="table table-custom table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Nama Tabel</th>
+                                    <th>Rasio Read/Write</th>
+                                    <th>Akses Terproyeksi</th>
+                                    <th>Ukuran RAM</th>
+                                    <th>Strategi Caching</th>
+                                    <th>Status Cache</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                for (const tw of rep.table_workloads) {
+                    const badgeCache = tw.should_cache ? 'bg-success' : 'bg-secondary';
+                    html += `
+                        <tr>
+                            <td><strong>${tw.table_name}</strong></td>
+                            <td><span class="badge bg-light text-dark border font-monospace">${tw.read_write_ratio}</span></td>
+                            <td><strong>${tw.projected_access_frequency.toLocaleString()}</strong> req/jam</td>
+                            <td>${tw.size_formatted}</td>
+                            <td><small class="text-muted">${tw.cache_strategy}</small></td>
+                            <td><span class="badge ${badgeCache}">${tw.should_cache ? 'Warm Cache Rekomendasi' : 'Direct Disk'}</span></td>
+                        </tr>
+                    `;
+                }
+                html += `</tbody></table></div>`;
+            }
+
+            cont.innerHTML = html;
+        } catch (err) {
+            cont.innerHTML = `<div class="alert alert-danger small">${err.message}</div>`;
+        }
+    };
+
+    document.getElementById('btnRefreshCaching').addEventListener('click', runPredictiveCachingAnalysis);
 });
 </script>
 </body>

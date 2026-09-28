@@ -184,7 +184,7 @@ def validate_file_safety(file):
 
 def security_middleware():
     """Saring setiap request untuk aktivitas berbahaya"""
-    if request.path.startswith('/static'):
+    if request.path.startswith('/static') or request.path.startswith('/admin/database/ai/sqli-inspect'):
         return None
 
     # 1. Deteksi SQL Injection
