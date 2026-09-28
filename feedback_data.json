@@ -267,11 +267,12 @@
         },
         "id": "7e999959-0e6e-4dd0-ac5d-58d2d3053503",
         "workflow": {
-            "status": "baru",
+            "status": "dikerjakan",
             "priority": "tinggi",
-            "admin_response": "",
-            "action_plan": "",
-            "updated_at": null
+            "admin_response": "Halo Kak Erantus P. Sam, terima kasih atas feedback yang telah anda berikan. Semoga segala keluh kesahnya akan segera ditanggapi, ditindaklanjutkan dan segera dieksekusi, Terima Kasih.",
+            "action_plan": "Perbaiki beberapa kode CSS yang belum dimasukkan sistem responsivitas yang tinggi untuk kompatibilitas pada beberapa perangkat lainnya",
+            "updated_at": "2026-09-29 05:52:15",
+            "updated_by": "Administrator"
         }
     },
     {
