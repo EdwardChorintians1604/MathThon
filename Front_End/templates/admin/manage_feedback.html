@@ -3,558 +3,1722 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Kelola Feedback</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <title>MathThon Admin | Kelola Feedback Pengguna</title>
+
+    <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+
+    <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5.3.2 & Icons 1.11.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!-- SweetAlert2 for modern interactive alerts -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <!-- MathThon Unified Admin Dashboard CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css_for_dashboard_admin.css') }}">
+
     <style>
+        /* ══════════════════════════════════════════════════════════════════════
+           ENHANCED FEEDBACK DASHBOARD DESIGN SYSTEM
+           ══════════════════════════════════════════════════════════════════════ */
         :root {
-            --bg-deep: #0a0d14;
-            --bg-card: rgba(255,255,255,0.04);
-            --bg-card-hover: rgba(255,255,255,0.07);
-            --border: rgba(255,255,255,0.08);
-            --border-glow: rgba(99,179,237,0.3);
-            --accent-blue: #63b3ed;
-            --accent-teal: #4fd1c5;
-            --accent-purple: #b794f4;
-            --text-primary: #e2e8f0;
-            --text-secondary: #718096;
-            --text-muted: #4a5568;
-            --success: #68d391;
-            --warning: #f6ad55;
-            --danger: #fc8181;
+            --fb-primary: #3b82f6;
+            --fb-indigo: #6366f1;
+            --fb-emerald: #10b981;
+            --fb-amber: #f59e0b;
+            --fb-crimson: #ef4444;
+            --fb-violet: #8b5cf6;
+            --fb-cyan: #06b6d4;
+            --fb-card-bg: rgba(255, 255, 255, 0.92);
+            --fb-card-border: #e2e8f0;
+            --fb-card-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
+            --fb-card-shadow-hover: 0 20px 30px -10px rgba(15, 23, 42, 0.10), 0 10px 15px -5px rgba(15, 23, 42, 0.04);
         }
 
-        * { box-sizing: border-box; }
-
-        body {
-            background-color: var(--bg-deep);
-            font-family: 'DM Sans', sans-serif;
-            color: var(--text-primary);
+        body.admin-dashboard-body {
+            font-family: var(--adm-font-sans);
+            background-color: var(--adm-bg);
+            color: var(--adm-text-main);
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
-        /* ─── Animated mesh background ─── */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 80% 60% at 20% 0%, rgba(99,179,237,0.07) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 50% at 80% 100%, rgba(183,148,244,0.06) 0%, transparent 60%),
-                radial-gradient(ellipse 40% 40% at 50% 50%, rgba(79,209,197,0.04) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* ─── Navbar ─── */
-        .navbar {
-            background-color: rgba(10, 13, 20, 0.85) !important;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border);
-            box-shadow: 0 4px 20px rgba(0,0,0,.35);
+        /* ─── Hero Section ─── */
+        .feedback-hero {
+            padding: 2.25rem 0 1.5rem;
             position: relative;
-            z-index: 100;
         }
-        .navbar-brand { font-weight: 700; color: #ffffff !important; font-family: 'Syne', sans-serif; }
-        .nav-link { color: #94a3b8 !important; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
-        .nav-link:hover, .nav-link.active { color: #63b3ed !important; }
-
-        /* ─── Page container ─── */
-        .container { position: relative; z-index: 1; }
-
-        /* ─── Page header ─── */
-        .page-header {
-            padding: 2.5rem 0 1.5rem;
-        }
-        .page-header .overline {
-            font-family: 'Syne', sans-serif;
-            font-size: 0.7rem;
+        .feedback-hero .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #eff6ff;
+            color: var(--adm-primary);
+            border: 1px solid #bfdbfe;
+            border-radius: 9999px;
+            padding: 0.35rem 1rem;
+            font-size: 0.78rem;
             font-weight: 700;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
-            color: var(--accent-teal);
+            margin-bottom: 0.85rem;
+        }
+        .feedback-hero h1 {
+            font-family: var(--adm-font-display);
+            font-size: clamp(1.85rem, 3.5vw, 2.65rem);
+            font-weight: 800;
+            color: var(--adm-text-main);
+            line-height: 1.2;
             margin-bottom: 0.5rem;
         }
-        .page-header h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(1.8rem, 4vw, 2.6rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, #e2e8f0 30%, var(--accent-blue));
+        .feedback-hero h1 .highlight {
+            background: var(--grad-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin: 0 0 0.4rem;
-            line-height: 1.15;
         }
-        .page-header .subtitle {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            font-weight: 300;
+        .feedback-hero .subtitle {
+            font-size: 0.98rem;
+            color: var(--adm-text-muted);
+            max-width: 720px;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
 
-        /* ─── Stats bar ─── */
-        .stats-bar {
-            display: flex;
-            gap: 1rem;
+        /* ─── Metric KPI Cards ─── */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.1rem;
             margin-bottom: 2rem;
-            flex-wrap: wrap;
         }
-        .stat-chip {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 50px;
-            padding: 0.45rem 1.1rem;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
+        @media (max-width: 992px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 576px) { .kpi-grid { grid-template-columns: 1fr; } }
+
+        .kpi-card {
+            background: var(--fb-card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--fb-card-border);
+            border-radius: var(--radius-lg);
+            padding: 1.35rem;
+            box-shadow: var(--fb-card-shadow);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
-            backdrop-filter: blur(10px);
+            gap: 1.1rem;
         }
-        .stat-chip .dot {
-            width: 7px; height: 7px;
-            border-radius: 50%;
+        .kpi-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--fb-card-shadow-hover);
+            border-color: #cbd5e1;
         }
-        .stat-chip .dot.blue { background: var(--accent-blue); box-shadow: 0 0 6px var(--accent-blue); }
-        .stat-chip .dot.teal { background: var(--accent-teal); box-shadow: 0 0 6px var(--accent-teal); }
-
-        /* ─── Loading ─── */
-        #loading {
-            text-align: center;
-            padding: 4rem 0;
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; bottom: 0;
+            width: 4px;
+            background: var(--kpi-accent, var(--grad-primary));
         }
-        .custom-spinner {
-            width: 44px; height: 44px;
-            border: 2px solid var(--border);
-            border-top-color: var(--accent-blue);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 1rem;
+        .kpi-icon-box {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.45rem;
+            color: #ffffff;
+            background: var(--kpi-accent, var(--grad-primary));
+            box-shadow: 0 8px 16px -4px rgba(0,0,0,0.12);
+            flex-shrink: 0;
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        #loading p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+        .kpi-content .kpi-number {
+            font-family: var(--adm-font-display);
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: var(--adm-text-main);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+        .kpi-content .kpi-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--adm-text-muted);
+            text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
-        /* ─── Accordion ─── */
-        .accordion-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 14px !important;
-            margin-bottom: 0.75rem;
-            overflow: hidden;
+        /* ─── Visual Analytics Layout ─── */
+        .analytics-section {
+            background: var(--fb-card-bg);
+            border: 1px solid var(--fb-card-border);
+            border-radius: var(--radius-xl);
+            padding: 1.75rem;
+            box-shadow: var(--fb-card-shadow);
+            margin-bottom: 2rem;
             backdrop-filter: blur(12px);
-            transition: border-color 0.3s, box-shadow 0.3s, transform 0.25s;
         }
-        .accordion-item:hover {
-            border-color: var(--border-glow);
-            box-shadow: 0 0 0 1px rgba(99,179,237,0.12), 0 8px 30px rgba(0,0,0,0.3);
-            transform: translateY(-1px);
-        }
-
-        .accordion-button {
-            background: transparent !important;
-            color: var(--text-primary) !important;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.9rem;
-            padding: 1.1rem 1.4rem;
-            box-shadow: none !important;
+        .section-header {
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
             gap: 0.75rem;
-            border: none;
         }
-        .accordion-button::after {
-            filter: invert(1) brightness(0.6);
-            margin-left: auto;
-            flex-shrink: 0;
+        .section-title {
+            font-family: var(--adm-font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--adm-text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin: 0;
         }
-        .accordion-button:not(.collapsed) {
-            color: var(--accent-blue) !important;
-            background: rgba(99,179,237,0.05) !important;
-            border-bottom: 1px solid var(--border);
-        }
-        .accordion-button:not(.collapsed)::after {
-            filter: invert(0) sepia(1) saturate(3) hue-rotate(180deg) brightness(1.2);
+        .section-title i {
+            color: var(--adm-primary);
         }
 
-        .category-badge {
+        .charts-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        @media (max-width: 992px) { .charts-row { grid-template-columns: 1fr; } }
+
+        .chart-box {
+            background: #ffffff;
+            border: 1px solid var(--adm-border);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            box-shadow: var(--adm-shadow-xs);
+            display: flex;
+            flex-direction: column;
+        }
+        .chart-box h3 {
+            font-family: var(--adm-font-display);
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--adm-text-main);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .chart-canvas-wrap {
+            position: relative;
+            flex: 1;
+            min-height: 220px;
+        }
+
+        /* ─── Feature Signal Cloud ─── */
+        .signal-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+        .signal-pill {
+            background: #ffffff;
+            border: 1px solid var(--adm-border);
+            border-radius: 9999px;
+            padding: 0.4rem 0.95rem;
+            font-size: 0.82rem;
+            color: var(--adm-text-main);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            box-shadow: var(--adm-shadow-xs);
+            transition: all 0.2s ease;
+        }
+        .signal-pill:hover {
+            border-color: var(--adm-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--adm-shadow-sm);
+        }
+        .signal-pill .signal-badge {
+            background: #eff6ff;
+            color: var(--adm-primary);
+            font-weight: 700;
+            font-size: 0.72rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 9999px;
+        }
+
+        /* ─── Smart Toolbar (Search, Filter, Sort, Actions) ─── */
+        .toolbar-panel {
+            background: var(--fb-card-bg);
+            border: 1px solid var(--fb-card-border);
+            border-radius: var(--radius-xl);
+            padding: 1.25rem 1.5rem;
+            box-shadow: var(--fb-card-shadow);
+            margin-bottom: 1.75rem;
+            backdrop-filter: blur(12px);
+        }
+        .toolbar-row {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            flex-wrap: wrap;
+        }
+        .search-box-wrap {
+            flex: 1;
+            min-width: 260px;
+            position: relative;
+        }
+        .search-box-wrap i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--adm-text-subtle);
+            font-size: 0.95rem;
+        }
+        .search-box-wrap input {
+            padding-left: 2.75rem;
+            height: 44px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--adm-border);
+            background: #ffffff;
+            font-size: 0.9rem;
+            color: var(--adm-text-main);
+            transition: all 0.2s ease;
+        }
+        .search-box-wrap input:focus {
+            border-color: var(--adm-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .filter-select {
+            height: 44px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--adm-border);
+            background-color: #ffffff;
+            font-size: 0.86rem;
+            color: var(--adm-text-main);
+            font-weight: 500;
+            padding: 0 2rem 0 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-select:focus {
+            border-color: var(--adm-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .btn-action-tool {
+            height: 44px;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0 1.15rem;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-action-tool:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ─── Feedback Accordion Cards ─── */
+        .feedback-item-card {
+            background: #ffffff;
+            border: 1px solid var(--adm-border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1.15rem;
+            box-shadow: var(--adm-shadow-xs);
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .feedback-item-card:hover {
+            border-color: #cbd5e1;
+            box-shadow: var(--fb-card-shadow);
+            transform: translateY(-2px);
+        }
+
+        .feedback-card-header {
+            padding: 1.25rem 1.5rem;
+            background: transparent;
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .feedback-card-header:hover {
+            background: rgba(248, 250, 252, 0.8);
+        }
+
+        .user-avatar-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--grad-indigo);
+            color: #ffffff;
+            font-family: var(--adm-font-display);
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.25);
+        }
+
+        .user-identity {
+            flex: 1;
+            min-width: 200px;
+        }
+        .user-identity .name-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+        .user-identity .name-row strong {
+            font-size: 0.95rem;
+            color: var(--adm-text-main);
+            font-weight: 700;
+        }
+        .user-identity .meta-row {
+            font-size: 0.8rem;
+            color: var(--adm-text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        /* Badges */
+        .badge-chip {
             display: inline-flex;
             align-items: center;
             gap: 0.35rem;
-            padding: 0.28rem 0.85rem;
-            border-radius: 50px;
-            font-size: 0.72rem;
-            font-weight: 600;
-            font-family: 'Syne', sans-serif;
+            padding: 0.32rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+        .badge-chip.cat-tech { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
+        .badge-chip.cat-ui { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+        .badge-chip.cat-perf { background: #fef3c7; color: #d97706; border: 1px solid #fde68a; }
+        .badge-chip.cat-content { background: #f3e8ff; color: #7c3aed; border: 1px solid #e9d5ff; }
+        .badge-chip.cat-mobile { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; }
+        .badge-chip.cat-general { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+
+        .badge-priority {
+            font-size: 0.74rem;
+            font-weight: 700;
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            text-transform: uppercase;
             letter-spacing: 0.04em;
-            text-transform: uppercase;
-            background: rgba(99,179,237,0.12);
-            color: var(--accent-blue);
-            border: 1px solid rgba(99,179,237,0.2);
-            flex-shrink: 0;
         }
-        .category-badge.positive {
-            background: rgba(104,211,145,0.12);
-            color: var(--success);
-            border-color: rgba(104,211,145,0.2);
+        .badge-priority.p-kritis { background: #dc2626; color: #fff; }
+        .badge-priority.p-tinggi { background: #f59e0b; color: #fff; }
+        .badge-priority.p-normal { background: #3b82f6; color: #fff; }
+        .badge-priority.p-rendah { background: #10b981; color: #fff; }
+
+        .badge-sentiment {
+            font-size: 0.74rem;
+            font-weight: 600;
+            padding: 0.22rem 0.6rem;
+            border-radius: 6px;
         }
-        .category-badge.warning {
-            background: rgba(246,173,85,0.12);
-            color: var(--warning);
-            border-color: rgba(246,173,85,0.2);
+        .badge-sentiment.sent-pos { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; }
+        .badge-sentiment.sent-neg { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+        .badge-sentiment.sent-neu { background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; }
+
+        .badge-status {
+            font-size: 0.74rem;
+            font-weight: 600;
+            padding: 0.25rem 0.7rem;
+            border-radius: 9999px;
+            border: 1px solid transparent;
         }
-        .category-badge.negative {
-            background: rgba(252,129,129,0.12);
-            color: var(--danger);
-            border-color: rgba(252,129,129,0.2);
+        .badge-status.st-baru { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+        .badge-status.st-ditinjau { background: #f3e8ff; color: #6b21a8; border-color: #e9d5ff; }
+        .badge-status.st-direncanakan { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+        .badge-status.st-dikerjakan { background: #fffbeb; color: #b45309; border-color: #fde68a; }
+        .badge-status.st-selesai { background: #ecfdf5; color: #047857; border-color: #a7f3d0; }
+        .badge-status.st-ditutup { background: #f1f5f9; color: #475569; border-color: #cbd5e1; }
+
+        .chevron-toggle {
+            font-size: 1.15rem;
+            color: var(--adm-text-subtle);
+            transition: transform 0.3s ease;
+        }
+        .feedback-item-card.is-open .chevron-toggle {
+            transform: rotate(180deg);
+            color: var(--adm-primary);
         }
 
-        .accordion-meta {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 0.35rem;
+        /* ─── Feedback Card Details (Accordion Body) ─── */
+        .feedback-card-body {
+            display: none;
+            padding: 1.5rem;
+            background: #fafafa;
+            border-top: 1px solid var(--adm-border);
         }
-        .accordion-meta i { font-size: 0.7rem; }
-
-        /* ─── Accordion body ─── */
-        .accordion-body {
-            background: transparent;
-            padding: 1.4rem;
-            border-top: 1px solid var(--border);
+        .feedback-item-card.is-open .feedback-card-body {
+            display: block;
+            animation: fadeIn 0.3s ease;
         }
 
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1.2rem;
-        }
-        @media (max-width: 576px) { .info-grid { grid-template-columns: 1fr; } }
-
-        .info-block {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 0.9rem 1rem;
-        }
-        .info-block .label {
-            font-size: 0.68rem;
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 0.35rem;
-            display: flex;
-            align-items: center;
-            gap: 0.35rem;
-        }
-        .info-block .label i { font-size: 0.75rem; color: var(--accent-teal); }
-        .info-block .value {
-            font-size: 0.875rem;
-            color: var(--text-primary);
-            line-height: 1.55;
-        }
-        .info-block .value em { color: var(--text-muted); font-style: italic; }
-
-        /* ─── CBR Analysis panel ─── */
-        .cbr-panel {
-            background: linear-gradient(135deg, rgba(99,179,237,0.06) 0%, rgba(79,209,197,0.04) 100%);
-            border: 1px solid rgba(99,179,237,0.15);
-            border-radius: 12px;
-            padding: 1.1rem 1.2rem;
+        /* Comment Blockquote */
+        .comment-quote-box {
+            background: #ffffff;
+            border: 1px solid var(--adm-border);
+            border-left: 4px solid var(--adm-primary);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.25rem;
             position: relative;
-            overflow: hidden;
         }
-        .cbr-panel::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
+        .comment-quote-box .quote-icon {
+            color: var(--adm-primary);
+            font-size: 1.25rem;
+            margin-right: 0.5rem;
         }
-        .cbr-label {
-            font-family: 'Syne', sans-serif;
-            font-size: 0.68rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--accent-blue);
-            margin-bottom: 0.75rem;
+        .comment-quote-box .comment-text {
+            font-size: 0.95rem;
+            color: var(--adm-text-main);
+            line-height: 1.6;
+        }
+
+        /* Features tags list */
+        .features-list-row {
             display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.25rem;
+        }
+        .feature-item-tag {
+            background: #ffffff;
+            border: 1px solid var(--adm-border);
+            border-radius: 8px;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--adm-text-main);
+            display: inline-flex;
             align-items: center;
             gap: 0.4rem;
         }
-        .cbr-label i { font-size: 0.8rem; }
+        .feature-item-tag i { color: var(--adm-primary); }
 
-        .cbr-recommendation {
-            font-size: 0.9rem;
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
-            line-height: 1.5;
+        /* CBR Engine Result Box */
+        .cbr-box {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);
+            border: 1px solid #bbf7d0;
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+            margin-bottom: 1.25rem;
         }
-
-        .similarity-row {
+        .cbr-box-header {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            justify-content: space-between;
+            margin-bottom: 0.65rem;
         }
-        .similarity-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            white-space: nowrap;
+        .cbr-box-title {
+            font-family: var(--adm-font-display);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #047857;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
         }
-        .similarity-bar-wrap {
+        .cbr-recommendation-text {
+            font-size: 0.92rem;
+            color: #064e3b;
+            line-height: 1.55;
+            margin-bottom: 0.85rem;
+        }
+        .cbr-similarity-bar-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+        .cbr-sim-track {
             flex: 1;
-            height: 4px;
-            background: rgba(255,255,255,0.07);
-            border-radius: 10px;
+            height: 7px;
+            background: rgba(4, 120, 87, 0.15);
+            border-radius: 9999px;
             overflow: hidden;
         }
-        .similarity-bar {
+        .cbr-sim-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
-            border-radius: 10px;
-            transition: width 0.8s cubic-bezier(.22,1,.36,1);
+            background: linear-gradient(90deg, #10b981, #06b6d4);
+            border-radius: 9999px;
+            transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .similarity-value {
-            font-family: 'Syne', sans-serif;
-            font-size: 0.78rem;
+        .cbr-sim-val {
+            font-family: var(--adm-font-mono);
             font-weight: 700;
-            color: var(--accent-teal);
+            font-size: 0.85rem;
+            color: #047857;
             white-space: nowrap;
         }
 
-        /* ─── Empty state ─── */
-        #no-feedback {
-            display: none;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 3rem 2rem;
-            text-align: center;
-            color: var(--text-secondary);
+        /* Admin Workflow Form Panel */
+        .admin-workflow-card {
+            background: #ffffff;
+            border: 1px solid var(--adm-border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            box-shadow: var(--adm-shadow-xs);
         }
-        #no-feedback i {
-            font-size: 2.5rem;
-            color: var(--text-muted);
-            display: block;
+        .admin-workflow-card h4 {
+            font-family: var(--adm-font-display);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--adm-text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             margin-bottom: 1rem;
         }
+        .admin-workflow-card h4 i { color: var(--adm-primary); }
 
-        /* ─── Fade-in animation for items ─── */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to   { opacity: 1; transform: translateY(0); }
+        .btn-ai-sparkle {
+            background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: all 0.2s ease;
         }
-        .accordion-item {
-            animation: fadeUp 0.4s ease both;
+        .btn-ai-sparkle:hover {
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        /* ─── Empty & Loading States ─── */
+        #emptyState, #loadingState {
+            background: #ffffff;
+            border: 1px solid var(--adm-border);
+            border-radius: var(--radius-xl);
+            padding: 4rem 2rem;
+            text-align: center;
+            box-shadow: var(--fb-card-shadow);
+            margin: 2rem 0;
+        }
+        .spinner-modern {
+            width: 48px;
+            height: 48px;
+            border: 3px solid #e2e8f0;
+            border-top-color: var(--adm-primary);
+            border-radius: 50%;
+            animation: spin 0.75s linear infinite;
+            margin: 0 auto 1.25rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Modal Styles */
+        .modal-content {
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--adm-border);
+            box-shadow: var(--adm-shadow-lg);
+        }
+        .modal-header {
+            border-bottom: 1px solid var(--adm-border);
+            padding: 1.25rem 1.75rem;
+        }
+        .modal-body {
+            padding: 1.75rem;
+        }
+        .modal-footer {
+            border-top: 1px solid var(--adm-border);
+            padding: 1rem 1.75rem;
         }
     </style>
 </head>
-<body>
+<body class="admin-dashboard-body d-flex flex-column min-vh-100">
 
-<!-- ══════════ NAVBAR (unchanged) ══════════ -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white mb-4">
+<!-- ══════════════════════════════════════════════════════════════════════
+     UNIFIED MODERN GLASSMORPHIC ADMIN NAVBAR
+     ══════════════════════════════════════════════════════════════════════ -->
+<nav class="navbar navbar-expand-lg admin-navbar">
     <div class="container">
-        <a class="navbar-brand" href="{{ url_for('admin.dashboard_admin') }}">
-            <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-            MathThon Admin
+        <a class="admin-brand" href="{{ url_for('admin.dashboard_admin') }}">
+            <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}" 
+                 alt="Logo MathThon" 
+                 class="admin-brand-logo">
+            <span>MathThon <small class="text-primary" style="font-size: 0.85rem; font-weight: 600;">Admin</small></span>
         </a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ms-auto">
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbarNav" aria-controls="adminNavbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="adminNavbarNav">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('admin.manage_users') }}"><i class="bi bi-person-lines-fill"></i> Kelola Pengguna</a>
+                    <a class="nav-link admin-nav-link" href="{{ url_for('admin.dashboard_admin') }}">
+                        <i class="bi bi-grid-fill"></i>
+                        <span>Dashboard</span>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ url_for('admin.manage_feedback') }}"><i class="bi bi-chat-left-text-fill"></i> Kelola Feedback</a>
+                    <a class="nav-link admin-nav-link" href="{{ url_for('admin.manage_users') }}">
+                        <i class="bi bi-person-lines-fill"></i>
+                        <span>Kelola Pengguna</span>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('admin.export_database') }}"><i class="bi bi-database-down"></i> Ekspor Database</a>
+                    <a class="nav-link admin-nav-link active" href="{{ url_for('admin.manage_feedback') }}">
+                        <i class="bi bi-chat-left-text-fill"></i>
+                        <span>Kelola Feedback</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link admin-nav-link" href="{{ url_for('admin.export_database') }}">
+                        <i class="bi bi-database-down"></i>
+                        <span>Ekspor Database</span>
+                    </a>
                 </li>
             </ul>
-        </div>
-        <div class="d-flex">
-            <a href="{{ url_for('admin.logout_admin') }}" class="btn btn-outline-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
+
+            <div class="d-flex align-items-center gap-3">
+                <div class="admin-user-pill d-none d-md-flex">
+                    <div class="admin-avatar">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                    <span>{{ users.name if users else 'Administrator' }}</span>
+                    <span class="admin-status-dot" title="Online & Aktif"></span>
+                </div>
+
+                <a href="{{ url_for('admin.logout_admin') }}" class="btn-admin-logout">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
         </div>
     </div>
 </nav>
-<!-- ══════════ END NAVBAR ══════════ -->
 
-<div class="container py-2">
+<!-- ══════════════════════════════════════════════════════════════════════
+     MAIN CONTENT CONTAINER
+     ══════════════════════════════════════════════════════════════════════ -->
+<main class="container my-auto py-3">
 
-    <!-- Page Header -->
-    <div class="page-header">
-        <div class="overline"><i class="bi bi-chat-square-heart"></i> &nbsp;User Insights</div>
-        <h1>Daftar Feedback<br>Pengguna</h1>
-        <p class="subtitle">Tinjau semua masukan yang diberikan oleh pengguna untuk perbaikan sistem.</p>
+    <!-- Hero Header -->
+    <header class="feedback-hero">
+        <div class="hero-pill">
+            <i class="bi bi-cpu-fill"></i> Case-Based Reasoning (CBR) &amp; Sentimen AI
+        </div>
+        <h1>Manajemen <span class="highlight">Feedback Pengguna</span></h1>
+        <p class="subtitle">
+            Pantau, investigasi, dan tindak lanjuti suara siswa secara cerdas dengan penalaran berbasis kasus (CBR), analisis polaritas sentimen, dan draf balasan otomatis.
+        </p>
+    </header>
+
+    <!-- Executive KPI Grid (Populated dynamically) -->
+    <section class="kpi-grid">
+        <div class="kpi-card" style="--kpi-accent: var(--grad-primary);">
+            <div class="kpi-icon-box">
+                <i class="bi bi-chat-heart-fill"></i>
+            </div>
+            <div class="kpi-content">
+                <div class="kpi-number" id="kpiTotal">0</div>
+                <div class="kpi-label">Total Masukan</div>
+            </div>
+        </div>
+
+        <div class="kpi-card" style="--kpi-accent: var(--grad-amber);">
+            <div class="kpi-icon-box">
+                <i class="bi bi-hourglass-split"></i>
+            </div>
+            <div class="kpi-content">
+                <div class="kpi-number" id="kpiOpen">0</div>
+                <div class="kpi-label">Perlu Tindak Lanjut</div>
+            </div>
+        </div>
+
+        <div class="kpi-card" style="--kpi-accent: var(--grad-crimson);">
+            <div class="kpi-icon-box">
+                <i class="bi bi-exclamation-octagon-fill"></i>
+            </div>
+            <div class="kpi-content">
+                <div class="kpi-number" id="kpiCritical">0</div>
+                <div class="kpi-label">Prioritas Kritis / Tinggi</div>
+            </div>
+        </div>
+
+        <div class="kpi-card" style="--kpi-accent: var(--grad-emerald);">
+            <div class="kpi-icon-box">
+                <i class="bi bi-check2-circle"></i>
+            </div>
+            <div class="kpi-content">
+                <div class="kpi-number" id="kpiCompletion">0%</div>
+                <div class="kpi-label">Tingkat Selesai</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Analytics & Signal Insights -->
+    <section class="analytics-section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="bi bi-pie-chart-fill"></i>
+                Dashboard Analisis &amp; Persepsi Pengguna
+            </h2>
+            <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-sm btn-outline-primary rounded-pill px-3" id="btnReanalyze">
+                    <i class="bi bi-arrow-clockwise"></i> Re-analisis Semua Data (CBR)
+                </button>
+                <button class="btn btn-sm btn-ai-sparkle rounded-pill px-3" id="btnAiOverview">
+                    <i class="bi bi-stars"></i> Ringkasan Eksekutif AI
+                </button>
+            </div>
+        </div>
+
+        <div class="charts-row">
+            <!-- Chart 1: Kategori Masalah -->
+            <div class="chart-box">
+                <h3>
+                    <span>Distribusi Kategori Masukan</span>
+                    <i class="bi bi-tags text-primary"></i>
+                </h3>
+                <div class="chart-canvas-wrap">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 2: Status Tindak Lanjut -->
+            <div class="chart-box">
+                <h3>
+                    <span>Status Workflow Admin</span>
+                    <i class="bi bi-kanban text-info"></i>
+                </h3>
+                <div class="chart-canvas-wrap">
+                    <canvas id="workflowChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 3: Analisis Sentimen -->
+            <div class="chart-box">
+                <h3>
+                    <span>Polaritas Sentimen Komentar</span>
+                    <i class="bi bi-emoji-smile text-success"></i>
+                </h3>
+                <div class="chart-canvas-wrap">
+                    <canvas id="sentimentChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Signal Feature Tags -->
+        <div class="border-top pt-3">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="fw-bold small text-muted text-uppercase tracking-wider">
+                    <i class="bi bi-lightning-charge-fill text-warning me-1"></i> Sinyal &amp; Fitur Paling Sering Disorot Siswa:
+                </span>
+                <span class="small text-muted" id="statAvgSimilarity">Rata-rata Kemiripan CBR: 0%</span>
+            </div>
+            <div class="signal-cloud" id="signalCloud">
+                <span class="text-muted small">Memuat sinyal feedback...</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Smart Filter & Search Control Panel -->
+    <section class="toolbar-panel">
+        <div class="toolbar-row">
+            <!-- Live Search -->
+            <div class="search-box-wrap">
+                <i class="bi bi-search"></i>
+                <input type="text" id="searchInput" class="form-control" placeholder="Cari nama siswa, komentar, kata kunci, kategori...">
+            </div>
+
+            <!-- Category Filter -->
+            <select id="filterCategory" class="filter-select">
+                <option value="all">Semua Kategori</option>
+                <option value="Teknis & Bug">Teknis &amp; Bug</option>
+                <option value="Desain & UI">Desain &amp; UI</option>
+                <option value="Performa">Performa</option>
+                <option value="Konten Materi">Konten Materi</option>
+                <option value="Responsivitas">Responsivitas</option>
+                <option value="General">General</option>
+            </select>
+
+            <!-- Priority Filter -->
+            <select id="filterPriority" class="filter-select">
+                <option value="all">Semua Prioritas</option>
+                <option value="kritis">Kritis</option>
+                <option value="tinggi">Tinggi</option>
+                <option value="normal">Normal</option>
+                <option value="rendah">Rendah</option>
+            </select>
+
+            <!-- Status Workflow Filter -->
+            <select id="filterStatus" class="filter-select">
+                <option value="all">Semua Status</option>
+                <option value="baru">Baru</option>
+                <option value="ditinjau">Ditinjau</option>
+                <option value="direncanakan">Direncanakan</option>
+                <option value="dikerjakan">Dikerjakan</option>
+                <option value="selesai">Selesai</option>
+                <option value="ditutup">Ditutup</option>
+            </select>
+
+            <!-- Sort By -->
+            <select id="sortBy" class="filter-select">
+                <option value="newest">Waktu: Terbaru</option>
+                <option value="oldest">Waktu: Terlama</option>
+                <option value="priority">Prioritas Tertinggi</option>
+                <option value="similarity">Kemiripan CBR Tertinggi</option>
+            </select>
+
+            <!-- Export Dropdown -->
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary btn-action-tool dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    <i class="bi bi-download"></i> Ekspor
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                    <li>
+                        <a class="dropdown-item py-2" href="{{ url_for('feedback.export_feedback_route', format='csv') }}">
+                            <i class="bi bi-filetype-csv text-success me-2"></i> Ekspor Spreadsheet (.CSV)
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item py-2" href="{{ url_for('feedback.export_feedback_route', format='json') }}">
+                            <i class="bi bi-file-earmark-code text-primary me-2"></i> Ekspor Data Raw (.JSON)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between mt-3 pt-2 border-top">
+            <span class="small text-muted" id="filterResultCount">Memuat masukan...</span>
+            <button class="btn btn-link btn-sm text-decoration-none p-0 text-muted" id="btnResetFilters">
+                <i class="bi bi-x-circle"></i> Reset Semua Filter
+            </button>
+        </div>
+    </section>
+
+    <!-- Loading State -->
+    <div id="loadingState">
+        <div class="spinner-modern"></div>
+        <h5 class="fw-bold text-muted mb-1">Memuat Data Feedback...</h5>
+        <small class="text-secondary">Sinkronisasi penalaran CBR dan status workflow.</small>
     </div>
 
-    <!-- Stats bar (populated by JS) -->
-    <div class="stats-bar" id="statsBar" style="display:none;">
-        <div class="stat-chip"><span class="dot blue"></span><span id="totalCount">0</span> total feedback</div>
-        <div class="stat-chip"><span class="dot teal"></span>Analisis CBR aktif</div>
+    <!-- Empty State -->
+    <div id="emptyState" style="display: none;">
+        <i class="bi bi-inbox-fill text-muted" style="font-size: 3.5rem;"></i>
+        <h4 class="fw-bold mt-3 mb-1">Tidak Ada Feedback Ditemukan</h4>
+        <p class="text-muted small">Coba ubah kata kunci pencarian atau sesuaikan filter Anda.</p>
+        <button class="btn btn-sm btn-outline-primary rounded-pill px-3" onclick="document.getElementById('btnResetFilters').click();">
+            Reset Filter
+        </button>
     </div>
 
-    <!-- Loading -->
-    <div id="loading">
-        <div class="custom-spinner"></div>
-        <p>Memuat data feedback...</p>
-    </div>
+    <!-- Feedback Cards Container -->
+    <div id="feedbackListContainer"></div>
 
-    <!-- Accordion -->
-    <div class="accordion" id="feedbackAccordion" style="border:none; gap:0;">
-        <!-- items injected by JS -->
-    </div>
+</main>
 
-    <!-- Empty state -->
-    <div id="no-feedback">
-        <i class="bi bi-inbox"></i>
-        <p class="mb-0" style="font-family:'Syne',sans-serif; font-weight:600;">Belum ada feedback yang masuk.</p>
-        <small>Feedback dari pengguna akan muncul di sini.</small>
+<!-- ══════════════════════════════════════════════════════════════════════
+     AI EXECUTIVE SUMMARY MODAL
+     ══════════════════════════════════════════════════════════════════════ -->
+<div class="modal fade" id="aiOverviewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title fw-bold d-flex align-items-center gap-2">
+                    <i class="bi bi-stars text-primary"></i>
+                    Ringkasan Eksekutif AI MathThon
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="aiOverviewLoading" class="text-center py-4">
+                    <div class="spinner-border text-primary mb-3" role="status"></div>
+                    <p class="text-muted mb-0">AI sedang mensintesis seluruh feedback pengguna dan merumuskan saran strategis...</p>
+                </div>
+                <div id="aiOverviewContent" style="display: none; line-height: 1.7; font-size: 0.95rem;"></div>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-outline-secondary btn-sm" id="btnCopyAiOverview">
+                    <i class="bi bi-clipboard"></i> Salin Ringkasan
+                </button>
+                <button type="button" class="btn btn-primary btn-sm px-4" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
     </div>
 </div>
 
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const accordionContainer = document.getElementById('feedbackAccordion');
-    const loadingIndicator    = document.getElementById('loading');
-    const noFeedbackMessage   = document.getElementById('no-feedback');
-    const statsBar            = document.getElementById('statsBar');
-    const totalCount          = document.getElementById('totalCount');
+document.addEventListener('DOMContentLoaded', () => {
+    // ─── API Endpoints & State ───
+    const API = {
+        list: "{{ url_for('feedback.get_feedback_list_route') }}",
+        analytics: "{{ url_for('feedback.feedback_analytics_route') }}",
+        workflow: (id) => `{{ url_for('feedback.get_feedback_list_route') }}`.replace('/list', `/${encodeURIComponent(id)}/workflow`),
+        delete: (id) => `{{ url_for('feedback.get_feedback_list_route') }}`.replace('/list', `/${encodeURIComponent(id)}`),
+        reanalyze: "{{ url_for('feedback.reanalyze_feedback_route') }}",
+        aiReply: (id) => `{{ url_for('feedback.get_feedback_list_route') }}`.replace('/list', `/${encodeURIComponent(id)}/ai-reply`),
+        aiOverview: "{{ url_for('feedback.ai_overview_feedback_route') }}"
+    };
 
-    /* ── Determine badge class from category/status string ── */
-    function getBadgeClass(text) {
-        const t = (text || '').toLowerCase();
-        if (t.includes('positif') || t.includes('baik') || t.includes('puas')) return 'positive';
-        if (t.includes('netral') || t.includes('sedang'))                       return 'warning';
-        if (t.includes('negatif') || t.includes('buruk') || t.includes('tidak')) return 'negative';
-        return '';
+    const csrfToken = "{{ csrf_token() }}";
+
+    // Chart instances
+    let categoryChart = null;
+    let workflowChart = null;
+    let sentimentChart = null;
+
+    // Data in memory
+    let feedbackDataset = [];
+
+    // DOM Elements
+    const elements = {
+        loading: document.getElementById('loadingState'),
+        empty: document.getElementById('emptyState'),
+        container: document.getElementById('feedbackListContainer'),
+        searchInput: document.getElementById('searchInput'),
+        filterCategory: document.getElementById('filterCategory'),
+        filterPriority: document.getElementById('filterPriority'),
+        filterStatus: document.getElementById('filterStatus'),
+        sortBy: document.getElementById('sortBy'),
+        btnReset: document.getElementById('btnResetFilters'),
+        resultCount: document.getElementById('filterResultCount'),
+        btnReanalyze: document.getElementById('btnReanalyze'),
+        btnAiOverview: document.getElementById('btnAiOverview'),
+        signalCloud: document.getElementById('signalCloud'),
+        avgSim: document.getElementById('statAvgSimilarity'),
+        kpis: {
+            total: document.getElementById('kpiTotal'),
+            open: document.getElementById('kpiOpen'),
+            critical: document.getElementById('kpiCritical'),
+            completion: document.getElementById('kpiCompletion')
+        }
+    };
+
+    // Configure Chart.js typography
+    Chart.defaults.font.family = "'Plus Jakarta Sans', system-ui, -apple-system, sans-serif";
+    Chart.defaults.color = '#64748b';
+
+    // Toast Utility
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2600,
+        timerProgressBar: true
+    });
+
+    const escapeHtml = (str) => String(str ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+
+    // ─── Badge Helper Functions ───
+    function getCategoryBadge(category) {
+        const cat = (category || '').toLowerCase();
+        let cls = 'cat-general';
+        let icon = 'bi-tag-fill';
+
+        if (cat.includes('teknis') || cat.includes('bug')) { cls = 'cat-tech'; icon = 'bi-bug-fill'; }
+        else if (cat.includes('desain') || cat.includes('ui')) { cls = 'cat-ui'; icon = 'bi-brush-fill'; }
+        else if (cat.includes('performa')) { cls = 'cat-perf'; icon = 'bi-lightning-charge-fill'; }
+        else if (cat.includes('konten') || cat.includes('materi')) { cls = 'cat-content'; icon = 'bi-book-fill'; }
+        else if (cat.includes('responsivitas') || cat.includes('mobile')) { cls = 'cat-mobile'; icon = 'bi-phone-fill'; }
+
+        return `<span class="badge-chip ${cls}"><i class="bi ${icon}"></i> ${escapeHtml(category || 'General')}</span>`;
     }
 
-    /* ── Parse similarity value (e.g. "0.85" or "85%") to 0-100 ── */
-    function parseSimilarity(val) {
+    function getPriorityBadge(priority) {
+        const p = (priority || 'normal').toLowerCase();
+        let cls = 'p-normal';
+        let label = 'Normal';
+        if (p === 'kritis') { cls = 'p-kritis'; label = 'Kritis'; }
+        else if (p === 'tinggi') { cls = 'p-tinggi'; label = 'Tinggi'; }
+        else if (p === 'rendah') { cls = 'p-rendah'; label = 'Rendah'; }
+        return `<span class="badge-priority ${cls}"><i class="bi bi-flag-fill me-1"></i>${label}</span>`;
+    }
+
+    function getSentimentBadge(sentiment) {
+        const s = (sentiment || 'Netral').toLowerCase();
+        let cls = 'sent-neu';
+        let icon = 'bi-emoji-neutral';
+        if (s.includes('pos')) { cls = 'sent-pos'; icon = 'bi-emoji-smile-fill'; }
+        else if (s.includes('neg') || s.includes('kritis')) { cls = 'sent-neg'; icon = 'bi-emoji-frown-fill'; }
+        return `<span class="badge-sentiment ${cls}"><i class="bi ${icon} me-1"></i>${escapeHtml(sentiment || 'Netral')}</span>`;
+    }
+
+    function getStatusBadge(status) {
+        const s = (status || 'baru').toLowerCase();
+        let cls = 'st-baru';
+        let label = 'Baru';
+        if (s === 'ditinjau') { cls = 'st-ditinjau'; label = 'Ditinjau'; }
+        else if (s === 'direncanakan') { cls = 'st-direncanakan'; label = 'Direncanakan'; }
+        else if (s === 'dikerjakan') { cls = 'st-dikerjakan'; label = 'Dikerjakan'; }
+        else if (s === 'selesai') { cls = 'st-selesai'; label = 'Selesai'; }
+        else if (s === 'ditutup') { cls = 'st-ditutup'; label = 'Ditutup'; }
+        return `<span class="badge-status ${cls}"><i class="bi bi-circle-fill me-1" style="font-size: 0.5rem;"></i>${label}</span>`;
+    }
+
+    function getInitials(name) {
+        if (!name || name === 'Anonymous') return 'A';
+        const parts = name.trim().split(/\s+/);
+        if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+        return (parts[0][0] + parts[1][0]).toUpperCase();
+    }
+
+    function parseSimilarityNumber(val) {
         if (!val) return 0;
-        const n = parseFloat(val);
-        if (isNaN(n)) return 0;
-        return n <= 1 ? Math.round(n * 100) : Math.round(n);
+        const num = parseFloat(String(val).replace('%', ''));
+        return isNaN(num) ? 0 : Math.round(num);
     }
 
-    fetch("{{ url_for('feedback.get_feedback_list_route') }}")
-        .then(response => {
-            if (!response.ok) throw new Error('Gagal mengambil data');
-            return response.json();
-        })
-        .then(data => {
-            loadingIndicator.style.display = 'none';
+    // ─── Render Visual Charts ───
+    function renderCharts(analytics) {
+        // 1. Category Chart
+        const catLabels = Object.keys(analytics.categories || {});
+        const catData = Object.values(analytics.categories || {});
+        const catColors = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4'];
 
-            if (!data || data.length === 0) {
-                noFeedbackMessage.style.display = 'block';
-                return;
+        if (categoryChart) categoryChart.destroy();
+        const ctxCat = document.getElementById('categoryChart').getContext('2d');
+        categoryChart = new Chart(ctxCat, {
+            type: 'doughnut',
+            data: {
+                labels: catLabels.length ? catLabels : ['Belum ada'],
+                datasets: [{
+                    data: catData.length ? catData : [1],
+                    backgroundColor: catData.length ? catColors.slice(0, catLabels.length) : ['#e2e8f0'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '72%',
+                plugins: {
+                    legend: { position: 'bottom', labels: { boxWidth: 10, padding: 12, font: { size: 11, weight: '600' } } }
+                }
+            }
+        });
+
+        // 2. Workflow Chart
+        const wfLabels = ['Baru', 'Ditinjau', 'Direncanakan', 'Dikerjakan', 'Selesai', 'Ditutup'];
+        const wfMap = analytics.workflow_statuses || {};
+        const wfData = wfLabels.map(l => wfMap[l.toLowerCase()] || 0);
+
+        if (workflowChart) workflowChart.destroy();
+        const ctxWf = document.getElementById('workflowChart').getContext('2d');
+        workflowChart = new Chart(ctxWf, {
+            type: 'bar',
+            data: {
+                labels: wfLabels,
+                datasets: [{
+                    label: 'Jumlah Tiket',
+                    data: wfData,
+                    backgroundColor: ['#3b82f6', '#8b5cf6', '#06b6d4', '#f59e0b', '#10b981', '#64748b'],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { display: false }, ticks: { font: { size: 10, weight: '600' } } },
+                    y: { beginAtZero: true, ticks: { precision: 0 } }
+                }
+            }
+        });
+
+        // 3. Sentiment Chart
+        const sentLabels = Object.keys(analytics.sentiments || {});
+        const sentData = Object.values(analytics.sentiments || {});
+        const sentColorsMap = {
+            'Positif': '#10b981',
+            'Netral': '#64748b',
+            'Negatif': '#f59e0b',
+            'Kritis / Negatif': '#ef4444'
+        };
+        const sentColors = sentLabels.map(l => sentColorsMap[l] || '#3b82f6');
+
+        if (sentimentChart) sentimentChart.destroy();
+        const ctxSent = document.getElementById('sentimentChart').getContext('2d');
+        sentimentChart = new Chart(ctxSent, {
+            type: 'doughnut',
+            data: {
+                labels: sentLabels.length ? sentLabels : ['Belum ada'],
+                datasets: [{
+                    data: sentData.length ? sentData : [1],
+                    backgroundColor: sentData.length ? sentColors : ['#e2e8f0'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '72%',
+                plugins: {
+                    legend: { position: 'bottom', labels: { boxWidth: 10, padding: 12, font: { size: 11, weight: '600' } } }
+                }
+            }
+        });
+    }
+
+    // ─── Fetch Analytics Summary ───
+    async function fetchAnalytics() {
+        try {
+            const res = await fetch(API.analytics);
+            if (!res.ok) throw new Error('Gagal memuat analitik');
+            const data = await res.json();
+
+            // Update KPI cards
+            elements.kpis.total.textContent = data.total;
+            elements.kpis.open.textContent = data.open_count;
+            elements.kpis.critical.textContent = data.critical_count;
+            elements.kpis.completion.textContent = `${data.completion_rate}%`;
+
+            elements.avgSim.textContent = `Rata-rata Kemiripan CBR: ${data.average_similarity}`;
+
+            // Render top signal cloud
+            if (data.top_features && data.top_features.length) {
+                elements.signalCloud.innerHTML = data.top_features.map(f => `
+                    <div class="signal-pill">
+                        <i class="bi ${escapeHtml(f.icon)} text-primary"></i>
+                        <span>${escapeHtml(f.name)}</span>
+                        <span class="signal-badge">${f.count}x</span>
+                    </div>
+                `).join('');
+            } else {
+                elements.signalCloud.innerHTML = '<span class="text-muted small">Belum ada fitur yang dipilih pengguna.</span>';
             }
 
-            totalCount.textContent = data.length;
-            statsBar.style.display = 'flex';
+            renderCharts(data);
+        } catch (err) {
+            console.error('Analytics Error:', err);
+        }
+    }
 
-            data.forEach((item, index) => {
-                const features       = item.features.length > 0 ? item.features.join(', ') : 'Tidak ada';
-                const simPct         = parseSimilarity(item.analysis.similarity);
-                const badgeClass     = getBadgeClass(item.analysis.category + ' ' + item.analysis.status);
-                const animDelay      = (index * 60) + 'ms';
+    // ─── Render Feedback Cards List ───
+    function renderFeedbackList(records) {
+        elements.container.innerHTML = '';
+        elements.resultCount.textContent = `Menampilkan ${records.length} dari ${feedbackDataset.length} feedback`;
 
-                const accordionItem = `
-                <div class="accordion-item" style="animation-delay:${animDelay}">
-                    <h2 class="accordion-header" id="heading-${index}">
-                        <button class="accordion-button collapsed" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapse-${index}"
-                                aria-expanded="false" aria-controls="collapse-${index}">
+        if (records.length === 0) {
+            elements.empty.style.display = 'block';
+            return;
+        }
+        elements.empty.style.display = 'none';
 
-                            <span class="category-badge ${badgeClass}">
-                                <i class="bi bi-tag-fill"></i>
-                                ${item.analysis.category}
-                            </span>
+        records.forEach((item, index) => {
+            const userInitial = getInitials(item.user);
+            const simPct = parseSimilarityNumber(item.analysis?.similarity);
+            const catBadge = getCategoryBadge(item.analysis?.category);
+            const priorityBadge = getPriorityBadge(item.workflow?.priority);
+            const statusBadge = getStatusBadge(item.workflow?.status);
+            const sentBadge = getSentimentBadge(item.analysis?.sentiment);
 
-                            <span style="font-weight:500; font-size:0.88rem; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
-                                ${item.analysis.status}
-                            </span>
+            const featureTags = (item.feature_details && item.feature_details.length)
+                ? item.feature_details.map(f => `<span class="feature-item-tag"><i class="bi ${escapeHtml(f.icon)}"></i> ${escapeHtml(f.name)}</span>`).join('')
+                : (item.features && item.features.length)
+                    ? item.features.map(f => `<span class="feature-item-tag"><i class="bi bi-tag"></i> ${escapeHtml(f)}</span>`).join('')
+                    : '<span class="text-muted small fst-italic">Tidak memilih opsi fitur spesifik.</span>';
 
-                            <span class="accordion-meta">
-                                <i class="bi bi-clock"></i>${item.timestamp}
-                                &nbsp;&middot;&nbsp;
-                                <i class="bi bi-person"></i>${item.user}
-                            </span>
-                        </button>
-                    </h2>
+            const cardHtml = `
+            <article class="feedback-item-card" id="card-${item.id}" data-id="${item.id}">
+                <div class="feedback-card-header" onclick="toggleCard('${item.id}')">
+                    <div class="user-avatar-circle">${escapeHtml(userInitial)}</div>
 
-                    <div id="collapse-${index}" class="accordion-collapse collapse"
-                         data-bs-parent="#feedbackAccordion">
-                        <div class="accordion-body">
-
-                            <div class="info-grid">
-                                <div class="info-block">
-                                    <div class="label"><i class="bi bi-chat-quote-fill"></i> Komentar Pengguna</div>
-                                    <div class="value">${item.comment || '<em>Tidak ada komentar.</em>'}</div>
-                                </div>
-                                <div class="info-block">
-                                    <div class="label"><i class="bi bi-ui-checks"></i> Fitur yang Dipilih</div>
-                                    <div class="value">${features}</div>
-                                </div>
-                            </div>
-
-                            <div class="cbr-panel">
-                                <div class="cbr-label">
-                                    <i class="bi bi-cpu-fill"></i> Analisis Sistem (CBR)
-                                </div>
-                                <div class="cbr-recommendation">${item.analysis.recommendation}</div>
-                                <div class="similarity-row">
-                                    <span class="similarity-label">Tingkat kemiripan</span>
-                                    <div class="similarity-bar-wrap">
-                                        <div class="similarity-bar" style="width:0%"
-                                             data-width="${simPct}%"></div>
-                                    </div>
-                                    <span class="similarity-value">${item.analysis.similarity}</span>
-                                </div>
-                            </div>
-
+                    <div class="user-identity">
+                        <div class="name-row">
+                            <strong>${escapeHtml(item.user || 'Anonymous')}</strong>
+                            ${catBadge}
+                        </div>
+                        <div class="meta-row">
+                            <span><i class="bi bi-calendar3 me-1"></i>${escapeHtml(item.timestamp || '-')}</span>
+                            <span>&bull;</span>
+                            <span>ID: <code class="small text-muted">${escapeHtml(item.id ? item.id.slice(0, 8) : '')}</code></span>
                         </div>
                     </div>
-                </div>`;
 
-                accordionContainer.insertAdjacentHTML('beforeend', accordionItem);
-            });
+                    <div class="d-flex align-items-center gap-2 flex-wrap ms-auto">
+                        ${sentBadge}
+                        ${priorityBadge}
+                        ${statusBadge}
+                        <i class="bi bi-chevron-down chevron-toggle ms-2"></i>
+                    </div>
+                </div>
 
-            /* Animate similarity bars when accordion opens */
-            document.querySelectorAll('.accordion-collapse').forEach(collapse => {
-                collapse.addEventListener('shown.bs.collapse', () => {
-                    collapse.querySelectorAll('.similarity-bar').forEach(bar => {
-                        bar.style.width = bar.dataset.width;
-                    });
-                });
-            });
-        })
-        .catch(error => {
-            loadingIndicator.innerHTML = `
-                <div style="background:rgba(252,129,129,0.08);border:1px solid rgba(252,129,129,0.2);
-                            border-radius:12px;padding:1.5rem;color:#fc8181;font-size:0.875rem;
-                            display:flex;align-items:center;gap:0.75rem;">
-                    <i class="bi bi-exclamation-triangle-fill" style="font-size:1.2rem;"></i>
-                    Gagal memuat data feedback. Silakan coba lagi.
-                </div>`;
-            console.error('Error:', error);
+                <div class="feedback-card-body">
+                    <!-- Komentar Pengguna -->
+                    <div class="comment-quote-box">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-quote quote-icon"></i>
+                            <div class="comment-text">
+                                ${item.comment ? escapeHtml(item.comment) : '<em class="text-muted">Pengguna tidak menuliskan komentar teks tambahan.</em>'}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fitur yang Dipilih -->
+                    <div class="mb-3">
+                        <div class="small fw-bold text-muted text-uppercase mb-2">
+                            <i class="bi bi-check2-square text-primary me-1"></i> Sinyal &amp; Indikator yang Dipilih:
+                        </div>
+                        <div class="features-list-row">${featureTags}</div>
+                    </div>
+
+                    <!-- CBR Intelligence Panel -->
+                    <div class="cbr-box">
+                        <div class="cbr-box-header">
+                            <div class="cbr-box-title">
+                                <i class="bi bi-cpu-fill"></i> Solusi Rekomendasi Sistem (Case-Based Reasoning)
+                            </div>
+                            <span class="badge bg-success bg-opacity-25 text-success small px-2 py-1 rounded">
+                                Status Kasus: ${escapeHtml(item.analysis?.status || 'Neutral')}
+                            </span>
+                        </div>
+                        <div class="cbr-recommendation-text">
+                            ${escapeHtml(item.analysis?.recommendation || 'Belum ada rekomendasi spesifik.')}
+                        </div>
+                        <div class="cbr-similarity-bar-wrap">
+                            <span class="small fw-bold text-success">Kemiripan Kasus:</span>
+                            <div class="cbr-sim-track">
+                                <div class="cbr-sim-fill" style="width: ${simPct}%;"></div>
+                            </div>
+                            <span class="cbr-sim-val">${escapeHtml(item.analysis?.similarity || '0%')}</span>
+                        </div>
+                    </div>
+
+                    <!-- Admin Workflow Actions -->
+                    <div class="admin-workflow-card" id="workflow-${item.id}">
+                        <h4>
+                            <i class="bi bi-clipboard2-check-fill"></i>
+                            Tindak Lanjut &amp; Solusi Administrator
+                            <span class="ms-auto small fw-normal text-muted" id="updated-at-${item.id}">
+                                ${item.workflow?.updated_at ? `<i class="bi bi-clock-history me-1"></i>Diperbarui: ${escapeHtml(item.workflow.updated_at)}` : 'Belum pernah diperbarui'}
+                            </span>
+                        </h4>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-muted">Status Tindak Lanjut</label>
+                                <select class="form-select form-select-sm" data-field="status">
+                                    <option value="baru" ${item.workflow?.status === 'baru' ? 'selected' : ''}>Baru</option>
+                                    <option value="ditinjau" ${item.workflow?.status === 'ditinjau' ? 'selected' : ''}>Ditinjau</option>
+                                    <option value="direncanakan" ${item.workflow?.status === 'direncanakan' ? 'selected' : ''}>Direncanakan</option>
+                                    <option value="dikerjakan" ${item.workflow?.status === 'dikerjakan' ? 'selected' : ''}>Dikerjakan</option>
+                                    <option value="selesai" ${item.workflow?.status === 'selesai' ? 'selected' : ''}>Selesai</option>
+                                    <option value="ditutup" ${item.workflow?.status === 'ditutup' ? 'selected' : ''}>Ditutup</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-muted">Tingkat Prioritas</label>
+                                <select class="form-select form-select-sm" data-field="priority">
+                                    <option value="rendah" ${item.workflow?.priority === 'rendah' ? 'selected' : ''}>Rendah</option>
+                                    <option value="normal" ${item.workflow?.priority === 'normal' ? 'selected' : ''}>Normal</option>
+                                    <option value="tinggi" ${item.workflow?.priority === 'tinggi' ? 'selected' : ''}>Tinggi</option>
+                                    <option value="kritis" ${item.workflow?.priority === 'kritis' ? 'selected' : ''}>Kritis</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-1">
+                                <label class="form-label small fw-bold text-muted mb-0">Tanggapan untuk Pengguna (Pesan Resmi)</label>
+                                <button type="button" class="btn-ai-sparkle" onclick="generateAiReply('${item.id}')">
+                                    <i class="bi bi-stars"></i> ✨ Draf Balasan AI
+                                </button>
+                            </div>
+                            <textarea class="form-control form-control-sm" rows="3" data-field="admin_response" placeholder="Tuliskan tanggapan resmi yang dapat dibaca atau dikirimkan ke siswa...">${escapeHtml(item.workflow?.admin_response || '')}</textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Rencana Aksi Internal Tim MathThon</label>
+                            <textarea class="form-control form-control-sm" rows="2" data-field="action_plan" placeholder="Contoh: Fix bug kalkulator di script.js baris 140, perbaiki kontras warna, update silabus...">${escapeHtml(item.workflow?.action_plan || '')}</textarea>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between pt-2 border-top">
+                            <button type="button" class="btn btn-outline-danger btn-sm" onclick="confirmDeleteFeedback('${item.id}')">
+                                <i class="bi bi-trash3-fill me-1"></i> Hapus Feedback
+                            </button>
+                            <button type="button" class="btn btn-primary btn-sm px-4 btn-save-workflow" onclick="saveWorkflow('${item.id}')">
+                                <i class="bi bi-check-lg me-1"></i> Simpan Tindak Lanjut
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </article>`;
+
+            elements.container.insertAdjacentHTML('beforeend', cardHtml);
         });
+    }
+
+    // Toggle Card Accordion
+    window.toggleCard = (id) => {
+        const card = document.getElementById(`card-${id}`);
+        if (!card) return;
+        card.classList.toggle('is-open');
+    };
+
+    // ─── Fetch All Feedback Records ───
+    async function fetchFeedbackList() {
+        elements.loading.style.display = 'block';
+        elements.empty.style.display = 'none';
+        elements.container.innerHTML = '';
+
+        try {
+            const res = await fetch(API.list);
+            if (!res.ok) throw new Error('Gagal mengambil daftar feedback');
+            feedbackDataset = await res.json();
+            applyFilters();
+        } catch (err) {
+            console.error('Fetch feedback error:', err);
+            elements.container.innerHTML = `
+                <div class="alert alert-danger d-flex align-items-center gap-2 rounded-4" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill fs-5"></i>
+                    <div>Gagal memuat data feedback dari server. Silakan muat ulang halaman.</div>
+                </div>`;
+        } finally {
+            elements.loading.style.display = 'none';
+        }
+    }
+
+    // ─── Filter & Search Engine ───
+    function applyFilters() {
+        const query = elements.searchInput.value.toLowerCase().trim();
+        const category = elements.filterCategory.value;
+        const priority = elements.filterPriority.value;
+        const status = elements.filterStatus.value;
+        const sort = elements.sortBy.value;
+
+        let filtered = feedbackDataset.filter(item => {
+            // Search query
+            if (query) {
+                const userName = (item.user || '').toLowerCase();
+                const comment = (item.comment || '').toLowerCase();
+                const cat = (item.analysis?.category || '').toLowerCase();
+                const recom = (item.analysis?.recommendation || '').toLowerCase();
+                const id = (item.id || '').toLowerCase();
+                if (!userName.includes(query) && !comment.includes(query) && !cat.includes(query) && !recom.includes(query) && !id.includes(query)) {
+                    return false;
+                }
+            }
+
+            // Category filter
+            if (category !== 'all' && item.analysis?.category !== category) {
+                return false;
+            }
+
+            // Priority filter
+            if (priority !== 'all' && (item.workflow?.priority || 'normal') !== priority) {
+                return false;
+            }
+
+            // Status filter
+            if (status !== 'all' && (item.workflow?.status || 'baru') !== status) {
+                return false;
+            }
+
+            return true;
+        });
+
+        // Sorting
+        if (sort === 'oldest') {
+            filtered.sort((a, b) => (a.timestamp || '').localeCompare(b.timestamp || ''));
+        } else if (sort === 'similarity') {
+            filtered.sort((a, b) => parseSimilarityNumber(b.analysis?.similarity) - parseSimilarityNumber(a.analysis?.similarity));
+        } else if (sort === 'priority') {
+            const pRank = { 'kritis': 4, 'tinggi': 3, 'normal': 2, 'rendah': 1 };
+            filtered.sort((a, b) => (pRank[b.workflow?.priority || 'normal'] || 0) - (pRank[a.workflow?.priority || 'normal'] || 0));
+        } else { // 'newest' default
+            filtered.sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || ''));
+        }
+
+        renderFeedbackList(filtered);
+    }
+
+    // Event listeners for filters
+    elements.searchInput.addEventListener('input', applyFilters);
+    elements.filterCategory.addEventListener('change', applyFilters);
+    elements.filterPriority.addEventListener('change', applyFilters);
+    elements.filterStatus.addEventListener('change', applyFilters);
+    elements.sortBy.addEventListener('change', applyFilters);
+
+    elements.btnReset.addEventListener('click', () => {
+        elements.searchInput.value = '';
+        elements.filterCategory.value = 'all';
+        elements.filterPriority.value = 'all';
+        elements.filterStatus.value = 'all';
+        elements.sortBy.value = 'newest';
+        applyFilters();
+    });
+
+    // ─── Save Workflow Action ───
+    window.saveWorkflow = async (feedbackId) => {
+        const panel = document.getElementById(`workflow-${feedbackId}`);
+        if (!panel) return;
+
+        const btn = panel.querySelector('.btn-save-workflow');
+        const originalText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = `<span class="spinner-border spinner-border-sm me-1" role="status"></span> Menyimpan...`;
+
+        const payload = {};
+        panel.querySelectorAll('[data-field]').forEach(input => {
+            payload[input.dataset.field] = input.value;
+        });
+
+        try {
+            const res = await fetch(API.workflow(feedbackId), {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.error || 'Gagal menyimpan perubahan');
+
+            // Update in memory dataset
+            const targetIdx = feedbackDataset.findIndex(r => r.id === feedbackId);
+            if (targetIdx !== -1) {
+                feedbackDataset[targetIdx] = result.feedback;
+            }
+
+            Toast.fire({
+                icon: 'success',
+                title: 'Tindak lanjut berhasil disimpan'
+            });
+
+            // Update timestamp label
+            const timeLabel = document.getElementById(`updated-at-${feedbackId}`);
+            if (timeLabel && result.feedback?.workflow?.updated_at) {
+                timeLabel.innerHTML = `<i class="bi bi-clock-history me-1"></i>Diperbarui: ${escapeHtml(result.feedback.workflow.updated_at)}`;
+            }
+
+            // Refresh analytics
+            await fetchAnalytics();
+        } catch (err) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal Menyimpan',
+                text: err.message,
+                confirmButtonColor: '#3b82f6'
+            });
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+        }
+    };
+
+    // ─── Delete Feedback Action ───
+    window.confirmDeleteFeedback = async (feedbackId) => {
+        const confirm = await Swal.fire({
+            title: 'Hapus Feedback Ini?',
+            text: 'Tindakan ini tidak dapat dibatalkan. Masukan dari pengguna akan dihapus permanen dari sistem.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ef4444',
+            cancelButtonColor: '#64748b',
+            confirmButtonText: 'Ya, Hapus Sekarang',
+            cancelButtonText: 'Batal'
+        });
+
+        if (!confirm.isConfirmed) return;
+
+        try {
+            const res = await fetch(API.delete(feedbackId), {
+                method: 'DELETE',
+                headers: { 'X-CSRFToken': csrfToken }
+            });
+
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.error || 'Gagal menghapus');
+
+            feedbackDataset = feedbackDataset.filter(r => r.id !== feedbackId);
+            applyFilters();
+            await fetchAnalytics();
+
+            Toast.fire({
+                icon: 'success',
+                title: 'Feedback berhasil dihapus'
+            });
+        } catch (err) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal Menghapus',
+                text: err.message,
+                confirmButtonColor: '#3b82f6'
+            });
+        }
+    };
+
+    // ─── AI Smart Reply Generator ───
+    window.generateAiReply = async (feedbackId) => {
+        const panel = document.getElementById(`workflow-${feedbackId}`);
+        if (!panel) return;
+        const textarea = panel.querySelector('[data-field="admin_response"]');
+
+        Toast.fire({
+            icon: 'info',
+            title: '✨ AI Gemini sedang merancang balasan...'
+        });
+
+        try {
+            const res = await fetch(API.aiReply(feedbackId), {
+                method: 'POST',
+                headers: { 'X-CSRFToken': csrfToken }
+            });
+
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.error || 'Gagal menghasilkan balasan AI');
+
+            if (textarea && result.draft_reply) {
+                textarea.value = result.draft_reply;
+                textarea.focus();
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Draf balasan AI berhasil dibuat!'
+                });
+            }
+        } catch (err) {
+            Swal.fire({
+                icon: 'error',
+                title: 'AI Tidak Merespon',
+                text: err.message,
+                confirmButtonColor: '#3b82f6'
+            });
+        }
+    };
+
+    // ─── Full CBR Re-analysis Action ───
+    elements.btnReanalyze.addEventListener('click', async () => {
+        const confirm = await Swal.fire({
+            title: 'Jalankan Re-analisis CBR?',
+            text: 'Sistem akan menerapkan algoritma Weighted Case-Based Reasoning dan heuristik sentimen terbaru untuk memperbarui seluruh data feedback yang ada.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3b82f6',
+            cancelButtonColor: '#64748b',
+            confirmButtonText: 'Mulai Re-analisis',
+            cancelButtonText: 'Batal'
+        });
+
+        if (!confirm.isConfirmed) return;
+
+        Swal.fire({
+            title: 'Memproses CBR...',
+            text: 'Harap tunggu, algoritma sedang menganalisis seluruh data masukan.',
+            allowOutsideClick: false,
+            didOpen: () => Swal.showLoading()
+        });
+
+        try {
+            const res = await fetch(API.reanalyze, {
+                method: 'POST',
+                headers: { 'X-CSRFToken': csrfToken }
+            });
+
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.error || 'Gagal memproses ulang');
+
+            await fetchFeedbackList();
+            await fetchAnalytics();
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Re-analisis Selesai!',
+                text: result.message,
+                confirmButtonColor: '#3b82f6'
+            });
+        } catch (err) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal Re-analisis',
+                text: err.message,
+                confirmButtonColor: '#3b82f6'
+            });
+        }
+    });
+
+    // ─── AI Executive Overview Modal ───
+    const aiModal = new bootstrap.Modal(document.getElementById('aiOverviewModal'));
+    const aiLoading = document.getElementById('aiOverviewLoading');
+    const aiContent = document.getElementById('aiOverviewContent');
+
+    elements.btnAiOverview.addEventListener('click', async () => {
+        aiLoading.style.display = 'block';
+        aiContent.style.display = 'none';
+        aiModal.show();
+
+        try {
+            const res = await fetch(API.aiOverview);
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.error || 'Gagal membuat ringkasan');
+
+            // Format markdown text to clean HTML paragraphs/lists
+            let formatted = result.summary
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/^• (.*?)$/gm, '<li class="mb-1">$1</li>')
+                .replace(/^- (.*?)$/gm, '<li class="mb-1">$1</li>')
+                .replace(/\n\n/g, '<br><br>');
+
+            aiContent.innerHTML = formatted;
+            aiLoading.style.display = 'none';
+            aiContent.style.display = 'block';
+        } catch (err) {
+            aiLoading.style.display = 'none';
+            aiContent.innerHTML = `<div class="alert alert-danger">${escapeHtml(err.message)}</div>`;
+            aiContent.style.display = 'block';
+        }
+    });
+
+    document.getElementById('btnCopyAiOverview').addEventListener('click', () => {
+        const text = aiContent.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            Toast.fire({ icon: 'success', title: 'Ringkasan disalin ke clipboard' });
+        });
+    });
+
+    // ─── Initial App Load ───
+    fetchFeedbackList();
+    fetchAnalytics();
 });
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

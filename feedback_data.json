@@ -1,17 +1,5 @@
 [
     {
-        "timestamp": "2026-07-19 16:10:41",
-        "user": "Anonymous",
-        "features": [],
-        "comment": "",
-        "analysis": {
-            "category": "General",
-            "status": "Neutral",
-            "similarity": "0.00%",
-            "recommendation": "Terima kasih atas feedback Anda. Kami akan meninjau saran Anda."
-        }
-    },
-    {
         "timestamp": "2026-04-14 16:58:25",
         "user": "Abil Nugraha",
         "features": [
@@ -23,10 +11,21 @@
         ],
         "comment": "Tolong perbaiki UI/UX-nya serta Error yang sering terjadi ",
         "analysis": {
-            "category": "Performa",
-            "status": "Sangat Baik",
-            "similarity": "100.00%",
-            "recommendation": "Kecepatan akses optimal. Pastikan optimasi server tetap stabil seiring bertambahnya trafik."
+            "category": "Teknis & Bug",
+            "status": "Kritis",
+            "similarity": "55.10%",
+            "similarity_raw": 0.551,
+            "sentiment": "Kritis / Negatif",
+            "matched_case_id": "CAT_TECH_CRITICAL",
+            "recommendation": "Lakukan debugging pada function JavaScript dan kalkulator matematika. Terapkan automated testing serta audit integritas server."
+        },
+        "id": "1e87a078-0a03-488b-8be1-3f524c06a7db",
+        "workflow": {
+            "status": "baru",
+            "priority": "kritis",
+            "admin_response": "",
+            "action_plan": "",
+            "updated_at": null
         }
     },
     {
@@ -39,10 +38,21 @@
         ],
         "comment": "Tolong perbaiki sidenav nya ",
         "analysis": {
-            "category": "Performa",
-            "status": "Isu Optimasi",
-            "similarity": "100.00%",
-            "recommendation": "Optimasi rendering Chart.js. Gunakan data lazy loading atau kurangi kompleksitas visual pada grafik berat."
+            "category": "Responsivitas",
+            "status": "Isu Mobile",
+            "similarity": "43.24%",
+            "similarity_raw": 0.4324,
+            "sentiment": "Negatif",
+            "matched_case_id": "CAT_MOBILE_ISSUE",
+            "recommendation": "Perbaiki z-index sidenav overlay, sesuaikan touch target button, dan uji kompatibilitas responsive di berbagai resolusi layar HP."
+        },
+        "id": "0e1d0a5a-ec96-4226-a5fe-f612edc3ac4d",
+        "workflow": {
+            "status": "baru",
+            "priority": "tinggi",
+            "admin_response": "",
+            "action_plan": "",
+            "updated_at": null
         }
     },
     {
@@ -57,8 +67,19 @@
         "analysis": {
             "category": "Konten Materi",
             "status": "Perlu Penyederhanaan",
-            "similarity": "100.00%",
-            "recommendation": "Gunakan bahasa yang lebih ramah pemula (ELI5). Tambahkan lebih banyak studi kasus dunia nyata."
+            "similarity": "74.50%",
+            "similarity_raw": 0.745,
+            "sentiment": "Negatif",
+            "matched_case_id": "CAT_CONTENT_NEG",
+            "recommendation": "Sederhanakan pemaparan rumus dengan pendekatan kontekstual (ELI5). Tambahkan lebih banyak simulasi kasus nyata di industri."
+        },
+        "id": "70e0bf55-6c7c-46e1-a132-a55312eb1816",
+        "workflow": {
+            "status": "baru",
+            "priority": "tinggi",
+            "admin_response": "",
+            "action_plan": "",
+            "updated_at": null
         }
     },
     {
@@ -71,10 +92,21 @@
         ],
         "comment": "Tolong Perbaiki Bug-nya, khawatirnya nanti akan ada serangan atau celah masuk yang akan menghancurkan website ini dari dalam",
         "analysis": {
-            "category": "Performa",
+            "category": "Teknis & Bug",
             "status": "Kritis",
-            "similarity": 1.0,
-            "recommendation": "Periksa ukuran aset (gambar/JS). Optimasi query database dan cek error logs server."
+            "similarity": "70.80%",
+            "similarity_raw": 0.708,
+            "sentiment": "Kritis / Negatif",
+            "matched_case_id": "CAT_TECH_CRITICAL",
+            "recommendation": "Lakukan debugging pada function JavaScript dan kalkulator matematika. Terapkan automated testing serta audit integritas server."
+        },
+        "id": "df321528-256b-43eb-880e-9c3aa14c9f03",
+        "workflow": {
+            "status": "baru",
+            "priority": "kritis",
+            "admin_response": "",
+            "action_plan": "",
+            "updated_at": null
         }
     },
     {
@@ -85,8 +117,19 @@
         "analysis": {
             "category": "General",
             "status": "Neutral",
-            "similarity": 0,
-            "recommendation": "Terima kasih atas feedback Anda."
+            "similarity": "0.00%",
+            "similarity_raw": 0.0,
+            "sentiment": "Netral",
+            "matched_case_id": "CAT_GENERAL",
+            "recommendation": "Terima kasih atas feedback Anda. Tim MathThon akan meninjau saran Anda secara berkala."
+        },
+        "id": "69d4db73-67f8-40d0-9a34-258a7063c804",
+        "workflow": {
+            "status": "baru",
+            "priority": "normal",
+            "admin_response": "",
+            "action_plan": "",
+            "updated_at": null
         }
     },
     {
@@ -101,10 +144,21 @@
         ],
         "comment": "Tolong, untuk bagian materi, bug, dan loading nya harus ditingkatkan kembali",
         "analysis": {
-            "category": "Performa",
-            "status": "Positif",
-            "similarity": 1.0,
-            "recommendation": "Optimasi infrastruktur saat ini sudah baik. Pertahankan penggunaan CDN dan caching."
+            "category": "Teknis & Bug",
+            "status": "Kritis",
+            "similarity": "76.12%",
+            "similarity_raw": 0.7612,
+            "sentiment": "Kritis / Negatif",
+            "matched_case_id": "CAT_TECH_CRITICAL",
+            "recommendation": "Lakukan debugging pada function JavaScript dan kalkulator matematika. Terapkan automated testing serta audit integritas server."
+        },
+        "id": "b293a4bc-3799-459a-a708-24bbf5d4e8f0",
+        "workflow": {
+            "status": "baru",
+            "priority": "kritis",
+            "admin_response": "",
+            "action_plan": "",
+            "updated_at": null
         }
     },
     {
@@ -117,10 +171,21 @@
         ],
         "comment": "Tolong untuk navigasinya diperbaiki lagi",
         "analysis": {
-            "category": "Desain & UI",
-            "status": "Negatif",
-            "similarity": 1.0,
-            "recommendation": "Lakukan audit UI. Sederhanakan navigasi dan perbaiki kontras warna."
+            "category": "Performa",
+            "status": "Isu Optimasi",
+            "similarity": "34.82%",
+            "similarity_raw": 0.3482,
+            "sentiment": "Negatif",
+            "matched_case_id": "CAT_PERF_LAG",
+            "recommendation": "Optimasi rendering Chart.js, terapkan data lazy loading atau debouncing, dan kurangi kompleksitas kalkulasi visual saat load grafik."
+        },
+        "id": "e402aa36-204c-4fbb-a34b-eb85174a62de",
+        "workflow": {
+            "status": "baru",
+            "priority": "tinggi",
+            "admin_response": "",
+            "action_plan": "",
+            "updated_at": null
         }
     },
     {
@@ -135,10 +200,21 @@
         ],
         "comment": "Pertama-tama, ada beberapa hal yang mesti diperhatikan, yakni font yang buruk, lalu grafik lag, lalu materi yang cukup rumit untuk dipahami, serta error dan bug yang susah dihilangkan, tolong perbaiki!!!",
         "analysis": {
-            "category": "Performa",
-            "status": "Isu Optimasi",
-            "similarity": 1.0,
-            "recommendation": "Optimasi rendering Chart.js. Gunakan data lazy loading atau kurangi kompleksitas visual pada grafik berat."
+            "category": "Teknis & Bug",
+            "status": "Kritis",
+            "similarity": "83.90%",
+            "similarity_raw": 0.839,
+            "sentiment": "Kritis / Negatif",
+            "matched_case_id": "CAT_TECH_CRITICAL",
+            "recommendation": "Lakukan debugging pada function JavaScript dan kalkulator matematika. Terapkan automated testing serta audit integritas server."
+        },
+        "id": "3a2c225f-6a46-4fc6-94e5-87f1f37794f8",
+        "workflow": {
+            "status": "baru",
+            "priority": "kritis",
+            "admin_response": "",
+            "action_plan": "",
+            "updated_at": null
         }
     },
     {
@@ -153,10 +229,21 @@
         ],
         "comment": "Tolong perbaiki layarnya secepatnya",
         "analysis": {
-            "category": "Performa",
-            "status": "Isu Optimasi",
-            "similarity": 1.0,
-            "recommendation": "Optimasi rendering Chart.js. Gunakan data lazy loading atau kurangi kompleksitas visual pada grafik berat."
+            "category": "Teknis & Bug",
+            "status": "Kritis",
+            "similarity": "63.70%",
+            "similarity_raw": 0.637,
+            "sentiment": "Negatif",
+            "matched_case_id": "CAT_TECH_CRITICAL",
+            "recommendation": "Lakukan debugging pada function JavaScript dan kalkulator matematika. Terapkan automated testing serta audit integritas server."
+        },
+        "id": "ca21e3b4-0470-40f3-8e01-66e92405dcc8",
+        "workflow": {
+            "status": "baru",
+            "priority": "kritis",
+            "admin_response": "",
+            "action_plan": "",
+            "updated_at": null
         }
     },
     {
@@ -172,8 +259,19 @@
         "analysis": {
             "category": "Desain & UI",
             "status": "Perlu Perbaikan UX",
-            "similarity": 1.0,
-            "recommendation": "Evaluasi hirarki informasi. Perbaiki kontras warna teks dan sederhanakan alur navigasi agar lebih intuitif."
+            "similarity": "53.63%",
+            "similarity_raw": 0.5363,
+            "sentiment": "Netral",
+            "matched_case_id": "CAT_UI_NEG",
+            "recommendation": "Evaluasi hierarki visual. Perbaiki rasio kontras warna font sesuai pedoman WCAG AA dan sederhanakan breadcrumb navigasi menu."
+        },
+        "id": "7e999959-0e6e-4dd0-ac5d-58d2d3053503",
+        "workflow": {
+            "status": "baru",
+            "priority": "tinggi",
+            "admin_response": "",
+            "action_plan": "",
+            "updated_at": null
         }
     },
     {
@@ -188,8 +286,19 @@
         "analysis": {
             "category": "Teknis & Bug",
             "status": "Kritis",
-            "similarity": 1.0,
-            "recommendation": "Lakukan debugging pada function JavaScript terkait. Unit testing diperlukan untuk fitur kalkulator."
+            "similarity": "75.91%",
+            "similarity_raw": 0.7591,
+            "sentiment": "Negatif",
+            "matched_case_id": "CAT_TECH_CRITICAL",
+            "recommendation": "Lakukan debugging pada function JavaScript dan kalkulator matematika. Terapkan automated testing serta audit integritas server."
+        },
+        "id": "38075cbc-ca2c-4ddb-b75e-058aea8c81af",
+        "workflow": {
+            "status": "baru",
+            "priority": "kritis",
+            "admin_response": "",
+            "action_plan": "",
+            "updated_at": null
         }
     },
     {
@@ -203,10 +312,21 @@
         ],
         "comment": "Tolong untuk desain web-nya ditingkatkan lagi",
         "analysis": {
-            "category": "Performa",
-            "status": "Isu Optimasi",
-            "similarity": 1.0,
-            "recommendation": "Optimasi rendering Chart.js. Gunakan data lazy loading atau kurangi kompleksitas visual pada grafik berat."
+            "category": "Teknis & Bug",
+            "status": "Kritis",
+            "similarity": "46.26%",
+            "similarity_raw": 0.4626,
+            "sentiment": "Negatif",
+            "matched_case_id": "CAT_TECH_CRITICAL",
+            "recommendation": "Lakukan debugging pada function JavaScript dan kalkulator matematika. Terapkan automated testing serta audit integritas server."
+        },
+        "id": "40193910-9d38-4e20-8f20-6f2129b9ed95",
+        "workflow": {
+            "status": "baru",
+            "priority": "kritis",
+            "admin_response": "",
+            "action_plan": "",
+            "updated_at": null
         }
     }
 ]

@@ -278,5 +278,25 @@
         "severity": "INFO",
         "details": "Admin 'Edward_Kenway' berhasil masuk melalui Portal Terpadu dari IP 127.0.0.1",
         "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 05:21:28",
+        "ip": "127.0.0.1",
+        "path": "/auth/login",
+        "method": "POST",
+        "attack_type": "Admin Authentication",
+        "severity": "INFO",
+        "details": "Admin 'Edward_Kenway' berhasil masuk melalui Portal Terpadu dari IP 127.0.0.1",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 05:26:49",
+        "ip": "127.0.0.1",
+        "path": "/auth/login",
+        "method": "POST",
+        "attack_type": "Admin Authentication",
+        "severity": "INFO",
+        "details": "Admin 'Edward_Kenway' berhasil masuk melalui Portal Terpadu dari IP 127.0.0.1",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
     }
 ]

@@ -3,28 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ekspor Database | MathThon Admin</title>
+    <title>MathThon Admin | Manajemen &amp; Backup Database</title>
     
     <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
     
-    <!-- Bootstrap 5 & Icons -->
+    <!-- Google Fonts: Plus Jakarta Sans, Outfit, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5.3.2 & Icons 1.11.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     
     <!-- Unified Admin Dashboard CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/css_for_dashboard_admin.css') }}">
     
     <style>
-        .export-card {
+        :root {
+            --db-primary: #3b82f6;
+            --db-indigo: #6366f1;
+            --db-emerald: #10b981;
+            --db-amber: #f59e0b;
+            --db-crimson: #ef4444;
+            --db-cyan: #06b6d4;
+            --db-card-bg: rgba(255, 255, 255, 0.94);
+            --db-card-border: #e2e8f0;
+            --db-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
+            --db-shadow-hover: 0 20px 30px -10px rgba(15, 23, 42, 0.10), 0 10px 15px -5px rgba(15, 23, 42, 0.04);
+        }
+
+        body.admin-dashboard-body {
+            font-family: var(--adm-font-sans);
+            background-color: var(--adm-bg);
+            color: var(--adm-text-main);
+            min-height: 100vh;
+        }
+
+        /* ─── Hero Section ─── */
+        .db-hero {
+            padding: 2.25rem 0 1.5rem;
+        }
+        .db-hero .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #eff6ff;
+            color: var(--adm-primary);
+            border: 1px solid #bfdbfe;
+            border-radius: 9999px;
+            padding: 0.35rem 1rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 0.85rem;
+        }
+        .db-hero h1 {
+            font-family: var(--adm-font-display);
+            font-size: clamp(1.85rem, 3.5vw, 2.65rem);
+            font-weight: 800;
+            color: var(--adm-text-main);
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+        .db-hero h1 .highlight {
+            background: var(--grad-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .db-hero .subtitle {
+            font-size: 0.98rem;
+            color: var(--adm-text-muted);
+            max-width: 760px;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* ─── Telemetry KPI Grid ─── */
+        .telemetry-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.15rem;
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 992px) { .telemetry-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 576px) { .telemetry-grid { grid-template-columns: 1fr; } }
+
+        .telemetry-card {
+            background: var(--db-card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--db-card-border);
+            border-radius: var(--radius-lg);
+            padding: 1.35rem;
+            box-shadow: var(--db-shadow);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+        }
+        .telemetry-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--db-shadow-hover);
+            border-color: #cbd5e1;
+        }
+        .telemetry-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; bottom: 0;
+            width: 4px;
+            background: var(--card-accent, var(--grad-primary));
+        }
+        .telemetry-icon-box {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #ffffff;
+            background: var(--card-accent, var(--grad-primary));
+            box-shadow: 0 8px 16px -4px rgba(0,0,0,0.12);
+            flex-shrink: 0;
+        }
+        .telemetry-content .telemetry-val {
+            font-family: var(--adm-font-display);
+            font-size: 1.65rem;
+            font-weight: 800;
+            color: var(--adm-text-main);
+            line-height: 1.1;
+            margin-bottom: 0.25rem;
+        }
+        .telemetry-content .telemetry-lbl {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--adm-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ─── Modern Tabs ─── */
+        .db-nav-tabs {
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 1.75rem;
+            gap: 0.5rem;
+        }
+        .db-nav-tabs .nav-link {
+            border: none;
+            color: var(--adm-text-muted);
+            font-weight: 600;
+            font-size: 0.92rem;
+            padding: 0.85rem 1.4rem;
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .db-nav-tabs .nav-link:hover {
+            color: var(--adm-primary);
+            background: rgba(239, 246, 255, 0.6);
+        }
+        .db-nav-tabs .nav-link.active {
+            color: var(--adm-primary);
             background: #ffffff;
-            border-radius: 20px;
+            border-bottom: 3px solid var(--adm-primary);
+            font-weight: 700;
+        }
+        .db-nav-tabs .nav-link .badge-count {
+            background: #eff6ff;
+            color: var(--adm-primary);
+            font-size: 0.75rem;
+            padding: 0.2rem 0.55rem;
+            border-radius: 9999px;
+            font-family: var(--adm-font-mono);
+        }
+
+        /* ─── Content Panels ─── */
+        .panel-surface {
+            background: var(--db-card-bg);
+            border: 1px solid var(--db-card-border);
+            border-radius: var(--radius-xl);
+            padding: 1.75rem;
+            box-shadow: var(--db-shadow);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(12px);
+        }
+
+        /* ─── Periodic Backup Schedule Banner ─── */
+        .schedule-banner {
+            background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
+            border: 1px solid #bfdbfe;
+            border-radius: var(--radius-lg);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .schedule-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .schedule-icon-squircle {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background: var(--grad-indigo);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 6px 14px -3px rgba(99, 102, 241, 0.35);
+        }
+        .schedule-text h4 {
+            font-family: var(--adm-font-display);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--adm-text-main);
+            margin-bottom: 0.25rem;
+        }
+        .schedule-text p {
+            font-size: 0.85rem;
+            color: var(--adm-text-muted);
+            margin: 0;
+        }
+
+        /* ─── Universal Export Cards ─── */
+        .export-card-ultra {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
             border: 1px solid var(--adm-border);
-            box-shadow: var(--adm-shadow-sm);
-            padding: 2.25rem 2rem;
+            box-shadow: var(--adm-shadow-xs);
+            padding: 1.85rem 1.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -32,64 +259,94 @@
             position: relative;
             overflow: hidden;
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            height: 100%;
         }
-        .export-card:hover {
+        .export-card-ultra:hover {
             transform: translateY(-6px);
-            box-shadow: var(--adm-shadow-lg);
-            border-color: rgba(203, 213, 225, 0.9);
+            box-shadow: var(--db-shadow-hover);
+            border-color: #cbd5e1;
         }
-        .export-card::before {
+        .export-card-ultra::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 4px;
-            background: var(--exp-gradient, var(--grad-indigo));
+            background: var(--exp-accent, var(--grad-primary));
         }
-        .export-icon-box {
-            width: 72px;
-            height: 72px;
-            border-radius: 20px;
+        .export-card-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 1.85rem;
             color: #ffffff;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.15);
+            background: var(--exp-accent, var(--grad-primary));
+            margin-bottom: 1.25rem;
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.15);
             transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .export-card:hover .export-icon-box {
-            transform: scale(1.1) rotate(5deg);
+        .export-card-ultra:hover .export-card-icon {
+            transform: scale(1.1) rotate(4deg);
         }
-        .exp-excel { --exp-gradient: var(--grad-emerald); }
-        .exp-excel .export-icon-box { background: var(--grad-emerald); box-shadow: 0 10px 24px -4px rgba(16, 185, 129, 0.4); }
-        .exp-sql { --exp-gradient: var(--grad-indigo); }
-        .exp-sql .export-icon-box { background: var(--grad-indigo); box-shadow: 0 10px 24px -4px rgba(99, 102, 241, 0.4); }
-        .exp-csv { --exp-gradient: var(--grad-cyan); }
-        .exp-csv .export-icon-box { background: var(--grad-cyan); box-shadow: 0 10px 24px -4px rgba(6, 182, 212, 0.4); }
-        
-        .page-title-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(16, 185, 129, 0.1);
-            color: #059669;
-            border: 1px solid rgba(16, 185, 129, 0.25);
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 0.78rem;
+
+        /* Table styles */
+        .table-responsive {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+        .table-custom {
+            margin-bottom: 0;
+            font-size: 0.88rem;
+        }
+        .table-custom th {
+            background: #f8fafc;
+            color: var(--adm-text-muted);
             font-weight: 700;
             text-transform: uppercase;
+            font-size: 0.75rem;
             letter-spacing: 0.05em;
-            margin-bottom: 0.85rem;
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid var(--adm-border);
+            white-space: nowrap;
+        }
+        .table-custom td {
+            padding: 0.95rem 1rem;
+            vertical-align: middle;
+            border-bottom: 1px solid #f1f5f9;
+            color: var(--adm-text-main);
+        }
+        .table-custom tbody tr:hover {
+            background-color: rgba(248, 250, 252, 0.8);
+        }
+
+        .badge-type {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .badge-type.tp-manual { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+        .badge-type.tp-auto { background: #f3e8ff; color: #7c3aed; border: 1px solid #e9d5ff; }
+
+        .hash-code {
+            font-family: var(--adm-font-mono);
+            font-size: 0.75rem;
+            background: #f1f5f9;
+            padding: 0.2rem 0.45rem;
+            border-radius: 4px;
+            color: #475569;
         }
     </style>
 </head>
 <body class="admin-dashboard-body d-flex flex-column min-vh-100">
 
-<!-- Glassmorphic Navbar -->
+<!-- ══════════════════════════════════════════════════════════════════════
+     NAVBAR
+     ══════════════════════════════════════════════════════════════════════ -->
 <nav class="navbar navbar-expand-lg admin-navbar">
     <div class="container">
         <a class="admin-brand" href="{{ url_for('admin.dashboard_admin') }}">
@@ -118,14 +375,28 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link admin-nav-link" href="{{ url_for('admin.manage_feedback') }}">
+                        <i class="bi bi-chat-left-text-fill"></i>
+                        <span>Kelola Feedback</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link admin-nav-link active text-primary" href="{{ url_for('admin.export_database') }}">
                         <i class="bi bi-database-down"></i>
-                        <span>Ekspor Database</span>
+                        <span>Manajemen Database</span>
                     </a>
                 </li>
             </ul>
 
             <div class="d-flex align-items-center gap-3">
+                <div class="admin-user-pill d-none d-md-flex">
+                    <div class="admin-avatar">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                    <span>{{ users.name if users else 'Administrator' }}</span>
+                    <span class="admin-status-dot" title="Online & Aktif"></span>
+                </div>
+
                 <a href="{{ url_for('admin.logout_admin') }}" class="btn-admin-logout">
                     <i class="bi bi-box-arrow-right"></i>
                     <span>Logout</span>
@@ -135,147 +406,707 @@
     </div>
 </nav>
 
-<!-- Main Container -->
-<main class="container my-4 my-md-5">
-    <div class="text-center mb-4 pb-2 animate__animated animate__fadeInDown">
-        <div class="page-title-badge">
-            <i class="bi bi-database-check"></i>
-            Backup & Ekspor Sistem
+<!-- ══════════════════════════════════════════════════════════════════════
+     MAIN CONTAINER
+     ══════════════════════════════════════════════════════════════════════ -->
+<main class="container my-auto py-3">
+
+    <!-- Hero Header -->
+    <header class="db-hero">
+        <div class="hero-pill">
+            <i class="bi bi-database-fill-gear"></i> Pusat Pemulihan &amp; Backup Database
         </div>
-        <h1 class="admin-hero-title mb-2">
-            Ekspor <span class="highlight">Database MathThon</span>
-        </h1>
-        <p class="admin-hero-desc">
-            Unduh salinan berkas database aplikasi dalam berbagai format standar untuk keperluan backup berkala, audit data, atau analisis offline.
+        <h1>Manajemen &amp; <span class="highlight">Backup Database</span></h1>
+        <p class="subtitle">
+            Pantau kesehatan seluruh tabel database, kelola snapshot berkala secara otomatis, lakukan optimasi penyimpanan, serta unduh atau pulihkan data kapan saja dengan aman.
         </p>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+            <button class="btn btn-primary rounded-pill px-3 py-2 fw-semibold" id="btnInstantSnapshot">
+                <i class="bi bi-lightning-charge-fill me-1"></i> Buat Snapshot Backup Sekarang
+            </button>
+            <button class="btn btn-outline-primary rounded-pill px-3 py-2 fw-semibold" data-bs-toggle="modal" data-bs-target="#scheduleConfigModal">
+                <i class="bi bi-clock-history me-1"></i> Konfigurasi Jadwal Berkala
+            </button>
+            <button class="btn btn-outline-secondary rounded-pill px-3 py-2 fw-semibold" data-bs-toggle="modal" data-bs-target="#uploadRestoreModal">
+                <i class="bi bi-cloud-upload-fill me-1"></i> Pulihkan dari Berkas Luar
+            </button>
+        </div>
+    </header>
+
+    <!-- Telemetry KPI Grid -->
+    <section class="telemetry-grid">
+        <div class="telemetry-card" style="--card-accent: var(--grad-indigo);">
+            <div class="telemetry-icon-box">
+                <i class="bi bi-database-check"></i>
+            </div>
+            <div class="telemetry-content">
+                <div class="telemetry-val">{{ overview.database_name }}</div>
+                <div class="telemetry-lbl">MySQL {{ overview.version[:10] }} &bull; Aktif</div>
+            </div>
+        </div>
+
+        <div class="telemetry-card" style="--card-accent: var(--grad-cyan);">
+            <div class="telemetry-icon-box">
+                <i class="bi bi-hdd-network-fill"></i>
+            </div>
+            <div class="telemetry-content">
+                <div class="telemetry-val">{{ overview.total_size_formatted }}</div>
+                <div class="telemetry-lbl">Total Ukuran Penyimpanan</div>
+            </div>
+        </div>
+
+        <div class="telemetry-card" style="--card-accent: var(--grad-emerald);">
+            <div class="telemetry-icon-box">
+                <i class="bi bi-table"></i>
+            </div>
+            <div class="telemetry-content">
+                <div class="telemetry-val">{{ overview.total_tables }} Tabel</div>
+                <div class="telemetry-lbl">{{ overview.total_rows }} Total Baris Data</div>
+            </div>
+        </div>
+
+        <div class="telemetry-card" style="--card-accent: var(--grad-violet);">
+            <div class="telemetry-icon-box">
+                <i class="bi bi-clock-history"></i>
+            </div>
+            <div class="telemetry-content">
+                <div class="telemetry-val">{{ 'Aktif' if config.auto_backup_enabled else 'Nonaktif' }}</div>
+                <div class="telemetry-lbl">Backup {{ config.interval_type|capitalize }} ({{ backups|length }} Berkas)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <ul class="nav db-nav-tabs" id="dbTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="tab-backups-btn" data-bs-toggle="tab" data-bs-target="#tab-backups" type="button" role="tab">
+                <i class="bi bi-archive-fill text-primary"></i>
+                Repositori Backup Berkala
+                <span class="badge-count">{{ backups|length }}</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tab-tables-btn" data-bs-toggle="tab" data-bs-target="#tab-tables" type="button" role="tab">
+                <i class="bi bi-diagram-3-fill text-info"></i>
+                Manajemen 15 Tabel Database
+                <span class="badge-count">{{ overview.total_tables }}</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tab-exports-btn" data-bs-toggle="tab" data-bs-target="#tab-exports" type="button" role="tab">
+                <i class="bi bi-download text-success"></i>
+                Unduh Ekspor Universal (Multi-Sheet/Dump)
+            </button>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="dbTabsContent">
+
+        <!-- ══════════════════════════════════════════════════════════════════
+             TAB 1: REPOSITORI BACKUP BERKALA & SNAPSHOT
+             ══════════════════════════════════════════════════════════════════ -->
+        <div class="tab-pane fade show active" id="tab-backups" role="tabpanel">
+            <div class="panel-surface">
+                
+                <!-- Schedule Summary Banner -->
+                <div class="schedule-banner">
+                    <div class="schedule-info">
+                        <div class="schedule-icon-squircle">
+                            <i class="bi bi-arrow-repeat"></i>
+                        </div>
+                        <div class="schedule-text">
+                            <h4>Jadwal Backup Berkala Otomatis: 
+                                <span class="badge {{ 'bg-success' if config.auto_backup_enabled else 'bg-secondary' }} ms-1">
+                                    {{ 'Aktif (' + config.interval_type|capitalize + ')' if config.auto_backup_enabled else 'Nonaktif' }}
+                                </span>
+                            </h4>
+                            <p>
+                                Snapshot berikutnya: <strong>{{ config.next_backup_time or 'Belum dijadwalkan' }}</strong> &bull; 
+                                Format: <strong>.{{ config.format|upper }}</strong> &bull; 
+                                Retensi Maksimal: <strong>{{ config.retention_count }} file terakhir</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-outline-primary bg-white rounded-pill px-3 fw-semibold" data-bs-toggle="modal" data-bs-target="#scheduleConfigModal">
+                            <i class="bi bi-sliders me-1"></i> Ubah Jadwal
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Backup Registry Table -->
+                <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+                    <h3 class="fw-bold fs-5 m-0 d-flex align-items-center gap-2">
+                        <i class="bi bi-folder2-open text-primary"></i>
+                        Daftar Berkas Snapshot Tersimpan di Server
+                    </h3>
+                    <span class="small text-muted">Folder arsip: <code>backups/database/</code></span>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-custom align-middle">
+                        <thead>
+                            <tr>
+                                <th>Nama Berkas Arsip</th>
+                                <th>Tipe Backup</th>
+                                <th>Format</th>
+                                <th>Waktu Pembuatan</th>
+                                <th>Ukuran Berkas</th>
+                                <th>Integritas (SHA256)</th>
+                                <th class="text-end">Aksi Pengelolaan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="backupTableBody">
+                            {% if backups %}
+                                {% for bkp in backups %}
+                                <tr id="row-{{ bkp.filename }}">
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <i class="bi {{ 'bi-file-zip-fill text-warning' if bkp.format == 'zip' else 'bi-file-earmark-code-fill text-primary' }} fs-5"></i>
+                                            <div>
+                                                <strong class="d-block text-dark">{{ bkp.filename }}</strong>
+                                                <small class="text-muted">ID: {{ bkp.id }}</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge-type {{ 'tp-auto' if 'scheduled' in bkp.type else 'tp-manual' }}">
+                                            {{ 'Otomatis' if 'scheduled' in bkp.type else 'Manual' }}
+                                        </span>
+                                    </td>
+                                    <td><span class="badge bg-light text-dark border">.{{ bkp.format|upper }}</span></td>
+                                    <td>{{ bkp.created_at }}</td>
+                                    <td><strong>{{ bkp.size_formatted }}</strong></td>
+                                    <td><span class="hash-code" title="{{ bkp.checksum }}">{{ bkp.checksum[:12] }}...</span></td>
+                                    <td class="text-end">
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="{{ url_for('admin.download_backup_route', filename=bkp.filename) }}" class="btn btn-outline-primary" title="Unduh Berkas">
+                                                <i class="bi bi-download"></i> Unduh
+                                            </a>
+                                            <button type="button" class="btn btn-outline-warning" onclick="confirmRestoreBackup('{{ bkp.filename }}')" title="Pulihkan Database">
+                                                <i class="bi bi-arrow-counterclockwise"></i> Restore
+                                            </button>
+                                            <button type="button" class="btn btn-outline-danger" onclick="confirmDeleteBackup('{{ bkp.filename }}')" title="Hapus Berkas">
+                                                <i class="bi bi-trash3-fill"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="7" class="text-center py-5 text-muted">
+                                        <i class="bi bi-inbox fs-2 d-block mb-2 text-secondary"></i>
+                                        Belum ada berkas backup yang dibuat. Klik tombol <strong>"Buat Snapshot Backup Sekarang"</strong> di atas.
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════════════════
+             TAB 2: MANAJEMEN 15 TABEL DATABASE
+             ══════════════════════════════════════════════════════════════════ -->
+        <div class="tab-pane fade" id="tab-tables" role="tabpanel">
+            <div class="panel-surface">
+                
+                <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+                    <div>
+                        <h3 class="fw-bold fs-5 m-0 d-flex align-items-center gap-2">
+                            <i class="bi bi-diagram-3-fill text-primary"></i>
+                            Struktur &amp; Kapasitas 15 Tabel Database
+                        </h3>
+                        <p class="text-muted small mb-0">Semua tabel aktif yang mendukung ekosistem aplikasi MathThon.</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-outline-primary rounded-pill px-3 py-2 fw-semibold" id="btnOptimizeAll">
+                            <i class="bi bi-speedometer2 me-1"></i> Optimalkan Seluruh Tabel Database
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-custom align-middle">
+                        <thead>
+                            <tr>
+                                <th>Nama Tabel</th>
+                                <th>Mesin</th>
+                                <th>Jumlah Baris</th>
+                                <th>Ukuran Data</th>
+                                <th>Ukuran Indeks</th>
+                                <th>Total Kapasitas</th>
+                                <th>Pembaruan Terakhir</th>
+                                <th class="text-end">Aksi Pemeliharaan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for tbl in overview.tables %}
+                            <tr id="tbl-row-{{ tbl.name }}">
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-table text-primary"></i>
+                                        <strong class="text-dark">{{ tbl.name }}</strong>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-light text-dark border">{{ tbl.engine }}</span></td>
+                                <td><strong>{{ tbl.rows }}</strong> baris</td>
+                                <td>{{ tbl.data_size_formatted }}</td>
+                                <td>{{ tbl.index_size_formatted }}</td>
+                                <td><strong class="text-primary">{{ tbl.total_size_formatted }}</strong></td>
+                                <td><small class="text-muted">{{ tbl.updated_at }}</small></td>
+                                <td class="text-end">
+                                    <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" onclick="optimizeTable('{{ tbl.name }}')">
+                                        <i class="bi bi-gear-fill me-1"></i> Optimalkan
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════════════════
+             TAB 3: UNDUH EKSPOR UNIVERSAL
+             ══════════════════════════════════════════════════════════════════ -->
+        <div class="tab-pane fade" id="tab-exports" role="tabpanel">
+            <div class="row g-4 justify-content-center">
+                
+                <!-- 1. Excel Export (Multi-sheet, all 15 tables) -->
+                <div class="col-md-6 col-lg-4 d-flex">
+                    <div class="export-card-ultra flex-fill" style="--exp-accent: var(--grad-emerald);">
+                        <div class="export-card-icon">
+                            <i class="bi bi-file-earmark-spreadsheet"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2">Excel Multi-Sheet (.XLSX)</h4>
+                        <span class="badge bg-success bg-opacity-10 text-success fw-bold px-3 py-1 rounded-pill mb-3">
+                            15 Tabel Terpetakan + Ringkasan
+                        </span>
+                        <p class="text-muted small mb-4 flex-grow-1">
+                            Seluruh tabel database diekspor ke dalam satu berkas spreadsheet Excel, masing-masing tabel memiliki lembar kerja (worksheet) tersendiri.
+                        </p>
+                        <a href="{{ url_for('admin.submit_export_excel') }}" class="btn btn-success rounded-pill w-100 py-2 fw-semibold">
+                            <i class="bi bi-download me-1"></i> Unduh Excel (.xlsx)
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. SQL Dump (Full Database Dump) -->
+                <div class="col-md-6 col-lg-4 d-flex">
+                    <div class="export-card-ultra flex-fill" style="--exp-accent: var(--grad-indigo);">
+                        <div class="export-card-icon">
+                            <i class="bi bi-file-earmark-code"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2">Full Database Dump (.SQL)</h4>
+                        <span class="badge bg-primary bg-opacity-10 text-primary fw-bold px-3 py-1 rounded-pill mb-3">
+                            Skema Lengkap + Data INSERT Utuh
+                        </span>
+                        <p class="text-muted small mb-4 flex-grow-1">
+                            Salinan murni skema tabel, relasi foreign key, dan data lengkap siap eksekusi di MySQL Workbench, phpMyAdmin, atau terminal.
+                        </p>
+                        <a href="{{ url_for('admin.submit_export_sql') }}" class="btn btn-primary rounded-pill w-100 py-2 fw-semibold">
+                            <i class="bi bi-download me-1"></i> Unduh Dump SQL (.sql)
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3. CSV ZIP Bundle -->
+                <div class="col-md-6 col-lg-4 d-flex">
+                    <div class="export-card-ultra flex-fill" style="--exp-accent: var(--grad-cyan);">
+                        <div class="export-card-icon">
+                            <i class="bi bi-file-earmark-zip"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2">Bundel CSV (.ZIP)</h4>
+                        <span class="badge bg-info bg-opacity-10 text-info fw-bold px-3 py-1 rounded-pill mb-3">
+                            15 Berkas CSV (UTF-8 BOM)
+                        </span>
+                        <p class="text-muted small mb-4 flex-grow-1">
+                            Kumpulan seluruh tabel dalam format Comma Separated Values ber-BOM UTF-8, siap dianalisis di Python, R, SPSS, atau Tableau.
+                        </p>
+                        <a href="{{ url_for('admin.submit_export_csv') }}" class="btn btn-info text-white rounded-pill w-100 py-2 fw-semibold">
+                            <i class="bi bi-download me-1"></i> Unduh Bundel CSV (.zip)
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
-    
-    <div id="exportStatus" class="alert shadow-sm border-0 mb-4" style="display:none; border-radius: 14px;" role="alert"></div>
 
-    <div class="row g-4 justify-content-center">
-        <!-- 1. Excel Export -->
-        <div class="col-md-6 col-lg-4 d-flex">
-            <div class="export-card exp-excel flex-fill animate__animated animate__zoomIn">
-                <div class="export-icon-box">
-                    <i class="bi bi-file-earmark-spreadsheet"></i>
-                </div>
-                <h4 class="fw-bold mb-2">Format Excel (XLSX)</h4>
-                <p class="text-muted small mb-4 flex-grow-1">
-                    Unduh data tabel pengguna dan analisis secara rapi dalam format spreadsheet Excel yang mudah dibaca dan diolah.
-                </p>
-                <a href="{{ url_for('admin.submit_export_excel') }}" class="btn-card-action export-link" data-format="Excel" style="background: var(--grad-emerald);">
-                    <i class="bi bi-download"></i>
-                    <span>Unduh Excel (.xlsx)</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- 2. SQL Export -->
-        <div class="col-md-6 col-lg-4 d-flex">
-            <div class="export-card exp-sql flex-fill animate__animated animate__zoomIn animate__delay-1s">
-                <div class="export-icon-box">
-                    <i class="bi bi-file-earmark-code"></i>
-                </div>
-                <h4 class="fw-bold mb-2">Database Dump (SQL)</h4>
-                <p class="text-muted small mb-4 flex-grow-1">
-                    Salinan komprehensif skema tabel dan query INSERT untuk keperluan migrasi server, restore instan, atau backup teknis.
-                </p>
-                <a href="{{ url_for('admin.submit_export_sql') }}" class="btn-card-action export-link" data-format="SQL" style="background: var(--grad-indigo);">
-                    <i class="bi bi-download"></i>
-                    <span>Unduh Dump SQL (.sql)</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- 3. CSV Export -->
-        <div class="col-md-6 col-lg-4 d-flex">
-            <div class="export-card exp-csv flex-fill animate__animated animate__zoomIn animate__delay-2s">
-                <div class="export-icon-box">
-                    <i class="bi bi-file-earmark-text"></i>
-                </div>
-                <h4 class="fw-bold mb-2">Data Text (CSV)</h4>
-                <p class="text-muted small mb-4 flex-grow-1">
-                    Format universal Comma Separated Values yang ringan dan siap diimpor ke sistem analisis data eksternal, Python, atau R.
-                </p>
-                <a href="{{ url_for('admin.submit_export_csv') }}" class="btn-card-action export-link" data-format="CSV" style="background: var(--grad-cyan);">
-                    <i class="bi bi-download"></i>
-                    <span>Unduh File CSV (.csv)</span>
-                </a>
-            </div>
-        </div>
-    </div>
 </main>
 
-<!-- Modern Footer -->
-<footer class="admin-footer mt-auto">
-    <div class="container">
-        <div class="footer-content">
-            <div class="d-flex align-items-center gap-2">
-                <span>&copy; 2025-2026 <strong>MathThon Admin</strong>. All rights reserved.</span>
+<!-- ══════════════════════════════════════════════════════════════════════
+     MODAL: KONFIGURASI JADWAL BACKUP BERKALA
+     ══════════════════════════════════════════════════════════════════════ -->
+<div class="modal fade" id="scheduleConfigModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 20px; border: 1px solid var(--adm-border);">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title fw-bold d-flex align-items-center gap-2">
+                    <i class="bi bi-clock-history text-primary"></i>
+                    Konfigurasi Jadwal Backup Berkala
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="d-flex align-items-center gap-3">
-                <span class="footer-badge"><i class="bi bi-cpu me-1"></i> Control Panel v2.4</span>
-                <span class="footer-badge text-success"><i class="bi bi-check-circle-fill me-1"></i> System Operational</span>
+            <div class="modal-body p-4">
+                <form id="scheduleConfigForm">
+                    <div class="form-check form-switch mb-3 p-3 bg-light rounded-3">
+                        <input class="form-check-input ms-0 me-3" type="checkbox" role="switch" id="cfgAutoEnabled" {{ 'checked' if config.auto_backup_enabled else '' }} style="cursor: pointer;">
+                        <label class="form-check-label fw-bold" for="cfgAutoEnabled">
+                            Aktifkan Pembuatan Backup Otomatis Berkala
+                        </label>
+                        <div class="small text-muted mt-1">Sistem akan secara berkala membuat snapshot database secara otomatis.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted">Frekuensi Backup</label>
+                        <select class="form-select" id="cfgInterval">
+                            <option value="hourly" {{ 'selected' if config.interval_type == 'hourly' else '' }}>Setiap 1 Jam (Intensif)</option>
+                            <option value="daily" {{ 'selected' if config.interval_type == 'daily' else '' }}>Setiap 24 Jam / Harian (Direkomendasikan)</option>
+                            <option value="weekly" {{ 'selected' if config.interval_type == 'weekly' else '' }}>Setiap 7 Hari / Mingguan</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted">Format Berkas Snapshot</label>
+                        <select class="form-select" id="cfgFormat">
+                            <option value="zip" {{ 'selected' if config.format == 'zip' else '' }}>Arsip Terkompresi (.SQL.ZIP) - Hemat Ruang</option>
+                            <option value="sql" {{ 'selected' if config.format == 'sql' else '' }}>Teks Murni (.SQL)</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted">Batas Retensi File (Maksimal Disimpan)</label>
+                        <input type="number" class="form-control" id="cfgRetention" value="{{ config.retention_count }}" min="3" max="50">
+                        <small class="text-muted">Berkas backup tertua akan otomatis dihapus jika melebihi jumlah ini.</small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary btn-sm rounded-pill px-4" id="btnSaveSchedule">Simpan Konfigurasi</button>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     MODAL: UNGGAH & PULIHKAN DARI BERKAS LUAR
+     ══════════════════════════════════════════════════════════════════════ -->
+<div class="modal fade" id="uploadRestoreModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 20px; border: 1px solid var(--adm-border);">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title fw-bold d-flex align-items-center gap-2">
+                    <i class="bi bi-cloud-upload text-primary"></i>
+                    Pulihkan Database dari Berkas Luar
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="alert alert-warning small d-flex align-items-start gap-2 mb-3">
+                    <i class="bi bi-exclamation-triangle-fill fs-5 flex-shrink-0 text-warning"></i>
+                    <div>
+                        <strong>Peringatan Keamanan:</strong> Memulihkan database akan menimpa data yang ada saat ini. Pastikan Anda telah membuat snapshot terbaru sebelum melanjutkan.
+                    </div>
+                </div>
+
+                <form id="uploadRestoreForm" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted">Pilih Berkas Backup (.SQL atau .ZIP)</label>
+                        <input type="file" class="form-control" id="restoreFile" accept=".sql,.zip" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-danger btn-sm rounded-pill px-4" id="btnExecuteUploadRestore">Mulai Pemulihan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="admin-footer mt-auto py-3">
+    <div class="container text-center">
+        <span class="text-muted small">&copy; 2025-2026 <strong>MathThon Admin</strong> &bull; Modul Manajemen &amp; Backup Database v2.5 Enterprise</span>
     </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const exportLinks = document.querySelectorAll('.export-link');
-    const exportStatus = document.getElementById('exportStatus');
+document.addEventListener('DOMContentLoaded', () => {
+    const csrfToken = "{{ csrf_token() }}";
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true
+    });
 
-    exportLinks.forEach(link => {
-        link.addEventListener('click', function (event) {
-            event.preventDefault();
-            const url = this.href;
-            const format = this.dataset.format;
-
-            // Show loading indicator
-            exportStatus.style.display = 'flex';
-            exportStatus.className = 'alert alert-info animate__animated animate__fadeIn d-flex align-items-center gap-2';
-            exportStatus.innerHTML = `<div class="spinner-border spinner-border-sm text-primary" role="status"></div> <span>Sedang memproses ekspor ke <strong>${format}</strong>... Mohon tunggu sebentar.</span>`;
-
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        return response.json().then(err => {
-                            throw new Error(err.message || `Gagal memulai ekspor. Status: ${response.status}`);
-                        });
-                    }
-                    const disposition = response.headers.get('Content-Disposition');
-                    let filename = `export.${format.toLowerCase()}`;
-                    if (disposition && disposition.includes('attachment')) {
-                        const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-                        const matches = filenameRegex.exec(disposition);
-                        if (matches && matches[1]) {
-                            filename = matches[1].replace(/['"]/g, '');
-                        }
-                    }
-                    return response.blob().then(blob => ({ blob, filename }));
-                })
-                .then(({ blob, filename }) => {
-                    const downloadUrl = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.style.display = 'none';
-                    a.href = downloadUrl;
-                    a.download = filename;
-                    document.body.appendChild(a);
-                    a.click();
-                    window.URL.revokeObjectURL(downloadUrl);
-                    a.remove();
-                    
-                    exportStatus.className = 'alert alert-success animate__animated animate__bounceIn d-flex align-items-center gap-2';
-                    exportStatus.innerHTML = `<i class="bi bi-check-circle-fill text-success fs-5"></i> <span>Ekspor ke <strong>${format}</strong> berhasil! Berkas sedang diunduh.</span>`;
-                })
-                .catch(error => {
-                    console.error('Error selama ekspor:', error);
-                    exportStatus.className = 'alert alert-danger animate__animated animate__shakeX d-flex align-items-center gap-2';
-                    exportStatus.innerHTML = `<i class="bi bi-exclamation-triangle-fill text-danger fs-5"></i> <span>Terjadi kesalahan: ${error.message || 'Silakan coba lagi.'}</span>`;
-                });
+    // ─── Buat Snapshot Manual Instan ───
+    document.getElementById('btnInstantSnapshot').addEventListener('click', async () => {
+        Swal.fire({
+            title: 'Membuat Snapshot Backup...',
+            text: 'Mengekstrak skema dan seluruh baris data dari 15 tabel ke dalam arsip terenkripsi.',
+            allowOutsideClick: false,
+            didOpen: () => Swal.showLoading()
         });
+
+        try {
+            const res = await fetch("{{ url_for('admin.create_backup_route') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ format: 'zip' })
+            });
+
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.error || 'Gagal membuat backup');
+
+            await Swal.fire({
+                icon: 'success',
+                title: 'Snapshot Berhasil Dibuat!',
+                text: result.message,
+                confirmButtonColor: '#3b82f6'
+            });
+
+            // Reload untuk memperbarui tabel registry
+            window.location.reload();
+        } catch (err) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal Membuat Backup',
+                text: err.message,
+                confirmButtonColor: '#3b82f6'
+            });
+        }
+    });
+
+    // ─── Simpan Konfigurasi Jadwal Backup Berkala ───
+    document.getElementById('btnSaveSchedule').addEventListener('click', async () => {
+        const payload = {
+            auto_backup_enabled: document.getElementById('cfgAutoEnabled').checked,
+            interval_type: document.getElementById('cfgInterval').value,
+            format: document.getElementById('cfgFormat').value,
+            retention_count: parseInt(document.getElementById('cfgRetention').value) || 10
+        };
+
+        try {
+            const res = await fetch("{{ url_for('admin.update_backup_config_route') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.error || 'Gagal menyimpan');
+
+            Toast.fire({ icon: 'success', title: result.message });
+            setTimeout(() => window.location.reload(), 1200);
+        } catch (err) {
+            Swal.fire({ icon: 'error', title: 'Kesalahan', text: err.message });
+        }
+    });
+
+    // ─── Hapus Arsip Backup ───
+    window.confirmDeleteBackup = async (filename) => {
+        const confirm = await Swal.fire({
+            title: 'Hapus Berkas Backup Ini?',
+            text: `Berkas ${filename} akan dihapus secara permanen dari server.`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ef4444',
+            cancelButtonColor: '#64748b',
+            confirmButtonText: 'Ya, Hapus',
+            cancelButtonText: 'Batal'
+        });
+
+        if (!confirm.isConfirmed) return;
+
+        try {
+            const deleteUrl = "{{ url_for('admin.delete_backup_route', filename='DUMMY') }}".replace('DUMMY', encodeURIComponent(filename));
+            const res = await fetch(deleteUrl, {
+                method: 'DELETE',
+                headers: { 'X-CSRFToken': csrfToken }
+            });
+
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.error || 'Gagal menghapus');
+
+            Toast.fire({ icon: 'success', title: result.message });
+            const row = document.getElementById(`row-${filename}`);
+            if (row) row.remove();
+        } catch (err) {
+            Swal.fire({ icon: 'error', title: 'Gagal Menghapus', text: err.message });
+        }
+    };
+
+    // ─── Pulihkan (Restore) dari Snapshot di Server ───
+    window.confirmRestoreBackup = async (filename) => {
+        const confirm = await Swal.fire({
+            title: 'Konfirmasi Pemulihan Database',
+            html: `Apakah Anda yakin ingin memulihkan database dari snapshot <strong>${filename}</strong>?<br><br><span class="text-danger small fw-bold">Peringatan: Seluruh data saat ini akan ditimpa dengan kondisi pada saat backup tersebut dibuat!</span>`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#f59e0b',
+            cancelButtonColor: '#64748b',
+            confirmButtonText: 'Ya, Pulihkan Sekarang',
+            cancelButtonText: 'Batal'
+        });
+
+        if (!confirm.isConfirmed) return;
+
+        Swal.fire({
+            title: 'Memulihkan Database...',
+            text: 'Mengeksekusi query SQL dan memulihkan relasi data.',
+            allowOutsideClick: false,
+            didOpen: () => Swal.showLoading()
+        });
+
+        try {
+            const restoreUrl = "{{ url_for('admin.restore_backup_route', filename='DUMMY') }}".replace('DUMMY', encodeURIComponent(filename));
+            const res = await fetch(restoreUrl, {
+                method: 'POST',
+                headers: { 'X-CSRFToken': csrfToken }
+            });
+
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.error || 'Gagal memulihkan database');
+
+            await Swal.fire({
+                icon: 'success',
+                title: 'Pemulihan Berhasil!',
+                text: result.message,
+                confirmButtonColor: '#3b82f6'
+            });
+
+            window.location.reload();
+        } catch (err) {
+            Swal.fire({ icon: 'error', title: 'Gagal Memulihkan', text: err.message });
+        }
+    };
+
+    // ─── Unggah & Pulihkan dari Berkas Luar ───
+    document.getElementById('btnExecuteUploadRestore').addEventListener('click', async () => {
+        const fileInput = document.getElementById('restoreFile');
+        if (!fileInput.files || !fileInput.files[0]) {
+            Swal.fire({ icon: 'warning', title: 'Pilih Berkas', text: 'Pilih file backup .sql atau .zip terlebih dahulu.' });
+            return;
+        }
+
+        const confirm = await Swal.fire({
+            title: 'Mulai Pemulihan dari Berkas Unggahan?',
+            text: 'Seluruh struktur dan data tabel akan ditimpa dengan isi berkas SQL ini.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ef4444',
+            confirmButtonText: 'Lanjutkan Pemulihan'
+        });
+
+        if (!confirm.isConfirmed) return;
+
+        const formData = new FormData();
+        formData.append('backup_file', fileInput.files[0]);
+
+        Swal.fire({
+            title: 'Mengunggah & Memulihkan...',
+            text: 'Mohon tunggu, proses pemulihan sedang berlangsung.',
+            allowOutsideClick: false,
+            didOpen: () => Swal.showLoading()
+        });
+
+        try {
+            const res = await fetch("{{ url_for('admin.upload_restore_backup_route') }}", {
+                method: 'POST',
+                headers: { 'X-CSRFToken': csrfToken },
+                body: formData
+            });
+
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.error || 'Gagal memulihkan');
+
+            await Swal.fire({
+                icon: 'success',
+                title: 'Database Berhasil Dipulihkan!',
+                text: result.message
+            });
+
+            window.location.reload();
+        } catch (err) {
+            Swal.fire({ icon: 'error', title: 'Gagal Memulihkan', text: err.message });
+        }
+    });
+
+    // ─── Optimasi Satu Tabel ───
+    window.optimizeTable = async (tableName) => {
+        Toast.fire({ icon: 'info', title: `Mengoptimasi tabel ${tableName}...` });
+        try {
+            const res = await fetch("{{ url_for('admin.optimize_table_route') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ table: tableName })
+            });
+
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.error || 'Gagal');
+
+            Toast.fire({ icon: 'success', title: result.message || `Tabel ${tableName} berhasil dioptimasi` });
+        } catch (err) {
+            Swal.fire({ icon: 'error', title: 'Gagal Optimasi', text: err.message });
+        }
+    };
+
+    // ─── Optimasi Seluruh Tabel ───
+    document.getElementById('btnOptimizeAll').addEventListener('click', async () => {
+        Swal.fire({
+            title: 'Mengoptimasi Seluruh Tabel...',
+            text: 'Defragmentasi penyimpanan dan pembaharuan statistik indeks untuk 15 tabel.',
+            allowOutsideClick: false,
+            didOpen: () => Swal.showLoading()
+        });
+
+        try {
+            const res = await fetch("{{ url_for('admin.optimize_table_route') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ table: 'all' })
+            });
+
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.error || 'Gagal');
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Optimasi Selesai!',
+                text: `${result.count} tabel berhasil dioptimalkan dan siap digunakan secara optimal.`,
+                confirmButtonColor: '#3b82f6'
+            });
+        } catch (err) {
+            Swal.fire({ icon: 'error', title: 'Gagal Optimasi', text: err.message });
+        }
     });
 });
 </script>

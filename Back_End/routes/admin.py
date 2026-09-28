@@ -356,7 +356,8 @@ def manage_analisis_hasil():
 @admin_bp.route("/manage_feedback")
 @admin_required
 def manage_feedback():
-    return render_template("admin/manage_feedback.html")
+    admin_user = {'name': session.get('name') or session.get('username') or 'Administrator'}
+    return render_template("admin/manage_feedback.html", users=admin_user)
 
 @admin_bp.route("/crime_detection")
 @admin_required
@@ -365,64 +366,276 @@ def crime_detection():
     summary = get_security_summary()
     return render_template("admin/crime_detection.html", summary=summary)
 
-# Export DB (CSV/SQL/Excel - full extracted)
+# ==============================================================================
+# DATABASE MANAGEMENT, PERIODIC BACKUPS & EXPORT ENGINE
+# ==============================================================================
+from flask import send_file, send_from_directory, Response
+from Back_End.db.db_management import (
+    get_database_overview,
+    get_backup_dir,
+    load_backup_registry,
+    load_backup_config,
+    save_backup_config,
+    create_backup_snapshot,
+    delete_backup_file,
+    restore_database_from_archive,
+    restore_database_from_file_content,
+    optimize_single_table,
+    optimize_all_database_tables,
+    generate_full_sql_dump,
+    generate_multi_table_excel_bytes,
+    generate_multi_table_csv_zip_bytes,
+    check_and_run_scheduled_backup_if_due
+)
+
 @admin_bp.route("/export_database")
 @admin_required
 def export_database():
-    return render_template("admin/export_database.html")
+    """Halaman Pusat Manajemen Database & Backup Berkala."""
+    app_obj = current_app._get_current_object()
+    
+    # Jalankan backup terjadwal jika waktu telah tiba
+    check_and_run_scheduled_backup_if_due(app_obj)
 
+    db_overview = get_database_overview(app_obj)
+    backups = load_backup_registry()
+    backup_config = load_backup_config()
+    admin_user = {'name': session.get('name') or session.get('username') or 'Administrator'}
 
+    return render_template(
+        "admin/export_database.html",
+        users=admin_user,
+        overview=db_overview,
+        backups=backups,
+        config=backup_config
+    )
+
+@admin_bp.route("/database/backup/create", methods=["POST"])
+@admin_required
+def create_backup_route():
+    """Membuat snapshot backup database secara instan (Manual Snapshot)."""
+    try:
+        app_obj = current_app._get_current_object()
+        data = request.get_json(silent=True) or {}
+        backup_format = data.get('format', 'zip')
+
+        record = create_backup_snapshot(app_obj, backup_type='manual', backup_format=backup_format)
+        return jsonify({
+            'success': True,
+            'message': f"Snapshot backup `{record['filename']}` berhasil dibuat ({record['size_formatted']}).",
+            'backup': record
+        })
+    except Exception as e:
+        logging.error(f"Error creating manual backup: {e}", exc_info=True)
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@admin_bp.route("/database/backup/download/<filename>", methods=["GET"])
+@admin_required
+def download_backup_route(filename):
+    """Mengunduh berkas arsip backup dari server."""
+    safe_filename = os.path.basename(filename)
+    backup_dir = get_backup_dir()
+    file_path = os.path.join(backup_dir, safe_filename)
+
+    if not os.path.exists(file_path):
+        flash("Berkas backup tidak ditemukan.", "danger")
+        return redirect(url_for('admin.export_database'))
+
+    return send_from_directory(
+        backup_dir,
+        safe_filename,
+        as_attachment=True,
+        download_name=safe_filename
+    )
+
+@admin_bp.route("/database/backup/delete/<filename>", methods=["DELETE"])
+@admin_required
+def delete_backup_route(filename):
+    """Menghapus arsip backup dari disk dan registry."""
+    try:
+        safe_filename = os.path.basename(filename)
+        success = delete_backup_file(safe_filename)
+        if success:
+            return jsonify({'success': True, 'message': f"Berkas `{safe_filename}` berhasil dihapus."})
+        return jsonify({'success': False, 'error': 'Berkas tidak ditemukan atau gagal dihapus.'}), 404
+    except Exception as e:
+        logging.error(f"Error deleting backup: {e}", exc_info=True)
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@admin_bp.route("/database/backup/restore/<filename>", methods=["POST"])
+@admin_required
+def restore_backup_route(filename):
+    """Memulihkan database dari berkas snapshot yang tersimpan di server."""
+    try:
+        app_obj = current_app._get_current_object()
+        safe_filename = os.path.basename(filename)
+        result = restore_database_from_archive(app_obj, safe_filename)
+        if result['success']:
+            return jsonify({
+                'success': True,
+                'message': f"Database berhasil dipulihkan dari `{safe_filename}` ({result.get('statements_executed', 0)} perintah dieksekusi)."
+            })
+        return jsonify({'success': False, 'error': result.get('error', 'Gagal memulihkan database.')}), 500
+    except Exception as e:
+        logging.error(f"Error restoring backup: {e}", exc_info=True)
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@admin_bp.route("/database/backup/upload-restore", methods=["POST"])
+@admin_required
+def upload_restore_backup_route():
+    """Mengunggah berkas .sql atau .zip dari komputer admin lalu merestore database."""
+    try:
+        if 'backup_file' not in request.files:
+            return jsonify({'success': False, 'error': 'Tidak ada berkas yang diunggah.'}), 400
+
+        file = request.files['backup_file']
+        if not file or not file.filename:
+            return jsonify({'success': False, 'error': 'Pilih berkas backup terlebih dahulu.'}), 400
+
+        filename = file.filename.lower()
+        if not (filename.endswith('.sql') or filename.endswith('.zip')):
+            return jsonify({'success': False, 'error': 'Format berkas harus berupa .sql atau .zip'}), 400
+
+        app_obj = current_app._get_current_object()
+        content = ""
+
+        if filename.endswith('.zip'):
+            import zipfile
+            with zipfile.ZipFile(file.stream, 'r') as zf:
+                sql_files = [n for n in zf.namelist() if n.endswith('.sql')]
+                if not sql_files:
+                    return jsonify({'success': False, 'error': 'Berkas ZIP tidak memuat file SQL.'}), 400
+                content = zf.read(sql_files[0]).decode('utf-8', errors='replace')
+        else:
+            content = file.stream.read().decode('utf-8', errors='replace')
+
+        result = restore_database_from_file_content(app_obj, content)
+        if result['success']:
+            return jsonify({
+                'success': True,
+                'message': f"Database berhasil dipulihkan dari berkas unggahan ({result.get('statements_executed', 0)} perintah dieksekusi)."
+            })
+        return jsonify({'success': False, 'error': result.get('error', 'Gagal memulihkan database.')}), 500
+    except Exception as e:
+        logging.error(f"Error in upload-restore: {e}", exc_info=True)
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@admin_bp.route("/database/backup/config", methods=["POST"])
+@admin_required
+def update_backup_config_route():
+    """Memperbarui pengaturan jadwal backup berkala otomatis."""
+    try:
+        data = request.get_json(silent=True) or {}
+        config = load_backup_config()
+
+        if 'auto_backup_enabled' in data:
+            config['auto_backup_enabled'] = bool(data['auto_backup_enabled'])
+        if 'interval_type' in data:
+            itype = str(data['interval_type']).lower()
+            if itype in {'hourly', 'daily', 'weekly'}:
+                config['interval_type'] = itype
+                if itype == 'hourly':
+                    config['interval_hours'] = 1
+                elif itype == 'daily':
+                    config['interval_hours'] = 24
+                elif itype == 'weekly':
+                    config['interval_hours'] = 168
+        if 'retention_count' in data:
+            try:
+                config['retention_count'] = max(3, min(50, int(data['retention_count'])))
+            except ValueError:
+                pass
+        if 'format' in data and data['format'] in {'sql', 'zip'}:
+            config['format'] = data['format']
+
+        # Hitung ulang jadwal berikutnya
+        from datetime import datetime, timedelta
+        now = datetime.now()
+        config['next_backup_time'] = (now + timedelta(hours=config['interval_hours'])).strftime("%Y-%m-%d %H:%M:%S")
+
+        save_backup_config(config)
+        return jsonify({'success': True, 'message': 'Konfigurasi backup berkala berhasil disimpan.', 'config': config})
+    except Exception as e:
+        logging.error(f"Error updating backup config: {e}", exc_info=True)
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@admin_bp.route("/database/table/optimize", methods=["POST"])
+@admin_required
+def optimize_table_route():
+    """Mengoptimasi satu tabel atau seluruh tabel database."""
+    try:
+        app_obj = current_app._get_current_object()
+        data = request.get_json(silent=True) or {}
+        target_table = data.get('table', 'all')
+
+        if target_table == 'all':
+            result = optimize_all_database_tables(app_obj)
+        else:
+            result = optimize_single_table(app_obj, target_table)
+
+        return jsonify(result)
+    except Exception as e:
+        logging.error(f"Error optimizing tables: {e}", exc_info=True)
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+# ==============================================================================
+# UPGRADED UNIVERSAL EXPORTS (FULL DATABASE)
+# ==============================================================================
 @admin_bp.route("/submit_export_database_excel")
 @admin_required
 def submit_export_excel():
-    conn = get_db_connection(current_app._get_current_object())
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM users")
-    users = cursor.fetchall()
-    cursor.execute("SELECT * FROM daftar_materi")
-    materi = cursor.fetchall()
-    df_users = pd.DataFrame(users)
-    df_materi = pd.DataFrame(materi)
-    output = io.BytesIO()
-    with pd.ExcelWriter(output, engine='openpyxl') as writer:
-        df_users.to_excel(writer, sheet_name='Users', index=False)
-        df_materi.to_excel(writer, sheet_name='Materi', index=False)
-    output.seek(0)
-    close_db_connection(conn)
-    return send_file(output, as_attachment=True, download_name="maththon_export.xlsx", mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-
+    """Ekspor seluruh tabel database ke berkas Excel Multi-Sheet."""
+    try:
+        app_obj = current_app._get_current_object()
+        excel_buffer = generate_multi_table_excel_bytes(app_obj)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        return send_file(
+            excel_buffer,
+            as_attachment=True,
+            download_name=f"maththon_db_full_{timestamp}.xlsx",
+            mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+    except Exception as e:
+        logging.error(f"Excel export error: {e}", exc_info=True)
+        flash(f"Gagal mengekspor database ke Excel: {e}", "danger")
+        return redirect(url_for('admin.export_database'))
 
 @admin_bp.route("/submit_export_database_sql")
 @admin_required
 def submit_export_sql():
-    conn = get_db_connection(current_app._get_current_object())
-    cursor = conn.cursor()
-    cursor.execute("SHOW CREATE TABLE users")
-    create_users = cursor.fetchone()[1]
-    cursor.execute("SHOW CREATE TABLE daftar_materi")
-    create_materi = cursor.fetchone()[1]
-    sql_content = f"-- MathThon Export\n\n{create_users}\n\n{create_materi}\n\n-- Data Users\nSELECT * FROM users;\n\n-- Data Materi\nSELECT * FROM daftar_materi;"
-    close_db_connection(conn)
-    return Response(sql_content, mimetype="text/plain", headers={"Content-Disposition": "attachment; filename=maththon_export.sql"})
-
-from flask import send_file, Response
+    """Ekspor seluruh skema dan baris data database ke format SQL Dump murni."""
+    try:
+        app_obj = current_app._get_current_object()
+        sql_dump = generate_full_sql_dump(app_obj, include_data=True)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        return Response(
+            sql_dump,
+            mimetype="application/sql",
+            headers={"Content-Disposition": f"attachment; filename=maththon_db_dump_{timestamp}.sql"}
+        )
+    except Exception as e:
+        logging.error(f"SQL export error: {e}", exc_info=True)
+        flash(f"Gagal mengekspor SQL dump: {e}", "danger")
+        return redirect(url_for('admin.export_database'))
 
 @admin_bp.route("/submit_export_database_csv")
 @admin_required
 def submit_export_csv():
-    conn = get_db_connection(current_app._get_current_object())
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM users")
-    users = cursor.fetchall()
-    cursor.execute("SELECT * FROM daftar_materi")
-    materi = cursor.fetchall()
-    df_users = pd.DataFrame(users)
-    df_materi = pd.DataFrame(materi)
-    csv_users = df_users.to_csv(index=False)
-    csv_materi = df_materi.to_csv(index=False)
-    csv_content = f"Users\n{csv_users}\n\nMateri\n{csv_materi}"
-    close_db_connection(conn)
-    return Response(csv_content, mimetype="text/csv", headers={"Content-Disposition": f"attachment; filename=maththon_export.csv"})
+    """Ekspor seluruh tabel database sebagai arsip ZIP berisi berkas CSV terpisah."""
+    try:
+        app_obj = current_app._get_current_object()
+        zip_buffer = generate_multi_table_csv_zip_bytes(app_obj)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        return send_file(
+            zip_buffer,
+            as_attachment=True,
+            download_name=f"maththon_csv_bundle_{timestamp}.zip",
+            mimetype='application/zip'
+        )
+    except Exception as e:
+        logging.error(f"CSV zip export error: {e}", exc_info=True)
+        flash(f"Gagal mengekspor kumpulan CSV: {e}", "danger")
+        return redirect(url_for('admin.export_database'))
 
 
 @admin_bp.route("/import_soal_csv", methods=["POST"])
