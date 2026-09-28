@@ -328,5 +328,265 @@
         "severity": "INFO",
         "details": "Admin 'Edward_Kenway' berhasil masuk melalui Portal Terpadu dari IP 127.0.0.1",
         "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:25:41",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: SELECT * FROM users WHERE username = 'admin' OR '1...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:14",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: SELECT * FROM users WHERE username = 'admin' OR '1...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:20",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: SELECT * FROM users...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:27",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: SELECT * FROM users WHERE id = 1 OR 1=1...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:27",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: SELECT * FROM users WHERE username = 'admin' OR 1=...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:27",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: SELECT * FROM users WHERE username = 'admin' OR 'a...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:27",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: SELECT * FROM users WHERE id = 1 OR '1'='1'...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:32",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: SELECT * FROM users...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:33",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: SELECT * FROM users WHERE id = 1...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:33",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: OR 1=1...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:33",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: ' OR '1'='1'...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:33",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: UNION SELECT...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:33",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: DROP TABLE...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:36",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: WHERE username = 'admin' OR '1'='1'...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:37",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: username = 'admin' OR '1'='1'...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:37",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: WHERE id = 1 OR 1=1...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:39",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: id = 1' OR '1'='1' --...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:40",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: id = 1 OR '1'='1' --...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:40",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: id = '1' OR '1'='1' #...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:26:40",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: admin' OR '1'='1' /*...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:28:33",
+        "ip": "127.0.0.1",
+        "path": "/auth/login",
+        "method": "POST",
+        "attack_type": "Admin Authentication",
+        "severity": "INFO",
+        "details": "Admin 'Edward_Kenway' berhasil masuk melalui Portal Terpadu dari IP 127.0.0.1",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0"
+    },
+    {
+        "timestamp": "2026-09-29 06:29:36",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: SELECT id, username FROM users WHERE id = 1 UNION ...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0"
+    },
+    {
+        "timestamp": "2026-09-29 06:29:42",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: SELECT * FROM users WHERE id = 1; DROP TABLE logs;...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0"
+    },
+    {
+        "timestamp": "2026-09-29 06:30:46",
+        "ip": "127.0.0.1",
+        "path": "/auth/login",
+        "method": "POST",
+        "attack_type": "Admin Authentication",
+        "severity": "INFO",
+        "details": "Admin 'Edward_Kenway' berhasil masuk melalui Portal Terpadu dari IP 127.0.0.1",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:31:10",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: SELECT * FROM users WHERE username = 'admin' OR '1...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-29 06:36:20",
+        "ip": "127.0.0.1",
+        "path": "/admin/database/ai/sqli-inspect",
+        "method": "POST",
+        "attack_type": "SQL Injection",
+        "severity": "CRITICAL",
+        "details": "Pattern matched in: id = 1 UNION SELECT null, concat(table_name, colum...",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
     }
 ]
