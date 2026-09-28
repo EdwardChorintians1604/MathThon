@@ -43,7 +43,7 @@ HYBRID_ENGINE = HybridCalculationEngine() if HYBRID_ENGINE_AVAILABLE else None
 
 
 OLLAMA_API_URL = os.getenv("OLLAMA_API_URL", "http://localhost:11434/api/generate")
-MODEL_NAME     = os.getenv("MODEL_NAME",     "deepseek-r1:8b")
+MODEL_NAME     = os.getenv("MODEL_NAME",     "qwen2.5:7b")
 # ==============================================================================
 # SYSTEM PROMPT  (raw string)
 # ==============================================================================
@@ -53,37 +53,25 @@ Kamu adalah MathThon AI, tutor matematika tingkat akademik yang ramah, analitis,
 Tugas utamamu adalah membimbing pengguna memahami matematika secara menyeluruh dengan penjelasan logis, terstruktur, dan edukatif.
 
 BATASAN TOPIK DAN KEBIJAKAN KHUSUS (WAJIB DIPATUHI):
-Kamu HANYA melayani topik MATEMATIKA (Aritmatika, Aljabar, Geometri, Trigonometri, Kalkulus, Statistika, Peluang, Matriks, Logika Matematika, Analisis Real/Kompleks, dan persoalan sains terapan yang berbasis perhitungan matematis).
-
-JIKA PENGGUNA MEMBERIKAN PERTANYAAN ATAU KALIMAT YANG TIDAK BERKAITAN DENGAN MATEMATIKA:
-(Contoh non-matematika: resep makanan/masakan, politik/pemerintahan, olahraga, hiburan/film/musik, zodiak/ramalan, curhat pribadi/asmara, sastra/puisi non-matematis, coding aplikasi umum tanpa matematika, tips gaya hidup, dsb.)
-KAMU DILARANG MENJAWAB TOPIK NON-MATEMATIKA TERSEBUT!
-Sebaliknya, kamu WAJIB menjawab dengan penolakan sopan, meminta pengguna mengetik ulang pertanyaan bertema matematika, dan menyertakan peringatan kehati-hatian LLM dengan format persis seperti ini:
-
-⚠️ **Pertanyaan di Luar Topik Matematika Terdeteksi**
-
-Kalimat atau pertanyaan yang Anda masukkan **tidak memiliki kaitan dengan materi atau persoalan matematika**.
-
-Sebagai **MathThon AI**, sistem ini dirancang dan dilatih khusus untuk mendampingi Anda dalam memahami dan menyelesaikan persoalan matematika (seperti Aritmatika, Aljabar, Geometri, Trigonometri, Kalkulus, Statistika, Peluang, Matriks, dan Logika Matematika).
-
-👉 **Silakan ketik ulang pertanyaan Anda** dengan topik atau persoalan matematika yang ingin Anda diskusikan atau selesaikan.
-
----
-> ⚠️ **Peringatan Penting:** 
-> Model bahasa (LLM) seperti ini bisa saja memberikan kesalahan informasi atau perhitungan. Tolong selalu cek dan periksa kembali (*double-check*) setiap hasil maupun langkah penyelesaian yang diberikan.
-
-Pengecualian: Salam sapaan pendek seperti "Halo", "Hai", "Selamat pagi" dijawab dengan ramah sembari langsung menyambut pengguna untuk menanyakan materi atau soal matematika.
+1. FOKUS MATEMATIKA:
+   Kamu HANYA melayani topik MATEMATIKA (Aritmatika, Aljabar, Geometri, Trigonometri, Kalkulus, Statistika, Peluang, Matriks, Logika Matematika, Analisis Real/Kompleks, dan persoalan sains terapan berbasis perhitungan matematis).
+2. PENANGANAN NON-MATEMATIKA:
+   Jika pengguna memberikan pertanyaan atau kalimat yang sama sekali tidak berkaitan dengan matematika (misal: resep makanan, politik, film/musik, curhat asmara, dsb.), tolak dengan sopan dan singkat dalam 1-2 kalimat tanpa memberikan materi non-matematika tersebut, lalu ajak pengguna untuk menanyakan topik matematika.
+   DILARANG KERAS menyisipkan teks penolakan, teguran, peringatan "Di Luar Topik Matematika", atau disclaimer penolakan jika pertanyaan pengguna berkaitan dengan matematika! JAWAB LANGSUNG persoalan matematikanya.
+3. SALAM & SAPAAN:
+   Salam pendek seperti "Halo", "Hai", "Selamat pagi" dijawab dengan ramah sembari menyambut pengguna untuk menanyakan materi atau soal matematika.
 
 PRINSIP PENJELASAN MENDALAM:
-1. STRUKTUR PENJELASAN RUNTUT:
-   - Konsep & Rumus Kunci: Kenalkan rumus, aturan, atau teorema yang dipakai (misal: Aturan Rantai Turunan, Integral Parsial, Sifat Matriks).
+1. STRUKTUR PENJELASAN RUNTUT & JAWAB LANGSUNG:
+   - JAWAB LANGSUNG inti persoalan secara edukatif, jelas, dan tanpa pengulangan kata/basa-basi (NO FILLER, NO ULANG).
+   - Konsep & Rumus Kunci: Kenalkan rumus, aturan, atau teorema yang dipakai (misal: Aturan Rantai Turunan, Integral Parsial, Sifat Matriks, Aturan Sarrus / Ekspansi Kofaktor Determinan).
    - Langkah demi Langkah (Step-by-Step): Jabarkan perhitungan secara terperinci dan jelas. Jangan melompati langkah krusial agar alur logika mudah dipahami.
    - Jawaban Akhir: Tuliskan hasil akhir secara tegas dan jelas.
    - Catatan / Tips Tambahan: Berikan wawasan konsep atau cara cepat mengecek kebenaran jawaban jika relevan.
 2. RAMAH & MEMOTIVASI:
    - Berikan nada bicara tutor yang ramah, jelas, dan memotivasi. Jika pengguna menyapa atau bertanya konsep santai, responslah dengan hangat.
-3. AKURASI TINGGI & TERMINOLOGI BAKU:
-   - Matriks: Gunakan klasifikasi matematika murni (Matriks Persegi, Baris, Kolom, Identitas, Diagonal, Transpose, Simetris, Segitiga).
+3. AKURASI TINGGI & TERMINOLOGI BAKU INDONESIA:
+   - Matriks: Gunakan klasifikasi matematika murni (Matriks Persegi, Baris, Kolom, Identitas, Diagonal, Transpose, Simetris, Segitiga). DILARANG mengarang istilah palsu (seperti opis, adjungat, dsb.).
    - Trigonometri: Gunakan istilah baku (Sisi Depan, Sisi Samping, Sisi Miring / Hipotenusa).
    - Kalkulus: Pastikan aturan turunan dan integrasi dieksekusi dengan presisi tanpa kesalahan aljabar.
 4. FORMATTING LATEX STANDAR KATEX:
@@ -507,6 +495,10 @@ def sanitize_chat_history(messages: list) -> list:
         "topik seksual atau kontroversial",
         "kebijakan keselamatan",
         "pelanggaran konten",
+        "pertanyaan di luar topik matematika",
+        "di luar topik matematika terdeteksi",
+        "tidak memiliki kaitan dengan materi atau persoalan matematika",
+        "silakan ketik ulang pertanyaan anda",
     ]
     
     # Pola header internal dan istilah halusinasi yang mungkin meracuni konteks (case-insensitive)
@@ -518,6 +510,7 @@ def sanitize_chat_history(messages: list) -> list:
         "### verifikasi",
         "### jawaban akhir",
         "pertanyaan anda mungkin maksudnya:",
+        "pertanyaan di luar topik matematika terdeteksi",
         "contoh soal:",
         "sinyal",
         "sekawan",
@@ -573,6 +566,34 @@ def strip_leaked_headers(response: str) -> str:
     ]
     for pattern in leaked:
         response = response.replace(pattern, "")
+
+    # Guardrail: Jika respons memuat solusi matematika tetapi diawali oleh template penolakan non-math yang bocor
+    has_math_body = any(term in response.lower() for term in [
+        'determinan', 'matriks', 'sin', 'cos', 'tan', 'kalkulus', 'turunan', 'integral',
+        'aljabar', 'persamaan', '$$', r'\begin', r'\times', r'\frac', 'langkah penyelesaian'
+    ])
+    if has_math_body:
+        # Bersihkan template penolakan non-matematika jika bocor ke jawaban matematika
+        response = re.sub(
+            r'⚠️\s*\*\*Pertanyaan di Luar Topik Matematika Terdeteksi\*\*[\s\S]*?(?=(?:Berikut|\$\$|\$|\*\*|Langkah|Untuk|Dalam|Diketahui|Solusi|[A-Z]))',
+            '',
+            response,
+            flags=re.IGNORECASE
+        )
+        response = re.sub(
+            r'Kalimat atau pertanyaan yang Anda masukkan \*\*tidak memiliki kaitan[\s\S]*?(?=(?:Berikut|\$\$|\$|\*\*|Langkah|Untuk|Dalam|Diketahui|Solusi|[A-Z]))',
+            '',
+            response,
+            flags=re.IGNORECASE
+        )
+        # Hapus sisa-sisa disclaimer template non-math jika ada
+        response = re.sub(
+            r'>\s*⚠️\s*\*\*Peringatan Penting:\*\*[\s\S]*?>.*?\n',
+            '',
+            response,
+            flags=re.IGNORECASE
+        )
+
     response = re.sub(r'\n{3,}', '\n\n', response)
     return response.strip()
 
@@ -741,8 +762,8 @@ def chat():
                         client = LLMClient(provider="gemini")
                         explanation_text = client.generate(
                             messages=messages, 
-                            temperature=0.3, 
-                            top_p=0.95, 
+                            temperature=0.2, 
+                            top_p=0.85, 
                             max_output_tokens=8192
                         ).strip()
                         ai_reply = f"{sympy_output}\n\n**Penjelasan Langkah Penyelesaian:**\n{explanation_text}"
@@ -782,8 +803,8 @@ def chat():
                 client = LLMClient(provider="gemini")
                 ai_reply = client.generate(
                     messages=messages, 
-                    temperature=0.3, 
-                    top_p=0.95,
+                    temperature=0.2, 
+                    top_p=0.85,
                     max_output_tokens=8192
                 ).strip()
             except RateLimitExceededError as rle:
@@ -910,7 +931,7 @@ def chat_ai_logic(data: dict) -> dict:
             {'role': 'system', 'content': system_content},
             {'role': 'user',   'content': formatted_user_input},
         ]
-        ai_reply = client.generate(messages=messages, temperature=0.3, top_p=0.95, max_output_tokens=8192).strip()
+        ai_reply = client.generate(messages=messages, temperature=0.2, top_p=0.85, max_output_tokens=8192).strip()
         if not ai_reply:
             ai_reply = '(AI tidak memberikan jawaban)'
         else:

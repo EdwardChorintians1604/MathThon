@@ -228,5 +228,45 @@
         "severity": "CRITICAL",
         "details": "Bot terperangkap mengisi field honeypot dari IP 127.0.0.1",
         "user_agent": "Werkzeug/3.1.5"
+    },
+    {
+        "timestamp": "2026-09-27 16:23:34",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "Admin Authentication",
+        "severity": "INFO",
+        "details": "Admin 'Edward_Kenway' berhasil masuk melalui Portal Terpadu dari IP 127.0.0.1",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0"
+    },
+    {
+        "timestamp": "2026-09-27 16:24:21",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "Admin Authentication",
+        "severity": "INFO",
+        "details": "Admin 'Edward_Kenway' berhasil masuk melalui Portal Terpadu dari IP 127.0.0.1",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-27 17:57:58",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "Admin Authentication",
+        "severity": "INFO",
+        "details": "Admin 'Edward_Kenway' berhasil masuk melalui Portal Terpadu dari IP 127.0.0.1",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0"
+    },
+    {
+        "timestamp": "2026-09-29 04:53:41",
+        "ip": "127.0.0.1",
+        "path": "/auth/login_user",
+        "method": "POST",
+        "attack_type": "Admin Authentication",
+        "severity": "INFO",
+        "details": "Admin 'Edward_Kenway' berhasil masuk melalui Portal Terpadu dari IP 127.0.0.1",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
     }
 ]

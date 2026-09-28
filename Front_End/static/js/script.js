@@ -1,40 +1,45 @@
-// Slider functionality
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
+// Legacy slider support.
+// Keberadaan slider ini bersifat opsional; nama fungsi dibuat lokal agar tidak
+// menimpa navigasi dashboard grafik pada halaman beranda.
+(() => {
+  function initialiseLegacySlider() {
+    const legacySlides = document.querySelectorAll('.slide');
+    const legacyDots = document.querySelectorAll('.dot');
+    const legacyPrevButton = document.getElementById('prevBtn');
+    const legacyNextButton = document.getElementById('nextBtn');
 
-function showSlide(index) {
-  slides.forEach(slide => slide.classList.remove('active'));
-  dots.forEach(dot => dot.classList.remove('active'));
-  slides[index].classList.add('active');
-  dots[index].classList.add('active');
-  currentSlide = index;
-  // Dispatch custom event for responsive slide charts
-  window.dispatchEvent(new CustomEvent('slideChanged', { detail: { slideIndex: index } }));
-}
+    if (!legacySlides.length || !legacyDots.length || !legacyPrevButton || !legacyNextButton) {
+      return;
+    }
 
-function nextSlide() {
-  currentSlide = (currentSlide + 1) % slides.length;
-  showSlide(currentSlide);
-}
+    let legacySlideIndex = 0;
 
-function prevSlide() {
-  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-  showSlide(currentSlide);
-}
+    const showLegacySlide = (index) => {
+      legacySlideIndex = (index + legacySlides.length) % legacySlides.length;
+      legacySlides.forEach((slide, slideIndex) => {
+        slide.classList.toggle('active', slideIndex === legacySlideIndex);
+      });
+      legacyDots.forEach((dot, dotIndex) => {
+        dot.classList.toggle('active', dotIndex === legacySlideIndex);
+      });
+      window.dispatchEvent(new CustomEvent('slideChanged', {
+        detail: { slideIndex: legacySlideIndex }
+      }));
+    };
 
-function goToSlide(index) {
-  showSlide(index);
-}
+    legacyPrevButton.addEventListener('click', () => showLegacySlide(legacySlideIndex - 1));
+    legacyNextButton.addEventListener('click', () => showLegacySlide(legacySlideIndex + 1));
+    legacyDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => showLegacySlide(index));
+    });
 
-// Event listeners
-prevBtn.addEventListener('click', prevSlide);
-nextBtn.addEventListener('click', nextSlide);
-dots.forEach((dot, index) => {
-  dot.addEventListener('click', () => goToSlide(index));
-});
+    showLegacySlide(0);
+    window.setInterval(() => showLegacySlide(legacySlideIndex + 1), 5000);
+  }
 
-// Auto slide (optional)
-setInterval(nextSlide, 5000); // Change slide every 5 seconds
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialiseLegacySlider, { once: true });
+  } else {
+    initialiseLegacySlider();
+  }
+})();

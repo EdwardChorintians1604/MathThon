@@ -1944,11 +1944,10 @@
       } else {
         msgDiv.classList.add('msg-ai-wrap');
         const clean = text.replace(/^AI\s*:\s*/i, '');
-        const isNonMath = isExplicitNonMath || 
-          clean.includes('Pertanyaan di Luar Topik Matematika') || 
-          clean.includes('tidak memiliki kaitan dengan materi atau persoalan matematika') ||
-          clean.includes('Ketik ulang pertanyaan') ||
-          clean.includes('ketik ulang pertanyaan');
+        // Periksa sinyal konten matematika (rumus KaTeX, simbol matriks/persamaan, atau penjelasan panjang)
+        const hasMathSignals = clean.includes('$$') || clean.includes('\\begin') || clean.includes('\\frac') || clean.includes('\\times') || clean.includes('=') || clean.length > 350;
+        const isNonMath = (isExplicitNonMath || 
+          (clean.includes('Pertanyaan di Luar Topik Matematika') && clean.includes('tidak memiliki kaitan dengan materi'))) && !hasMathSignals;
 
         const html = renderMarkdownWithKaTeX(clean);
         const safeClean = clean.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$/g, '\\$');

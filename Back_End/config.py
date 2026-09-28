@@ -37,9 +37,9 @@ class Config:
     
     # AI/LLM
     OLLAMA_API_KEY = "http://localhost:11434/api/generate"
-    MODEL_NAME = os.getenv('MODEL_NAME', 'phi4-mini:latest')
+    MODEL_NAME = os.getenv('MODEL_NAME', 'qwen2.5:7b')
     GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
-    GEMINI_MODEL = os.getenv('GEMINI_MODEL', 'gemini-2.0-flash')
+    GEMINI_MODEL = os.getenv('GEMINI_MODEL', 'gemini-flash-latest')
     AI_SYSTEM_PROMPT = os.getenv("AI_SYSTEM_PROMPT", "Anda adalah asisten matematika yang membantu menyelesaikan soal secara langkah demi langkah.")
     
     # Email SMTP

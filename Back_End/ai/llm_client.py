@@ -40,7 +40,7 @@ class LLMClient:
                 raise RuntimeError("GEMINI_API_KEY tidak ditemukan. Tambahkan ke .env atau ke app.config.")
             
             self.api_key = self.api_keys[0]
-            raw_model = model or os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+            raw_model = model or os.getenv("GEMINI_MODEL", "gemini-flash-latest")
             self.model = raw_model
             genai.configure(api_key=self.api_key)
         else:
@@ -145,8 +145,8 @@ class LLMClient:
                             gemini_messages.append({"role": gemini_role, "parts": [{"text": content}]})
 
                     candidate_models = [self.model]
-                    # Urutan model Google resmi dengan kuota terpisah
-                    for fallback_m in ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-flash-8b", "gemini-2.0-flash-lite", "gemini-1.5-pro"]:
+                    # Urutan model Google resmi yang aktif dan terbukti didukung
+                    for fallback_m in ["gemini-flash-latest", "gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.8-flash"]:
                         if fallback_m not in candidate_models:
                             candidate_models.append(fallback_m)
 

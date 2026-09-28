@@ -107,8 +107,8 @@ def submit_register_user():
         if conn:
             conn.close()
 
-@auth_bp.route("/login_user", methods=["GET", "POST"])
-def login_user():
+@auth_bp.route("/login", methods=["GET", "POST"])
+def login():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
