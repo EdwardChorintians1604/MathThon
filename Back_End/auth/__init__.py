@@ -14,11 +14,11 @@ from google.auth.transport import requests as google_requests
 
 # Adjust imports to be relative from the blueprint's location
 from ..db.database_mysql import get_db_connection, close_db_connection, execute_insert
-from ..security_for_web import user_required
+from ..routes.security_for_web import user_required
 
 # Create a Blueprint
 # The 'user' prefix will be handled by url_prefix
-auth_bp = Blueprint('auth', __name__, url_prefix='/user', template_folder='../../Front_End/templates')
+auth_bp = Blueprint('auth', __name__, template_folder='../../Front_End/templates')
 
 @auth_bp.route("/register_user", methods=["GET"])
 def register_user():
@@ -108,7 +108,7 @@ def submit_register_user():
             conn.close()
 
 @auth_bp.route("/login", methods=["GET", "POST"])
-def login():
+def login_user():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
