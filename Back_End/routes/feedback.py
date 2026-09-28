@@ -13,6 +13,10 @@ from Back_End.feedback.feedback_logic import (
     reanalyze_all_feedback,
     generate_ai_smart_reply,
     generate_ai_executive_summary,
+    generate_ai_ticket_action_plan,
+    generate_ai_root_cause_diagnosis,
+    generate_ai_developer_backlog,
+    chat_with_feedback_ai,
     FEATURE_DEFINITIONS,
 )
 
@@ -163,18 +167,38 @@ def reanalyze_feedback_route():
 @feedback_bp.route('/<feedback_id>/ai-reply', methods=['POST'])
 @admin_required
 def ai_reply_feedback_route(feedback_id):
-    """Membuat draf balasan solutif untuk pengguna menggunakan AI Gemini."""
+    """Membuat draf balasan solutif untuk pengguna menggunakan AI Gemini dengan tone terpilih."""
+    try:
+        data = request.get_json(silent=True) or {}
+        tone = data.get('tone', 'friendly')
+
+        records = get_all_feedback(with_feature_meta=True)
+        target = next((r for r in records if r.get('id') == feedback_id), None)
+        if not target:
+            return jsonify({'error': 'Feedback tidak ditemukan.'}), 404
+
+        draft_reply = generate_ai_smart_reply(target, tone=tone)
+        return jsonify({'success': True, 'draft_reply': draft_reply, 'tone': tone})
+    except Exception as e:
+        logging.error(f"AI draft reply error: {e}", exc_info=True)
+        return jsonify({'error': 'Gagal membuat draf balasan AI.'}), 500
+
+
+@feedback_bp.route('/<feedback_id>/ai-action-plan', methods=['POST'])
+@admin_required
+def ai_action_plan_feedback_route(feedback_id):
+    """Membuat rencana aksi teknis internal otomatis untuk tiket feedback dengan AI."""
     try:
         records = get_all_feedback(with_feature_meta=True)
         target = next((r for r in records if r.get('id') == feedback_id), None)
         if not target:
             return jsonify({'error': 'Feedback tidak ditemukan.'}), 404
 
-        draft_reply = generate_ai_smart_reply(target)
-        return jsonify({'success': True, 'draft_reply': draft_reply})
+        action_plan = generate_ai_ticket_action_plan(target)
+        return jsonify({'success': True, 'action_plan': action_plan})
     except Exception as e:
-        logging.error(f"AI draft reply error: {e}", exc_info=True)
-        return jsonify({'error': 'Gagal membuat draf balasan AI.'}), 500
+        logging.error(f"AI action plan error: {e}", exc_info=True)
+        return jsonify({'error': 'Gagal membuat rencana aksi internal AI.'}), 500
 
 
 @feedback_bp.route('/ai-overview', methods=['GET'])
@@ -188,6 +212,51 @@ def ai_overview_feedback_route():
     except Exception as e:
         logging.error(f"AI overview error: {e}", exc_info=True)
         return jsonify({'error': 'Gagal membuat ringkasan eksekutif AI.'}), 500
+
+
+@feedback_bp.route('/ai/diagnose', methods=['POST', 'GET'])
+@admin_required
+def ai_diagnose_feedback_route():
+    """Diagnosa akar masalah (Root Cause Analysis) dengan AI."""
+    try:
+        records = get_all_feedback(with_feature_meta=True)
+        diagnosis = generate_ai_root_cause_diagnosis(records)
+        return jsonify({'success': True, 'diagnosis': diagnosis})
+    except Exception as e:
+        logging.error(f"AI diagnose error: {e}", exc_info=True)
+        return jsonify({'error': 'Gagal membuat diagnosa akar masalah AI.'}), 500
+
+
+@feedback_bp.route('/ai/backlog', methods=['POST', 'GET'])
+@admin_required
+def ai_backlog_feedback_route():
+    """Membuat Sprint Backlog Developer dari keluhan siswa dengan AI."""
+    try:
+        records = get_all_feedback(with_feature_meta=True)
+        backlog = generate_ai_developer_backlog(records)
+        return jsonify({'success': True, 'backlog': backlog})
+    except Exception as e:
+        logging.error(f"AI backlog error: {e}", exc_info=True)
+        return jsonify({'error': 'Gagal membuat developer backlog AI.'}), 500
+
+
+@feedback_bp.route('/ai/chat', methods=['POST'])
+@admin_required
+def ai_chat_feedback_route():
+    """Chat interaktif dengan AI Copilot seputar masukan pengguna."""
+    try:
+        data = request.get_json(silent=True) or {}
+        user_query = data.get('query', '').strip()
+        if not user_query:
+            return jsonify({'error': 'Pertanyaan tidak boleh kosong.'}), 400
+
+        history = data.get('history', [])
+        records = get_all_feedback(with_feature_meta=True)
+        reply = chat_with_feedback_ai(user_query, records, history=history)
+        return jsonify({'success': True, 'reply': reply})
+    except Exception as e:
+        logging.error(f"AI copilot chat error: {e}", exc_info=True)
+        return jsonify({'error': 'Gagal memproses pertanyaan copilot AI.'}), 500
 
 
 @feedback_bp.route('/export', methods=['GET'])

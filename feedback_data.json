@@ -110,29 +110,6 @@
         }
     },
     {
-        "timestamp": "2026-01-29 03:12:34",
-        "user": "Anonymous",
-        "features": [],
-        "comment": "",
-        "analysis": {
-            "category": "General",
-            "status": "Neutral",
-            "similarity": "0.00%",
-            "similarity_raw": 0.0,
-            "sentiment": "Netral",
-            "matched_case_id": "CAT_GENERAL",
-            "recommendation": "Terima kasih atas feedback Anda. Tim MathThon akan meninjau saran Anda secara berkala."
-        },
-        "id": "69d4db73-67f8-40d0-9a34-258a7063c804",
-        "workflow": {
-            "status": "baru",
-            "priority": "normal",
-            "admin_response": "",
-            "action_plan": "",
-            "updated_at": null
-        }
-    },
-    {
         "timestamp": "2026-01-29 03:16:53",
         "user": "Jericho",
         "features": [

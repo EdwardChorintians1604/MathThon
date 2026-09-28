@@ -657,6 +657,258 @@
             border-top: 1px solid var(--adm-border);
             padding: 1rem 1.75rem;
         }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           AI FEEDBACK INTELLIGENCE SUITE & COPILOT STYLES
+           ══════════════════════════════════════════════════════════════════════ */
+        .ai-suite-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(245, 243, 255, 0.9) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: var(--radius-xl);
+            padding: 1.75rem;
+            box-shadow: 0 16px 32px -10px rgba(124, 58, 237, 0.12), 0 4px 10px -2px rgba(124, 58, 237, 0.05);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(14px);
+        }
+        .ai-suite-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #06b6d4);
+        }
+        .ai-badge-engine {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #f5f3ff;
+            color: #7c3aed;
+            border: 1px solid #ddd6fe;
+            border-radius: 9999px;
+            padding: 0.35rem 0.95rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .ai-pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            animation: pulse-green 2s infinite;
+        }
+        @keyframes pulse-green {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        .btn-ai-tool-card {
+            background: #ffffff;
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            border-radius: var(--radius-lg);
+            padding: 1.1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: left;
+            text-decoration: none;
+            color: var(--adm-text-main);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+            width: 100%;
+            height: 100%;
+        }
+        .btn-ai-tool-card:hover {
+            transform: translateY(-3px);
+            border-color: #7c3aed;
+            box-shadow: 0 12px 24px -6px rgba(124, 58, 237, 0.18);
+            color: var(--adm-text-main);
+        }
+        .btn-ai-tool-card .tool-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.45rem;
+            flex-shrink: 0;
+            color: #ffffff;
+            box-shadow: 0 6px 14px -3px rgba(0,0,0,0.15);
+        }
+        .btn-ai-tool-card .tool-text strong {
+            display: block;
+            font-size: 0.95rem;
+            font-family: var(--adm-font-display);
+            margin-bottom: 0.2rem;
+            color: var(--adm-text-main);
+        }
+        .btn-ai-tool-card .tool-text span {
+            font-size: 0.8rem;
+            color: var(--adm-text-muted);
+            line-height: 1.4;
+            display: block;
+        }
+
+        /* Copilot Chat UI */
+        .copilot-chat-box {
+            background: #ffffff;
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin-top: 1.5rem;
+        }
+        .copilot-chat-header {
+            padding: 0.85rem 1.35rem;
+            background: linear-gradient(90deg, #f8fafc 0%, #f1f5f9 100%);
+            border-bottom: 1px solid var(--adm-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .copilot-messages-area {
+            min-height: 220px;
+            max-height: 380px;
+            overflow-y: auto;
+            padding: 1.25rem 1.35rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: #ffffff;
+            scroll-behavior: smooth;
+        }
+        .copilot-bubble {
+            max-width: 88%;
+            padding: 0.95rem 1.25rem;
+            border-radius: var(--radius-lg);
+            font-size: 0.9rem;
+            line-height: 1.65;
+            position: relative;
+            animation: fadeIn 0.25s ease-out;
+        }
+        .copilot-bubble-ai {
+            align-self: flex-start;
+            background: #fdfefe;
+            color: var(--adm-text-main);
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            box-shadow: 0 4px 14px rgba(124, 58, 237, 0.06);
+            border-bottom-left-radius: 4px;
+        }
+        .copilot-bubble-ai strong {
+            color: #1e293b;
+        }
+        .copilot-bubble-ai ul, .copilot-bubble-ai ol {
+            margin-bottom: 0.5rem;
+            padding-left: 1.25rem;
+        }
+        .copilot-bubble-user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+            color: #ffffff !important;
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.25);
+        }
+        .copilot-bubble-user strong, .copilot-bubble-user span, .copilot-bubble-user p {
+            color: #ffffff !important;
+        }
+        .copilot-quick-prompts {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            padding: 0.75rem 1.35rem;
+            background: #f8fafc;
+            border-top: 1px solid var(--adm-border);
+        }
+        .prompt-chip {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .prompt-chip:hover {
+            border-color: #8b5cf6;
+            color: #7c3aed;
+            background: #f5f3ff;
+            transform: translateY(-1px);
+        }
+        .copilot-input-area {
+            padding: 0.85rem 1.35rem;
+            background: #ffffff;
+            border-top: 1px solid var(--adm-border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .copilot-input-area input {
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            padding: 0.65rem 1rem;
+            border: 1px solid var(--adm-border);
+            background: #f8fafc;
+        }
+        .copilot-input-area input:focus {
+            border-color: #8b5cf6;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+        }
+
+        /* Backlog & Diagnostic Cards */
+        .backlog-item-card {
+            background: #ffffff;
+            border: 1px solid var(--adm-border);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            transition: all 0.2s ease;
+            box-shadow: var(--adm-shadow-xs);
+        }
+        .backlog-item-card:hover {
+            border-color: #8b5cf6;
+            box-shadow: var(--adm-shadow-sm);
+        }
+        .diag-health-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-lg);
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.25);
+        }
+        .diag-health-score {
+            font-family: var(--adm-font-display);
+            font-size: 2.25rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .diag-component-row {
+            border-left: 4px solid #3b82f6;
+            background: #f8fafc;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1rem 1.15rem;
+            margin-bottom: 0.85rem;
+            border: 1px solid #e2e8f0;
+            border-left-width: 4px;
+        }
     </style>
 </head>
 <body class="admin-dashboard-body d-flex flex-column min-vh-100">
@@ -848,6 +1100,125 @@
         </div>
     </section>
 
+    <!-- ══════════════════════════════════════════════════════════════════════
+         AI FEEDBACK INTELLIGENCE SUITE & COPILOT
+         ══════════════════════════════════════════════════════════════════════ -->
+    <section class="ai-suite-container" id="aiIntelligenceHub">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+                <div class="d-flex align-items-center gap-2 mb-1">
+                    <span class="ai-badge-engine">
+                        <span class="ai-pulse-dot"></span> Gemini Flash-Lite Copilot
+                    </span>
+                    <span class="badge bg-light text-secondary border">Real-time Grounded</span>
+                </div>
+                <h3 class="m-0 fw-bold fs-5 text-dark d-flex align-items-center gap-2">
+                    <i class="bi bi-robot text-primary"></i>
+                    AI Intelligence Suite &amp; Asisten Analitik MathThon
+                </h3>
+            </div>
+            <div class="text-muted small">
+                Analisis otomatis berbasis sentimen siswa &amp; arsitektur aplikasi
+            </div>
+        </div>
+
+        <!-- 3 Quick Action Interactive AI Tool Cards -->
+        <div class="row g-3 mb-3">
+            <div class="col-md-4">
+                <div class="btn-ai-tool-card" onclick="openAiDiagnosis()" role="button" tabindex="0">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">
+                        <i class="bi bi-search-heart"></i>
+                    </div>
+                    <div class="tool-text">
+                        <strong>Diagnosa Akar Masalah</strong>
+                        <span>Petakan file &amp; modul rentan yang dikeluhkan pengguna</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="btn-ai-tool-card" onclick="openAiBacklog()" role="button" tabindex="0">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);">
+                        <i class="bi bi-kanban"></i>
+                    </div>
+                    <div class="tool-text">
+                        <strong>Generator Sprint Backlog</strong>
+                        <span>Ubah keluhan siswa jadi Scrum User Stories &amp; kriteria selesai</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="btn-ai-tool-card" onclick="document.getElementById('btnAiOverview').click()" role="button" tabindex="0">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);">
+                        <i class="bi bi-file-earmark-spreadsheet"></i>
+                    </div>
+                    <div class="tool-text">
+                        <strong>Ringkasan Eksekutif</strong>
+                        <span>Sintesis menyeluruh untuk evaluasi manajemen platform</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive AI Copilot Chat Box -->
+        <div class="copilot-chat-box">
+            <div class="copilot-chat-header">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-chat-dots-fill text-primary"></i>
+                    <strong class="small text-dark">Tanya AI Seputar Masukan Pengguna</strong>
+                    <span class="badge bg-primary bg-opacity-10 text-primary small" style="font-size: 0.72rem;">Interaktif</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <button type="button" class="btn btn-sm btn-link text-decoration-none text-muted p-0 small" onclick="clearCopilotChat()">
+                        <i class="bi bi-trash"></i> Bersihkan Percakapan
+                    </button>
+                </div>
+            </div>
+
+            <!-- Messages Area -->
+            <div class="copilot-messages-area" id="copilotMessages">
+                <div class="copilot-bubble copilot-bubble-ai">
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <i class="bi bi-stars text-primary"></i>
+                        <strong class="small">MathThon AI Copilot</strong>
+                        <span class="text-muted" style="font-size: 0.72rem;">Live Assistant</span>
+                    </div>
+                    Halo Admin! Saya telah menganalisis masukan siswa yang tersimpan di sistem MathThon. Anda dapat menanyakan ringkasan keluhan, evaluasi modul materi, kendala teknis tertentu, atau klik salah satu rekomendasi pertanyaan cepat di bawah ini.
+                </div>
+            </div>
+
+            <!-- Quick Prompt Shortcut Chips -->
+            <div class="copilot-quick-prompts">
+                <span class="small text-muted fw-bold me-1" style="font-size: 0.75rem;">Pertanyaan Cepat:</span>
+                <span class="prompt-chip" onclick="askCopilotPrompt('Apa saja keluhan paling kritis dan mendesak saat ini?')">
+                    ⚡ Keluhan Kritis
+                </span>
+                <span class="prompt-chip" onclick="askCopilotPrompt('Bagaimana evaluasi siswa terhadap navigasi & responsivitas di HP?')">
+                    📱 Isu Mobile &amp; Sidenav
+                </span>
+                <span class="prompt-chip" onclick="askCopilotPrompt('Apakah ada keluhan spesifik terkait kalkulator dan latihan soal?')">
+                    🧮 Bug Kalkulator
+                </span>
+                <span class="prompt-chip" onclick="askCopilotPrompt('Apa masukan utama siswa terhadap penjelasan konten materi matematika?')">
+                    📚 Evaluasi Materi
+                </span>
+                <span class="prompt-chip" onclick="askCopilotPrompt('Berikan 3 rekomendasi tindakan prioritas minggu ini!')">
+                    🎯 Prioritas Tindakan
+                </span>
+            </div>
+
+            <!-- Input Area -->
+            <div class="copilot-input-area">
+                <input type="text" class="form-control" id="copilotInput" placeholder="Ketik pertanyaan untuk AI (misal: 'Apakah siswa puas dengan materi Kalkulus?')..." onkeydown="if(event.key==='Enter') sendCopilotQuery()">
+                <button type="button" class="btn btn-primary px-3 d-inline-flex align-items-center gap-1" id="btnSendCopilot" onclick="sendCopilotQuery()">
+                    <span>Kirim</span>
+                    <i class="bi bi-send-fill"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- Smart Filter & Search Control Panel -->
     <section class="toolbar-panel">
         <div class="toolbar-row">
@@ -974,6 +1345,101 @@
             </div>
         </div>
     </div>
+<!-- ══════════════════════════════════════════════════════════════════════
+     AI ROOT CAUSE DIAGNOSIS MODAL
+     ══════════════════════════════════════════════════════════════════════ -->
+<div class="modal fade" id="aiDiagnosisModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <div>
+                    <h5 class="modal-title fw-bold d-flex align-items-center gap-2 mb-1">
+                        <i class="bi bi-heart-pulse-fill text-danger"></i>
+                        Diagnosa Akar Masalah (Root Cause Analysis)
+                    </h5>
+                    <div class="text-muted small">Analisis komprehensif sistemik, pemetaan file/komponen rentan, dan rekomendasi mitigasi engineering.</div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="aiDiagnosisLoading" class="text-center py-5">
+                    <div class="spinner-modern mb-3"></div>
+                    <p class="text-muted fw-bold">AI sedang memeriksa log keluhan, kategori masalah, dan stack komponen aplikasi...</p>
+                </div>
+                <div id="aiDiagnosisContent" style="display: none;">
+                    <!-- Health score and summary card -->
+                    <div class="d-flex align-items-center gap-4 p-3 bg-light rounded-4 mb-4 border flex-wrap">
+                        <div class="diag-health-badge">
+                            <span class="diag-health-score" id="diagHealthScore">0</span>
+                            <span class="small text-uppercase fw-bold" style="font-size: 0.65rem;">System Health</span>
+                        </div>
+                        <div style="flex: 1; min-width: 260px;">
+                            <h6 class="fw-bold mb-1 text-dark">Ringkasan Evaluasi Sistemik</h6>
+                            <p class="text-muted mb-0 small" id="diagSummary" style="line-height: 1.6;"></p>
+                        </div>
+                    </div>
+
+                    <!-- Vulnerable components list -->
+                    <h6 class="fw-bold mb-3 d-flex align-items-center gap-2 text-dark">
+                        <i class="bi bi-exclamation-triangle-fill text-warning"></i>
+                        Komponen &amp; File Rentan yang Teridentifikasi:
+                    </h6>
+                    <div id="diagComponentsList" class="mb-4"></div>
+
+                    <!-- Architectural Recommendations -->
+                    <h6 class="fw-bold mb-2 d-flex align-items-center gap-2 text-dark">
+                        <i class="bi bi-shield-check text-success"></i>
+                        Rekomendasi Arsitektural Tim Developer &amp; QA:
+                    </h6>
+                    <div class="p-3 bg-success bg-opacity-10 rounded-3 border border-success border-opacity-25" id="diagRecommendationsList"></div>
+                </div>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-outline-secondary btn-sm" id="btnCopyDiag">
+                    <i class="bi bi-clipboard me-1"></i> Salin Diagnosa
+                </button>
+                <button type="button" class="btn btn-primary btn-sm px-4" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     AI SPRINT BACKLOG GENERATOR MODAL
+     ══════════════════════════════════════════════════════════════════════ -->
+<div class="modal fade" id="aiBacklogModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <div>
+                    <h5 class="modal-title fw-bold d-flex align-items-center gap-2 mb-1">
+                        <i class="bi bi-kanban-fill text-primary"></i>
+                        AI Sprint Backlog Generator (Scrum Tickets)
+                    </h5>
+                    <div class="text-muted small">Ekstraksi suara siswa menjadi tiket User Stories siap kerja untuk tim frontend, backend, dan konten kurikulum.</div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="aiBacklogLoading" class="text-center py-5">
+                    <div class="spinner-modern mb-3"></div>
+                    <p class="text-muted fw-bold">AI sedang merumuskan User Story, Acceptance Criteria, dan tingkat prioritas tiket...</p>
+                </div>
+                <div id="aiBacklogContent" style="display: none;">
+                    <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+                        <span class="text-muted small">Tiket backlog siap dipindahkan ke Jira, GitHub Projects, atau Trello:</span>
+                        <button type="button" class="btn btn-sm btn-outline-primary" id="btnCopyBacklogMarkdown">
+                            <i class="bi bi-markdown me-1"></i> Salin Format Markdown
+                        </button>
+                    </div>
+                    <div id="backlogTicketsList"></div>
+                </div>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-primary btn-sm px-4" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Scripts -->
@@ -991,7 +1457,11 @@ document.addEventListener('DOMContentLoaded', () => {
         delete: (id) => `{{ url_for('feedback.get_feedback_list_route') }}`.replace('/list', `/${encodeURIComponent(id)}`),
         reanalyze: "{{ url_for('feedback.reanalyze_feedback_route') }}",
         aiReply: (id) => `{{ url_for('feedback.get_feedback_list_route') }}`.replace('/list', `/${encodeURIComponent(id)}/ai-reply`),
-        aiOverview: "{{ url_for('feedback.ai_overview_feedback_route') }}"
+        aiActionPlan: (id) => `{{ url_for('feedback.get_feedback_list_route') }}`.replace('/list', `/${encodeURIComponent(id)}/ai-action-plan`),
+        aiOverview: "{{ url_for('feedback.ai_overview_feedback_route') }}",
+        aiDiagnose: `{{ url_for('feedback.get_feedback_list_route') }}`.replace('/list', '/ai/diagnose'),
+        aiBacklog: `{{ url_for('feedback.get_feedback_list_route') }}`.replace('/list', '/ai/backlog'),
+        aiChat: `{{ url_for('feedback.get_feedback_list_route') }}`.replace('/list', '/ai/chat')
     };
 
     const csrfToken = "{{ csrf_token() }}";
@@ -1355,17 +1825,30 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
 
                         <div class="mb-3">
-                            <div class="d-flex align-items-center justify-content-between mb-1">
+                            <div class="d-flex align-items-center justify-content-between mb-1 flex-wrap gap-2">
                                 <label class="form-label small fw-bold text-muted mb-0">Tanggapan untuk Pengguna (Pesan Resmi)</label>
-                                <button type="button" class="btn-ai-sparkle" onclick="generateAiReply('${item.id}')">
-                                    <i class="bi bi-stars"></i> ✨ Draf Balasan AI
-                                </button>
+                                <div class="d-flex align-items-center gap-1">
+                                    <select class="form-select form-select-sm" id="tone-${item.id}" style="width: auto; font-size: 0.76rem; padding: 0.25rem 1.6rem 0.25rem 0.6rem; border-color: rgba(139, 92, 246, 0.4); cursor: pointer;" title="Pilih Gaya Bahasa Balasan AI">
+                                        <option value="friendly">🎒 Ramah (Siswa)</option>
+                                        <option value="formal">👔 Formal</option>
+                                        <option value="concise">⚡ Singkat &amp; Padat</option>
+                                        <option value="technical">🛠️ Teknis</option>
+                                    </select>
+                                    <button type="button" class="btn-ai-sparkle" onclick="generateAiReply('${item.id}')" title="Buat draf balasan dengan gaya bahasa terpilih">
+                                        <i class="bi bi-stars"></i> ✨ Draf Balasan AI
+                                    </button>
+                                </div>
                             </div>
                             <textarea class="form-control form-control-sm" rows="3" data-field="admin_response" placeholder="Tuliskan tanggapan resmi yang dapat dibaca atau dikirimkan ke siswa...">${escapeHtml(item.workflow?.admin_response || '')}</textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label small fw-bold text-muted">Rencana Aksi Internal Tim MathThon</label>
+                            <div class="d-flex align-items-center justify-content-between mb-1 flex-wrap gap-2">
+                                <label class="form-label small fw-bold text-muted mb-0">Rencana Aksi Internal Tim MathThon</label>
+                                <button type="button" class="btn btn-sm btn-outline-primary py-0 px-2 d-inline-flex align-items-center gap-1" style="font-size: 0.76rem; border-radius: 6px;" onclick="generateAiActionPlan('${item.id}')" title="Buat 3 langkah to-do teknis otomatis dengan AI">
+                                    <i class="bi bi-cpu"></i> 🧠 Rencana Aksi AI
+                                </button>
+                            </div>
                             <textarea class="form-control form-control-sm" rows="2" data-field="action_plan" placeholder="Contoh: Fix bug kalkulator di script.js baris 140, perbaiki kontras warna, update silabus...">${escapeHtml(item.workflow?.action_plan || '')}</textarea>
                         </div>
 
@@ -1587,21 +2070,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // ─── AI Smart Reply Generator ───
+    // ─── Markdown Formatter Utility ───
+    function formatMarkdown(text) {
+        if (!text) return '';
+        let html = text
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-light border text-primary font-monospace small">$1</code>')
+            .replace(/^\s*[-•]\s+(.*)$/gm, '<li class="ms-3 mb-1">$1</li>')
+            .replace(/^\s*(\d+)\.\s+(.*)$/gm, '<li class="ms-3 mb-1"><strong>$1.</strong> $2</li>')
+            .replace(/\n\n/g, '<br><br>')
+            .replace(/\n/g, '<br>');
+        return html;
+    }
+
+    // ─── AI Smart Reply Generator (with Tone Selection) ───
     window.generateAiReply = async (feedbackId) => {
         const panel = document.getElementById(`workflow-${feedbackId}`);
         if (!panel) return;
         const textarea = panel.querySelector('[data-field="admin_response"]');
+        const toneSelect = document.getElementById(`tone-${feedbackId}`);
+        const selectedTone = toneSelect ? toneSelect.value : 'friendly';
+
+        const toneNames = {
+            'friendly': 'Ramah',
+            'formal': 'Formal',
+            'concise': 'Singkat',
+            'technical': 'Teknis'
+        };
 
         Toast.fire({
             icon: 'info',
-            title: '✨ AI Gemini sedang merancang balasan...'
+            title: `✨ AI merancang balasan (Gaya: ${toneNames[selectedTone] || 'Ramah'})...`
         });
 
         try {
             const res = await fetch(API.aiReply(feedbackId), {
                 method: 'POST',
-                headers: { 'X-CSRFToken': csrfToken }
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ tone: selectedTone })
             });
 
             const result = await res.json();
@@ -1610,6 +2121,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (textarea && result.draft_reply) {
                 textarea.value = result.draft_reply;
                 textarea.focus();
+                textarea.classList.add('animate__animated', 'animate__pulse');
+                setTimeout(() => textarea.classList.remove('animate__animated', 'animate__pulse'), 1000);
+
                 Toast.fire({
                     icon: 'success',
                     title: 'Draf balasan AI berhasil dibuat!'
@@ -1622,6 +2136,343 @@ document.addEventListener('DOMContentLoaded', () => {
                 text: err.message,
                 confirmButtonColor: '#3b82f6'
             });
+        }
+    };
+
+    // ─── AI Ticket Action Plan Generator ───
+    window.generateAiActionPlan = async (feedbackId) => {
+        const panel = document.getElementById(`workflow-${feedbackId}`);
+        if (!panel) return;
+        const textarea = panel.querySelector('[data-field="action_plan"]');
+
+        Toast.fire({
+            icon: 'info',
+            title: '🧠 AI merumuskan rencana aksi teknis internal...'
+        });
+
+        try {
+            const res = await fetch(API.aiActionPlan(feedbackId), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                }
+            });
+
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.error || 'Gagal membuat rencana aksi AI');
+
+            if (textarea && result.action_plan) {
+                textarea.value = result.action_plan;
+                textarea.focus();
+                textarea.classList.add('animate__animated', 'animate__pulse');
+                setTimeout(() => textarea.classList.remove('animate__animated', 'animate__pulse'), 1000);
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Rencana aksi internal AI berhasil dirumuskan!'
+                });
+            }
+        } catch (err) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal Membuat Rencana Aksi',
+                text: err.message,
+                confirmButtonColor: '#3b82f6'
+            });
+        }
+    };
+
+    // ─── AI Root Cause Diagnosis Modal Handler ───
+    const diagModal = new bootstrap.Modal(document.getElementById('aiDiagnosisModal'));
+    const diagLoading = document.getElementById('aiDiagnosisLoading');
+    const diagContent = document.getElementById('aiDiagnosisContent');
+    let lastDiagnosisData = null;
+
+    window.openAiDiagnosis = async () => {
+        diagLoading.style.display = 'block';
+        diagContent.style.display = 'none';
+        diagModal.show();
+
+        try {
+            const res = await fetch(API.aiDiagnose, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                }
+            });
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.error || 'Gagal melakukan diagnosa akar masalah');
+
+            const diag = result.diagnosis || {};
+            lastDiagnosisData = diag;
+
+            // Health score & Summary
+            document.getElementById('diagHealthScore').textContent = diag.system_health_score || '80/100';
+            document.getElementById('diagSummary').textContent = diag.summary || 'Analisis selesai.';
+
+            // Components list
+            const compList = document.getElementById('diagComponentsList');
+            if (diag.vulnerable_components && diag.vulnerable_components.length) {
+                compList.innerHTML = diag.vulnerable_components.map(c => {
+                    const sev = (c.severity || '').toLowerCase();
+                    let sevClass = 'bg-primary text-primary';
+                    if (sev.includes('kritis')) sevClass = 'bg-danger text-danger';
+                    else if (sev.includes('tinggi')) sevClass = 'bg-warning text-dark';
+                    else if (sev.includes('sedang')) sevClass = 'bg-info text-info';
+
+                    return `
+                    <div class="diag-component-row">
+                        <div class="d-flex align-items-center justify-content-between mb-1 flex-wrap gap-2">
+                            <div>
+                                <strong class="text-dark fs-6">${escapeHtml(c.component)}</strong>
+                                ${c.file_hint ? `<span class="badge bg-light text-muted border font-monospace ms-2 small">${escapeHtml(c.file_hint)}</span>` : ''}
+                            </div>
+                            <span class="badge ${sevClass} bg-opacity-10 fw-bold px-2 py-1 rounded small">
+                                ${escapeHtml(c.severity || 'Normal')}
+                            </span>
+                        </div>
+                        <div class="text-secondary small mb-2"><strong>Kendala:</strong> ${escapeHtml(c.issue)}</div>
+                        <div class="small p-2 bg-white rounded border border-light-subtle">
+                            <strong class="text-success"><i class="bi bi-wrench-adjustable me-1"></i>Solusi Rekayasa:</strong> ${escapeHtml(c.fix)}
+                        </div>
+                    </div>`;
+                }).join('');
+            } else {
+                compList.innerHTML = '<div class="text-muted small">Tidak ada komponen rentan kritis yang terdeteksi saat ini.</div>';
+            }
+
+            // Recommendations
+            const recList = document.getElementById('diagRecommendationsList');
+            if (diag.recommendations && diag.recommendations.length) {
+                recList.innerHTML = `<ul class="mb-0 ps-3 small text-dark">` +
+                    diag.recommendations.map(r => `<li class="mb-1">${escapeHtml(r)}</li>`).join('') +
+                    `</ul>`;
+            } else {
+                recList.innerHTML = '<div class="text-muted small">Pertahankan standar arsitektur dan stabilitas sistem.</div>';
+            }
+
+            diagLoading.style.display = 'none';
+            diagContent.style.display = 'block';
+        } catch (err) {
+            diagLoading.style.display = 'none';
+            diagContent.innerHTML = `<div class="alert alert-danger">${escapeHtml(err.message)}</div>`;
+            diagContent.style.display = 'block';
+        }
+    };
+
+    document.getElementById('btnCopyDiag').addEventListener('click', () => {
+        if (!lastDiagnosisData) return;
+        const text = `LAPORAN DIAGNOSA AKAR MASALAH (MATHTHON)\nHealth Score: ${lastDiagnosisData.system_health_score}\n\nRingkasan:\n${lastDiagnosisData.summary}\n\nKomponen Rentan:\n` +
+            (lastDiagnosisData.vulnerable_components || []).map(c => `- [${c.severity}] ${c.component} (${c.file_hint || ''}): ${c.issue} -> Solusi: ${c.fix}`).join('\n') +
+            `\n\nRekomendasi:\n` + (lastDiagnosisData.recommendations || []).map((r, i) => `${i+1}. ${r}`).join('\n');
+
+        navigator.clipboard.writeText(text).then(() => {
+            Toast.fire({ icon: 'success', title: 'Laporan diagnosa berhasil disalin!' });
+        });
+    });
+
+    // ─── AI Sprint Backlog Generator Modal Handler ───
+    const backlogModal = new bootstrap.Modal(document.getElementById('aiBacklogModal'));
+    const backlogLoading = document.getElementById('aiBacklogLoading');
+    const backlogContent = document.getElementById('aiBacklogContent');
+    let lastBacklogItems = [];
+
+    window.openAiBacklog = async () => {
+        backlogLoading.style.display = 'block';
+        backlogContent.style.display = 'none';
+        backlogModal.show();
+
+        try {
+            const res = await fetch(API.aiBacklog, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                }
+            });
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.error || 'Gagal menghasilkan sprint backlog');
+
+            lastBacklogItems = result.backlog || [];
+            const container = document.getElementById('backlogTicketsList');
+
+            if (lastBacklogItems.length) {
+                container.innerHTML = lastBacklogItems.map((ticket, idx) => {
+                    const p = (ticket.priority || '').toUpperCase();
+                    let pBadge = 'bg-primary text-primary';
+                    if (p.includes('P0') || p.includes('BLOCKER')) pBadge = 'bg-danger text-danger';
+                    else if (p.includes('P1') || p.includes('HIGH')) pBadge = 'bg-warning text-dark';
+                    else if (p.includes('P2')) pBadge = 'bg-info text-info';
+
+                    return `
+                    <div class="backlog-item-card" id="backlog-ticket-${idx}">
+                        <div class="d-flex align-items-center justify-content-between mb-2 flex-wrap gap-2">
+                            <div>
+                                <span class="badge ${pBadge} bg-opacity-10 fw-bold px-2 py-1 rounded me-2">
+                                    ${escapeHtml(ticket.priority || 'P2 - Normal')}
+                                </span>
+                                <span class="badge bg-secondary bg-opacity-10 text-secondary px-2 py-1 rounded">
+                                    ${escapeHtml(ticket.category || 'General')}
+                                </span>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-link text-decoration-none p-0 text-primary small" onclick="copySingleTicket(${idx})">
+                                <i class="bi bi-clipboard me-1"></i> Salin Tiket
+                            </button>
+                        </div>
+                        <h6 class="fw-bold mb-2 text-dark">${escapeHtml(ticket.title)}</h6>
+                        <div class="p-2.5 bg-light rounded-3 mb-2 small text-secondary">
+                            <strong>User Story:</strong> <em>"${escapeHtml(ticket.user_story)}"</em>
+                        </div>
+                        <div class="small text-muted">
+                            <strong class="text-dark"><i class="bi bi-check2-circle text-success me-1"></i>Acceptance Criteria:</strong>
+                            <div class="mt-1 ps-2 border-start border-2 border-success text-dark">${escapeHtml(ticket.acceptance_criteria)}</div>
+                        </div>
+                    </div>`;
+                }).join('');
+            } else {
+                container.innerHTML = '<div class="text-muted small">Tidak ada tiket backlog yang dihasilkan.</div>';
+            }
+
+            backlogLoading.style.display = 'none';
+            backlogContent.style.display = 'block';
+        } catch (err) {
+            backlogLoading.style.display = 'none';
+            backlogContent.innerHTML = `<div class="alert alert-danger">${escapeHtml(err.message)}</div>`;
+            backlogContent.style.display = 'block';
+        }
+    };
+
+    window.copySingleTicket = (idx) => {
+        const t = lastBacklogItems[idx];
+        if (!t) return;
+        const text = `### ${t.title}\n- **Priority:** ${t.priority}\n- **Category:** ${t.category}\n- **User Story:** ${t.user_story}\n- **Acceptance Criteria:** ${t.acceptance_criteria}`;
+        navigator.clipboard.writeText(text).then(() => {
+            Toast.fire({ icon: 'success', title: 'Tiket berhasil disalin!' });
+        });
+    };
+
+    document.getElementById('btnCopyBacklogMarkdown').addEventListener('click', () => {
+        if (!lastBacklogItems.length) return;
+        const md = `# MathThon Sprint Backlog (Generated by AI)\n\n` +
+            lastBacklogItems.map(t => `### [${t.priority}] ${t.title}\n*Category:* \`${t.category}\`\n\n> **User Story:** ${t.user_story}\n\n**Acceptance Criteria:**\n- ${t.acceptance_criteria}\n`).join('\n---\n\n');
+
+        navigator.clipboard.writeText(md).then(() => {
+            Toast.fire({ icon: 'success', title: 'Seluruh backlog disalin dalam format Markdown!' });
+        });
+    });
+
+    // ─── Interactive AI Copilot Chat Handlers ───
+    let copilotChatHistory = [];
+
+    window.clearCopilotChat = () => {
+        copilotChatHistory = [];
+        const msgContainer = document.getElementById('copilotMessages');
+        msgContainer.innerHTML = `
+            <div class="copilot-bubble copilot-bubble-ai">
+                <div class="d-flex align-items-center gap-2 mb-1">
+                    <i class="bi bi-stars text-primary"></i>
+                    <strong class="small">MathThon AI Copilot</strong>
+                    <span class="text-muted" style="font-size: 0.72rem;">Live Assistant</span>
+                </div>
+                Halo Admin! Saya telah menganalisis masukan siswa yang tersimpan di sistem MathThon. Anda dapat menanyakan ringkasan keluhan, evaluasi modul materi, kendala teknis tertentu, atau klik salah satu rekomendasi pertanyaan cepat di bawah ini.
+            </div>`;
+        Toast.fire({ icon: 'info', title: 'Percakapan copilot dibersihkan' });
+    };
+
+    window.askCopilotPrompt = (promptText) => {
+        const input = document.getElementById('copilotInput');
+        if (input) {
+            input.value = promptText;
+            window.sendCopilotQuery();
+        }
+    };
+
+    window.sendCopilotQuery = async () => {
+        const input = document.getElementById('copilotInput');
+        const query = (input.value || '').trim();
+        if (!query) return;
+
+        const msgContainer = document.getElementById('copilotMessages');
+        const btnSend = document.getElementById('btnSendCopilot');
+
+        // Append user bubble
+        const userBubble = document.createElement('div');
+        userBubble.className = 'copilot-bubble copilot-bubble-user';
+        userBubble.innerHTML = `<div class="fw-semibold small text-white-50 mb-0.5">Admin</div><div>${escapeHtml(query)}</div>`;
+        msgContainer.appendChild(userBubble);
+
+        // Clear input and disable button
+        input.value = '';
+        btnSend.disabled = true;
+
+        // Append typing indicator
+        const typingBubble = document.createElement('div');
+        typingBubble.className = 'copilot-bubble copilot-bubble-ai';
+        typingBubble.id = 'copilotTyping';
+        typingBubble.innerHTML = `
+            <div class="d-flex align-items-center gap-2 text-muted small">
+                <span class="spinner-border spinner-border-sm text-primary" role="status"></span>
+                <span>AI Copilot sedang menganalisis data masukan...</span>
+            </div>`;
+        msgContainer.appendChild(typingBubble);
+        msgContainer.scrollTop = msgContainer.scrollHeight;
+
+        try {
+            const res = await fetch(API.aiChat, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({
+                    query: query,
+                    history: copilotChatHistory
+                })
+            });
+
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.error || 'AI Copilot tidak dapat memproses permintaan');
+
+            // Remove typing bubble
+            const typingElem = document.getElementById('copilotTyping');
+            if (typingElem) typingElem.remove();
+
+            // Append AI response bubble
+            const aiBubble = document.createElement('div');
+            aiBubble.className = 'copilot-bubble copilot-bubble-ai';
+            const formattedReply = formatMarkdown(result.reply);
+
+            aiBubble.innerHTML = `
+                <div class="d-flex align-items-center justify-content-between mb-1.5 pb-1 border-bottom">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-stars text-primary"></i>
+                        <strong class="small text-dark">MathThon AI Copilot</strong>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-link text-decoration-none text-muted p-0 small" onclick="navigator.clipboard.writeText(this.dataset.content); Toast.fire({icon: 'success', title: 'Tanggapan disalin!'});" data-content="${escapeHtml(result.reply)}">
+                        <i class="bi bi-clipboard"></i> Salin
+                    </button>
+                </div>
+                <div class="copilot-reply-content">${formattedReply}</div>`;
+
+            msgContainer.appendChild(aiBubble);
+            msgContainer.scrollTop = msgContainer.scrollHeight;
+
+            // Save history
+            copilotChatHistory.push({ role: 'user', content: query });
+            copilotChatHistory.push({ role: 'assistant', content: result.reply });
+        } catch (err) {
+            const typingElem = document.getElementById('copilotTyping');
+            if (typingElem) typingElem.remove();
+
+            const errBubble = document.createElement('div');
+            errBubble.className = 'copilot-bubble copilot-bubble-ai text-danger';
+            errBubble.innerHTML = `<i class="bi bi-exclamation-triangle-fill me-1"></i> ${escapeHtml(err.message)}`;
+            msgContainer.appendChild(errBubble);
+            msgContainer.scrollTop = msgContainer.scrollHeight;
+        } finally {
+            btnSend.disabled = false;
         }
     };
 
@@ -1690,14 +2541,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await res.json();
             if (!res.ok) throw new Error(result.error || 'Gagal membuat ringkasan');
 
-            // Format markdown text to clean HTML paragraphs/lists
-            let formatted = result.summary
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                .replace(/^• (.*?)$/gm, '<li class="mb-1">$1</li>')
-                .replace(/^- (.*?)$/gm, '<li class="mb-1">$1</li>')
-                .replace(/\n\n/g, '<br><br>');
-
-            aiContent.innerHTML = formatted;
+            aiContent.innerHTML = formatMarkdown(result.summary);
             aiLoading.style.display = 'none';
             aiContent.style.display = 'block';
         } catch (err) {

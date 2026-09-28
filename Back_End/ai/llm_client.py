@@ -145,8 +145,8 @@ class LLMClient:
                             gemini_messages.append({"role": gemini_role, "parts": [{"text": content}]})
 
                     candidate_models = [self.model]
-                    # Urutan model Google resmi yang aktif dan terbukti didukung
-                    for fallback_m in ["gemini-flash-latest", "gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.8-flash"]:
+                    # Urutan model Google resmi yang aktif dan terbukti memiliki kuota tinggi
+                    for fallback_m in ["gemini-flash-lite-latest", "gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-flash-latest", "gemini-3.8-flash", "gemma-4-26b-a4b-it"]:
                         if fallback_m not in candidate_models:
                             candidate_models.append(fallback_m)
 

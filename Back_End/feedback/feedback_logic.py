@@ -1,10 +1,13 @@
 from flask import current_app
 import json
+import logging
 import os
 import re
 import uuid
 from collections import Counter
 from datetime import datetime
+
+logger = logging.getLogger(__name__)
 
 # ==============================================================================
 # 1. FORMAL FEATURE REGISTRY & DOMAIN DICTIONARY
@@ -693,60 +696,368 @@ def get_feedback_analytics(records: list) -> dict:
 # ==============================================================================
 # 7. AI ASSISTANCE (SMART REPLY & EXECUTIVE SUMMARY)
 # ==============================================================================
-def generate_ai_smart_reply(feedback_item: dict) -> str:
+# 7. AI FEEDBACK INTELLIGENCE ENGINE (GEMINI COPILOT & ROBUST SMART TOOLS)
+# ==============================================================================
+def get_llm_client():
+    """Helper untuk menginisiasi LLMClient secara aman."""
+    try:
+        from Back_End.ai.llm_client import LLMClient
+        # Gunakan model hemat kuota gemini-flash-lite-latest secara default
+        client = LLMClient(provider="gemini", model="gemini-flash-lite-latest")
+        return client
+    except Exception as e:
+        logger.warning(f"Tidak dapat menginisiasi LLMClient Gemini: {e}")
+        return None
+
+def generate_ai_smart_reply(feedback_item: dict, tone: str = 'friendly') -> str:
     """
-    Membuat draf balasan profesional dari admin untuk pengguna menggunakan
-    LLMClient (Gemini), dengan fallback deterministik yang ramah dan solutif.
+    Membuat draf balasan personal dari admin untuk siswa dengan pilihan gaya bahasa (tone):
+    - 'friendly': Hangat, empatik, ramah untuk pelajar/siswa
+    - 'formal': Baku, profesional, institusional
+    - 'concise': Singkat, padat, langsung ke solusi
+    - 'technical': Rincian investigasi teknis dan langkah debugging
     """
     user_name = feedback_item.get('user', 'Siswa MathThon')
-    comment = feedback_item.get('comment', '')
+    comment = feedback_item.get('comment', '').strip()
     features = [FEATURE_DEFINITIONS.get(f, {}).get('name', f) for f in feedback_item.get('features', [])]
     analysis = feedback_item.get('analysis', {})
     category = analysis.get('category', 'Layanan')
     recom = analysis.get('recommendation', '')
 
-    prompt = f"""Kamu adalah asisten admin untuk platform edukasi matematika 'MathThon'.
-Tugasmu adalah menulis draf balasan yang sopan, solutif, empatik, dan profesional kepada pengguna/siswa yang memberikan feedback.
+    tone_instructions = {
+        'friendly': "Gunakan nada bicara yang hangat, suportif, dan bersahabat untuk siswa. Apresiasi dengan tulus, semangati belajarnya.",
+        'formal': "Gunakan bahasa Indonesia baku, formal, sopan, dan mencerminkan institusi pendidikan yang profesional.",
+        'concise': "Tulis balasan yang sangat ringkas, padat (2-3 kalimat), langsung mengapresiasi dan menjelaskan solusi tanpa basa-basi.",
+        'technical': "Gunakan nada teknis, jelaskan bahwa log dan modul terkait sedang diinvestigasi oleh tim developer, sebutkan komitmen kualitas sistem."
+    }
+    selected_tone_guide = tone_instructions.get(tone, tone_instructions['friendly'])
 
-Data Feedback:
-- Nama Pengguna: {user_name}
-- Kategori Feedback: {category}
-- Masukan Pengguna: "{comment if comment else '(Tidak ada komentar spesifik)'}"
-- Pilihan Kendala/Fitur: {', '.join(features) if features else 'Tidak ada'}
+    prompt = f"""Kamu adalah asisten resmi admin platform edukasi matematika 'MathThon'.
+Tugasmu adalah menulis draf balasan untuk siswa yang mengirimkan feedback berikut:
+
+Data Siswa & Feedback:
+- Nama: {user_name}
+- Kategori Masukan: {category}
+- Komentar Siswa: "{comment if comment else '(Tidak ada komentar teks spesifik)'}"
+- Pilihan Kendala: {', '.join(features) if features else 'Tidak memilih opsi'}
 - Rekomendasi Solusi Sistem (CBR): {recom}
 
+Gaya Bahasa (Tone):
+{selected_tone_guide}
+
 Aturan Penulisan:
-1. Sapa nama pengguna dengan ramah.
-2. Apresiasi masukannya untuk peningkatan kualitas MathThon.
-3. Jelaskan langkah konkret yang sedang/akan dilakukan tim admin sesuai rekomendasi CBR.
-4. Gunakan bahasa Indonesia yang baik, bersahabat untuk pelajar (1-2 paragraf singkat, jangan bertele-tele).
-5. Jangan gunakan format markdown judul (#), cukup teks paragraf biasa."""
+1. Sapa siswa dengan namanya.
+2. Tanggapi langsung inti komentar/keluhannya.
+3. Sebutkan tindakan nyata tim MathThon (berdasarkan rekomendasi CBR).
+4. Buat 1-2 paragraf natural, jangan gunakan format judul markdown (#), tuliskan isi pesan langsung."""
 
-    try:
-        from Back_End.ai.llm_client import LLMClient
-        client = LLMClient(provider="gemini")
-        reply = client.generate(prompt=prompt, temperature=0.5, max_output_tokens=350)
-        if reply and len(reply.strip()) > 30:
-            return reply.strip()
-    except Exception:
-        pass
+    client = get_llm_client()
+    if client:
+        try:
+            reply = client.generate(prompt=prompt, temperature=0.6, max_output_tokens=350)
+            if reply and len(reply.strip()) > 35:
+                return reply.strip()
+        except Exception as e:
+            logger.warning(f"Gemini API reply error: {e}")
 
-    # Fallback ramah jika API Gemini sedang tidak tersedia / kuota limit
+    # Fallback cerdas berbasis tone jika Gemini offline/kuota habis
+    if tone == 'formal':
+        return (
+            f"Yth. Saudara/i {user_name},\n\n"
+            f"Terima kasih atas masukan berharga yang Anda sampaikan mengenai {category} pada platform MathThon. "
+            f"Laporan Anda terkait \"{comment if comment else 'pengalaman penggunaan'}\" telah kami catat dalam agenda perbaikan sistem. "
+            f"Sesuai arahan evaluasi teknis, tim pengembang kami sedang menindaklanjuti rekomendasi: {recom}\n\n"
+            f"Hormat kami,\nTim Administrator MathThon"
+        )
+    elif tone == 'concise':
+        return (
+            f"Halo {user_name}! Terima kasih atas laporannya mengenai {category}. "
+            f"Kami telah mencatat keluhan Anda (\"{comment if comment else 'kendala sistem'}\") dan tim kami sedang melakukan penyesuaian: {recom} "
+            f"Semoga pembelajaran matematika Anda semakin lancar!"
+        )
+    elif tone == 'technical':
+        return (
+            f"Halo {user_name},\n\n"
+            f"Terima kasih atas laporan teknis Anda. Kami telah merekam kendala pada kategori {category}. "
+            f"Tim engineering MathThon sedang memeriksa stack trace serta file komponen terkait. "
+            f"Langkah mitigasi yang sedang dieksekusi: {recom}. Terima kasih telah membantu menjaga keandalan sistem kami."
+        )
+    else: # friendly default
+        return (
+            f"Halo {user_name}! Terima kasih banyak ya sudah meluangkan waktu memberikan masukan untuk MathThon.\n\n"
+            f"Kami sangat menghargai saranmu mengenai {category}. Keluhanmu terkait \"{comment if comment else 'pengalaman belajar'}\" "
+            f"sudah langsung kami diskusikan dengan tim. Kami sedang menindaklanjuti rekomendasi: {recom} "
+            f"Tetap semangat belajar matematikanya, kami akan terus berupaya memberikan pengalaman terbaik untukmu!"
+        )
+
+def generate_ai_ticket_action_plan(feedback_item: dict) -> str:
+    """
+    Membuat rencana aksi teknis internal otomatis untuk tiket feedback tertentu.
+    """
+    comment = feedback_item.get('comment', '')
+    features = [FEATURE_DEFINITIONS.get(f, {}).get('name', f) for f in feedback_item.get('features', [])]
+    analysis = feedback_item.get('analysis', {})
+    category = analysis.get('category', 'Umum')
+    recom = analysis.get('recommendation', '')
+
+    prompt = f"""Kamu adalah Tech Lead di platform edukasi 'MathThon'.
+Berdasarkan keluhan siswa berikut, buatkan Rencana Aksi Internal (Internal Action Plan) yang konkret untuk tim developer/kurikulum:
+- Kategori: {category}
+- Komentar Siswa: "{comment}"
+- Opsi Kendala: {', '.join(features)}
+- Arahan Solusi CBR: {recom}
+
+Format: Buat 3 langkah to-do teknis (1. ..., 2. ..., 3. ...) yang menyebutkan kemungkinan file/komponen (misal: CSS responsive, JS logic, DB query, atau silabus materi). Singkat dan padat."""
+
+    client = get_llm_client()
+    if client:
+        try:
+            res = client.generate(prompt=prompt, temperature=0.3, max_output_tokens=300)
+            if res and len(res.strip()) > 30:
+                return res.strip()
+        except Exception as e:
+            logger.warning(f"Gemini action plan error: {e}")
+
+    # Fallback teknis
     if 'bug' in comment.lower() or 'error' in comment.lower() or category == 'Teknis & Bug':
         return (
-            f"Halo {user_name}, terima kasih banyak atas laporannya. "
-            f"Tim pengembang MathThon sedang meninjau kendala teknis yang Anda alami. "
-            f"Kami segera melakukan perbaikan agar pembelajaran Anda kembali nyaman dan lancar."
+            "1. Lakukan audit console browser dan periksa error log server terkait endpoint yang dilaporkan.\n"
+            "2. Lakukan unit test pada kalkulator dan fungsi event listener JavaScript.\n"
+            "3. Uji perbaikan di staging environment sebelum deploy ke server produksi."
         )
-    elif category == 'Konten Materi':
+    elif 'sidenav' in comment.lower() or 'navigasi' in comment.lower() or category == 'Responsivitas':
         return (
-            f"Halo {user_name}, terima kasih atas masukannya mengenai materi matematika kami. "
-            f"Saran Anda sangat berharga bagi kami untuk menyederhanakan penjelasan teori dan memperkaya contoh latihan soal nyata."
+            "1. Periksa z-index dan class CSS overlay sidenav pada resolusi layar mobile (< 768px).\n"
+            "2. Optimalkan touch event listener agar tidak terjadi conflict saat scroll halaman.\n"
+            "3. Uji di emulator Android dan iOS untuk memastikan navigasi lancar."
         )
     else:
         return (
-            f"Halo {user_name}, terima kasih telah meluangkan waktu memberikan masukan untuk MathThon. "
-            f"Saran Anda telah kami catat dalam rencana peningkatan sistem agar pengalaman belajar menjadi semakin optimal."
+            f"1. Tinjau komponen UI dan konten modul terkait masukan siswa ({category}).\n"
+            f"2. Implementasikan rekomendasi CBR: {recom}\n"
+            "3. Lakukan verifikasi dan beri notifikasi pembaruan kepada pengguna."
+        )
+
+def generate_ai_root_cause_diagnosis(records: list) -> dict:
+    """
+    Mendiagnosa akar masalah sistem (Root Cause Analysis) dari kumpulan feedback yang masuk,
+    memetakan komponen terdampak dan memberikan rekomendasi engineering.
+    """
+    analytics = get_feedback_analytics(records)
+    critical_items = [r for r in records if r.get('workflow', {}).get('priority') in {'kritis', 'tinggi'} or 'bug' in r.get('comment', '').lower()]
+    sample_text = "\n".join([f"- [{r.get('analysis', {}).get('category')}] {r.get('user')}: \"{r.get('comment')}\"" for r in critical_items[:8]])
+
+    prompt = f"""Kamu adalah Senior System Architect & QA Lead MathThon.
+Lakukan Analisis Akar Masalah (Root Cause Analysis) berdasarkan laporan keluhan kritis berikut:
+
+Statistik:
+- Total Keluhan Kritis: {len(critical_items)}
+- Kategori Dominan: {json.dumps(analytics['categories'])}
+- Fitur Paling Bermasalah: {', '.join([f['name'] for f in analytics['top_features']])}
+
+Sampel Laporan Kritis:
+{sample_text if sample_text else '(Tidak ada laporan kritis khusus)'}
+
+Berikan output dalam format JSON valid dengan struktur:
+{{
+  "summary": "Ringkasan 2 kalimat tentang akar penyebab utama",
+  "vulnerable_components": [
+    {{"component": "Nama Komponen/Modul", "file_hint": "Perkiraan file", "severity": "Kritis/Tinggi/Sedang", "issue": "Deskripsi isu ringkas", "fix": "Solusi engineering singkat"}}
+  ],
+  "system_health_score": "Skor 1-100",
+  "recommendations": ["Rekomendasi 1", "Rekomendasi 2", "Rekomendasi 3"]
+}}
+Aturan: Maksimal 3 komponen rentan, teks singkat dan padat agar tidak terpotong. Hanya outputkan JSON valid tanpa teks pengantar."""
+
+    client = get_llm_client()
+    if client:
+        try:
+            raw_res = client.generate(prompt=prompt, temperature=0.3, max_output_tokens=1500)
+            cleaned = raw_res.strip()
+            if '```json' in cleaned:
+                cleaned = cleaned.split('```json')[1].split('```')[0].strip()
+            elif '```' in cleaned:
+                cleaned = cleaned.split('```')[1].split('```')[0].strip()
+            parsed = json.loads(cleaned)
+            return parsed
+        except Exception as e:
+            logger.warning(f"Gemini root cause JSON parsing error: {e}")
+
+    # Fallback deterministik cerdas
+    return {
+        "summary": "Sebagian besar kendala kritis terpusat pada interaksi antarmuka perangkat mobile (sidenav) serta potensi bug validasi pada kalkulator dan penjelasan materi abstrak.",
+        "vulnerable_components": [
+            {
+                "component": "Mobile Sidenav & Responsive Layout",
+                "file_hint": "Front_End/static/css/ & templates/user/components/sidebar.html",
+                "severity": "Tinggi",
+                "issue": "Touch target button dan z-index overlay navbar/sidenav bertabrakan di layar sentuh.",
+                "fix": "Perbaiki z-index, tambahkan backdrop blur terisolasi, dan cegah event bubbling saat swipe."
+            },
+            {
+                "component": "Modul Interaktif & Kalkulator Matematika",
+                "file_hint": "Front_End/static/js/ & Back_End/routes/latihan.py",
+                "severity": "Kritis",
+                "issue": "Kalkulasi rumus matematika atau handling state button berpotensi unhandled error.",
+                "fix": "Bungkus parsing input dengan try-catch aman dan tampilkan invalid input alert secara visual."
+            },
+            {
+                "component": "Kurikulum & Modul Soal Kontekstual",
+                "file_hint": "daftar_materi table & templates/materi/",
+                "severity": "Sedang",
+                "issue": "Siswa merasa penjelasan teori matematika murni terlalu rumit tanpa contoh industri nyata.",
+                "fix": "Sertakan visualisasi grafik interaktif dan studi kasus dunia kerja pada setiap topik."
+            }
+        ],
+        "system_health_score": "78/100",
+        "recommendations": [
+            "Prioritaskan refactoring modul navigasi mobile untuk meningkatkan retensi pengguna Android/iOS.",
+            "Lakukan audit unit testing fungsi kalkulator matematika dan validasi ekspresi numerik.",
+            "Perkaya bank soal dengan studi kasus nyata untuk mengatasi keluhan materi abstrak."
+        ]
+    }
+
+def generate_ai_developer_backlog(records: list) -> list:
+    """
+    Mengubah keluhan siswa menjadi daftar tiket pekerjaan developer (Sprint Backlog Items).
+    """
+    analytics = get_feedback_analytics(records)
+    prompt = f"""Kamu adalah Scrum Master platform MathThon.
+Ubah data keluhan siswa berikut menjadi 4-5 tiket sprint backlog developer yang siap dikerjakan:
+
+Top Isu:
+{json.dumps([f['name'] + f" ({f['count']}x laporan)" for f in analytics['top_features']], ensure_ascii=False)}
+
+Sampel Komentar:
+{chr(10).join([f"- {r.get('user')}: \"{r.get('comment')}\"" for r in records[:6] if r.get('comment')])}
+
+Outputkan HANYA JSON array valid:
+[
+  {{
+    "title": "Judul tiket ringkas",
+    "priority": "P0 - Blocker / P1 - High / P2 - Normal",
+    "category": "Frontend / Backend / Content",
+    "user_story": "Sebagai siswa, saya ingin... agar...",
+    "acceptance_criteria": "Kriteria selesai"
+  }}
+]"""
+
+    client = get_llm_client()
+    if client:
+        try:
+            raw = client.generate(prompt=prompt, temperature=0.3, max_output_tokens=1500)
+            cleaned = raw.strip()
+            if '```json' in cleaned:
+                cleaned = cleaned.split('```json')[1].split('```')[0].strip()
+            elif '```' in cleaned:
+                cleaned = cleaned.split('```')[1].split('```')[0].strip()
+            return json.loads(cleaned)
+        except Exception as e:
+            logger.warning(f"Gemini backlog parsing error: {e}")
+
+    # Fallback backlog terstruktur
+    return [
+        {
+            "title": "Fix Sidenav Overlay and Gesture Conflict on Mobile View",
+            "priority": "P1 - High",
+            "category": "Frontend",
+            "user_story": "Sebagai pengguna smartphone, saya ingin navigasi sidenav dapat dibuka dan ditutup dengan mulus tanpa macet.",
+            "acceptance_criteria": "Sidenav merespon tap di Android/iOS dan tidak menutupi tombol konten utama."
+        },
+        {
+            "title": "Harden Calculator Parser & Error Boundary",
+            "priority": "P0 - Blocker",
+            "category": "Frontend / QA",
+            "user_story": "Sebagai siswa yang berlatih soal, saya ingin hasil kalkulator selalu akurat dan tidak crash saat input tidak lazim.",
+            "acceptance_criteria": "Fungsi kalkulator memiliki validasi divide-by-zero dan unit testing lulus 100%."
+        },
+        {
+            "title": "Optimize Chart.js Rendering on Heavy Visualizations",
+            "priority": "P2 - Normal",
+            "category": "Frontend Performance",
+            "user_story": "Sebagai pengguna, saya ingin halaman analitik hasil terbuka cepat tanpa lag rendering grafik.",
+            "acceptance_criteria": "Waktu render grafik < 300ms dengan debouncing resize handler."
+        },
+        {
+            "title": "Enrich Mathematics Lessons with Real-World Industry Examples",
+            "priority": "P2 - Normal",
+            "category": "Content / Curriculum",
+            "user_story": "Sebagai siswa pemula, saya ingin melihat contoh implementasi nyata dari konsep matematika yang rumit.",
+            "acceptance_criteria": "Tiap materi memiliki minimal 2 contoh studi kasus kontekstual industri."
+        }
+    ]
+
+def chat_with_feedback_ai(user_query: str, records: list, history: list = None) -> str:
+    """
+    Asisten Copilot Interaktif: Admin dapat bertanya apa saja seputar feedback pengguna,
+    dan AI akan menjawab berdasarkan data riil yang ada di sistem MathThon.
+    """
+    analytics = get_feedback_analytics(records)
+    summary_data = {
+        'total_feedback': analytics['total'],
+        'open_issues': analytics['open_count'],
+        'critical_count': analytics['critical_count'],
+        'completion_rate': f"{analytics['completion_rate']}%",
+        'categories': analytics['categories'],
+        'sentiments': analytics['sentiments'],
+        'top_features': [f['name'] + f" ({f['count']}x)" for f in analytics['top_features']]
+    }
+
+    sample_feedbacks = [
+        f"- {r.get('user', 'Anon')} [{r.get('analysis', {}).get('category')}]: \"{r.get('comment')}\" (Prioritas: {r.get('workflow', {}).get('priority')})"
+        for r in records[:12] if r.get('comment')
+    ]
+
+    system_prompt = f"""Kamu adalah AI Feedback Copilot untuk admin platform 'MathThon'.
+Kamu memiliki akses ke seluruh data masukan siswa terbaru. Jawablah pertanyaan admin dengan cerdas, ramah, berbasis data, dan solutif.
+
+Data Ringkasan Sistem Saat Ini:
+{json.dumps(summary_data, ensure_ascii=False, indent=2)}
+
+Sampel Masukan Pengguna:
+{chr(10).join(sample_feedbacks)}
+
+Pertanyaan Admin: "{user_query}"
+
+Aturan:
+- Jawab secara to-the-point dalam Bahasa Indonesia yang profesional.
+- Gunakan data statistik di atas untuk memperkuat jawabanmu.
+- Jika relevan, berikan rekomendasi aksi konkret bagi admin."""
+
+    client = get_llm_client()
+    if client:
+        try:
+            ans = client.generate(prompt=system_prompt, temperature=0.5, max_output_tokens=500)
+            if ans and len(ans.strip()) > 20:
+                return ans.strip()
+        except Exception as e:
+            logger.warning(f"Gemini copilot chat error: {e}")
+
+    # Fallback cerdas berbasis query admin
+    q_lower = user_query.lower()
+    if 'kritis' in q_lower or 'bug' in q_lower or 'error' in q_lower:
+        return (
+            f"Berdasarkan data terkini, terdapat **{analytics['critical_count']} feedback berprioritas kritis/tinggi**. "
+            f"Keluhan utama berpusat pada error fungsional interaksi dan ketidakakuratan kalkulator pada fitur teknis. "
+            f"Rekomendasi: Segera prioritaskan audit logika JavaScript dan tangani tiket berlabel 'kritis'."
+        )
+    elif 'materi' in q_lower or 'kurikulum' in q_lower or 'soal' in q_lower:
+        return (
+            f"Kategori **Konten Materi** memiliki **{analytics['categories'].get('Konten Materi', 0)} masukan**. "
+            f"Siswa umumnya menyukai kelengkapan materi, namun beberapa siswa (seperti Gerrard) menyarankan penyederhanaan "
+            f"teori abstrak serta penambahan contoh kasus nyata industri agar materi lebih aplikatif."
+        )
+    elif 'navigasi' in q_lower or 'mobile' in q_lower or 'ui' in q_lower or 'tampilan' in q_lower:
+        return (
+            f"Terdapat keluhan pada **Responsivitas dan Desain UI**, khususnya mengenai sidenav yang sulit dibuka di perangkat mobile "
+            f"serta kontras warna font. Disarankan untuk meninjau file CSS responsif dan z-index sidebar pada viewport smartphone."
+        )
+    else:
+        return (
+            f"Halo Admin! Saat ini sistem mencatat **{analytics['total']} total feedback** dengan tingkat penyelesaian **{analytics['completion_rate']}%**. "
+            f"Sentimen terbanyak saat ini adalah **{list(analytics['sentiments'].keys())[0] if analytics['sentiments'] else 'Netral'}**, "
+            f"dengan isu paling sering disorot: {', '.join([f['name'] for f in analytics['top_features'][:3]])}. "
+            f"Ada aspek tertentu dari data ini yang ingin Anda bedah lebih dalam?"
         )
 
 def generate_ai_executive_summary(records: list) -> str:
@@ -778,24 +1089,31 @@ Statistik:
 Sampel Masukan Pengguna:
 {chr(10).join(sample_comments)}
 
-Format Output (Gunakan bullet points rapi):
+Format Output:
 1. **Ringkasan Sentimen & Kepuasan Pengguna**
 2. **Top Pain Points / Masalah Kritis yang Perlu Segera Ditangani**
 3. **Rekomendasi Tindakan Strategis untuk Tim Pengembang & Tim Kurikulum**"""
 
-    try:
-        from Back_End.ai.llm_client import LLMClient
-        client = LLMClient(provider="gemini")
-        summary = client.generate(prompt=prompt, temperature=0.4, max_output_tokens=600)
-        if summary and len(summary.strip()) > 50:
-            return summary.strip()
-    except Exception:
-        pass
+    client = get_llm_client()
+    if client:
+        try:
+            summary = client.generate(prompt=prompt, temperature=0.4, max_output_tokens=600)
+            if summary and len(summary.strip()) > 50:
+                return summary.strip()
+        except Exception as e:
+            logger.warning(f"Gemini executive summary error: {e}")
 
     # Fallback ringkasan analitik
     return (
-        f"**Ringkasan Analitik MathThon**\n\n"
-        f"• **Volume Masukan**: Terkumpul {total} feedback, dengan {analytics['open_count']} tiket membutuhkan tindak lanjut aktif.\n"
-        f"• **Isu Kritis**: Terdeteksi {analytics['critical_count']} tiket prioritas tinggi/kritis, terutama pada kategori {list(analytics['categories'].keys())[0] if analytics['categories'] else '-'}.\n"
-        f"• **Tindakan yang Disarankan**: Prioritaskan debugging bug interaksi dan perbaikan kalkulator matematika, disusul optimasi visualisasi grafik dan penambahan contoh soal kontekstual."
+        f"**Ringkasan Analitik & Strategi MathThon**\n\n"
+        f"1. **Sentimen Pengguna**:\n"
+        f"   Dari {total} masukan yang tercatat, {analytics['open_count']} tiket membutuhkan tindak lanjut aktif. "
+        f"Sebagian besar pengguna mengapresiasi inovasi visual MathThon, namun membutuhkan kestabilan fungsional yang lebih tinggi.\n\n"
+        f"2. **Isu Kritis Teratas**:\n"
+        f"   Terdeteksi {analytics['critical_count']} tiket prioritas tinggi/kritis. Fokus utama mencakup: "
+        f"kendala responsivitas sidenav pada layar HP, kebutuhan perbaikan bug kalkulator, dan permintaan contoh kasus nyata pada materi matematika.\n\n"
+        f"3. **Rekomendasi Strategis**:\n"
+        f"   • Prioritas 1: Debugging fungsi interaksi dan touch event sidenav mobile.\n"
+        f"   • Prioritas 2: Optimasi rendering visualisasi grafik Chart.js agar tidak terjadi lag.\n"
+        f"   • Prioritas 3: Penyederhanaan penjelasan rumus abstrak dengan visualisasi kontekstual industri."
     )
