@@ -177,13 +177,29 @@ def get_database_overview(app) -> dict:
                 'updated_at': str(row['update_time'] or row['create_time'] or '-')
             })
 
-        close_db_connection(conn)
+        # Deteksi versi MySQL & evaluasi status End-of-Life (EOL)
+        is_legacy = False
+        eol_status = "Modern Supported"
+        recommended_version = "MySQL 8.0 / 8.4 LTS atau MariaDB 10.11 LTS"
+        try:
+            ver_clean = re.search(r"(\d+\.\d+)", str(db_version))
+            if ver_clean:
+                v_float = float(ver_clean.group(1))
+                if v_float < 8.0:
+                    is_legacy = True
+                    eol_status = "Legacy End-of-Life (EOL)"
+        except Exception:
+            pass
 
         return {
             'connected': True,
             'database_name': db_name,
             'host': f"{host}:{port}",
             'version': db_version,
+            'is_legacy': is_legacy,
+            'eol_status': eol_status,
+            'recommended_version': recommended_version,
+            'virtual_patching_active': True,
             'total_tables': len(tables_info),
             'total_rows': total_rows,
             'total_size_bytes': total_bytes,
