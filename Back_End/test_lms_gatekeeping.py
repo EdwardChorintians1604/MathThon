@@ -8,6 +8,12 @@ Comprehensive Automated Test for LMS Architecture, Gatekeeping & AI Tutor Active
 """
 import sys
 import os
+if sys.platform.startswith('win'):
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from Back_End import create_app
@@ -25,11 +31,20 @@ def run_tests():
     print("🧪 1. TESTING RELATIONAL DATABASE & SYLLABUS MAPPING")
     print("=======================================================")
     svc = ProgressService()
-    test_user_id = 99999 # isolated test user id
-    
-    # Clean previous test user progress if any
     db_session = get_db_session()
-    db_session.query(UserProgress).filter(UserProgress.user_id == test_user_id).delete()
+    
+    # Use real user from database to satisfy Foreign Key constraint
+    real_user = db_session.query(User).first()
+    assert real_user is not None, "At least one user must exist in database"
+    test_user_id = real_user.id
+    print(f"👤 Using test user ID: {test_user_id} ({real_user.username})")
+    
+    # Clean test user progress on test materials
+    test_mat_ids = [21, 22, 23, 24, 25]
+    db_session.query(UserProgress).filter(
+        UserProgress.user_id == test_user_id,
+        UserProgress.material_id.in_(test_mat_ids)
+    ).delete(synchronize_session=False)
     db_session.commit()
     
     courses = db_session.query(Course).all()
@@ -48,11 +63,11 @@ def run_tests():
     print("🔒 2. TESTING GATEKEEPING LOGIC AT API LEVEL (403 FORBIDDEN)")
     print("=======================================================")
     # Bab 1 of Integral has no prereq (or prereq from previous module), but Bab 2 has Bab 1 as prereq!
-    bab1_integral = svc.get_material_by_slug("bab-1-latar-belakang-akumulasi")
-    bab2_integral = svc.get_material_by_slug("bab-2-antiturunan")
+    bab1_integral = svc.get_material_by_slug("integral-bab-1")
+    bab2_integral = svc.get_material_by_slug("integral-bab-2")
     
-    assert bab1_integral is not None, "bab-1-latar-belakang-akumulasi not found!"
-    assert bab2_integral is not None, "bab-2-antiturunan not found!"
+    assert bab1_integral is not None, "integral-bab-1 not found!"
+    assert bab2_integral is not None, "integral-bab-2 not found!"
     assert bab2_integral.prerequisite_id == bab1_integral.id, "Bab 2 prerequisite must be Bab 1!"
     print(f"ℹ️ Bab 1: '{bab1_integral.title}' (ID: {bab1_integral.id})")
     print(f"ℹ️ Bab 2: '{bab2_integral.title}' (ID: {bab2_integral.id}, Prereq ID: {bab2_integral.prerequisite_id})")
@@ -61,8 +76,8 @@ def run_tests():
         sess["user_id"] = test_user_id
 
     # Request Bab 2 before Bab 1 is completed
-    res = client.get("/api/materials/bab-2-antiturunan")
-    print(f"📡 GET /api/materials/bab-2-antiturunan -> Status Code: {res.status_code}")
+    res = client.get("/api/materials/integral-bab-2")
+    print(f"📡 GET /api/materials/integral-bab-2 -> Status Code: {res.status_code}")
     res_json = res.get_json()
     print(f"📄 Response JSON: {res_json}")
     
@@ -79,12 +94,12 @@ def run_tests():
     print(f"✅ Bab 1 marked as Completed for user {test_user_id}.")
 
     # Now request Bab 2 again
-    res = client.get("/api/materials/bab-2-antiturunan")
-    print(f"📡 GET /api/materials/bab-2-antiturunan -> Status Code: {res.status_code}")
+    res = client.get("/api/materials/integral-bab-2")
+    print(f"📡 GET /api/materials/integral-bab-2 -> Status Code: {res.status_code}")
     assert res.status_code == 200, f"Expected 200 OK after prerequisite completed, got {res.status_code}"
     res_json = res.get_json()
     assert res_json["status"] == "success"
-    assert res_json["data"]["slug"] == "bab-2-antiturunan"
+    assert res_json["data"]["slug"] == "integral-bab-2"
     print("✅ Gatekeeping Unlock Passed! Bab 2 is now accessible (HTTP 200).")
 
     print("\n=======================================================")
@@ -92,7 +107,7 @@ def run_tests():
     print("=======================================================")
     # Test incorrect answer at Step 1 of integral
     wrong_req = {
-        "material_slug": "bab-5-capstone-integral",
+        "material_slug": "integral-bab-5",
         "module_slug": "integral",
         "step_index": 1,
         "user_answer": "6x", # wrong, 6x is derivative, not integral!
@@ -118,7 +133,7 @@ def run_tests():
     ]
     for step_num, ans in steps_answers:
         step_req = {
-            "material_slug": "bab-5-capstone-integral",
+            "material_slug": "integral-bab-5",
             "module_slug": "integral",
             "step_index": step_num,
             "user_answer": ans,
@@ -133,8 +148,11 @@ def run_tests():
     assert step_res["user_progress_status"] == "Completed", "Status must become Completed"
     print("✅ Multi-stage Scaffolding Completed! User progress status is now 'Completed'.")
 
-    # Clean up test user
-    db_session.query(UserProgress).filter(UserProgress.user_id == test_user_id).delete()
+    # Clean up test user records for test materials
+    db_session.query(UserProgress).filter(
+        UserProgress.user_id == test_user_id,
+        UserProgress.material_id.in_(test_mat_ids)
+    ).delete(synchronize_session=False)
     db_session.commit()
     print("\n🎉 ALL TESTS PASSED SUCCESSFULLY! LMS Gatekeeping & Active Recall AI Tutor fully functional.")
 

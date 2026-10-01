@@ -126,13 +126,20 @@ def create_app(test_config=None):
     app.register_blueprint(api_bp, url_prefix='/api')
 
     from .api.routers import api_v2_bp
+    from .api.routers.courses import courses_router
+    from .api.routers.progress import progress_router
+    from .api.routers.users import users_router
     csrf.exempt(api_v2_bp)
+    csrf.exempt(courses_router)
+    csrf.exempt(progress_router)
+    csrf.exempt(users_router)
     app.register_blueprint(api_v2_bp, url_prefix='/api')
 
     from .routes.latihan import latihan_bp # Handles /user/latihan/<topic_id>
     app.register_blueprint(latihan_bp, url_prefix='/user/latihan')
     
     from .routes.materi import materi_bp
+    csrf.exempt(materi_bp)
     app.register_blueprint(materi_bp, url_prefix='/user/materi')
     
     from .routes.ai import ai_bp

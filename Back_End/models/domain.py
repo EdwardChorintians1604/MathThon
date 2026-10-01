@@ -1,6 +1,7 @@
 """
 SQLAlchemy Domain Models (ORM)
 Course, Module, Material, UserProgress, and User
+Matched 100% to MySQL Schema in migrate_lms.py
 """
 from sqlalchemy import Column, Integer, String, Text, Boolean, DateTime, ForeignKey, Enum as SQLEnum
 from sqlalchemy.orm import relationship
@@ -11,11 +12,10 @@ class Course(Base):
     __tablename__ = "courses"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    title = Column(String(255), nullable=False)
+    title = Column(String(191), nullable=False)
     slug = Column(String(100), unique=True, nullable=False)
     description = Column(Text, nullable=True)
     order_index = Column(Integer, default=1)
-    is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
     # Relationships
@@ -28,7 +28,6 @@ class Course(Base):
             "slug": self.slug,
             "description": self.description,
             "order_index": self.order_index,
-            "is_active": self.is_active,
             "modules_count": len(self.modules) if self.modules else 0
         }
 
@@ -37,26 +36,36 @@ class Module(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     course_id = Column(Integer, ForeignKey("courses.id", ondelete="CASCADE"), nullable=False)
-    name = Column(String(255), nullable=False)
+    title = Column(String(191), nullable=False)
     slug = Column(String(100), unique=True, nullable=False)
     description = Column(Text, nullable=True)
+    icon = Column(String(100), default="bi-journal-bookmark-fill")
     order_index = Column(Integer, default=1)
-    is_active = Column(Boolean, default=True)
+    prerequisite_module_id = Column(Integer, ForeignKey("modules.id", ondelete="SET NULL"), nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
     # Relationships
     course = relationship("Course", back_populates="modules")
     materials = relationship("Material", back_populates="module", cascade="all, delete-orphan", order_by="Material.chapter_number")
 
+    @property
+    def name(self):
+        return self.title
+
+    @name.setter
+    def name(self, val):
+        self.title = val
+
     def to_dict(self):
         return {
             "id": self.id,
             "course_id": self.course_id,
-            "name": self.name,
+            "title": self.title,
+            "name": self.title,
             "slug": self.slug,
             "description": self.description,
+            "icon": self.icon,
             "order_index": self.order_index,
-            "is_active": self.is_active,
             "materials_count": len(self.materials) if self.materials else 0
         }
 
@@ -65,15 +74,24 @@ class Material(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     module_id = Column(Integer, ForeignKey("modules.id", ondelete="CASCADE"), nullable=False)
-    title = Column(String(255), nullable=False)
-    slug = Column(String(100), unique=True, nullable=False)
     chapter_number = Column(Integer, default=1)
+    title = Column(String(191), nullable=False)
+    slug = Column(String(100), nullable=False)
+    content_type = Column(SQLEnum('reading', 'exercise', 'sandbox', 'checkpoint', name='content_type_enum'), default='reading')
     is_checkpoint = Column(Boolean, default=False)
     prerequisite_id = Column(Integer, ForeignKey("materials.id", ondelete="SET NULL"), nullable=True)
-    summary = Column(Text, nullable=True)
-    content = Column(Text, nullable=True)
     order_index = Column(Integer, default=1)
+    anchor_id = Column(String(50), default="bab1")
+    summary = Column(Text, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
+
+    @property
+    def content(self):
+        return self.summary
+
+    @content.setter
+    def content(self, val):
+        self.summary = val
 
     # Relationships
     module = relationship("Module", back_populates="materials")
@@ -84,11 +102,13 @@ class Material(Base):
         return {
             "id": self.id,
             "module_id": self.module_id,
+            "chapter_number": self.chapter_number,
             "title": self.title,
             "slug": self.slug,
-            "chapter_number": self.chapter_number,
-            "is_checkpoint": self.is_checkpoint,
+            "content_type": self.content_type,
+            "is_checkpoint": bool(self.is_checkpoint),
             "prerequisite_id": self.prerequisite_id,
+            "anchor_id": self.anchor_id,
             "summary": self.summary,
             "order_index": self.order_index
         }
@@ -134,7 +154,6 @@ class User(Base):
     email = Column(String(255), unique=True, nullable=False)
     password = Column(String(255), nullable=False)
     photo = Column(String(255), nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
 
     def to_dict(self):
         return {

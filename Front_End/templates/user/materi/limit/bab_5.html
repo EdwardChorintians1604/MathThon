@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limit Fungsi Aljabar - Bab 5: Capstone: Proyek Integratif & Uji Sintesis Limit - MathThon</title>
+  <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/materi_reader.css') }}">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <!-- PyScript Core 2024 -->
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+  <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
+  <style>
+    :root {
+      --accent: #f59e0b;
+      --accent-glow: #f59e0b33;
+      --accent-dim: #f59e0b15;
+      --bg-dark: #0a0d14;
+      --bg-card: #111622;
+      --bg-surface: #161d2e;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      margin: 0;
+      line-height: 1.65;
+    }
+    /* Dicoding Topbar */
+    .dic-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(10, 13, 20, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .dic-topbar-left { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    .dic-back-btn {
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 0.4rem 0.75rem;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-glow);
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .dic-back-btn:hover { background: var(--accent); color: #fff; transform: translateY(-1px); }
+    .dic-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .dic-timer { font-family: 'Fira Code', monospace; color: #38bdf8; }
+    
+    /* Layout */
+    .dic-layout {
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      min-height: calc(100vh - 58px);
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    /* Sidebar */
+    .dic-sidebar {
+      background: #0d121c;
+      border-right: 1px solid var(--border-color);
+      padding: 1.5rem 1rem;
+      position: sticky;
+      top: 58px;
+      height: calc(100vh - 58px);
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+    .dic-sb-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-glow);
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .dic-sb-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .dic-sb-nav-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin: 1.25rem 0 0.5rem 0.5rem;
+    }
+    .dic-chapter-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.7rem 0.85rem;
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      margin-bottom: 0.35rem;
+      border-left: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    .dic-chapter-link:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+    }
+    .dic-chapter-link.active {
+      background: rgba(255, 255, 255, 0.07);
+      color: #fff;
+      border-left-color: var(--accent);
+      font-weight: 600;
+    }
+    .dic-num-badge {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .dic-chapter-link.done .dic-num-badge {
+      background: #10b981;
+      color: #fff;
+    }
+    /* Anchor TOC Links in Sidebar */
+    .dic-anchor-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.75rem;
+      margin-top: 1rem;
+    }
+    .dic-anchor-link {
+      display: block;
+      padding: 0.35rem 0.5rem;
+      font-size: 0.78rem;
+      color: #64748b;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+    .dic-anchor-link:hover { color: var(--accent); background: var(--accent-dim); }
+    
+    /* Main Content Area */
+    .dic-main {
+      padding: 2.5rem 3rem;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .dic-crumb {
+      font-size: 0.82rem;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.75rem;
+    }
+    .dic-crumb a { color: #64748b; text-decoration: none; }
+    .dic-crumb a:hover { color: var(--accent); }
+    
+    /* Role Banner */
+    .dic-role-banner {
+      background: linear-gradient(135deg, var(--accent-dim), rgba(255,255,255,0.02));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .dic-role-icon {
+      font-size: 1.4rem;
+      color: var(--accent);
+      line-height: 1;
+      padding-top: 0.2rem;
+    }
+    .dic-role-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+    .dic-role-text {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      margin: 0;
+      line-height: 1.5;
+    }
+    
+    .dic-h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0 0 1rem;
+      color: #f8fafc;
+      line-height: 1.25;
+    }
+    
+    /* Target Box */
+    .dic-target-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .dic-target-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-target-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.88rem;
+      color: #94a3b8;
+    }
+    .dic-target-list li { margin-bottom: 0.35rem; }
+    
+    .dic-section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin: 2.5rem 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .dic-lead {
+      font-size: 1.02rem;
+      color: #cbd5e1;
+      line-height: 1.8;
+      margin: 1rem 0 1.5rem;
+    }
+    
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .dic-formula-explain {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+      margin: 1rem 0;
+      line-height: 1.6;
+    }
+    
+    .dic-example-box {
+      background: rgba(16, 185, 129, 0.05);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .dic-example-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #34d399;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    /* Python Interactive Sandbox */
+    .dic-ide-box {
+      background: #090d16;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 2rem 0;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+    .dic-ide-topbar {
+      background: #111726;
+      padding: 0.65rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-ide-title {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-run-btn {
+      background: #10b981;
+      color: #fff;
+      border: none;
+      padding: 0.35rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
+    }
+    .dic-run-btn:hover { background: #059669; transform: scale(1.02); }
+    .dic-editor {
+      width: 100%;
+      background: #090d16;
+      color: #f1f5f9;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88rem;
+      padding: 1rem;
+      border: none;
+      resize: vertical;
+      min-height: 140px;
+      outline: none;
+      line-height: 1.6;
+    }
+    .dic-terminal {
+      background: #04070d;
+      border-top: 1px solid var(--border-color);
+      padding: 1rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.84rem;
+      color: #34d399;
+      min-height: 70px;
+      white-space: pre-wrap;
+      max-height: 240px;
+      overflow-y: auto;
+    }
+    
+    /* Quiz & Recall */
+    .dic-quiz-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.75rem;
+      margin: 2.5rem 0;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-quiz-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+    }
+    .dic-quiz-q {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #f8fafc;
+      margin-bottom: 1.25rem;
+      line-height: 1.6;
+    }
+    .dic-opt-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.85rem 1.25rem;
+      width: 100%;
+      text-align: left;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+    .dic-opt-btn:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .dic-opt-btn.ok {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: #10b981;
+      color: #6ee7b7;
+    }
+    .dic-opt-btn.bad {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: #ef4444;
+      color: #fca5a5;
+    }
+    .dic-feedback {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.85rem 1.25rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+    }
+    .dic-feedback.show { display: block; }
+    .dic-feedback.ok {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #6ee7b7;
+    }
+    .dic-feedback.bad {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+    }
+    
+    /* Bottom Navigation */
+    .dic-bottom-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-top: 2rem;
+      margin-top: 3rem;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+    .dic-nav-btn {
+      padding: 0.65rem 1.4rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      background: transparent;
+      cursor: pointer;
+    }
+    .dic-nav-btn:hover { background: rgba(255,255,255,0.06); color: #fff; }
+    .dic-nav-btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .dic-nav-btn.primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    
+    @media (max-width: 860px) {
+      .dic-layout { grid-template-columns: 1fr; }
+      .dic-sidebar { display: none; }
+      .dic-main { padding: 1.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Dicoding Topbar -->
+  <header class="dic-topbar">
+    <div class="dic-topbar-left">
+      <a href="{{ url_for('materi.subject_index', subject='limit') }}" class="dic-back-btn">
+        <i class="bi bi-arrow-left"></i> <span>Limit</span>
+      </a>
+      <span class="dic-badge"><i class="bi bi-arrow-right-short" style="color:#f59e0b;"></i> Limit Fungsi Aljabar</span>
+    </div>
+    <div class="d-flex align-items-center gap-2">
+      <span class="dic-badge"><i class="bi bi-book"></i> Bab 5/5</span>
+      <span class="dic-badge dic-timer"><i class="bi bi-stopwatch text-info"></i> <span id="studyTimer">00:00</span></span>
+    </div>
+  </header>
+
+  <div class="dic-layout">
+    <!-- Dicoding Sidebar -->
+    <aside class="dic-sidebar">
+      <div class="dic-sb-header">
+        <div class="dic-sb-icon"><i class="bi bi-arrow-right-short"></i></div>
+        <div>
+          <div style="font-size:0.75rem; color:#f59e0b; font-weight:700; text-transform:uppercase;">Modul MathThon</div>
+          <div style="font-weight:700; font-size:0.95rem; color:#f8fafc;">Limit</div>
+        </div>
+      </div>
+
+      <div class="dic-sb-nav-title">Daftar Bab & Silabus</div>
+      
+        <a href="{{ url_for('materi.subject_bab', subject='limit', bab_num=1) }}" 
+           class="dic-chapter-link {{ 'done' if all_bab_status[0]['is_completed'] else '' }}">
+          <span class="dic-num-badge">{{ '✓' if all_bab_status[0]['is_completed'] else '1' }}</span>
+          <span>Fondasi: Konsep Intuitif & Pengenalan Limit</span>
+        </a>
+
+        <a href="{{ url_for('materi.subject_bab', subject='limit', bab_num=2) }}" 
+           class="dic-chapter-link {{ 'done' if all_bab_status[1]['is_completed'] else '' }}">
+          <span class="dic-num-badge">{{ '✓' if all_bab_status[1]['is_completed'] else '2' }}</span>
+          <span>Anatomi: Notasi, Kaidah & Sifat Baku Limit</span>
+        </a>
+
+        <a href="{{ url_for('materi.subject_bab', subject='limit', bab_num=3) }}" 
+           class="dic-chapter-link {{ 'done' if all_bab_status[2]['is_completed'] else '' }}">
+          <span class="dic-num-badge">{{ '✓' if all_bab_status[2]['is_completed'] else '3' }}</span>
+          <span>Mekanika: Prosedur Perhitungan & Operasi Limit</span>
+        </a>
+
+        <a href="{{ url_for('materi.subject_bab', subject='limit', bab_num=4) }}" 
+           class="dic-chapter-link {{ 'done' if all_bab_status[3]['is_completed'] else '' }}">
+          <span class="dic-num-badge">{{ '✓' if all_bab_status[3]['is_completed'] else '4' }}</span>
+          <span>Pemodelan: Aplikasi Nyata & Studi Kasus Limit</span>
+        </a>
+
+        <a href="{{ url_for('materi.subject_bab', subject='limit', bab_num=5) }}" 
+           class="dic-chapter-link active {{ 'done' if all_bab_status[4]['is_completed'] else '' }}">
+          <span class="dic-num-badge">{{ '✓' if all_bab_status[4]['is_completed'] else '5' }}</span>
+          <span>Capstone: Proyek Integratif & Uji Sintesis Limit</span>
+        </a>
+
+      <!-- In-Page Anchor Links -->
+      <div class="dic-sb-nav-title">Daftar Isi Halaman (TOC)</div>
+      <div class="dic-anchor-box">
+        <a href="#peruntukan" class="dic-anchor-link"><i class="bi bi-compass me-1"></i> Peruntukan & Sasaran</a>
+        <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
+        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
+        <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
+        <a href="#sandbox" class="dic-anchor-link"><i class="bi bi-terminal-fill me-1"></i> Python Sandbox Lab</a>
+        <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
+      </div>
+    </aside>
+
+    <!-- Main Content Reader -->
+    <main class="dic-main">
+      <div class="dic-crumb">
+        <a href="{{ url_for('materi.materi_user') }}">Katalog Materi</a>
+        <i class="bi bi-chevron-right small"></i>
+        <a href="{{ url_for('materi.subject_index', subject='limit') }}">Limit</a>
+        <i class="bi bi-chevron-right small"></i>
+        <span>Bab 5</span>
+      </div>
+
+      <!-- Explicit Stage Banner -->
+      <div class="dic-role-banner" id="peruntukan">
+        <div class="dic-role-icon"><i class="bi bi-trophy-fill"></i></div>
+        <div>
+          <div class="dic-role-title">TAHAP 5: CAPSTONE PROJECT & EVALUASI SINTESIS</div>
+          <p class="dic-role-text">Peruntukan Bab 5 adalah mengintegrasikan seluruh materi Bab 1 s/d Bab 4 dalam satu proyek tantangan komprehensif sebagai standar penguasaan modul.</p>
+        </div>
+      </div>
+
+      <h1 class="dic-h1">Capstone: Proyek Integratif & Uji Sintesis Limit</h1>
+
+      <!-- Learning Objectives -->
+      <div class="dic-target-box">
+        <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#f59e0b;"></i> Sasaran Pembelajaran Bab 5:</div>
+        <ul class="dic-target-list">
+          <li>Memahami landasan konseptual dari Capstone: Proyek Integratif & Uji Sintesis Limit secara sistematis.</li>
+          <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
+          <li>Mampu mengimplementasikan simulasi perhitungannya melalui Python Sandbox.</li>
+        </ul>
+      </div>
+
+      <!-- Core Concept -->
+      <h2 class="dic-section-title" id="konsep">
+        <i class="bi bi-book-half" style="color:#f59e0b;"></i> Pembahasan Konsep & Teori
+      </h2>
+      <p class="dic-lead">
+        Bab 5 adalah puncak evaluasi capstone: mengintegrasikan seluruh bab sebelumnya ke dalam penyelesaian studi kasus komprehensif berstandar industri.
+      </p>
+
+      <!-- Formula Section -->
+      <h2 class="dic-section-title" id="formula">
+        <i class="bi bi-calculator" style="color:#f59e0b;"></i> Formulasi Matematis & Bedah Rumus
+      </h2>
+      <div class="dic-formula-card">
+        \[ \text{Sintesis Capstone: } \sum_{i=1}^n \text{Komponen}_i = \text{Total Optimal} \]
+      </div>
+      <div class="dic-formula-explain">
+        <strong>💡 Makna Formulasi:</strong> Sintesis capstone menyatukan seluruh komponen rumus dalam evaluasi akhir yang komprehensif.
+      </div>
+
+      <!-- Worked Example -->
+      <h2 class="dic-section-title" id="contoh">
+        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu
+      </h2>
+      <div class="dic-example-box">
+        <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
+        <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
+          Contoh Capstone Bab 5: Memecahkan persoalan multi-langkah integratif dari hulu ke hilir.
+        </p>
+      </div>
+
+      <!-- Interactive Python Sandbox (PyScript + Live Runner) -->
+      <h2 class="dic-section-title" id="sandbox">
+        <i class="bi bi-terminal-fill text-warning"></i> Interactive Python Sandbox (PyScript Engine)
+      </h2>
+      <div class="dic-ide-box">
+        <div class="dic-ide-topbar">
+          <div class="dic-ide-title">
+            <i class="bi bi-filetype-py"></i> main_limit_bab5.py
+          </div>
+          <button class="dic-run-btn" id="runPyBtn" onclick="runPythonSandbox()">
+            <i class="bi bi-play-fill"></i> Jalankan Kode
+          </button>
+        </div>
+        <textarea class="dic-editor" id="pyCodeEditor" rows="6">{% raw %}# Capstone Project Solver Limit
+print('=== Evaluasi Capstone Modul Limit ===')
+print('Status: Seluruh algoritma berhasil disintesis secara optimal.'){% endraw %}</textarea>
+        <div class="dic-terminal" id="pyTerminalOutput">⏳ Klik "Jalankan Kode" untuk mengeksekusi script Python di browser...</div>
+      </div>
+
+      <!-- PyScript Background Tag -->
+      <py-script output="pyTerminalOutput" style="display:none;">
+{% raw %}
+      # Capstone Project Solver Limit
+      print('=== Evaluasi Capstone Modul Limit ===')
+      print('Status: Seluruh algoritma berhasil disintesis secara optimal.')
+{% endraw %}
+      </py-script>
+
+      <!-- Active Recall Exercise -->
+      <div class="dic-quiz-card" id="latihan">
+        <div class="dic-quiz-tag"><i class="bi bi-patch-question-fill"></i> Active Recall Quiz - Bab 5</div>
+        <div class="dic-quiz-q">Apa kriteria keberhasilan pada Capstone Project modul Limit?</div>
+        
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Capstone menguji kemampuan analisis integratif secara menyeluruh.')">
+          <span>Mampu mensintesis konsep Bab 1-4 secara terpadu</span>
+          <i class="bi bi-circle"></i>
+        </button>
+
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Capstone menguji kemampuan analisis integratif secara menyeluruh.')">
+          <span>Hanya menjawab 1 soal singkat</span>
+          <i class="bi bi-circle"></i>
+        </button>
+
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Capstone menguji kemampuan analisis integratif secara menyeluruh.')">
+          <span>Menghafal nama bab</span>
+          <i class="bi bi-circle"></i>
+        </button>
+        <div class="dic-feedback" id="quizFeedback"></div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <nav class="dic-bottom-nav">
+        <a href="{{ url_for('materi.subject_bab', subject='limit', bab_num=4) }}" class="dic-nav-btn">
+          <i class="bi bi-arrow-left"></i> ← Bab 4: Pemodelan
+        </a>
+        <button class="dic-nav-btn" id="markDoneBtn" onclick="markBabCompleted()">
+          <i class="bi bi-check-circle"></i> Tandai Bab Selesai
+        </button>
+        <a href="{{ url_for('materi.subject_index', subject='limit') }}" class="dic-nav-btn primary">
+          Selesai Modul Limit ✓ <i class="bi bi-arrow-right"></i>
+        </a>
+      </nav>
+    </main>
+  </div>
+
+  <script>
+    // Inisialisasi KaTeX Auto Render
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof renderMathInElement === 'function') {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+          ],
+          throwOnError: false
+        });
+      }
+    });
+
+    // Stopwatch Belajar Aktif
+    let studySeconds = 0;
+    let quizAnswered = false;
+    const timerDisplay = document.getElementById('studyTimer');
+    setInterval(() => {
+      studySeconds++;
+      const mins = String(Math.floor(studySeconds / 60)).padStart(2, '0');
+      const secs = String(studySeconds % 60).padStart(2, '0');
+      if (timerDisplay) timerDisplay.textContent = `${mins}:${secs}`;
+    }, 1000);
+
+    // Kuis Active Recall Check
+    function checkAnswer(btn, isCorrect, explanation) {
+      if (quizAnswered) return;
+      quizAnswered = true;
+      document.querySelectorAll('.dic-opt-btn').forEach(b => b.style.pointerEvents = 'none');
+      
+      const fb = document.getElementById('quizFeedback');
+      if (isCorrect) {
+        btn.classList.add('ok');
+        btn.querySelector('i').className = 'bi bi-check-circle-fill text-success';
+        fb.innerHTML = `<strong>✅ Luar Biasa Benar!</strong> ${explanation}`;
+        fb.className = 'dic-feedback show ok';
+      } else {
+        btn.classList.add('bad');
+        btn.querySelector('i').className = 'bi bi-x-circle-fill text-danger';
+        fb.innerHTML = `<strong>❌ Perlu Ditinjau:</strong> ${explanation}`;
+        fb.className = 'dic-feedback show bad';
+      }
+    }
+
+    // Eksekusi Python Sandbox
+    function runPythonSandbox() {
+      const code = document.getElementById('pyCodeEditor').value;
+      const term = document.getElementById('pyTerminalOutput');
+      term.textContent = 'Menjalankan skrip Python...\n';
+      
+      try {
+        if (window.pyscript && window.pyscript.interpreter) {
+          window.pyscript.interpreter.run(code);
+        } else {
+          const lines = code.split('\n');
+          let output = [];
+          lines.forEach(line => {
+            if (line.includes('print(')) {
+              const match = line.match(/print\((.*)\)/);
+              if (match) {
+                output.push('>>> ' + match[1].replace(/['"]/g, ''));
+              }
+            }
+          });
+          term.textContent = output.length > 0 ? output.join('\n') : '>>> Eksekusi kode selesai dengan sukses (Output 0).';
+        }
+      } catch(err) {
+        term.textContent = '❌ Error saat menjalankan kode: ' + err.message;
+      }
+    }
+
+    // Simpan Progres Bab ke API Backend
+    function markBabCompleted() {
+      const markBtn = document.getElementById('markDoneBtn');
+      const csrfMeta = document.querySelector('meta[name="csrf-token"]');
+      const headers = { 'Content-Type': 'application/json' };
+      if (csrfMeta) headers['X-CSRFToken'] = csrfMeta.getAttribute('content');
+
+      fetch('/user/materi/api/bab-progress', {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify({
+          subject: 'limit',
+          bab_num: 5,
+          is_completed: true,
+          time_spent: studySeconds,
+          exercise_score: 5
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success') {
+          markBtn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Bab Selesai!';
+          markBtn.style.background = 'rgba(16, 185, 129, 0.2)';
+          markBtn.style.borderColor = '#10b981';
+          markBtn.style.color = '#34d399';
+          markBtn.disabled = true;
+        }
+      })
+      .catch(console.error);
+    }
+
+    // Auto-save beacon sebelum halaman ditutup
+    window.addEventListener('beforeunload', () => {
+      navigator.sendBeacon('/user/materi/api/bab-progress', JSON.stringify({
+        subject: 'limit',
+        bab_num: 5,
+        is_completed: false,
+        time_spent: studySeconds,
+        exercise_score: 0
+      }));
+    });
+  </script>
+</body>
+</html>

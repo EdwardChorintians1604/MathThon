@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Bilangan (Biner, Oktal, Hex) - Silabus & Peta Kurikulum Modul - MathThon</title>
+  <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/materi_reader.css') }}">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <style>
+    :root {
+      --accent: #334155;
+      --accent-glow: #33415533;
+      --accent-dim: #33415515;
+      --bg-dark: #0a0d14;
+      --bg-card: #111622;
+      --bg-surface: #161d2e;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      margin: 0;
+      line-height: 1.65;
+    }
+    /* Dicoding Topbar */
+    .dic-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(10, 13, 20, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .dic-topbar-left { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    .dic-back-btn {
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 0.4rem 0.75rem;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-glow);
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .dic-back-btn:hover { background: var(--accent); color: #fff; transform: translateY(-1px); }
+    .dic-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .dic-timer { font-family: 'Fira Code', monospace; color: #38bdf8; }
+    
+    /* Layout */
+    .dic-layout {
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      min-height: calc(100vh - 58px);
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    /* Sidebar */
+    .dic-sidebar {
+      background: #0d121c;
+      border-right: 1px solid var(--border-color);
+      padding: 1.5rem 1rem;
+      position: sticky;
+      top: 58px;
+      height: calc(100vh - 58px);
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+    .dic-sb-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-glow);
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .dic-sb-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .dic-sb-nav-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin: 1.25rem 0 0.5rem 0.5rem;
+    }
+    .dic-chapter-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.7rem 0.85rem;
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      margin-bottom: 0.35rem;
+      border-left: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    .dic-chapter-link:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+    }
+    .dic-chapter-link.active {
+      background: rgba(255, 255, 255, 0.07);
+      color: #fff;
+      border-left-color: var(--accent);
+      font-weight: 600;
+    }
+    .dic-num-badge {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .dic-chapter-link.done .dic-num-badge {
+      background: #10b981;
+      color: #fff;
+    }
+    /* Anchor TOC Links in Sidebar */
+    .dic-anchor-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.75rem;
+      margin-top: 1rem;
+    }
+    .dic-anchor-link {
+      display: block;
+      padding: 0.35rem 0.5rem;
+      font-size: 0.78rem;
+      color: #64748b;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+    .dic-anchor-link:hover { color: var(--accent); background: var(--accent-dim); }
+    
+    /* Main Content Area */
+    .dic-main {
+      padding: 2.5rem 3rem;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .dic-crumb {
+      font-size: 0.82rem;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.75rem;
+    }
+    .dic-crumb a { color: #64748b; text-decoration: none; }
+    .dic-crumb a:hover { color: var(--accent); }
+    
+    /* Role Banner */
+    .dic-role-banner {
+      background: linear-gradient(135deg, var(--accent-dim), rgba(255,255,255,0.02));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .dic-role-icon {
+      font-size: 1.4rem;
+      color: var(--accent);
+      line-height: 1;
+      padding-top: 0.2rem;
+    }
+    .dic-role-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+    .dic-role-text {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      margin: 0;
+      line-height: 1.5;
+    }
+    
+    .dic-h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0 0 1rem;
+      color: #f8fafc;
+      line-height: 1.25;
+    }
+    
+    /* Target Box */
+    .dic-target-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .dic-target-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-target-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.88rem;
+      color: #94a3b8;
+    }
+    .dic-target-list li { margin-bottom: 0.35rem; }
+    
+    .dic-section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin: 2.5rem 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .dic-lead {
+      font-size: 1.02rem;
+      color: #cbd5e1;
+      line-height: 1.8;
+      margin: 1rem 0 1.5rem;
+    }
+    
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .dic-formula-explain {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+      margin: 1rem 0;
+      line-height: 1.6;
+    }
+    
+    .dic-example-box {
+      background: rgba(16, 185, 129, 0.05);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .dic-example-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #34d399;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    /* Python Interactive Sandbox */
+    .dic-ide-box {
+      background: #090d16;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 2rem 0;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+    .dic-ide-topbar {
+      background: #111726;
+      padding: 0.65rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-ide-title {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-run-btn {
+      background: #10b981;
+      color: #fff;
+      border: none;
+      padding: 0.35rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
+    }
+    .dic-run-btn:hover { background: #059669; transform: scale(1.02); }
+    .dic-editor {
+      width: 100%;
+      background: #090d16;
+      color: #f1f5f9;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88rem;
+      padding: 1rem;
+      border: none;
+      resize: vertical;
+      min-height: 140px;
+      outline: none;
+      line-height: 1.6;
+    }
+    .dic-terminal {
+      background: #04070d;
+      border-top: 1px solid var(--border-color);
+      padding: 1rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.84rem;
+      color: #34d399;
+      min-height: 70px;
+      white-space: pre-wrap;
+      max-height: 240px;
+      overflow-y: auto;
+    }
+    
+    /* Quiz & Recall */
+    .dic-quiz-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.75rem;
+      margin: 2.5rem 0;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-quiz-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+    }
+    .dic-quiz-q {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #f8fafc;
+      margin-bottom: 1.25rem;
+      line-height: 1.6;
+    }
+    .dic-opt-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.85rem 1.25rem;
+      width: 100%;
+      text-align: left;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+    .dic-opt-btn:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .dic-opt-btn.ok {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: #10b981;
+      color: #6ee7b7;
+    }
+    .dic-opt-btn.bad {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: #ef4444;
+      color: #fca5a5;
+    }
+    .dic-feedback {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.85rem 1.25rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+    }
+    .dic-feedback.show { display: block; }
+    .dic-feedback.ok {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #6ee7b7;
+    }
+    .dic-feedback.bad {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+    }
+    
+    /* Bottom Navigation */
+    .dic-bottom-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-top: 2rem;
+      margin-top: 3rem;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+    .dic-nav-btn {
+      padding: 0.65rem 1.4rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      background: transparent;
+      cursor: pointer;
+    }
+    .dic-nav-btn:hover { background: rgba(255,255,255,0.06); color: #fff; }
+    .dic-nav-btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .dic-nav-btn.primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    
+    @media (max-width: 860px) {
+      .dic-layout { grid-template-columns: 1fr; }
+      .dic-sidebar { display: none; }
+      .dic-main { padding: 1.5rem 1rem; }
+    }
+  </style>
+</head>
+<style>
+  .dic-overview-wrap { max-width: 980px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+  .dic-hero-card {
+    background: linear-gradient(135deg, #33415525, #33415508);
+    border: 1px solid #33415540;
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.3);
+  }
+  .dic-hero-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: #334155;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 8px 20px #33415555;
+  }
+  
+  /* 5-Stage Framework Section */
+  .dic-framework-box {
+    background: #111622;
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 1.75rem;
+    margin-bottom: 2.5rem;
+  }
+  .dic-stage-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .dic-stage-card:last-child { border-bottom: none; }
+  .dic-stage-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .dic-stage-badge {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+  .dic-stage-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 0.25rem;
+  }
+  .dic-stage-desc {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    line-height: 1.5;
+  }
+  
+  .dic-card-item {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background: #111622;
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1.1rem 1.5rem;
+    text-decoration: none;
+    color: var(--text-main);
+    margin-bottom: 0.75rem;
+    transition: all 0.2s;
+  }
+  .dic-card-item:hover {
+    background: #161d2e;
+    border-color: #334155;
+    transform: translateX(4px);
+    color: #fff;
+  }
+  .dic-card-item.completed { border-color: rgba(16, 185, 129, 0.4); }
+  .dic-card-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .dic-card-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.2rem; }
+  .dic-card-meta { font-size: 0.8rem; color: #64748b; }
+  .dic-start-btn {
+    background: #334155;
+    color: #fff;
+    font-weight: 700;
+    padding: 0.85rem 2.2rem;
+    border-radius: 12px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1rem;
+    box-shadow: 0 8px 20px #33415544;
+    transition: all 0.2s;
+  }
+  .dic-start-btn:hover { opacity: 0.95; transform: translateY(-2px); color:#fff; }
+</style>
+<body>
+  <!-- Dicoding Header -->
+  <header class="dic-topbar">
+    <a href="{{ url_for('materi.materi_user') }}" class="dic-back-btn">
+      <i class="bi bi-arrow-left"></i> <span>Katalog Materi</span>
+    </a>
+    <span class="dic-badge"><i class="bi bi-cpu" style="color:#334155;"></i> Sistem Bilangan (Biner, Oktal, Hex)</span>
+  </header>
+
+  <div class="dic-overview-wrap">
+    <!-- Hero Box -->
+    <div class="dic-hero-card">
+      <div class="d-flex align-items-center gap-3 mb-3">
+        <div class="dic-hero-icon"><i class="bi bi-cpu"></i></div>
+        <div>
+          <div style="font-size:0.8rem; color:#334155; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;">Modul Pembelajaran MathThon</div>
+          <h1 style="font-size:1.85rem; font-weight:800; margin:0; color:#f8fafc;">Sistem Bilangan (Biner, Oktal, Hex)</h1>
+        </div>
+      </div>
+      <p style="color:#cbd5e1; font-size:1rem; margin-bottom:1.5rem; line-height:1.7;">
+        Kuasai konversi antar basis bilangan dan representasi memori komputer.
+      </p>
+      <div class="d-flex gap-4 flex-wrap" style="font-size:0.88rem; color:#94a3b8;">
+        <span><i class="bi bi-collection text-info me-1"></i> 5 Bab Terstruktur</span>
+        <span><i class="bi bi-check2-all text-success me-1"></i> {{ bab_progress|selectattr('is_completed')|list|length }}/5 Bab Selesai</span>
+        <span><i class="bi bi-terminal-fill text-warning me-1"></i> PyScript Sandbox Tersedia</span>
+      </div>
+
+      <!-- Progress Bar -->
+      <div style="margin-top:1.25rem; background:rgba(255,255,255,0.08); border-radius:6px; height:7px; overflow:hidden;">
+        <div style="height:100%; background:#334155; transition:width 0.4s; width: {{ (bab_progress|selectattr('is_completed')|list|length / total * 100)|int }}%;"></div>
+      </div>
+    </div>
+
+    <!-- 5-Stage Framework Card -->
+    <div class="dic-framework-box">
+      <h2 style="font-size:1.05rem; font-weight:800; color:#f8fafc; margin-bottom:0.5rem; display:flex; align-items:center; gap:0.5rem;">
+        <i class="bi bi-diagram-3-fill" style="color:#334155;"></i> Peta Peruntukan Kurikulum 5 Bab (Learning Pathway)
+      </h2>
+      <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:1.25rem;">
+        Setiap bab dirancang secara pedagogis dengan peruntukan berjenjang dari intuisi hingga proyek sintesis:
+      </p>
+      
+        <div class="dic-stage-card">
+          <div class="dic-stage-num" style="background:#33415520; color:#334155;">1</div>
+          <div class="flex-grow-1">
+            <div class="dic-stage-badge" style="color:#334155;">TAHAP 1: FONDASI & INTUISI</div>
+            <div class="dic-stage-title">Fondasi: Konsep Intuitif & Pengenalan Sis. Bilangan</div>
+            <div class="dic-stage-desc">Peruntukan Bab 1 adalah membangun pemahaman intuitif dari nol, latar belakang mengapa konsep ini diciptakan, perbedaannya dengan topik sebelumnya, serta kerangka berpikir dasar.</div>
+          </div>
+        </div>
+
+        <div class="dic-stage-card">
+          <div class="dic-stage-num" style="background:#33415520; color:#334155;">2</div>
+          <div class="flex-grow-1">
+            <div class="dic-stage-badge" style="color:#334155;">TAHAP 2: ANATOMI & KAIDAH FORMAL</div>
+            <div class="dic-stage-title">Anatomi: Notasi, Kaidah & Sifat Baku Sis. Bilangan</div>
+            <div class="dic-stage-desc">Peruntukan Bab 2 adalah membedah struktur anatomi matematika, notasi formal, sifat-sifat fundamental, dan aksioma/teorema yang menjadi aturan main.</div>
+          </div>
+        </div>
+
+        <div class="dic-stage-card">
+          <div class="dic-stage-num" style="background:#33415520; color:#334155;">3</div>
+          <div class="flex-grow-1">
+            <div class="dic-stage-badge" style="color:#334155;">TAHAP 3: MEKANIKA PERHITUNGAN & ALGORITMA</div>
+            <div class="dic-stage-title">Mekanika: Prosedur Perhitungan & Operasi Sis. Bilangan</div>
+            <div class="dic-stage-desc">Peruntukan Bab 3 adalah melatih keterampilan kalkulasi bertahap, metode analitik prosedural, strategi penyederhanaan, dan penanganan kasus khusus.</div>
+          </div>
+        </div>
+
+        <div class="dic-stage-card">
+          <div class="dic-stage-num" style="background:#33415520; color:#334155;">4</div>
+          <div class="flex-grow-1">
+            <div class="dic-stage-badge" style="color:#334155;">TAHAP 4: PEMODELAN & STUDI KASUS NYATA</div>
+            <div class="dic-stage-title">Pemodelan: Aplikasi Nyata & Studi Kasus Sis. Bilangan</div>
+            <div class="dic-stage-desc">Peruntukan Bab 4 adalah menerjemahkan masalah dunia nyata (fisika, sains komputer, ekonomi, arsitektur) ke dalam pemodelan matematis formal.</div>
+          </div>
+        </div>
+
+        <div class="dic-stage-card">
+          <div class="dic-stage-num" style="background:#33415520; color:#334155;">5</div>
+          <div class="flex-grow-1">
+            <div class="dic-stage-badge" style="color:#334155;">TAHAP 5: CAPSTONE PROJECT & EVALUASI SINTESIS</div>
+            <div class="dic-stage-title">Capstone: Proyek Integratif & Uji Sintesis Sis. Bilangan</div>
+            <div class="dic-stage-desc">Peruntukan Bab 5 adalah mengintegrasikan seluruh materi Bab 1 s/d Bab 4 dalam satu proyek tantangan komprehensif sebagai standar penguasaan modul.</div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Chapter List -->
+    <h2 style="font-size:1.1rem; font-weight:700; color:#cbd5e1; margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem;">
+      <i class="bi bi-list-ol" style="color:#334155;"></i> Daftar Bab Pembelajaran
+    </h2>
+    
+      <a href="{{ url_for('materi.subject_bab', subject='sistem_bilangan', bab_num=1) }}" 
+         class="dic-card-item {{ 'completed' if bab_progress[0]['is_completed'] else '' }}">
+        <div class="dic-card-num" style="background:#33415520; color:#334155;">1</div>
+        <div class="flex-grow-1">
+          <div style="font-size:0.75rem; color:#334155; font-weight:700; text-transform:uppercase;">TAHAP 1: FONDASI & INTUISI</div>
+          <div class="dic-card-title">Fondasi: Konsep Intuitif & Pengenalan Sis. Bilangan</div>
+          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Interaktif PyScript Sandbox</div>
+        </div>
+        <i class="bi {{ 'bi-check-circle-fill text-success' if bab_progress[0]['is_completed'] else 'bi-chevron-right text-muted' }} fs-5"></i>
+      </a>
+
+      <a href="{{ url_for('materi.subject_bab', subject='sistem_bilangan', bab_num=2) }}" 
+         class="dic-card-item {{ 'completed' if bab_progress[1]['is_completed'] else '' }}">
+        <div class="dic-card-num" style="background:#33415520; color:#334155;">2</div>
+        <div class="flex-grow-1">
+          <div style="font-size:0.75rem; color:#334155; font-weight:700; text-transform:uppercase;">TAHAP 2: ANATOMI & KAIDAH FORMAL</div>
+          <div class="dic-card-title">Anatomi: Notasi, Kaidah & Sifat Baku Sis. Bilangan</div>
+          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Interaktif PyScript Sandbox</div>
+        </div>
+        <i class="bi {{ 'bi-check-circle-fill text-success' if bab_progress[1]['is_completed'] else 'bi-chevron-right text-muted' }} fs-5"></i>
+      </a>
+
+      <a href="{{ url_for('materi.subject_bab', subject='sistem_bilangan', bab_num=3) }}" 
+         class="dic-card-item {{ 'completed' if bab_progress[2]['is_completed'] else '' }}">
+        <div class="dic-card-num" style="background:#33415520; color:#334155;">3</div>
+        <div class="flex-grow-1">
+          <div style="font-size:0.75rem; color:#334155; font-weight:700; text-transform:uppercase;">TAHAP 3: MEKANIKA PERHITUNGAN & ALGORITMA</div>
+          <div class="dic-card-title">Mekanika: Prosedur Perhitungan & Operasi Sis. Bilangan</div>
+          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Interaktif PyScript Sandbox</div>
+        </div>
+        <i class="bi {{ 'bi-check-circle-fill text-success' if bab_progress[2]['is_completed'] else 'bi-chevron-right text-muted' }} fs-5"></i>
+      </a>
+
+      <a href="{{ url_for('materi.subject_bab', subject='sistem_bilangan', bab_num=4) }}" 
+         class="dic-card-item {{ 'completed' if bab_progress[3]['is_completed'] else '' }}">
+        <div class="dic-card-num" style="background:#33415520; color:#334155;">4</div>
+        <div class="flex-grow-1">
+          <div style="font-size:0.75rem; color:#334155; font-weight:700; text-transform:uppercase;">TAHAP 4: PEMODELAN & STUDI KASUS NYATA</div>
+          <div class="dic-card-title">Pemodelan: Aplikasi Nyata & Studi Kasus Sis. Bilangan</div>
+          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Interaktif PyScript Sandbox</div>
+        </div>
+        <i class="bi {{ 'bi-check-circle-fill text-success' if bab_progress[3]['is_completed'] else 'bi-chevron-right text-muted' }} fs-5"></i>
+      </a>
+
+      <a href="{{ url_for('materi.subject_bab', subject='sistem_bilangan', bab_num=5) }}" 
+         class="dic-card-item {{ 'completed' if bab_progress[4]['is_completed'] else '' }}">
+        <div class="dic-card-num" style="background:#33415520; color:#334155;">5</div>
+        <div class="flex-grow-1">
+          <div style="font-size:0.75rem; color:#334155; font-weight:700; text-transform:uppercase;">TAHAP 5: CAPSTONE PROJECT & EVALUASI SINTESIS</div>
+          <div class="dic-card-title">Capstone: Proyek Integratif & Uji Sintesis Sis. Bilangan</div>
+          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Interaktif PyScript Sandbox</div>
+        </div>
+        <i class="bi {{ 'bi-check-circle-fill text-success' if bab_progress[4]['is_completed'] else 'bi-chevron-right text-muted' }} fs-5"></i>
+      </a>
+
+    <!-- CTA Button -->
+    <div class="text-center mt-5">
+      <a href="{{ url_for('materi.subject_bab', subject='sistem_bilangan', bab_num=1) }}" class="dic-start-btn">
+        <i class="bi bi-play-circle-fill fs-5"></i> Mulai Pembelajaran Bab 1
+      </a>
+    </div>
+  </div>
+</body>
+</html>

@@ -17,7 +17,7 @@ courses_router = Blueprint("courses_router", __name__)
 def list_courses():
     """Mengambil daftar semua kelas/kursus utama."""
     db_session = get_db_session()
-    courses = db_session.query(Course).filter(Course.is_active == True).order_by(Course.order_index).all()
+    courses = db_session.query(Course).order_by(Course.order_index).all()
     return jsonify({
         "status": "success",
         "data": [c.to_dict() for c in courses]

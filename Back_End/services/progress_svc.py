@@ -17,9 +17,26 @@ class ProgressService:
         self.session = db_session or get_db_session()
 
     def get_material_by_slug(self, slug: str) -> Optional[Material]:
-        """Cari record material berdasarkan slug unik."""
-        clean_slug = slug.strip().lower()
-        return self.session.query(Material).filter(Material.slug == clean_slug).first()
+        """Cari record material berdasarkan slug unik atau alias ramah."""
+        clean_slug = slug.strip().lower().replace("_", "-")
+        # 1. Exact match
+        mat = self.session.query(Material).filter(Material.slug == clean_slug).first()
+        if mat:
+            return mat
+        
+        # 2. Flexible alias match
+        all_materials = self.session.query(Material).all()
+        for m in all_materials:
+            m_slug = m.slug.lower()
+            if m_slug == clean_slug or m_slug in clean_slug or clean_slug in m_slug:
+                return m
+            if f"bab-{m.chapter_number}" in clean_slug:
+                if m.module and (m.module.slug in clean_slug or m.module.title.lower() in clean_slug):
+                    return m
+                if "antiturunan" in clean_slug and "antiturunan" in m.title.lower():
+                    return m
+
+        return None
 
     def get_material_by_id(self, material_id: int) -> Optional[Material]:
         """Cari record material berdasarkan ID."""
@@ -136,7 +153,7 @@ class ProgressService:
         Menghasilkan kurikulum lengkap berjenjang (Course -> Module -> Material)
         beserta status gembok (Locked, In_Progress, Completed) untuk masing-masing item.
         """
-        courses = self.session.query(Course).filter(Course.is_active == True).order_by(Course.order_index).all()
+        courses = self.session.query(Course).order_by(Course.order_index).all()
         
         # Ambil seluruh progres user untuk kalkulasi cepat
         user_progs = self.session.query(UserProgress).filter(UserProgress.user_id == user_id).all()
@@ -155,8 +172,6 @@ class ProgressService:
             }
 
             for m in c.modules:
-                if not m.is_active:
-                    continue
                 
                 m_data = {
                     "id": m.id,

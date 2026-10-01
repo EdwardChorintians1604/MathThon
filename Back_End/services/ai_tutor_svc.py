@@ -204,7 +204,7 @@ CHECKPOINT_CURRICULUM = {
             },
             {
                 "step": 4,
-                "question": "Kurangkan $12 - 2$. Berapakah determinan matriks $A$ ($\det(A)$)?",
+                "question": r"Kurangkan $12 - 2$. Berapakah determinan matriks $A$ ($\det(A)$)?",
                 "concept": "12 - 2 = 10.",
                 "valid_answers": ["10", "10.0", "det(A)=10"],
                 "target_representation": "10"

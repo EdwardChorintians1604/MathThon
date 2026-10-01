@@ -140,7 +140,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const cleanSlug = safeSlug.replace(/_/g, '-');
             const pathInfo = learningPathMap[safeSlug] || learningPathMap[cleanSlug] || { is_unlocked: true, is_completed: false, missing_prerequisites: [] };
             
-            const endpoint = `/user/materi/${materi.slug || materi.judul_materi.toLowerCase().replace(/\s+/g, '-')}`;
+            const cleanTarget = (materi.slug || safeSlug).replace(/[^a-zA-Z0-9_-]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
+            const endpoint = `/user/materi/${cleanTarget}`;
 
             const stars = Array.from({length: 5}, (_, i) =>
                 `<i class="bi ${i < materi.rating ? 'bi-star-fill' : 'bi-star'}"></i>`
