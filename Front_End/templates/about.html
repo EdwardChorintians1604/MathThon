@@ -4,33 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}MathThon | Tentang Kami{% endblock %}</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- AOS Animation -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Custom Info Pages CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/info_pages.css') }}">
 
-  <!-- Tailwind CSS (CDN) - ditambahkan tanpa build step -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          boxShadow: {
-            glow: '0 0 0 1px rgba(102,126,234,0.25), 0 18px 50px rgba(102,126,234,0.18)'
-          }
-        }
-      }
-    };
-  </script>
-
+  <!-- Favicon -->
   <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
-  
+
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -40,92 +36,374 @@
   </script>
 </head>
 
-<body style="background: linear-gradient(to bottom, black, rgb(66, 46, 100), grey);">
+<body class="info-page-body">
 
-  <header>
-    <nav class="wrapper animate__animated animate__fadeInDown">
-      <div class="brand animate__animated animate__fadeInLeft">
-        <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}" alt="MathThon Logo" class="photos">
+  <!-- Ambient Animated Gradient Mesh -->
+  <div class="ambient-mesh" aria-hidden="true">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+  </div>
+
+  <!-- Mobile Sidenav Backdrop -->
+  <div class="info-sidenav-backdrop" id="sidenavBackdrop" onclick="closeSidenav()"></div>
+
+  <!-- Mobile Sidenav Drawer -->
+  <aside class="info-sidenav-drawer" id="sidenavRight" aria-label="Menu Navigasi Mobile">
+    <div class="info-sidenav-header">
+      <div class="d-flex align-items-center gap-2">
+        <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}" alt="MathThon Logo" class="photos" style="width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--accent-gold);">
+        <span class="info-brand-title fs-5">MathThon</span>
       </div>
-      <ul class="navigation">
-        <a class="nav-link" href="{{ url_for('main.home') }}">Beranda</a>
-        <a class="nav-link" href="{{ url_for('main.privacy') }}">Privasi</a>
-        <a class="nav-link active" href="{{ url_for('main.about') }}">Tentang</a>
-        <div class="dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Masuk / Daftar</a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
-            <li><a class="dropdown-item" href="{{ url_for('auth.login_user') }}"><i class="bi bi-box-arrow-in-right me-2"></i>Masuk (Portal Terpadu)</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('auth.register_user') }}"><i class="bi bi-person-plus me-2"></i>Daftar Akun Baru</a></li>
+      <button class="info-sidenav-close" onclick="closeSidenav()" aria-label="Tutup Menu">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    <nav class="info-sidenav-links">
+      <a href="{{ url_for('main.home') }}"><i class="bi bi-house-door"></i> Beranda</a>
+      <a href="{{ url_for('main.about') }}" class="active"><i class="bi bi-info-circle"></i> Tentang</a>
+      <a href="{{ url_for('main.privacy') }}"><i class="bi bi-shield-check"></i> Privasi</a>
+      <a href="{{ url_for('main.terms') }}"><i class="bi bi-file-earmark-text"></i> Syarat & Ketentuan</a>
+      <div class="info-sidenav-divider"></div>
+      <a href="{{ url_for('auth.login_user') }}"><i class="bi bi-box-arrow-in-right text-warning"></i> Masuk (Portal Terpadu)</a>
+      <a href="{{ url_for('auth.register_user') }}"><i class="bi bi-person-plus text-info"></i> Daftar Akun Baru</a>
+    </nav>
+  </aside>
+
+  <!-- Header & Sticky Navbar -->
+  <header class="info-header">
+    <div class="info-nav-wrapper">
+      <a href="{{ url_for('main.home') }}" class="info-brand animate__animated animate__fadeInLeft">
+        <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}" alt="MathThon Logo" class="photos">
+        <span class="info-brand-title">MathThon</span>
+      </a>
+
+      <ul class="info-navigation animate__animated animate__fadeInDown">
+        <li><a class="nav-link" href="{{ url_for('main.home') }}">Beranda</a></li>
+        <li><a class="nav-link active" href="{{ url_for('main.about') }}">Tentang</a></li>
+        <li><a class="nav-link" href="{{ url_for('main.privacy') }}">Privasi</a></li>
+        <li><a class="nav-link" href="{{ url_for('main.terms') }}">Syarat & Ketentuan</a></li>
+        <li class="dropdown ms-2">
+          <a class="nav-link dropdown-toggle d-flex align-items-center gap-1" href="#" id="authDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-circle"></i> Masuk / Daftar
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end animate__animated animate__fadeIn" aria-labelledby="authDropdown">
+            <li>
+              <a class="dropdown-item" href="{{ url_for('auth.login_user') }}">
+                <i class="bi bi-box-arrow-in-right me-2 text-warning"></i> Masuk (Portal Terpadu)
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{{ url_for('auth.register_user') }}">
+                <i class="bi bi-person-plus me-2 text-info"></i> Daftar Akun Baru
+              </a>
+            </li>
           </ul>
-        </div>
+        </li>
       </ul>
-      <button class="open-sidenav-btn" id="openSidenavBtn" onclick="openSidenav()">
+
+      <button class="info-open-sidenav-btn" id="openSidenavBtn" onclick="openSidenav()" aria-label="Buka Menu">
         <i class="bi bi-list"></i>
       </button>
-
-      <div id="sidenav-right" class="sidenav-right">
-        <span class="closebtn" onclick="closeSidenav()">&times;</span>
-        <a href="{{ url_for('main.home') }}">Beranda</a>
-        <a href="{{ url_for('main.privacy') }}">Privasi</a>
-        <a href="{{ url_for('main.about') }}" class="active">Tentang</a>
-        <a href="{{ url_for('auth.login_user') }}"><i class="bi bi-box-arrow-in-right me-2"></i>Masuk (Portal Terpadu)</a>
-        <a href="{{ url_for('auth.register_user') }}"><i class="bi bi-person-plus me-2"></i>Daftar Akun Baru</a>
-      </div>
-    </nav>
+    </div>
   </header>
 
-  <section class="content-section">
-    <div class="container" data-aos="fade-up">
-      <h2 class="page-title-large">Mengenai MathThon</h2>
-      
-      <div class="content-card shadow-lg">
-        <h3 class="card-subtitle">Visi Kami</h3>
-        <p>Menjadi platform pembelajaran matematika paling inovatif dan terpercaya di Indonesia, menginspirasi generasi muda untuk mencintai matematika melalui pendekatan yang interaktif dan berbasis data.</p>
+  <!-- Main Content Wrap -->
+  <div class="info-content-wrap">
+    
+    <!-- Hero Section -->
+    <section class="info-hero">
+      <div class="container">
+        <div class="badge-pill animate__animated animate__fadeInDown">
+          <i class="bi bi-stars"></i> Mengenal Lebih Dekat MathThon
+        </div>
+        <h1 class="info-hero-title animate__animated animate__fadeInUp">
+          Membuka Potensi <span class="text-gradient-gold">Matematika</span> Generasi Masa Depan
+        </h1>
+        <p class="info-hero-subtitle animate__animated animate__fadeInUp animate__delay-1s">
+          MathThon adalah platform pembelajaran interaktif yang memadukan kurikulum adaptif, simulasi visual, dan teknologi kecerdasan buatan untuk membuat matematika menjadi mudah, menyenangkan, dan relevan bagi semua siswa.
+        </p>
 
-        <h3 class="card-subtitle">Misi Kami</h3>
-        <p>Misi kami adalah membuat pembelajaran matematika menjadi lebih mudah diakses dan menarik bagi semua siswa. Kami percaya bahwa setiap orang memiliki potensi untuk menguasai matematika, dan dengan pendekatan yang tepat, belajar matematika bisa menjadi pengalaman yang menyenangkan dan memuaskan.</p>
-
-        <h3 class="card-subtitle">Cerita Kami</h3>
-        <p>Berawal dari keresahan akan rendahnya minat belajar matematika di Indonesia, sekelompok mahasiswa dan pengembang bergabung untuk menciptakan solusi yang menggabungkan teknologi modern dengan kurikulum matematika yang efektif. Begitulah MathThon lahir - sebagai jembatan bagi mereka yang ingin menaklukkan tantangan matematika.</p>
-
-        <h3 class="card-subtitle">Kenapa Memilih MathThon?</h3>
-        <ul>
-          <li><strong>Materi Terstruktur:</strong> Kurikulum yang disusun secara sistematis mulai dari dasar hingga tingkat lanjut.</li>
-          <li><strong>Pembelajaran Interaktif:</strong> Penggunaan alat bantu visual dan simulasi untuk mempermudah pemahaman konsep abstrak.</li>
-          <li><strong>AI Integrated:</strong> Dukungan kecerdasan buatan untuk membantu menjawab pertanyaan dan memberikan penjelasan personal.</li>
-          <li><strong>Ecosystem Belajar:</strong> Komunitas yang mendukung dan progres yang terpantau secara real-time.</li>
-        </ul>
-      </div>
-
-      <div class="content-card alt shadow-lg">
-        <h3 class="card-subtitle text-center">Tim Kami</h3>
-        <p class="text-center">Kami adalah tim yang berdedikasi tinggi untuk pendidikan matematika.</p>
-        <div class="row g-4 mt-3">
-          <div class="col-md-4 text-center">
-            <h5 class="text-warning">Erantus P. Samaloisa</h5>
-            <p class="small text-white">Founder & Lead Dev</p>
+        <!-- Metrics Grid -->
+        <div class="metrics-grid" data-aos="fade-up" data-aos-delay="200">
+          <div class="metric-card">
+            <div class="metric-value">100+</div>
+            <div class="metric-label">Modul Terstruktur</div>
           </div>
-          <div class="col-md-4 text-center">
-            <h5 class="text-warning">Thoufiq Jabbar Silton</h5>
-            <p class="small text-white">Data Analyst</p>
+          <div class="metric-card">
+            <div class="metric-value">AI-Powered</div>
+            <div class="metric-label">Asisten Belajar Cerdas</div>
           </div>
-          <div class="col-md-4 text-center">
-            <h5 class="text-warning">Anisa B. Pasaribu</h5>
-            <p class="small text-white">Content Curator</p>
+          <div class="metric-card">
+            <div class="metric-value">100%</div>
+            <div class="metric-label">Visual & Interaktif</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">Akses Bebas</div>
+            <div class="metric-label">Untuk Semua Pelajar</div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer class="py-4 bg-dark text-center text-white">
-    <div class="container">
-      <p class="mb-3">&copy; 2025 MathThon. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="{{ url_for('main.about') }}" class="text-white mx-2 text-decoration-none">Tentang MathThon</a> |
-        <a href="{{ url_for('main.privacy') }}" class="text-white mx-2 text-decoration-none">Kebijakan Privasi</a> |
-        <a href="{{ url_for('main.terms') }}" class="text-white mx-2 text-decoration-none">Syarat & Ketentuan</a>
+    <!-- Main Cards Section -->
+    <main class="info-container">
+
+      <!-- Visi & Misi (Dual Grid) -->
+      <section class="dual-grid" data-aos="fade-up">
+        <!-- Visi Card -->
+        <article class="vision-card">
+          <div class="section-title-wrap">
+            <div class="section-icon-badge gold">
+              <i class="bi bi-eye-fill"></i>
+            </div>
+            <div>
+              <h2 class="glass-card-title">Visi Kami</h2>
+              <p class="glass-card-subtitle">Pandangan jangka panjang MathThon</p>
+            </div>
+          </div>
+          <p class="text-muted">
+            Menjadi platform edukasi matematika paling inovatif, adaptif, dan terpercaya di Indonesia. Kami bertekad menginspirasi generasi muda untuk tidak sekadar menghafal rumus, melainkan memahami keindahan logika di balik setiap konsep dan persamaan.
+          </p>
+          <ul class="card-pillar-list">
+            <li><i class="bi bi-check-circle-fill text-warning"></i> Inovasi teknologi pembelajaran modern berbasis data.</li>
+            <li><i class="bi bi-check-circle-fill text-warning"></i> Demokratisasi akses pendidikan berkualitas bagi seluruh pelosok.</li>
+            <li><i class="bi bi-check-circle-fill text-warning"></i> Membangun daya nalar analitis dan rasa percaya diri siswa.</li>
+          </ul>
+        </article>
+
+        <!-- Misi Card -->
+        <article class="mission-card">
+          <div class="section-title-wrap">
+            <div class="section-icon-badge indigo">
+              <i class="bi bi-rocket-takeoff-fill"></i>
+            </div>
+            <div>
+              <h2 class="glass-card-title">Misi Kami</h2>
+              <p class="glass-card-subtitle">Komitmen aksi nyata kami setiap hari</p>
+            </div>
+          </div>
+          <p class="text-muted">
+            Menghapus stigma bahwa matematika itu rumit dan membosankan dengan menghadirkan metode belajar yang visual, berorientasi pemahaman nyata, serta didukung tutor kecerdasan buatan yang selalu siap membantu 24/7.
+          </p>
+          <ul class="card-pillar-list">
+            <li><i class="bi bi-check-circle-fill text-indigo" style="color: #818cf8;"></i> Menyederhanakan konsep abstrak melalui visualisasi interaktif.</li>
+            <li><i class="bi bi-check-circle-fill text-indigo" style="color: #818cf8;"></i> Menyediakan kurikulum berjenjang yang mudah dipelajari mandiri.</li>
+            <li><i class="bi bi-check-circle-fill text-indigo" style="color: #818cf8;"></i> Mendukung setiap siswa sesuai ritme dan kecepatan belajarnya.</li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- Cerita Kami -->
+      <section class="glass-card" data-aos="fade-up">
+        <div class="section-title-wrap">
+          <div class="section-icon-badge emerald">
+            <i class="bi bi-journal-bookmark-fill"></i>
+          </div>
+          <div>
+            <h2 class="glass-card-title">Cerita di Balik MathThon</h2>
+            <p class="glass-card-subtitle">Bagaimana ide ini bertransformasi menjadi sebuah solusi</p>
+          </div>
+        </div>
+        <p class="lead text-light mb-3" style="font-size: 1.05rem;">
+          Berawal dari keresahan melihat banyaknya siswa yang merasa cemas atau tertinggal saat berhadapan dengan matematika, sekelompok pengembang, data scientist, dan pendidik bersatu untuk merancang cara belajar yang sama sekali berbeda.
+        </p>
+        <p class="text-muted">
+          Kami menyadari bahwa masalah utama bukan terletak pada kemampuan siswa, melainkan pada metode penyampaian yang sering kali kaku dan tidak kontekstual. MathThon lahir sebagai jembatan: menggabungkan estetika desain modern, kalkulator grafis visual, kurikulum terstruktur, serta kecerdasan buatan terpadu. Hasilnya adalah ruang belajar yang aman, ramah, dan memicu rasa ingin tahu.
+        </p>
+        <div class="p-3 mt-3 rounded-3" style="background: rgba(251, 191, 36, 0.05); border-left: 3px solid var(--accent-gold);">
+          <p class="fst-italic text-warning mb-0" style="font-size: 0.95rem;">
+            "Matematika bukan tentang seberapa cepat kamu menghitung, melainkan seberapa dalam kamu memahami bagaimana segalanya terhubung."
+          </p>
+        </div>
+      </section>
+
+      <!-- Kenapa Memilih MathThon? (Feature Grid) -->
+      <section class="glass-card" data-aos="fade-up">
+        <div class="section-title-wrap">
+          <div class="section-icon-badge cyan">
+            <i class="bi bi-patch-check-fill"></i>
+          </div>
+          <div>
+            <h2 class="glass-card-title">Kenapa Memilih MathThon?</h2>
+            <p class="glass-card-subtitle">Keunggulan fitur yang membedakan platform kami</p>
+          </div>
+        </div>
+
+        <div class="features-grid-modern">
+          <div class="feature-item-modern">
+            <div class="feature-item-icon" style="background: rgba(251, 191, 36, 0.15); color: var(--accent-gold);">
+              <i class="bi bi-diagram-3-fill"></i>
+            </div>
+            <h3 class="feature-item-title">Materi Terstruktur</h3>
+            <p class="feature-item-desc">Kurikulum disusun bertahap mulai dari fondasi dasar, aljabar, kalkulus, hingga statistika dan aplikasinya dalam ilmu komputasi.</p>
+          </div>
+
+          <div class="feature-item-modern">
+            <div class="feature-item-icon" style="background: rgba(6, 182, 212, 0.15); color: #22d3ee;">
+              <i class="bi bi-display-fill"></i>
+            </div>
+            <h3 class="feature-item-title">Visualisasi Interaktif</h3>
+            <p class="feature-item-desc">Alat bantu grafik dinamis dan visualizer rumus yang mengubah rumus abstrak menjadi representasi visual yang mudah dicerna.</p>
+          </div>
+
+          <div class="feature-item-modern">
+            <div class="feature-item-icon" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">
+              <i class="bi bi-robot"></i>
+            </div>
+            <h3 class="feature-item-title">Terintegrasi AI Cerdas</h3>
+            <p class="feature-item-desc">Fitur asisten AI yang dapat membantu memecahkan kebuntuan, memberikan petunjuk bertahap, dan menjelaskan konsep secara personal.</p>
+          </div>
+
+          <div class="feature-item-modern">
+            <div class="feature-item-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
+              <i class="bi bi-graph-up-arrow"></i>
+            </div>
+            <h3 class="feature-item-title">Pantau Progres Belajar</h3>
+            <p class="feature-item-desc">Dashboard komprehensif untuk memantau capaian materi, riwayat latihan soal, serta statistik pemahaman secara real-time.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tim Pengembang (Team Grid) -->
+      <section class="glass-card" data-aos="fade-up">
+        <div class="text-center mb-4">
+          <div class="badge-pill indigo mb-2">
+            <i class="bi bi-people-fill"></i> Tim Pengembang & Kontributor
+          </div>
+          <h2 class="glass-card-title text-center">Sosok di Balik MathThon</h2>
+          <p class="glass-card-subtitle text-center">Dedikasi para mahasiswa, pengembang, dan pemerhati edukasi untuk kemajuan belajar matematika</p>
+        </div>
+
+        <div class="team-grid-modern">
+          <!-- Member 1: Erantus -->
+          <div class="team-card-modern" data-aos="fade-up" data-aos-delay="100">
+            <div class="team-photo-wrap">
+              <img src="{{ url_for('static', filename='image/Edward_James_Kenway.png') }}" class="team-photo" alt="Erantus P. Samaloisa">
+              <div class="team-badge-circle"><i class="bi bi-code-slash"></i></div>
+            </div>
+            <h3 class="team-name">Erantus P. Samaloisa</h3>
+            <span class="team-role">Founder & Lead Dev</span>
+            <p class="team-bio">Merancang arsitektur sistem, integrasi backend, dan pengalaman interaktif platform MathThon.</p>
+            <div class="team-tags">
+              <span class="team-tag">System Architect</span>
+              <span class="team-tag">Full-Stack</span>
+            </div>
+          </div>
+
+          <!-- Member 2: Thoufiq -->
+          <div class="team-card-modern" data-aos="fade-up" data-aos-delay="150">
+            <div class="team-photo-wrap">
+              <img src="{{ url_for('static', filename='image/Thoufiq_Jabbar_Silton.png') }}" class="team-photo" alt="Thoufiq Jabbar Silton">
+              <div class="team-badge-circle"><i class="bi bi-pie-chart-fill"></i></div>
+            </div>
+            <h3 class="team-name">Thoufiq Jabbar Silton</h3>
+            <span class="team-role">Data Scientist & AI</span>
+            <p class="team-bio">Fokus pada analisis data pengguna, kurasi model AI, dan optimasi pemrosesan kalkulasi algoritma.</p>
+            <div class="team-tags">
+              <span class="team-tag">Data Science</span>
+              <span class="team-tag">Machine Learning</span>
+            </div>
+          </div>
+
+          <!-- Member 3: Anisa -->
+          <div class="team-card-modern" data-aos="fade-up" data-aos-delay="200">
+            <div class="team-photo-wrap">
+              <img src="{{ url_for('static', filename='image/ANisa.png') }}" class="team-photo" alt="Anisa Betsaida Pasaribu">
+              <div class="team-badge-circle"><i class="bi bi-calculator"></i></div>
+            </div>
+            <h3 class="team-name">Anisa Betsaida Pasaribu</h3>
+            <span class="team-role">Content Curator & Math</span>
+            <p class="team-bio">Menyusun dan memvalidasi keakuratan materi matematika, latihan soal, dan kurikulum tematik.</p>
+            <div class="team-tags">
+              <span class="team-tag">Curriculum</span>
+              <span class="team-tag">Pedagogy</span>
+            </div>
+          </div>
+
+          <!-- Member 4: Maheza -->
+          <div class="team-card-modern" data-aos="fade-up" data-aos-delay="250">
+            <div class="team-photo-wrap">
+              <img src="{{ url_for('static', filename='image/mahez.png') }}" class="team-photo" alt="Maheza Novrauyuda">
+              <div class="team-badge-circle"><i class="bi bi-cpu"></i></div>
+            </div>
+            <h3 class="team-name">Maheza Novrauyuda</h3>
+            <span class="team-role">AI Engineer</span>
+            <p class="team-bio">Mengembangkan pipeline integrasi model bahasa cerdas dan respon interaktif untuk asisten belajar.</p>
+            <div class="team-tags">
+              <span class="team-tag">AI Pipeline</span>
+              <span class="team-tag">API Integration</span>
+            </div>
+          </div>
+
+          <!-- Member 5: Alwi -->
+          <div class="team-card-modern" data-aos="fade-up" data-aos-delay="300">
+            <div class="team-photo-wrap">
+              <img src="{{ url_for('static', filename='image/Alwi.png') }}" class="team-photo" alt="Muhammad Almusyahwi">
+              <div class="team-badge-circle"><i class="bi bi-megaphone-fill"></i></div>
+            </div>
+            <h3 class="team-name">Muhammad Almusyahwi</h3>
+            <span class="team-role">Content Creator</span>
+            <p class="team-bio">Merancang konten visual edukatif, infografis pendukung, dan menjalin komunikasi dengan komunitas pelajar.</p>
+            <div class="team-tags">
+              <span class="team-tag">Creative Design</span>
+              <span class="team-tag">Community</span>
+            </div>
+          </div>
+
+          <!-- Member 6: Rofiq -->
+          <div class="team-card-modern" data-aos="fade-up" data-aos-delay="350">
+            <div class="team-photo-wrap">
+              <img src="{{ url_for('static', filename='image/Rofiq_Yulhari.png') }}" class="team-photo" alt="Rofiq Mahdi Yulhari">
+              <div class="team-badge-circle"><i class="bi bi-camera-reels-fill"></i></div>
+            </div>
+            <h3 class="team-name">Rofiq Mahdi Yulhari</h3>
+            <span class="team-role">Multimedia & Video</span>
+            <p class="team-bio">Menghadirkan video interaktif, visualisasi animasi, dan aset grafis berkualitas tinggi untuk media belajar.</p>
+            <div class="team-tags">
+              <span class="team-tag">Motion Graphic</span>
+              <span class="team-tag">Video Editing</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call To Action (CTA) Banner -->
+      <section class="info-cta-card" data-aos="zoom-in">
+        <h2 class="info-cta-title">Siap Menguasai Matematika Bersama Kami?</h2>
+        <p class="info-cta-subtitle">
+          Bergabunglah sekarang dan rasakan pengalaman belajar matematika yang interaktif, visual, dan menyenangkan dengan dukungan asisten AI.
+        </p>
+        <div class="info-btn-group">
+          <a href="{{ url_for('main.home') }}" class="info-btn-primary">
+            <i class="bi bi-house-door-fill"></i> Jelajahi Beranda
+          </a>
+          <a href="{{ url_for('auth.register_user') }}" class="info-btn-secondary">
+            <i class="bi bi-person-plus-fill"></i> Daftar Akun Gratis
+          </a>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="info-footer">
+    <div class="info-footer-container">
+      <a href="{{ url_for('main.home') }}" class="info-footer-brand">
+        <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}" alt="MathThon Logo">
+        <span>MathThon</span>
+      </a>
+      <div class="info-footer-links">
+        <a href="{{ url_for('main.home') }}">Beranda</a>
+        <a href="{{ url_for('main.about') }}">Tentang MathThon</a>
+        <a href="{{ url_for('main.privacy') }}">Kebijakan Privasi</a>
+        <a href="{{ url_for('main.terms') }}">Syarat & Ketentuan</a>
+        <a href="{{ url_for('auth.login_user') }}">Portal Masuk</a>
       </div>
+      <p class="info-footer-copy">
+        &copy; 2025&ndash;2026 MathThon. Seluruh hak cipta dilindungi undang-undang.
+      </p>
     </div>
   </footer>
 
@@ -133,17 +411,41 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    // Inisialisasi AOS (Animate On Scroll)
     AOS.init({
-      duration: 1000,
-      once: true
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 50
     });
-    
+
+    // Kontrol Mobile Sidenav
     function openSidenav() {
-      document.getElementById("sidenav-right").classList.add("open");
+      const drawer = document.getElementById("sidenavRight");
+      const backdrop = document.getElementById("sidenavBackdrop");
+      if (drawer && backdrop) {
+        drawer.classList.add("open");
+        backdrop.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
     }
+
     function closeSidenav() {
-      document.getElementById("sidenav-right").classList.remove("open");
+      const drawer = document.getElementById("sidenavRight");
+      const backdrop = document.getElementById("sidenavBackdrop");
+      if (drawer && backdrop) {
+        drawer.classList.remove("open");
+        backdrop.classList.remove("active");
+        document.body.style.overflow = "";
+      }
     }
+
+    // Tutup drawer ketika tombol ESC ditekan
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") {
+        closeSidenav();
+      }
+    });
   </script>
 </body>
 </html>

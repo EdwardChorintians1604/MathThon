@@ -5,10 +5,16 @@ async function sendMessage() {
   if (!text) return;
   chatEl.innerHTML += `<div><b>You:</b> ${escapeHtml(text)}</div>`;
   msgEl.value = "";
+  const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') 
+                 || document.querySelector('input[name="csrf_token"]')?.value 
+                 || '';
   try {
     const res = await fetch("/api/ai/chat", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrfToken
+      },
       body: JSON.stringify({ message: text })
     });
 

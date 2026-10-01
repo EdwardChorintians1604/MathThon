@@ -212,3 +212,9 @@ def get_security_logs():
         return jsonify(logs[-50:][::-1])
     except (json.JSONDecodeError, OSError):
         return jsonify([])
+
+@api_bp.route('/csrf-token', methods=['GET'])
+def get_csrf_token():
+    """Return a fresh CSRF token."""
+    from flask_wtf.csrf import generate_csrf
+    return jsonify({"success": True, "csrf_token": generate_csrf()})

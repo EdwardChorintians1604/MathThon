@@ -1,129 +1,669 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fungsi Turunan - Materi Matematika</title>
-    <link rel="icon" href="{{url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/materi.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materi: Turunan & Kalkulus Diferensial - MathThon</title>
+  <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/materi_reader.css') }}">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 </head>
-<body>
-    <header>
-        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Menu">
-            <i class="bi bi-list"></i>
-        </button>
-        
-        <nav>
-            <div id="sidenav" class="sidenav">
-                <button class="close-btn" id="closeBtn" aria-label="Close Menu">
-                    <i class="bi bi-x"></i>
-                </button>
-                <h3>Navigasi Turunan</h3>
-                <ul>
-                    <li><a href="{{url_for('user.dashboard_user')}}">Kembali ke Beranda</a></li>
-                    <li><a href="#definisi">Definisi</a></li>
-                    <li><a href="#aturan">Aturan Dasar</a></li>
-                    <li><a href="#contoh">Contoh Soal</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <h1>Materi: Fungsi Turunan</h1>
-        <div id="isi-materi" style="margin-left:220px;">
-            
-            <div class="card" id="definisi">
-                <div class="card-body">
-                    <h2><i class="bi bi-graph-up-arrow text-primary"></i> Definisi</h2>
-                    <p>Turunan adalah konsep dasar dalam kalkulus yang mengukur laju perubahan fungsi terhadap variabelnya.</p>
-                    <p>Secara matematis, turunan f(x) didefinisikan sebagai:</p>
-                    <blockquote class="blockquote">
-                        <code>f'(x) = lim (h→0) [f(x+h) - f(x)] / h</code>
-                    </blockquote>
-                </div>
-            </div>
+<body class="mr-body">
 
-            <div class="card" id="aturan">
-                <div class="card-body">
-                    <h2><i class="bi bi-list-check text-success"></i> Aturan Dasar</h2>
-                    <ul>
-                        <li><strong>Konstanta:</strong> Jika f(x) = c, maka f'(x) = 0</li>
-                        <li><strong>Pangkat:</strong> Jika f(x) = x<sup>n</sup>, maka f'(x) = n·x<sup>n-1</sup></li>
-                        <li><strong>Penjumlahan:</strong> (u + v)' = u' + v'</li>
-                        <li><strong>Perkalian:</strong> (uv)' = u'v + uv'</li>
-                    </ul>
-                </div>
-            </div>
+  <div class="mr-progress-container"><div class="mr-progress-bar" id="progressBar"></div></div>
 
-            <div class="card" id="contoh">
-                <div class="card-body">
-                    <h2><i class="bi bi-pencil-square text-warning"></i> Contoh</h2>
-                    <p>Diberikan fungsi: <code>f(x) = 3x<sup>2</sup> + 2x + 1</code></p>
-                    <p>Maka turunannya adalah:</p>
-                    <ul>
-                        <li>Turunan 3x<sup>2</sup> = 3(2x) = 6x</li>
-                        <li>Turunan 2x = 2</li>
-                        <li>Turunan 1 = 0</li>
-                    </ul>
-                    <p>Hasil: <strong>f'(x) = 6x + 2</strong></p>
-                </div>
-            </div>
-
-        </div>
+  <header class="mr-topbar">
+    <div class="mr-topbar-left">
+      <a href="{{ url_for('materi.materi_user') }}" class="mr-back-btn">
+        <i class="bi bi-arrow-left"></i> <span>Daftar Materi</span>
+      </a>
+      <span class="mr-topic-badge"><i class="bi bi-graph-up"></i> Kalkulus Diferensial</span>
     </div>
+    <div class="mr-topbar-right">
+      <span class="mr-read-time"><i class="bi bi-clock"></i> 9 Menit Baca</span>
+      <button class="mr-hamburger-btn" onclick="toggleMobileToc()" aria-label="Toggle Daftar Isi">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+  </header>
 
-    <div class="overlay" id="overlay"></div>
+  <div class="mr-layout-wrap">
+    <aside class="mr-sidebar-toc" id="sidebarToc">
+      <div class="mr-toc-heading"><i class="bi bi-compass"></i> Navigasi Turunan</div>
+      <nav class="mr-toc-nav">
+        <a href="#pengantar" class="mr-toc-link active"><i class="bi bi-stars"></i> 1. Laju Perubahan & Gradien</a>
+        <a href="#definisi" class="mr-toc-link"><i class="bi bi-bezier"></i> 2. Definisi Formal Garis Singgung</a>
+        <a href="#aturan" class="mr-toc-link"><i class="bi bi-list-ol"></i> 3. Aturan Emas Diferensial</a>
+        <a href="#sandbox" class="mr-toc-link"><i class="bi bi-sliders"></i> 4. Live Derivative Calculator</a>
+        <a href="#studi-kasus" class="mr-toc-link"><i class="bi bi-graph-up-arrow"></i> 5. Optimasi Laba Bisnis Maksimum</a>
+        <a href="#kuis" class="mr-toc-link"><i class="bi bi-patch-question"></i> 6. Uji Cepat Mandiri</a>
+      </nav>
+      <div class="mr-toc-divider"></div>
+      <div class="p-2 rounded" style="background: rgba(255,255,255,0.03); font-size: 0.8rem; color: var(--mr-text-muted);">
+        <i class="bi bi-info-circle text-warning me-1"></i> Nilai turunan $f'(x)$ adalah kemiringan (gradien) garis singgung kurva pada tepat titik $x$.
+      </div>
+    </aside>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburgerBtn = document.getElementById('hamburgerBtn');
-            const closeBtn = document.getElementById('closeBtn');
-            const sidenav = document.getElementById('sidenav');
-            const overlay = document.getElementById('overlay');
+    <main class="mr-article">
+      
+      <!-- Learning Path Prerequisite Banner -->
+      <div class="mr-path-banner">
+        <div>
+          <span class="text-secondary small fw-bold text-uppercase d-block mb-1">
+            <i class="bi bi-diagram-3-fill text-warning me-1"></i> Learning Path Kurikulum
+          </span>
+          <div class="mr-path-flow">
+            <span class="mr-path-node completed"><i class="bi bi-check-circle-fill"></i> Limit Aljabar</span>
+            <i class="bi bi-chevron-right text-muted small"></i>
+            <span class="mr-path-node current"><i class="bi bi-record-circle-fill"></i> Fungsi Turunan (Saat ini)</span>
+            <i class="bi bi-chevron-right text-muted small"></i>
+            <span class="mr-path-node locked" id="nextModuleNode"><i class="bi bi-lock-fill"></i> Integral & Luas</span>
+          </div>
+        </div>
+        <div class="text-end">
+          <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill">
+            <i class="bi bi-shield-check me-1"></i> Prasyarat Terpenuhi
+          </span>
+        </div>
+      </div>
 
-            function openNav() {
-                sidenav.classList.add('active');
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; 
-            }
+      <!-- Stateful Learning Analytics HUD -->
+      <div class="mr-analytics-hud">
+        <div class="mr-hud-item">
+          <div class="mr-hud-icon indigo"><i class="bi bi-stopwatch-fill"></i></div>
+          <div>
+            <div class="small text-muted">Durasi Belajar Aktif</div>
+            <div class="mr-hud-val" id="activeTimeCounter">00:00</div>
+          </div>
+        </div>
+        <div class="mr-hud-item">
+          <div class="mr-hud-icon gold"><i class="bi bi-ladder"></i></div>
+          <div>
+            <div class="small text-muted">Scaffolding Tahapan</div>
+            <div class="mr-hud-val"><span id="hudCurrentStage">0</span> / 4 Selesai</div>
+          </div>
+        </div>
+        <div class="mr-hud-item">
+          <div class="mr-hud-icon emerald"><i class="bi bi-award-fill"></i></div>
+          <div>
+            <div class="small text-muted">Status Penguasaan</div>
+            <div class="mr-hud-val" id="hudMasteryStatus">Dalam Eksplorasi</div>
+          </div>
+        </div>
+      </div>
 
-            function closeNav() {
-                sidenav.classList.remove('active');
-                overlay.classList.remove('active');
-                document.body.style.overflow = ''; 
-            }
+      <!-- Hero -->
+      <section class="mr-hero-card" id="pengantar">
+        <h1 class="mr-hero-title">Fungsi Turunan: Seni Menangkap Perubahan Sesaat</h1>
+        <p class="mr-hero-desc">
+          Dunia ini selalu berubah: suhu udara naik-turun, harga saham berfluktuasi, dan mobil melaju dengan kecepatan dinamis. <strong>Kalkulus Diferensial</strong> (ditemukan oleh Newton dan Leibniz) adalah alat matematika untuk mengukur laju perubahan tepat pada satu detik tertentu.
+        </p>
 
-            if (hamburgerBtn) hamburgerBtn.addEventListener('click', openNav);
-            if (closeBtn) closeBtn.addEventListener('click', closeNav);
-            if (overlay) overlay.addEventListener('click', closeNav);
+        <div class="mr-realworld-box">
+          <div class="d-flex align-items-center gap-2 mb-2 text-warning fw-bold">
+            <i class="bi bi-lightning-charge fs-5"></i> Jantung Kecerdasan Buatan (Gradient Descent)
+          </div>
+          <p class="text-secondary small mb-2">
+            Bagaimana model AI seperti ChatGPT atau mobil otonom Tesla belajar? Melalui algoritma <em>Gradient Descent</em> (turunan parsial berulang) untuk meminimalkan tingkat kesalahan (loss function) menuju nilai minimum global!
+          </p>
+          <div class="mr-realworld-pills">
+            <span class="mr-pill">🤖 Optimasi Model Machine Learning</span>
+            <span class="mr-pill">📈 Maksimalisasi Keuntungan Ekonomi</span>
+            <span class="mr-pill">🚀 Kalkulasi Aerodinamika Pesawat</span>
+          </div>
+        </div>
+      </section>
 
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 768) closeNav();
-            });
+      <!-- Definisi Formal -->
+      <section class="mr-card" id="definisi">
+        <div class="mr-card-header">
+          <div class="mr-card-icon gold"><i class="bi bi-bezier"></i></div>
+          <div>
+            <h2 class="mr-card-title">Definisi Matematika Formal: Limit Garis Singgung</h2>
+            <p class="mr-card-subtitle">Turunan adalah limit kemiringan tali busur saat jarak dua titik mendekati nol</p>
+          </div>
+        </div>
+
+        <div class="mr-formula-box">
+          <span class="mr-formula-badge">Definisi Turunan</span>
+          <div class="mr-formula-render">$$f'(x) = \frac{df}{dx} = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}$$</div>
+          <div class="mr-formula-expl">
+            Notasi $f'(x)$ diperkenalkan oleh Lagrange, dan $\frac{df}{dx}$ diperkenalkan oleh Leibniz.
+          </div>
+        </div>
+      </section>
+
+      <!-- Aturan Turunan -->
+      <section class="mr-card" id="aturan">
+        <div class="mr-card-header">
+          <div class="mr-card-icon indigo"><i class="bi bi-list-ol"></i></div>
+          <div>
+            <h2 class="mr-card-title">Aturan-Aturan Dasar Diferensiasi</h2>
+            <p class="mr-card-subtitle">Pintasan praktis tanpa harus menghitung limit panjang</p>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-warning fw-bold mb-1">1. Aturan Pangkat (Power Rule)</div>
+              <div class="font-monospace text-white small">$$\frac{d}{dx}[x^n] = n x^{n-1}$$</div>
+              <p class="small text-secondary mb-0 mt-1">Contoh: Turunan dari $x^3$ adalah $3x^2$.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-info fw-bold mb-1">2. Aturan Konstanta</div>
+              <div class="font-monospace text-white small">$$\frac{d}{dx}[c] = 0, \quad \frac{d}{dx}[c \cdot f(x)] = c \cdot f'(x)$$</div>
+              <p class="small text-secondary mb-0 mt-1">Konstanta tidak memiliki laju perubahan, sehingga turunannya 0.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-emerald fw-bold mb-1" style="color: #34d399;">3. Aturan Perkalian (Product Rule)</div>
+              <div class="font-monospace text-white small">$$(u \cdot v)' = u'v + uv'$$</div>
+              <p class="small text-secondary mb-0 mt-1">Bukan $u' \cdot v'$, melainkan jumlahan silang turunan!</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-cyan fw-bold mb-1" style="color: #22d3ee;">4. Aturan Pembagian (Quotient Rule)</div>
+              <div class="font-monospace text-white small">$$\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$$</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sandbox Interaktif -->
+      <section class="mr-sandbox" id="sandbox">
+        <div class="mr-sandbox-title">
+          <i class="bi bi-sliders"></i> Sandbox: Kalkulator Turunan Polinomial & Gradien Garis Singgung
+        </div>
+        <p class="mr-sandbox-desc">
+          Ubah koefisien fungsi kuadrat $f(x) = ax^2 + bx + c$ dan amati rumus turunan $f'(x) = 2ax + b$ beserta nilai kemiringannya (gradien $m$) pada titik $x$ tertentu!
+        </p>
+
+        <div class="row g-3">
+          <div class="col-4">
+            <label class="small text-secondary mb-1">Koefisien a:</label>
+            <input type="number" class="form-control bg-dark text-white border-secondary" id="derA" value="3" oninput="calcDerivative()">
+          </div>
+          <div class="col-4">
+            <label class="small text-secondary mb-1">Koefisien b:</label>
+            <input type="number" class="form-control bg-dark text-white border-secondary" id="derB" value="4" oninput="calcDerivative()">
+          </div>
+          <div class="col-4">
+            <label class="small text-secondary mb-1">Konstanta c:</label>
+            <input type="number" class="form-control bg-dark text-white border-secondary" id="derC" value="-5" oninput="calcDerivative()">
+          </div>
+        </div>
+
+        <div class="mt-3">
+          <div class="d-flex justify-content-between small text-secondary mb-1">
+            <span>Evaluasi pada Titik x:</span>
+            <span class="font-monospace text-warning" id="derXVal">x = 2</span>
+          </div>
+          <input type="range" class="mr-slider" id="derXSlider" min="-5" max="5" value="2" oninput="calcDerivative()">
+        </div>
+
+        <div class="mr-live-result-box">
+          <div>
+            <div class="mr-live-result-label">Rumus Fungsi Turunan f'(x):</div>
+            <div class="fs-5 text-warning font-monospace" id="derFormulaDisplay">f'(x) = 6x + 4</div>
+          </div>
+          <div class="text-end">
+            <div class="mr-live-result-label">Gradien Garis Singgung di Titik x:</div>
+            <div class="mr-live-result-val text-success" id="derGradientDisplay">m = 16</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Studi Kasus Optimasi Laba -->
+      <section class="mr-card" id="studi-kasus">
+        <div class="mr-card-header">
+          <div class="mr-card-icon cyan"><i class="bi bi-graph-up-arrow"></i></div>
+          <div>
+            <h2 class="mr-card-title">Studi Kasus: Menentukan Laba Bisnis Maksimum</h2>
+            <p class="mr-card-subtitle">Titik stasioner $f'(x) = 0$ sebagai puncak kurva keuntungan</p>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-3 mb-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+          Fungsi keuntungan suatu pabrik dinyatakan sebagai $L(x) = -2x^2 + 40x - 50$ (dalam juta rupiah), di mana $x$ adalah jumlah unit barang yang diproduksi. Berapa unit produksi yang menghasilkan keuntungan maksimal?
+        </div>
+
+        <div class="mr-walkthrough">
+          <div class="mr-step-item">
+            <div class="mr-step-num">1</div>
+            <div class="mr-step-title">Gunakan Syarat Titik Stasioner</div>
+            <div class="mr-step-body">Puncak kurva maksimum tercapai saat garis singgung mendatar, yaitu $L'(x) = 0$.</div>
+          </div>
+          <div class="mr-step-item">
+            <div class="mr-step-num">2</div>
+            <div class="mr-step-title">Turunkan Fungsi Keuntungan</div>
+            <div class="mr-step-body">
+              $$L'(x) = \frac{d}{dx}[-2x^2 + 40x - 50] = -4x + 40$$
+              <div id="optStep" class="mr-hidden-step">
+                Samakan dengan nol:
+                $$-4x + 40 = 0 \implies 4x = 40 \implies \mathbf{x = 10 \text{ unit}}$$
+                Keuntungan maksimumnya:
+                $$L(10) = -2(10)^2 + 40(10) - 50 = -200 + 400 - 50 = \mathbf{\text{Rp } 150 \text{ Juta}}$$
+                <div class="text-success small fw-bold mt-1">Pabrik harus memproduksi 10 unit untuk meraup laba maksimal Rp 150 Juta.</div>
+              </div>
+              <button class="mr-reveal-btn" id="optBtn" onclick="revealStep('optStep', 'optBtn')">
+                <i class="bi bi-eye"></i> Tampilkan Kalkulasi Stasioner
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════ SCAFFOLDING CHECKPOINT -->
+      <section class="mr-scaffold-container" id="kuis">
+        <div class="mr-scaffold-header">
+          <h2 class="mr-scaffold-title">
+            <i class="bi bi-cpu-fill text-warning"></i> Active Recall Checkpoint: Diferensiasi Multi-Tahap
+          </h2>
+          <div class="mr-stage-dots">
+            <div class="mr-stage-dot active" id="dot-1">1</div>
+            <div class="mr-stage-dot" id="dot-2">2</div>
+            <div class="mr-stage-dot" id="dot-3">3</div>
+            <div class="mr-stage-dot" id="dot-4">4</div>
+          </div>
+        </div>
+
+        <p class="text-secondary small mb-4">
+          Tentukan turunan pertama dari fungsi: $$f(x) = 4x^3 - 5x^2 + 7x - 9$$
+          Sistem akan memvalidasi proses turunan suku per suku untuk melatih ketelitian aljabar diferensial Anda.
+        </p>
+
+        <!-- STAGE 1: Turunan Suku Utama 4x^3 -->
+        <div class="mr-scaffold-step active" id="stage-1">
+          <div class="mr-step-badge"><i class="bi bi-1-circle"></i> Tahap 1: Turunkan Suku Pangkat Tertinggi</div>
+          <div class="mr-step-prompt">
+            Gunakan aturan pangkat $\frac{d}{dx}[a x^n] = a \cdot n x^{n-1}$. Berapakah turunan dari suku $4x^3$?
+          </div>
+          <div class="mr-math-input-group">
+            <span class="mr-math-prefix">d/dx [4x³] = </span>
+            <input type="text" class="mr-math-field" id="inputStage1" placeholder="Contoh: 12x^2 atau 12x²" autocomplete="off">
+          </div>
+          <div class="mr-step-btn-group">
+            <button class="mr-btn-validate" onclick="validateStage(1)">
+              <i class="bi bi-check2-circle"></i> Validasi Tahap 1
+            </button>
+            <button class="mr-btn-ai-hint" onclick="requestAiHint(1, 'Aturan pangkat 4 * 3 * x^(3-1) = 12x^2')">
+              <i class="bi bi-robot"></i> Minta Bantuan AI Tutor
+            </button>
+          </div>
+          <div class="mr-ai-tutor-box" id="aiTutorBox-1">
+            <div class="mr-ai-tutor-header">
+              <span class="mr-ai-tutor-badge"><i class="bi bi-stars"></i> MathThon AI Micro-Tutor</span>
+              <span class="badge bg-dark-subtle text-secondary small">Socratic Scaffolding</span>
+            </div>
+            <p class="mr-ai-tutor-text" id="aiTutorText-1"></p>
+          </div>
+        </div>
+
+        <!-- STAGE 2: Turunan Suku Kedua -5x^2 -->
+        <div class="mr-scaffold-step" id="stage-2">
+          <div class="mr-step-badge"><i class="bi bi-2-circle"></i> Tahap 2: Turunan Suku Kuadrat</div>
+          <div class="mr-step-prompt">
+            Berapakah turunan dari suku kedua yang bernilai negatif: $-5x^2$?
+          </div>
+          <div class="mr-math-input-group">
+            <span class="mr-math-prefix">d/dx [-5x²] = </span>
+            <input type="text" class="mr-math-field" id="inputStage2" placeholder="Contoh: -10x" autocomplete="off">
+          </div>
+          <div class="mr-step-btn-group">
+            <button class="mr-btn-validate" onclick="validateStage(2)">
+              <i class="bi bi-check2-circle"></i> Validasi Tahap 2
+            </button>
+            <button class="mr-btn-ai-hint" onclick="requestAiHint(2, 'Aturan pangkat -5 * 2 * x = -10x')">
+              <i class="bi bi-robot"></i> Minta Bantuan AI Tutor
+            </button>
+          </div>
+          <div class="mr-ai-tutor-box" id="aiTutorBox-2">
+            <div class="mr-ai-tutor-header">
+              <span class="mr-ai-tutor-badge"><i class="bi bi-stars"></i> MathThon AI Micro-Tutor</span>
+              <span class="badge bg-dark-subtle text-secondary small">Socratic Scaffolding</span>
+            </div>
+            <p class="mr-ai-tutor-text" id="aiTutorText-2"></p>
+          </div>
+        </div>
+
+        <!-- STAGE 3: Turunan Suku Linear & Konstanta -->
+        <div class="mr-scaffold-step" id="stage-3">
+          <div class="mr-step-badge"><i class="bi bi-3-circle"></i> Tahap 3: Turunan Suku Linear & Konstanta</div>
+          <div class="mr-step-prompt">
+            Turunan dari $7x$ adalah $7$, dan turunan konstanta $-9$ adalah $0$. Berapakah nilai gabungan turunan kedua suku tersebut: $\frac{d}{dx}[7x - 9]$?
+          </div>
+          <div class="mr-math-input-group">
+            <span class="mr-math-prefix">d/dx [7x - 9] = </span>
+            <input type="text" class="mr-math-field" id="inputStage3" placeholder="Contoh: 7" autocomplete="off">
+          </div>
+          <div class="mr-step-btn-group">
+            <button class="mr-btn-validate" onclick="validateStage(3)">
+              <i class="bi bi-check2-circle"></i> Validasi Tahap 3
+            </button>
+            <button class="mr-btn-ai-hint" onclick="requestAiHint(3, 'Turunan cx adalah c, dan turunan konstanta adalah 0, sehingga 7 - 0 = 7')">
+              <i class="bi bi-robot"></i> Minta Bantuan AI Tutor
+            </button>
+          </div>
+          <div class="mr-ai-tutor-box" id="aiTutorBox-3">
+            <div class="mr-ai-tutor-header">
+              <span class="mr-ai-tutor-badge"><i class="bi bi-stars"></i> MathThon AI Micro-Tutor</span>
+              <span class="badge bg-dark-subtle text-secondary small">Socratic Scaffolding</span>
+            </div>
+            <p class="mr-ai-tutor-text" id="aiTutorText-3"></p>
+          </div>
+        </div>
+
+        <!-- STAGE 4: Sintesis Fungsi Turunan Lengkap -->
+        <div class="mr-scaffold-step" id="stage-4">
+          <div class="mr-step-badge"><i class="bi bi-4-circle"></i> Tahap 4: Sintesis Fungsi Turunan Lengkap</div>
+          <div class="mr-step-prompt">
+            Gabungkan hasil penurunan dari ketiga tahap sebelumnya. Tuliskan ekspresi lengkap fungsi $f'(x)$:
+          </div>
+          <div class="mr-math-input-group">
+            <span class="mr-math-prefix">f'(x) = </span>
+            <input type="text" class="mr-math-field" id="inputStage4" placeholder="Contoh: 12x^2 - 10x + 7" autocomplete="off">
+          </div>
+          <div class="mr-step-btn-group">
+            <button class="mr-btn-validate" onclick="validateStage(4)">
+              <i class="bi bi-check2-circle"></i> Submit Turunan Utuh
+            </button>
+            <button class="mr-btn-ai-hint" onclick="requestAiHint(4, 'Gabungkan suku 12x^2, -10x, dan +7 menjadi 12x^2 - 10x + 7')">
+              <i class="bi bi-robot"></i> Minta Bantuan AI Tutor
+            </button>
+          </div>
+          <div class="mr-ai-tutor-box" id="aiTutorBox-4">
+            <div class="mr-ai-tutor-header">
+              <span class="mr-ai-tutor-badge"><i class="bi bi-stars"></i> MathThon AI Micro-Tutor</span>
+              <span class="badge bg-dark-subtle text-secondary small">Socratic Scaffolding</span>
+            </div>
+            <p class="mr-ai-tutor-text" id="aiTutorText-4"></p>
+          </div>
+        </div>
+
+        <!-- COMPLETION CELEBRATION CARD -->
+        <div class="mr-completion-card" id="completionCard">
+          <div class="mr-completion-icon"><i class="bi bi-check-circle-fill"></i></div>
+          <h3 class="mr-completion-title">Luar Biasa! Modul Turunan Berhasil Dituntaskan</h3>
+          <p class="mr-completion-desc">
+            Anda telah membuktikan penguasaan aturan diferensial kalkulus secara analitis dan terstruktur.
+            Modul puncak kalkulus berikutnya: <strong>Integral & Luas Lengkung</strong> kini telah terbuka!
+          </p>
+          <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="{{ url_for('materi.materi_user') }}" class="btn btn-outline-light rounded-pill px-4">
+              <i class="bi bi-grid-fill me-1"></i> Kembali ke Katalog
+            </a>
+            <a href="{{ url_for('materi.materi_detail', materi_identifier='integral') }}" class="btn btn-warning fw-bold rounded-pill px-4">
+              <i class="bi bi-arrow-right-circle-fill me-1"></i> Lanjut: Integral & Luas
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    const MATERI_SLUG = "fungsi_turunan";
+    let activeSeconds = 0;
+    let currentStage = 1;
+    let isCompletedModule = false;
+
+    document.addEventListener("DOMContentLoaded", function() {
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}],
+          throwOnError: false
         });
-    </script>
-</body>
-<style>
-    /* Copy basic CSS from other template or rely on external css/materi.css */
-    /* We rely on static/css/materi.css based on the link tag, but can add inline for safety if needed */
-    .hamburger-btn { display: none; position: fixed; top: 15px; left: 15px; z-index: 1100; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; border-radius: 10px; width: 50px; height: 50px; color: white; font-size: 24px; cursor: pointer; }
-    .sidenav { height: 100%; width: 200px; position: fixed; top: 0; left: 0; background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%); padding-top: 80px; z-index: 1000; transition: transform 0.3s ease; }
-    .sidenav h3 { text-align: center; color: #ecf0f1; font-size: 1.2rem; margin-bottom: 1rem; }
-    .sidenav ul { list-style: none; padding: 0; }
-    .sidenav ul li a { color: #bdc3c7; text-decoration: none; display: block; padding: 12px 16px; transition: 0.3s; margin: 0 10px; border-radius: 4px; }
-    .sidenav ul li a:hover { background: #34495e; color: #fff; transform: translateX(5px); border-left: 4px solid #3498db; }
-    .close-btn { display: none; position: absolute; top: 15px; right: 15px; background: #e74c3c; border: none; border-radius: 50%; width: 40px; height: 40px; color: white; font-size: 24px; }
-    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; }
-    .overlay.active { display: block; }
-    @media (max-width: 768px) {
-        .hamburger-btn, .close-btn { display: block; }
-        .sidenav { transform: translateX(-100%); width: 280px; }
-        .sidenav.active { transform: translateX(0); }
-        #isi-materi { margin-left: 0 !important; }
-        .container { padding-top: 70px; }
+      }
+      calcDerivative();
+      loadSavedProgress();
+      startActiveTimer();
+    });
+
+    // ── Stateful Timer & Micro-Metrics ─────────────────────────────
+    function startActiveTimer() {
+      setInterval(() => {
+        activeSeconds++;
+        const mins = String(Math.floor(activeSeconds / 60)).padStart(2, '0');
+        const secs = String(activeSeconds % 60).padStart(2, '0');
+        const counterEl = document.getElementById("activeTimeCounter");
+        if (counterEl) counterEl.textContent = `${mins}:${secs}`;
+
+        if (activeSeconds % 60 === 0) {
+          syncProgressToServer(currentStage - 1, isCompletedModule, 60);
+        }
+      }, 1000);
     }
-    @media (min-width: 769px) { .sidenav { transform: translateX(0) !important; } }
-</style>
+
+    async function loadSavedProgress() {
+      try {
+        const res = await fetch(`/user/materi/api/get-progress/${MATERI_SLUG}`);
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.status === "success") {
+          activeSeconds = data.time_spent_seconds || 0;
+          if (data.is_completed) {
+            markAllStagesCompleted();
+          } else if (data.checkpoint_stage > 0) {
+            goToStage(data.checkpoint_stage + 1);
+          }
+        }
+      } catch (err) {
+        console.warn("[Progress Load Warning]:", err);
+      }
+    }
+
+    async function syncProgressToServer(stage, completed, spentDelta) {
+      try {
+        await fetch("/user/materi/api/track-progress", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            materi_slug: MATERI_SLUG,
+            checkpoint_stage: stage,
+            is_completed: completed,
+            time_spent: spentDelta
+          })
+        });
+      } catch (err) {
+        console.warn("[Progress Sync Warning]:", err);
+      }
+    }
+
+    // ── Scaffolding Multi-stage Logic ──────────────────────────────
+    function validateStage(stageNum) {
+      let isCorrect = false;
+      let userVal = "";
+      let expectedConcept = "";
+
+      if (stageNum === 1) {
+        userVal = document.getElementById("inputStage1").value.trim().toLowerCase().replace(/\s+/g, '');
+        expectedConcept = "Turunan 4x^3 adalah 12x^2";
+        if (userVal === "12x^2" || userVal === "12x²" || userVal === "12*x^2") {
+          isCorrect = true;
+        }
+      } else if (stageNum === 2) {
+        userVal = document.getElementById("inputStage2").value.trim().toLowerCase().replace(/\s+/g, '');
+        expectedConcept = "Turunan -5x^2 adalah -10x";
+        if (userVal === "-10x" || userVal === "-10*x") {
+          isCorrect = true;
+        }
+      } else if (stageNum === 3) {
+        userVal = document.getElementById("inputStage3").value.trim().replace(/\s+/g, '');
+        expectedConcept = "Turunan 7x - 9 adalah 7";
+        if (userVal === "7" || userVal === "+7") {
+          isCorrect = true;
+        }
+      } else if (stageNum === 4) {
+        userVal = document.getElementById("inputStage4").value.trim().toLowerCase().replace(/\s+/g, '');
+        expectedConcept = "Fungsi turunan utuh 12x^2 - 10x + 7";
+        if (
+          userVal === "12x^2-10x+7" || 
+          userVal === "12x²-10x+7" ||
+          userVal === "12x^2+-10x+7"
+        ) {
+          isCorrect = true;
+        }
+      }
+
+      const tutorBox = document.getElementById(`aiTutorBox-${stageNum}`);
+      const tutorText = document.getElementById(`aiTutorText-${stageNum}`);
+
+      if (isCorrect) {
+        tutorBox.classList.remove("visible");
+        const dot = document.getElementById(`dot-${stageNum}`);
+        dot.classList.remove("active");
+        dot.classList.add("completed");
+        dot.innerHTML = `<i class="bi bi-check-lg"></i>`;
+
+        document.getElementById("hudCurrentStage").textContent = stageNum;
+        syncProgressToServer(stageNum, stageNum === 4, 10);
+
+        if (stageNum < 4) {
+          goToStage(stageNum + 1);
+        } else {
+          markAllStagesCompleted();
+        }
+      } else {
+        triggerAdaptiveFeedback(stageNum, userVal, expectedConcept);
+      }
+    }
+
+    function goToStage(nextStage) {
+      currentStage = nextStage;
+      document.querySelectorAll(".mr-scaffold-step").forEach(el => el.classList.remove("active"));
+      const nextStepEl = document.getElementById(`stage-${nextStage}`);
+      if (nextStepEl) nextStepEl.classList.add("active");
+
+      document.querySelectorAll(".mr-stage-dot").forEach((d, idx) => {
+        if (idx + 1 === nextStage) {
+          d.classList.add("active");
+        }
+      });
+      document.getElementById("hudCurrentStage").textContent = nextStage - 1;
+    }
+
+    function markAllStagesCompleted() {
+      isCompletedModule = true;
+      document.querySelectorAll(".mr-scaffold-step").forEach(el => el.classList.remove("active"));
+      for (let i = 1; i <= 4; i++) {
+        const dot = document.getElementById(`dot-${i}`);
+        if (dot) {
+          dot.classList.remove("active");
+          dot.classList.add("completed");
+          dot.innerHTML = `<i class="bi bi-check-lg"></i>`;
+        }
+      }
+      document.getElementById("hudCurrentStage").textContent = "4";
+      document.getElementById("hudMasteryStatus").textContent = "Lulus & Terverifikasi ⭐";
+      document.getElementById("completionCard").classList.add("visible");
+      
+      const nextNode = document.getElementById("nextModuleNode");
+      if (nextNode) {
+        nextNode.classList.remove("locked");
+        nextNode.classList.add("completed");
+        nextNode.innerHTML = `<i class="bi bi-unlock-fill text-warning"></i> Integral & Luas (Terbuka)`;
+      }
+
+      syncProgressToServer(4, 1, 15);
+    }
+
+    // ── AI Adaptive Micro-Tutor API Handler ────────────────────────
+    async function requestAiHint(stageNum, concept) {
+      const inputEl = document.getElementById(`inputStage${stageNum}`);
+      const val = inputEl ? inputEl.value : "";
+      triggerAdaptiveFeedback(stageNum, val, concept, true);
+    }
+
+    async function triggerAdaptiveFeedback(stageNum, userVal, concept, manual = false) {
+      const tutorBox = document.getElementById(`aiTutorBox-${stageNum}`);
+      const tutorText = document.getElementById(`aiTutorText-${stageNum}`);
+      tutorBox.classList.add("visible");
+      tutorText.innerHTML = `<span class="spinner-border spinner-border-sm text-warning me-2"></span> AI Tutor sedang menganalisis aturan diferensiasi Anda...`;
+
+      try {
+        const res = await fetch("/user/materi/api/adaptive-hint", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            materi: "Fungsi Turunan & Diferensial",
+            step: stageNum,
+            question: `Tahap ${stageNum} Turunan suku dari 4x^3 - 5x^2 + 7x - 9`,
+            user_input: userVal || "(kosong)",
+            expected_concept: concept
+          })
+        });
+
+        const data = await res.json();
+        if (data.status === "success" && data.hint) {
+          tutorText.innerHTML = `<i class="bi bi-chat-quote-fill text-warning me-1"></i> ${data.hint}`;
+        } else {
+          tutorText.innerHTML = "Periksa kembali pengalian pangkat ke koefisien: turunan x^n adalah n * x^(n-1).";
+        }
+      } catch (err) {
+        tutorText.innerHTML = "💡 <strong>Petunjuk:</strong> Gunakan rumus turunan suku demi suku $\\frac{d}{dx}[a x^n] = a \\cdot n x^{n-1}$.";
+      }
+    }
+
+    // ── Sandbox & Global Listeners ─────────────────────────────────
+    window.addEventListener("scroll", function() {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById("progressBar").style.width = (winScroll / height) * 100 + "%";
+    });
+
+    const sections = document.querySelectorAll("main section");
+    const navLinks = document.querySelectorAll(".mr-toc-link");
+    window.addEventListener("scroll", function() {
+      let current = "";
+      sections.forEach(sec => { if (pageYOffset >= sec.offsetTop - 120) current = sec.getAttribute("id"); });
+      navLinks.forEach(l => {
+        l.classList.remove("active");
+        if (l.getAttribute("href") === "#" + current) l.classList.add("active");
+      });
+    });
+
+    function toggleMobileToc() { document.getElementById("sidebarToc").classList.toggle("open-mobile"); }
+
+    function revealStep(stepId, btnId) {
+      document.getElementById(stepId).classList.add("revealed");
+      document.getElementById(btnId).style.display = "none";
+      if (window.renderMathInElement) {
+        renderMathInElement(document.getElementById(stepId), { delimiters: [{left: '$$', right: '$$', display: true}] });
+      }
+    }
+
+    function calcDerivative() {
+      const a = parseFloat(document.getElementById("derA")?.value) || 0;
+      const b = parseFloat(document.getElementById("derB")?.value) || 0;
+      const c = parseFloat(document.getElementById("derC")?.value) || 0;
+      const x = parseFloat(document.getElementById("derXSlider")?.value) || 0;
+
+      const derXVal = document.getElementById("derXVal");
+      if (derXVal) derXVal.innerText = `x = ${x}`;
+
+      const derA_val = 2 * a;
+      const signB = b >= 0 ? `+ ${b}` : `- ${Math.abs(b)}`;
+      const formulaEl = document.getElementById("derFormulaDisplay");
+      if (formulaEl) formulaEl.innerText = `f'(x) = ${derA_val}x ${signB}`;
+
+      const gradient = (derA_val * x) + b;
+      const gradEl = document.getElementById("derGradientDisplay");
+      if (gradEl) gradEl.innerText = `m = ${gradient}`;
+    }
+  </script>
+</body>
 </html>

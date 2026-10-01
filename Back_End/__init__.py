@@ -1,6 +1,6 @@
 from flask import Flask, session, g, url_for, request, abort, render_template, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from flask_wtf.csrf import CSRFProtect
+from flask_wtf.csrf import CSRFProtect, CSRFError
 from flask_cors import CORS
 from flask_limiter import Limiter
 from dotenv import load_dotenv
@@ -79,6 +79,16 @@ def create_app(test_config=None):
     @app.errorhandler(403)
     def forbidden_handler(e):
         return render_template("error_security.html", title="Access Denied", code=403, message=str(e)), 403
+    
+    @app.errorhandler(CSRFError)
+    def csrf_error_handler(e):
+        if '/api/' in request.path:
+            return jsonify({
+                "success": False,
+                "error": e.description or "CSRF token invalid atau kedaluwarsa.",
+                "csrf_expired": True
+            }), 400
+        return render_template("error_security.html", title="CSRF Error", code=400, message=str(e.description or e)), 400
     
     @app.context_processor
     def inject_user():

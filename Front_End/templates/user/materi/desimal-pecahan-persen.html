@@ -1,11 +1,353 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materi: Pecahan, Desimal, & Persentase - MathThon</title>
+  <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/materi_reader.css') }}">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 </head>
-<body>
-    
+<body class="mr-body">
+
+  <div class="mr-progress-container"><div class="mr-progress-bar" id="progressBar"></div></div>
+
+  <header class="mr-topbar">
+    <div class="mr-topbar-left">
+      <a href="{{ url_for('materi.materi_user') }}" class="mr-back-btn">
+        <i class="bi bi-arrow-left"></i> <span>Daftar Materi</span>
+      </a>
+      <span class="mr-topic-badge"><i class="bi bi-pie-chart"></i> Bilangan Rasional</span>
+    </div>
+    <div class="mr-topbar-right">
+      <span class="mr-read-time"><i class="bi bi-clock"></i> 7 Menit Baca</span>
+      <button class="mr-hamburger-btn" onclick="toggleMobileToc()" aria-label="Toggle Daftar Isi">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="mr-layout-wrap">
+    <aside class="mr-sidebar-toc" id="sidebarToc">
+      <div class="mr-toc-heading"><i class="bi bi-compass"></i> Navigasi Materi</div>
+      <nav class="mr-toc-nav">
+        <a href="#pengantar" class="mr-toc-link active"><i class="bi bi-stars"></i> 1. Tiga Wajah Bilangan</a>
+        <a href="#konversi" class="mr-toc-link"><i class="bi bi-arrow-repeat"></i> 2. Hubungan Ekuivalensi</a>
+        <a href="#operasi" class="mr-toc-link"><i class="bi bi-calculator"></i> 3. Operasi Hitung Pecahan</a>
+        <a href="#sandbox" class="mr-toc-link"><i class="bi bi-sliders"></i> 4. Live 3-Way Converter</a>
+        <a href="#studi-kasus" class="mr-toc-link"><i class="bi bi-tags"></i> 5. Kasus Nyata: Diskon Toko</a>
+        <a href="#kuis" class="mr-toc-link"><i class="bi bi-patch-question"></i> 6. Uji Cepat Mandiri</a>
+      </nav>
+      <div class="mr-toc-divider"></div>
+      <div class="p-2 rounded" style="background: rgba(255,255,255,0.03); font-size: 0.8rem; color: var(--mr-text-muted);">
+        <i class="bi bi-lightbulb text-warning me-1"></i> Pecahan, desimal, dan persen merepresentasikan kuantitas yang sama dalam bentuk format berbeda.
+      </div>
+    </aside>
+
+    <main class="mr-article">
+      
+      <!-- Hero -->
+      <section class="mr-hero-card" id="pengantar">
+        <h1 class="mr-hero-title">Pecahan, Desimal, & Persen: Tiga Wajah Satu Nilai</h1>
+        <p class="mr-hero-desc">
+          Apakah $\frac{3}{4}$, $0.75$, dan $75\%$ berbeda? Secara kuantitas, ketiganya bernilai <strong>persis sama</strong>. Memahami cara berpindah di antara ketiga format ini adalah fondasi paling penting dalam kalkulasi finansial, data statistik, dan sains.
+        </p>
+
+        <div class="mr-realworld-box">
+          <div class="d-flex align-items-center gap-2 mb-2 text-warning fw-bold">
+            <i class="bi bi-cash-coin fs-5"></i> Aplikasi Finansial & Nyata Sehari-hari
+          </div>
+          <p class="text-secondary small mb-2">
+            Dari suku bunga bank, kalkulasi pajak PPN, pembagian saham kepemilikan startup, hingga resep takaran kue dan data probabilitas cuaca, semua menggunakan rasio ini.
+          </p>
+          <div class="mr-realworld-pills">
+            <span class="mr-pill">🏷️ Diskon & Promo Belanja</span>
+            <span class="mr-pill">📈 Suku Bunga & Investasi</span>
+            <span class="mr-pill">🧪 Takaran Rasio Kimia & Farmasi</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Konversi & Hubungan -->
+      <section class="mr-card" id="konversi">
+        <div class="mr-card-header">
+          <div class="mr-card-icon gold"><i class="bi bi-arrow-repeat"></i></div>
+          <div>
+            <h2 class="mr-card-title">Segitiga Konversi Ekuivalensi</h2>
+            <p class="mr-card-subtitle">Rumus konversi baku antar ketiga representasi</p>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="p-3 rounded-3 text-center h-100" style="background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.25);">
+              <span class="badge bg-warning text-dark mb-2">Pecahan $\to$ Desimal</span>
+              <p class="small text-secondary mb-1">Bagi pembilang dengan penyebut secara langsung:</p>
+              <div class="fw-bold text-white fs-6">$$\frac{a}{b} = a \div b$$</div>
+              <div class="text-dim small mt-2">Contoh: $\frac{2}{5} = 2 \div 5 = 0.4$</div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="p-3 rounded-3 text-center h-100" style="background: rgba(6,182,212,0.06); border: 1px solid rgba(6,182,212,0.25);">
+              <span class="badge bg-info text-dark mb-2">Desimal $\to$ Persen</span>
+              <p class="small text-secondary mb-1">Kalikan bilangan desimal dengan $100\%$:</p>
+              <div class="fw-bold text-white fs-6">$$d \times 100\%$$</div>
+              <div class="text-dim small mt-2">Contoh: $0.4 \times 100\% = 40\%$</div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="p-3 rounded-3 text-center h-100" style="background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.25);">
+              <span class="badge bg-success mb-2">Persen $\to$ Pecahan</span>
+              <p class="small text-secondary mb-1">Jadikan penyebut 100 lalu sederhanakan via FPB:</p>
+              <div class="fw-bold text-white fs-6">$$p\% = \frac{p}{100}$$</div>
+              <div class="text-dim small mt-2">Contoh: $40\% = \frac{40}{100} = \frac{2}{5}$</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Operasi Hitung Pecahan -->
+      <section class="mr-card" id="operasi">
+        <div class="mr-card-header">
+          <div class="mr-card-icon indigo"><i class="bi bi-calculator"></i></div>
+          <div>
+            <h2 class="mr-card-title">Kaidah Operasi Hitung Pecahan</h2>
+            <p class="mr-card-subtitle">Penjumlahan, Pengurangan, Perkalian, dan Pembagian Pecahan</p>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-warning fw-bold mb-1">1. Penjumlahan & Pengurangan</div>
+              <div class="small text-secondary mb-2">Wajib samakan penyebut (KPK) terlebih dahulu:</div>
+              <div class="font-monospace small text-white">$$\frac{a}{b} \pm \frac{c}{d} = \frac{ad \pm bc}{bd}$$</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-emerald fw-bold mb-1" style="color: #34d399;">2. Perkalian & Pembagian</div>
+              <div class="small text-secondary mb-2">Kali langsung atau balik pecahan kedua pada pembagian:</div>
+              <div class="font-monospace small text-white">$$\frac{a}{b} \times \frac{c}{d} = \frac{ac}{bd}, \quad \frac{a}{b} \div \frac{c}{d} = \frac{a}{b} \times \frac{d}{c}$$</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sandbox Interaktif -->
+      <section class="mr-sandbox" id="sandbox">
+        <div class="mr-sandbox-title">
+          <i class="bi bi-sliders"></i> Live 3-Way Converter & Visual Proporsi Bar
+        </div>
+        <p class="mr-sandbox-desc">
+          Ketikkan pembilang dan penyebut di bawah untuk melihat transformasi otomatis ke bentuk pecahan, desimal, persen, dan diagram persentase!
+        </p>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <label class="small text-secondary mb-1">Pembilang (Numerator):</label>
+            <input type="number" class="form-control bg-dark text-white border-secondary" id="numInp" value="3" min="1" max="100" oninput="convertFraction()">
+          </div>
+          <div class="col-6">
+            <label class="small text-secondary mb-1">Penyebut (Denominator):</label>
+            <input type="number" class="form-control bg-dark text-white border-secondary" id="denInp" value="4" min="1" max="100" oninput="convertFraction()">
+          </div>
+        </div>
+
+        <div class="mr-live-result-box">
+          <div>
+            <div class="mr-live-result-label">Bentuk Desimal:</div>
+            <div class="fs-4 text-warning font-monospace" id="resDecimal">0.750</div>
+          </div>
+          <div class="text-end">
+            <div class="mr-live-result-label">Bentuk Persentase:</div>
+            <div class="fs-4 text-success font-monospace" id="resPercent">75.0%</div>
+          </div>
+        </div>
+
+        <!-- Visual Bar -->
+        <div class="mt-3">
+          <div class="d-flex justify-content-between small text-secondary mb-1">
+            <span>Proporsi Visual:</span>
+            <span id="visualPropText">75% dari 100%</span>
+          </div>
+          <div class="progress" style="height: 14px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+            <div class="progress-bar bg-warning" id="visualProgressBar" style="width: 75%;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Studi Kasus Nyata -->
+      <section class="mr-card" id="studi-kasus">
+        <div class="mr-card-header">
+          <div class="mr-card-icon cyan"><i class="bi bi-tags-fill"></i></div>
+          <div>
+            <h2 class="mr-card-title">Membongkar Mitos: Diskon 50% + 20%</h2>
+            <p class="mr-card-subtitle">Mengapa diskon bertingkat tidak sama dengan diskon 70%?</p>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-3 mb-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+          Sebuah jaket berharga Rp 200.000 mendapatkan promo <strong>Diskon 50% + 20%</strong>. Berapakah harga akhir yang harus dibayar kasir?
+        </div>
+
+        <div class="mr-walkthrough">
+          <div class="mr-step-item">
+            <div class="mr-step-num">1</div>
+            <div class="mr-step-title">Terapkan Diskon Pertama (50%)</div>
+            <div class="mr-step-body">
+              Harga setelah diskon 1 = Rp $200.000 - (50\% \times 200.000) = \text{Rp } 100.000$.
+            </div>
+          </div>
+
+          <div class="mr-step-item">
+            <div class="mr-step-num">2</div>
+            <div class="mr-step-title">Terapkan Diskon Kedua (20% dari Sisa Harga!)</div>
+            <div class="mr-step-body">
+              Diskon kedua dihitung dari <strong>Rp 100.000</strong>, bukan dari harga awal:
+              <div id="discStep" class="mr-hidden-step">
+                Potongan ke-2 = $20\% \times 100.000 = \text{Rp } 20.000$.<br>
+                Harga Akhir = $\text{Rp } 100.000 - 20.000 = \mathbf{\text{Rp } 80.000}$.<br>
+                <div class="text-warning small mt-2">
+                  Catatan: Bila diskonnya 70% murni, harganya menjadi Rp 60.000. Jadi diskon 50%+20% sebenarnya setara diskon 60%, bukan 70%!
+                </div>
+              </div>
+              <button class="mr-reveal-btn" id="discBtn" onclick="revealStep('discStep', 'discBtn')">
+                <i class="bi bi-eye"></i> Tampilkan Perhitungan Kasir
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mini Kuis -->
+      <section class="mr-quiz-card" id="kuis">
+        <div class="mr-quiz-header">
+          <span class="mr-quiz-badge"><i class="bi bi-lightning-fill"></i> Checkpoint Rasio</span>
+          <span class="text-dim small">&bull; Kuis Pemahaman</span>
+        </div>
+        <div class="mr-quiz-question">
+          Bentuk pecahan paling sederhana dari persentase $35\%$ adalah:
+        </div>
+        <div class="mr-quiz-options">
+          <button class="mr-quiz-opt-btn" onclick="checkQuizAnswer(this, false, 'Belum tepat. Bagi pembilang dan penyebut dengan FPB-nya yaitu 5.')">
+            <span>A. 3/10</span>
+            <i class="bi bi-circle"></i>
+          </button>
+          <button class="mr-quiz-opt-btn" onclick="checkQuizAnswer(this, true, 'Hebat! 35% = 35/100. Keduanya dibagi 5 menghasilkan 7/20.')">
+            <span>B. 7/20</span>
+            <i class="bi bi-circle"></i>
+          </button>
+          <button class="mr-quiz-opt-btn" onclick="checkQuizAnswer(this, false, 'Masih salah. 7/25 bernilai 28%, bukan 35%.')">
+            <span>C. 7/25</span>
+            <i class="bi bi-circle"></i>
+          </button>
+          <button class="mr-quiz-opt-btn" onclick="checkQuizAnswer(this, false, 'Keliru. 35/50 adalah 70%.')">
+            <span>D. 35/50</span>
+            <i class="bi bi-circle"></i>
+          </button>
+        </div>
+        <div class="mr-quiz-feedback" id="quizFeedback"></div>
+
+        <div class="mr-hint-box">
+          <button class="mr-hint-toggle" onclick="toggleHint('pecahanHint')">
+            <i class="bi bi-lightbulb-fill text-warning"></i> <span>Butuh Petunjuk FPB? (Klik di sini)</span>
+          </button>
+          <div class="mr-hint-content" id="pecahanHint">
+            <strong>Petunjuk:</strong> Tuliskan $35\%$ sebagai $\frac{35}{100}$. Angka $35$ dan $100$ sama-sama dapat dibagi habis dengan angka $5$.
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}],
+          throwOnError: false
+        });
+      }
+      convertFraction();
+    });
+
+    window.addEventListener("scroll", function() {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById("progressBar").style.width = (winScroll / height) * 100 + "%";
+    });
+
+    const sections = document.querySelectorAll("main section");
+    const navLinks = document.querySelectorAll(".mr-toc-link");
+    window.addEventListener("scroll", function() {
+      let current = "";
+      sections.forEach(sec => { if (pageYOffset >= sec.offsetTop - 120) current = sec.getAttribute("id"); });
+      navLinks.forEach(l => {
+        l.classList.remove("active");
+        if (l.getAttribute("href") === "#" + current) l.classList.add("active");
+      });
+    });
+
+    function toggleMobileToc() { document.getElementById("sidebarToc").classList.toggle("open-mobile"); }
+
+    function revealStep(stepId, btnId) {
+      document.getElementById(stepId).classList.add("revealed");
+      document.getElementById(btnId).style.display = "none";
+      if (window.renderMathInElement) {
+        renderMathInElement(document.getElementById(stepId), { delimiters: [{left: '$$', right: '$$', display: true}] });
+      }
+    }
+
+    function convertFraction() {
+      const num = parseFloat(document.getElementById("numInp").value) || 0;
+      const den = parseFloat(document.getElementById("denInp").value) || 1;
+      if (den === 0) return;
+
+      const dec = num / den;
+      const pct = dec * 100;
+
+      document.getElementById("resDecimal").innerText = dec.toFixed(3);
+      document.getElementById("resPercent").innerText = pct.toFixed(1) + "%";
+      document.getElementById("visualPropText").innerText = `${pct.toFixed(1)}% proporsi`;
+      document.getElementById("visualProgressBar").style.width = Math.min(pct, 100) + "%";
+    }
+
+    function checkQuizAnswer(btn, isCorrect, msg) {
+      const card = btn.closest(".mr-quiz-card");
+      const buttons = card.querySelectorAll(".mr-quiz-opt-btn");
+      const fb = card.querySelector(".mr-quiz-feedback");
+      buttons.forEach(b => { b.disabled = true; b.classList.remove("correct", "wrong"); });
+
+      if (isCorrect) {
+        btn.classList.add("correct");
+        btn.querySelector("i").className = "bi bi-check-circle-fill";
+        fb.className = "mr-quiz-feedback success";
+        fb.innerHTML = `<i class="bi bi-patch-check-fill me-1"></i> ${msg}`;
+      } else {
+        btn.classList.add("wrong");
+        btn.querySelector("i").className = "bi bi-x-circle-fill";
+        fb.className = "mr-quiz-feedback retry";
+        fb.innerHTML = `<i class="bi bi-exclamation-triangle-fill me-1"></i> ${msg} <br><button class="btn btn-sm btn-outline-light mt-2" onclick="resetQuiz(this)">Coba Lagi</button>`;
+      }
+    }
+
+    function resetQuiz(btn) {
+      const card = btn.closest(".mr-quiz-card");
+      const buttons = card.querySelectorAll(".mr-quiz-opt-btn");
+      const fb = card.querySelector(".mr-quiz-feedback");
+      buttons.forEach(b => { b.disabled = false; b.classList.remove("correct", "wrong"); b.querySelector("i").className = "bi bi-circle"; });
+      fb.style.display = "none";
+    }
+
+    function toggleHint(id) { document.getElementById(id).classList.toggle("open"); }
+  </script>
 </body>
 </html>

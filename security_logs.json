@@ -668,5 +668,45 @@
         "severity": "INFO",
         "details": "Admin 'Edward_Kenway' berhasil masuk melalui Portal Terpadu dari IP 127.0.0.1",
         "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-09-30 11:35:23",
+        "ip": "127.0.0.1",
+        "path": "/auth/login",
+        "method": "POST",
+        "attack_type": "Admin Authentication",
+        "severity": "INFO",
+        "details": "Admin 'Edward_Kenway' berhasil masuk melalui Portal Terpadu dari IP 127.0.0.1",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0"
+    },
+    {
+        "timestamp": "2026-10-01 17:00:01",
+        "ip": "127.0.0.1",
+        "path": "/auth/login",
+        "method": "POST",
+        "attack_type": "Admin Authentication",
+        "severity": "INFO",
+        "details": "Admin 'Edward_Kenway' berhasil masuk melalui Portal Terpadu dari IP 127.0.0.1",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-10-01 17:01:02",
+        "ip": "127.0.0.1",
+        "path": "/auth/login",
+        "method": "POST",
+        "attack_type": "Admin Authentication",
+        "severity": "INFO",
+        "details": "Admin 'Edward_Kenway' berhasil masuk melalui Portal Terpadu dari IP 127.0.0.1",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+    },
+    {
+        "timestamp": "2026-10-01 19:56:25",
+        "ip": "127.0.0.1",
+        "path": "/auth/login",
+        "method": "POST",
+        "attack_type": "Admin Authentication",
+        "severity": "INFO",
+        "details": "Admin 'Edward_Kenway' berhasil masuk melalui Portal Terpadu dari IP 127.0.0.1",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
     }
 ]

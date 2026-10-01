@@ -4,33 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}MathThon | Kebijakan Privasi{% endblock %}</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- AOS Animation -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Custom Info Pages CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/info_pages.css') }}">
 
-  <!-- Tailwind CSS (CDN) - ditambahkan tanpa build step -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          boxShadow: {
-            glow: '0 0 0 1px rgba(102,126,234,0.25), 0 18px 50px rgba(102,126,234,0.18)'
-          }
-        }
-      }
-    };
-  </script>
-
+  <!-- Favicon -->
   <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
-  
+
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -40,93 +36,483 @@
   </script>
 </head>
 
-<body style="background: linear-gradient(to bottom, black, rgb(66, 46, 100), grey);">
+<body class="info-page-body">
 
-  <header>
-    <nav class="wrapper animate__animated animate__fadeInDown">
-      <div class="brand animate__animated animate__fadeInLeft">
-        <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}" alt="MathThon Logo" class="photos">
+  <!-- Ambient Animated Gradient Mesh -->
+  <div class="ambient-mesh" aria-hidden="true">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+  </div>
+
+  <!-- Mobile Sidenav Backdrop -->
+  <div class="info-sidenav-backdrop" id="sidenavBackdrop" onclick="closeSidenav()"></div>
+
+  <!-- Mobile Sidenav Drawer -->
+  <aside class="info-sidenav-drawer" id="sidenavRight" aria-label="Menu Navigasi Mobile">
+    <div class="info-sidenav-header">
+      <div class="d-flex align-items-center gap-2">
+        <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}" alt="MathThon Logo" class="photos" style="width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--accent-gold);">
+        <span class="info-brand-title fs-5">MathThon</span>
       </div>
-      <ul class="navigation">
-        <a class="nav-link" href="{{ url_for('main.home') }}">Beranda</a>
-        <a class="nav-link active" href="{{ url_for('main.privacy') }}">Privasi</a>
-        <a class="nav-link" href="{{ url_for('main.terms') }}">Syarat & Ketentuan</a>
-        <a class="nav-link" href="{{ url_for('main.about') }}">Tentang</a>
-        <div class="dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Masuk / Daftar</a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
-            <li><a class="dropdown-item" href="{{ url_for('auth.login_user') }}"><i class="bi bi-box-arrow-in-right me-2"></i>Masuk (Portal Terpadu)</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('auth.register_user') }}"><i class="bi bi-person-plus me-2"></i>Daftar Akun Baru</a></li>
+      <button class="info-sidenav-close" onclick="closeSidenav()" aria-label="Tutup Menu">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    <nav class="info-sidenav-links">
+      <a href="{{ url_for('main.home') }}"><i class="bi bi-house-door"></i> Beranda</a>
+      <a href="{{ url_for('main.about') }}"><i class="bi bi-info-circle"></i> Tentang</a>
+      <a href="{{ url_for('main.privacy') }}" class="active"><i class="bi bi-shield-check"></i> Privasi</a>
+      <a href="{{ url_for('main.terms') }}"><i class="bi bi-file-earmark-text"></i> Syarat & Ketentuan</a>
+      <div class="info-sidenav-divider"></div>
+      <a href="{{ url_for('auth.login_user') }}"><i class="bi bi-box-arrow-in-right text-warning"></i> Masuk (Portal Terpadu)</a>
+      <a href="{{ url_for('auth.register_user') }}"><i class="bi bi-person-plus text-info"></i> Daftar Akun Baru</a>
+    </nav>
+  </aside>
+
+  <!-- Header & Sticky Navbar -->
+  <header class="info-header">
+    <div class="info-nav-wrapper">
+      <a href="{{ url_for('main.home') }}" class="info-brand animate__animated animate__fadeInLeft">
+        <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}" alt="MathThon Logo" class="photos">
+        <span class="info-brand-title">MathThon</span>
+      </a>
+
+      <ul class="info-navigation animate__animated animate__fadeInDown">
+        <li><a class="nav-link" href="{{ url_for('main.home') }}">Beranda</a></li>
+        <li><a class="nav-link" href="{{ url_for('main.about') }}">Tentang</a></li>
+        <li><a class="nav-link active" href="{{ url_for('main.privacy') }}">Privasi</a></li>
+        <li><a class="nav-link" href="{{ url_for('main.terms') }}">Syarat & Ketentuan</a></li>
+        <li class="dropdown ms-2">
+          <a class="nav-link dropdown-toggle d-flex align-items-center gap-1" href="#" id="authDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-circle"></i> Masuk / Daftar
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end animate__animated animate__fadeIn" aria-labelledby="authDropdown">
+            <li>
+              <a class="dropdown-item" href="{{ url_for('auth.login_user') }}">
+                <i class="bi bi-box-arrow-in-right me-2 text-warning"></i> Masuk (Portal Terpadu)
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{{ url_for('auth.register_user') }}">
+                <i class="bi bi-person-plus me-2 text-info"></i> Daftar Akun Baru
+              </a>
+            </li>
           </ul>
-        </div>
+        </li>
       </ul>
-      <button class="open-sidenav-btn" id="openSidenavBtn" onclick="openSidenav()">
+
+      <button class="info-open-sidenav-btn" id="openSidenavBtn" onclick="openSidenav()" aria-label="Buka Menu">
         <i class="bi bi-list"></i>
       </button>
-
-      <div id="sidenav-right" class="sidenav-right">
-        <span class="closebtn" onclick="closeSidenav()">&times;</span>
-        <a href="{{ url_for('main.home') }}">Beranda</a>
-        <a href="{{ url_for('main.privacy') }}" class="active">Privasi</a>
-        <a href="{{ url_for('main.terms') }}">Syarat & Ketentuan</a>
-        <a href="{{ url_for('main.about') }}">Tentang</a>
-        <a href="{{ url_for('auth.login_user') }}"><i class="bi bi-box-arrow-in-right me-2"></i>Masuk (Portal Terpadu)</a>
-        <a href="{{ url_for('auth.register_user') }}"><i class="bi bi-person-plus me-2"></i>Daftar Akun Baru</a>
-      </div>
-    </nav>
+    </div>
   </header>
 
-  <section class="content-section">
-    <div class="container" data-aos="fade-up">
-      <h2 class="page-title-large">Kebijakan Privasi MathThon</h2>
-      
-      <div class="content-card shadow-lg">
-        <h3 class="card-subtitle">Apa itu MathThon?</h3>
-        <p>MathThon adalah platform pembelajaran matematika daring yang dirancang untuk membantu siswa dari berbagai tingkat pendidikan dalam memahami konsep-konsep matematika dengan cara yang menyenangkan dan interaktif. Kami menyediakan berbagai sumber belajar, latihan soal, dan alat bantu visual untuk memudahkan proses belajar.</p>
-
-        <h3 class="card-subtitle">Kebijakan Privasi MathThon</h3>
-        <p>Kebijakan privasi ini menjelaskan bagaimana MathThon mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda saat menggunakan platform kami. Kami berkomitmen untuk melindungi privasi Anda dan memastikan bahwa data Anda digunakan hanya untuk tujuan yang sah.</p>
-
-        <h3 class="card-subtitle">1. Pengumpulan Data</h3>
-        <p>Kami mengumpulkan informasi berikut saat Anda menggunakan MathThon:</p>
-        <ul>
-          <li><strong>Data Pendaftaran:</strong> Nama, alamat email, kata sandi, dan informasi profil lainnya yang Anda berikan saat mendaftar.</li>
-          <li><strong>Data Penggunaan:</strong> Informasi tentang bagaimana Anda menggunakan platform, seperti materi yang diakses, skor latihan, dan waktu belajar.</li>
-          <li><strong>Data Teknis:</strong> Alamat IP, jenis perangkat, browser, dan data lokasi umum untuk analisis dan keamanan.</li>
-          <li><strong>Data Pembelajaran:</strong> Progress belajar, jawaban soal, dan analisis performa untuk personalisasi pengalaman belajar.</li>
-        </ul>
-
-        <h3 class="card-subtitle">2. Penggunaan Data</h3>
-        <p>Data yang kami kumpulkan digunakan untuk menyediakan dan meningkatkan layanan pembelajaran matematika, personalisasi konten, melacak progress belajar, menganalisis tren penggunaan, dan memastikan keamanan platform.</p>
-
-        <h3 class="card-subtitle">3. Pembagian Data</h3>
-        <p>Kami tidak menjual atau menyewakan data pribadi Anda kepada pihak ketiga. Data hanya dibagikan dengan persetujuan Anda, kepada penyedia layanan terpercaya untuk operasional platform, atau untuk mematuhi kewajiban hukum.</p>
-
-        <h3 class="card-subtitle">4. Keamanan Data</h3>
-        <p>Kami menerapkan langkah-langkah keamanan teknis seperti enkripsi data, akses terbatas bagi personel berwenang, dan pemantauan keamanan sistem secara berkala untuk melindungi data Anda.</p>
-
-        <h3 class="card-subtitle">5. Hak Pengguna</h3>
-        <p>Anda memiliki hak untuk mengakses, memperbaiki, menghapus, atau memindahkan data pribadi Anda. Anda juga dapat menolak pemrosesan data untuk tujuan tertentu dengan menghubungi kami.</p>
-
-        <h3 class="card-subtitle">6. Kontak Kami</h3>
-        <p>Jika Anda memiliki pertanyaan tentang kebijakan privasi ini, hubungi kami melalui:</p>
-        <ul>
-          <li>Email: privacy@maththon.com</li>
-          <li>WhatsApp: +62 812-3456-7890 (Admin Support)</li>
-        </ul>
-        <p><em>Terakhir diperbarui: Januari 2025</em></p>
+  <!-- Main Content Wrap -->
+  <div class="info-content-wrap">
+    
+    <!-- Hero Section -->
+    <section class="info-hero">
+      <div class="container">
+        <div class="badge-pill emerald animate__animated animate__fadeInDown">
+          <i class="bi bi-shield-check"></i> Dokumen Resmi Kebijakan Privasi
+        </div>
+        <h1 class="info-hero-title animate__animated animate__fadeInUp">
+          Privasi & Keamanan <span class="text-gradient-gold">Data Anda</span>
+        </h1>
+        <p class="info-hero-subtitle animate__animated animate__fadeInUp animate__delay-1s">
+          Kepercayaan Anda adalah prioritas kami. Kebijakan Privasi ini menerangkan secara transparan bagaimana MathThon mengumpulkan, melindungi, dan mengelola informasi Anda sesuai standar keamanan modern.
+        </p>
+        <div class="d-flex align-items-center justify-content-center gap-3 text-muted small animate__animated animate__fadeIn">
+          <span><i class="bi bi-calendar-check me-1 text-warning"></i> Terakhir Diperbarui: Januari 2026</span>
+          <span>&bull;</span>
+          <span><i class="bi bi-file-earmark-check me-1 text-info"></i> Versi Dokumen: 2.1</span>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer class="py-4 bg-dark text-center text-white">
-    <div class="container">
-      <p class="mb-3">&copy; 2025 MathThon. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="{{ url_for('main.about') }}" class="text-white mx-2 text-decoration-none">Tentang MathThon</a> |
-        <a href="{{ url_for('main.privacy') }}" class="text-white mx-2 text-decoration-none">Kebijakan Privasi</a> |
-        <a href="{{ url_for('main.terms') }}" class="text-white mx-2 text-decoration-none">Syarat & Ketentuan</a>
+    <!-- Main Container -->
+    <main class="info-container">
+
+      <!-- 3 Pilar Privasi MathThon (Principles) -->
+      <section class="privacy-principles-grid" data-aos="fade-up">
+        <div class="principle-card">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="section-icon-badge emerald" style="width: 42px; height: 42px; font-size: 1.25rem;">
+              <i class="bi bi-shield-slash"></i>
+            </div>
+            <h3 class="fs-5 text-white mb-0 fw-bold">Zero-Sale Policy</h3>
+          </div>
+          <p class="text-muted small mb-0">
+            Kami <strong>tidak pernah</strong> dan tidak akan pernah menjual atau menyewakan informasi pribadi Anda kepada pengiklan atau pihak ketiga manapun.
+          </p>
+        </div>
+
+        <div class="principle-card">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="section-icon-badge gold" style="width: 42px; height: 42px; font-size: 1.25rem;">
+              <i class="bi bi-lock-fill"></i>
+            </div>
+            <h3 class="fs-5 text-white mb-0 fw-bold">Enkripsi Modern</h3>
+          </div>
+          <p class="text-muted small mb-0">
+            Seluruh transmisi data dilindungi protokol SSL/TLS, dan kata sandi dienkripsi dengan algoritma hashing mutakhir standar industri.
+          </p>
+        </div>
+
+        <div class="principle-card">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="section-icon-badge cyan" style="width: 42px; height: 42px; font-size: 1.25rem;">
+              <i class="bi bi-person-check-fill"></i>
+            </div>
+            <h3 class="fs-5 text-white mb-0 fw-bold">Kedaulatan Akun</h3>
+          </div>
+          <p class="text-muted small mb-0">
+            Anda memegang kendali penuh atas data Anda, termasuk hak untuk mengakses, memperbaiki profil, atau meminta penghapusan akun permanen.
+          </p>
+        </div>
+      </section>
+
+      <!-- Quick Jump Nav Bar -->
+      <nav class="quick-jump-bar" aria-label="Navigasi Cepat Bagian Kebijakan" data-aos="fade-up">
+        <a href="#pengumpulan" class="quick-jump-link"><i class="bi bi-database-fill-down"></i> 1. Pengumpulan</a>
+        <a href="#penggunaan" class="quick-jump-link"><i class="bi bi-gear-fill"></i> 2. Penggunaan</a>
+        <a href="#pembagian" class="quick-jump-link"><i class="bi bi-share-fill"></i> 3. Pembagian</a>
+        <a href="#keamanan" class="quick-jump-link"><i class="bi bi-shield-lock-fill"></i> 4. Keamanan</a>
+        <a href="#hak-pengguna" class="quick-jump-link"><i class="bi bi-person-gear"></i> 5. Hak Pengguna</a>
+        <a href="#cookie" class="quick-jump-link"><i class="bi bi-cookie"></i> 6. Cookie</a>
+        <a href="#kontak" class="quick-jump-link"><i class="bi bi-headset"></i> 7. Kontak</a>
+      </nav>
+
+      <!-- Section: Pengantar MathThon -->
+      <section class="glass-card" data-aos="fade-up">
+        <div class="section-title-wrap">
+          <div class="section-icon-badge gold">
+            <i class="bi bi-info-circle-fill"></i>
+          </div>
+          <div>
+            <h2 class="glass-card-title">Tentang Layanan MathThon</h2>
+            <p class="glass-card-subtitle">Ruang lingkup operasional platform pembelajaran</p>
+          </div>
+        </div>
+        <p class="text-muted">
+          MathThon adalah platform daring inovatif yang dirancang untuk memfasilitasi pembelajaran matematika bagi siswa dari berbagai tingkatan melalui pendekatan interaktif, visualisasi konsep, dan asisten berbasis kecerdasan buatan. Kebijakan ini berlaku untuk seluruh situs web, aplikasi web, dan layanan terkait yang dikelola langsung oleh tim MathThon.
+        </p>
+      </section>
+
+      <!-- Section 1: Pengumpulan Data -->
+      <section class="glass-card" id="pengumpulan" data-aos="fade-up">
+        <div class="section-title-wrap">
+          <div class="section-icon-badge cyan">
+            <i class="bi bi-database-fill-down"></i>
+          </div>
+          <div>
+            <h2 class="glass-card-title">1. Informasi yang Kami Kumpulkan</h2>
+            <p class="glass-card-subtitle">Jenis data yang diproses saat Anda berinteraksi dengan sistem kami</p>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="data-type-box h-100">
+              <div class="data-type-header">
+                <i class="bi bi-person-vcard fs-5"></i> Data Akun & Pendaftaran
+              </div>
+              <p class="text-muted small mb-2">Informasi yang Anda berikan secara langsung saat membuat akun baru:</p>
+              <ul class="text-muted small ps-3 mb-0">
+                <li>Nama lengkap atau nama pengguna (username)</li>
+                <li>Alamat surel (email) aktif untuk verifikasi</li>
+                <li>Kata sandi yang disimpan dalam bentuk hash terenkripsi</li>
+                <li>Foto profil (opsional bila diunggah oleh pengguna)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="data-type-box h-100">
+              <div class="data-type-header">
+                <i class="bi bi-mortarboard-fill fs-5"></i> Data Aktivitas & Belajar
+              </div>
+              <p class="text-muted small mb-2">Data yang tercipta saat Anda belajar di platform:</p>
+              <ul class="text-muted small ps-3 mb-0">
+                <li>Modul dan topik yang telah diselesaikan</li>
+                <li>Skor latihan, riwayat pengerjaan soal, dan durasi belajar</li>
+                <li>Interaksi dengan modul kalkulator dan asisten tutor AI</li>
+                <li>Catatan progres dan lencana pencapaian belajar</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="data-type-box">
+              <div class="data-type-header">
+                <i class="bi bi-cpu fs-5"></i> Data Teknis & Penggunaan Sistem
+              </div>
+              <p class="text-muted small mb-2">Data telemetri otomatis untuk menjaga stabilitas dan performa aplikasi:</p>
+              <ul class="text-muted small ps-3 mb-0">
+                <li>Alamat IP (Internet Protocol) untuk audit keamanan dan pencegahan spam</li>
+                <li>Jenis peramban (browser), sistem operasi, dan resolusi layar perangkat</li>
+                <li>Log diagnostik galat (error logs) guna mempercepat perbaikan bug sistem</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Penggunaan Data -->
+      <section class="glass-card" id="penggunaan" data-aos="fade-up">
+        <div class="section-title-wrap">
+          <div class="section-icon-badge indigo">
+            <i class="bi bi-gear-fill"></i>
+          </div>
+          <div>
+            <h2 class="glass-card-title">2. Bagaimana Kami Menggunakan Data Anda</h2>
+            <p class="glass-card-subtitle">Tujuan pemrosesan informasi untuk meningkatkan kualitas pembelajaran</p>
+          </div>
+        </div>
+        <p class="text-muted">
+          Kami memproses data Anda dengan itikad baik semata-mata untuk mendukung proses belajar yang optimal:
+        </p>
+        <ul class="card-pillar-list">
+          <li>
+            <i class="bi bi-check-circle-fill text-warning"></i>
+            <strong class="text-white">Personalisasi Pengalaman Belajar:</strong> Menyesuaikan tingkat kesulitan latihan soal dan menyajikan rekomendasi materi matematika sesuai kemajuan individu.
+          </li>
+          <li>
+            <i class="bi bi-check-circle-fill text-warning"></i>
+            <strong class="text-white">Penyediaan Layanan Asisten AI:</strong> Memberikan tanggapan yang relevan terhadap pertanyaan matematika yang diajukan ke asisten belajar.
+          </li>
+          <li>
+            <i class="bi bi-check-circle-fill text-warning"></i>
+            <strong class="text-white">Pemeliharaan & Keamanan Sistem:</strong> Melindungi akun Anda dari upaya peretasan, serangan brute-force, dan akses tanpa hak.
+          </li>
+          <li>
+            <i class="bi bi-check-circle-fill text-warning"></i>
+            <strong class="text-white">Komunikasi Layanan Esensial:</strong> Mengirimkan notifikasi reset kata sandi, pemberitahuan pembaruan fitur penting, atau informasi keamanan akun.
+          </li>
+        </ul>
+      </section>
+
+      <!-- Section 3: Pembagian Data -->
+      <section class="glass-card" id="pembagian" data-aos="fade-up">
+        <div class="section-title-wrap">
+          <div class="section-icon-badge gold">
+            <i class="bi bi-share-fill"></i>
+          </div>
+          <div>
+            <h2 class="glass-card-title">3. Kebijakan Pembagian Data Pihak Ketiga</h2>
+            <p class="glass-card-subtitle">Transparansi penuh mengenai penanganan data lintas sistem</p>
+          </div>
+        </div>
+        <p class="text-muted">
+          Prinsip dasar MathThon adalah menjaga kerahasiaan penuh pengguna kami. Kami <strong>tidak menjual, memperdagangkan, atau menyewakan</strong> data pribadi Anda kepada pihak manapun.
+        </p>
+        <p class="text-muted">
+          Data hanya dapat dibagikan dalam kondisi terbatas berikut:
+        </p>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="p-3 rounded-3" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-light);">
+              <h4 class="fs-6 text-white fw-bold mb-2"><i class="bi bi-server me-2 text-info"></i> Penyedia Infrastruktur Tepercaya</h4>
+              <p class="text-muted small mb-0">Mitra penyedia hosting cloud dan basis data yang terikat oleh perjanjian kerahasiaan ketat dan kepatuhan standar industri enkripsi.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-light);">
+              <h4 class="fs-6 text-white fw-bold mb-2"><i class="bi bi-shield-check me-2 text-warning"></i> Kepatuhan Hukum yang Berlaku</h4>
+              <p class="text-muted small mb-0">Bila diwajibkan secara sah oleh keputusan pengadilan atau aparat penegak hukum Republik Indonesia berdasarkan peraturan perundang-undangan.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Keamanan Sistem -->
+      <section class="glass-card" id="keamanan" data-aos="fade-up">
+        <div class="section-title-wrap">
+          <div class="section-icon-badge emerald">
+            <i class="bi bi-shield-lock-fill"></i>
+          </div>
+          <div>
+            <h2 class="glass-card-title">4. Standar Keamanan & Perlindungan Data</h2>
+            <p class="glass-card-subtitle">Langkah proteksi teknis dan operasional yang kami terapkan</p>
+          </div>
+        </div>
+        <p class="text-muted">
+          Kami mengadopsi prinsip keamanan <em>defense-in-depth</em> untuk memastikan data Anda aman dari ancaman siber:
+        </p>
+        <div class="row g-3">
+          <div class="col-sm-6 col-lg-3">
+            <div class="p-3 rounded-3 text-center h-100" style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2);">
+              <i class="bi bi-file-earmark-lock fs-2 text-emerald mb-2 d-block" style="color: #34d399;"></i>
+              <h5 class="fs-6 text-white fw-bold mb-1">Enkripsi SSL/TLS</h5>
+              <p class="text-dim small mb-0">Semua saluran transmisi dienkripsi dengan standar enkripsi 256-bit.</p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="p-3 rounded-3 text-center h-100" style="background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.2);">
+              <i class="bi bi-key-fill fs-2 text-warning mb-2 d-block"></i>
+              <h5 class="fs-6 text-white fw-bold mb-1">Hashing Kredensial</h5>
+              <p class="text-dim small mb-0">Kata sandi tidak pernah disimpan dalam bentuk teks polos (plain text).</p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="p-3 rounded-3 text-center h-100" style="background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.2);">
+              <i class="bi bi-fingerprint fs-2 text-indigo mb-2 d-block" style="color: #818cf8;"></i>
+              <h5 class="fs-6 text-white fw-bold mb-1">Kontrol Akses Ketat</h5>
+              <p class="text-dim small mb-0">Hanya teknisi yang berwenang yang dapat mengakses basis data produksi.</p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="p-3 rounded-3 text-center h-100" style="background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.2);">
+              <i class="bi bi-arrow-repeat fs-2 text-cyan mb-2 d-block" style="color: #22d3ee;"></i>
+              <h5 class="fs-6 text-white fw-bold mb-1">Cadangan Berkala</h5>
+              <p class="text-dim small mb-0">Pencadangan rutin otomatis untuk melindungi data dari kehilangan mendadak.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Hak Pengguna -->
+      <section class="glass-card" id="hak-pengguna" data-aos="fade-up">
+        <div class="section-title-wrap">
+          <div class="section-icon-badge cyan">
+            <i class="bi bi-person-gear"></i>
+          </div>
+          <div>
+            <h2 class="glass-card-title">5. Hak-Hak Anda sebagai Pengguna</h2>
+            <p class="glass-card-subtitle">Kewenangan penuh yang dapat Anda gunakan setiap saat</p>
+          </div>
+        </div>
+        <p class="text-muted">
+          Sebagai pengguna terdaftar, Anda memiliki hak-hak privasi mendasar berikut:
+        </p>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="p-3 rounded-3" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-light);">
+              <h4 class="fs-6 text-white fw-bold mb-1"><i class="bi bi-eye-fill me-2 text-warning"></i> Hak Akses & Portabilitas</h4>
+              <p class="text-muted small mb-0">Anda berhak meminta salinan data riwayat belajar dan data profil yang kami simpan.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-light);">
+              <h4 class="fs-6 text-white fw-bold mb-1"><i class="bi bi-pencil-square me-2 text-info"></i> Hak Koreksi Data</h4>
+              <p class="text-muted small mb-0">Anda dapat memperbarui atau memperbaiki informasi nama, email, dan password langsung melalui halaman profil.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-light);">
+              <h4 class="fs-6 text-white fw-bold mb-1"><i class="bi bi-trash3-fill me-2 text-danger"></i> Hak Penghapusan (Right to be Forgotten)</h4>
+              <p class="text-muted small mb-0">Anda berhak mengajukan permohonan penutupan dan penghapusan permanen akun beserta seluruh riwayat belajarnya.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-light);">
+              <h4 class="fs-6 text-white fw-bold mb-1"><i class="bi bi-x-octagon-fill me-2 text-warning"></i> Hak Penolakan Pemrosesan</h4>
+              <p class="text-muted small mb-0">Anda dapat menolak fitur pelacakan analitik non-esensial melalui pengaturan privasi browser Anda.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Cookie -->
+      <section class="glass-card" id="cookie" data-aos="fade-up">
+        <div class="section-title-wrap">
+          <div class="section-icon-badge gold">
+            <i class="bi bi-cookie"></i>
+          </div>
+          <div>
+            <h2 class="glass-card-title">6. Kebijakan Cookie & Sesi Lokal</h2>
+            <p class="glass-card-subtitle">Penyimpanan sementara di browser untuk kenyamanan akses</p>
+          </div>
+        </div>
+        <p class="text-muted">
+          MathThon menggunakan <em>HTTP Cookies</em> dan penyimpanan lokal (LocalStorage) dengan fungsi esensial:
+        </p>
+        <ul class="card-pillar-list">
+          <li><i class="bi bi-check-circle-fill text-warning"></i> <strong>Cookie Sesi:</strong> Menjaga status autentikasi login Anda agar tidak perlu memasukkan email & password berulang kali pada setiap halaman.</li>
+          <li><i class="bi bi-check-circle-fill text-warning"></i> <strong>Cookie Preferensi:</strong> Menyimpan preferensi tampilan seperti mode tema atau ukuran teks.</li>
+          <li><i class="bi bi-check-circle-fill text-warning"></i> <strong>Kontrol Pengguna:</strong> Anda dapat menghapus atau menonaktifkan cookie melalui pengaturan peramban Anda kapan saja.</li>
+        </ul>
+      </section>
+
+      <!-- Section 7: Kontak & Pengaduan Privasi -->
+      <section class="glass-card" id="kontak" data-aos="fade-up">
+        <div class="section-title-wrap">
+          <div class="section-icon-badge emerald">
+            <i class="bi bi-headset"></i>
+          </div>
+          <div>
+            <h2 class="glass-card-title">7. Saluran Kontak Petugas Privasi</h2>
+            <p class="glass-card-subtitle">Kami siap membantu menjawab seluruh pertanyaan seputar privasi Anda</p>
+          </div>
+        </div>
+        <p class="text-muted">
+          Bila Anda memiliki keluhan, permohonan hak data, atau saran terkait kebijakan privasi ini, silakan hubungi tim kami melalui saluran resmi berikut:
+        </p>
+
+        <div class="contact-grid">
+          <!-- Email Action Card -->
+          <a href="mailto:privacy@maththon.com" class="contact-action-card">
+            <div class="contact-icon-large">
+              <i class="bi bi-envelope-at-fill"></i>
+            </div>
+            <div>
+              <div class="text-dim small">Surel Petugas Privasi</div>
+              <div class="fw-bold text-white fs-6">privacy@maththon.com</div>
+              <div class="text-warning small mt-1">Respon dalam 1x24 jam kerja &rarr;</div>
+            </div>
+          </a>
+
+          <!-- WhatsApp Action Card -->
+          <a href="https://wa.me/6281234567890?text=Halo%20Admin%20MathThon,%20saya%20ingin%20bertanya%20seputar%20Kebijakan%20Privasi" target="_blank" rel="noopener noreferrer" class="contact-action-card whatsapp">
+            <div class="contact-icon-large">
+              <i class="bi bi-whatsapp"></i>
+            </div>
+            <div>
+              <div class="text-dim small">Bantuan Cepat WhatsApp</div>
+              <div class="fw-bold text-white fs-6">+62 812-3456-7890</div>
+              <div class="text-success small mt-1">Layanan Bantuan Pelajar &rarr;</div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- Bottom Banner -->
+      <section class="info-cta-card" data-aos="zoom-in">
+        <h2 class="info-cta-title">Belajar Tenang dengan Jaminan Privasi Penuh</h2>
+        <p class="info-cta-subtitle">
+          Fokuslah mengasah kemampuan matematikamu tanpa rasa cemas. Kami menjaga data dan perjalanan belajarmu dengan standar tertinggi.
+        </p>
+        <div class="info-btn-group">
+          <a href="{{ url_for('main.about') }}" class="info-btn-secondary">
+            <i class="bi bi-info-circle-fill"></i> Tentang MathThon
+          </a>
+          <a href="{{ url_for('main.terms') }}" class="info-btn-primary">
+            <i class="bi bi-file-earmark-text-fill"></i> Baca Syarat & Ketentuan
+          </a>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="info-footer">
+    <div class="info-footer-container">
+      <a href="{{ url_for('main.home') }}" class="info-footer-brand">
+        <img src="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}" alt="MathThon Logo">
+        <span>MathThon</span>
+      </a>
+      <div class="info-footer-links">
+        <a href="{{ url_for('main.home') }}">Beranda</a>
+        <a href="{{ url_for('main.about') }}">Tentang MathThon</a>
+        <a href="{{ url_for('main.privacy') }}">Kebijakan Privasi</a>
+        <a href="{{ url_for('main.terms') }}">Syarat & Ketentuan</a>
+        <a href="{{ url_for('auth.login_user') }}">Portal Masuk</a>
       </div>
+      <p class="info-footer-copy">
+        &copy; 2025&ndash;2026 MathThon. Seluruh hak cipta dilindungi undang-undang.
+      </p>
     </div>
   </footer>
 
@@ -134,17 +520,40 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    // Inisialisasi AOS
     AOS.init({
-      duration: 1000,
-      once: true
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 50
     });
-    
+
+    // Kontrol Mobile Sidenav
     function openSidenav() {
-      document.getElementById("sidenav-right").classList.add("open");
+      const drawer = document.getElementById("sidenavRight");
+      const backdrop = document.getElementById("sidenavBackdrop");
+      if (drawer && backdrop) {
+        drawer.classList.add("open");
+        backdrop.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
     }
+
     function closeSidenav() {
-      document.getElementById("sidenav-right").classList.remove("open");
+      const drawer = document.getElementById("sidenavRight");
+      const backdrop = document.getElementById("sidenavBackdrop");
+      if (drawer && backdrop) {
+        drawer.classList.remove("open");
+        backdrop.classList.remove("active");
+        document.body.style.overflow = "";
+      }
     }
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") {
+        closeSidenav();
+      }
+    });
   </script>
 </body>
 </html>

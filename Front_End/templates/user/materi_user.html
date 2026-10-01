@@ -128,43 +128,77 @@ document.addEventListener("DOMContentLoaded", function () {
     let isActiveVisible  = false;
     let isInactiveVisible = false;
 
+    let learningPathMap = {};
+
     // ── Render kartu materi utama ────────────────────────────────
     function renderMateriCards(list) {
         container.innerHTML = "";
         noResults.style.display = list.length === 0 ? "block" : "none";
 
         list.forEach((materi, index) => {
-            const safeSlug = materi.slug || materi.judul_materi.toLowerCase().replace(/\s+/g, '-');
-            const endpoint = `/user/materi/${safeSlug}`;
+            const safeSlug = (materi.slug || materi.judul_materi.toLowerCase().replace(/\s+/g, '-')).toLowerCase().replace(/-/g, '_');
+            const cleanSlug = safeSlug.replace(/_/g, '-');
+            const pathInfo = learningPathMap[safeSlug] || learningPathMap[cleanSlug] || { is_unlocked: true, is_completed: false, missing_prerequisites: [] };
+            
+            const endpoint = `/user/materi/${materi.slug || materi.judul_materi.toLowerCase().replace(/\s+/g, '-')}`;
 
             const stars = Array.from({length: 5}, (_, i) =>
                 `<i class="bi ${i < materi.rating ? 'bi-star-fill' : 'bi-star'}"></i>`
             ).join('');
 
-            const isInactive  = materi.status === 'inactive';
+            const isInactive = materi.status === 'inactive';
+            const isLocked = !isInactive && !pathInfo.is_unlocked;
+            const isCompleted = pathInfo.is_completed;
+
+            let badgeHtml = '';
+            if (isInactive) {
+                badgeHtml = '<span class="mth-card__badge mth-card__badge--inactive">Nonaktif</span>';
+            } else if (isCompleted) {
+                badgeHtml = '<span class="mth-card__badge" style="background: rgba(16,185,129,0.2); color: #34d399; border: 1px solid rgba(16,185,129,0.4);"><i class="bi bi-patch-check-fill me-1"></i> Terkuasai</span>';
+            } else if (isLocked) {
+                badgeHtml = '<span class="mth-card__badge" style="background: rgba(244,63,94,0.15); color: #fda4af; border: 1px solid rgba(244,63,94,0.3);"><i class="bi bi-lock-fill me-1"></i> Terkunci</span>';
+            } else {
+                badgeHtml = '<span class="mth-card__badge mth-card__badge--active"><i class="bi bi-unlock-fill me-1"></i> Terbuka</span>';
+            }
+
+            let prereqNotice = '';
+            if (isLocked && pathInfo.missing_prerequisites && pathInfo.missing_prerequisites.length > 0) {
+                prereqNotice = `<div class="p-2 mt-2 rounded small" style="background: rgba(244,63,94,0.08); border: 1px solid rgba(244,63,94,0.2); color: #fca5a5; font-size: 0.78rem;">
+                    <i class="bi bi-shield-exclamation me-1"></i> Prasyarat: ${pathInfo.missing_prerequisites.join(', ')}
+                </div>`;
+            }
+
+            let actionBtn = '';
+            if (isInactive) {
+                actionBtn = `<a href="javascript:void(0)" class="mth-card__btn mth-card__btn--locked" onclick="alert('Maaf, materi ini sedang tidak aktif atau belum tersedia.')">
+                    <i class="bi bi-lock-fill"></i> Belum Tersedia
+                </a>`;
+            } else if (isLocked) {
+                const missingText = pathInfo.missing_prerequisites.join(', ');
+                actionBtn = `<a href="javascript:void(0)" class="mth-card__btn mth-card__btn--locked" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1);" onclick="alert('🔒 Modul Terkunci! Anda wajib menyelesaikan modul prasyarat terlebih dahulu: ${missingText}')">
+                    <i class="bi bi-lock-fill text-danger me-1"></i> Terkunci (Prasyarat)
+                </a>`;
+            } else {
+                actionBtn = `<a href="${endpoint}" class="mth-card__btn">
+                    <i class="bi bi-play-circle-fill"></i> ${isCompleted ? 'Pelajari Ulang' : 'Mulai Scaffolding'}
+                </a>`;
+            }
 
             const card = document.createElement('div');
-            card.className = `mth-card${isInactive ? ' mth-card--inactive' : ''}`;
+            card.className = `mth-card${isInactive ? ' mth-card--inactive' : ''}${isLocked ? ' mth-card--locked-path' : ''}`;
             card.style.animationDelay = `${index * 80}ms`;
             card.innerHTML = `
                 <div class="mth-card__accent"></div>
                 <div class="mth-card__body">
                   <div class="mth-card__top">
-                    <span class="mth-card__badge ${isInactive ? 'mth-card__badge--inactive' : 'mth-card__badge--active'}">
-                      ${isInactive ? 'Nonaktif' : 'Aktif'}
-                    </span>
+                    ${badgeHtml}
                     <div class="mth-card__stars">${stars}</div>
                   </div>
                   <h3 class="mth-card__title">${materi.judul_materi}</h3>
                   <p class="mth-card__desc">${materi.deskripsi || '—'}</p>
+                  ${prereqNotice}
                   <div class="mth-card__footer">
-                    <a href="${isInactive ? 'javascript:void(0)' : endpoint}"
-                       class="mth-card__btn${isInactive ? ' mth-card__btn--locked' : ''}"
-                       ${isInactive ? `onclick="alert('Maaf, materi ini sedang tidak aktif atau belum tersedia.')"` : ''}>
-                      ${isInactive
-                        ? '<i class="bi bi-lock-fill"></i> Belum Tersedia'
-                        : '<i class="bi bi-play-circle-fill"></i> Pelajari Sekarang'}
-                    </a>
+                    ${actionBtn}
                   </div>
                 </div>`;
             container.appendChild(card);
@@ -292,10 +326,30 @@ document.addEventListener("DOMContentLoaded", function () {
     // ── FETCH UTAMA ──────────────────────────────────────────────
     async function initialize() {
         try {
-            const res = await fetch("/api/materi");
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            // Fetch materi dan learning-path secara paralel
+            const [materiRes, pathRes] = await Promise.all([
+                fetch("/api/materi"),
+                fetch("/user/materi/api/learning-path").catch(() => null)
+            ]);
 
-            const data = await res.json();
+            if (!materiRes.ok) throw new Error(`HTTP ${materiRes.status}`);
+            const data = await materiRes.json();
+
+            // Populate learning path map jika tersedia
+            if (pathRes && pathRes.ok) {
+                try {
+                    const pathData = await pathRes.json();
+                    if (pathData.status === "success" && Array.isArray(pathData.learning_path)) {
+                        pathData.learning_path.forEach(item => {
+                            learningPathMap[item.slug] = item;
+                            learningPathMap[item.slug.replace(/_/g, '-')] = item;
+                        });
+                    }
+                } catch (e) {
+                    console.warn("Learning path parsing failed:", e);
+                }
+            }
+
             loading.style.display = "none";
 
             if (!Array.isArray(data) || data.length === 0) {

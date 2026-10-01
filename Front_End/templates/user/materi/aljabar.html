@@ -1,276 +1,742 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Materi: Pengenalan Aljabar</title>
-    <link rel="icon" href="{{url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/materi.css')}}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materi: Pengenalan Aljabar - MathThon</title>
+  <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/materi_reader.css') }}">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 </head>
-<body>
-    <header>
-        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Menu">
-            <i class="bi bi-list"></i>
-        </button>
-        
-        <nav>
-            <div id="sidenav" class="sidenav">
-                <button class="close-btn" id="closeBtn" aria-label="Close Menu">
-                    <i class="bi bi-x"></i>
-                </button>
-                <h3>Navigasi Aljabar</h3>
-                <ul>
-                    <li><a href="{{url_for('user.dashboard_user')}}">Kembali ke Beranda</a></li>
-                    <li><a href="#definisi">Definisi</a></li>
-                    <li><a href="#variabel">Variabel & Konstanta</a></li>
-                    <li><a href="#persamaan">Persamaan Sederhana</a></li>
-                    <li><a href="#contoh">Contoh Lain</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <h1>Materi: Pengenalan Aljabar</h1>
-        <div id="isi-materi" style="margin-left:220px;">
-            <div class="card" id="definisi">
-                <div class="card-body">
-                    <h2><i class="bi bi-question-circle-fill text-primary"></i> Apa itu Aljabar?</h2>
-                    <p>Aljabar adalah cabang matematika yang mempelajari simbol matematika dan aturan untuk memanipulasi simbol-simbol ini. Aljabar memungkinkan kita untuk merepresentasikan masalah atau situasi sebagai ekspresi matematika.</p>
-                    <p>Ini adalah alat yang sangat kuat untuk memecahkan masalah dengan nilai yang tidak diketahui.</p>
-                </div>
-            </div>
+<body class="mr-body">
 
-            <div class="card" id="variabel">
-                <div class="card-body">
-                    <h2><i class="bi bi-alphabet text-success"></i> Variabel dan Konstanta</h2>
-                    <p>Dalam aljabar, kita menggunakan huruf (seperti <code>x</code>, <code>y</code>, atau <code>a</code>) untuk mewakili angka yang tidak diketahui. Huruf-huruf ini disebut <strong>variabel</strong>.</p>
-                    <p>Angka yang nilainya tetap dan tidak berubah disebut <strong>konstanta</strong> (misalnya: 2, 7, -10).</p>
-                </div>
-            </div>
+  <!-- Reading Progress Bar -->
+  <div class="mr-progress-container"><div class="mr-progress-bar" id="progressBar"></div></div>
 
-            <div class="card" id="persamaan">
-                <div class="card-body">
-                    <h2><i class="bi bi-equals text-warning"></i> Contoh Persamaan Sederhana</h2>
-                    <p>Sebuah persamaan aljabar menyatakan bahwa dua ekspresi adalah sama. Contoh:</p>
-                    <blockquote class="blockquote"><code>x + 5 = 10</code></blockquote>
-                    <p>Untuk menyelesaikan persamaan ini, kita ingin mencari nilai <code>x</code>. Kita bisa mengurangi kedua sisi dengan 5:</p>
-                    <p><code>x + 5 - 5 = 10 - 5</code></p>
-                    <p>Sehingga didapatkan hasil:</p>
-                    <p><code>x = 5</code></p>
-                </div>
-            </div>
-
-            <div class="card" id="contoh">
-                <div class="card-body">
-                    <h2><i class="bi bi-lightbulb-fill text-info"></i> Contoh Lain</h2>
-                    <ul>
-                        <li><strong>Ekspresi Aljabar:</strong> <code>2y + 3</code> (Ini bukan persamaan karena tidak ada tanda sama dengan).</li>
-                        <li><strong>Menyelesaikan untuk Perkalian:</strong> Jika <code>3a = 15</code>, maka bagi kedua sisi dengan 3 untuk mendapatkan <code>a = 5</code>.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+  <!-- Topbar Header -->
+  <header class="mr-topbar">
+    <div class="mr-topbar-left">
+      <a href="{{ url_for('materi.materi_user') }}" class="mr-back-btn">
+        <i class="bi bi-arrow-left"></i> <span>Daftar Materi</span>
+      </a>
+      <span class="mr-topic-badge"><i class="bi bi-calculator"></i> Aljabar Fundamental</span>
     </div>
+    <div class="mr-topbar-right">
+      <span class="mr-read-time"><i class="bi bi-clock"></i> 8 Menit Baca</span>
+      <button class="mr-hamburger-btn" onclick="toggleMobileToc()" aria-label="Toggle Daftar Isi">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+  </header>
 
-    <div class="overlay" id="overlay"></div>
+  <div class="mr-layout-wrap">
+    <!-- Sidebar Table of Contents -->
+    <aside class="mr-sidebar-toc" id="sidebarToc">
+      <div class="mr-toc-heading"><i class="bi bi-compass"></i> Daftar Isi Modul</div>
+      <nav class="mr-toc-nav">
+        <a href="#pengantar" class="mr-toc-link active"><i class="bi bi-stars"></i> 1. Mengapa Aljabar?</a>
+        <a href="#anatomi" class="mr-toc-link"><i class="bi bi-diagram-3"></i> 2. Anatomi Bentuk Aljabar</a>
+        <a href="#operasi" class="mr-toc-link"><i class="bi bi-plus-slash-minus"></i> 3. Operasi Aljabar</a>
+        <a href="#plsv" class="mr-toc-link"><i class="bi bi-check2-circle"></i> 4. Persamaan Linear (PLSV)</a>
+        <a href="#sandbox" class="mr-toc-link"><i class="bi bi-sliders"></i> 5. Sandbox Interaktif</a>
+        <a href="#studi-kasus" class="mr-toc-link"><i class="bi bi-lightbulb"></i> 6. Kasus Nyata & Step Revealer</a>
+        <a href="#kuis" class="mr-toc-link"><i class="bi bi-patch-question"></i> 7. Cek Pemahaman Mandiri</a>
+      </nav>
+      <div class="mr-toc-divider"></div>
+      <div class="p-2 rounded" style="background: rgba(255,255,255,0.03); font-size: 0.8rem; color: var(--mr-text-muted);">
+        <i class="bi bi-info-circle text-warning me-1"></i> Geser slider dan selesaikan kuis untuk menguji pemahaman Anda secara langsung.
+      </div>
+    </aside>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburgerBtn = document.getElementById('hamburgerBtn');
-            const closeBtn = document.getElementById('closeBtn');
-            const sidenav = document.getElementById('sidenav');
-            const overlay = document.getElementById('overlay');
+    <!-- Main Content -->
+    <main class="mr-article">
+      
+      <!-- Learning Path Prerequisite Banner -->
+      <div class="mr-path-banner">
+        <div>
+          <span class="text-secondary small fw-bold text-uppercase d-block mb-1">
+            <i class="bi bi-diagram-3-fill text-warning me-1"></i> Learning Path Kurikulum
+          </span>
+          <div class="mr-path-flow">
+            <span class="mr-path-node completed"><i class="bi bi-check-circle-fill"></i> Operasi Kabataku</span>
+            <i class="bi bi-chevron-right text-muted small"></i>
+            <span class="mr-path-node current"><i class="bi bi-record-circle-fill"></i> Aljabar & PLSV (Saat ini)</span>
+            <i class="bi bi-chevron-right text-muted small"></i>
+            <span class="mr-path-node locked" id="nextModuleNode"><i class="bi bi-lock-fill"></i> Limit Fungsi Aljabar</span>
+          </div>
+        </div>
+        <div class="text-end">
+          <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill">
+            <i class="bi bi-shield-check me-1"></i> Prasyarat Terpenuhi
+          </span>
+        </div>
+      </div>
 
-            // Fungsi untuk membuka sidenav
-            function openNav() {
-                sidenav.classList.add('active');
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling
-            }
+      <!-- Stateful Learning Analytics HUD -->
+      <div class="mr-analytics-hud">
+        <div class="mr-hud-item">
+          <div class="mr-hud-icon indigo"><i class="bi bi-stopwatch-fill"></i></div>
+          <div>
+            <div class="small text-muted">Durasi Belajar Aktif</div>
+            <div class="mr-hud-val" id="activeTimeCounter">00:00</div>
+          </div>
+        </div>
+        <div class="mr-hud-item">
+          <div class="mr-hud-icon gold"><i class="bi bi-ladder"></i></div>
+          <div>
+            <div class="small text-muted">Scaffolding Tahapan</div>
+            <div class="mr-hud-val"><span id="hudCurrentStage">0</span> / 4 Selesai</div>
+          </div>
+        </div>
+        <div class="mr-hud-item">
+          <div class="mr-hud-icon emerald"><i class="bi bi-award-fill"></i></div>
+          <div>
+            <div class="small text-muted">Status Penguasaan</div>
+            <div class="mr-hud-val" id="hudMasteryStatus">Dalam Eksplorasi</div>
+          </div>
+        </div>
+      </div>
 
-            // Fungsi untuk menutup sidenav
-            function closeNav() {
-                sidenav.classList.remove('active');
-                overlay.classList.remove('active');
-                document.body.style.overflow = ''; // Restore scrolling
-            }
+      <!-- Hero Card -->
+      <section class="mr-hero-card" id="pengantar">
+        <h1 class="mr-hero-title">Pengenalan Aljabar: Seni Berpikir dengan Pola</h1>
+        <p class="mr-hero-desc">
+          Aljabar berasal dari kata Arab <em>Al-Jabr</em> (karya ilmuwan Al-Khwarizmi) yang bermakna "pemulihan dan penyeimbangan". Aljabar adalah bahasa universal untuk menyelesaikan masalah yang memiliki nilai misterius (belum diketahui).
+        </p>
+        
+        <div class="mr-realworld-box">
+          <div class="d-flex align-items-center gap-2 mb-2 text-warning fw-bold">
+            <i class="bi bi-rocket-takeoff-fill fs-5"></i> Di Mana Aljabar Dipakai di Dunia Nyata?
+          </div>
+          <p class="text-secondary small mb-2">
+            Di balik algoritma pencarian Google, fisika roket luar angkasa, hingga kode pemrograman kalkulasi diskon belanja di e-commerce, semua rumus ditulis dalam variabel aljabar.
+          </p>
+          <div class="mr-realworld-pills">
+            <span class="mr-pill">💻 Algoritma Pemrograman</span>
+            <span class="mr-pill">📊 Prediksi Keuangan & Bisnis</span>
+            <span class="mr-pill">🎮 Fisika Game Mesin 3D</span>
+          </div>
+        </div>
+      </section>
 
-            // Event listeners
-            if (hamburgerBtn) {
-                hamburgerBtn.addEventListener('click', openNav);
-            }
+      <!-- Anatomi Bentuk Aljabar -->
+      <section class="mr-card" id="anatomi">
+        <div class="mr-card-header">
+          <div class="mr-card-icon gold"><i class="bi bi-diagram-3-fill"></i></div>
+          <div>
+            <h2 class="mr-card-title">Anatomi Bentuk Aljabar</h2>
+            <p class="mr-card-subtitle">Mengenal 4 elemen fundamental pembentuk ekspresi aljabar</p>
+          </div>
+        </div>
 
-            if (closeBtn) {
-                closeBtn.addEventListener('click', closeNav);
-            }
+        <p class="text-secondary">
+          Perhatikan ekspresi aljabar berikut:
+        </p>
 
-            if (overlay) {
-                overlay.addEventListener('click', closeNav);
-            }
+        <div class="mr-formula-box">
+          <span class="mr-formula-badge">Formula Utama</span>
+          <div class="mr-formula-render">$$3x^2 + 5x - 7$$</div>
+          <div class="mr-formula-expl">
+            Ekspresi ini memiliki <strong>3 suku</strong>: $3x^2$, $5x$, dan $-7$.
+          </div>
+        </div>
 
-            // Menutup sidenav saat link diklik (untuk smooth navigation)
-            const sidenavLinks = sidenav.querySelectorAll('a');
-            sidenavLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    // Hanya tutup di mobile
-                    if (window.innerWidth <= 768) {
-                        closeNav();
-                    }
-                });
-            });
+        <div class="row g-3 mt-2">
+          <div class="col-md-6">
+            <div class="p-3 rounded-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <h4 class="fs-6 text-warning fw-bold mb-1"><i class="bi bi-dot"></i> Variabel (Peubah)</h4>
+              <p class="small text-secondary mb-0">Simbol huruf (seperti $x, y, a, b$) yang mewakili kuantitas yang nilainya belum tetap atau dicari.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <h4 class="fs-6 text-info fw-bold mb-1"><i class="bi bi-dot"></i> Koefisien</h4>
+              <p class="small text-secondary mb-0">Faktor pengali yang melekat di depan variabel. Pada $3x^2$, angka <strong>3</strong> adalah koefisien dari $x^2$.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <h4 class="fs-6 text-emerald fw-bold mb-1" style="color: #34d399;"><i class="bi bi-dot"></i> Konstanta</h4>
+              <p class="small text-secondary mb-0">Bilangan tunggal yang bernilai mutlak tetap tanpa variabel pengiring. Pada ekspresi di atas, konstantanya adalah <strong>-7</strong>.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <h4 class="fs-6 text-cyan fw-bold mb-1" style="color: #22d3ee;"><i class="bi bi-dot"></i> Derajat (Pangkat)</h4>
+              <p class="small text-secondary mb-0">Pangkat tertinggi variabel dalam suku aljabar. Pada contoh di atas, suku $3x^2$ berderajat <strong>2</strong>.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            // Menutup sidenav saat window di-resize ke desktop
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 768) {
-                    closeNav();
-                }
-            });
+      <!-- Operasi Bentuk Aljabar -->
+      <section class="mr-card" id="operasi">
+        <div class="mr-card-header">
+          <div class="mr-card-icon indigo"><i class="bi bi-plus-slash-minus"></i></div>
+          <div>
+            <h2 class="mr-card-title">Operasi Suku Sejenis</h2>
+            <p class="mr-card-subtitle">Kaidah penggabungan penjumlahan dan pengurangan</p>
+          </div>
+        </div>
+        <p class="text-secondary">
+          Aturan emas aljabar: <strong>Hanya suku-suku yang sejenis (variabel dan pangkatnya identik) yang dapat dijumlahkan atau dikurangkan.</strong>
+        </p>
+
+        <div class="p-3 rounded-3 my-3" style="background: rgba(99, 102, 241, 0.08); border-left: 3px solid var(--mr-indigo);">
+          <div class="fw-bold text-white mb-1"><i class="bi bi-check2-circle text-indigo"></i> Contoh Suku Sejenis vs Tak Sejenis:</div>
+          <div class="small text-secondary">
+            <div>&bull; $4x + 3x = (4+3)x = \mathbf{7x}$ <span class="badge bg-success-subtle text-success ms-2">Bisa Dijumlah</span></div>
+            <div>&bull; $5x + 3y = \mathbf{5x + 3y}$ <span class="badge bg-danger-subtle text-danger ms-2">Tidak Bisa (Beda Variabel)</span></div>
+            <div>&bull; $2x^2 + 4x = \mathbf{2x^2 + 4x}$ <span class="badge bg-danger-subtle text-danger ms-2">Tidak Bisa (Beda Pangkat)</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PLSV -->
+      <section class="mr-card" id="plsv">
+        <div class="mr-card-header">
+          <div class="mr-card-icon emerald"><i class="bi bi-check2-circle"></i></div>
+          <div>
+            <h2 class="mr-card-title">Persamaan Linear Satu Variabel (PLSV)</h2>
+            <p class="mr-card-subtitle">Konsep timbangan seimbang: kedua ruas diperlakukan setara</p>
+          </div>
+        </div>
+        <p class="text-secondary">
+          Bentuk umum PLSV adalah:
+        </p>
+        <div class="mr-formula-box">
+          <span class="mr-formula-badge">Bentuk Standar</span>
+          <div class="mr-formula-render">$$ax + b = c \quad (a \neq 0)$$</div>
+          <div class="mr-formula-expl">
+            Prinsip penyelesaian: <em>Isolasi variabel $x$</em> dengan melakukan operasi penjumlahan, pengurangan, perkalian, atau pembagian yang bernilai sama pada kedua ruas.
+          </div>
+        </div>
+      </section>
+
+      <!-- Sandbox Interaktif -->
+      <section class="mr-sandbox" id="sandbox">
+        <div class="mr-sandbox-title">
+          <i class="bi bi-sliders"></i> Sandbox Interaktif: Solver PLSV Dinamis
+        </div>
+        <p class="mr-sandbox-desc">
+          Geser slider nilai $a$, $b$, dan $c$ untuk melihat bagaimana persamaan $ax + b = c$ diselesaikan seketika secara matematis!
+        </p>
+
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="mr-slider-group">
+              <div class="mr-slider-header">
+                <span>Koefisien (a):</span>
+                <span class="mr-slider-val" id="valA">2</span>
+              </div>
+              <input type="range" class="mr-slider" id="sliderA" min="1" max="10" value="2" oninput="solveInteractivePLSV()">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="mr-slider-group">
+              <div class="mr-slider-header">
+                <span>Konstanta Kiri (b):</span>
+                <span class="mr-slider-val" id="valB">6</span>
+              </div>
+              <input type="range" class="mr-slider" id="sliderB" min="-20" max="20" value="6" oninput="solveInteractivePLSV()">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="mr-slider-group">
+              <div class="mr-slider-header">
+                <span>Ruas Kanan (c):</span>
+                <span class="mr-slider-val" id="valC">16</span>
+              </div>
+              <input type="range" class="mr-slider" id="sliderC" min="-20" max="30" value="16" oninput="solveInteractivePLSV()">
+            </div>
+          </div>
+        </div>
+
+        <div class="mr-live-result-box">
+          <div>
+            <div class="mr-live-result-label">Persamaan yang terbentuk:</div>
+            <div class="fs-5 text-warning font-monospace" id="displayEquation">2x + 6 = 16</div>
+          </div>
+          <div class="text-end">
+            <div class="mr-live-result-label">Solusi Nilai x:</div>
+            <div class="mr-live-result-val" id="displaySolution">x = 5.00</div>
+          </div>
+        </div>
+        <div class="mt-2 text-dim small" id="stepDeduction">
+          Langkah: $2x = 16 - 6 \implies 2x = 10 \implies x = \frac{10}{2} = 5$
+        </div>
+      </section>
+
+      <!-- Step Revealer (Kasus Nyata) -->
+      <section class="mr-card" id="studi-kasus">
+        <div class="mr-card-header">
+          <div class="mr-card-icon cyan"><i class="bi bi-lightbulb-fill"></i></div>
+          <div>
+            <h2 class="mr-card-title">Studi Kasus Langkah Demi Langkah</h2>
+            <p class="mr-card-subtitle">Penerapan model matematika pada soal cerita</p>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-3 mb-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+          <strong class="text-white">Masalah:</strong> Rian membeli 3 buah buku catatan matematika dan satu buah pulpen seharga Rp 4.000. Total yang harus dibayarkan adalah Rp 22.000. Berapakah harga satu buah buku catatan?
+        </div>
+
+        <div class="mr-walkthrough">
+          <div class="mr-step-item">
+            <div class="mr-step-num">1</div>
+            <div class="mr-step-title">Definisikan Variabel</div>
+            <div class="mr-step-body">Misalkan harga 1 buah buku catatan adalah $x$ (dalam rupiah).</div>
+          </div>
+
+          <div class="mr-step-item">
+            <div class="mr-step-num">2</div>
+            <div class="mr-step-title">Rumuskan Persamaan Model Matematika</div>
+            <div class="mr-step-body">
+              3 buku + 1 pulpen = Total harga<br>
+              $$3x + 4.000 = 22.000$$
+            </div>
+          </div>
+
+          <div class="mr-step-item">
+            <div class="mr-step-num">3</div>
+            <div class="mr-step-title">Isolasi Variabel (Eliminasi Konstanta)</div>
+            <div class="mr-step-body">
+              Kurangkan kedua sisi dengan $4.000$:
+              <div id="hiddenStep1" class="mr-hidden-step">
+                $$3x = 22.000 - 4.000 \implies 3x = 18.000$$
+              </div>
+              <button class="mr-reveal-btn" id="revealBtn1" onclick="revealStep('hiddenStep1', 'revealBtn1')">
+                <i class="bi bi-eye"></i> Tampilkan Perhitungan Ruas
+              </button>
+            </div>
+          </div>
+
+          <div class="mr-step-item">
+            <div class="mr-step-num">4</div>
+            <div class="mr-step-title">Dapatkan Solusi Akhir</div>
+            <div class="mr-step-body">
+              Bagi kedua sisi dengan koefisien $3$:
+              <div id="hiddenStep2" class="mr-hidden-step">
+                $$x = \frac{18.000}{3} = \mathbf{6.000}$$
+                <div class="text-success fw-bold mt-1">Kesimpulan: Harga 1 buah buku catatan adalah Rp 6.000.</div>
+              </div>
+              <button class="mr-reveal-btn" id="revealBtn2" onclick="revealStep('hiddenStep2', 'revealBtn2')">
+                <i class="bi bi-check-circle"></i> Tampilkan Jawaban Akhir
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════ SCAFFOLDING CHECKPOINT -->
+      <section class="mr-scaffold-container" id="kuis">
+        <div class="mr-scaffold-header">
+          <h2 class="mr-scaffold-title">
+            <i class="bi bi-cpu-fill text-warning"></i> Active Recall Checkpoint: Penyelesaian PLSV Bertahap
+          </h2>
+          <div class="mr-stage-dots">
+            <div class="mr-stage-dot active" id="dot-1">1</div>
+            <div class="mr-stage-dot" id="dot-2">2</div>
+            <div class="mr-stage-dot" id="dot-3">3</div>
+            <div class="mr-stage-dot" id="dot-4">4</div>
+          </div>
+        </div>
+
+        <p class="text-secondary small mb-4">
+          Selesaikan persamaan linear satu variabel (PLSV) berikut: $$5x - 7 = 18$$
+          Sistem akan memvalidasi penalaran aljabar dan keseimbangan ruas Anda langkah demi langkah.
+        </p>
+
+        <!-- STAGE 1: Isolasi Ruas & Pemindahan Konstanta -->
+        <div class="mr-scaffold-step active" id="stage-1">
+          <div class="mr-step-badge"><i class="bi bi-1-circle"></i> Tahap 1: Penyeimbangan Ruas Konstanta</div>
+          <div class="mr-step-prompt">
+            Tambahkan kedua ruas dengan angka $7$ untuk mengeliminasi $-7$ di ruas kiri: $5x = 18 + 7$. Berapakah nilai ruas kanan saat ini?
+          </div>
+          <div class="mr-math-input-group">
+            <span class="mr-math-prefix">5x = </span>
+            <input type="text" class="mr-math-field" id="inputStage1" placeholder="Contoh: 25" autocomplete="off">
+          </div>
+          <div class="mr-step-btn-group">
+            <button class="mr-btn-validate" onclick="validateStage(1)">
+              <i class="bi bi-check2-circle"></i> Validasi Tahap 1
+            </button>
+            <button class="mr-btn-ai-hint" onclick="requestAiHint(1, 'Menjumlahkan 18 + 7 = 25')">
+              <i class="bi bi-robot"></i> Minta Bantuan AI Tutor
+            </button>
+          </div>
+          <div class="mr-ai-tutor-box" id="aiTutorBox-1">
+            <div class="mr-ai-tutor-header">
+              <span class="mr-ai-tutor-badge"><i class="bi bi-stars"></i> MathThon AI Micro-Tutor</span>
+              <span class="badge bg-dark-subtle text-secondary small">Socratic Scaffolding</span>
+            </div>
+            <p class="mr-ai-tutor-text" id="aiTutorText-1"></p>
+          </div>
+        </div>
+
+        <!-- STAGE 2: Pembagian Koefisien Variabel -->
+        <div class="mr-scaffold-step" id="stage-2">
+          <div class="mr-step-badge"><i class="bi bi-2-circle"></i> Tahap 2: Pembagian Koefisien Variabel</div>
+          <div class="mr-step-prompt">
+            Untuk menyisakan variabel $x$ tunggal, bagilah kedua ruas dengan koefisiennya ($5$): $x = \frac{25}{5}$. Berapakah nilai dari $x$?
+          </div>
+          <div class="mr-math-input-group">
+            <span class="mr-math-prefix">x = </span>
+            <input type="text" class="mr-math-field" id="inputStage2" placeholder="Contoh: 5" autocomplete="off">
+          </div>
+          <div class="mr-step-btn-group">
+            <button class="mr-btn-validate" onclick="validateStage(2)">
+              <i class="bi bi-check2-circle"></i> Validasi Tahap 2
+            </button>
+            <button class="mr-btn-ai-hint" onclick="requestAiHint(2, 'Membagi 25 dengan 5 menghasilkan 5')">
+              <i class="bi bi-robot"></i> Minta Bantuan AI Tutor
+            </button>
+          </div>
+          <div class="mr-ai-tutor-box" id="aiTutorBox-2">
+            <div class="mr-ai-tutor-header">
+              <span class="mr-ai-tutor-badge"><i class="bi bi-stars"></i> MathThon AI Micro-Tutor</span>
+              <span class="badge bg-dark-subtle text-secondary small">Socratic Scaffolding</span>
+            </div>
+            <p class="mr-ai-tutor-text" id="aiTutorText-2"></p>
+          </div>
+        </div>
+
+        <!-- STAGE 3: Substitusi Verifikasi Kebenaran -->
+        <div class="mr-scaffold-step" id="stage-3">
+          <div class="mr-step-badge"><i class="bi bi-3-circle"></i> Tahap 3: Uji Substitusi Mandiri</div>
+          <div class="mr-step-prompt">
+            Uji kembali kebenaran jawaban Anda dengan mensubstitusikan $x = 5$ ke ruas kiri persamaan awal: $5(5) - 7 = 25 - 7$. Berapakah hasilnya?
+          </div>
+          <div class="mr-math-input-group">
+            <span class="mr-math-prefix">25 - 7 = </span>
+            <input type="text" class="mr-math-field" id="inputStage3" placeholder="Contoh: 18" autocomplete="off">
+          </div>
+          <div class="mr-step-btn-group">
+            <button class="mr-btn-validate" onclick="validateStage(3)">
+              <i class="bi bi-check2-circle"></i> Validasi Pembuktian
+            </button>
+            <button class="mr-btn-ai-hint" onclick="requestAiHint(3, 'Menghitung 25 - 7 = 18 yang sama dengan ruas kanan')">
+              <i class="bi bi-robot"></i> Minta Bantuan AI Tutor
+            </button>
+          </div>
+          <div class="mr-ai-tutor-box" id="aiTutorBox-3">
+            <div class="mr-ai-tutor-header">
+              <span class="mr-ai-tutor-badge"><i class="bi bi-stars"></i> MathThon AI Micro-Tutor</span>
+              <span class="badge bg-dark-subtle text-secondary small">Socratic Scaffolding</span>
+            </div>
+            <p class="mr-ai-tutor-text" id="aiTutorText-3"></p>
+          </div>
+        </div>
+
+        <!-- STAGE 4: Penulisan Himpunan Penyelesaian (HP) -->
+        <div class="mr-scaffold-step" id="stage-4">
+          <div class="mr-step-badge"><i class="bi bi-4-circle"></i> Tahap 4: Format Himpunan Penyelesaian</div>
+          <div class="mr-step-prompt">
+            Tuliskan himpunan penyelesaian resmi dalam kurung kurawal atau nilai solusi $x$:
+          </div>
+          <div class="mr-math-input-group">
+            <span class="mr-math-prefix">HP = </span>
+            <input type="text" class="mr-math-field" id="inputStage4" placeholder="Contoh: {5} atau 5" autocomplete="off">
+          </div>
+          <div class="mr-step-btn-group">
+            <button class="mr-btn-validate" onclick="validateStage(4)">
+              <i class="bi bi-check2-circle"></i> Submit Solusi Lengkap
+            </button>
+            <button class="mr-btn-ai-hint" onclick="requestAiHint(4, 'Menuliskan himpunan penyelesaian HP = {5}')">
+              <i class="bi bi-robot"></i> Minta Bantuan AI Tutor
+            </button>
+          </div>
+          <div class="mr-ai-tutor-box" id="aiTutorBox-4">
+            <div class="mr-ai-tutor-header">
+              <span class="mr-ai-tutor-badge"><i class="bi bi-stars"></i> MathThon AI Micro-Tutor</span>
+              <span class="badge bg-dark-subtle text-secondary small">Socratic Scaffolding</span>
+            </div>
+            <p class="mr-ai-tutor-text" id="aiTutorText-4"></p>
+          </div>
+        </div>
+
+        <!-- COMPLETION CELEBRATION CARD -->
+        <div class="mr-completion-card" id="completionCard">
+          <div class="mr-completion-icon"><i class="bi bi-check-circle-fill"></i></div>
+          <h3 class="mr-completion-title">Fondasi Aljabar Sukses Terkuasai!</h3>
+          <p class="mr-completion-desc">
+            Hebat! Dengan menguasai konsep dasar aljabar dan PLSV, gerbang kalkulus seperti <strong>Limit Fungsi Aljabar</strong> serta <strong>Matriks</strong> kini terbuka untuk Anda.
+          </p>
+          <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="{{ url_for('materi.materi_user') }}" class="btn btn-outline-light rounded-pill px-4">
+              <i class="bi bi-grid-fill me-1"></i> Kembali ke Katalog
+            </a>
+            <a href="{{ url_for('materi.materi_detail', materi_identifier='limit') }}" class="btn btn-warning fw-bold rounded-pill px-4">
+              <i class="bi bi-arrow-right-circle-fill me-1"></i> Lanjut: Limit Fungsi Aljabar
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    const MATERI_SLUG = "aljabar";
+    let activeSeconds = 0;
+    let currentStage = 1;
+    let isCompletedModule = false;
+
+    document.addEventListener("DOMContentLoaded", function() {
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}],
+          throwOnError: false
         });
-    </script>
+      }
+      solveInteractivePLSV();
+      loadSavedProgress();
+      startActiveTimer();
+    });
+
+    // ── Stateful Timer & Micro-Metrics ─────────────────────────────
+    function startActiveTimer() {
+      setInterval(() => {
+        activeSeconds++;
+        const mins = String(Math.floor(activeSeconds / 60)).padStart(2, '0');
+        const secs = String(activeSeconds % 60).padStart(2, '0');
+        const counterEl = document.getElementById("activeTimeCounter");
+        if (counterEl) counterEl.textContent = `${mins}:${secs}`;
+
+        if (activeSeconds % 60 === 0) {
+          syncProgressToServer(currentStage - 1, isCompletedModule, 60);
+        }
+      }, 1000);
+    }
+
+    async function loadSavedProgress() {
+      try {
+        const res = await fetch(`/user/materi/api/get-progress/${MATERI_SLUG}`);
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.status === "success") {
+          activeSeconds = data.time_spent_seconds || 0;
+          if (data.is_completed) {
+            markAllStagesCompleted();
+          } else if (data.checkpoint_stage > 0) {
+            goToStage(data.checkpoint_stage + 1);
+          }
+        }
+      } catch (err) {
+        console.warn("[Progress Load Warning]:", err);
+      }
+    }
+
+    async function syncProgressToServer(stage, completed, spentDelta) {
+      try {
+        await fetch("/user/materi/api/track-progress", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            materi_slug: MATERI_SLUG,
+            checkpoint_stage: stage,
+            is_completed: completed,
+            time_spent: spentDelta
+          })
+        });
+      } catch (err) {
+        console.warn("[Progress Sync Warning]:", err);
+      }
+    }
+
+    // ── Scaffolding Multi-stage Logic ──────────────────────────────
+    function validateStage(stageNum) {
+      let isCorrect = false;
+      let userVal = "";
+      let expectedConcept = "";
+
+      if (stageNum === 1) {
+        userVal = document.getElementById("inputStage1").value.trim().replace(/\s+/g, '');
+        expectedConcept = "Menjumlahkan 18 + 7 menghasilkan 25";
+        if (userVal === "25" || userVal === "5x=25") {
+          isCorrect = true;
+        }
+      } else if (stageNum === 2) {
+        userVal = document.getElementById("inputStage2").value.trim().toLowerCase().replace(/\s+/g, '');
+        expectedConcept = "Membagi 25 dengan 5 menghasilkan 5";
+        if (userVal === "5" || userVal === "x=5") {
+          isCorrect = true;
+        }
+      } else if (stageNum === 3) {
+        userVal = document.getElementById("inputStage3").value.trim().replace(/\s+/g, '');
+        expectedConcept = "Uji kebenaran 25 - 7 = 18";
+        if (userVal === "18") {
+          isCorrect = true;
+        }
+      } else if (stageNum === 4) {
+        userVal = document.getElementById("inputStage4").value.trim().toLowerCase().replace(/\s+/g, '');
+        expectedConcept = "Himpunan penyelesaian HP = {5}";
+        if (userVal === "{5}" || userVal === "5" || userVal === "x=5" || userVal === "hp={5}") {
+          isCorrect = true;
+        }
+      }
+
+      const tutorBox = document.getElementById(`aiTutorBox-${stageNum}`);
+      const tutorText = document.getElementById(`aiTutorText-${stageNum}`);
+
+      if (isCorrect) {
+        tutorBox.classList.remove("visible");
+        const dot = document.getElementById(`dot-${stageNum}`);
+        dot.classList.remove("active");
+        dot.classList.add("completed");
+        dot.innerHTML = `<i class="bi bi-check-lg"></i>`;
+
+        document.getElementById("hudCurrentStage").textContent = stageNum;
+        syncProgressToServer(stageNum, stageNum === 4, 10);
+
+        if (stageNum < 4) {
+          goToStage(stageNum + 1);
+        } else {
+          markAllStagesCompleted();
+        }
+      } else {
+        triggerAdaptiveFeedback(stageNum, userVal, expectedConcept);
+      }
+    }
+
+    function goToStage(nextStage) {
+      currentStage = nextStage;
+      document.querySelectorAll(".mr-scaffold-step").forEach(el => el.classList.remove("active"));
+      const nextStepEl = document.getElementById(`stage-${nextStage}`);
+      if (nextStepEl) nextStepEl.classList.add("active");
+
+      document.querySelectorAll(".mr-stage-dot").forEach((d, idx) => {
+        if (idx + 1 === nextStage) {
+          d.classList.add("active");
+        }
+      });
+      document.getElementById("hudCurrentStage").textContent = nextStage - 1;
+    }
+
+    function markAllStagesCompleted() {
+      isCompletedModule = true;
+      document.querySelectorAll(".mr-scaffold-step").forEach(el => el.classList.remove("active"));
+      for (let i = 1; i <= 4; i++) {
+        const dot = document.getElementById(`dot-${i}`);
+        if (dot) {
+          dot.classList.remove("active");
+          dot.classList.add("completed");
+          dot.innerHTML = `<i class="bi bi-check-lg"></i>`;
+        }
+      }
+      document.getElementById("hudCurrentStage").textContent = "4";
+      document.getElementById("hudMasteryStatus").textContent = "Lulus & Terverifikasi ⭐";
+      document.getElementById("completionCard").classList.add("visible");
+      
+      const nextNode = document.getElementById("nextModuleNode");
+      if (nextNode) {
+        nextNode.classList.remove("locked");
+        nextNode.classList.add("completed");
+        nextNode.innerHTML = `<i class="bi bi-unlock-fill text-warning"></i> Limit Aljabar (Terbuka)`;
+      }
+
+      syncProgressToServer(4, 1, 15);
+    }
+
+    // ── AI Adaptive Micro-Tutor API Handler ────────────────────────
+    async function requestAiHint(stageNum, concept) {
+      const inputEl = document.getElementById(`inputStage${stageNum}`);
+      const val = inputEl ? inputEl.value : "";
+      triggerAdaptiveFeedback(stageNum, val, concept, true);
+    }
+
+    async function triggerAdaptiveFeedback(stageNum, userVal, concept, manual = false) {
+      const tutorBox = document.getElementById(`aiTutorBox-${stageNum}`);
+      const tutorText = document.getElementById(`aiTutorText-${stageNum}`);
+      tutorBox.classList.add("visible");
+      tutorText.innerHTML = `<span class="spinner-border spinner-border-sm text-warning me-2"></span> AI Tutor sedang menganalisis pemikiran aljabar Anda...`;
+
+      try {
+        const res = await fetch("/user/materi/api/adaptive-hint", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            materi: "Pengenalan Aljabar & PLSV",
+            step: stageNum,
+            question: `Tahap ${stageNum} Penyelesaian 5x - 7 = 18`,
+            user_input: userVal || "(kosong)",
+            expected_concept: concept
+          })
+        });
+
+        const data = await res.json();
+        if (data.status === "success" && data.hint) {
+          tutorText.innerHTML = `<i class="bi bi-chat-quote-fill text-warning me-1"></i> ${data.hint}`;
+        } else {
+          tutorText.innerHTML = "Periksa kembali aturan pindah ruas: jika tanda minus pindah ruas, maka tandanya berubah menjadi positif.";
+        }
+      } catch (err) {
+        tutorText.innerHTML = "💡 <strong>Petunjuk:</strong> Pindahkan -7 menjadi +7 pada ruas kanan, lalu bagi kedua sisi dengan 5.";
+      }
+    }
+
+    // ── Sandbox & Global Listeners ─────────────────────────────────
+    window.addEventListener("scroll", function() {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById("progressBar").style.width = (winScroll / height) * 100 + "%";
+    });
+
+    const sections = document.querySelectorAll("main section");
+    const navLinks = document.querySelectorAll(".mr-toc-link");
+    window.addEventListener("scroll", function() {
+      let current = "";
+      sections.forEach(sec => { if (pageYOffset >= sec.offsetTop - 120) current = sec.getAttribute("id"); });
+      navLinks.forEach(l => {
+        l.classList.remove("active");
+        if (l.getAttribute("href") === "#" + current) l.classList.add("active");
+      });
+    });
+
+    function toggleMobileToc() { document.getElementById("sidebarToc").classList.toggle("open-mobile"); }
+
+    function revealStep(stepId, btnId) {
+      document.getElementById(stepId).classList.add("revealed");
+      document.getElementById(btnId).style.display = "none";
+      if (window.renderMathInElement) {
+        renderMathInElement(document.getElementById(stepId), { delimiters: [{left: '$$', right: '$$', display: true}] });
+      }
+    }
+
+    function solveInteractivePLSV() {
+      const a = parseFloat(document.getElementById("sliderA")?.value) || 2;
+      const b = parseFloat(document.getElementById("sliderB")?.value) || 4;
+      const c = parseFloat(document.getElementById("sliderC")?.value) || 10;
+
+      const valA = document.getElementById("valA");
+      if (valA) valA.innerText = a;
+      const valB = document.getElementById("valB");
+      if (valB) valB.innerText = b;
+      const valC = document.getElementById("valC");
+      if (valC) valC.innerText = c;
+
+      const signB = b >= 0 ? `+ ${b}` : `- ${Math.abs(b)}`;
+      const eqDisplay = document.getElementById("displayEquation");
+      if (eqDisplay) eqDisplay.innerText = `${a}x ${signB} = ${c}`;
+
+      const x = (c - b) / a;
+      const solDisplay = document.getElementById("displaySolution");
+      if (solDisplay) solDisplay.innerText = `x = ${x.toFixed(2)}`;
+
+      const stepText = `Langkah: ${a}x = ${c} - (${b}) \\implies ${a}x = ${(c-b)} \\implies x = \\frac{${(c-b)}}{${a}} = ${x.toFixed(2)}`;
+      const stepElem = document.getElementById("stepDeduction");
+      if (stepElem) {
+        stepElem.innerText = `$$${stepText}$$`;
+        if (window.renderMathInElement) {
+          renderMathInElement(stepElem, { delimiters: [{left: '$$', right: '$$', display: true}] });
+        }
+      }
+    }
+  </script>
 </body>
-    <style>
-        /* Hamburger Button - Hanya muncul di mobile */
-        .hamburger-btn {
-            display: none;
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            z-index: 1100;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            border-radius: 10px;
-            width: 50px;
-            height: 50px;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
-        }
-        .hamburger-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-        }
-        .hamburger-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Close Button di dalam Sidenav */
-        .close-btn {
-            display: none;
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #e74c3c;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 1001;
-        }
-        .close-btn:hover {
-            background: #c0392b;
-            transform: rotate(90deg);
-        }
-
-        /* Sidenav Styling */
-        .sidenav {
-            height: 100%;
-            width: 200px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
-            padding-top: 80px;
-            border-right: 1px solid #ddd;
-            z-index: 1000;
-            transition: transform 0.3s ease;
-        }
-        .sidenav h3 {
-            text-align: center;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: #ecf0f1;
-            font-weight: 600;
-        }
-        .sidenav ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .sidenav ul li {
-            margin: 10px 0;
-        }
-        .sidenav ul li a {
-            color: #bdc3c7;
-            text-decoration: none;
-            display: block;
-            padding: 12px 16px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            margin: 0 10px;
-        }
-        .sidenav ul li a:hover {
-            background: #34495e;
-            color: #fff;
-            transform: translateX(5px);
-            border-left: 4px solid #3498db;
-        }
-
-        /* Overlay untuk menutup menu saat klik di luar */
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .overlay.active {
-            display: block;
-            opacity: 1;
-        }
-
-        /* Responsive Design untuk Mobile */
-        @media (max-width: 768px) {
-            .hamburger-btn {
-                display: block;
-            }
-            .close-btn {
-                display: block;
-            }
-            .sidenav {
-                width: 280px;
-                transform: translateX(-100%);
-                padding-top: 60px;
-                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
-            }
-            .sidenav.active {
-                transform: translateX(0);
-            }
-            #isi-materi {
-                margin-left: 0 !important;
-                padding: 20px 15px;
-            }
-            .container {
-                padding-top: 70px;
-            }
-        }
-
-        /* Desktop - Sidenav selalu terlihat */
-        @media (min-width: 769px) {
-            .sidenav {
-                transform: translateX(0) !important;
-            }
-        }
-    </style>
 </html>

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materi: Integral & Kalkulus Integral - MathThon</title>
+  <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/materi_reader.css') }}">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body class="mr-body">
+
+  <div class="mr-progress-container"><div class="mr-progress-bar" id="progressBar"></div></div>
+
+  <header class="mr-topbar">
+    <div class="mr-topbar-left">
+      <a href="{{ url_for('materi.materi_user') }}" class="mr-back-btn">
+        <i class="bi bi-arrow-left"></i> <span>Daftar Materi</span>
+      </a>
+      <span class="mr-topic-badge"><i class="bi bi-infinity"></i> Kalkulus Integral</span>
+    </div>
+    <div class="mr-topbar-right">
+      <span class="mr-read-time"><i class="bi bi-clock"></i> 9 Menit Baca</span>
+      <button class="mr-hamburger-btn" onclick="toggleMobileToc()" aria-label="Toggle Daftar Isi">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="mr-layout-wrap">
+    <aside class="mr-sidebar-toc" id="sidebarToc">
+      <div class="mr-toc-heading"><i class="bi bi-compass"></i> Navigasi Integral</div>
+      <nav class="mr-toc-nav">
+        <a href="#pengantar" class="mr-toc-link active"><i class="bi bi-stars"></i> 1. Akumulasi & Luas Lengkung</a>
+        <a href="#definisi" class="mr-toc-link"><i class="bi bi-slash-lg"></i> 2. Antiturunan & Mengapa +C?</a>
+        <a href="#aturan" class="mr-toc-link"><i class="bi bi-list-stars"></i> 3. Aturan Dasar Integral</a>
+        <a href="#tentu" class="mr-toc-link"><i class="bi bi-bounding-box-circles"></i> 4. Teorema Dasar Kalkulus</a>
+        <a href="#sandbox" class="mr-toc-link"><i class="bi bi-sliders"></i> 5. Live Area Calculator</a>
+        <a href="#studi-kasus" class="mr-toc-link"><i class="bi bi-car-front"></i> 6. Kasus: Jarak dari Kecepatan</a>
+        <a href="#kuis" class="mr-toc-link"><i class="bi bi-patch-question"></i> 7. Uji Cepat Mandiri</a>
+      </nav>
+      <div class="mr-toc-divider"></div>
+      <div class="p-2 rounded" style="background: rgba(255,255,255,0.03); font-size: 0.8rem; color: var(--mr-text-muted);">
+        <i class="bi bi-info-circle text-warning me-1"></i> Jika turunan adalah proses "memecah menjadi laju sesaat", maka integral adalah proses "mengumpulkan kembali menjadi total utuh".
+      </div>
+    </aside>
+
+    <main class="mr-article">
+      
+      <!-- Learning Path Prerequisite Banner -->
+      <div class="mr-path-banner">
+        <div>
+          <span class="text-secondary small fw-bold text-uppercase d-block mb-1">
+            <i class="bi bi-diagram-3-fill text-warning me-1"></i> Learning Path Kurikulum
+          </span>
+          <div class="mr-path-flow">
+            <span class="mr-path-node completed"><i class="bi bi-check-circle-fill"></i> Limit Aljabar</span>
+            <i class="bi bi-chevron-right text-muted small"></i>
+            <span class="mr-path-node completed"><i class="bi bi-check-circle-fill"></i> Fungsi Turunan</span>
+            <i class="bi bi-chevron-right text-muted small"></i>
+            <span class="mr-path-node current"><i class="bi bi-record-circle-fill"></i> Integral & Luas (Puncak Kalkulus)</span>
+          </div>
+        </div>
+        <div class="text-end">
+          <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill">
+            <i class="bi bi-shield-check me-1"></i> Prasyarat Terpenuhi
+          </span>
+        </div>
+      </div>
+
+      <!-- Stateful Learning Analytics HUD -->
+      <div class="mr-analytics-hud">
+        <div class="mr-hud-item">
+          <div class="mr-hud-icon indigo"><i class="bi bi-stopwatch-fill"></i></div>
+          <div>
+            <div class="small text-muted">Durasi Belajar Aktif</div>
+            <div class="mr-hud-val" id="activeTimeCounter">00:00</div>
+          </div>
+        </div>
+        <div class="mr-hud-item">
+          <div class="mr-hud-icon gold"><i class="bi bi-ladder"></i></div>
+          <div>
+            <div class="small text-muted">Scaffolding Tahapan</div>
+            <div class="mr-hud-val"><span id="hudCurrentStage">0</span> / 4 Selesai</div>
+          </div>
+        </div>
+        <div class="mr-hud-item">
+          <div class="mr-hud-icon emerald"><i class="bi bi-award-fill"></i></div>
+          <div>
+            <div class="small text-muted">Status Penguasaan</div>
+            <div class="mr-hud-val" id="hudMasteryStatus">Dalam Eksplorasi</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero -->
+      <section class="mr-hero-card" id="pengantar">
+        <h1 class="mr-hero-title">Kalkulus Integral: Seni Menghitung Akumulasi & Luas Lengkung</h1>
+        <p class="mr-hero-desc">
+          Bagaimana cara menghitung luas danau yang berkelok-kelok atau volume kubah masjid yang melengkung indah? Bentuk geometris biasa gagal, tetapi <strong>Integral</strong> memecahkan bentuk lengkung menjadi triliunan potongan persegi panjang tipis lalu menjumlahkannya secara sempurna.
+        </p>
+
+        <div class="mr-realworld-box">
+          <div class="d-flex align-items-center gap-2 mb-2 text-warning fw-bold">
+            <i class="bi bi-lightning-charge fs-5"></i> Fisika Roket & Sinyal Telekomunikasi
+          </div>
+          <p class="text-secondary small mb-2">
+            Sensor akselerometer di ponsel Anda mengukur percepatan. Chip ponsel menggunakan <em>integral</em> untuk menghitung kecepatan sesaat, lalu mengintegralkannya sekali lagi untuk menentukan posisi GPS dan perpindahan langkah kaki Anda!
+          </p>
+          <div class="mr-realworld-pills">
+            <span class="mr-pill">📡 Pengolahan Sinyal Audio (Fourier)</span>
+            <span class="mr-pill">🔋 Perhitungan Konsumsi Energi Baterai</span>
+            <span class="mr-pill">🚀 Trajektori Gravitasi Satelit</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Definisi & Mengapa +C -->
+      <section class="mr-card" id="definisi">
+        <div class="mr-card-header">
+          <div class="mr-card-icon gold"><i class="bi bi-slash-lg"></i></div>
+          <div>
+            <h2 class="mr-card-title">Antiturunan & Misteri Konstanta (+C)</h2>
+            <p class="mr-card-subtitle">Mengapa integral tak tentu selalu diakhiri dengan + C?</p>
+          </div>
+        </div>
+
+        <p class="text-secondary">
+          Perhatikan bahwa turunan dari $x^2 + 5$, $x^2 - 100$, dan $x^2 + 0$ adalah sama-sama <strong>$2x$</strong> (karena turunan konstanta adalah 0).
+          Oleh karena itu, ketika kita membalik prosesnya (mencari antiturunan dari $2x$), kita tidak tahu pasti angka konstanta aslinya, sehingga wajib menambahkan lambang konstanta integrasi <strong>$+ C$</strong>.
+        </p>
+
+        <div class="mr-formula-box">
+          <span class="mr-formula-badge">Integral Tak Tentu</span>
+          <div class="mr-formula-render">$$\int f(x) \, dx = F(x) + C \iff F'(x) = f(x)$$</div>
+          <div class="mr-formula-expl">
+            Simbol $\int$ adalah huruf <em>S</em> panjang (singkatan kata Latin <em>Summa</em> yang berarti penjumlahan total).
+          </div>
+        </div>
+      </section>
+
+      <!-- Aturan Dasar -->
+      <section class="mr-card" id="aturan">
+        <div class="mr-card-header">
+          <div class="mr-card-icon indigo"><i class="bi bi-list-stars"></i></div>
+          <div>
+            <h2 class="mr-card-title">Aturan-Aturan Dasar Pengintegralan</h2>
+            <p class="mr-card-subtitle">Kaidah baku menghitung integral aljabar</p>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-warning fw-bold mb-1">1. Aturan Pangkat (Power Rule)</div>
+              <div class="font-monospace text-white small">$$\int x^n \, dx = \frac{1}{n+1} x^{n+1} + C \quad (n \neq -1)$$</div>
+              <p class="small text-secondary mb-0 mt-1">Pangkat bertambah 1, lalu bagi dengan pangkat baru tersebut!</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-info fw-bold mb-1">2. Kasus Khusus $n = -1$</div>
+              <div class="font-monospace text-white small">$$\int \frac{1}{x} \, dx = \ln|x| + C$$</div>
+              <p class="small text-secondary mb-0 mt-1">Satu-satunya pangkat yang tidak bisa dibagi dengan $n+1=0$.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-emerald fw-bold mb-1" style="color: #34d399;">3. Integral Konstanta</div>
+              <div class="font-monospace text-white small">$$\int k \, dx = kx + C$$</div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-cyan fw-bold mb-1" style="color: #22d3ee;">4. Sifat Kelinearan</div>
+              <div class="font-monospace text-white small">$$\int (af(x) \pm bg(x)) \, dx = a\int f(x)\,dx \pm b\int g(x)\,dx$$</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Teorema Dasar Kalkulus -->
+      <section class="mr-card" id="tentu">
+        <div class="mr-card-header">
+          <div class="mr-card-icon emerald"><i class="bi bi-bounding-box-circles"></i></div>
+          <div>
+            <h2 class="mr-card-title">Teorema Dasar Kalkulus: Integral Tentu</h2>
+            <p class="mr-card-subtitle">Menghitung luas daerah pasti berbatas interval $[a, b]$</p>
+          </div>
+        </div>
+
+        <div class="mr-formula-box">
+          <span class="mr-formula-badge">Teorema Fundamental</span>
+          <div class="mr-formula-render">$$\int_a^b f(x) \, dx = [F(x)]_a^b = F(b) - F(a)$$</div>
+          <div class="mr-formula-expl">
+            Pada integral tentu, konstanta $C$ saling menghilangkan karena $(F(b) + C) - (F(a) + C) = F(b) - F(a)$. Hasil akhirnya selalu berupa <strong>bilangan riil pasti</strong> (mewakili luas daerah).
+          </div>
+        </div>
+      </section>
+
+      <!-- Sandbox Interaktif -->
+      <section class="mr-sandbox" id="sandbox">
+        <div class="mr-sandbox-title">
+          <i class="bi bi-sliders"></i> Sandbox: Kalkulator Luas Integral Tentu $\int_0^b x^2 \, dx$
+        </div>
+        <p class="mr-sandbox-desc">
+          Geser batas atas ($b$) kurva parabola $f(x) = x^2$ untuk melihat akumulasi luas daerah di bawah kurva dihitung seketika dengan Teorema Dasar Kalkulus!
+        </p>
+
+        <div class="mr-slider-group">
+          <div class="mr-slider-header">
+            <span>Batas Atas Integrasi (b):</span>
+            <span class="mr-slider-val" id="intBVal">b = 3</span>
+          </div>
+          <input type="range" class="mr-slider" id="intBSlider" min="1" max="10" value="3" oninput="calcIntegral()">
+        </div>
+
+        <div class="mr-live-result-box">
+          <div>
+            <div class="mr-live-result-label">Evaluasi Antiturunan: $F(x) = \frac{x^3}{3}$</div>
+            <div class="fs-5 text-warning font-monospace" id="intCalcDisplay">F(3) - F(0) = (3³ / 3) - 0</div>
+          </div>
+          <div class="text-end">
+            <div class="mr-live-result-label">Luas Daerah Pasti:</div>
+            <div class="mr-live-result-val text-success" id="intResultDisplay">9.00 satuan luas</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Studi Kasus Nyata -->
+      <section class="mr-card" id="studi-kasus">
+        <div class="mr-card-header">
+          <div class="mr-card-icon cyan"><i class="bi bi-car-front-fill"></i></div>
+          <div>
+            <h2 class="mr-card-title">Studi Kasus: Menghitung Jarak Tempuh dari Kecepatan</h2>
+            <p class="mr-card-subtitle">Akumulasi kecepatan mobil listrik yang berakselerasi</p>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-3 mb-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+          Sebuah mobil listrik berakselerasi dari keadaan diam dengan fungsi kecepatan $v(t) = 6t$ m/detik. Berapa total jarak yang ditempuh mobil selama $4$ detik pertama?
+        </div>
+
+        <div class="mr-walkthrough">
+          <div class="mr-step-item">
+            <div class="mr-step-num">1</div>
+            <div class="mr-step-title">Gunakan Hubungan Fisika Jarak dan Integral Kecepatan</div>
+            <div class="mr-step-body">Total jarak adalah integral dari kecepatan: $$s = \int_0^4 v(t) \, dt = \int_0^4 6t \, dt$$</div>
+          </div>
+          <div class="mr-step-item">
+            <div class="mr-step-num">2</div>
+            <div class="mr-step-title">Integralkan Suku $6t$</div>
+            <div class="mr-step-body">
+              Antiturunan dari $6t^1$ adalah:
+              $$F(t) = 6 \left(\frac{t^2}{2}\right) = 3t^2$$
+              <div id="distStep" class="mr-hidden-step">
+                Evaluasi batas $[0, 4]$:
+                $$s = [3t^2]_0^4 = 3(4)^2 - 3(0)^2 = 3(16) - 0 = \mathbf{48 \text{ meter}}$$
+                <div class="text-success small fw-bold mt-1">Mobil menempuh total jarak 48 meter selama 4 detik pertama.</div>
+              </div>
+              <button class="mr-reveal-btn" id="distBtn" onclick="revealStep('distStep', 'distBtn')">
+                <i class="bi bi-eye"></i> Tampilkan Perhitungan
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════ SCAFFOLDING CHECKPOINT -->
+      <section class="mr-scaffold-container" id="kuis">
+        <div class="mr-scaffold-header">
+          <h2 class="mr-scaffold-title">
+            <i class="bi bi-cpu-fill text-warning"></i> Active Recall Checkpoint: Integrasi Aljabar Bertahap
+          </h2>
+          <div class="mr-stage-dots">
+            <div class="mr-stage-dot active" id="dot-1">1</div>
+            <div class="mr-stage-dot" id="dot-2">2</div>
+            <div class="mr-stage-dot" id="dot-3">3</div>
+            <div class="mr-stage-dot" id="dot-4">4</div>
+          </div>
+        </div>
+
+        <p class="text-secondary small mb-4">
+          Selesaikan integral tak tentu aljabar berikut: $$\int (3x^2 + 4x) \, dx$$
+          Sistem akan memvalidasi penguasaan aturan kebalikan diferensial Anda langkah demi langkah.
+        </p>
+
+        <!-- STAGE 1: Integralkan Suku Pertama 3x^2 -->
+        <div class="mr-scaffold-step active" id="stage-1">
+          <div class="mr-step-badge"><i class="bi bi-1-circle"></i> Tahap 1: Integralkan Suku Kuadrat</div>
+          <div class="mr-step-prompt">
+            Gunakan rumus antiturunan $\int a x^n \, dx = \frac{a}{n+1} x^{n+1}$. Berapakah hasil integral dari suku $3x^2$?
+          </div>
+          <div class="mr-math-input-group">
+            <span class="mr-math-prefix">∫ 3x² dx = </span>
+            <input type="text" class="mr-math-field" id="inputStage1" placeholder="Contoh: x^3 atau x³" autocomplete="off">
+          </div>
+          <div class="mr-step-btn-group">
+            <button class="mr-btn-validate" onclick="validateStage(1)">
+              <i class="bi bi-check2-circle"></i> Validasi Tahap 1
+            </button>
+            <button class="mr-btn-ai-hint" onclick="requestAiHint(1, 'Aturan pangkat integral 3/(2+1) * x^(2+1) = x^3')">
+              <i class="bi bi-robot"></i> Minta Bantuan AI Tutor
+            </button>
+          </div>
+          <div class="mr-ai-tutor-box" id="aiTutorBox-1">
+            <div class="mr-ai-tutor-header">
+              <span class="mr-ai-tutor-badge"><i class="bi bi-stars"></i> MathThon AI Micro-Tutor</span>
+              <span class="badge bg-dark-subtle text-secondary small">Socratic Scaffolding</span>
+            </div>
+            <p class="mr-ai-tutor-text" id="aiTutorText-1"></p>
+          </div>
+        </div>
+
+        <!-- STAGE 2: Integralkan Suku Kedua 4x -->
+        <div class="mr-scaffold-step" id="stage-2">
+          <div class="mr-step-badge"><i class="bi bi-2-circle"></i> Tahap 2: Integralkan Suku Linear</div>
+          <div class="mr-step-prompt">
+            Suku $4x$ berpangkat 1 ($4x^1$). Berapakah hasil integral dari suku $4x$?
+          </div>
+          <div class="mr-math-input-group">
+            <span class="mr-math-prefix">∫ 4x dx = </span>
+            <input type="text" class="mr-math-field" id="inputStage2" placeholder="Contoh: 2x^2 atau 2x²" autocomplete="off">
+          </div>
+          <div class="mr-step-btn-group">
+            <button class="mr-btn-validate" onclick="validateStage(2)">
+              <i class="bi bi-check2-circle"></i> Validasi Tahap 2
+            </button>
+            <button class="mr-btn-ai-hint" onclick="requestAiHint(2, 'Aturan pangkat integral 4/(1+1) * x^(1+1) = 2x^2')">
+              <i class="bi bi-robot"></i> Minta Bantuan AI Tutor
+            </button>
+          </div>
+          <div class="mr-ai-tutor-box" id="aiTutorBox-2">
+            <div class="mr-ai-tutor-header">
+              <span class="mr-ai-tutor-badge"><i class="bi bi-stars"></i> MathThon AI Micro-Tutor</span>
+              <span class="badge bg-dark-subtle text-secondary small">Socratic Scaffolding</span>
+            </div>
+            <p class="mr-ai-tutor-text" id="aiTutorText-2"></p>
+          </div>
+        </div>
+
+        <!-- STAGE 3: Konstanta Integrasi -->
+        <div class="mr-scaffold-step" id="stage-3">
+          <div class="mr-step-badge"><i class="bi bi-3-circle"></i> Tahap 3: Konstanta Arbitrer Integrasi</div>
+          <div class="mr-step-prompt">
+            Karena ini merupakan integral tak tentu (tanpa batas atas dan batas bawah), simbol wajib apa yang harus selalu ditambahkan di akhir fungsi?
+          </div>
+          <div class="mr-math-input-group">
+            <span class="mr-math-prefix">Simbol Konstanta = </span>
+            <input type="text" class="mr-math-field" id="inputStage3" placeholder="Contoh: C atau + C" autocomplete="off">
+          </div>
+          <div class="mr-step-btn-group">
+            <button class="mr-btn-validate" onclick="validateStage(3)">
+              <i class="bi bi-check2-circle"></i> Validasi Tahap 3
+            </button>
+            <button class="mr-btn-ai-hint" onclick="requestAiHint(3, 'Konstanta integrasi dituliskan sebagai simbol huruf kapital C')">
+              <i class="bi bi-robot"></i> Minta Bantuan AI Tutor
+            </button>
+          </div>
+          <div class="mr-ai-tutor-box" id="aiTutorBox-3">
+            <div class="mr-ai-tutor-header">
+              <span class="mr-ai-tutor-badge"><i class="bi bi-stars"></i> MathThon AI Micro-Tutor</span>
+              <span class="badge bg-dark-subtle text-secondary small">Socratic Scaffolding</span>
+            </div>
+            <p class="mr-ai-tutor-text" id="aiTutorText-3"></p>
+          </div>
+        </div>
+
+        <!-- STAGE 4: Sintesis Hasil Integral Tak Tentu Lengkap -->
+        <div class="mr-scaffold-step" id="stage-4">
+          <div class="mr-step-badge"><i class="bi bi-4-circle"></i> Tahap 4: Sintesis Antiturunan Lengkap</div>
+          <div class="mr-step-prompt">
+            Gabungkan seluruh komponen hasil integrasi di atas. Tuliskan jawaban akhir fungsi integral tak tentu:
+          </div>
+          <div class="mr-math-input-group">
+            <span class="mr-math-prefix">∫ (3x² + 4x) dx = </span>
+            <input type="text" class="mr-math-field" id="inputStage4" placeholder="Contoh: x^3 + 2x^2 + C" autocomplete="off">
+          </div>
+          <div class="mr-step-btn-group">
+            <button class="mr-btn-validate" onclick="validateStage(4)">
+              <i class="bi bi-check2-circle"></i> Submit Hasil Akhir
+            </button>
+            <button class="mr-btn-ai-hint" onclick="requestAiHint(4, 'Gabungkan x^3 + 2x^2 + C')">
+              <i class="bi bi-robot"></i> Minta Bantuan AI Tutor
+            </button>
+          </div>
+          <div class="mr-ai-tutor-box" id="aiTutorBox-4">
+            <div class="mr-ai-tutor-header">
+              <span class="mr-ai-tutor-badge"><i class="bi bi-stars"></i> MathThon AI Micro-Tutor</span>
+              <span class="badge bg-dark-subtle text-secondary small">Socratic Scaffolding</span>
+            </div>
+            <p class="mr-ai-tutor-text" id="aiTutorText-4"></p>
+          </div>
+        </div>
+
+        <!-- COMPLETION CELEBRATION CARD -->
+        <div class="mr-completion-card" id="completionCard">
+          <div class="mr-completion-icon"><i class="bi bi-award-fill"></i></div>
+          <h3 class="mr-completion-title">Kalkulus Master! Modul Integral Selesai</h3>
+          <p class="mr-completion-desc">
+            Selamat! Anda telah menyelesaikan seluruh trilogi Kalkulus Dasar MathThon (Limit $\to$ Turunan $\to$ Integral).
+            Kemampuan analisis matematika tingkat lanjut Anda kini telah terverifikasi secara resmi.
+          </p>
+          <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="{{ url_for('materi.materi_user') }}" class="btn btn-warning fw-bold rounded-pill px-4">
+              <i class="bi bi-grid-fill me-1"></i> Eksplorasi Modul Lain di Katalog
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    const MATERI_SLUG = "integral";
+    let activeSeconds = 0;
+    let currentStage = 1;
+    let isCompletedModule = false;
+
+    document.addEventListener("DOMContentLoaded", function() {
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}],
+          throwOnError: false
+        });
+      }
+      calcIntegral();
+      loadSavedProgress();
+      startActiveTimer();
+    });
+
+    // ── Stateful Timer & Micro-Metrics ─────────────────────────────
+    function startActiveTimer() {
+      setInterval(() => {
+        activeSeconds++;
+        const mins = String(Math.floor(activeSeconds / 60)).padStart(2, '0');
+        const secs = String(activeSeconds % 60).padStart(2, '0');
+        const counterEl = document.getElementById("activeTimeCounter");
+        if (counterEl) counterEl.textContent = `${mins}:${secs}`;
+
+        if (activeSeconds % 60 === 0) {
+          syncProgressToServer(currentStage - 1, isCompletedModule, 60);
+        }
+      }, 1000);
+    }
+
+    async function loadSavedProgress() {
+      try {
+        const res = await fetch(`/user/materi/api/get-progress/${MATERI_SLUG}`);
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.status === "success") {
+          activeSeconds = data.time_spent_seconds || 0;
+          if (data.is_completed) {
+            markAllStagesCompleted();
+          } else if (data.checkpoint_stage > 0) {
+            goToStage(data.checkpoint_stage + 1);
+          }
+        }
+      } catch (err) {
+        console.warn("[Progress Load Warning]:", err);
+      }
+    }
+
+    async function syncProgressToServer(stage, completed, spentDelta) {
+      try {
+        await fetch("/user/materi/api/track-progress", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            materi_slug: MATERI_SLUG,
+            checkpoint_stage: stage,
+            is_completed: completed,
+            time_spent: spentDelta
+          })
+        });
+      } catch (err) {
+        console.warn("[Progress Sync Warning]:", err);
+      }
+    }
+
+    // ── Scaffolding Multi-stage Logic ──────────────────────────────
+    function validateStage(stageNum) {
+      let isCorrect = false;
+      let userVal = "";
+      let expectedConcept = "";
+
+      if (stageNum === 1) {
+        userVal = document.getElementById("inputStage1").value.trim().toLowerCase().replace(/\s+/g, '');
+        expectedConcept = "Integral 3x^2 dx adalah x^3";
+        if (userVal === "x^3" || userVal === "x³" || userVal === "1x^3" || userVal === "1x³") {
+          isCorrect = true;
+        }
+      } else if (stageNum === 2) {
+        userVal = document.getElementById("inputStage2").value.trim().toLowerCase().replace(/\s+/g, '');
+        expectedConcept = "Integral 4x dx adalah 2x^2";
+        if (userVal === "2x^2" || userVal === "2x²" || userVal === "2*x^2") {
+          isCorrect = true;
+        }
+      } else if (stageNum === 3) {
+        userVal = document.getElementById("inputStage3").value.trim().toUpperCase().replace(/\s+/g, '');
+        expectedConcept = "Simbol konstanta integrasi adalah C";
+        if (userVal === "C" || userVal === "+C") {
+          isCorrect = true;
+        }
+      } else if (stageNum === 4) {
+        userVal = document.getElementById("inputStage4").value.trim().toLowerCase().replace(/\s+/g, '');
+        expectedConcept = "Integral lengkap x^3 + 2x^2 + C";
+        if (
+          userVal === "x^3+2x^2+c" || 
+          userVal === "x³+2x²+c" ||
+          userVal === "x^3+2x^2" ||
+          userVal === "2x^2+x^3+c"
+        ) {
+          isCorrect = true;
+        }
+      }
+
+      const tutorBox = document.getElementById(`aiTutorBox-${stageNum}`);
+      const tutorText = document.getElementById(`aiTutorText-${stageNum}`);
+
+      if (isCorrect) {
+        tutorBox.classList.remove("visible");
+        const dot = document.getElementById(`dot-${stageNum}`);
+        dot.classList.remove("active");
+        dot.classList.add("completed");
+        dot.innerHTML = `<i class="bi bi-check-lg"></i>`;
+
+        document.getElementById("hudCurrentStage").textContent = stageNum;
+        syncProgressToServer(stageNum, stageNum === 4, 10);
+
+        if (stageNum < 4) {
+          goToStage(stageNum + 1);
+        } else {
+          markAllStagesCompleted();
+        }
+      } else {
+        triggerAdaptiveFeedback(stageNum, userVal, expectedConcept);
+      }
+    }
+
+    function goToStage(nextStage) {
+      currentStage = nextStage;
+      document.querySelectorAll(".mr-scaffold-step").forEach(el => el.classList.remove("active"));
+      const nextStepEl = document.getElementById(`stage-${nextStage}`);
+      if (nextStepEl) nextStepEl.classList.add("active");
+
+      document.querySelectorAll(".mr-stage-dot").forEach((d, idx) => {
+        if (idx + 1 === nextStage) {
+          d.classList.add("active");
+        }
+      });
+      document.getElementById("hudCurrentStage").textContent = nextStage - 1;
+    }
+
+    function markAllStagesCompleted() {
+      isCompletedModule = true;
+      document.querySelectorAll(".mr-scaffold-step").forEach(el => el.classList.remove("active"));
+      for (let i = 1; i <= 4; i++) {
+        const dot = document.getElementById(`dot-${i}`);
+        if (dot) {
+          dot.classList.remove("active");
+          dot.classList.add("completed");
+          dot.innerHTML = `<i class="bi bi-check-lg"></i>`;
+        }
+      }
+      document.getElementById("hudCurrentStage").textContent = "4";
+      document.getElementById("hudMasteryStatus").textContent = "Lulus & Terverifikasi ⭐";
+      document.getElementById("completionCard").classList.add("visible");
+
+      syncProgressToServer(4, 1, 15);
+    }
+
+    // ── AI Adaptive Micro-Tutor API Handler ────────────────────────
+    async function requestAiHint(stageNum, concept) {
+      const inputEl = document.getElementById(`inputStage${stageNum}`);
+      const val = inputEl ? inputEl.value : "";
+      triggerAdaptiveFeedback(stageNum, val, concept, true);
+    }
+
+    async function triggerAdaptiveFeedback(stageNum, userVal, concept, manual = false) {
+      const tutorBox = document.getElementById(`aiTutorBox-${stageNum}`);
+      const tutorText = document.getElementById(`aiTutorText-${stageNum}`);
+      tutorBox.classList.add("visible");
+      tutorText.innerHTML = `<span class="spinner-border spinner-border-sm text-warning me-2"></span> AI Tutor sedang menganalisis integrasi antiturunan Anda...`;
+
+      try {
+        const res = await fetch("/user/materi/api/adaptive-hint", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            materi: "Integral & Luas Lengkung",
+            step: stageNum,
+            question: `Tahap ${stageNum} Integral dari 3x^2 + 4x`,
+            user_input: userVal || "(kosong)",
+            expected_concept: concept
+          })
+        });
+
+        const data = await res.json();
+        if (data.status === "success" && data.hint) {
+          tutorText.innerHTML = `<i class="bi bi-chat-quote-fill text-warning me-1"></i> ${data.hint}`;
+        } else {
+          tutorText.innerHTML = "Ingat aturan pangkat antiturunan: pangkat bertambah satu (n+1) dan koefisien dibagi (n+1).";
+        }
+      } catch (err) {
+        tutorText.innerHTML = "💡 <strong>Petunjuk:</strong> Gunakan aturan antiturunan $\\int a x^n dx = \\frac{a}{n+1} x^{n+1}$.";
+      }
+    }
+
+    // ── Sandbox & Global Listeners ─────────────────────────────────
+    window.addEventListener("scroll", function() {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById("progressBar").style.width = (winScroll / height) * 100 + "%";
+    });
+
+    const sections = document.querySelectorAll("main section");
+    const navLinks = document.querySelectorAll(".mr-toc-link");
+    window.addEventListener("scroll", function() {
+      let current = "";
+      sections.forEach(sec => { if (pageYOffset >= sec.offsetTop - 120) current = sec.getAttribute("id"); });
+      navLinks.forEach(l => {
+        l.classList.remove("active");
+        if (l.getAttribute("href") === "#" + current) l.classList.add("active");
+      });
+    });
+
+    function toggleMobileToc() { document.getElementById("sidebarToc").classList.toggle("open-mobile"); }
+
+    function revealStep(stepId, btnId) {
+      document.getElementById(stepId).classList.add("revealed");
+      document.getElementById(btnId).style.display = "none";
+      if (window.renderMathInElement) {
+        renderMathInElement(document.getElementById(stepId), { delimiters: [{left: '$$', right: '$$', display: true}] });
+      }
+    }
+
+    function calcIntegral() {
+      const b = parseInt(document.getElementById("intBSlider")?.value) || 3;
+      const intBVal = document.getElementById("intBVal");
+      if (intBVal) intBVal.innerText = `b = ${b}`;
+
+      const area = Math.pow(b, 3) / 3;
+      const calcDisplay = document.getElementById("intCalcDisplay");
+      if (calcDisplay) calcDisplay.innerText = `F(${b}) - F(0) = (${b}³ / 3) - 0 = ${b*b*b}/3`;
+      const resDisplay = document.getElementById("intResultDisplay");
+      if (resDisplay) resDisplay.innerText = `${area.toFixed(2)} satuan luas`;
+    }
+  </script>
+</body>
+</html>

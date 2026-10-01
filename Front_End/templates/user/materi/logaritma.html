@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materi: Logaritma & Aplikasinya - MathThon</title>
+  <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/materi_reader.css') }}">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body class="mr-body">
+
+  <div class="mr-progress-container"><div class="mr-progress-bar" id="progressBar"></div></div>
+
+  <header class="mr-topbar">
+    <div class="mr-topbar-left">
+      <a href="{{ url_for('materi.materi_user') }}" class="mr-back-btn">
+        <i class="bi bi-arrow-left"></i> <span>Daftar Materi</span>
+      </a>
+      <span class="mr-topic-badge"><i class="bi bi-water"></i> Logaritma & Skala</span>
+    </div>
+    <div class="mr-topbar-right">
+      <span class="mr-read-time"><i class="bi bi-clock"></i> 8 Menit Baca</span>
+      <button class="mr-hamburger-btn" onclick="toggleMobileToc()" aria-label="Toggle Daftar Isi">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="mr-layout-wrap">
+    <aside class="mr-sidebar-toc" id="sidebarToc">
+      <div class="mr-toc-heading"><i class="bi bi-compass"></i> Navigasi Logaritma</div>
+      <nav class="mr-toc-nav">
+        <a href="#pengantar" class="mr-toc-link active"><i class="bi bi-stars"></i> 1. Menjinakkan Angka Raksasa</a>
+        <a href="#definisi" class="mr-toc-link"><i class="bi bi-infinity"></i> 2. Definisi Invers Eksponen</a>
+        <a href="#sifat" class="mr-toc-link"><i class="bi bi-card-checklist"></i> 3. Sifat-Sifat Logaritma</a>
+        <a href="#sandbox" class="mr-toc-link"><i class="bi bi-sliders"></i> 4. Interactive Log Calculator</a>
+        <a href="#studi-kasus" class="mr-toc-link"><i class="bi bi-activity"></i> 5. Skala Gempa Richter</a>
+        <a href="#kuis" class="mr-toc-link"><i class="bi bi-patch-question"></i> 6. Uji Cepat Mandiri</a>
+      </nav>
+      <div class="mr-toc-divider"></div>
+      <div class="p-2 rounded" style="background: rgba(255,255,255,0.03); font-size: 0.8rem; color: var(--mr-text-muted);">
+        <i class="bi bi-info-circle text-warning me-1"></i> Logaritma adalah pertanyaan: "Basis harus dipangkatkan berapa agar menjadi nilai tersebut?"
+      </div>
+    </aside>
+
+    <main class="mr-article">
+      
+      <!-- Hero -->
+      <section class="mr-hero-card" id="pengantar">
+        <h1 class="mr-hero-title">Logaritma: Penjinak Skala Raksasa</h1>
+        <p class="mr-hero-desc">
+          Sebelum era kalkulator elektronik, penemuan logaritma oleh John Napier pada abad ke-17 menyelamatkan para astronom dari kelelahan menghitung orbit planet. Logaritma mengubah perkalian yang melelahkan menjadi penjumlahan sederhana!
+        </p>
+
+        <div class="mr-realworld-box">
+          <div class="d-flex align-items-center gap-2 mb-2 text-warning fw-bold">
+            <i class="bi bi-soundwave fs-5"></i> Di Mana Logaritma Bekerja?
+          </div>
+          <p class="text-secondary small mb-2">
+            Telinga manusia mendengar volume suara dalam skala logaritmik (Desibel), kimiawan mengukur keasaman larutan (pH), dan seismolog mengukur gempa (Skala Richter).
+          </p>
+          <div class="mr-realworld-pills">
+            <span class="mr-pill">🌐 Skala Gempa Richter</span>
+            <span class="mr-pill">🔊 Intensitas Suara (Desibel dB)</span>
+            <span class="mr-pill">🧪 Tingkat Keasaman Kimia (pH)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Definisi Invers Eksponen -->
+      <section class="mr-card" id="definisi">
+        <div class="mr-card-header">
+          <div class="mr-card-icon gold"><i class="bi bi-infinity"></i></div>
+          <div>
+            <h2 class="mr-card-title">Definisi Matematika Formal</h2>
+            <p class="mr-card-subtitle">Hubungan timbal balik antara eksponen dan logaritma</p>
+          </div>
+        </div>
+
+        <div class="mr-formula-box">
+          <span class="mr-formula-badge">Definisi Baku</span>
+          <div class="mr-formula-render">$$b^y = x \iff \log_b(x) = y$$</div>
+          <div class="mr-formula-expl">
+            <strong>Syarat Sah Mutlak:</strong> Basis $b > 0$ dan $b \neq 1$. Numerus $x > 0$.
+          </div>
+        </div>
+
+        <div class="p-3 rounded-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+          <div class="text-white fw-bold mb-1"><i class="bi bi-check2-circle text-warning"></i> Pemahaman Intuitif:</div>
+          <div class="small text-secondary">
+            <div>&bull; $2^3 = 8 \iff \log_2(8) = 3$ (Artinya: 2 dipangkatkan berapa agar jadi 8? Jawab: 3).</div>
+            <div>&bull; $10^4 = 10.000 \iff \log_{10}(10.000) = 4$. (Jika basis 10, biasanya ditulis $\log(10.000) = 4$).</div>
+            <div>&bull; $e^x = y \iff \ln(y) = x$ (Logaritma natural dengan basis bilangan Euler $e \approx 2.718$).</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sifat-Sifat Logaritma -->
+      <section class="mr-card" id="sifat">
+        <div class="mr-card-header">
+          <div class="mr-card-icon indigo"><i class="bi bi-card-checklist"></i></div>
+          <div>
+            <h2 class="mr-card-title">Sifat-Sifat Operasi Logaritma</h2>
+            <p class="mr-card-subtitle">Hukum kalkulasi yang menyederhanakan perhitungan rumit</p>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-warning fw-bold mb-1">1. Sifat Perkalian (Menjadi Tambah)</div>
+              <div class="font-monospace text-white">$$\log_b(M \cdot N) = \log_b(M) + \log_b(N)$$</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-info fw-bold mb-1">2. Sifat Pembagian (Menjadi Kurang)</div>
+              <div class="font-monospace text-white">$$\log_b\left(\frac{M}{N}\right) = \log_b(M) - \log_b(N)$$</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-emerald fw-bold mb-1" style="color: #34d399;">3. Sifat Pangkat Numerus</div>
+              <div class="font-monospace text-white">$$\log_b(M^k) = k \cdot \log_b(M)$$</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-cyan fw-bold mb-1" style="color: #22d3ee;">4. Sifat Basis Identitas</div>
+              <div class="font-monospace text-white">$$\log_b(b) = 1, \quad \log_b(1) = 0$$</div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="p-3 rounded-3" style="background: rgba(99,102,241,0.08); border: 1px solid var(--mr-border-glow);">
+              <div class="text-white fw-bold mb-1">5. Sifat Penggantian Basis (Change of Base)</div>
+              <div class="font-monospace text-white">$$\log_b(a) = \frac{\log_c(a)}{\log_c(b)} = \frac{\ln(a)}{\ln(b)}$$</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sandbox Interaktif -->
+      <section class="mr-sandbox" id="sandbox">
+        <div class="mr-sandbox-title">
+          <i class="bi bi-sliders"></i> Interactive Sandbox: Logarithm Solver
+        </div>
+        <p class="mr-sandbox-desc">
+          Pilih basis dan nilai numerus untuk melihat bagaimana nilai logaritma $\log_b(x) = y$ terbentuk seketika!
+        </p>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <label class="small text-secondary mb-1">Basis (b > 1):</label>
+            <input type="number" class="form-control bg-dark text-white border-secondary" id="logBaseInp" value="2" min="2" max="10" oninput="calcLog()">
+          </div>
+          <div class="col-6">
+            <label class="small text-secondary mb-1">Numerus (x > 0):</label>
+            <input type="number" class="form-control bg-dark text-white border-secondary" id="logNumInp" value="64" min="1" max="1000" oninput="calcLog()">
+          </div>
+        </div>
+
+        <div class="mr-live-result-box">
+          <div>
+            <div class="mr-live-result-label">Bentuk Persamaan:</div>
+            <div class="fs-4 text-warning font-monospace" id="logExpDisplay">log₂(64)</div>
+          </div>
+          <div class="text-end">
+            <div class="mr-live-result-label">Hasil (Nilai y):</div>
+            <div class="mr-live-result-val text-success" id="logResultDisplay">6.000</div>
+          </div>
+        </div>
+        <div class="mt-2 text-dim small" id="logCheck">
+          Pembuktian Invers: $2^6 = 64$.
+        </div>
+      </section>
+
+      <!-- Studi Kasus Gempa Richter -->
+      <section class="mr-card" id="studi-kasus">
+        <div class="mr-card-header">
+          <div class="mr-card-icon cyan"><i class="bi bi-activity"></i></div>
+          <div>
+            <h2 class="mr-card-title">Studi Kasus: Mengapa Skala Richter Menipu Intuisi?</h2>
+            <p class="mr-card-subtitle">Perbandingan gempa magnitude 7.0 vs 5.0</p>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-3 mb-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+          Banyak orang mengira gempa berkekuatan 7.0 SR hanya sedikit lebih kuat dari gempa 5.0 SR. Padahal skala Richter adalah <strong>skala logaritmik basis 10</strong>. Mari buktikan selisih kekuatannya!
+        </div>
+
+        <div class="mr-walkthrough">
+          <div class="mr-step-item">
+            <div class="mr-step-num">1</div>
+            <div class="mr-step-title">Hitung Selisih Skala Logaritmik</div>
+            <div class="mr-step-body">Selisih magnitude = $7.0 - 5.0 = 2.0$.</div>
+          </div>
+          <div class="mr-step-item">
+            <div class="mr-step-num">2</div>
+            <div class="mr-step-title">Konversi ke Skala Amplitudo Nyata</div>
+            <div class="mr-step-body">
+              Karena logaritma berbasis 10:
+              <div id="richterStep" class="mr-hidden-step">
+                $$\text{Rasio Amplitudo} = 10^{\Delta M} = 10^2 = \mathbf{100 \text{ kali lipat!}}$$
+                <p class="text-warning small mt-2">
+                  Amplitudo gempa 7.0 SR adalah <strong>100 kali lebih besar</strong>, dan energinya bahkan sekitar <strong>1000 kali lebih dahsyat</strong> ($10^{1.5 \times 2} = 10^3$) dibanding gempa 5.0 SR!
+                </p>
+              </div>
+              <button class="mr-reveal-btn" id="richterBtn" onclick="revealStep('richterStep', 'richterBtn')">
+                <i class="bi bi-eye"></i> Tampilkan Bukti Rasio
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mini Kuis -->
+      <section class="mr-quiz-card" id="kuis">
+        <div class="mr-quiz-header">
+          <span class="mr-quiz-badge"><i class="bi bi-lightning-fill"></i> Checkpoint Logaritma</span>
+          <span class="text-dim small">&bull; Kuis Pemahaman</span>
+        </div>
+        <div class="mr-quiz-question">
+          Berapakah nilai dari ekspresi berikut: $$\log_3(18) - \log_3(2)$$
+        </div>
+        <div class="mr-quiz-options">
+          <button class="mr-quiz-opt-btn" onclick="checkQuizAnswer(this, false, 'Keliru. Logaritma pengurangan numerus bukan dikurang (18-2=16), melainkan dibagi!')">
+            <span>A. log₃(16)</span>
+            <i class="bi bi-circle"></i>
+          </button>
+          <button class="mr-quiz-opt-btn" onclick="checkQuizAnswer(this, true, 'Sempurna! Gunakan sifat pembagian: log₃(18/2) = log₃(9). Karena 3² = 9, maka hasilnya adalah 2.')">
+            <span>B. 2</span>
+            <i class="bi bi-circle"></i>
+          </button>
+          <button class="mr-quiz-opt-btn" onclick="checkQuizAnswer(this, false, 'Masih salah. Periksa kembali nilai dari log₃(9).')">
+            <span>C. 3</span>
+            <i class="bi bi-circle"></i>
+          </button>
+          <button class="mr-quiz-opt-btn" onclick="checkQuizAnswer(this, false, 'Belum tepat. Hasil akhir berupa bilangan bulat positif.')">
+            <span>D. 9</span>
+            <i class="bi bi-circle"></i>
+          </button>
+        </div>
+        <div class="mr-quiz-feedback" id="quizFeedback"></div>
+
+        <div class="mr-hint-box">
+          <button class="mr-hint-toggle" onclick="toggleHint('logHint')">
+            <i class="bi bi-lightbulb-fill text-warning"></i> <span>Butuh Petunjuk Sifat Pembagian? (Klik di sini)</span>
+          </button>
+          <div class="mr-hint-content" id="logHint">
+            <strong>Petunjuk:</strong> Sifat 2: $\log_b(M) - \log_b(N) = \log_b(M/N)$. Hitung $\frac{18}{2} = 9$, lalu cari $\log_3(9)$.
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}],
+          throwOnError: false
+        });
+      }
+      calcLog();
+    });
+
+    window.addEventListener("scroll", function() {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById("progressBar").style.width = (winScroll / height) * 100 + "%";
+    });
+
+    const sections = document.querySelectorAll("main section");
+    const navLinks = document.querySelectorAll(".mr-toc-link");
+    window.addEventListener("scroll", function() {
+      let current = "";
+      sections.forEach(sec => { if (pageYOffset >= sec.offsetTop - 120) current = sec.getAttribute("id"); });
+      navLinks.forEach(l => {
+        l.classList.remove("active");
+        if (l.getAttribute("href") === "#" + current) l.classList.add("active");
+      });
+    });
+
+    function toggleMobileToc() { document.getElementById("sidebarToc").classList.toggle("open-mobile"); }
+
+    function revealStep(stepId, btnId) {
+      document.getElementById(stepId).classList.add("revealed");
+      document.getElementById(btnId).style.display = "none";
+      if (window.renderMathInElement) {
+        renderMathInElement(document.getElementById(stepId), { delimiters: [{left: '$$', right: '$$', display: true}] });
+      }
+    }
+
+    function calcLog() {
+      const b = parseFloat(document.getElementById("logBaseInp").value) || 2;
+      const x = parseFloat(document.getElementById("logNumInp").value) || 1;
+      if (b <= 0 || b === 1 || x <= 0) return;
+
+      const y = Math.log(x) / Math.log(b);
+      document.getElementById("logExpDisplay").innerText = `log_{${b}}(${x})`;
+      document.getElementById("logResultDisplay").innerText = y.toFixed(3);
+      document.getElementById("logCheck").innerText = `Pembuktian Invers: ${b}^${y.toFixed(2)} ≈ ${x}.`;
+    }
+
+    function checkQuizAnswer(btn, isCorrect, msg) {
+      const card = btn.closest(".mr-quiz-card");
+      const buttons = card.querySelectorAll(".mr-quiz-opt-btn");
+      const fb = card.querySelector(".mr-quiz-feedback");
+      buttons.forEach(b => { b.disabled = true; b.classList.remove("correct", "wrong"); });
+
+      if (isCorrect) {
+        btn.classList.add("correct");
+        btn.querySelector("i").className = "bi bi-check-circle-fill";
+        fb.className = "mr-quiz-feedback success";
+        fb.innerHTML = `<i class="bi bi-patch-check-fill me-1"></i> ${msg}`;
+      } else {
+        btn.classList.add("wrong");
+        btn.querySelector("i").className = "bi bi-x-circle-fill";
+        fb.className = "mr-quiz-feedback retry";
+        fb.innerHTML = `<i class="bi bi-exclamation-triangle-fill me-1"></i> ${msg} <br><button class="btn btn-sm btn-outline-light mt-2" onclick="resetQuiz(this)">Coba Lagi</button>`;
+      }
+    }
+
+    function resetQuiz(btn) {
+      const card = btn.closest(".mr-quiz-card");
+      const buttons = card.querySelectorAll(".mr-quiz-opt-btn");
+      const fb = card.querySelector(".mr-quiz-feedback");
+      buttons.forEach(b => { b.disabled = false; b.classList.remove("correct", "wrong"); b.querySelector("i").className = "bi bi-circle"; });
+      fb.style.display = "none";
+    }
+
+    function toggleHint(id) { document.getElementById(id).classList.toggle("open"); }
+  </script>
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materi: Eksponen & Fungsi Eksponensial - MathThon</title>
+  <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/materi_reader.css') }}">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body class="mr-body">
+
+  <div class="mr-progress-container"><div class="mr-progress-bar" id="progressBar"></div></div>
+
+  <header class="mr-topbar">
+    <div class="mr-topbar-left">
+      <a href="{{ url_for('materi.materi_user') }}" class="mr-back-btn">
+        <i class="bi bi-arrow-left"></i> <span>Daftar Materi</span>
+      </a>
+      <span class="mr-topic-badge"><i class="bi bi-graph-up-arrow"></i> Aljabar Lanjutan</span>
+    </div>
+    <div class="mr-topbar-right">
+      <span class="mr-read-time"><i class="bi bi-clock"></i> 8 Menit Baca</span>
+      <button class="mr-hamburger-btn" onclick="toggleMobileToc()" aria-label="Toggle Daftar Isi">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="mr-layout-wrap">
+    <aside class="mr-sidebar-toc" id="sidebarToc">
+      <div class="mr-toc-heading"><i class="bi bi-compass"></i> Navigasi Eksponen</div>
+      <nav class="mr-toc-nav">
+        <a href="#pengantar" class="mr-toc-link active"><i class="bi bi-stars"></i> 1. Kekuatan Eksponen</a>
+        <a href="#definisi" class="mr-toc-link"><i class="bi bi-superscript"></i> 2. Definisi & Konsep Dasar</a>
+        <a href="#sifat" class="mr-toc-link"><i class="bi bi-list-check"></i> 3. Delapan Sifat Eksponen</a>
+        <a href="#sandbox" class="mr-toc-link"><i class="bi bi-sliders"></i> 4. Simulator Pertumbuhan</a>
+        <a href="#studi-kasus" class="mr-toc-link"><i class="bi bi-cash-stack"></i> 5. Bunga Majemuk Finansial</a>
+        <a href="#kuis" class="mr-toc-link"><i class="bi bi-patch-question"></i> 6. Uji Cepat Mandiri</a>
+      </nav>
+      <div class="mr-toc-divider"></div>
+      <div class="p-2 rounded" style="background: rgba(255,255,255,0.03); font-size: 0.8rem; color: var(--mr-text-muted);">
+        <i class="bi bi-lightning text-warning me-1"></i> Pertumbuhan eksponensial awalnya tampak lambat, lalu melesat sangat cepat!
+      </div>
+    </aside>
+
+    <main class="mr-article">
+      
+      <!-- Hero -->
+      <section class="mr-hero-card" id="pengantar">
+        <h1 class="mr-hero-title">Eksponen: Ledakan Perkalian Berulang</h1>
+        <p class="mr-hero-desc">
+          Eksponensial bukan sekadar perkalian berulang. Ini adalah model matematika di balik fenomena tercepat di alam semesta: penyebaran virus, kekuatan komputasi mikroprosesor, hingga bunga berbunga (compound interest) dalam investasi.
+        </p>
+
+        <div class="mr-realworld-box">
+          <div class="d-flex align-items-center gap-2 mb-2 text-warning fw-bold">
+            <i class="bi bi-cpu fs-5"></i> Hukum Moore & Bunga Majemuk
+          </div>
+          <p class="text-secondary small mb-2">
+            Albert Einstein pernah menyebut bunga majemuk sebagai <em>"keajaiban dunia kedelapan"</em> karena kekuatan eksponensialnya. Di dunia IT, Hukum Moore memprediksi jumlah transistor berlipat ganda setiap 2 tahun.
+          </p>
+          <div class="mr-realworld-pills">
+            <span class="mr-pill">📈 Bunga Majemuk Finansial</span>
+            <span class="mr-pill">🦠 Pertumbuhan Biologi Sel</span>
+            <span class="mr-pill">🔐 Kriptografi Kunci Publik (RSA)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Definisi Dasar -->
+      <section class="mr-card" id="definisi">
+        <div class="mr-card-header">
+          <div class="mr-card-icon gold"><i class="bi bi-superscript"></i></div>
+          <div>
+            <h2 class="mr-card-title">Definisi Matematika Formal</h2>
+            <p class="mr-card-subtitle">Basis dan eksponen dalam notasi matematika</p>
+          </div>
+        </div>
+
+        <div class="mr-formula-box">
+          <span class="mr-formula-badge">Notasi Formal</span>
+          <div class="mr-formula-render">$$a^n = \underbrace{a \times a \times a \times \dots \times a}_{n \text{ faktor}}$$</div>
+          <div class="mr-formula-expl">
+            $a$ disebut <strong>basis (bilangan pokok)</strong>, dan $n$ disebut <strong>pangkat (eksponen)</strong>.
+          </div>
+        </div>
+      </section>
+
+      <!-- Sifat-Sifat Eksponen -->
+      <section class="mr-card" id="sifat">
+        <div class="mr-card-header">
+          <div class="mr-card-icon indigo"><i class="bi bi-list-check"></i></div>
+          <div>
+            <h2 class="mr-card-title">8 Sifat Utama Operasi Eksponen</h2>
+            <p class="mr-card-subtitle">Hukum wajib untuk menyederhanakan bentuk pangkat</p>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="p-3 rounded-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-warning fw-bold mb-1">1. Perkalian Basis Sama</div>
+              <div class="font-monospace text-white">$$a^m \cdot a^n = a^{m+n}$$</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-info fw-bold mb-1">2. Pembagian Basis Sama</div>
+              <div class="font-monospace text-white">$$\frac{a^m}{a^n} = a^{m-n} \quad (a \neq 0)$$</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-emerald fw-bold mb-1" style="color: #34d399;">3. Pangkat Dipangkatkan</div>
+              <div class="font-monospace text-white">$$(a^m)^n = a^{m \cdot n}$$</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-cyan fw-bold mb-1" style="color: #22d3ee;">4. Perkalian Dipangkatkan</div>
+              <div class="font-monospace text-white">$$(a \cdot b)^n = a^n \cdot b^n$$</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-warning fw-bold mb-1">5. Pangkat Nol</div>
+              <div class="font-monospace text-white">$$a^0 = 1 \quad (a \neq 0)$$</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+              <div class="text-info fw-bold mb-1">6. Pangkat Negatif</div>
+              <div class="font-monospace text-white">$$a^{-n} = \frac{1}{a^n} \quad (a \neq 0)$$</div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="p-3 rounded-3" style="background: rgba(99,102,241,0.08); border: 1px solid var(--mr-border-glow);">
+              <div class="text-white fw-bold mb-1">7 & 8. Pangkat Pecahan (Bentuk Akar)</div>
+              <div class="font-monospace text-white">$$a^{\frac{1}{n}} = \sqrt[n]{a}, \quad a^{\frac{m}{n}} = \sqrt[n]{a^m} = (\sqrt[n]{a})^m$$</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sandbox Pertumbuhan Eksponensial -->
+      <section class="mr-sandbox" id="sandbox">
+        <div class="mr-sandbox-title">
+          <i class="bi bi-sliders"></i> Simulator Interaktif: $y = a \cdot b^x$
+        </div>
+        <p class="mr-sandbox-desc">
+          Geser nilai basis ($b$) dan pangkat ($x$) untuk menyaksikan seberapa dahsyat nilai eksponen melesat dibanding fungsi perkalian linear biasa!
+        </p>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="mr-slider-group">
+              <div class="mr-slider-header">
+                <span>Basis Pokok (b):</span>
+                <span class="mr-slider-val" id="expBaseVal">2</span>
+              </div>
+              <input type="range" class="mr-slider" id="expBaseSlider" min="2" max="5" value="2" oninput="simExpo()">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mr-slider-group">
+              <div class="mr-slider-header">
+                <span>Pangkat Eksponen (x):</span>
+                <span class="mr-slider-val" id="expPowerVal">5</span>
+              </div>
+              <input type="range" class="mr-slider" id="expPowerSlider" min="0" max="12" value="5" oninput="simExpo()">
+            </div>
+          </div>
+        </div>
+
+        <div class="mr-live-result-box">
+          <div>
+            <div class="mr-live-result-label">Bentuk Pangkat:</div>
+            <div class="fs-4 text-warning font-monospace" id="expEqDisplay">2⁵</div>
+          </div>
+          <div class="text-end">
+            <div class="mr-live-result-label">Hasil Perhitungan:</div>
+            <div class="mr-live-result-val text-success" id="expResultDisplay">32</div>
+          </div>
+        </div>
+        <div class="mt-2 text-dim small" id="expCompare">
+          Bandingkan: Penjumlahan linear biasa $2 \times 5 = 10$, sedangkan eksponen $2^5 = 32$ (lebih dari 3x lipat!).
+        </div>
+      </section>
+
+      <!-- Kasus Nyata -->
+      <section class="mr-card" id="studi-kasus">
+        <div class="mr-card-header">
+          <div class="mr-card-icon cyan"><i class="bi bi-cash-stack"></i></div>
+          <div>
+            <h2 class="mr-card-title">Studi Kasus: Bunga Majemuk Investasi</h2>
+            <p class="mr-card-subtitle">Bagaimana uang berlipat ganda seiring waktu</p>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-3 mb-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+          Modal awal $M_0 = \text{Rp } 10.000.000$ disimpan dengan bunga majemuk tahunan $10\%$ ($r = 0.10$). Berapakah nilainya setelah 3 tahun?
+        </div>
+
+        <div class="mr-walkthrough">
+          <div class="mr-step-item">
+            <div class="mr-step-num">1</div>
+            <div class="mr-step-title">Gunakan Formula Pertumbuhan Eksponen</div>
+            <div class="mr-step-body">$$M_t = M_0 \times (1 + r)^t$$</div>
+          </div>
+          <div class="mr-step-item">
+            <div class="mr-step-num">2</div>
+            <div class="mr-step-title">Substitusikan Nilai Parameter</div>
+            <div class="mr-step-body">
+              $$M_3 = 10.000.000 \times (1 + 0.10)^3 = 10.000.000 \times (1.1)^3$$
+              <div id="expoStep" class="mr-hidden-step">
+                $(1.1)^3 = 1.331$<br>
+                $$M_3 = 10.000.000 \times 1.331 = \mathbf{\text{Rp } 13.310.000}$$
+                <div class="text-success small fw-bold mt-1">Total keuntungan murni dari eksponen bunga majemuk adalah Rp 3.310.000.</div>
+              </div>
+              <button class="mr-reveal-btn" id="expoBtn" onclick="revealStep('expoStep', 'expoBtn')">
+                <i class="bi bi-eye"></i> Tampilkan Perhitungan
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mini Kuis -->
+      <section class="mr-quiz-card" id="kuis">
+        <div class="mr-quiz-header">
+          <span class="mr-quiz-badge"><i class="bi bi-lightning-fill"></i> Checkpoint Eksponen</span>
+          <span class="text-dim small">&bull; Kuis Pemahaman</span>
+        </div>
+        <div class="mr-quiz-question">
+          Berapakah hasil penyederhanaan dari: $$\frac{2^5 \times 2^3}{2^4}$$
+        </div>
+        <div class="mr-quiz-options">
+          <button class="mr-quiz-opt-btn" onclick="checkQuizAnswer(this, false, 'Keliru. Gunakan sifat perkalian: 2^(5+3) = 2^8.')">
+            <span>A. 2^2 = 4</span>
+            <i class="bi bi-circle"></i>
+          </button>
+          <button class="mr-quiz-opt-btn" onclick="checkQuizAnswer(this, true, 'Luar biasa tepat! Pembilang: 2^(5+3) = 2^8. Dibagi penyebut: 2^(8-4) = 2^4 = 16.')">
+            <span>B. 2^4 = 16</span>
+            <i class="bi bi-circle"></i>
+          </button>
+          <button class="mr-quiz-opt-btn" onclick="checkQuizAnswer(this, false, 'Masih salah. Cek pengurangan pangkat pada pembagian.')">
+            <span>C. 2^6 = 64</span>
+            <i class="bi bi-circle"></i>
+          </button>
+          <button class="mr-quiz-opt-btn" onclick="checkQuizAnswer(this, false, 'Belum tepat. Hasilnya bukan 32.')">
+            <span>D. 2^5 = 32</span>
+            <i class="bi bi-circle"></i>
+          </button>
+        </div>
+        <div class="mr-quiz-feedback" id="quizFeedback"></div>
+
+        <div class="mr-hint-box">
+          <button class="mr-hint-toggle" onclick="toggleHint('expHint')">
+            <i class="bi bi-lightbulb-fill text-warning"></i> <span>Butuh Petunjuk Sifat? (Klik di sini)</span>
+          </button>
+          <div class="mr-hint-content" id="expHint">
+            <strong>Petunjuk:</strong> Sifat 1: $2^5 \times 2^3 = 2^{5+3} = 2^8$. Sifat 2: $\frac{2^8}{2^4} = 2^{8-4} = 2^4$.
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}],
+          throwOnError: false
+        });
+      }
+      simExpo();
+    });
+
+    window.addEventListener("scroll", function() {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById("progressBar").style.width = (winScroll / height) * 100 + "%";
+    });
+
+    const sections = document.querySelectorAll("main section");
+    const navLinks = document.querySelectorAll(".mr-toc-link");
+    window.addEventListener("scroll", function() {
+      let current = "";
+      sections.forEach(sec => { if (pageYOffset >= sec.offsetTop - 120) current = sec.getAttribute("id"); });
+      navLinks.forEach(l => {
+        l.classList.remove("active");
+        if (l.getAttribute("href") === "#" + current) l.classList.add("active");
+      });
+    });
+
+    function toggleMobileToc() { document.getElementById("sidebarToc").classList.toggle("open-mobile"); }
+
+    function revealStep(stepId, btnId) {
+      document.getElementById(stepId).classList.add("revealed");
+      document.getElementById(btnId).style.display = "none";
+      if (window.renderMathInElement) {
+        renderMathInElement(document.getElementById(stepId), { delimiters: [{left: '$$', right: '$$', display: true}] });
+      }
+    }
+
+    function simExpo() {
+      const b = parseInt(document.getElementById("expBaseSlider").value);
+      const x = parseInt(document.getElementById("expPowerSlider").value);
+
+      document.getElementById("expBaseVal").innerText = b;
+      document.getElementById("expPowerVal").innerText = x;
+
+      const res = Math.pow(b, x);
+      document.getElementById("expEqDisplay").innerText = `${b}^${x}`;
+      document.getElementById("expResultDisplay").innerText = res.toLocaleString('id-ID');
+
+      const linear = b * x;
+      document.getElementById("expCompare").innerText = `Bandingkan: Penjumlahan linear biasa ${b} × ${x} = ${linear}, sedangkan eksponen ${b}^${x} = ${res.toLocaleString('id-ID')}!`;
+    }
+
+    function checkQuizAnswer(btn, isCorrect, msg) {
+      const card = btn.closest(".mr-quiz-card");
+      const buttons = card.querySelectorAll(".mr-quiz-opt-btn");
+      const fb = card.querySelector(".mr-quiz-feedback");
+      buttons.forEach(b => { b.disabled = true; b.classList.remove("correct", "wrong"); });
+
+      if (isCorrect) {
+        btn.classList.add("correct");
+        btn.querySelector("i").className = "bi bi-check-circle-fill";
+        fb.className = "mr-quiz-feedback success";
+        fb.innerHTML = `<i class="bi bi-patch-check-fill me-1"></i> ${msg}`;
+      } else {
+        btn.classList.add("wrong");
+        btn.querySelector("i").className = "bi bi-x-circle-fill";
+        fb.className = "mr-quiz-feedback retry";
+        fb.innerHTML = `<i class="bi bi-exclamation-triangle-fill me-1"></i> ${msg} <br><button class="btn btn-sm btn-outline-light mt-2" onclick="resetQuiz(this)">Coba Lagi</button>`;
+      }
+    }
+
+    function resetQuiz(btn) {
+      const card = btn.closest(".mr-quiz-card");
+      const buttons = card.querySelectorAll(".mr-quiz-opt-btn");
+      const fb = card.querySelector(".mr-quiz-feedback");
+      buttons.forEach(b => { b.disabled = false; b.classList.remove("correct", "wrong"); b.querySelector("i").className = "bi bi-circle"; });
+      fb.style.display = "none";
+    }
+
+    function toggleHint(id) { document.getElementById(id).classList.toggle("open"); }
+  </script>
+</body>
+</html>

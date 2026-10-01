@@ -130,6 +130,18 @@ def init_db_schema(app):
                 description TEXT NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            )""",
+            """CREATE TABLE IF NOT EXISTS user_materi_progress (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                user_id INT NOT NULL,
+                materi_slug VARCHAR(100) NOT NULL,
+                checkpoint_stage INT DEFAULT 0,
+                is_completed TINYINT(1) DEFAULT 0,
+                time_spent_seconds INT DEFAULT 0,
+                attempts_count INT DEFAULT 0,
+                last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+                UNIQUE KEY uq_user_materi (user_id, materi_slug)
             )"""
         ]
         

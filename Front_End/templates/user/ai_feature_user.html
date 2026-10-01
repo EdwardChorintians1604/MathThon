@@ -1774,7 +1774,28 @@
     /* ══════════════════════════════════════════════════════
        HELPERS
     ══════════════════════════════════════════════════════ */
-    const CSRF = () => document.querySelector('input[name="csrf_token"]')?.value || '';
+    const CSRF = () => document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') 
+                    || document.querySelector('input[name="csrf_token"]')?.value 
+                    || '';
+
+    async function refreshCSRF() {
+      try {
+        const res = await fetch('/api/csrf-token');
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.csrf_token) {
+            const meta = document.querySelector('meta[name="csrf-token"]');
+            if (meta) meta.setAttribute('content', data.csrf_token);
+            const input = document.querySelector('input[name="csrf_token"]');
+            if (input) input.value = data.csrf_token;
+            return data.csrf_token;
+          }
+        }
+      } catch (e) {
+        console.warn('Gagal memperbarui CSRF token:', e);
+      }
+      return null;
+    }
 
     function escHtml(s) {
       return String(s).replace(/[&<>"]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
@@ -2386,11 +2407,27 @@
           body.conversation_id = currentConvId;
         }
 
-        const r = await fetch('/api/ai/chat', {
+        let r = await fetch('/api/ai/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'X-CSRFToken': CSRF() },
           body: JSON.stringify(body)
         });
+
+        // Handle expired / invalid CSRF token with automatic retry
+        if (r.status === 400) {
+          const cloned = r.clone();
+          const errData = await cloned.json().catch(() => ({}));
+          if (errData.csrf_expired || (errData.error && String(errData.error).toLowerCase().includes('csrf'))) {
+            const newToken = await refreshCSRF();
+            if (newToken) {
+              r = await fetch('/api/ai/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': newToken },
+                body: JSON.stringify(body)
+              });
+            }
+          }
+        }
 
         const data = await r.json();
         const reply = data.reply || data.response || 'Maaf, tidak ada jawaban dari AI saat ini.';
