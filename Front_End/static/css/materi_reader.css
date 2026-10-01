@@ -842,6 +842,123 @@ body.mr-body {
    Bootcamp Scaffolding, AI Micro-Tutor & Stateful Analytics System
    ========================================================================== */
 
+/* Chapter Badges & Typography */
+.mr-chapter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(251, 191, 36, 0.12);
+  color: var(--mr-gold);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  padding: 4px 12px;
+  border-radius: var(--mr-radius-full);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 12px;
+}
+
+/* In-Chapter Embedded Exercise Box */
+.mr-chapter-exercise {
+  background: linear-gradient(145deg, rgba(17, 24, 48, 0.9), rgba(12, 17, 36, 0.95));
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-left: 4px solid var(--mr-indigo);
+  border-radius: var(--mr-radius-md);
+  padding: 20px 22px;
+  margin: 28px 0 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.mr-exercise-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.mr-exercise-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #818cf8;
+}
+
+.mr-exercise-q {
+  font-size: 0.98rem;
+  color: #f1f5f9;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.mr-exercise-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.mr-exercise-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--mr-radius-sm);
+  padding: 11px 16px;
+  color: var(--mr-text-primary);
+  font-family: var(--mr-font-body);
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.mr-exercise-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(99, 102, 241, 0.4);
+  transform: translateX(3px);
+}
+
+.mr-exercise-btn.correct {
+  background: rgba(16, 185, 129, 0.2) !important;
+  border-color: #10b981 !important;
+  color: #6ee7b7 !important;
+  font-weight: 600;
+}
+
+.mr-exercise-btn.wrong {
+  background: rgba(244, 63, 94, 0.18) !important;
+  border-color: #f43f5e !important;
+  color: #fda4af !important;
+}
+
+.mr-exercise-feedback {
+  display: none;
+  margin-top: 14px;
+  padding: 12px 16px;
+  border-radius: var(--mr-radius-sm);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  animation: fadeInStep 0.25s ease;
+}
+
+.mr-exercise-feedback.success {
+  display: block;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #a7f3d0;
+}
+
+.mr-exercise-feedback.retry {
+  display: block;
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  color: #fecdd3;
+}
+
+
 /* Stateful Learning HUD Bar */
 .mr-analytics-hud {
   background: rgba(15, 23, 42, 0.85);

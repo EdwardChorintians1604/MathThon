@@ -33,18 +33,17 @@
 
   <div class="mr-layout-wrap">
     <aside class="mr-sidebar-toc" id="sidebarToc">
-      <div class="mr-toc-heading"><i class="bi bi-compass"></i> Navigasi Limit</div>
+      <div class="mr-toc-heading"><i class="bi bi-journal-bookmark-fill"></i> Kurikulum Bab</div>
       <nav class="mr-toc-nav">
-        <a href="#pengantar" class="mr-toc-link active"><i class="bi bi-stars"></i> 1. Mengapa Mendekati?</a>
-        <a href="#definisi" class="mr-toc-link"><i class="bi bi-bullseye"></i> 2. Definisi Formal Limit</a>
-        <a href="#taktentu" class="mr-toc-link"><i class="bi bi-slash-circle"></i> 3. Bentuk Tak Tentu 0/0</a>
-        <a href="#sandbox" class="mr-toc-link"><i class="bi bi-sliders"></i> 4. Live Limit Approacher</a>
-        <a href="#studi-kasus" class="mr-toc-link"><i class="bi bi-speedometer2"></i> 5. Kecepatan Sesaat Fisika</a>
-        <a href="#kuis" class="mr-toc-link"><i class="bi bi-patch-question"></i> 6. Uji Cepat Mandiri</a>
+        <a href="#bab1" class="mr-toc-link active"><i class="bi bi-book-half"></i> Bab 1: Pendahuluan & Latar Belakang</a>
+        <a href="#bab2" class="mr-toc-link"><i class="bi bi-bullseye"></i> Bab 2: Definisi Formal & Keberadaan</a>
+        <a href="#bab3" class="mr-toc-link"><i class="bi bi-sliders"></i> Bab 3: Bentuk Tak Tentu & Sandbox</a>
+        <a href="#bab4" class="mr-toc-link"><i class="bi bi-speedometer2"></i> Bab 4: Studi Kasus Terapan</a>
+        <a href="#bab5" class="mr-toc-link"><i class="bi bi-cpu-fill text-warning"></i> Bab 5: Capstone Checkpoint</a>
       </nav>
       <div class="mr-toc-divider"></div>
       <div class="p-2 rounded" style="background: rgba(255,255,255,0.03); font-size: 0.8rem; color: var(--mr-text-muted);">
-        <i class="bi bi-info-circle text-warning me-1"></i> Limit menjawab apa yang terjadi ketika kita mendekati suatu titik sedekat mungkin tanpa harus menyentuhnya.
+        <i class="bi bi-info-circle text-warning me-1"></i> Tiap bab dilengkapi latihan mandiri terintegrasi untuk memperkuat active recall Anda.
       </div>
     </aside>
 
@@ -96,11 +95,12 @@
         </div>
       </div>
 
-      <!-- Hero -->
-      <section class="mr-hero-card" id="pengantar">
-        <h1 class="mr-hero-title">Limit: Gerbang Menuju Dunia Kalkulus</h1>
+      <!-- BAB 1 -->
+      <section class="mr-hero-card" id="bab1">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 1: Pendahuluan & Latar Belakang</span>
+        <h1 class="mr-hero-title">Limit: Gerbang Menuju Dunia Kalkulus Modern</h1>
         <p class="mr-hero-desc">
-          Bagaimana cara membagi sebuah angka dengan nol? Dalam aritmatika biasa, pembagian dengan nol tidak terdefinisi. Namun, konsep <strong>Limit</strong> memungkinkan kita mengamati perilaku fungsi saat nilainya mendekati batas kritis tersebut.
+          Mengapa konsep limit harus diciptakan oleh para matematikawan? Dalam aritmatika dasar, kita diajarkan bahwa <strong>pembagian dengan nol adalah hal terlarang (tidak terdefinisi)</strong>. Namun, fisika dan kalkulus menuntut kita menjawab pertanyaan pelik: <em>"Berapakah kecepatan sesaat benda tepat pada interval waktu nol detik ($\Delta t = 0$)?"</em>
         </p>
 
         <div class="mr-realworld-box">
@@ -108,7 +108,7 @@
             <i class="bi bi-speedometer fs-5"></i> Spidometer & Laju Perubahan Sesaat
           </div>
           <p class="text-secondary small mb-2">
-            Spidometer kendaraan Anda tidak mengukur jarak total dibagi waktu total perjalanan. Spidometer mengukur <em>limit kecepatan ketika interval waktu ($\Delta t$) mendekati nol detik</em>.
+            Spidometer kendaraan Anda tidak menghitung jarak total dibagi waktu tempuh total. Spidometer membaca <strong>limit dari selisih jarak saat interval waktu mendekati nol</strong>: $\lim_{\Delta t \to 0} \frac{\Delta s}{\Delta t}$.
           </p>
           <div class="mr-realworld-pills">
             <span class="mr-pill">🏎️ Kecepatan Sesaat Fisika</span>
@@ -116,15 +116,42 @@
             <span class="mr-pill">🌐 Kompresi Video & Audio Bitrate</span>
           </div>
         </div>
+
+        <!-- Latihan Terintegrasi Bab 1 -->
+        <div class="mr-chapter-exercise">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 1</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Mengapa dalam matematika ekspresi $\frac{0}{0}$ dinamakan <strong>Bentuk Tak Tentu</strong> (<em>Indeterminate Form</em>), bukan bernilai 1 atau 0?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. Bentuk 0/0 tidak memiliki satu nilai tunggal yang mutlak.')">
+              <span>A. Karena pembagian angka yang sama selalu menghasilkan angka 1</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Tepat sekali! Bentuk 0/0 disebut tak tentu karena nilai limitnya bisa berupa angka apa pun (bergantung pada fungsi pembentuknya) setelah disederhanakan.')">
+              <span>B. Karena nilai aslinya baru bisa diketahui setelah fungsi disederhanakan aljabarnya</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. 0/0 berbeda dengan pembagian n/0 (dengan n ≠ 0) yang menghasilkan tak hingga/tidak terdefinisi.')">
+              <span>C. Karena angka nol tidak boleh berada di posisi pembilang</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- Definisi Formal -->
-      <section class="mr-card" id="definisi">
+      <!-- BAB 2 -->
+      <section class="mr-card" id="bab2">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 2: Definisi Formal & Keberadaan Limit</span>
         <div class="mr-card-header">
           <div class="mr-card-icon gold"><i class="bi bi-bullseye"></i></div>
           <div>
             <h2 class="mr-card-title">Definisi Intuitif & Formal Limit</h2>
-            <p class="mr-card-subtitle">Makna matematis dari notasi mendekati ($x \to c$)</p>
+            <p class="mr-card-subtitle">Makna matematis dari notasi pendekatan ($x \to c$)</p>
           </div>
         </div>
 
@@ -132,40 +159,68 @@
           <span class="mr-formula-badge">Notasi Baku</span>
           <div class="mr-formula-render">$$\lim_{x \to c} f(x) = L$$</div>
           <div class="mr-formula-expl">
-            Artinya: Ketika nilai $x$ bergerak semakin dekat ke bilangan $c$ (baik dari kiri maupun kanan), nilai fungsi $f(x)$ akan semakin mendekati bilangan $L$.
+            Artinya: Ketika nilai $x$ bergerak semakin dekat ke bilangan $c$ (tanpa harus menyentuh $c$), nilai fungsi $f(x)$ akan semakin mendekati suatu bilangan tunggal $L$.
           </div>
         </div>
 
-        <div class="p-3 rounded-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
-          <strong class="text-white">Syarat Keberadaan Limit:</strong>
+        <div class="p-3 rounded-3 mb-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
+          <strong class="text-white">Syarat Mutlak Keberadaan Limit:</strong>
           <div class="small text-secondary mt-1">
-            Limit bernilai $L$ hanya jika limit dari arah kiri ($x \to c^-$) bernilai <strong>sama</strong> dengan limit dari arah kanan ($x \to c^+$):
+            Limit bernilai $L$ hanya jika limit dari arah kiri ($x \to c^-$) bernilai <strong>sama persis</strong> dengan limit dari arah kanan ($x \to c^+$):
             $$\lim_{x \to c^-} f(x) = \lim_{x \to c^+} f(x) = L$$
+            Jika limit kiri $\neq$ limit kanan, maka $\lim_{x \to c} f(x)$ <strong>TIDAK ADA</strong>.
           </div>
+        </div>
+
+        <!-- Latihan Terintegrasi Bab 2 -->
+        <div class="mr-chapter-exercise">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 2</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Suatu fungsi tangga memiliki limit kiri $\lim_{x \to 2^-} f(x) = 4$ dan limit kanan $\lim_{x \to 2^+} f(x) = 7$. Berapakah nilai dari $\lim_{x \to 2} f(x)$?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Nilai limit bukan rata-rata dari kedua arah.')">
+              <span>A. 5.5</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Benar sekali! Karena limit kiri (4) ≠ limit kanan (7), maka syarat kesamaan limit tidak terpenuhi, sehingga limit tidak ada.')">
+              <span>B. Tidak Ada (Tidak Terdefinisi)</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Masih salah. Arah kanan tidak mengabaikan arah kiri.')">
+              <span>C. 7</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
         </div>
       </section>
 
-      <!-- Bentuk Tak Tentu -->
-      <section class="mr-card" id="taktentu">
+      <!-- BAB 3 -->
+      <section class="mr-card" id="bab3">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 3: Metode Operasi & Sandbox Interaktif</span>
         <div class="mr-card-header">
           <div class="mr-card-icon indigo"><i class="bi bi-slash-circle"></i></div>
           <div>
-            <h2 class="mr-card-title">Menyelesaikan Bentuk Tak Tentu 0/0</h2>
-            <p class="mr-card-subtitle">Tiga metode jitu ketika substitusi langsung menghasilkan 0/0</p>
+            <h2 class="mr-card-title">Tiga Metode Penyelesaian Bentuk Tak Tentu</h2>
+            <p class="mr-card-subtitle">Pintasan rasional ketika substitusi langsung menghasilkan 0/0</p>
           </div>
         </div>
 
-        <div class="row g-3">
+        <div class="row g-3 mb-4">
           <div class="col-md-4">
             <div class="p-3 rounded-3 h-100" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
               <div class="text-warning fw-bold mb-1">1. Faktorisasi Aljabar</div>
-              <p class="small text-secondary mb-0">Faktorkan pembilang dan penyebut untuk mencoret suku pembuat nol $(x - c)$.</p>
+              <p class="small text-secondary mb-0">Faktorkan pembilang dan penyebut untuk mencoret faktor pembuat nol $(x - c)$.</p>
             </div>
           </div>
           <div class="col-md-4">
             <div class="p-3 rounded-3 h-100" style="background: rgba(255,255,255,0.03); border: 1px solid var(--mr-border-subtle);">
               <div class="text-info fw-bold mb-1">2. Perkalian Sekawan</div>
-              <p class="small text-secondary mb-0">Untuk fungsi berbentuk akar kuadrat, kalikan dengan bentuk rasional sekawannya.</p>
+              <p class="small text-secondary mb-0">Untuk fungsi berbentuk akar aljabar, kalikan dengan bentuk rasional sekawannya.</p>
             </div>
           </div>
           <div class="col-md-4">
@@ -175,42 +230,66 @@
             </div>
           </div>
         </div>
+
+        <!-- Sandbox Interaktif di dalam Bab 3 -->
+        <div class="mr-sandbox">
+          <div class="mr-sandbox-title">
+            <i class="bi bi-sliders"></i> Interactive Sandbox: Pendekatan Limit $f(x) = \frac{x^2 - 4}{x - 2}$
+          </div>
+          <p class="mr-sandbox-desc">
+            Jika kita masukkan $x = 2$ langsung, hasilnya adalah $\frac{0}{0}$. Geser slider nilai $x$ mendekati angka 2 dan amati bagaimana nilai fungsi bergerak mendekati angka 4!
+          </p>
+
+          <div class="mr-slider-group">
+            <div class="mr-slider-header">
+              <span>Nilai Pendekatan x:</span>
+              <span class="mr-slider-val" id="limitXVal">1.900</span>
+            </div>
+            <input type="range" class="mr-slider" id="limitXSlider" min="1500" max="2500" value="1900" oninput="simLimit()">
+          </div>
+
+          <div class="mr-live-result-box">
+            <div>
+              <div class="mr-live-result-label">Evaluasi Fungsi: $f(x) = x + 2$</div>
+              <div class="fs-5 text-warning font-monospace" id="limitCalcDisplay">f(1.900) = (1.900² - 4) / (1.900 - 2)</div>
+            </div>
+            <div class="text-end">
+              <div class="mr-live-result-label">Nilai f(x) Mendekati:</div>
+              <div class="mr-live-result-val text-success" id="limitResultDisplay">3.900</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Latihan Terintegrasi Bab 3 -->
+        <div class="mr-chapter-exercise">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 3</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Jika Anda berhadapan dengan limit aljabar $\lim_{x \to 4} \frac{\sqrt{x} - 2}{x - 4}$ yang menghasilkan $\frac{0}{0}$, metode mana yang paling tepat digunakan?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Luar biasa tepat! Mengalikan pembilang dan penyebut dengan sekawannya (√x + 2) akan merasionalkan bentuk akar menjadi x - 4 sehingga bisa dicoret.')">
+              <span>A. Mengalikan pembilang dan penyebut dengan bentuk sekawan $(\sqrt{x} + 2)$</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Pembagian langsung tidak menghilangkan akar pada pembilang.')">
+              <span>B. Mengabaikan akar dan membagi x dengan x</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Masih salah. Substitusi langsung tetap menghasilkan 0/0.')">
+              <span>C. Memasukkan angka 0 ke dalam fungsi</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- Sandbox Interaktif -->
-      <section class="mr-sandbox" id="sandbox">
-        <div class="mr-sandbox-title">
-          <i class="bi bi-sliders"></i> Interactive Sandbox: Pendekatan Limit $f(x) = \frac{x^2 - 4}{x - 2}$
-        </div>
-        <p class="mr-sandbox-desc">
-          Jika kita masukkan $x = 2$ langsung, hasilnya adalah $\frac{0}{0}$ (tidak terdefinisi). Geser slider nilai $x$ mendekati angka 2 dan amati bagaimana nilai fungsi bergerak mendekati angka 4!
-        </p>
-
-        <div class="mr-slider-group">
-          <div class="mr-slider-header">
-            <span>Nilai Pendekatan x:</span>
-            <span class="mr-slider-val" id="limitXVal">1.900</span>
-          </div>
-          <input type="range" class="mr-slider" id="limitXSlider" min="1500" max="2500" value="1900" oninput="simLimit()">
-        </div>
-
-        <div class="mr-live-result-box">
-          <div>
-            <div class="mr-live-result-label">Evaluasi Fungsi: $f(x) = x + 2$</div>
-            <div class="fs-5 text-warning font-monospace" id="limitCalcDisplay">f(1.900) = (1.900² - 4) / (1.900 - 2)</div>
-          </div>
-          <div class="text-end">
-            <div class="mr-live-result-label">Nilai f(x) Mendekati:</div>
-            <div class="mr-live-result-val text-success" id="limitResultDisplay">3.900</div>
-          </div>
-        </div>
-        <div class="mt-2 text-dim small">
-          Kesimpulan: Saat $x \to 2$, nilai $f(x) \to 4$. Maka $\lim_{x \to 2} \frac{x^2 - 4}{x - 2} = 4$.
-        </div>
-      </section>
-
-      <!-- Studi Kasus -->
-      <section class="mr-card" id="studi-kasus">
+      <!-- BAB 4 -->
+      <section class="mr-card" id="bab4">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 4: Implementasi & Pemodelan Terapan</span>
         <div class="mr-card-header">
           <div class="mr-card-icon cyan"><i class="bi bi-speedometer2"></i></div>
           <div>
@@ -249,10 +328,37 @@
             </div>
           </div>
         </div>
+
+        <!-- Latihan Terintegrasi Bab 4 -->
+        <div class="mr-chapter-exercise">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 4</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Jika fungsi jarak batu adalah $s(t) = 5t^2$, dengan rumus kecepatan sesaat $v(t) = 10t$, berapakah kecepatan batu tepat pada detik pertama ($t = 1$)?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Hebat! Pada t = 1, kecepatan sesaat adalah v(1) = 10(1) = 10 m/detik.')">
+              <span>A. 10 m/detik</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Masih salah. Jarak total pada t=1 adalah 5 meter, tetapi kecepatannya adalah 10 m/detik.')">
+              <span>B. 5 m/detik</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. Cek perkalian 10 × 1.')">
+              <span>C. 15 m/detik</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- ═══════════════════════════════════════════════════════ SCAFFOLDING CHECKPOINT -->
-      <section class="mr-scaffold-container" id="kuis">
+      <!-- BAB 5: CAPSTONE SCAFFOLDING -->
+      <section class="mr-scaffold-container" id="bab5">
+        <span class="mr-chapter-badge"><i class="bi bi-trophy-fill text-warning"></i> BAB 5: Evaluasi Akhir & Capstone Scaffolding</span>
         <div class="mr-scaffold-header">
           <h2 class="mr-scaffold-title">
             <i class="bi bi-cpu-fill text-warning"></i> Active Recall Checkpoint: Multi-Step Limit
@@ -649,6 +755,40 @@
       const res = x + 2;
       document.getElementById("limitCalcDisplay").innerText = `f(${x.toFixed(3)}) ≈ (${x.toFixed(3)}² - 4) / (${x.toFixed(3)} - 2)`;
       document.getElementById("limitResultDisplay").innerText = res.toFixed(3);
+    }
+
+    function checkChapterExercise(btn, isCorrect, explanation) {
+      const box = btn.closest(".mr-chapter-exercise");
+      const buttons = box.querySelectorAll(".mr-exercise-btn");
+      const fb = box.querySelector(".mr-exercise-feedback");
+      buttons.forEach(b => {
+        b.disabled = true;
+        b.classList.remove("correct", "wrong");
+      });
+
+      if (isCorrect) {
+        btn.classList.add("correct");
+        btn.querySelector("i").className = "bi bi-check-circle-fill";
+        fb.className = "mr-exercise-feedback success";
+        fb.innerHTML = `<i class="bi bi-patch-check-fill me-1"></i> ${explanation}`;
+      } else {
+        btn.classList.add("wrong");
+        btn.querySelector("i").className = "bi bi-x-circle-fill";
+        fb.className = "mr-exercise-feedback retry";
+        fb.innerHTML = `<i class="bi bi-exclamation-triangle-fill me-1"></i> ${explanation} <br><button class="btn btn-sm btn-outline-light mt-2" onclick="resetChapterExercise(this)">Coba Lagi</button>`;
+      }
+    }
+
+    function resetChapterExercise(btn) {
+      const box = btn.closest(".mr-chapter-exercise");
+      const buttons = box.querySelectorAll(".mr-exercise-btn");
+      const fb = box.querySelector(".mr-exercise-feedback");
+      buttons.forEach(b => {
+        b.disabled = false;
+        b.classList.remove("correct", "wrong");
+        b.querySelector("i").className = "bi bi-circle";
+      });
+      fb.style.display = "none";
     }
   </script>
 </body>

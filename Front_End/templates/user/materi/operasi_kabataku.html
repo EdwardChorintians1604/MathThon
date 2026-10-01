@@ -36,12 +36,11 @@
     <aside class="mr-sidebar-toc" id="sidebarToc">
       <div class="mr-toc-heading"><i class="bi bi-compass"></i> Navigasi Bab</div>
       <nav class="mr-toc-nav">
-        <a href="#pengantar" class="mr-toc-link active"><i class="bi bi-stars"></i> 1. Hakikat Ka-Ba-Ta-Ku</a>
-        <a href="#hierarki" class="mr-toc-link"><i class="bi bi-diagram-3"></i> 2. Hierarki Urutan (PEMDAS)</a>
-        <a href="#sifat" class="mr-toc-link"><i class="bi bi-shield-check"></i> 3. Sifat Aritmatika Formal</a>
-        <a href="#sandbox" class="mr-toc-link"><i class="bi bi-sliders"></i> 4. Sandbox Hierarki Hitung</a>
-        <a href="#jebakan" class="mr-toc-link"><i class="bi bi-exclamation-triangle"></i> 5. Jebakan Viral Matematika</a>
-        <a href="#kuis" class="mr-toc-link"><i class="bi bi-patch-question"></i> 6. Cek Pemahaman Mandiri</a>
+        <a href="#bab1" class="mr-toc-link active"><i class="bi bi-bookmark-fill"></i> Bab 1: Hakikat & Konvensi KaBaTaKu</a>
+        <a href="#bab2" class="mr-toc-link"><i class="bi bi-diagram-3"></i> Bab 2: Hierarki Urutan (PEMDAS)</a>
+        <a href="#bab3" class="mr-toc-link"><i class="bi bi-shield-check"></i> Bab 3: Sifat Aritmatika & Sandbox</a>
+        <a href="#bab4" class="mr-toc-link"><i class="bi bi-exclamation-triangle"></i> Bab 4: Kasus Nyata & Jebakan Viral</a>
+        <a href="#bab5" class="mr-toc-link"><i class="bi bi-cpu-fill"></i> Bab 5: Capstone Checkpoint</a>
       </nav>
       <div class="mr-toc-divider"></div>
       <div class="p-2 rounded" style="background: rgba(255,255,255,0.03); font-size: 0.8rem; color: var(--mr-text-muted);">
@@ -95,8 +94,9 @@
         </div>
       </div>
 
-      <!-- Hero Section -->
-      <section class="mr-hero-card" id="pengantar">
+      <!-- BAB 1 -->
+      <section class="mr-hero-card" id="bab1">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 1: Pendahuluan & Latar Belakang</span>
         <h1 class="mr-hero-title">Operasi Ka-Ba-Ta-Ku & Aturan Hierarki Operasi</h1>
         <p class="mr-hero-desc">
           <strong>KaBaTaKu</strong> (Kali, Bagi, Tambah, Kurang) adalah pilar fundamental matematika. Mengapa $2 + 3 \times 4$ bukan $20$, melainkan $14$? Jawabannya ada pada kesepakatan rasional ilmu matematika yang disebut <em>Order of Operations</em>.
@@ -115,10 +115,37 @@
             <span class="mr-pill">🧠 Model Jaringan Saraf Tiruan</span>
           </div>
         </div>
+
+        <!-- Latihan Terintegrasi Bab 1 -->
+        <div class="mr-chapter-exercise">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 1</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Mengapa para ilmuwan matematika menetapkan aturan baku hierarki urutan operasi (Order of Operations), alih-alih menghitung seenaknya dari kiri ke kanan?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Tepat sekali! Tanpa konvensi hierarki baku, kalimat matematika 2 + 3 x 4 akan ambigu (bisa 20 atau 14). Hierarki memastikan konsistensi hasil di seluruh dunia dan komputasi mesin.')">
+              <span>A. Agar setiap ekspresi matematika selalu memiliki satu tafsir nilai tunggal yang konsisten dan terhindar dari ambiguitas</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. Perkalian tidak selalu menghasilkan angka terbesar (misalnya dikali bilangan pecahan atau 0).')">
+              <span>B. Karena perkalian selalu bernilai lebih besar daripada penjumlahan</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Hierarki operasi adalah konvensi universal, bukan batasan kapasitas memori.')">
+              <span>C. Karena memori komputer tidak sanggup menghitung penjumlahan terlebih dahulu</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- Hierarki Operasi -->
-      <section class="mr-card" id="hierarki">
+      <!-- BAB 2 -->
+      <section class="mr-card" id="bab2">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 2: Hierarki Urutan Operasi (PEMDAS)</span>
         <div class="mr-card-header">
           <div class="mr-card-icon gold"><i class="bi bi-diagram-3-fill"></i></div>
           <div>
@@ -161,10 +188,37 @@
             </div>
           </div>
         </div>
+
+        <!-- Latihan Terintegrasi Bab 2 -->
+        <div class="mr-chapter-exercise mt-4">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 2</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Pada ekspresi perhitungan $10 - 2 \times 3 + 4$, operasi manakah yang <strong>WAJIB</strong> dikerjakan pertama kali?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. Menghitung 10 - 2 melanggar kaidah hierarki karena pengurangan berada di bawah kasta perkalian.')">
+              <span>A. $10 - 2$ (pengurangan di paling kiri)</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Tepat sekali! Menurut PEMDAS/KaBaTaKu, perkalian 2 x 3 = 6 wajib dievaluasi terlebih dahulu, sehingga ekspresi menjadi 10 - 6 + 4 = 8.')">
+              <span>B. $2 \times 3$ (perkalian karena derajatnya lebih tinggi dari tambah dan kurang)</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Penjumlahan tidak boleh mendahului perkalian.')">
+              <span>C. $3 + 4$ (penjumlahan di sebelah kanan)</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- Sifat Aritmatika -->
-      <section class="mr-card" id="sifat">
+      <!-- BAB 3 -->
+      <section class="mr-card" id="bab3">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 3: Sifat Aritmatika & Sandbox Hitung</span>
         <div class="mr-card-header">
           <div class="mr-card-icon indigo"><i class="bi bi-shield-check"></i></div>
           <div>
@@ -196,53 +250,80 @@
             </div>
           </div>
         </div>
+
+        <!-- Sandbox Interaktif di dalam Bab 3 -->
+        <div class="mr-sandbox mt-4" id="sandbox">
+          <div class="mr-sandbox-title">
+            <i class="bi bi-sliders"></i> Eksplorasi Sandbox: Simulasi Evaluasi Ekspresi $a + b \times c - d$
+          </div>
+          <p class="mr-sandbox-desc">
+            Ubah angka di bawah dan amati bagaimana perkalian otomatis didahulukan sebelum penjumlahan dan pengurangan!
+          </p>
+
+          <div class="row g-3">
+            <div class="col-6 col-md-3">
+              <label class="small text-secondary mb-1">Angka A:</label>
+              <input type="number" class="form-control bg-dark text-white border-secondary" id="kabaA" value="5" oninput="evalKabataku()">
+            </div>
+            <div class="col-6 col-md-3">
+              <label class="small text-secondary mb-1">Angka B (Pengali):</label>
+              <input type="number" class="form-control bg-dark text-white border-secondary" id="kabaB" value="4" oninput="evalKabataku()">
+            </div>
+            <div class="col-6 col-md-3">
+              <label class="small text-secondary mb-1">Angka C (Pengali):</label>
+              <input type="number" class="form-control bg-dark text-white border-secondary" id="kabaC" value="3" oninput="evalKabataku()">
+            </div>
+            <div class="col-6 col-md-3">
+              <label class="small text-secondary mb-1">Angka D (Pengurang):</label>
+              <input type="number" class="form-control bg-dark text-white border-secondary" id="kabaD" value="2" oninput="evalKabataku()">
+            </div>
+          </div>
+
+          <div class="mr-live-result-box">
+            <div>
+              <div class="mr-live-result-label">Bentuk Ekspresi:</div>
+              <div class="fs-5 text-warning font-monospace" id="kabaExpDisplay">5 + 4 × 3 - 2</div>
+            </div>
+            <div class="text-end">
+              <div class="mr-live-result-label">Hasil Perhitungan yang Benar:</div>
+              <div class="mr-live-result-val text-success" id="kabaResultDisplay">15</div>
+            </div>
+          </div>
+          <div class="mt-2 text-dim small" id="kabaDeduction">
+            Langkah: Selesaikan perkalian $4 \times 3 = 12$ terlebih dahulu $\implies 5 + 12 - 2 = 17 - 2 = 15$.
+          </div>
+        </div>
+
+        <!-- Latihan Terintegrasi Bab 3 -->
+        <div class="mr-chapter-exercise mt-4">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 3</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Hukum sifat aritmatika manakah yang menyatakan bahwa urutan tanda kurung pengelompokan tidak memengaruhi hasil penjumlahan: $(a + b) + c = a + (b + c)$?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. Komutatif adalah pertukaran posisi urutan suku: a + b = b + a.')">
+              <span>A. Sifat Komutatif (Pertukaran)</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Tepat sekali! Sifat Asosiatif mengatur bahwa pengelompokan operasi sejenis (seperti penjumlahan murni atau perkalian murni) menghasilkan nilai yang identik.')">
+              <span>B. Sifat Asosiatif (Pengelompokan)</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Distributif adalah penyebaran perkalian terhadap penjumlahan: a(b + c) = ab + ac.')">
+              <span>C. Sifat Distributif (Penyebaran)</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- Sandbox Interaktif -->
-      <section class="mr-sandbox" id="sandbox">
-        <div class="mr-sandbox-title">
-          <i class="bi bi-sliders"></i> Sandbox: Simulasi Evaluasi Ekspresi $a + b \times c - d$
-        </div>
-        <p class="mr-sandbox-desc">
-          Ubah angka di bawah dan amati bagaimana perkalian otomatis didahulukan sebelum penjumlahan dan pengurangan!
-        </p>
-
-        <div class="row g-3">
-          <div class="col-6 col-md-3">
-            <label class="small text-secondary mb-1">Angka A:</label>
-            <input type="number" class="form-control bg-dark text-white border-secondary" id="kabaA" value="5" oninput="evalKabataku()">
-          </div>
-          <div class="col-6 col-md-3">
-            <label class="small text-secondary mb-1">Angka B (Pengali):</label>
-            <input type="number" class="form-control bg-dark text-white border-secondary" id="kabaB" value="4" oninput="evalKabataku()">
-          </div>
-          <div class="col-6 col-md-3">
-            <label class="small text-secondary mb-1">Angka C (Pengali):</label>
-            <input type="number" class="form-control bg-dark text-white border-secondary" id="kabaC" value="3" oninput="evalKabataku()">
-          </div>
-          <div class="col-6 col-md-3">
-            <label class="small text-secondary mb-1">Angka D (Pengurang):</label>
-            <input type="number" class="form-control bg-dark text-white border-secondary" id="kabaD" value="2" oninput="evalKabataku()">
-          </div>
-        </div>
-
-        <div class="mr-live-result-box">
-          <div>
-            <div class="mr-live-result-label">Bentuk Ekspresi:</div>
-            <div class="fs-5 text-warning font-monospace" id="kabaExpDisplay">5 + 4 × 3 - 2</div>
-          </div>
-          <div class="text-end">
-            <div class="mr-live-result-label">Hasil Perhitungan yang Benar:</div>
-            <div class="mr-live-result-val text-success" id="kabaResultDisplay">15</div>
-          </div>
-        </div>
-        <div class="mt-2 text-dim small" id="kabaDeduction">
-          Langkah: Selesaikan perkalian $4 \times 3 = 12$ terlebih dahulu $\implies 5 + 12 - 2 = 17 - 2 = 15$.
-        </div>
-      </section>
-
-      <!-- Kasus Nyata / Jebakan Viral -->
-      <section class="mr-card" id="jebakan">
+      <!-- BAB 4 -->
+      <section class="mr-card" id="bab4">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 4: Kasus Nyata & Jebakan Viral</span>
         <div class="mr-card-header">
           <div class="mr-card-icon emerald"><i class="bi bi-exclamation-triangle-fill"></i></div>
           <div>
@@ -280,10 +361,37 @@
             </div>
           </div>
         </div>
+
+        <!-- Latihan Terintegrasi Bab 4 -->
+        <div class="mr-chapter-exercise mt-4">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 4</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Pada ekspresi $8 \div 2 \times 4$, mengapa kita menghitung $8 \div 2 = 4$ terlebih dahulu, BUKAN $2 \times 4 = 8$?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Tepat sekali! Perkalian dan pembagian berada pada kasta prioritas yang SETARA. Ketika dua operasi setara bertemu berdampingan, aturan PEMDAS mewajibkan evaluasi berurutan dari KIRI ke KANAN.')">
+              <span>A. Karena pembagian dan perkalian berderajat setara, sehingga wajib diselesaikan berurutan dari kiri ke kanan</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. Pembagian dan perkalian memiliki prioritas yang setara, tidak ada yang lebih tinggi.')">
+              <span>B. Karena simbol pembagian selalu lebih diprioritaskan daripada perkalian</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Nilai angka tidak menentukan urutan kaidah prioritas operator.')">
+              <span>C. Karena angka 8 lebih besar daripada angka 4</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- ═══════════════════════════════════════════════════════ SCAFFOLDING CHECKPOINT -->
-      <section class="mr-scaffold-container" id="kuis">
+      <!-- ═══════════════════════════════════════════════════════ BAB 5: CAPSTONE SCAFFOLDING CHECKPOINT -->
+      <section class="mr-scaffold-container" id="bab5">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 5: Capstone Scaffolding Checkpoint</span>
         <div class="mr-scaffold-header">
           <h2 class="mr-scaffold-title">
             <i class="bi bi-cpu-fill text-warning"></i> Active Recall Checkpoint: Hierarki KaBaTaKu Bertahap
@@ -678,6 +786,40 @@
           renderMathInElement(dedEl, { delimiters: [{left: '$', right: '$', display: false}] });
         }
       }
+    }
+
+    function checkChapterExercise(btn, isCorrect, explanation) {
+      const box = btn.closest(".mr-chapter-exercise");
+      const buttons = box.querySelectorAll(".mr-exercise-btn");
+      const fb = box.querySelector(".mr-exercise-feedback");
+      buttons.forEach(b => {
+        b.disabled = true;
+        b.classList.remove("correct", "wrong");
+      });
+
+      if (isCorrect) {
+        btn.classList.add("correct");
+        btn.querySelector("i").className = "bi bi-check-circle-fill";
+        fb.className = "mr-exercise-feedback success";
+        fb.innerHTML = `<i class="bi bi-patch-check-fill me-1"></i> ${explanation}`;
+      } else {
+        btn.classList.add("wrong");
+        btn.querySelector("i").className = "bi bi-x-circle-fill";
+        fb.className = "mr-exercise-feedback retry";
+        fb.innerHTML = `<i class="bi bi-exclamation-triangle-fill me-1"></i> ${explanation} <br><button class="btn btn-sm btn-outline-light mt-2" onclick="resetChapterExercise(this)">Coba Lagi</button>`;
+      }
+    }
+
+    function resetChapterExercise(btn) {
+      const box = btn.closest(".mr-chapter-exercise");
+      const buttons = box.querySelectorAll(".mr-exercise-btn");
+      const fb = box.querySelector(".mr-exercise-feedback");
+      buttons.forEach(b => {
+        b.disabled = false;
+        b.classList.remove("correct", "wrong");
+        b.querySelector("i").className = "bi bi-circle";
+      });
+      fb.style.display = "none";
     }
   </script>
 </body>

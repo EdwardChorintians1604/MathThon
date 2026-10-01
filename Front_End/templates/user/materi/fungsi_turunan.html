@@ -35,12 +35,11 @@
     <aside class="mr-sidebar-toc" id="sidebarToc">
       <div class="mr-toc-heading"><i class="bi bi-compass"></i> Navigasi Turunan</div>
       <nav class="mr-toc-nav">
-        <a href="#pengantar" class="mr-toc-link active"><i class="bi bi-stars"></i> 1. Laju Perubahan & Gradien</a>
-        <a href="#definisi" class="mr-toc-link"><i class="bi bi-bezier"></i> 2. Definisi Formal Garis Singgung</a>
-        <a href="#aturan" class="mr-toc-link"><i class="bi bi-list-ol"></i> 3. Aturan Emas Diferensial</a>
-        <a href="#sandbox" class="mr-toc-link"><i class="bi bi-sliders"></i> 4. Live Derivative Calculator</a>
-        <a href="#studi-kasus" class="mr-toc-link"><i class="bi bi-graph-up-arrow"></i> 5. Optimasi Laba Bisnis Maksimum</a>
-        <a href="#kuis" class="mr-toc-link"><i class="bi bi-patch-question"></i> 6. Uji Cepat Mandiri</a>
+        <a href="#bab1" class="mr-toc-link active"><i class="bi bi-bookmark-fill"></i> Bab 1: Latar Belakang & Laju Sesaat</a>
+        <a href="#bab2" class="mr-toc-link"><i class="bi bi-bezier"></i> Bab 2: Definisi Formal & Leibniz</a>
+        <a href="#bab3" class="mr-toc-link"><i class="bi bi-list-ol"></i> Bab 3: Aturan Turunan & Sandbox</a>
+        <a href="#bab4" class="mr-toc-link"><i class="bi bi-graph-up-arrow"></i> Bab 4: Studi Kasus Optimasi Laba</a>
+        <a href="#bab5" class="mr-toc-link"><i class="bi bi-cpu-fill"></i> Bab 5: Capstone Checkpoint</a>
       </nav>
       <div class="mr-toc-divider"></div>
       <div class="p-2 rounded" style="background: rgba(255,255,255,0.03); font-size: 0.8rem; color: var(--mr-text-muted);">
@@ -96,8 +95,9 @@
         </div>
       </div>
 
-      <!-- Hero -->
-      <section class="mr-hero-card" id="pengantar">
+      <!-- BAB 1 -->
+      <section class="mr-hero-card" id="bab1">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 1: Pendahuluan & Latar Belakang</span>
         <h1 class="mr-hero-title">Fungsi Turunan: Seni Menangkap Perubahan Sesaat</h1>
         <p class="mr-hero-desc">
           Dunia ini selalu berubah: suhu udara naik-turun, harga saham berfluktuasi, dan mobil melaju dengan kecepatan dinamis. <strong>Kalkulus Diferensial</strong> (ditemukan oleh Newton dan Leibniz) adalah alat matematika untuk mengukur laju perubahan tepat pada satu detik tertentu.
@@ -116,10 +116,37 @@
             <span class="mr-pill">🚀 Kalkulasi Aerodinamika Pesawat</span>
           </div>
         </div>
+
+        <!-- Latihan Terintegrasi Bab 1 -->
+        <div class="mr-chapter-exercise">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 1</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Mengapa rumus laju perubahan rata-rata $\frac{\Delta y}{\Delta t} = \frac{y_2 - y_1}{t_2 - t_1}$ belum cukup untuk mengetahui kecepatan mobil balap tepat pada detik ke-3?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. Kecepatan rata-rata dapat dihitung, namun ia menyamaratakan seluruh kejadian selama selang waktu.')">
+              <span>A. Karena mobil balap bergerak dengan kecepatan yang bernilai negatif</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Tepat sekali! Kecepatan rata-rata memerlukan rentang waktu $\\Delta t > 0$, sedangkan kecepatan sesaat membutuhkan selisih waktu yang mendekati nol (limit diferensial).')">
+              <span>B. Karena laju rata-rata hanya mengukur interval lebar, sedangkan kecepatan sesaat memerlukan limit saat $\Delta t \to 0$</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Formula rata-rata tetap valid untuk selang waktu tertentu, hanya saja tidak mampu membaca nilai sesaat.')">
+              <span>C. Karena kalkulasi pembagian waktu tidak diperbolehkan dalam fisika</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- Definisi Formal -->
-      <section class="mr-card" id="definisi">
+      <!-- BAB 2 -->
+      <section class="mr-card" id="bab2">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 2: Definisi Formal & Limit Leibniz</span>
         <div class="mr-card-header">
           <div class="mr-card-icon gold"><i class="bi bi-bezier"></i></div>
           <div>
@@ -135,10 +162,37 @@
             Notasi $f'(x)$ diperkenalkan oleh Lagrange, dan $\frac{df}{dx}$ diperkenalkan oleh Leibniz.
           </div>
         </div>
+
+        <!-- Latihan Terintegrasi Bab 2 -->
+        <div class="mr-chapter-exercise">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 2</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Pada definisi limit formal $f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}$, apa arti geometris dari nilai $h \to 0$?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. Fungsi kurva tidak berubah bentuk menjadi garis horizontal.')">
+              <span>A. Kurva fungsi dipaksa menjadi garis lurus datar sempurna</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Tepat sekali! Selisih jarak horizontal h antara dua titik tali busur semakin sempit menuju 0, sehingga tali busur memusat menjadi tepat satu garis singgung tangensial di titik x.')">
+              <span>B. Dua titik pengamatan tali busur semakin berimpit mendekati jarak nol, menjelma menjadi garis singgung</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Nilai h adalah selisih perubahan variabel bebas (input), bukan nilai output f(x).')">
+              <span>C. Nilai fungsi f(x) dipaksa menjadi nol</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- Aturan Turunan -->
-      <section class="mr-card" id="aturan">
+      <!-- BAB 3 -->
+      <section class="mr-card" id="bab3">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 3: Aturan Diferensiasi & Sandbox Interaktif</span>
         <div class="mr-card-header">
           <div class="mr-card-icon indigo"><i class="bi bi-list-ol"></i></div>
           <div>
@@ -179,54 +233,81 @@
             </div>
           </div>
         </div>
+
+        <!-- Sandbox Interaktif di dalam Bab 3 -->
+        <div class="mr-sandbox mt-4" id="sandbox">
+          <div class="mr-sandbox-title">
+            <i class="bi bi-sliders"></i> Eksplorasi Sandbox: Turunan Polinomial & Gradien Garis Singgung
+          </div>
+          <p class="mr-sandbox-desc">
+            Ubah koefisien fungsi kuadrat $f(x) = ax^2 + bx + c$ dan amati rumus turunan $f'(x) = 2ax + b$ beserta nilai kemiringannya (gradien $m$) pada titik $x$ tertentu!
+          </p>
+
+          <div class="row g-3">
+            <div class="col-4">
+              <label class="small text-secondary mb-1">Koefisien a:</label>
+              <input type="number" class="form-control bg-dark text-white border-secondary" id="derA" value="3" oninput="calcDerivative()">
+            </div>
+            <div class="col-4">
+              <label class="small text-secondary mb-1">Koefisien b:</label>
+              <input type="number" class="form-control bg-dark text-white border-secondary" id="derB" value="4" oninput="calcDerivative()">
+            </div>
+            <div class="col-4">
+              <label class="small text-secondary mb-1">Konstanta c:</label>
+              <input type="number" class="form-control bg-dark text-white border-secondary" id="derC" value="-5" oninput="calcDerivative()">
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <div class="d-flex justify-content-between small text-secondary mb-1">
+              <span>Evaluasi pada Titik x:</span>
+              <span class="font-monospace text-warning" id="derXVal">x = 2</span>
+            </div>
+            <input type="range" class="mr-slider" id="derXSlider" min="-5" max="5" value="2" oninput="calcDerivative()">
+          </div>
+
+          <div class="mr-live-result-box">
+            <div>
+              <div class="mr-live-result-label">Rumus Fungsi Turunan f'(x):</div>
+              <div class="fs-5 text-warning font-monospace" id="derFormulaDisplay">f'(x) = 6x + 4</div>
+            </div>
+            <div class="text-end">
+              <div class="mr-live-result-label">Gradien Garis Singgung di Titik x:</div>
+              <div class="mr-live-result-val text-success" id="derGradientDisplay">m = 16</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Latihan Terintegrasi Bab 3 -->
+        <div class="mr-chapter-exercise mt-4">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 3</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Jika diberikan suatu fungsi konstan horizontal $f(x) = 250$, berapakah nilai turunan pertamanya $f'(x)$?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. 250x adalah turunan dari 125x^2, bukan turunan dari angka konstan 250.')">
+              <span>A. $250x$</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Tepat sekali! Menurut aturan konstanta, nilai konstan tidak memiliki laju perubahan sama sekali (garis mendatar dengan kemiringan 0), sehingga d/dx [c] = 0.')">
+              <span>B. $0$, karena nilai konstan tidak memiliki laju perubahan</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Angka konstan tidak menghasilkan turunan bernilai 1 (turunan dari x adalah 1).')">
+              <span>C. $1$</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- Sandbox Interaktif -->
-      <section class="mr-sandbox" id="sandbox">
-        <div class="mr-sandbox-title">
-          <i class="bi bi-sliders"></i> Sandbox: Kalkulator Turunan Polinomial & Gradien Garis Singgung
-        </div>
-        <p class="mr-sandbox-desc">
-          Ubah koefisien fungsi kuadrat $f(x) = ax^2 + bx + c$ dan amati rumus turunan $f'(x) = 2ax + b$ beserta nilai kemiringannya (gradien $m$) pada titik $x$ tertentu!
-        </p>
-
-        <div class="row g-3">
-          <div class="col-4">
-            <label class="small text-secondary mb-1">Koefisien a:</label>
-            <input type="number" class="form-control bg-dark text-white border-secondary" id="derA" value="3" oninput="calcDerivative()">
-          </div>
-          <div class="col-4">
-            <label class="small text-secondary mb-1">Koefisien b:</label>
-            <input type="number" class="form-control bg-dark text-white border-secondary" id="derB" value="4" oninput="calcDerivative()">
-          </div>
-          <div class="col-4">
-            <label class="small text-secondary mb-1">Konstanta c:</label>
-            <input type="number" class="form-control bg-dark text-white border-secondary" id="derC" value="-5" oninput="calcDerivative()">
-          </div>
-        </div>
-
-        <div class="mt-3">
-          <div class="d-flex justify-content-between small text-secondary mb-1">
-            <span>Evaluasi pada Titik x:</span>
-            <span class="font-monospace text-warning" id="derXVal">x = 2</span>
-          </div>
-          <input type="range" class="mr-slider" id="derXSlider" min="-5" max="5" value="2" oninput="calcDerivative()">
-        </div>
-
-        <div class="mr-live-result-box">
-          <div>
-            <div class="mr-live-result-label">Rumus Fungsi Turunan f'(x):</div>
-            <div class="fs-5 text-warning font-monospace" id="derFormulaDisplay">f'(x) = 6x + 4</div>
-          </div>
-          <div class="text-end">
-            <div class="mr-live-result-label">Gradien Garis Singgung di Titik x:</div>
-            <div class="mr-live-result-val text-success" id="derGradientDisplay">m = 16</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Studi Kasus Optimasi Laba -->
-      <section class="mr-card" id="studi-kasus">
+      <!-- BAB 4 -->
+      <section class="mr-card" id="bab4">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 4: Studi Kasus Nyata - Optimasi Bisnis</span>
         <div class="mr-card-header">
           <div class="mr-card-icon cyan"><i class="bi bi-graph-up-arrow"></i></div>
           <div>
@@ -263,10 +344,37 @@
             </div>
           </div>
         </div>
+
+        <!-- Latihan Terintegrasi Bab 4 -->
+        <div class="mr-chapter-exercise mt-4">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 4</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Mengapa syarat tercapainya titik optimal (laba maksimum atau biaya minimum) selalu mengharuskan turunan pertama bernilai nol ($f'(x) = 0$)?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Tepat sekali! Pada puncak bukit (maksimum) atau dasar lembah (minimum), kemiringan kurva mendatar sempurna sejajar sumbu X, sehingga gradien garis singgung m = f\'(x) = 0.')">
+              <span>A. Karena pada titik ekstrem puncak atau lembah, garis singgung kurva mendatar sempurna sehingga gradien m = 0</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. Fungsi kurva tidak berhenti eksis, melainkan memiliki laju perubahan sesaat bernilai nol.')">
+              <span>B. Karena grafik fungsi terputus pada titik tersebut</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Nilai keuntungan maksimum justru bernilai paling tinggi pada titik stasioner tersebut, bukan nol.')">
+              <span>C. Karena keuntungan perusahaan dipaksa bernilai nol</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- ═══════════════════════════════════════════════════════ SCAFFOLDING CHECKPOINT -->
-      <section class="mr-scaffold-container" id="kuis">
+      <!-- ═══════════════════════════════════════════════════════ BAB 5: CAPSTONE SCAFFOLDING CHECKPOINT -->
+      <section class="mr-scaffold-container" id="bab5">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 5: Capstone Scaffolding Checkpoint</span>
         <div class="mr-scaffold-header">
           <h2 class="mr-scaffold-title">
             <i class="bi bi-cpu-fill text-warning"></i> Active Recall Checkpoint: Diferensiasi Multi-Tahap
@@ -663,6 +771,40 @@
       const gradient = (derA_val * x) + b;
       const gradEl = document.getElementById("derGradientDisplay");
       if (gradEl) gradEl.innerText = `m = ${gradient}`;
+    }
+
+    function checkChapterExercise(btn, isCorrect, explanation) {
+      const box = btn.closest(".mr-chapter-exercise");
+      const buttons = box.querySelectorAll(".mr-exercise-btn");
+      const fb = box.querySelector(".mr-exercise-feedback");
+      buttons.forEach(b => {
+        b.disabled = true;
+        b.classList.remove("correct", "wrong");
+      });
+
+      if (isCorrect) {
+        btn.classList.add("correct");
+        btn.querySelector("i").className = "bi bi-check-circle-fill";
+        fb.className = "mr-exercise-feedback success";
+        fb.innerHTML = `<i class="bi bi-patch-check-fill me-1"></i> ${explanation}`;
+      } else {
+        btn.classList.add("wrong");
+        btn.querySelector("i").className = "bi bi-x-circle-fill";
+        fb.className = "mr-exercise-feedback retry";
+        fb.innerHTML = `<i class="bi bi-exclamation-triangle-fill me-1"></i> ${explanation} <br><button class="btn btn-sm btn-outline-light mt-2" onclick="resetChapterExercise(this)">Coba Lagi</button>`;
+      }
+    }
+
+    function resetChapterExercise(btn) {
+      const box = btn.closest(".mr-chapter-exercise");
+      const buttons = box.querySelectorAll(".mr-exercise-btn");
+      const fb = box.querySelector(".mr-exercise-feedback");
+      buttons.forEach(b => {
+        b.disabled = false;
+        b.classList.remove("correct", "wrong");
+        b.querySelector("i").className = "bi bi-circle";
+      });
+      fb.style.display = "none";
     }
   </script>
 </body>

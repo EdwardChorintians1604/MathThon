@@ -38,13 +38,11 @@
     <aside class="mr-sidebar-toc" id="sidebarToc">
       <div class="mr-toc-heading"><i class="bi bi-compass"></i> Daftar Isi Modul</div>
       <nav class="mr-toc-nav">
-        <a href="#pengantar" class="mr-toc-link active"><i class="bi bi-stars"></i> 1. Mengapa Aljabar?</a>
-        <a href="#anatomi" class="mr-toc-link"><i class="bi bi-diagram-3"></i> 2. Anatomi Bentuk Aljabar</a>
-        <a href="#operasi" class="mr-toc-link"><i class="bi bi-plus-slash-minus"></i> 3. Operasi Aljabar</a>
-        <a href="#plsv" class="mr-toc-link"><i class="bi bi-check2-circle"></i> 4. Persamaan Linear (PLSV)</a>
-        <a href="#sandbox" class="mr-toc-link"><i class="bi bi-sliders"></i> 5. Sandbox Interaktif</a>
-        <a href="#studi-kasus" class="mr-toc-link"><i class="bi bi-lightbulb"></i> 6. Kasus Nyata & Step Revealer</a>
-        <a href="#kuis" class="mr-toc-link"><i class="bi bi-patch-question"></i> 7. Cek Pemahaman Mandiri</a>
+        <a href="#bab1" class="mr-toc-link active"><i class="bi bi-bookmark-fill"></i> Bab 1: Latar Belakang & Variabel</a>
+        <a href="#bab2" class="mr-toc-link"><i class="bi bi-diagram-3"></i> Bab 2: Anatomi Bentuk Aljabar</a>
+        <a href="#bab3" class="mr-toc-link"><i class="bi bi-plus-slash-minus"></i> Bab 3: Operasi Aljabar & Sandbox</a>
+        <a href="#bab4" class="mr-toc-link"><i class="bi bi-lightbulb"></i> Bab 4: Studi Kasus Pemodelan</a>
+        <a href="#bab5" class="mr-toc-link"><i class="bi bi-cpu-fill"></i> Bab 5: Capstone Checkpoint</a>
       </nav>
       <div class="mr-toc-divider"></div>
       <div class="p-2 rounded" style="background: rgba(255,255,255,0.03); font-size: 0.8rem; color: var(--mr-text-muted);">
@@ -101,8 +99,9 @@
         </div>
       </div>
 
-      <!-- Hero Card -->
-      <section class="mr-hero-card" id="pengantar">
+      <!-- BAB 1 -->
+      <section class="mr-hero-card" id="bab1">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 1: Pendahuluan & Latar Belakang</span>
         <h1 class="mr-hero-title">Pengenalan Aljabar: Seni Berpikir dengan Pola</h1>
         <p class="mr-hero-desc">
           Aljabar berasal dari kata Arab <em>Al-Jabr</em> (karya ilmuwan Al-Khwarizmi) yang bermakna "pemulihan dan penyeimbangan". Aljabar adalah bahasa universal untuk menyelesaikan masalah yang memiliki nilai misterius (belum diketahui).
@@ -121,10 +120,37 @@
             <span class="mr-pill">🎮 Fisika Game Mesin 3D</span>
           </div>
         </div>
+
+        <!-- Latihan Terintegrasi Bab 1 -->
+        <div class="mr-chapter-exercise">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 1</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Mengapa para ilmuwan matematika memperkenalkan simbol variabel (seperti huruf $x$, $y$) daripada hanya menghafal angka konkret?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Tepat sekali! Variabel memungkinkan perumusan pola universal (generalisasi) yang berlaku untuk kuantitas dinamis apa pun, tanpa harus menghitung ulang rumus dari awal.')">
+              <span>A. Untuk merumuskan generalisasi pola yang berlaku umum bagi kuantitas dinamis atau yang belum diketahui</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. Angka konkret tetap dapat dihitung secara aritmatika biasa.')">
+              <span>B. Karena angka konkret dilarang digunakan dalam perhitungan sains modern</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Variabel bukan sekadar hiasan tulisan, melainkan abstraksi matematis tingkat tinggi.')">
+              <span>C. Hanya sebagai hiasan tulisan agar buku terlihat rumit</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- Anatomi Bentuk Aljabar -->
-      <section class="mr-card" id="anatomi">
+      <!-- BAB 2 -->
+      <section class="mr-card" id="bab2">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 2: Anatomi Bentuk Aljabar</span>
         <div class="mr-card-header">
           <div class="mr-card-icon gold"><i class="bi bi-diagram-3-fill"></i></div>
           <div>
@@ -171,15 +197,42 @@
             </div>
           </div>
         </div>
+
+        <!-- Latihan Terintegrasi Bab 2 -->
+        <div class="mr-chapter-exercise mt-4">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 2</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Pada ekspresi aljabar $-8x^3 + 4x - 15$, manakah yang merupakan <strong>koefisien dari $x^3$</strong> dan manakah yang merupakan <strong>konstanta</strong>?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. Jangan lupakan tanda negatif (-) yang melekat di depan angka!')">
+              <span>A. Koefisien adalah 8 dan konstanta adalah 15</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Tepat sekali! Angka pengali di depan x³ adalah -8 (koefisien) dan suku bilangan murni tanpa variabel adalah -15 (konstanta).')">
+              <span>B. Koefisien adalah -8 dan konstanta adalah -15</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Angka 3 adalah derajat/pangkat variabel, bukan koefisien.')">
+              <span>C. Koefisien adalah 3 dan konstanta adalah 4</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- Operasi Bentuk Aljabar -->
-      <section class="mr-card" id="operasi">
+      <!-- BAB 3 -->
+      <section class="mr-card" id="bab3">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 3: Operasi Aljabar & Sandbox Solver</span>
         <div class="mr-card-header">
           <div class="mr-card-icon indigo"><i class="bi bi-plus-slash-minus"></i></div>
           <div>
-            <h2 class="mr-card-title">Operasi Suku Sejenis</h2>
-            <p class="mr-card-subtitle">Kaidah penggabungan penjumlahan dan pengurangan</p>
+            <h2 class="mr-card-title">Operasi Suku Sejenis & Persamaan Linear</h2>
+            <p class="mr-card-subtitle">Kaidah penggabungan dan prinsip keseimbangan ruas</p>
           </div>
         </div>
         <p class="text-secondary">
@@ -194,85 +247,101 @@
             <div>&bull; $2x^2 + 4x = \mathbf{2x^2 + 4x}$ <span class="badge bg-danger-subtle text-danger ms-2">Tidak Bisa (Beda Pangkat)</span></div>
           </div>
         </div>
-      </section>
 
-      <!-- PLSV -->
-      <section class="mr-card" id="plsv">
-        <div class="mr-card-header">
-          <div class="mr-card-icon emerald"><i class="bi bi-check2-circle"></i></div>
-          <div>
-            <h2 class="mr-card-title">Persamaan Linear Satu Variabel (PLSV)</h2>
-            <p class="mr-card-subtitle">Konsep timbangan seimbang: kedua ruas diperlakukan setara</p>
+        <div class="mt-4 pt-2 border-top border-secondary border-opacity-25">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="badge bg-emerald-subtle text-emerald border border-emerald-subtle"><i class="bi bi-check2-circle"></i> Konsep PLSV</span>
+            <span class="text-white fw-bold">Persamaan Linear Satu Variabel: $ax + b = c$</span>
           </div>
+          <p class="text-secondary small mb-3">
+            Prinsip penyelesaian PLSV adalah mengisolasi variabel $x$ dengan melakukan operasi yang identik pada kedua ruas (prinsip timbangan adil).
+          </p>
         </div>
-        <p class="text-secondary">
-          Bentuk umum PLSV adalah:
-        </p>
-        <div class="mr-formula-box">
-          <span class="mr-formula-badge">Bentuk Standar</span>
-          <div class="mr-formula-render">$$ax + b = c \quad (a \neq 0)$$</div>
-          <div class="mr-formula-expl">
-            Prinsip penyelesaian: <em>Isolasi variabel $x$</em> dengan melakukan operasi penjumlahan, pengurangan, perkalian, atau pembagian yang bernilai sama pada kedua ruas.
+
+        <!-- Sandbox Interaktif di dalam Bab 3 -->
+        <div class="mr-sandbox mt-3" id="sandbox">
+          <div class="mr-sandbox-title">
+            <i class="bi bi-sliders"></i> Eksplorasi Sandbox: Solver PLSV Dinamis
           </div>
-        </div>
-      </section>
+          <p class="mr-sandbox-desc">
+            Geser slider nilai $a$, $b$, dan $c$ untuk melihat bagaimana persamaan $ax + b = c$ diselesaikan seketika secara matematis!
+          </p>
 
-      <!-- Sandbox Interaktif -->
-      <section class="mr-sandbox" id="sandbox">
-        <div class="mr-sandbox-title">
-          <i class="bi bi-sliders"></i> Sandbox Interaktif: Solver PLSV Dinamis
-        </div>
-        <p class="mr-sandbox-desc">
-          Geser slider nilai $a$, $b$, dan $c$ untuk melihat bagaimana persamaan $ax + b = c$ diselesaikan seketika secara matematis!
-        </p>
-
-        <div class="row g-3">
-          <div class="col-md-4">
-            <div class="mr-slider-group">
-              <div class="mr-slider-header">
-                <span>Koefisien (a):</span>
-                <span class="mr-slider-val" id="valA">2</span>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="mr-slider-group">
+                <div class="mr-slider-header">
+                  <span>Koefisien (a):</span>
+                  <span class="mr-slider-val" id="valA">2</span>
+                </div>
+                <input type="range" class="mr-slider" id="sliderA" min="1" max="10" value="2" oninput="solveInteractivePLSV()">
               </div>
-              <input type="range" class="mr-slider" id="sliderA" min="1" max="10" value="2" oninput="solveInteractivePLSV()">
+            </div>
+            <div class="col-md-4">
+              <div class="mr-slider-group">
+                <div class="mr-slider-header">
+                  <span>Konstanta Kiri (b):</span>
+                  <span class="mr-slider-val" id="valB">6</span>
+                </div>
+                <input type="range" class="mr-slider" id="sliderB" min="-20" max="20" value="6" oninput="solveInteractivePLSV()">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="mr-slider-group">
+                <div class="mr-slider-header">
+                  <span>Ruas Kanan (c):</span>
+                  <span class="mr-slider-val" id="valC">16</span>
+                </div>
+                <input type="range" class="mr-slider" id="sliderC" min="-20" max="30" value="16" oninput="solveInteractivePLSV()">
+              </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="mr-slider-group">
-              <div class="mr-slider-header">
-                <span>Konstanta Kiri (b):</span>
-                <span class="mr-slider-val" id="valB">6</span>
-              </div>
-              <input type="range" class="mr-slider" id="sliderB" min="-20" max="20" value="6" oninput="solveInteractivePLSV()">
+
+          <div class="mr-live-result-box">
+            <div>
+              <div class="mr-live-result-label">Persamaan yang terbentuk:</div>
+              <div class="fs-5 text-warning font-monospace" id="displayEquation">2x + 6 = 16</div>
+            </div>
+            <div class="text-end">
+              <div class="mr-live-result-label">Solusi Nilai x:</div>
+              <div class="mr-live-result-val" id="displaySolution">x = 5.00</div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="mr-slider-group">
-              <div class="mr-slider-header">
-                <span>Ruas Kanan (c):</span>
-                <span class="mr-slider-val" id="valC">16</span>
-              </div>
-              <input type="range" class="mr-slider" id="sliderC" min="-20" max="30" value="16" oninput="solveInteractivePLSV()">
-            </div>
+          <div class="mt-2 text-dim small" id="stepDeduction">
+            Langkah: $2x = 16 - 6 \implies 2x = 10 \implies x = \frac{10}{2} = 5$
           </div>
         </div>
 
-        <div class="mr-live-result-box">
-          <div>
-            <div class="mr-live-result-label">Persamaan yang terbentuk:</div>
-            <div class="fs-5 text-warning font-monospace" id="displayEquation">2x + 6 = 16</div>
+        <!-- Latihan Terintegrasi Bab 3 -->
+        <div class="mr-chapter-exercise mt-4">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 3</span>
+            <span class="text-muted small">Active Recall</span>
           </div>
-          <div class="text-end">
-            <div class="mr-live-result-label">Solusi Nilai x:</div>
-            <div class="mr-live-result-val" id="displaySolution">x = 5.00</div>
+          <div class="mr-exercise-q">
+            Mengapa suku $5x^2$ dan $3x$ <strong>TIDAK BISA</strong> dijumlahkan menjadi $8x^3$?
           </div>
-        </div>
-        <div class="mt-2 text-dim small" id="stepDeduction">
-          Langkah: $2x = 16 - 6 \implies 2x = 10 \implies x = \frac{10}{2} = 5$
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Tepat sekali! Suku aljabar hanya bisa dijumlahkan jika sejenis (variabel dan eksponennya sama persis). Karena derajat pangkatnya berbeda (x² vs x¹), keduanya tidak dapat dilebur.')">
+              <span>A. Karena kedua suku tersebut bukan suku sejenis (variabel memiliki pangkat derajat yang berbeda)</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. Angka 5 dan 3 boleh dijumlahkan jika sukunya sejenis.')">
+              <span>B. Karena angka 5 dan 3 tidak boleh dijumlahkan dalam aljabar</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Operasi penjumlahan aljabar tidak mengharuskan pengubahan menjadi perkalian.')">
+              <span>C. Karena tanda tambah harus diubah menjadi perkalian terlebih dahulu</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
         </div>
       </section>
 
-      <!-- Step Revealer (Kasus Nyata) -->
-      <section class="mr-card" id="studi-kasus">
+      <!-- BAB 4 -->
+      <section class="mr-card" id="bab4">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 4: Pemodelan Studi Kasus Nyata</span>
         <div class="mr-card-header">
           <div class="mr-card-icon cyan"><i class="bi bi-lightbulb-fill"></i></div>
           <div>
@@ -330,10 +399,37 @@
             </div>
           </div>
         </div>
+
+        <!-- Latihan Terintegrasi Bab 4 -->
+        <div class="mr-chapter-exercise mt-4">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 4</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Pada persamaan $3x + 4.000 = 22.000$, mengapa kita mengurangkan <strong>kedua ruas</strong> dengan $4.000$ (bukan hanya ruas kiri)?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Tepat sekali! Persamaan diibaratkan seperti neraca timbangan yang seimbang. Jika ruas kiri dikurangi beban 4.000, ruas kanan pun wajib dikurangi sejumlah yang sama agar tetap setara.')">
+              <span>A. Karena prinsip timbangan aljabar mewajibkan perlakuan adil yang identik di kedua sisi untuk menjaga kesetaraan tanda sama dengan (=)</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. Mengubah satu sisi saja akan merusak kebenaran matematis persamaan tersebut.')">
+              <span>B. Karena ruas kanan boleh diubah bebas tanpa memengaruhi hasil</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Pembagian tidak ada kaitannya dengan tahap eliminasi konstanta penjumlahan.')">
+              <span>C. Karena angka 4.000 harus diubah menjadi bentuk pembagian</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- ═══════════════════════════════════════════════════════ SCAFFOLDING CHECKPOINT -->
-      <section class="mr-scaffold-container" id="kuis">
+      <!-- ═══════════════════════════════════════════════════════ BAB 5: CAPSTONE SCAFFOLDING CHECKPOINT -->
+      <section class="mr-scaffold-container" id="bab5">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 5: Capstone Scaffolding Checkpoint</span>
         <div class="mr-scaffold-header">
           <h2 class="mr-scaffold-title">
             <i class="bi bi-cpu-fill text-warning"></i> Active Recall Checkpoint: Penyelesaian PLSV Bertahap
@@ -736,6 +832,40 @@
           renderMathInElement(stepElem, { delimiters: [{left: '$$', right: '$$', display: true}] });
         }
       }
+    }
+
+    function checkChapterExercise(btn, isCorrect, explanation) {
+      const box = btn.closest(".mr-chapter-exercise");
+      const buttons = box.querySelectorAll(".mr-exercise-btn");
+      const fb = box.querySelector(".mr-exercise-feedback");
+      buttons.forEach(b => {
+        b.disabled = true;
+        b.classList.remove("correct", "wrong");
+      });
+
+      if (isCorrect) {
+        btn.classList.add("correct");
+        btn.querySelector("i").className = "bi bi-check-circle-fill";
+        fb.className = "mr-exercise-feedback success";
+        fb.innerHTML = `<i class="bi bi-patch-check-fill me-1"></i> ${explanation}`;
+      } else {
+        btn.classList.add("wrong");
+        btn.querySelector("i").className = "bi bi-x-circle-fill";
+        fb.className = "mr-exercise-feedback retry";
+        fb.innerHTML = `<i class="bi bi-exclamation-triangle-fill me-1"></i> ${explanation} <br><button class="btn btn-sm btn-outline-light mt-2" onclick="resetChapterExercise(this)">Coba Lagi</button>`;
+      }
+    }
+
+    function resetChapterExercise(btn) {
+      const box = btn.closest(".mr-chapter-exercise");
+      const buttons = box.querySelectorAll(".mr-exercise-btn");
+      const fb = box.querySelector(".mr-exercise-feedback");
+      buttons.forEach(b => {
+        b.disabled = false;
+        b.classList.remove("correct", "wrong");
+        b.querySelector("i").className = "bi bi-circle";
+      });
+      fb.style.display = "none";
     }
   </script>
 </body>

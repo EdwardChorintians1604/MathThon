@@ -1,0 +1,3 @@
+"""
+MathThon Backend Package
+"""

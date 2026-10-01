@@ -125,6 +125,10 @@ def create_app(test_config=None):
     from .routes.api import api_bp
     app.register_blueprint(api_bp, url_prefix='/api')
 
+    from .api.routers import api_v2_bp
+    csrf.exempt(api_v2_bp)
+    app.register_blueprint(api_v2_bp, url_prefix='/api')
+
     from .routes.latihan import latihan_bp # Handles /user/latihan/<topic_id>
     app.register_blueprint(latihan_bp, url_prefix='/user/latihan')
     

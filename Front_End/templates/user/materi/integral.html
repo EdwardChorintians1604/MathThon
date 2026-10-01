@@ -35,13 +35,11 @@
     <aside class="mr-sidebar-toc" id="sidebarToc">
       <div class="mr-toc-heading"><i class="bi bi-compass"></i> Navigasi Integral</div>
       <nav class="mr-toc-nav">
-        <a href="#pengantar" class="mr-toc-link active"><i class="bi bi-stars"></i> 1. Akumulasi & Luas Lengkung</a>
-        <a href="#definisi" class="mr-toc-link"><i class="bi bi-slash-lg"></i> 2. Antiturunan & Mengapa +C?</a>
-        <a href="#aturan" class="mr-toc-link"><i class="bi bi-list-stars"></i> 3. Aturan Dasar Integral</a>
-        <a href="#tentu" class="mr-toc-link"><i class="bi bi-bounding-box-circles"></i> 4. Teorema Dasar Kalkulus</a>
-        <a href="#sandbox" class="mr-toc-link"><i class="bi bi-sliders"></i> 5. Live Area Calculator</a>
-        <a href="#studi-kasus" class="mr-toc-link"><i class="bi bi-car-front"></i> 6. Kasus: Jarak dari Kecepatan</a>
-        <a href="#kuis" class="mr-toc-link"><i class="bi bi-patch-question"></i> 7. Uji Cepat Mandiri</a>
+        <a href="#bab1" class="mr-toc-link active"><i class="bi bi-bookmark-fill"></i> Bab 1: Akumulasi & Luas Lengkung</a>
+        <a href="#bab2" class="mr-toc-link"><i class="bi bi-slash-lg"></i> Bab 2: Antiturunan & Misteri +C</a>
+        <a href="#bab3" class="mr-toc-link"><i class="bi bi-list-stars"></i> Bab 3: Aturan Integral & Sandbox</a>
+        <a href="#bab4" class="mr-toc-link"><i class="bi bi-car-front"></i> Bab 4: Studi Kasus Jarak Tempuh</a>
+        <a href="#bab5" class="mr-toc-link"><i class="bi bi-cpu-fill"></i> Bab 5: Capstone Checkpoint</a>
       </nav>
       <div class="mr-toc-divider"></div>
       <div class="p-2 rounded" style="background: rgba(255,255,255,0.03); font-size: 0.8rem; color: var(--mr-text-muted);">
@@ -97,8 +95,9 @@
         </div>
       </div>
 
-      <!-- Hero -->
-      <section class="mr-hero-card" id="pengantar">
+      <!-- BAB 1 -->
+      <section class="mr-hero-card" id="bab1">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 1: Pendahuluan & Latar Belakang</span>
         <h1 class="mr-hero-title">Kalkulus Integral: Seni Menghitung Akumulasi & Luas Lengkung</h1>
         <p class="mr-hero-desc">
           Bagaimana cara menghitung luas danau yang berkelok-kelok atau volume kubah masjid yang melengkung indah? Bentuk geometris biasa gagal, tetapi <strong>Integral</strong> memecahkan bentuk lengkung menjadi triliunan potongan persegi panjang tipis lalu menjumlahkannya secara sempurna.
@@ -117,10 +116,37 @@
             <span class="mr-pill">🚀 Trajektori Gravitasi Satelit</span>
           </div>
         </div>
+
+        <!-- Latihan Terintegrasi Bab 1 -->
+        <div class="mr-chapter-exercise">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 1</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Secara intuitif dan geometris, bagaimana cara kalkulus integral menghitung luas daerah di bawah kurva lengkung yang tidak beraturan?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Tepat sekali! Metode ini dirintis oleh Bernhard Riemann (Jumlah Riemann), di mana kurva dipotong menjadi pias-pias persegi panjang dengan lebar mendekati nol, lalu dijumlahkan limit akumulasinya.')">
+              <span>A. Memotong bidang lengkung menjadi partisi persegi panjang kecil yang tak terhingga banyak, lalu menjumlahkan limit luasnya</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. Mengukur keliling luar tidak menghasilkan perhitungan akumulasi luas daerah.')">
+              <span>B. Menghitung keliling garis terluar kurva menggunakan mistar</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Perkalian dua titik ekstrem hanya menghitung persegi panjang raksasa tanpa memperhitungkan kelengkungan fungsi.')">
+              <span>C. Mengalikan titik batas minimum dengan titik maksimum secara langsung</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- Definisi & Mengapa +C -->
-      <section class="mr-card" id="definisi">
+      <!-- BAB 2 -->
+      <section class="mr-card" id="bab2">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 2: Antiturunan & Misteri Konstanta (+C)</span>
         <div class="mr-card-header">
           <div class="mr-card-icon gold"><i class="bi bi-slash-lg"></i></div>
           <div>
@@ -141,15 +167,42 @@
             Simbol $\int$ adalah huruf <em>S</em> panjang (singkatan kata Latin <em>Summa</em> yang berarti penjumlahan total).
           </div>
         </div>
+
+        <!-- Latihan Terintegrasi Bab 2 -->
+        <div class="mr-chapter-exercise mt-4">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 2</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Mengapa hasil penyelesaian integral tak tentu $\int 2x \, dx$ wajib menyertakan simbol konstanta $+ C$ di belakangnya?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Tepat sekali! Karena turunan dari bilangan konstanta apa pun bernilai 0 (misal turunan x² + 10 atau x² - 99 adalah 2x), maka saat diintegralkan kembali kita harus menyediakan wadah konstanta + C untuk mewakili seluruh keluarga kurva antiturunannya.')">
+              <span>A. Karena turunan dari konstanta apa pun bernilai 0, sehingga nilai konstanta mula-mula tidak terlacak tanpa informasi nilai awal</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. Huruf C mewakili arbitrary Constant, bukan singkatan dari Kalkulus.')">
+              <span>B. Karena huruf C adalah simbol identitas penemu kalkulus</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Konstanta C adalah kebutuhan matematis mutlak dari proses antiturunan.')">
+              <span>C. Karena persamaan matematika dilarang berakhir tanpa huruf peubah</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- Aturan Dasar -->
-      <section class="mr-card" id="aturan">
+      <!-- BAB 3 -->
+      <section class="mr-card" id="bab3">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 3: Aturan Pengintegralan & Live Sandbox</span>
         <div class="mr-card-header">
           <div class="mr-card-icon indigo"><i class="bi bi-list-stars"></i></div>
           <div>
-            <h2 class="mr-card-title">Aturan-Aturan Dasar Pengintegralan</h2>
-            <p class="mr-card-subtitle">Kaidah baku menghitung integral aljabar</p>
+            <h2 class="mr-card-title">Aturan-Aturan Dasar Pengintegralan & Teorema Fundamental</h2>
+            <p class="mr-card-subtitle">Kaidah baku menghitung integral tak tentu dan integral tentu</p>
           </div>
         </div>
 
@@ -184,58 +237,76 @@
             </div>
           </div>
         </div>
+
+        <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
+          <div class="mr-formula-box mb-3">
+            <span class="mr-formula-badge">Teorema Dasar Kalkulus (Integral Tentu)</span>
+            <div class="mr-formula-render">$$\int_a^b f(x) \, dx = [F(x)]_a^b = F(b) - F(a)$$</div>
+            <div class="mr-formula-expl">
+              Pada integral tentu, konstanta $C$ saling menghilangkan. Hasil akhirnya berupa <strong>bilangan riil pasti</strong> yang mewakili luas daerah di bawah kurva pada selang $[a, b]$.
+            </div>
+          </div>
+        </div>
+
+        <!-- Sandbox Interaktif di dalam Bab 3 -->
+        <div class="mr-sandbox mt-3" id="sandbox">
+          <div class="mr-sandbox-title">
+            <i class="bi bi-sliders"></i> Eksplorasi Sandbox: Kalkulator Luas Integral Tentu $\int_0^b x^2 \, dx$
+          </div>
+          <p class="mr-sandbox-desc">
+            Geser batas atas ($b$) kurva parabola $f(x) = x^2$ untuk melihat akumulasi luas daerah di bawah kurva dihitung seketika dengan Teorema Dasar Kalkulus!
+          </p>
+
+          <div class="mr-slider-group">
+            <div class="mr-slider-header">
+              <span>Batas Atas Integrasi (b):</span>
+              <span class="mr-slider-val" id="intBVal">b = 3</span>
+            </div>
+            <input type="range" class="mr-slider" id="intBSlider" min="1" max="10" value="3" oninput="calcIntegral()">
+          </div>
+
+          <div class="mr-live-result-box">
+            <div>
+              <div class="mr-live-result-label">Evaluasi Antiturunan: $F(x) = \frac{x^3}{3}$</div>
+              <div class="fs-5 text-warning font-monospace" id="intCalcDisplay">F(3) - F(0) = (3³ / 3) - 0</div>
+            </div>
+            <div class="text-end">
+              <div class="mr-live-result-label">Luas Daerah Pasti:</div>
+              <div class="mr-live-result-val text-success" id="intResultDisplay">9.00 satuan luas</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Latihan Terintegrasi Bab 3 -->
+        <div class="mr-chapter-exercise mt-4">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 3</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Berdasarkan kaidah aturan pangkat antiturunan $\int x^n \, dx = \frac{1}{n+1} x^{n+1} + C$, berapakah hasil integrasi dari $\int x^3 \, dx$?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. 3x² adalah turunan (diferensiasi), bukan integral (antiturunan).')">
+              <span>A. $3x^2 + C$</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Tepat sekali! Pangkat 3 ditambah 1 menjadi 4, lalu koefisien dibagi 4: (1 / (3+1)) x^(3+1) + C = (1/4) x^4 + C.')">
+              <span>B. $\frac{1}{4} x^4 + C$</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Pangkat baru membagi suku, bukan menjadi pengali di depan.')">
+              <span>C. $4x^4 + C$</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- Teorema Dasar Kalkulus -->
-      <section class="mr-card" id="tentu">
-        <div class="mr-card-header">
-          <div class="mr-card-icon emerald"><i class="bi bi-bounding-box-circles"></i></div>
-          <div>
-            <h2 class="mr-card-title">Teorema Dasar Kalkulus: Integral Tentu</h2>
-            <p class="mr-card-subtitle">Menghitung luas daerah pasti berbatas interval $[a, b]$</p>
-          </div>
-        </div>
-
-        <div class="mr-formula-box">
-          <span class="mr-formula-badge">Teorema Fundamental</span>
-          <div class="mr-formula-render">$$\int_a^b f(x) \, dx = [F(x)]_a^b = F(b) - F(a)$$</div>
-          <div class="mr-formula-expl">
-            Pada integral tentu, konstanta $C$ saling menghilangkan karena $(F(b) + C) - (F(a) + C) = F(b) - F(a)$. Hasil akhirnya selalu berupa <strong>bilangan riil pasti</strong> (mewakili luas daerah).
-          </div>
-        </div>
-      </section>
-
-      <!-- Sandbox Interaktif -->
-      <section class="mr-sandbox" id="sandbox">
-        <div class="mr-sandbox-title">
-          <i class="bi bi-sliders"></i> Sandbox: Kalkulator Luas Integral Tentu $\int_0^b x^2 \, dx$
-        </div>
-        <p class="mr-sandbox-desc">
-          Geser batas atas ($b$) kurva parabola $f(x) = x^2$ untuk melihat akumulasi luas daerah di bawah kurva dihitung seketika dengan Teorema Dasar Kalkulus!
-        </p>
-
-        <div class="mr-slider-group">
-          <div class="mr-slider-header">
-            <span>Batas Atas Integrasi (b):</span>
-            <span class="mr-slider-val" id="intBVal">b = 3</span>
-          </div>
-          <input type="range" class="mr-slider" id="intBSlider" min="1" max="10" value="3" oninput="calcIntegral()">
-        </div>
-
-        <div class="mr-live-result-box">
-          <div>
-            <div class="mr-live-result-label">Evaluasi Antiturunan: $F(x) = \frac{x^3}{3}$</div>
-            <div class="fs-5 text-warning font-monospace" id="intCalcDisplay">F(3) - F(0) = (3³ / 3) - 0</div>
-          </div>
-          <div class="text-end">
-            <div class="mr-live-result-label">Luas Daerah Pasti:</div>
-            <div class="mr-live-result-val text-success" id="intResultDisplay">9.00 satuan luas</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Studi Kasus Nyata -->
-      <section class="mr-card" id="studi-kasus">
+      <!-- BAB 4 -->
+      <section class="mr-card" id="bab4">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 4: Studi Kasus Nyata - Jarak Tempuh Fisika</span>
         <div class="mr-card-header">
           <div class="mr-card-icon cyan"><i class="bi bi-car-front-fill"></i></div>
           <div>
@@ -271,10 +342,37 @@
             </div>
           </div>
         </div>
+
+        <!-- Latihan Terintegrasi Bab 4 -->
+        <div class="mr-chapter-exercise mt-4">
+          <div class="mr-exercise-header">
+            <span class="mr-exercise-tag"><i class="bi bi-pencil-square"></i> Latihan Pemahaman Bab 4</span>
+            <span class="text-muted small">Active Recall</span>
+          </div>
+          <div class="mr-exercise-q">
+            Jika sebuah partikel bergerak dengan kecepatan $v(t) = 4t$ (m/s), berapakah total jarak perpindahan partikel dari detik $t = 0$ hingga $t = 5$?
+          </div>
+          <div class="mr-exercise-options">
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, true, 'Tepat sekali! Jarak s = ∫₀⁵ 4t dt = [2t²]₀⁵ = 2(5)² - 0 = 2(25) = 50 meter.')">
+              <span>A. $50$ meter, hasil integral $\int_0^5 4t \, dt = [2t^2]_0^5$</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Kurang tepat. 20 meter didapat dari perkalian langsung 4 x 5 tanpa mengintegralkan fungsi waktu.')">
+              <span>B. $20$ meter</span>
+              <i class="bi bi-circle"></i>
+            </button>
+            <button class="mr-exercise-btn" onclick="checkChapterExercise(this, false, 'Keliru. Kecepatan harus diintegralkan terhadap waktu untuk menemukan jarak.')">
+              <span>C. $100$ meter</span>
+              <i class="bi bi-circle"></i>
+            </button>
+          </div>
+          <div class="mr-exercise-feedback"></div>
+        </div>
       </section>
 
-      <!-- ═══════════════════════════════════════════════════════ SCAFFOLDING CHECKPOINT -->
-      <section class="mr-scaffold-container" id="kuis">
+      <!-- ═══════════════════════════════════════════════════════ BAB 5: CAPSTONE SCAFFOLDING CHECKPOINT -->
+      <section class="mr-scaffold-container" id="bab5">
+        <span class="mr-chapter-badge"><i class="bi bi-bookmark-fill"></i> BAB 5: Capstone Scaffolding Checkpoint</span>
         <div class="mr-scaffold-header">
           <h2 class="mr-scaffold-title">
             <i class="bi bi-cpu-fill text-warning"></i> Active Recall Checkpoint: Integrasi Aljabar Bertahap
@@ -655,6 +753,40 @@
       if (calcDisplay) calcDisplay.innerText = `F(${b}) - F(0) = (${b}³ / 3) - 0 = ${b*b*b}/3`;
       const resDisplay = document.getElementById("intResultDisplay");
       if (resDisplay) resDisplay.innerText = `${area.toFixed(2)} satuan luas`;
+    }
+
+    function checkChapterExercise(btn, isCorrect, explanation) {
+      const box = btn.closest(".mr-chapter-exercise");
+      const buttons = box.querySelectorAll(".mr-exercise-btn");
+      const fb = box.querySelector(".mr-exercise-feedback");
+      buttons.forEach(b => {
+        b.disabled = true;
+        b.classList.remove("correct", "wrong");
+      });
+
+      if (isCorrect) {
+        btn.classList.add("correct");
+        btn.querySelector("i").className = "bi bi-check-circle-fill";
+        fb.className = "mr-exercise-feedback success";
+        fb.innerHTML = `<i class="bi bi-patch-check-fill me-1"></i> ${explanation}`;
+      } else {
+        btn.classList.add("wrong");
+        btn.querySelector("i").className = "bi bi-x-circle-fill";
+        fb.className = "mr-exercise-feedback retry";
+        fb.innerHTML = `<i class="bi bi-exclamation-triangle-fill me-1"></i> ${explanation} <br><button class="btn btn-sm btn-outline-light mt-2" onclick="resetChapterExercise(this)">Coba Lagi</button>`;
+      }
+    }
+
+    function resetChapterExercise(btn) {
+      const box = btn.closest(".mr-chapter-exercise");
+      const buttons = box.querySelectorAll(".mr-exercise-btn");
+      const fb = box.querySelector(".mr-exercise-feedback");
+      buttons.forEach(b => {
+        b.disabled = false;
+        b.classList.remove("correct", "wrong");
+        b.querySelector("i").className = "bi bi-circle";
+      });
+      fb.style.display = "none";
     }
   </script>
 </body>
