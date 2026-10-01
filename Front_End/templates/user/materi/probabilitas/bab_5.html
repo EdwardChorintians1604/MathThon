@@ -14,10 +14,6 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/materi_reader.css') }}">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-  <!-- PyScript Core 2024 -->
-  <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
-  <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
-
   <style>
     :root {
       --accent: #14b8a6;
@@ -38,7 +34,7 @@
       margin: 0;
       line-height: 1.65;
     }
-    /* Dicoding Topbar */
+    /* Topbar */
     .dic-topbar {
       position: sticky;
       top: 0;
@@ -247,7 +243,6 @@
       line-height: 1.25;
     }
     
-    /* Target Box */
     .dic-target-box {
       background: #111622;
       border: 1px solid var(--border-color);
@@ -327,70 +322,33 @@
       gap: 0.5rem;
     }
     
-    /* Python Interactive Sandbox */
-    .dic-ide-box {
-      background: #090d16;
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
+    /* Interactive Math Simulation Box */
+    .dic-sim-box {
+      background: #111622;
+      border: 1px solid var(--accent-glow);
+      border-radius: 16px;
       overflow: hidden;
       margin: 2rem 0;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
     }
-    .dic-ide-topbar {
-      background: #111726;
-      padding: 0.65rem 1rem;
+    .dic-sim-topbar {
+      background: linear-gradient(135deg, var(--accent-dim), #161d2e);
+      padding: 0.85rem 1.25rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--border-color);
     }
-    .dic-ide-title {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.8rem;
-      color: #38bdf8;
+    .dic-sim-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #f8fafc;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-    .dic-run-btn {
-      background: #10b981;
-      color: #fff;
-      border: none;
-      padding: 0.35rem 0.9rem;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: all 0.2s;
-    }
-    .dic-run-btn:hover { background: #059669; transform: scale(1.02); }
-    .dic-editor {
-      width: 100%;
-      background: #090d16;
-      color: #f1f5f9;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.88rem;
-      padding: 1rem;
-      border: none;
-      resize: vertical;
-      min-height: 140px;
-      outline: none;
-      line-height: 1.6;
-    }
-    .dic-terminal {
-      background: #04070d;
-      border-top: 1px solid var(--border-color);
-      padding: 1rem;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.84rem;
-      color: #34d399;
-      min-height: 70px;
-      white-space: pre-wrap;
-      max-height: 240px;
-      overflow-y: auto;
+    .dic-sim-body {
+      padding: 1.5rem;
     }
     
     /* Quiz & Recall */
@@ -573,7 +531,7 @@
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
         <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
-        <a href="#sandbox" class="dic-anchor-link"><i class="bi bi-terminal-fill me-1"></i> Python Sandbox Lab</a>
+        <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
       </div>
     </aside>
@@ -593,7 +551,7 @@
         <div class="dic-role-icon"><i class="bi bi-trophy-fill"></i></div>
         <div>
           <div class="dic-role-title">TAHAP 5: CAPSTONE PROJECT & EVALUASI SINTESIS</div>
-          <p class="dic-role-text">Peruntukan Bab 5 adalah mengintegrasikan seluruh materi Bab 1 s/d Bab 4 dalam satu proyek tantangan komprehensif sebagai standar penguasaan modul.</p>
+          <p class="dic-role-text">Peruntukan Bab 5: Mengintegrasikan seluruh materi Bab 1 s/d Bab 4 dalam satu proyek tantangan komprehensif sebagai standar penguasaan modul.</p>
         </div>
       </div>
 
@@ -605,7 +563,7 @@
         <ul class="dic-target-list">
           <li>Memahami landasan konseptual dari Capstone: Proyek Integratif & Uji Sintesis Probabilitas secara sistematis.</li>
           <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengimplementasikan simulasi perhitungannya melalui Python Sandbox.</li>
+          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
         </ul>
       </div>
 
@@ -614,7 +572,7 @@
         <i class="bi bi-book-half" style="color:#14b8a6;"></i> Pembahasan Konsep & Teori
       </h2>
       <p class="dic-lead">
-        Bab 5 adalah puncak evaluasi capstone: mengintegrasikan seluruh bab sebelumnya ke dalam penyelesaian studi kasus komprehensif berstandar industri.
+        Capstone Probabilitas menguji sintesis kombinatorika hipergeometrik pemilihan delegasi tim.
       </p>
 
       <!-- Formula Section -->
@@ -622,10 +580,10 @@
         <i class="bi bi-calculator" style="color:#14b8a6;"></i> Formulasi Matematis & Bedah Rumus
       </h2>
       <div class="dic-formula-card">
-        \[ \text{Sintesis Capstone: } \sum_{i=1}^n \text{Komponen}_i = \text{Total Optimal} \]
+        \[ P(\text{2P, 1W}) = \frac{^6C_2 \cdot ^4C_1}{^{10}C_3} = \frac{15 \cdot 4}{120} = \frac{60}{120} = 0.50 \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Sintesis capstone menyatukan seluruh komponen rumus dalam evaluasi akhir yang komprehensif.
+        <strong>💡 Makna Formulasi:</strong> Sintesis Capstone menghitung peluang pemilihan delegasi gabungan pria dan wanita dari suatu komite.
       </div>
 
       <!-- Worked Example -->
@@ -635,55 +593,87 @@
       <div class="dic-example-box">
         <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
         <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh Capstone Bab 5: Memecahkan persoalan multi-langkah integratif dari hulu ke hilir.
+          Contoh 5 (Capstone): Dalam komite 10 orang (6 pria, 4 wanita) dipilih 3 orang delegasi. Peluang terpilih 2 pria dan 1 wanita: [⁶C₂ × ⁴C₁] / ¹⁰C₃ = (15 × 4) / 120 = 60/120 = 0.50 (50%).
         </p>
       </div>
 
-      <!-- Interactive Python Sandbox (PyScript + Live Runner) -->
-      <h2 class="dic-section-title" id="sandbox">
-        <i class="bi bi-terminal-fill text-warning"></i> Interactive Python Sandbox (PyScript Engine)
+      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <h2 class="dic-section-title" id="simulator">
+        <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
-      <div class="dic-ide-box">
-        <div class="dic-ide-topbar">
-          <div class="dic-ide-title">
-            <i class="bi bi-filetype-py"></i> main_probabilitas_bab5.py
+      <div class="dic-sim-box">
+        <div class="dic-sim-topbar">
+          <div class="dic-sim-title">
+            <i class="bi bi-cpu-fill" style="color:#14b8a6;"></i> Laboratorium Penalaran: Rasio Kombinatorika & Hukum Bilangan Besar
           </div>
-          <button class="dic-run-btn" id="runPyBtn" onclick="runPythonSandbox()">
-            <i class="bi bi-play-fill"></i> Jalankan Kode
-          </button>
+          <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">
+            <i class="bi bi-broadcast me-1"></i> Live Simulator
+          </span>
         </div>
-        <textarea class="dic-editor" id="pyCodeEditor" rows="6">{% raw %}# Capstone Project Solver Probabilitas
-print('=== Evaluasi Capstone Modul Probabilitas ===')
-print('Status: Seluruh algoritma berhasil disintesis secara optimal.'){% endraw %}</textarea>
-        <div class="dic-terminal" id="pyTerminalOutput">⏳ Klik "Jalankan Kode" untuk mengeksekusi script Python di browser...</div>
+        <div class="dic-sim-body">
+          <p class="small text-muted mb-3">🎯 Misi Berpikir: Mengapa permutasi ⁿPᵣ selalu tepat r! kali lebih besar daripada kombinasi ⁿCᵣ?</p>
+          
+        <div class="p-3 mb-3 rounded" style="background:rgba(20,184,166,0.08); border:1px solid rgba(20,184,166,0.25);">
+          <div class="small fw-bold text-info mb-1"><i class="bi bi-dice-5"></i> Logika Urutan Posisi:</div>
+          <p class="small text-light mb-0">Kombinasi memilih anggota tanpa peduli urutan. Permutasi menata setiap anggota terpilih ke dalam urutan posisi (sebanyak r! cara). Ubah nilai r dan buktikan hubungan multiplikatifnya!</p>
+        </div>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-6">
+            <label class="form-label small text-muted">Total Objek Tersedia (n): <span id="prob_val_n" class="fw-bold text-info">6</span></label>
+            <input type="range" class="form-range" id="prob_slider_n" min="2" max="10" value="6" oninput="updateProbSim()">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label small text-muted">Objek Dipilih (r ≤ n): <span id="prob_val_r" class="fw-bold text-warning">3</span></label>
+            <input type="range" class="form-range" id="prob_slider_r" min="1" max="10" value="3" oninput="updateProbSim()">
+          </div>
+        </div>
+        <div class="mt-3 p-3 rounded" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
+          <div class="row text-center g-2 mb-2">
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Kombinasi ⁿCᵣ:</div>
+              <div class="fs-4 fw-bold text-success" id="prob_comb">20</div>
+              <div class="small text-muted">Tanpa urutan</div>
+            </div>
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Faktor Urutan (r!):</div>
+              <div class="fs-4 fw-bold text-warning" id="prob_fact">6</div>
+              <div class="small text-muted">Penataan posisi</div>
+            </div>
+            <div class="col-4">
+              <div class="small text-muted">Permutasi ⁿPᵣ:</div>
+              <div class="fs-4 fw-bold text-info" id="prob_perm">120</div>
+              <div class="small text-muted">ⁿCᵣ × r!</div>
+            </div>
+          </div>
+          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #14b8a6;">
+            <div class="small text-info fw-bold mb-1"><i class="bi bi-link-45deg"></i> Bukti Hubungan Logis:</div>
+            <div class="small text-light" id="prob_proof">ⁿP₃ = 20 × 3! = 20 × 6 = 120 cara susunan.</div>
+          </div>
+        </div>
+        
+        </div>
       </div>
 
-      <!-- PyScript Background Tag -->
-      <py-script output="pyTerminalOutput" style="display:none;">
-{% raw %}
-      # Capstone Project Solver Probabilitas
-      print('=== Evaluasi Capstone Modul Probabilitas ===')
-      print('Status: Seluruh algoritma berhasil disintesis secara optimal.')
-{% endraw %}
-      </py-script>
-
-      <!-- Active Recall Exercise -->
-      <div class="dic-quiz-card" id="latihan">
-        <div class="dic-quiz-tag"><i class="bi bi-patch-question-fill"></i> Active Recall Quiz - Bab 5</div>
-        <div class="dic-quiz-q">Apa kriteria keberhasilan pada Capstone Project modul Probabilitas?</div>
+      <!-- Active Recall / Capstone Challenge Exercise -->
+      <div class="dic-quiz-card border border-warning border-opacity-50 shadow-lg" id="latihan" style="background: linear-gradient(145deg, #131b2e, #111622);">
+        <div class="dic-quiz-tag" style="color:#eab308; font-size:0.82rem;">
+          <i class="bi bi-trophy-fill"></i> 
+          🏆 CAPSTONE CHALLENGE - UJI SINTESIS AKHIR MODUL
+        </div>
+        <div class="dic-quiz-q" style="font-size:1.1rem; color:#fef08a;">Tantangan Capstone: Dari 10 anggota (6 pria, 4 wanita) dipilih 3 orang. Berapakah peluang terpilih 2 pria dan 1 wanita?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Capstone menguji kemampuan analisis integratif secara menyeluruh.')">
-          <span>Mampu mensintesis konsep Bab 1-4 secara terpadu</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, '[⁶C₂ × ⁴C₁] / ¹⁰C₃ = (15 × 4) / 120 = 60 / 120 = 0.50.')">
+          <span>0.50 (50%)</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Capstone menguji kemampuan analisis integratif secara menyeluruh.')">
-          <span>Hanya menjawab 1 soal singkat</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '[⁶C₂ × ⁴C₁] / ¹⁰C₃ = (15 × 4) / 120 = 60 / 120 = 0.50.')">
+          <span>0.25 (25%)</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Capstone menguji kemampuan analisis integratif secara menyeluruh.')">
-          <span>Menghafal nama bab</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '[⁶C₂ × ⁴C₁] / ¹⁰C₃ = (15 × 4) / 120 = 60 / 120 = 0.50.')">
+          <span>0.75 (75%)</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
@@ -749,32 +739,24 @@ print('Status: Seluruh algoritma berhasil disintesis secara optimal.'){% endraw 
       }
     }
 
-    // Eksekusi Python Sandbox
-    function runPythonSandbox() {
-      const code = document.getElementById('pyCodeEditor').value;
-      const term = document.getElementById('pyTerminalOutput');
-      term.textContent = 'Menjalankan skrip Python...\n';
-      
-      try {
-        if (window.pyscript && window.pyscript.interpreter) {
-          window.pyscript.interpreter.run(code);
-        } else {
-          const lines = code.split('\n');
-          let output = [];
-          lines.forEach(line => {
-            if (line.includes('print(')) {
-              const match = line.match(/print\((.*)\)/);
-              if (match) {
-                output.push('>>> ' + match[1].replace(/['"]/g, ''));
-              }
-            }
-          });
-          term.textContent = output.length > 0 ? output.join('\n') : '>>> Eksekusi kode selesai dengan sukses (Output 0).';
+    // Widget Simulator Logic
+    
+        function updateProbSim() {
+          const fact = (num) => num <= 1 ? 1 : num * fact(num - 1);
+          let n = parseInt(document.getElementById('prob_slider_n').value);
+          let r = parseInt(document.getElementById('prob_slider_r').value);
+          if (r > n) { r = n; document.getElementById('prob_slider_r').value = r; }
+          document.getElementById('prob_val_n').textContent = n;
+          document.getElementById('prob_val_r').textContent = r;
+          const fR = fact(r);
+          const perm = fact(n) / fact(n - r);
+          const comb = fact(n) / (fR * fact(n - r));
+          document.getElementById('prob_comb').textContent = comb.toLocaleString('id-ID');
+          document.getElementById('prob_fact').textContent = `${r}! = ${fR}`;
+          document.getElementById('prob_perm').textContent = perm.toLocaleString('id-ID');
+          document.getElementById('prob_proof').innerHTML = `Hubungan: <strong>ⁿPᵣ = ⁿCᵣ × r!</strong> ➔ ${comb} × ${fR} = <strong>${perm} cara</strong>.`;
         }
-      } catch(err) {
-        term.textContent = '❌ Error saat menjalankan kode: ' + err.message;
-      }
-    }
+        
 
     // Simpan Progres Bab ke API Backend
     function markBabCompleted() {

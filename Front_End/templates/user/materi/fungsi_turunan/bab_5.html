@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fungsi Turunan & Diferensial - Bab 5: Capstone: Proyek Integratif & Uji Sintesis Turunan - MathThon</title>
+  <title>Fungsi Turunan & Diferensial - Bab 5: Capstone: Proyek Optimasi Keuntungan & Desain Maksimum - MathThon</title>
   <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,10 +14,6 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/materi_reader.css') }}">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-  <!-- PyScript Core 2024 -->
-  <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
-  <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
-
   <style>
     :root {
       --accent: #ef4444;
@@ -38,7 +34,7 @@
       margin: 0;
       line-height: 1.65;
     }
-    /* Dicoding Topbar */
+    /* Topbar */
     .dic-topbar {
       position: sticky;
       top: 0;
@@ -247,7 +243,6 @@
       line-height: 1.25;
     }
     
-    /* Target Box */
     .dic-target-box {
       background: #111622;
       border: 1px solid var(--border-color);
@@ -327,70 +322,33 @@
       gap: 0.5rem;
     }
     
-    /* Python Interactive Sandbox */
-    .dic-ide-box {
-      background: #090d16;
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
+    /* Interactive Math Simulation Box */
+    .dic-sim-box {
+      background: #111622;
+      border: 1px solid var(--accent-glow);
+      border-radius: 16px;
       overflow: hidden;
       margin: 2rem 0;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
     }
-    .dic-ide-topbar {
-      background: #111726;
-      padding: 0.65rem 1rem;
+    .dic-sim-topbar {
+      background: linear-gradient(135deg, var(--accent-dim), #161d2e);
+      padding: 0.85rem 1.25rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--border-color);
     }
-    .dic-ide-title {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.8rem;
-      color: #38bdf8;
+    .dic-sim-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #f8fafc;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-    .dic-run-btn {
-      background: #10b981;
-      color: #fff;
-      border: none;
-      padding: 0.35rem 0.9rem;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: all 0.2s;
-    }
-    .dic-run-btn:hover { background: #059669; transform: scale(1.02); }
-    .dic-editor {
-      width: 100%;
-      background: #090d16;
-      color: #f1f5f9;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.88rem;
-      padding: 1rem;
-      border: none;
-      resize: vertical;
-      min-height: 140px;
-      outline: none;
-      line-height: 1.6;
-    }
-    .dic-terminal {
-      background: #04070d;
-      border-top: 1px solid var(--border-color);
-      padding: 1rem;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.84rem;
-      color: #34d399;
-      min-height: 70px;
-      white-space: pre-wrap;
-      max-height: 240px;
-      overflow-y: auto;
+    .dic-sim-body {
+      padding: 1.5rem;
     }
     
     /* Quiz & Recall */
@@ -539,31 +497,31 @@
         <a href="{{ url_for('materi.subject_bab', subject='fungsi_turunan', bab_num=1) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[0]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[0]['is_completed'] else '1' }}</span>
-          <span>Fondasi: Konsep Intuitif & Pengenalan Turunan</span>
+          <span>Fondasi: Gradien Garis Singgung & Laju Perubahan</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='fungsi_turunan', bab_num=2) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[1]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[1]['is_completed'] else '2' }}</span>
-          <span>Anatomi: Notasi, Kaidah & Sifat Baku Turunan</span>
+          <span>Anatomi: Kaidah Pangkat, Perkalian & Pembagian Turunan</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='fungsi_turunan', bab_num=3) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[2]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[2]['is_completed'] else '3' }}</span>
-          <span>Mekanika: Prosedur Perhitungan & Operasi Turunan</span>
+          <span>Mekanika: Aturan Rantai & Turunan Tingkat Tinggi</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='fungsi_turunan', bab_num=4) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[3]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[3]['is_completed'] else '4' }}</span>
-          <span>Pemodelan: Aplikasi Nyata & Studi Kasus Turunan</span>
+          <span>Pemodelan: Titik Stasioner, Nilai Ekstrim & Kecekungan</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='fungsi_turunan', bab_num=5) }}" 
            class="dic-chapter-link active {{ 'done' if all_bab_status[4]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[4]['is_completed'] else '5' }}</span>
-          <span>Capstone: Proyek Integratif & Uji Sintesis Turunan</span>
+          <span>Capstone: Proyek Optimasi Keuntungan & Desain Maksimum</span>
         </a>
 
       <!-- In-Page Anchor Links -->
@@ -573,7 +531,7 @@
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
         <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
-        <a href="#sandbox" class="dic-anchor-link"><i class="bi bi-terminal-fill me-1"></i> Python Sandbox Lab</a>
+        <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
       </div>
     </aside>
@@ -593,19 +551,19 @@
         <div class="dic-role-icon"><i class="bi bi-trophy-fill"></i></div>
         <div>
           <div class="dic-role-title">TAHAP 5: CAPSTONE PROJECT & EVALUASI SINTESIS</div>
-          <p class="dic-role-text">Peruntukan Bab 5 adalah mengintegrasikan seluruh materi Bab 1 s/d Bab 4 dalam satu proyek tantangan komprehensif sebagai standar penguasaan modul.</p>
+          <p class="dic-role-text">Peruntukan Bab 5: Mengintegrasikan seluruh materi Bab 1 s/d Bab 4 dalam satu proyek tantangan komprehensif sebagai standar penguasaan modul.</p>
         </div>
       </div>
 
-      <h1 class="dic-h1">Capstone: Proyek Integratif & Uji Sintesis Turunan</h1>
+      <h1 class="dic-h1">Capstone: Proyek Optimasi Keuntungan & Desain Maksimum</h1>
 
       <!-- Learning Objectives -->
       <div class="dic-target-box">
         <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#ef4444;"></i> Sasaran Pembelajaran Bab 5:</div>
         <ul class="dic-target-list">
-          <li>Memahami landasan konseptual dari Capstone: Proyek Integratif & Uji Sintesis Turunan secara sistematis.</li>
+          <li>Memahami landasan konseptual dari Capstone: Proyek Optimasi Keuntungan & Desain Maksimum secara sistematis.</li>
           <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengimplementasikan simulasi perhitungannya melalui Python Sandbox.</li>
+          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
         </ul>
       </div>
 
@@ -614,7 +572,7 @@
         <i class="bi bi-book-half" style="color:#ef4444;"></i> Pembahasan Konsep & Teori
       </h2>
       <p class="dic-lead">
-        Bab 5 adalah puncak evaluasi capstone: mengintegrasikan seluruh bab sebelumnya ke dalam penyelesaian studi kasus komprehensif berstandar industri.
+        Capstone Turunan menguji kemampuan merumuskan fungsi objektif bisnis dan mencari titik optimasi optimal.
       </p>
 
       <!-- Formula Section -->
@@ -622,10 +580,10 @@
         <i class="bi bi-calculator" style="color:#ef4444;"></i> Formulasi Matematis & Bedah Rumus
       </h2>
       <div class="dic-formula-card">
-        \[ \text{Sintesis Capstone: } \sum_{i=1}^n \text{Komponen}_i = \text{Total Optimal} \]
+        \[ U(x) = -2x^2 + 40x - 50 \implies U'(x) = -4x + 40 = 0 \implies x = 10 \implies U_{\text{maks}} = 150 \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Sintesis capstone menyatukan seluruh komponen rumus dalam evaluasi akhir yang komprehensif.
+        <strong>💡 Makna Formulasi:</strong> Model fungsi keuntungan kuadratik dimaksimalkan dengan menetapkan turunan pertama sama dengan nol.
       </div>
 
       <!-- Worked Example -->
@@ -635,55 +593,84 @@
       <div class="dic-example-box">
         <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
         <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh Capstone Bab 5: Memecahkan persoalan multi-langkah integratif dari hulu ke hilir.
+          Contoh 5 (Capstone): Perusahaan memodelkan laba U(x) = -2x² + 40x - 50 (dalam juta rupiah) untuk x unit produk. Laba maksimal tercapai saat U'(x) = -4x + 40 = 0 => x = 10 unit, dengan Laba Maks = -2(100) + 400 - 50 = 150 juta rupiah.
         </p>
       </div>
 
-      <!-- Interactive Python Sandbox (PyScript + Live Runner) -->
-      <h2 class="dic-section-title" id="sandbox">
-        <i class="bi bi-terminal-fill text-warning"></i> Interactive Python Sandbox (PyScript Engine)
+      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <h2 class="dic-section-title" id="simulator">
+        <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
-      <div class="dic-ide-box">
-        <div class="dic-ide-topbar">
-          <div class="dic-ide-title">
-            <i class="bi bi-filetype-py"></i> main_fungsi_turunan_bab5.py
+      <div class="dic-sim-box">
+        <div class="dic-sim-topbar">
+          <div class="dic-sim-title">
+            <i class="bi bi-cpu-fill" style="color:#ef4444;"></i> Laboratorium Penalaran: Garis Singgung & Deteksi Titik Stasioner
           </div>
-          <button class="dic-run-btn" id="runPyBtn" onclick="runPythonSandbox()">
-            <i class="bi bi-play-fill"></i> Jalankan Kode
-          </button>
+          <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">
+            <i class="bi bi-broadcast me-1"></i> Live Simulator
+          </span>
         </div>
-        <textarea class="dic-editor" id="pyCodeEditor" rows="6">{% raw %}# Capstone Project Solver Turunan
-print('=== Evaluasi Capstone Modul Turunan ===')
-print('Status: Seluruh algoritma berhasil disintesis secara optimal.'){% endraw %}</textarea>
-        <div class="dic-terminal" id="pyTerminalOutput">⏳ Klik "Jalankan Kode" untuk mengeksekusi script Python di browser...</div>
+        <div class="dic-sim-body">
+          <p class="small text-muted mb-3">🎯 Misi Berpikir: Geser titik evaluasi x₀ sepanjang kurva f(x) = x² - 4x. Amati kapan gradien garis singgung m = 0 dan apa maknanya bagi titik balik!</p>
+          
+        <div class="p-3 mb-3 rounded" style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.25);">
+          <div class="small fw-bold text-danger mb-1"><i class="bi bi-speedometer2"></i> Logika Titik Stasioner:</div>
+          <p class="small text-light mb-0">Saat kurva bergerak dari fase turun ke fase naik (atau sebaliknya), kurva wajib melewati titik datar di mana gradien garis singgungnya sesaat mendatar: <strong>m = f'(x) = 0</strong>.</p>
+        </div>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-6">
+            <label class="form-label small text-muted">Titik Evaluasi (x₀): <span id="tur_val_x" class="fw-bold text-warning">2</span></label>
+            <input type="range" class="form-range" id="tur_slider_x" min="-2" max="6" value="2" oninput="updateTurunanSim()">
+          </div>
+          <div class="col-md-6">
+            <div class="small text-muted mb-1">Fungsi Parabola Aktif:</div>
+            <div class="badge bg-danger-subtle text-danger p-2">f(x) = x² - 4x &nbsp;➔&nbsp; f'(x) = 2x - 4</div>
+          </div>
+        </div>
+        <div class="mt-3 p-3 rounded" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
+          <div class="row text-center g-2 mb-2">
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Titik Koordinat (x₀, y₀):</div>
+              <div class="fs-5 fw-bold text-light" id="tur_pt">(2, -4)</div>
+            </div>
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Gradien Garis Singgung (m):</div>
+              <div class="fs-5 fw-bold text-warning" id="tur_grad">m = 0 (Datar)</div>
+            </div>
+            <div class="col-4">
+              <div class="small text-muted">Status Geometris:</div>
+              <div class="fs-6 fw-bold text-success" id="tur_status">Titik Minimum Stasioner</div>
+            </div>
+          </div>
+          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #ef4444;">
+            <div class="small text-danger fw-bold mb-1"><i class="bi bi-graph-up-arrow"></i> Rantai Penalaran Diferensial:</div>
+            <div class="small text-light" id="tur_tangent">f'(2) = 2(2) - 4 = 0. Garis singgung horizontal y = -4 menandai titik balik minimum kurva.</div>
+          </div>
+        </div>
+        
+        </div>
       </div>
 
-      <!-- PyScript Background Tag -->
-      <py-script output="pyTerminalOutput" style="display:none;">
-{% raw %}
-      # Capstone Project Solver Turunan
-      print('=== Evaluasi Capstone Modul Turunan ===')
-      print('Status: Seluruh algoritma berhasil disintesis secara optimal.')
-{% endraw %}
-      </py-script>
-
-      <!-- Active Recall Exercise -->
-      <div class="dic-quiz-card" id="latihan">
-        <div class="dic-quiz-tag"><i class="bi bi-patch-question-fill"></i> Active Recall Quiz - Bab 5</div>
-        <div class="dic-quiz-q">Apa kriteria keberhasilan pada Capstone Project modul Turunan?</div>
+      <!-- Active Recall / Capstone Challenge Exercise -->
+      <div class="dic-quiz-card border border-warning border-opacity-50 shadow-lg" id="latihan" style="background: linear-gradient(145deg, #131b2e, #111622);">
+        <div class="dic-quiz-tag" style="color:#eab308; font-size:0.82rem;">
+          <i class="bi bi-trophy-fill"></i> 
+          🏆 CAPSTONE CHALLENGE - UJI SINTESIS AKHIR MODUL
+        </div>
+        <div class="dic-quiz-q" style="font-size:1.1rem; color:#fef08a;">Tantangan Capstone: Fungsi keuntungan penjualan dinyatakan oleh U(x) = -2x² + 40x - 50 (juta rupiah). Berapakah keuntungan maksimum yang bisa diperoleh?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Capstone menguji kemampuan analisis integratif secara menyeluruh.')">
-          <span>Mampu mensintesis konsep Bab 1-4 secara terpadu</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'U\'(x) = -4x + 40 = 0 => x = 10. U(10) = -2(100) + 40(10) - 50 = -200 + 400 - 50 = Rp 150 Juta.')">
+          <span>Rp 150 Juta</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Capstone menguji kemampuan analisis integratif secara menyeluruh.')">
-          <span>Hanya menjawab 1 soal singkat</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'U\'(x) = -4x + 40 = 0 => x = 10. U(10) = -2(100) + 40(10) - 50 = -200 + 400 - 50 = Rp 150 Juta.')">
+          <span>Rp 200 Juta</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Capstone menguji kemampuan analisis integratif secara menyeluruh.')">
-          <span>Menghafal nama bab</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'U\'(x) = -4x + 40 = 0 => x = 10. U(10) = -2(100) + 40(10) - 50 = -200 + 400 - 50 = Rp 150 Juta.')">
+          <span>Rp 100 Juta</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
@@ -749,32 +736,34 @@ print('Status: Seluruh algoritma berhasil disintesis secara optimal.'){% endraw 
       }
     }
 
-    // Eksekusi Python Sandbox
-    function runPythonSandbox() {
-      const code = document.getElementById('pyCodeEditor').value;
-      const term = document.getElementById('pyTerminalOutput');
-      term.textContent = 'Menjalankan skrip Python...\n';
-      
-      try {
-        if (window.pyscript && window.pyscript.interpreter) {
-          window.pyscript.interpreter.run(code);
-        } else {
-          const lines = code.split('\n');
-          let output = [];
-          lines.forEach(line => {
-            if (line.includes('print(')) {
-              const match = line.match(/print\((.*)\)/);
-              if (match) {
-                output.push('>>> ' + match[1].replace(/['"]/g, ''));
-              }
-            }
-          });
-          term.textContent = output.length > 0 ? output.join('\n') : '>>> Eksekusi kode selesai dengan sukses (Output 0).';
+    // Widget Simulator Logic
+    
+        function updateTurunanSim() {
+          const x0 = parseInt(document.getElementById('tur_slider_x').value);
+          document.getElementById('tur_val_x').textContent = x0;
+          const y0 = x0 * x0 - 4 * x0;
+          const m = 2 * x0 - 4;
+          document.getElementById('tur_pt').textContent = `(${x0}, ${y0})`;
+          document.getElementById('tur_grad').textContent = `m = ${m}`;
+          let status = '';
+          let statusCls = '';
+          if (m < 0) {
+            status = 'Kurva Sedang Turun (m < 0)';
+            statusCls = 'fs-6 fw-bold text-info';
+          } else if (m === 0) {
+            status = '🎯 Titik Minimum Stasioner (m = 0)';
+            statusCls = 'fs-6 fw-bold text-success';
+          } else {
+            status = 'Kurva Sedang Naik (m > 0)';
+            statusCls = 'fs-6 fw-bold text-warning';
+          }
+          document.getElementById('tur_status').textContent = status;
+          document.getElementById('tur_status').className = statusCls;
+          const c = y0 - m * x0;
+          const cSign = c >= 0 ? `+ ${c}` : `- ${Math.abs(c)}`;
+          document.getElementById('tur_tangent').innerHTML = `Garis singgung: <strong>y = ${m}x ${cSign}</strong>. Nilai turunan f'(${x0}) = ${m} merepresentasikan kecepatan perubahan sesaat grafik.`;
         }
-      } catch(err) {
-        term.textContent = '❌ Error saat menjalankan kode: ' + err.message;
-      }
-    }
+        
 
     // Simpan Progres Bab ke API Backend
     function markBabCompleted() {

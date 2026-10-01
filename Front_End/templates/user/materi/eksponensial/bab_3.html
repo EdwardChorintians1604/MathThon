@@ -14,10 +14,6 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/materi_reader.css') }}">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-  <!-- PyScript Core 2024 -->
-  <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
-  <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
-
   <style>
     :root {
       --accent: #f97316;
@@ -38,7 +34,7 @@
       margin: 0;
       line-height: 1.65;
     }
-    /* Dicoding Topbar */
+    /* Topbar */
     .dic-topbar {
       position: sticky;
       top: 0;
@@ -247,7 +243,6 @@
       line-height: 1.25;
     }
     
-    /* Target Box */
     .dic-target-box {
       background: #111622;
       border: 1px solid var(--border-color);
@@ -327,70 +322,33 @@
       gap: 0.5rem;
     }
     
-    /* Python Interactive Sandbox */
-    .dic-ide-box {
-      background: #090d16;
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
+    /* Interactive Math Simulation Box */
+    .dic-sim-box {
+      background: #111622;
+      border: 1px solid var(--accent-glow);
+      border-radius: 16px;
       overflow: hidden;
       margin: 2rem 0;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
     }
-    .dic-ide-topbar {
-      background: #111726;
-      padding: 0.65rem 1rem;
+    .dic-sim-topbar {
+      background: linear-gradient(135deg, var(--accent-dim), #161d2e);
+      padding: 0.85rem 1.25rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--border-color);
     }
-    .dic-ide-title {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.8rem;
-      color: #38bdf8;
+    .dic-sim-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #f8fafc;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-    .dic-run-btn {
-      background: #10b981;
-      color: #fff;
-      border: none;
-      padding: 0.35rem 0.9rem;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: all 0.2s;
-    }
-    .dic-run-btn:hover { background: #059669; transform: scale(1.02); }
-    .dic-editor {
-      width: 100%;
-      background: #090d16;
-      color: #f1f5f9;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.88rem;
-      padding: 1rem;
-      border: none;
-      resize: vertical;
-      min-height: 140px;
-      outline: none;
-      line-height: 1.6;
-    }
-    .dic-terminal {
-      background: #04070d;
-      border-top: 1px solid var(--border-color);
-      padding: 1rem;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.84rem;
-      color: #34d399;
-      min-height: 70px;
-      white-space: pre-wrap;
-      max-height: 240px;
-      overflow-y: auto;
+    .dic-sim-body {
+      padding: 1.5rem;
     }
     
     /* Quiz & Recall */
@@ -573,7 +531,7 @@
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
         <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
-        <a href="#sandbox" class="dic-anchor-link"><i class="bi bi-terminal-fill me-1"></i> Python Sandbox Lab</a>
+        <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
       </div>
     </aside>
@@ -593,7 +551,7 @@
         <div class="dic-role-icon"><i class="bi bi-gear-wide-connected"></i></div>
         <div>
           <div class="dic-role-title">TAHAP 3: MEKANIKA PERHITUNGAN & ALGORITMA</div>
-          <p class="dic-role-text">Peruntukan Bab 3 adalah melatih keterampilan kalkulasi bertahap, metode analitik prosedural, strategi penyederhanaan, dan penanganan kasus khusus.</p>
+          <p class="dic-role-text">Peruntukan Bab 3: Melatih keterampilan kalkulasi bertahap, metode analitik prosedural, strategi penyederhanaan, dan penanganan kasus khusus.</p>
         </div>
       </div>
 
@@ -605,7 +563,7 @@
         <ul class="dic-target-list">
           <li>Memahami landasan konseptual dari Mekanika: Prosedur Perhitungan & Operasi Eksponen secara sistematis.</li>
           <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengimplementasikan simulasi perhitungannya melalui Python Sandbox.</li>
+          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
         </ul>
       </div>
 
@@ -614,7 +572,7 @@
         <i class="bi bi-book-half" style="color:#f97316;"></i> Pembahasan Konsep & Teori
       </h2>
       <p class="dic-lead">
-        Bab 3 melatih keterampilan mekanika perhitungan: prosedur algoritma bertahap, teknik manipulasi aljabar, dan strategi menghindari kesalahan hitung.
+        Persamaan eksponen banyak diaplikasikan dalam pemodelan bunga majemuk finansial dan fisika nuklir.
       </p>
 
       <!-- Formula Section -->
@@ -622,10 +580,10 @@
         <i class="bi bi-calculator" style="color:#f97316;"></i> Formulasi Matematis & Bedah Rumus
       </h2>
       <div class="dic-formula-card">
-        \[ \text{Mekanika: } x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]
+        \[ 2^{2x - 1} = 32 \implies 2^{2x - 1} = 2^5 \implies 2x - 1 = 5 \implies x = 3 \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Setiap suku dalam rumus dihitung secara prosedural langkah demi langkah untuk mendapatkan solusi eksak.
+        <strong>💡 Makna Formulasi:</strong> Persamaan eksponensial diselesaikan dengan menyamakan basis kedua ruas.
       </div>
 
       <!-- Worked Example -->
@@ -635,61 +593,82 @@
       <div class="dic-example-box">
         <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
         <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh Perhitungan Bab 3: Menjalankan algoritma perhitungan bertahap hingga menemukan solusi eksak.
+          Contoh 3: Selesaikan 3^(x+1) = 81. 3^(x+1) = 3⁴ => x + 1 = 4 => x = 3.
         </p>
       </div>
 
-      <!-- Interactive Python Sandbox (PyScript + Live Runner) -->
-      <h2 class="dic-section-title" id="sandbox">
-        <i class="bi bi-terminal-fill text-warning"></i> Interactive Python Sandbox (PyScript Engine)
+      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <h2 class="dic-section-title" id="simulator">
+        <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
-      <div class="dic-ide-box">
-        <div class="dic-ide-topbar">
-          <div class="dic-ide-title">
-            <i class="bi bi-filetype-py"></i> main_eksponensial_bab3.py
+      <div class="dic-sim-box">
+        <div class="dic-sim-topbar">
+          <div class="dic-sim-title">
+            <i class="bi bi-cpu-fill" style="color:#f97316;"></i> Laboratorium Penalaran: Fenomena Ledakan Multiplikasi Eksponensial
           </div>
-          <button class="dic-run-btn" id="runPyBtn" onclick="runPythonSandbox()">
-            <i class="bi bi-play-fill"></i> Jalankan Kode
-          </button>
+          <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">
+            <i class="bi bi-broadcast me-1"></i> Live Simulator
+          </span>
         </div>
-        <textarea class="dic-editor" id="pyCodeEditor" rows="6">{% raw %}# Mekanika Kalkulasi Eksponen
-def hitung_langkah(x):
-    return x ** 2 + 2 * x + 1
-
-print('f(3) =', hitung_langkah(3))
-print('f(5) =', hitung_langkah(5)){% endraw %}</textarea>
-        <div class="dic-terminal" id="pyTerminalOutput">⏳ Klik "Jalankan Kode" untuk mengeksekusi script Python di browser...</div>
+        <div class="dic-sim-body">
+          <p class="small text-muted mb-3">🎯 Misi Berpikir: Bandingkan kecepatan pertumbuhan fungsi linier f(n) = 2n vs fungsi eksponensial g(n) = 2ⁿ!</p>
+          
+        <div class="p-3 mb-3 rounded" style="background:rgba(249,115,22,0.08); border:1px solid rgba(249,115,22,0.25);">
+          <div class="small fw-bold text-warning mb-1"><i class="bi bi-graph-up-arrow"></i> Mengapa Pertumbuhan Eksponensial Menipu Persepsi Manusia?</div>
+          <p class="small text-light mb-0">Pada langkah awal, pertumbuhan eksponensial terlihat lambat. Namun setelah melewati titik kritis, perkalian berulang memicu pelonjakan masif yang menyalip pertumbuhan linier!</p>
+        </div>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-6">
+            <label class="form-label small text-muted">Langkah / Periode Waktu (n): <span id="exp_val_n" class="fw-bold text-warning">5</span></label>
+            <input type="range" class="form-range" id="exp_slider_n" min="1" max="15" value="5" oninput="updateExpSim()">
+          </div>
+          <div class="col-md-6">
+            <div class="small text-muted mb-1">Perbandingan Model:</div>
+            <div class="small text-light">Linier: <span class="badge bg-secondary">f(n) = 2n</span> &nbsp;|&nbsp; Eksponen: <span class="badge bg-warning text-dark">g(n) = 2ⁿ</span></div>
+          </div>
+        </div>
+        <div class="mt-3 p-3 rounded" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
+          <div class="row text-center g-2 mb-2">
+            <div class="col-6 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Pertumbuhan Linier (Penjumlahan):</div>
+              <div class="fs-4 fw-bold text-info" id="exp_lin">10</div>
+              <div class="small text-muted">Naik +2 konstan tiap langkah</div>
+            </div>
+            <div class="col-6">
+              <div class="small text-muted">Pertumbuhan Eksponensial (Multiplikasi):</div>
+              <div class="fs-4 fw-bold text-warning" id="exp_res">32</div>
+              <div class="small text-muted">Melipatgandakan 2x lipat tiap langkah</div>
+            </div>
+          </div>
+          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #f97316;">
+            <div class="small text-warning fw-bold mb-1"><i class="bi bi-lightning-charge-fill"></i> Rasio Dominasi:</div>
+            <div class="small text-light" id="exp_ratio">Pada n = 5, nilai eksponensial sudah 3.20x lebih besar dari linier.</div>
+          </div>
+        </div>
+        
+        </div>
       </div>
 
-      <!-- PyScript Background Tag -->
-      <py-script output="pyTerminalOutput" style="display:none;">
-{% raw %}
-      # Mekanika Kalkulasi Eksponen
-      def hitung_langkah(x):
-          return x ** 2 + 2 * x + 1
-      
-      print('f(3) =', hitung_langkah(3))
-      print('f(5) =', hitung_langkah(5))
-{% endraw %}
-      </py-script>
-
-      <!-- Active Recall Exercise -->
-      <div class="dic-quiz-card" id="latihan">
-        <div class="dic-quiz-tag"><i class="bi bi-patch-question-fill"></i> Active Recall Quiz - Bab 3</div>
-        <div class="dic-quiz-q">Pada tahap mekanika perhitungan, langkah pertama yang benar adalah?</div>
+      <!-- Active Recall / Capstone Challenge Exercise -->
+      <div class="dic-quiz-card " id="latihan" style="">
+        <div class="dic-quiz-tag" style="">
+          <i class="bi bi-patch-question-fill"></i> 
+          Active Recall Quiz - Bab 3
+        </div>
+        <div class="dic-quiz-q" style="">Jika 4^(x - 1) = 64, berapakah nilai x?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Identifikasi variabel adalah langkah awal dari prosedur kalkulasi sistematis.')">
-          <span>Mengidentifikasi variabel dan memilih formula yang tepat</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, '4^(x-1) = 4³ => x - 1 = 3 => x = 4.')">
+          <span>x = 4</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Identifikasi variabel adalah langkah awal dari prosedur kalkulasi sistematis.')">
-          <span>Langsung menebak hasil akhir</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '4^(x-1) = 4³ => x - 1 = 3 => x = 4.')">
+          <span>x = 3</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Identifikasi variabel adalah langkah awal dari prosedur kalkulasi sistematis.')">
-          <span>Mengabaikan tanda operasi</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '4^(x-1) = 4³ => x - 1 = 3 => x = 4.')">
+          <span>x = 5</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
@@ -755,32 +734,19 @@ print('f(5) =', hitung_langkah(5)){% endraw %}</textarea>
       }
     }
 
-    // Eksekusi Python Sandbox
-    function runPythonSandbox() {
-      const code = document.getElementById('pyCodeEditor').value;
-      const term = document.getElementById('pyTerminalOutput');
-      term.textContent = 'Menjalankan skrip Python...\n';
-      
-      try {
-        if (window.pyscript && window.pyscript.interpreter) {
-          window.pyscript.interpreter.run(code);
-        } else {
-          const lines = code.split('\n');
-          let output = [];
-          lines.forEach(line => {
-            if (line.includes('print(')) {
-              const match = line.match(/print\((.*)\)/);
-              if (match) {
-                output.push('>>> ' + match[1].replace(/['"]/g, ''));
-              }
-            }
-          });
-          term.textContent = output.length > 0 ? output.join('\n') : '>>> Eksekusi kode selesai dengan sukses (Output 0).';
+    // Widget Simulator Logic
+    
+        function updateExpSim() {
+          const n = parseInt(document.getElementById('exp_slider_n').value);
+          document.getElementById('exp_val_n').textContent = n;
+          const lin = 2 * n;
+          const exp = Math.pow(2, n);
+          const ratio = (exp / lin).toFixed(2);
+          document.getElementById('exp_lin').textContent = lin.toLocaleString('id-ID');
+          document.getElementById('exp_res').textContent = exp.toLocaleString('id-ID');
+          document.getElementById('exp_ratio').innerHTML = `Pada n = ${n}, nilai eksponensial (<strong>${exp.toLocaleString('id-ID')}</strong>) sudah <strong>${ratio}x lipat</strong> melampaui pertumbuhan linier (${lin}).`;
         }
-      } catch(err) {
-        term.textContent = '❌ Error saat menjalankan kode: ' + err.message;
-      }
-    }
+        
 
     // Simpan Progres Bab ke API Backend
     function markBabCompleted() {

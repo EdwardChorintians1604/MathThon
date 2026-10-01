@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Geometri: Bangun Datar & Ruang - Bab 1: Fondasi: Konsep Intuitif & Pengenalan Geometri - MathThon</title>
+  <title>Geometri: Bangun Datar & Ruang - Bab 1: Fondasi: Dimensi Geometri & Teorema Pythagoras - MathThon</title>
   <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,10 +14,6 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/materi_reader.css') }}">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-  <!-- PyScript Core 2024 -->
-  <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
-  <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
-
   <style>
     :root {
       --accent: #a855f7;
@@ -38,7 +34,7 @@
       margin: 0;
       line-height: 1.65;
     }
-    /* Dicoding Topbar */
+    /* Topbar */
     .dic-topbar {
       position: sticky;
       top: 0;
@@ -247,7 +243,6 @@
       line-height: 1.25;
     }
     
-    /* Target Box */
     .dic-target-box {
       background: #111622;
       border: 1px solid var(--border-color);
@@ -327,70 +322,33 @@
       gap: 0.5rem;
     }
     
-    /* Python Interactive Sandbox */
-    .dic-ide-box {
-      background: #090d16;
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
+    /* Interactive Math Simulation Box */
+    .dic-sim-box {
+      background: #111622;
+      border: 1px solid var(--accent-glow);
+      border-radius: 16px;
       overflow: hidden;
       margin: 2rem 0;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
     }
-    .dic-ide-topbar {
-      background: #111726;
-      padding: 0.65rem 1rem;
+    .dic-sim-topbar {
+      background: linear-gradient(135deg, var(--accent-dim), #161d2e);
+      padding: 0.85rem 1.25rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--border-color);
     }
-    .dic-ide-title {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.8rem;
-      color: #38bdf8;
+    .dic-sim-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #f8fafc;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-    .dic-run-btn {
-      background: #10b981;
-      color: #fff;
-      border: none;
-      padding: 0.35rem 0.9rem;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: all 0.2s;
-    }
-    .dic-run-btn:hover { background: #059669; transform: scale(1.02); }
-    .dic-editor {
-      width: 100%;
-      background: #090d16;
-      color: #f1f5f9;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.88rem;
-      padding: 1rem;
-      border: none;
-      resize: vertical;
-      min-height: 140px;
-      outline: none;
-      line-height: 1.6;
-    }
-    .dic-terminal {
-      background: #04070d;
-      border-top: 1px solid var(--border-color);
-      padding: 1rem;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.84rem;
-      color: #34d399;
-      min-height: 70px;
-      white-space: pre-wrap;
-      max-height: 240px;
-      overflow-y: auto;
+    .dic-sim-body {
+      padding: 1.5rem;
     }
     
     /* Quiz & Recall */
@@ -539,31 +497,31 @@
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=1) }}" 
            class="dic-chapter-link active {{ 'done' if all_bab_status[0]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[0]['is_completed'] else '1' }}</span>
-          <span>Fondasi: Konsep Intuitif & Pengenalan Geometri</span>
+          <span>Fondasi: Dimensi Geometri & Teorema Pythagoras</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=2) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[1]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[1]['is_completed'] else '2' }}</span>
-          <span>Anatomi: Notasi, Kaidah & Sifat Baku Geometri</span>
+          <span>Anatomi: Bangun Datar Baku (Segitiga, Lingkaran, Segiempat)</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=3) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[2]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[2]['is_completed'] else '3' }}</span>
-          <span>Mekanika: Prosedur Perhitungan & Operasi Geometri</span>
+          <span>Mekanika: Luas Permukaan & Volume Bangun Ruang 3D</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=4) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[3]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[3]['is_completed'] else '4' }}</span>
-          <span>Pemodelan: Aplikasi Nyata & Studi Kasus Geometri</span>
+          <span>Pemodelan: Konstruksi & Estimasi Material Ruang</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=5) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[4]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[4]['is_completed'] else '5' }}</span>
-          <span>Capstone: Proyek Integratif & Uji Sintesis Geometri</span>
+          <span>Capstone: Proyek Rekayasa & Uji Evaluasi Kapasitas Ruang</span>
         </a>
 
       <!-- In-Page Anchor Links -->
@@ -573,7 +531,7 @@
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
         <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
-        <a href="#sandbox" class="dic-anchor-link"><i class="bi bi-terminal-fill me-1"></i> Python Sandbox Lab</a>
+        <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
       </div>
     </aside>
@@ -593,19 +551,19 @@
         <div class="dic-role-icon"><i class="bi bi-stars"></i></div>
         <div>
           <div class="dic-role-title">TAHAP 1: FONDASI & INTUISI</div>
-          <p class="dic-role-text">Peruntukan Bab 1 adalah membangun pemahaman intuitif dari nol, latar belakang mengapa konsep ini diciptakan, perbedaannya dengan topik sebelumnya, serta kerangka berpikir dasar.</p>
+          <p class="dic-role-text">Peruntukan Bab 1: Membangun pemahaman intuitif dari nol, latar belakang mengapa konsep ini diciptakan, perbedaannya dengan topik sebelumnya, serta kerangka berpikir dasar.</p>
         </div>
       </div>
 
-      <h1 class="dic-h1">Fondasi: Konsep Intuitif & Pengenalan Geometri</h1>
+      <h1 class="dic-h1">Fondasi: Dimensi Geometri & Teorema Pythagoras</h1>
 
       <!-- Learning Objectives -->
       <div class="dic-target-box">
         <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#a855f7;"></i> Sasaran Pembelajaran Bab 1:</div>
         <ul class="dic-target-list">
-          <li>Memahami landasan konseptual dari Fondasi: Konsep Intuitif & Pengenalan Geometri secara sistematis.</li>
+          <li>Memahami landasan konseptual dari Fondasi: Dimensi Geometri & Teorema Pythagoras secara sistematis.</li>
           <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengimplementasikan simulasi perhitungannya melalui Python Sandbox.</li>
+          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
         </ul>
       </div>
 
@@ -614,7 +572,7 @@
         <i class="bi bi-book-half" style="color:#a855f7;"></i> Pembahasan Konsep & Teori
       </h2>
       <p class="dic-lead">
-        Bab 1 berfokus pada fondasi awal: membangun intuisi matematis yang kokoh tentang mengapa Geometri: Bangun Datar & Ruang esensial untuk dipelajari dan bagaimana cara kerjanya secara konseptual.
+        Geometri mengkaji sifat ukuran, bentuk, posisi relatif bidang, dan sifat-sifat ruang dalam matematika formal.
       </p>
 
       <!-- Formula Section -->
@@ -622,10 +580,10 @@
         <i class="bi bi-calculator" style="color:#a855f7;"></i> Formulasi Matematis & Bedah Rumus
       </h2>
       <div class="dic-formula-card">
-        \[ \text{Konsep Fondasi: } f(x) \iff \text{Representasi Dasar} \]
+        \[ c^2 = a^2 + b^2 \iff c = \sqrt{a^2 + b^2} \quad (\text{Pythagoras}) \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Rumus ini mendefinisikan hubungan dasar antara variabel input dan nilai output yang dihasilkan.
+        <strong>💡 Makna Formulasi:</strong> Teorema Pythagoras menghubungkan sisi alas a, tinggi b, dan hipotenusa c pada segitiga siku-siku.
       </div>
 
       <!-- Worked Example -->
@@ -635,55 +593,93 @@
       <div class="dic-example-box">
         <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
         <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh Fondasi Bab 1: Mengidentifikasi parameter awal dari kasus kontekstual Geometri.
+          Contoh 1: Segitiga siku-siku memiliki alas 6 cm dan tinggi 8 cm. Sisi miring c = √(6² + 8²) = √(36 + 64) = 10 cm.
         </p>
       </div>
 
-      <!-- Interactive Python Sandbox (PyScript + Live Runner) -->
-      <h2 class="dic-section-title" id="sandbox">
-        <i class="bi bi-terminal-fill text-warning"></i> Interactive Python Sandbox (PyScript Engine)
+      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <h2 class="dic-section-title" id="simulator">
+        <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
-      <div class="dic-ide-box">
-        <div class="dic-ide-topbar">
-          <div class="dic-ide-title">
-            <i class="bi bi-filetype-py"></i> main_bangun_datar_dan_bangun_ruang_bab1.py
+      <div class="dic-sim-box">
+        <div class="dic-sim-topbar">
+          <div class="dic-sim-title">
+            <i class="bi bi-cpu-fill" style="color:#a855f7;"></i> Laboratorium Penalaran Spasial: Hukum Skala Kuadratik vs Kubik
           </div>
-          <button class="dic-run-btn" id="runPyBtn" onclick="runPythonSandbox()">
-            <i class="bi bi-play-fill"></i> Jalankan Kode
-          </button>
+          <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">
+            <i class="bi bi-broadcast me-1"></i> Live Simulator
+          </span>
         </div>
-        <textarea class="dic-editor" id="pyCodeEditor" rows="6">{% raw %}# Eksplorasi Fondasi Geometri
-print('=== Fondasi Konsep: Geometri: Bangun Datar & Ruang ===')
-print('Inisialisasi sistem berhasil. Siap mengeksplorasi modul.'){% endraw %}</textarea>
-        <div class="dic-terminal" id="pyTerminalOutput">⏳ Klik "Jalankan Kode" untuk mengeksekusi script Python di browser...</div>
+        <div class="dic-sim-body">
+          <p class="small text-muted mb-3">🎯 Misi Berpikir: Amati mengapa saat dimensi dilipatgandakan k kali, Luas Permukaan naik k² kali lipat sementara Volume melonjak k³ kali lipat!</p>
+          
+        <div class="p-3 mb-3 rounded" style="background:rgba(168,85,247,0.08); border:1px solid rgba(168,85,247,0.25);">
+          <div class="small fw-bold text-warning mb-1"><i class="bi bi-bounding-box-circles"></i> Prinsip Penalaran Skala Geometri:</div>
+          <p class="small text-light mb-0">Panjang bersifat 1D (skala k), Luas penampang bersifat 2D (skala k²), dan Volume ruang bersifat 3D (skala k³). Inilah alasan geometris mengapa raksasa membutuhkan tulang yang jauh lebih tebal!</p>
+        </div>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-4">
+            <label class="form-label small text-muted">Bentuk Geometri:</label>
+            <select class="form-select form-select-sm bg-dark text-light border-secondary" id="geo_shape" onchange="updateGeoSim()">
+              <option value="tabung">Tabung (Silinder)</option>
+              <option value="balok">Balok (Prisma Segiempat)</option>
+              <option value="bola">Bola</option>
+              <option value="kerucut">Kerucut</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label small text-muted">Dimensi Utama r / p: <span id="geo_val_d1" class="fw-bold text-info">7</span> cm</label>
+            <input type="range" class="form-range" id="geo_slider_d1" min="1" max="20" value="7" oninput="updateGeoSim()">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label small text-muted">Tinggi t / Lebar l: <span id="geo_val_d2" class="fw-bold text-warning">10</span> cm</label>
+            <input type="range" class="form-range" id="geo_slider_d2" min="1" max="20" value="10" oninput="updateGeoSim()">
+          </div>
+        </div>
+        <div class="mt-3 p-3 rounded" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
+          <div class="row text-center g-2 mb-2">
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Dimensi Linier 1D:</div>
+              <div class="fs-6 fw-bold text-light" id="geo_lin">r = 7 cm, t = 10 cm</div>
+            </div>
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Luas Permukaan (2D - cm²):</div>
+              <div class="fs-5 fw-bold text-info" id="geo_area">747.70 cm²</div>
+            </div>
+            <div class="col-4">
+              <div class="small text-muted">Kapasitas Volume (3D - cm³):</div>
+              <div class="fs-5 fw-bold text-success" id="geo_vol">1539.38 cm³</div>
+            </div>
+          </div>
+          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #a855f7;">
+            <div class="small text-warning fw-bold mb-1"><i class="bi bi-lightbulb-fill"></i> Analisis Rasio Luas terhadap Volume (L/V):</div>
+            <div class="small text-light" id="geo_ratio">Rasio L/V = 0.49. Semakin besar ukuran objek, rasio permukaan terhadap volume semakin mengecil.</div>
+          </div>
+        </div>
+        
+        </div>
       </div>
 
-      <!-- PyScript Background Tag -->
-      <py-script output="pyTerminalOutput" style="display:none;">
-{% raw %}
-      # Eksplorasi Fondasi Geometri
-      print('=== Fondasi Konsep: Geometri: Bangun Datar & Ruang ===')
-      print('Inisialisasi sistem berhasil. Siap mengeksplorasi modul.')
-{% endraw %}
-      </py-script>
-
-      <!-- Active Recall Exercise -->
-      <div class="dic-quiz-card" id="latihan">
-        <div class="dic-quiz-tag"><i class="bi bi-patch-question-fill"></i> Active Recall Quiz - Bab 1</div>
-        <div class="dic-quiz-q">Apa tujuan utama dari mempelajari konsep fondasi dalam modul Geometri?</div>
+      <!-- Active Recall / Capstone Challenge Exercise -->
+      <div class="dic-quiz-card " id="latihan" style="">
+        <div class="dic-quiz-tag" style="">
+          <i class="bi bi-patch-question-fill"></i> 
+          Active Recall Quiz - Bab 1
+        </div>
+        <div class="dic-quiz-q" style="">Sebuah segitiga siku-siku memiliki sisi 9 cm dan 12 cm. Berapakah panjang sisi miringnya?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Fondasi yang kuat sangat penting untuk memahami kaidah lanjutan.')">
-          <span>Membangun pemahaman intuitif dan kerangka berpikir</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'c = √(9² + 12²) = √(81 + 144) = √225 = 15 cm.')">
+          <span>15 cm</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Fondasi yang kuat sangat penting untuk memahami kaidah lanjutan.')">
-          <span>Hanya menghafal rumus</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'c = √(9² + 12²) = √(81 + 144) = √225 = 15 cm.')">
+          <span>21 cm</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Fondasi yang kuat sangat penting untuk memahami kaidah lanjutan.')">
-          <span>Melewati materi dasar</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'c = √(9² + 12²) = √(81 + 144) = √225 = 15 cm.')">
+          <span>18 cm</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
@@ -749,32 +745,37 @@ print('Inisialisasi sistem berhasil. Siap mengeksplorasi modul.'){% endraw %}</t
       }
     }
 
-    // Eksekusi Python Sandbox
-    function runPythonSandbox() {
-      const code = document.getElementById('pyCodeEditor').value;
-      const term = document.getElementById('pyTerminalOutput');
-      term.textContent = 'Menjalankan skrip Python...\n';
-      
-      try {
-        if (window.pyscript && window.pyscript.interpreter) {
-          window.pyscript.interpreter.run(code);
-        } else {
-          const lines = code.split('\n');
-          let output = [];
-          lines.forEach(line => {
-            if (line.includes('print(')) {
-              const match = line.match(/print\((.*)\)/);
-              if (match) {
-                output.push('>>> ' + match[1].replace(/['"]/g, ''));
-              }
-            }
-          });
-          term.textContent = output.length > 0 ? output.join('\n') : '>>> Eksekusi kode selesai dengan sukses (Output 0).';
+    // Widget Simulator Logic
+    
+        function updateGeoSim() {
+          const shape = document.getElementById('geo_shape').value;
+          const d1 = parseFloat(document.getElementById('geo_slider_d1').value);
+          const d2 = parseFloat(document.getElementById('geo_slider_d2').value);
+          document.getElementById('geo_val_d1').textContent = d1;
+          document.getElementById('geo_val_d2').textContent = d2;
+          document.getElementById('geo_lin').textContent = `d₁ = ${d1} cm, d₂ = ${d2} cm`;
+          let area = 0, vol = 0;
+          if (shape === 'tabung') {
+            area = 2 * Math.PI * d1 * (d1 + d2);
+            vol = Math.PI * d1 * d1 * d2;
+          } else if (shape === 'balok') {
+            const t = 5;
+            area = 2 * (d1*d2 + d1*t + d2*t);
+            vol = d1 * d2 * t;
+          } else if (shape === 'bola') {
+            area = 4 * Math.PI * d1 * d1;
+            vol = (4/3) * Math.PI * Math.pow(d1, 3);
+          } else if (shape === 'kerucut') {
+            const s = Math.sqrt(d1*d1 + d2*d2);
+            area = Math.PI * d1 * (d1 + s);
+            vol = (1/3) * Math.PI * d1 * d1 * d2;
+          }
+          const ratio = (area / vol).toFixed(2);
+          document.getElementById('geo_area').textContent = `${area.toFixed(2)} cm²`;
+          document.getElementById('geo_vol').textContent = `${vol.toFixed(2)} cm³`;
+          document.getElementById('geo_ratio').innerHTML = `Rasio L/V = <strong>${ratio}</strong>. Volume bertumbuh secara kubik (~d³) jauh lebih cepat daripada luas permukaan kuadratik (~d²).`;
         }
-      } catch(err) {
-        term.textContent = '❌ Error saat menjalankan kode: ' + err.message;
-      }
-    }
+        
 
     // Simpan Progres Bab ke API Backend
     function markBabCompleted() {

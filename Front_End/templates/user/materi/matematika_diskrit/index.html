@@ -34,7 +34,7 @@
       margin: 0;
       line-height: 1.65;
     }
-    /* Dicoding Topbar */
+    /* Topbar */
     .dic-topbar {
       position: sticky;
       top: 0;
@@ -243,7 +243,6 @@
       line-height: 1.25;
     }
     
-    /* Target Box */
     .dic-target-box {
       background: #111622;
       border: 1px solid var(--border-color);
@@ -323,70 +322,33 @@
       gap: 0.5rem;
     }
     
-    /* Python Interactive Sandbox */
-    .dic-ide-box {
-      background: #090d16;
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
+    /* Interactive Math Simulation Box */
+    .dic-sim-box {
+      background: #111622;
+      border: 1px solid var(--accent-glow);
+      border-radius: 16px;
       overflow: hidden;
       margin: 2rem 0;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
     }
-    .dic-ide-topbar {
-      background: #111726;
-      padding: 0.65rem 1rem;
+    .dic-sim-topbar {
+      background: linear-gradient(135deg, var(--accent-dim), #161d2e);
+      padding: 0.85rem 1.25rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--border-color);
     }
-    .dic-ide-title {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.8rem;
-      color: #38bdf8;
+    .dic-sim-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #f8fafc;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-    .dic-run-btn {
-      background: #10b981;
-      color: #fff;
-      border: none;
-      padding: 0.35rem 0.9rem;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: all 0.2s;
-    }
-    .dic-run-btn:hover { background: #059669; transform: scale(1.02); }
-    .dic-editor {
-      width: 100%;
-      background: #090d16;
-      color: #f1f5f9;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.88rem;
-      padding: 1rem;
-      border: none;
-      resize: vertical;
-      min-height: 140px;
-      outline: none;
-      line-height: 1.6;
-    }
-    .dic-terminal {
-      background: #04070d;
-      border-top: 1px solid var(--border-color);
-      padding: 1rem;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.84rem;
-      color: #34d399;
-      min-height: 70px;
-      white-space: pre-wrap;
-      max-height: 240px;
-      overflow-y: auto;
+    .dic-sim-body {
+      padding: 1.5rem;
     }
     
     /* Quiz & Recall */
@@ -642,17 +604,17 @@
         </div>
       </div>
       <p style="color:#cbd5e1; font-size:1rem; margin-bottom:1.5rem; line-height:1.7;">
-        Kuasai tabel kebenaran, teori himpunan, relasi fungsi, dan graf.
+        Kuasai tabel kebenaran, teori himpunan, relasi fungsi, kardinalitas, dan graf.
       </p>
       <div class="d-flex gap-4 flex-wrap" style="font-size:0.88rem; color:#94a3b8;">
         <span><i class="bi bi-collection text-info me-1"></i> 5 Bab Terstruktur</span>
         <span><i class="bi bi-check2-all text-success me-1"></i> {{ bab_progress|selectattr('is_completed')|list|length }}/5 Bab Selesai</span>
-        <span><i class="bi bi-terminal-fill text-warning me-1"></i> PyScript Sandbox Tersedia</span>
+        <span><i class="bi bi-sliders text-warning me-1"></i> Simulator Visual Interaktif</span>
       </div>
 
       <!-- Progress Bar -->
       <div style="margin-top:1.25rem; background:rgba(255,255,255,0.08); border-radius:6px; height:7px; overflow:hidden;">
-        <div style="height:100%; background:#475569; transition:width 0.4s; width: {{ (bab_progress|selectattr('is_completed')|list|length / total * 100)|int }}%;"></div>
+        <div style="height:100%; background:#475569; transition:width 0.4s; width: {{ (bab_progress|selectattr('is_completed')|list|length / 5 * 100)|int }}%;"></div>
       </div>
     </div>
 
@@ -670,7 +632,7 @@
           <div class="flex-grow-1">
             <div class="dic-stage-badge" style="color:#475569;">TAHAP 1: FONDASI & INTUISI</div>
             <div class="dic-stage-title">Fondasi: Konsep Intuitif & Pengenalan Mat. Diskrit</div>
-            <div class="dic-stage-desc">Peruntukan Bab 1 adalah membangun pemahaman intuitif dari nol, latar belakang mengapa konsep ini diciptakan, perbedaannya dengan topik sebelumnya, serta kerangka berpikir dasar.</div>
+            <div class="dic-stage-desc">Peruntukan Bab 1: Membangun pemahaman intuitif dari nol, latar belakang mengapa konsep ini diciptakan, perbedaannya dengan topik sebelumnya, serta kerangka berpikir dasar.</div>
           </div>
         </div>
 
@@ -679,7 +641,7 @@
           <div class="flex-grow-1">
             <div class="dic-stage-badge" style="color:#475569;">TAHAP 2: ANATOMI & KAIDAH FORMAL</div>
             <div class="dic-stage-title">Anatomi: Notasi, Kaidah & Sifat Baku Mat. Diskrit</div>
-            <div class="dic-stage-desc">Peruntukan Bab 2 adalah membedah struktur anatomi matematika, notasi formal, sifat-sifat fundamental, dan aksioma/teorema yang menjadi aturan main.</div>
+            <div class="dic-stage-desc">Peruntukan Bab 2: Membedah struktur anatomi matematika, notasi formal, sifat-sifat fundamental, dan aksioma/teorema yang menjadi aturan main.</div>
           </div>
         </div>
 
@@ -688,7 +650,7 @@
           <div class="flex-grow-1">
             <div class="dic-stage-badge" style="color:#475569;">TAHAP 3: MEKANIKA PERHITUNGAN & ALGORITMA</div>
             <div class="dic-stage-title">Mekanika: Prosedur Perhitungan & Operasi Mat. Diskrit</div>
-            <div class="dic-stage-desc">Peruntukan Bab 3 adalah melatih keterampilan kalkulasi bertahap, metode analitik prosedural, strategi penyederhanaan, dan penanganan kasus khusus.</div>
+            <div class="dic-stage-desc">Peruntukan Bab 3: Melatih keterampilan kalkulasi bertahap, metode analitik prosedural, strategi penyederhanaan, dan penanganan kasus khusus.</div>
           </div>
         </div>
 
@@ -697,7 +659,7 @@
           <div class="flex-grow-1">
             <div class="dic-stage-badge" style="color:#475569;">TAHAP 4: PEMODELAN & STUDI KASUS NYATA</div>
             <div class="dic-stage-title">Pemodelan: Aplikasi Nyata & Studi Kasus Mat. Diskrit</div>
-            <div class="dic-stage-desc">Peruntukan Bab 4 adalah menerjemahkan masalah dunia nyata (fisika, sains komputer, ekonomi, arsitektur) ke dalam pemodelan matematis formal.</div>
+            <div class="dic-stage-desc">Peruntukan Bab 4: Menerjemahkan masalah dunia nyata (fisika, sains komputer, ekonomi, arsitektur) ke dalam pemodelan matematis formal.</div>
           </div>
         </div>
 
@@ -706,7 +668,7 @@
           <div class="flex-grow-1">
             <div class="dic-stage-badge" style="color:#475569;">TAHAP 5: CAPSTONE PROJECT & EVALUASI SINTESIS</div>
             <div class="dic-stage-title">Capstone: Proyek Integratif & Uji Sintesis Mat. Diskrit</div>
-            <div class="dic-stage-desc">Peruntukan Bab 5 adalah mengintegrasikan seluruh materi Bab 1 s/d Bab 4 dalam satu proyek tantangan komprehensif sebagai standar penguasaan modul.</div>
+            <div class="dic-stage-desc">Peruntukan Bab 5: Mengintegrasikan seluruh materi Bab 1 s/d Bab 4 dalam satu proyek tantangan komprehensif sebagai standar penguasaan modul.</div>
           </div>
         </div>
     </div>
@@ -722,7 +684,7 @@
         <div class="flex-grow-1">
           <div style="font-size:0.75rem; color:#475569; font-weight:700; text-transform:uppercase;">TAHAP 1: FONDASI & INTUISI</div>
           <div class="dic-card-title">Fondasi: Konsep Intuitif & Pengenalan Mat. Diskrit</div>
-          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Interaktif PyScript Sandbox</div>
+          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Simulator Interaktif</div>
         </div>
         <i class="bi {{ 'bi-check-circle-fill text-success' if bab_progress[0]['is_completed'] else 'bi-chevron-right text-muted' }} fs-5"></i>
       </a>
@@ -733,7 +695,7 @@
         <div class="flex-grow-1">
           <div style="font-size:0.75rem; color:#475569; font-weight:700; text-transform:uppercase;">TAHAP 2: ANATOMI & KAIDAH FORMAL</div>
           <div class="dic-card-title">Anatomi: Notasi, Kaidah & Sifat Baku Mat. Diskrit</div>
-          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Interaktif PyScript Sandbox</div>
+          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Simulator Interaktif</div>
         </div>
         <i class="bi {{ 'bi-check-circle-fill text-success' if bab_progress[1]['is_completed'] else 'bi-chevron-right text-muted' }} fs-5"></i>
       </a>
@@ -744,7 +706,7 @@
         <div class="flex-grow-1">
           <div style="font-size:0.75rem; color:#475569; font-weight:700; text-transform:uppercase;">TAHAP 3: MEKANIKA PERHITUNGAN & ALGORITMA</div>
           <div class="dic-card-title">Mekanika: Prosedur Perhitungan & Operasi Mat. Diskrit</div>
-          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Interaktif PyScript Sandbox</div>
+          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Simulator Interaktif</div>
         </div>
         <i class="bi {{ 'bi-check-circle-fill text-success' if bab_progress[2]['is_completed'] else 'bi-chevron-right text-muted' }} fs-5"></i>
       </a>
@@ -755,7 +717,7 @@
         <div class="flex-grow-1">
           <div style="font-size:0.75rem; color:#475569; font-weight:700; text-transform:uppercase;">TAHAP 4: PEMODELAN & STUDI KASUS NYATA</div>
           <div class="dic-card-title">Pemodelan: Aplikasi Nyata & Studi Kasus Mat. Diskrit</div>
-          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Interaktif PyScript Sandbox</div>
+          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Simulator Interaktif</div>
         </div>
         <i class="bi {{ 'bi-check-circle-fill text-success' if bab_progress[3]['is_completed'] else 'bi-chevron-right text-muted' }} fs-5"></i>
       </a>
@@ -766,7 +728,7 @@
         <div class="flex-grow-1">
           <div style="font-size:0.75rem; color:#475569; font-weight:700; text-transform:uppercase;">TAHAP 5: CAPSTONE PROJECT & EVALUASI SINTESIS</div>
           <div class="dic-card-title">Capstone: Proyek Integratif & Uji Sintesis Mat. Diskrit</div>
-          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Interaktif PyScript Sandbox</div>
+          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Simulator Interaktif</div>
         </div>
         <i class="bi {{ 'bi-check-circle-fill text-success' if bab_progress[4]['is_completed'] else 'bi-chevron-right text-muted' }} fs-5"></i>
       </a>
