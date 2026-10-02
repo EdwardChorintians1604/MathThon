@@ -2265,7 +2265,10 @@ def build_bab_html(subj_key, data, bab_num):
     function markBabCompleted() {{
       const markBtn = document.getElementById('markDoneBtn');
       const csrfMeta = document.querySelector('meta[name="csrf-token"]');
-      const headers = {{ 'Content-Type': 'application/json' }};
+      const headers = {{ 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }};
       if (csrfMeta) headers['X-CSRFToken'] = csrfMeta.getAttribute('content');
 
       fetch('/user/materi/api/bab-progress', {{
@@ -2294,13 +2297,19 @@ def build_bab_html(subj_key, data, bab_num):
 
     // Auto-save beacon sebelum halaman ditutup
     window.addEventListener('beforeunload', () => {{
-      navigator.sendBeacon('/user/materi/api/bab-progress', JSON.stringify({{
-        subject: '{subj_key}',
-        bab_num: {bab_num},
-        is_completed: false,
-        time_spent: studySeconds,
-        exercise_score: 0
-      }}));
+      try {{
+        const payload = JSON.stringify({{
+          subject: '{subj_key}',
+          bab_num: {bab_num},
+          is_completed: false,
+          time_spent: studySeconds,
+          exercise_score: 0
+        }});
+        const blob = new Blob([payload], {{ type: 'application/json' }});
+        navigator.sendBeacon('/user/materi/api/bab-progress', blob);
+      }} catch (e) {{
+        console.warn('Beacon save failed', e);
+      }}
     }});
   </script>
 </body>

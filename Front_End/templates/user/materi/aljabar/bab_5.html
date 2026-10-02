@@ -757,7 +757,10 @@
     function markBabCompleted() {
       const markBtn = document.getElementById('markDoneBtn');
       const csrfMeta = document.querySelector('meta[name="csrf-token"]');
-      const headers = { 'Content-Type': 'application/json' };
+      const headers = { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      };
       if (csrfMeta) headers['X-CSRFToken'] = csrfMeta.getAttribute('content');
 
       fetch('/user/materi/api/bab-progress', {
@@ -786,13 +789,19 @@
 
     // Auto-save beacon sebelum halaman ditutup
     window.addEventListener('beforeunload', () => {
-      navigator.sendBeacon('/user/materi/api/bab-progress', JSON.stringify({
-        subject: 'aljabar',
-        bab_num: 5,
-        is_completed: false,
-        time_spent: studySeconds,
-        exercise_score: 0
-      }));
+      try {
+        const payload = JSON.stringify({
+          subject: 'aljabar',
+          bab_num: 5,
+          is_completed: false,
+          time_spent: studySeconds,
+          exercise_score: 0
+        });
+        const blob = new Blob([payload], { type: 'application/json' });
+        navigator.sendBeacon('/user/materi/api/bab-progress', blob);
+      } catch (e) {
+        console.warn('Beacon save failed', e);
+      }
     });
   </script>
 </body>

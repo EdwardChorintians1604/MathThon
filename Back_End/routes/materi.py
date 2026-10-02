@@ -272,6 +272,31 @@ def ensure_progress_table(conn):
         logging.error(f"[DB Progress Check Error]: {e}")
 
 
+def _get_request_data():
+    """Safely extract JSON data from Flask request regardless of Content-Type (supports beacon text/plain, raw json, or form)."""
+    try:
+        if request.is_json:
+            res = request.get_json(silent=True)
+            if isinstance(res, dict):
+                return res
+        # Try force parsing as JSON even if content-type is text/plain or missing
+        res = request.get_json(silent=True, force=True)
+        if isinstance(res, dict):
+            return res
+        if request.form:
+            return request.form.to_dict()
+        if request.data:
+            try:
+                parsed = json.loads(request.data.decode('utf-8'))
+                if isinstance(parsed, dict):
+                    return parsed
+            except Exception:
+                pass
+    except Exception:
+        pass
+    return {}
+
+
 # =========================================================================
 # 🔹 API 1: FEEDBACK LOOP BERBASIS AI (Adaptive Micro-Tutor Hint)
 # =========================================================================
@@ -279,7 +304,7 @@ def ensure_progress_table(conn):
 @user_required
 def adaptive_hint():
     """Memberikan petunjuk scaffolding berbasis AI tanpa membocorkan jawaban."""
-    data = request.get_json() or {}
+    data = _get_request_data()
     materi = data.get("materi", "matematika")
     step = data.get("step", 1)
     question = data.get("question", "")
@@ -330,7 +355,7 @@ def generate_heuristic_hint(materi, step, user_input, expected_concept):
 def track_progress():
     """Menyimpan metrik mikro per user per modul."""
     user_id = session.get("user_id")
-    data = request.get_json() or {}
+    data = _get_request_data()
     materi_slug = data.get("materi_slug", "").strip().lower()
     checkpoint_stage = int(data.get("checkpoint_stage", 0))
     is_completed = 1 if data.get("is_completed", False) else 0
@@ -466,7 +491,7 @@ def learning_path():
 def bab_progress():
     """Track progress per bab (slug format: aljabar_bab_1, integral_bab_3, dst.)"""
     user_id = session.get("user_id")
-    data = request.get_json() or {}
+    data = _get_request_data()
     subject = data.get("subject", "").strip().lower()
     bab_num = int(data.get("bab_num", 1))
     is_completed = 1 if data.get("is_completed", False) else 0
