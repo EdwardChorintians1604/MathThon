@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistem Bilangan (Biner, Oktal, Hex) - Bab 3: Mekanika: Prosedur Perhitungan & Operasi Sis. Bilangan - MathThon</title>
+  <title>Sistem Bilangan (Biner, Oktal, Hex) - Bab 3: Mekanika: Algoritma Konversi Desimal ke Basis Lain (Metode Modulo Sisa) - MathThon</title>
   <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,7 +187,7 @@
     /* Main Content Area */
     .dic-main {
       padding: 2.5rem 3rem;
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       width: 100%;
     }
@@ -242,31 +242,63 @@
       color: #f8fafc;
       line-height: 1.25;
     }
-    
+
+    /* Target Box */
     .dic-target-box {
-      background: #111622;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.25rem;
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .dic-target-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #818cf8;
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .dic-target-list {
       margin: 0;
       padding-left: 1.25rem;
-      font-size: 0.88rem;
-      color: #94a3b8;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
     }
-    .dic-target-list li { margin-bottom: 0.35rem; }
-    
+    .dic-target-list li { margin-bottom: 0.4rem; }
+
+    /* Real-World Hook Box */
+    .dic-hook-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.02));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .dic-hook-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dic-hook-body {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Section Title */
     .dic-section-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -278,50 +310,192 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border-color);
     }
-    
-    .dic-lead {
-      font-size: 1.02rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin: 1rem 0 1.5rem;
-    }
-    
-    .dic-formula-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid var(--accent-glow);
+
+    /* Concepts Cards */
+    .dic-concept-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 1.5rem;
       margin: 1.25rem 0;
-      text-align: center;
-      overflow-x: auto;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .dic-formula-explain {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-      margin: 1rem 0;
-      line-height: 1.6;
-    }
-    
-    .dic-example-box {
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-    }
-    .dic-example-title {
-      font-size: 0.85rem;
+    .dic-h3 {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #34d399;
-      margin-bottom: 0.5rem;
+      color: #f8fafc;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+    .dic-list {
+      margin: 0.5rem 0 0.75rem 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .dic-list li { margin-bottom: 0.35rem; }
+
+    /* Dicoding Callout Boxes */
+    .dic-callout {
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .dic-callout-icon {
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .dic-callout-content { flex-grow: 1; font-size: 0.91rem; line-height: 1.7; }
+    .dic-callout-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
     
+    .dic-callout.pro-tip {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-left: 4px solid #10b981;
+    }
+    .dic-callout.pro-tip .dic-callout-title { color: #34d399; }
+    .dic-callout.pro-tip .dic-callout-icon { color: #10b981; }
+    .dic-callout.pro-tip .dic-callout-content { color: #d1fae5; }
+
+    .dic-callout.pitfall {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 4px solid #f43f5e;
+    }
+    .dic-callout.pitfall .dic-callout-title { color: #fb7185; }
+    .dic-callout.pitfall .dic-callout-icon { color: #f43f5e; }
+    .dic-callout.pitfall .dic-callout-content { color: #ffe4e6; }
+
+    .dic-callout.fun-fact {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-left: 4px solid #8b5cf6;
+    }
+    .dic-callout.fun-fact .dic-callout-title { color: #c084fc; }
+    .dic-callout.fun-fact .dic-callout-icon { color: #8b5cf6; }
+    .dic-callout.fun-fact .dic-callout-content { color: #ede9fe; }
+
+    /* Formula & Parameter Table */
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-param-table-wrap {
+      margin: 1.25rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .dic-param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .dic-param-table th {
+      background: #161d2e;
+      color: #94a3b8;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-param-table td {
+      padding: 0.75rem 1rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .dic-param-table tr:last-child td { border-bottom: none; }
+    .dic-param-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .dic-symbol-badge {
+      font-family: 'Fira Code', monospace;
+      color: #38bdf8;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .dic-formula-explain {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      line-height: 1.7;
+    }
+
+    /* Guided Step Box */
+    .dic-step-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dic-step-problem {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+      line-height: 1.7;
+    }
+    .dic-step-item {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .dic-step-item.diketahui {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid #6366f1;
+      color: #cbd5e1;
+    }
+    .dic-step-item.ditanya {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 3px solid #f59e0b;
+      color: #cbd5e1;
+    }
+    .dic-step-item.langkah {
+      background: rgba(16, 185, 129, 0.05);
+      border-left: 3px solid #10b981;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    .dic-step-item.kesimpulan {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid #38bdf8;
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
     /* Interactive Math Simulation Box */
     .dic-sim-box {
       background: #111622;
@@ -424,6 +598,34 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
+
+    /* Takeaways Box */
+    .dic-takeaway-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(16, 185, 129, 0.01));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .dic-takeaway-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-takeaway-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .dic-takeaway-list li { margin-bottom: 0.45rem; }
     
     /* Bottom Navigation */
     .dic-bottom-nav {
@@ -497,42 +699,45 @@
         <a href="{{ url_for('materi.subject_bab', subject='sistem_bilangan', bab_num=1) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[0]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[0]['is_completed'] else '1' }}</span>
-          <span>Fondasi: Konsep Intuitif & Pengenalan Sis. Bilangan</span>
+          <span>Fondasi: Konsep Nilai Tempat Berbobot Polinomial</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='sistem_bilangan', bab_num=2) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[1]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[1]['is_completed'] else '2' }}</span>
-          <span>Anatomi: Notasi, Kaidah & Sifat Baku Sis. Bilangan</span>
+          <span>Anatomi: Empat Sistem Bilangan Baku Komputer (Biner, Oktal, Desimal, Heksa)</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='sistem_bilangan', bab_num=3) }}" 
            class="dic-chapter-link active {{ 'done' if all_bab_status[2]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[2]['is_completed'] else '3' }}</span>
-          <span>Mekanika: Prosedur Perhitungan & Operasi Sis. Bilangan</span>
+          <span>Mekanika: Algoritma Konversi Desimal ke Basis Lain (Metode Modulo Sisa)</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='sistem_bilangan', bab_num=4) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[3]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[3]['is_completed'] else '4' }}</span>
-          <span>Pemodelan: Aplikasi Nyata & Studi Kasus Sis. Bilangan</span>
+          <span>Pemodelan: Kode Warna Hex CSS Web (#FF5733) & Memori RAM</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='sistem_bilangan', bab_num=5) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[4]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[4]['is_completed'] else '5' }}</span>
-          <span>Capstone: Proyek Integratif & Uji Sintesis Sis. Bilangan</span>
+          <span>Capstone: Decoder Paket Jaringan Komputer & Ekstraksi Header IP</span>
         </a>
 
-      <!-- In-Page Anchor Links -->
+      <!-- In-Page Anchor Links (TOC) -->
       <div class="dic-sb-nav-title">Daftar Isi Halaman (TOC)</div>
       <div class="dic-anchor-box">
         <a href="#peruntukan" class="dic-anchor-link"><i class="bi bi-compass me-1"></i> Peruntukan & Sasaran</a>
+        <a href="#hook" class="dic-anchor-link"><i class="bi bi-lightbulb me-1"></i> Mengapa Ini Penting?</a>
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
-        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
+        <a href="#tips" class="dic-anchor-link"><i class="bi bi-patch-check me-1"></i> Tips & Jebakan Umum</a>
+        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi KaTeX</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
         <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
+        <a href="#rangkuman" class="dic-anchor-link"><i class="bi bi-check2-all me-1"></i> Rangkuman Intisari</a>
       </div>
     </aside>
 
@@ -546,6 +751,16 @@
         <span>Bab 3</span>
       </div>
 
+      <!-- Reading Meta Badges -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="badge bg-secondary-subtle text-light border border-secondary-subtle px-2 py-1 small">
+          <i class="bi bi-clock-history me-1"></i> ~12-15 Menit Baca Mendalam
+        </span>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 small">
+          <i class="bi bi-mortarboard me-1"></i> Standar Akademi Dicoding
+        </span>
+      </div>
+
       <!-- Explicit Stage Banner -->
       <div class="dic-role-banner" id="peruntukan">
         <div class="dic-role-icon"><i class="bi bi-gear-wide-connected"></i></div>
@@ -555,121 +770,215 @@
         </div>
       </div>
 
-      <h1 class="dic-h1">Mekanika: Prosedur Perhitungan & Operasi Sis. Bilangan</h1>
+      <h1 class="dic-h1">Mekanika: Algoritma Konversi Desimal ke Basis Lain (Metode Modulo Sisa)</h1>
 
       <!-- Learning Objectives -->
       <div class="dic-target-box">
         <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#334155;"></i> Sasaran Pembelajaran Bab 3:</div>
         <ul class="dic-target-list">
-          <li>Memahami landasan konseptual dari Mekanika: Prosedur Perhitungan & Operasi Sis. Bilangan secara sistematis.</li>
-          <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
+          <li>Menguasai algoritma pembagian berulang modulo untuk mengubah Desimal ke Biner, Oktal, dan Heksa.</li><li>Menyusun urutan digit hasil dari sisa pembagian terakhir menuju sisa pertama (Bottom-Up).</li><li>Menguasai teknik konversi langsung Biner ke Heksadesimal menggunakan pengelompokan 4-bit.</li>
         </ul>
       </div>
 
-      <!-- Core Concept -->
+      <!-- Real-World Motivation Hook -->
+      <div class="dic-hook-box" id="hook">
+        <div class="dic-hook-title"><i class="bi bi-lightbulb-fill"></i> Mengapa Konsep Ini Sangat Penting? (Perspektif Praktisi & Rekayasa)</div>
+        <p class="dic-hook-body">Bagaimana sebuah chip prosesor komputer mengubah angka desimal yang kamu ketik di keyboard (misal angka 25) menjadi sinyal biner mesin? Komputer menjalankan Algoritma Modulo Sisa Pembagian: bagi angka berulang-ulang dengan 2, catat sisa pembagiannya (0 atau 1), lalu baca dari bawah ke atas! Prosedur mekanis ini adalah algoritma konversi tertua yang paling andal dalam sejarah ilmu komputasi.</p>
+      </div>
+
+      <!-- Core Concept Sections -->
       <h2 class="dic-section-title" id="konsep">
-        <i class="bi bi-book-half" style="color:#334155;"></i> Pembahasan Konsep & Teori
+        <i class="bi bi-book-half" style="color:#334155;"></i> Pembahasan Konsep & Teori Mendalam
       </h2>
-      <p class="dic-lead">
-        Oktal (basis 8) dan Heksadesimal (basis 16) digunakan sebagai representasi ringkas kode biner mesin.
-      </p>
+      
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-arrow-down-up text-primary"></i> 1. Algoritma Pembagian Berulang Modulo</h3>
+              <p>Untuk mengubah bilangan desimal ke basis $b$ (misal $b = 2$ atau $b = 16$):</p>
+              <ol class="dic-list">
+                <li>Bagi bilangan tersebut dengan basis $b$, catat hasil bagi bulat dan sisa pembagiannya (modulo).</li>
+                <li>Bagi kembali hasil bagi tersebut dengan $b$ terus-menerus sampai hasil baginya menjadi 0.</li>
+                <li><strong>Baca Hasil dari Bawah ke Atas (Bottom-Up):</strong> Sisa pembagian paling terakhir menjadi digit paling kiri (Most Significant Bit / MSB), dan sisa pertama menjadi digit paling kanan (Least Significant Bit / LSB).</li>
+              </ol>
+            </div>
+            
+
+      <!-- Dicoding Insights & Callouts -->
+      <h2 class="dic-section-title" id="tips">
+        <i class="bi bi-patch-check" style="color:#334155;"></i> Tips Praktisi & Wawasan Kritis
+      </h2>
+      
+      <div class="dic-callout pro-tip">
+        <div class="dic-callout-icon"><i class="bi bi-lightbulb-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">💡 Dicoding Pro-Tip / Praktik Terbaik</div>
+          <div class="dic-callout-content">Jalan pintas tercepat mengonversi Biner ke Heksadesimal: Kelompokkan digit biner per 4 bit dari kanan ke kiri, lalu konversi tiap 4 bit tersebut menjadi 1 digit heksa! Contoh: `1101 1010` -> `1101` adalah 13 (D) dan `1010` adalah 10 (A) -> Hasilnya langsung `DA`!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout pitfall">
+        <div class="dic-callout-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">⚠️ Common Pitfall / Jebakan Umum</div>
+          <div class="dic-callout-content">Jangan membaca sisa pembagian dari atas ke bawah! Pembacaan HARUS DARI BAWAH KE ATAS (sisa pembagian paling akhir ditulis pertama)!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout fun-fact">
+        <div class="dic-callout-icon"><i class="bi bi-cpu-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">🧠 Wawasan Komputasi & Fakta Menarik</div>
+          <div class="dic-callout-content">Algoritma pembagian modulo sisa ini dinamakan Algoritma Horner Invers yang telah diterapkan sejak era Dinasti Song di Tiongkok abad ke-13 untuk menghitung kalender gerhana bulan.</div>
+        </div>
+      </div>
 
       <!-- Formula Section -->
       <h2 class="dic-section-title" id="formula">
-        <i class="bi bi-calculator" style="color:#334155;"></i> Formulasi Matematis & Bedah Rumus
+        <i class="bi bi-calculator" style="color:#334155;"></i> Formulasi KaTeX & Anatomi Parameter
       </h2>
       <div class="dic-formula-card">
-        \[ 1 \text{ Byte} = 8 \text{ Bits} \implies 00000000_2 \text{ s.d. } 11111111_2 = 255_{10} \]
+        \[ N \div b = Q_1 \text{ sisa } R_0 \ ; \ Q_1 \div b = Q_2 \text{ sisa } R_1 \dots \implies \text{Digit: } R_n \dots R_1 R_0 \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Satu byte data memori tersusun atas 8 digit biner yang merepresentasikan integer 0 hingga 255.
+        <strong>💡 Makna & Intuisi Formulasi:</strong> Mengekstrak koefisien polinomial basis satu per satu mulai dari pangkat terendah.
       </div>
+
+      <div class="small fw-bold text-muted text-uppercase mb-2 mt-3"><i class="bi bi-table me-1"></i> Bedah Anatomi Variabel Formulasi:</div>
+      
+    <div class="dic-param-table-wrap">
+      <table class="dic-param-table">
+        <thead>
+          <tr>
+            <th>Simbol / Notasi</th>
+            <th>Makna & Interpretasi Matematis</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">N</span></td>
+              <td class="text-light">Bilangan desimal mula-mula.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">b</span></td>
+              <td class="text-light">Basis tujuan pembagi (2 untuk biner, 16 untuk heksa).</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">R_i</span></td>
+              <td class="text-light">Sisa bagi modulo yang menjadi digit bilangan.</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 
       <!-- Worked Example -->
       <h2 class="dic-section-title" id="contoh">
-        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu
+        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu (Langkah Demi Langkah)
       </h2>
-      <div class="dic-example-box">
-        <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
-        <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh 3: Konversi 255 desimal ke Heksa: 255/16 = 15 sisa 15 (F); 15/16 = 0 sisa 15 (F) => FF₁₆.
-        </p>
+      
+    <div class="dic-step-box">
+      <div class="dic-step-problem">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-patch-question"></i> Skenario Studi Kasus:</div>
+        <div>Konversikan bilangan desimal $29_{10}$ ke dalam bentuk bilangan biner (basis 2) menggunakan metode pembagian berulang modulo!</div>
       </div>
+      <div class="dic-step-item diketahui">
+        <div class="small fw-bold text-primary mb-1"><i class="bi bi-pin-angle-fill"></i> Diketahui:</div>
+        <div>Bilangan desimal 29.</div>
+      </div>
+      <div class="dic-step-item ditanya">
+        <div class="small fw-bold text-warning mb-1"><i class="bi bi-question-circle-fill"></i> Ditanya:</div>
+        <div>Bentuk biner basis 2.</div>
+      </div>
+      <div class="dic-step-item langkah">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-diagram-3-fill"></i> Langkah Penyelesaian Terpandu:</div>
+        <div><div class='mb-2'><strong>Langkah 1: Bagi 29 dengan 2:</strong> $29 \div 2 = 14$ dengan sisa $1$.</div><div class='mb-2'><strong>Langkah 2: Bagi 14 dengan 2:</strong> $14 \div 2 = 7$ dengan sisa $0$.</div><div class='mb-2'><strong>Langkah 3: Bagi 7 dengan 2:</strong> $7 \div 2 = 3$ dengan sisa $1$.</div><div class='mb-2'><strong>Langkah 4: Bagi 3 dengan 2:</strong> $3 \div 2 = 1$ dengan sisa $1$.</div><div class='mb-2'><strong>Langkah 5: Bagi 1 dengan 2:</strong> $1 \div 2 = 0$ dengan sisa $1$ (Berhenti karena hasil bagi sudah 0).</div><div class='mb-2'><strong>Langkah 6: Baca Sisa Pembagian dari Bawah ke Atas:</strong> Sisa dari bawah ke atas: $1, 1, 1, 0, 1$.</div></div>
+      </div>
+      <div class="dic-step-item kesimpulan">
+        <div class="small fw-bold text-info mb-1"><i class="bi bi-check-circle-fill"></i> Kesimpulan Akhir:</div>
+        <div>Bilangan desimal $29_{10}$ setara dengan bilangan biner $11101_2$.</div>
+      </div>
+    </div>
 
-      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <!-- Interactive Math Simulator Widget -->
       <h2 class="dic-section-title" id="simulator">
         <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
       <div class="dic-sim-box">
         <div class="dic-sim-topbar">
           <div class="dic-sim-title">
-            <i class="bi bi-cpu-fill" style="color:#334155;"></i> Laboratorium Penalaran: Mengapa Komputer Menggunakan Biner & Nilai Tempat Polinomial?
+            <i class="bi bi-cpu-fill" style="color:#334155;"></i> Laboratorium Arsitektur Biner: Konversi Radiks (Basis 10, 2, 8, 16)
           </div>
           <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">
             <i class="bi bi-broadcast me-1"></i> Live Simulator
           </span>
         </div>
         <div class="dic-sim-body">
-          <p class="small text-muted mb-3">🎯 Misi Berpikir: Bagaimana 8 sakelar biner (0/1) mampu menyusun nilai 0 s.d. 255 menggunakan prinsip nilai tempat 2ⁿ?</p>
+          <p class="small text-muted mb-3">🎯 Misi Berpikir: Geser nilai desimal dan saksikan dekomposisi nilai tempat menjadi representasi Biner (Bit mesin) dan Heksadesimal (Alamat memori)!</p>
           
-        <div class="p-3 mb-3 rounded" style="background:rgba(51,65,85,0.2); border:1px solid rgba(51,65,85,0.4);">
-          <div class="small fw-bold text-info mb-1"><i class="bi bi-cpu"></i> Prinsip Nilai Tempat Polinomial:</div>
-          <p class="small text-light mb-0">Setiap digit biner merepresentasikan bobot kelipatan dua: <strong>128, 64, 32, 16, 8, 4, 2, 1</strong>. Aktifkan sakelar bit di bawah ini untuk melihat konversi logika memori!</p>
+        <div class="p-3 mb-3 rounded" style="background:rgba(99,102,241,0.08); border:1px solid rgba(99,102,241,0.25);">
+          <div class="small fw-bold text-info mb-1"><i class="bi bi-motherboard"></i> Bahasa Mesin vs Bahasa Manusia:</div>
+          <p class="small text-light mb-0">Manusia berhitung basis 10 karena memiliki 10 jari. Transistor komputer hanya mengenali 2 kondisi fisik (tegangan tinggi/rendah: 1 dan 0). Heksadesimal (basis 16) menjembatani keduanya dengan mengemas 4 bit biner dalam 1 digit hex!</p>
         </div>
-        <div class="d-flex justify-content-center gap-2 flex-wrap mb-3" id="bit_switches">
-          <button class="btn btn-sm btn-outline-info bit-btn" data-bit="7" onclick="toggleBit(7)">Bit 7 (128): <span id="b7">1</span></button>
-          <button class="btn btn-sm btn-outline-info bit-btn" data-bit="6" onclick="toggleBit(6)">Bit 6 (64): <span id="b6">1</span></button>
-          <button class="btn btn-sm btn-outline-info bit-btn" data-bit="5" onclick="toggleBit(5)">Bit 5 (32): <span id="b5">1</span></button>
-          <button class="btn btn-sm btn-outline-info bit-btn" data-bit="4" onclick="toggleBit(4)">Bit 4 (16): <span id="b4">1</span></button>
-          <button class="btn btn-sm btn-outline-info bit-btn" data-bit="3" onclick="toggleBit(3)">Bit 3 (8): <span id="b3">1</span></button>
-          <button class="btn btn-sm btn-outline-info bit-btn" data-bit="2" onclick="toggleBit(2)">Bit 2 (4): <span id="b2">1</span></button>
-          <button class="btn btn-sm btn-outline-info bit-btn" data-bit="1" onclick="toggleBit(1)">Bit 1 (2): <span id="b1">1</span></button>
-          <button class="btn btn-sm btn-outline-info bit-btn" data-bit="0" onclick="toggleBit(0)">Bit 0 (1): <span id="b0">1</span></button>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-12">
+            <label class="form-label small text-muted">Input Bilangan Desimal (Basis 10): <span id="sys_val_dec" class="fw-bold text-info">42</span></label>
+            <input type="range" class="form-range" id="sys_slider" min="0" max="255" value="42" oninput="updateSistemSim()">
+          </div>
         </div>
-        <div class="p-3 rounded" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
-          <div class="row text-center g-2">
+        <div class="mt-3 p-3 rounded" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
+          <div class="row text-center g-2 mb-2">
             <div class="col-4 border-end border-secondary border-opacity-25">
-              <div class="small text-muted">Biner (Basis 2):</div>
-              <div class="fs-5 fw-bold text-success font-monospace" id="b_bin_display">11111111</div>
+              <div class="small text-muted">Biner (Basis 2 - 8 Bit Byte):</div>
+              <div class="fs-5 fw-bold text-success font-monospace" id="sys_bin">00101010</div>
             </div>
             <div class="col-4 border-end border-secondary border-opacity-25">
-              <div class="small text-muted">Desimal (Basis 10):</div>
-              <div class="fs-4 fw-bold text-info" id="b_dec_display">255</div>
+              <div class="small text-muted">Oktal (Basis 8):</div>
+              <div class="fs-5 fw-bold text-warning font-monospace" id="sys_oct">52</div>
             </div>
             <div class="col-4">
               <div class="small text-muted">Heksadesimal (Basis 16):</div>
-              <div class="fs-4 fw-bold text-warning font-monospace" id="b_hex_display">FF</div>
+              <div class="fs-5 fw-bold text-info font-monospace" id="sys_hex">0x2A</div>
             </div>
+          </div>
+          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #6366f1;">
+            <div class="small text-info fw-bold mb-1"><i class="bi bi-cpu-fill"></i> Dekomposisi Pembobotan Bit Biner:</div>
+            <div class="small text-light font-monospace" id="sys_breakdown">32 + 8 + 2 = 42</div>
           </div>
         </div>
         
         </div>
       </div>
 
-      <!-- Active Recall / Capstone Challenge Exercise -->
+      <!-- Active Recall Quiz -->
       <div class="dic-quiz-card " id="latihan" style="">
         <div class="dic-quiz-tag" style="">
           <i class="bi bi-patch-question-fill"></i> 
           Active Recall Quiz - Bab 3
         </div>
-        <div class="dic-quiz-q" style="">Simbol huruf 'C' pada sistem heksadesimal merepresentasikan nilai desimal?</div>
+        <div class="dic-quiz-q" style="">Berapakah representasi biner dari bilangan desimal 19?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'A=10, B=11, C=12, D=13, E=14, F=15.')">
-          <span>12</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, '19 = 16 + 2 + 1 = 1*16 + 0*8 + 0*4 + 1*2 + 1*1 = 10011₂.')">
+          <span>10011₂</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'A=10, B=11, C=12, D=13, E=14, F=15.')">
-          <span>11</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '19 = 16 + 2 + 1 = 1*16 + 0*8 + 0*4 + 1*2 + 1*1 = 10011₂.')">
+          <span>10101₂</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'A=10, B=11, C=12, D=13, E=14, F=15.')">
-          <span>13</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '19 = 16 + 2 + 1 = 1*16 + 0*8 + 0*4 + 1*2 + 1*1 = 10011₂.')">
+          <span>11001₂</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
+      </div>
+
+      <!-- Core Takeaways -->
+      <div class="dic-takeaway-box" id="rangkuman">
+        <div class="dic-takeaway-title"><i class="bi bi-bookmark-check-fill"></i> Ringkasan Intisari Dicoding (Key Takeaways):</div>
+        <ul class="dic-takeaway-list">
+          <li>Konversi desimal ke basis lain dilakukan dengan pembagian berulang basis sasaran.</li><li>Sisa pembagian modulo dicatat dan dibaca dari bawah ke atas (Bottom-Up).</li><li>Pengelompokan 4-bit biner mempercepat konversi biner ke heksadesimal secara instan.</li>
+        </ul>
       </div>
 
       <!-- Bottom Navigation -->
@@ -734,19 +1043,23 @@
 
     // Widget Simulator Logic
     
-        let bits = [1, 1, 1, 1, 1, 1, 1, 1];
-        function toggleBit(index) {
-          bits[index] = bits[index] === 1 ? 0 : 1;
-          document.getElementById(`b${index}`).textContent = bits[index];
-          let dec = 0;
-          let binStr = '';
-          for (let i = 7; i >= 0; i--) {
-            binStr += bits[i];
-            dec += bits[i] * Math.pow(2, i);
+        function updateSistemSim() {
+          const val = parseInt(document.getElementById('sys_slider').value);
+          document.getElementById('sys_val_dec').textContent = val;
+          const bin = val.toString(2).padStart(8, '0');
+          const oct = val.toString(8);
+          const hex = '0x' + val.toString(16).toUpperCase();
+          document.getElementById('sys_bin').textContent = bin;
+          document.getElementById('sys_oct').textContent = oct;
+          document.getElementById('sys_hex').textContent = hex;
+          let terms = [];
+          for (let i = 0; i < 8; i++) {
+            if (bin[7 - i] === '1') {
+              terms.push(`2^${i} (${Math.pow(2, i)})`);
+            }
           }
-          document.getElementById('b_bin_display').textContent = binStr;
-          document.getElementById('b_dec_display').textContent = dec;
-          document.getElementById('b_hex_display').textContent = dec.toString(16).toUpperCase().padStart(2, '0');
+          const breakdown = terms.length > 0 ? terms.reverse().join(' + ') + ` = ${val}` : '0';
+          document.getElementById('sys_breakdown').innerHTML = `Pembobotan: ${breakdown}`;
         }
         
 

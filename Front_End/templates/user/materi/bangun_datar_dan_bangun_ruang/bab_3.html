@@ -187,7 +187,7 @@
     /* Main Content Area */
     .dic-main {
       padding: 2.5rem 3rem;
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       width: 100%;
     }
@@ -242,31 +242,63 @@
       color: #f8fafc;
       line-height: 1.25;
     }
-    
+
+    /* Target Box */
     .dic-target-box {
-      background: #111622;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.25rem;
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .dic-target-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #818cf8;
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .dic-target-list {
       margin: 0;
       padding-left: 1.25rem;
-      font-size: 0.88rem;
-      color: #94a3b8;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
     }
-    .dic-target-list li { margin-bottom: 0.35rem; }
-    
+    .dic-target-list li { margin-bottom: 0.4rem; }
+
+    /* Real-World Hook Box */
+    .dic-hook-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.02));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .dic-hook-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dic-hook-body {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Section Title */
     .dic-section-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -278,50 +310,192 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border-color);
     }
-    
-    .dic-lead {
-      font-size: 1.02rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin: 1rem 0 1.5rem;
-    }
-    
-    .dic-formula-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid var(--accent-glow);
+
+    /* Concepts Cards */
+    .dic-concept-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 1.5rem;
       margin: 1.25rem 0;
-      text-align: center;
-      overflow-x: auto;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .dic-formula-explain {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-      margin: 1rem 0;
-      line-height: 1.6;
-    }
-    
-    .dic-example-box {
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-    }
-    .dic-example-title {
-      font-size: 0.85rem;
+    .dic-h3 {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #34d399;
-      margin-bottom: 0.5rem;
+      color: #f8fafc;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+    .dic-list {
+      margin: 0.5rem 0 0.75rem 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .dic-list li { margin-bottom: 0.35rem; }
+
+    /* Dicoding Callout Boxes */
+    .dic-callout {
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .dic-callout-icon {
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .dic-callout-content { flex-grow: 1; font-size: 0.91rem; line-height: 1.7; }
+    .dic-callout-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
     
+    .dic-callout.pro-tip {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-left: 4px solid #10b981;
+    }
+    .dic-callout.pro-tip .dic-callout-title { color: #34d399; }
+    .dic-callout.pro-tip .dic-callout-icon { color: #10b981; }
+    .dic-callout.pro-tip .dic-callout-content { color: #d1fae5; }
+
+    .dic-callout.pitfall {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 4px solid #f43f5e;
+    }
+    .dic-callout.pitfall .dic-callout-title { color: #fb7185; }
+    .dic-callout.pitfall .dic-callout-icon { color: #f43f5e; }
+    .dic-callout.pitfall .dic-callout-content { color: #ffe4e6; }
+
+    .dic-callout.fun-fact {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-left: 4px solid #8b5cf6;
+    }
+    .dic-callout.fun-fact .dic-callout-title { color: #c084fc; }
+    .dic-callout.fun-fact .dic-callout-icon { color: #8b5cf6; }
+    .dic-callout.fun-fact .dic-callout-content { color: #ede9fe; }
+
+    /* Formula & Parameter Table */
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-param-table-wrap {
+      margin: 1.25rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .dic-param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .dic-param-table th {
+      background: #161d2e;
+      color: #94a3b8;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-param-table td {
+      padding: 0.75rem 1rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .dic-param-table tr:last-child td { border-bottom: none; }
+    .dic-param-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .dic-symbol-badge {
+      font-family: 'Fira Code', monospace;
+      color: #38bdf8;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .dic-formula-explain {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      line-height: 1.7;
+    }
+
+    /* Guided Step Box */
+    .dic-step-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dic-step-problem {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+      line-height: 1.7;
+    }
+    .dic-step-item {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .dic-step-item.diketahui {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid #6366f1;
+      color: #cbd5e1;
+    }
+    .dic-step-item.ditanya {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 3px solid #f59e0b;
+      color: #cbd5e1;
+    }
+    .dic-step-item.langkah {
+      background: rgba(16, 185, 129, 0.05);
+      border-left: 3px solid #10b981;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    .dic-step-item.kesimpulan {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid #38bdf8;
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
     /* Interactive Math Simulation Box */
     .dic-sim-box {
       background: #111622;
@@ -424,6 +598,34 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
+
+    /* Takeaways Box */
+    .dic-takeaway-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(16, 185, 129, 0.01));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .dic-takeaway-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-takeaway-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .dic-takeaway-list li { margin-bottom: 0.45rem; }
     
     /* Bottom Navigation */
     .dic-bottom-nav {
@@ -497,13 +699,13 @@
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=1) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[0]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[0]['is_completed'] else '1' }}</span>
-          <span>Fondasi: Dimensi Geometri & Teorema Pythagoras</span>
+          <span>Fondasi: Dimensi Geometri Spasial & Teorema Pythagoras</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=2) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[1]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[1]['is_completed'] else '2' }}</span>
-          <span>Anatomi: Bangun Datar Baku (Segitiga, Lingkaran, Segiempat)</span>
+          <span>Anatomi: Bangun Datar Baku (Segitiga, Segiempat & Lingkaran)</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=3) }}" 
@@ -515,24 +717,27 @@
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=4) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[3]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[3]['is_completed'] else '4' }}</span>
-          <span>Pemodelan: Konstruksi & Estimasi Material Ruang</span>
+          <span>Pemodelan: Hukum Skala Spasial Kuadratik vs Kubik</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=5) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[4]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[4]['is_completed'] else '5' }}</span>
-          <span>Capstone: Proyek Rekayasa & Uji Evaluasi Kapasitas Ruang</span>
+          <span>Capstone: Desain Tangki Penyimpanan Industri dengan Efisiensi Material</span>
         </a>
 
-      <!-- In-Page Anchor Links -->
+      <!-- In-Page Anchor Links (TOC) -->
       <div class="dic-sb-nav-title">Daftar Isi Halaman (TOC)</div>
       <div class="dic-anchor-box">
         <a href="#peruntukan" class="dic-anchor-link"><i class="bi bi-compass me-1"></i> Peruntukan & Sasaran</a>
+        <a href="#hook" class="dic-anchor-link"><i class="bi bi-lightbulb me-1"></i> Mengapa Ini Penting?</a>
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
-        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
+        <a href="#tips" class="dic-anchor-link"><i class="bi bi-patch-check me-1"></i> Tips & Jebakan Umum</a>
+        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi KaTeX</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
         <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
+        <a href="#rangkuman" class="dic-anchor-link"><i class="bi bi-check2-all me-1"></i> Rangkuman Intisari</a>
       </div>
     </aside>
 
@@ -544,6 +749,16 @@
         <a href="{{ url_for('materi.subject_index', subject='bangun_datar_dan_bangun_ruang') }}">Geometri</a>
         <i class="bi bi-chevron-right small"></i>
         <span>Bab 3</span>
+      </div>
+
+      <!-- Reading Meta Badges -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="badge bg-secondary-subtle text-light border border-secondary-subtle px-2 py-1 small">
+          <i class="bi bi-clock-history me-1"></i> ~12-15 Menit Baca Mendalam
+        </span>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 small">
+          <i class="bi bi-mortarboard me-1"></i> Standar Akademi Dicoding
+        </span>
       </div>
 
       <!-- Explicit Stage Banner -->
@@ -561,43 +776,136 @@
       <div class="dic-target-box">
         <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#a855f7;"></i> Sasaran Pembelajaran Bab 3:</div>
         <ul class="dic-target-list">
-          <li>Memahami landasan konseptual dari Mekanika: Luas Permukaan & Volume Bangun Ruang 3D secara sistematis.</li>
-          <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
+          <li>Menguasai formula volume dan luas permukaan: Kubus, Balok, Tabung (Silinder), Kerucut, dan Bola.</li><li>Memahami hubungan antara Prisma-Tabung (Alas x Tinggi) dan Limas-Kerucut (1/3 Alas x Tinggi).</li><li>Menghitung kapasitas kubik fluida (liter dan meter kubik) serta kebutuhan bahan pelapis permukaan.</li>
         </ul>
       </div>
 
-      <!-- Core Concept -->
+      <!-- Real-World Motivation Hook -->
+      <div class="dic-hook-box" id="hook">
+        <div class="dic-hook-title"><i class="bi bi-lightbulb-fill"></i> Mengapa Konsep Ini Sangat Penting? (Perspektif Praktisi & Rekayasa)</div>
+        <p class="dic-hook-body">Berapakah volume es krim yang dapat ditampung di dalam kerucut (cone) dibandingkan dengan tabung silinder yang memiliki alas dan tinggi yang sama persis? Jika kamu mengisi kerucut itu dengan air lalu menuangkannya ke dalam tabung silinder, kamu butuh TEPAT TIGA KALI TUANGAN kerucut untuk mengisi tabung tersebut sampai penuh! Inilah alasan elegan mengapa rumus volume kerucut dan limas selalu memuat faktor pengali 1/3!</p>
+      </div>
+
+      <!-- Core Concept Sections -->
       <h2 class="dic-section-title" id="konsep">
-        <i class="bi bi-book-half" style="color:#a855f7;"></i> Pembahasan Konsep & Teori
+        <i class="bi bi-book-half" style="color:#a855f7;"></i> Pembahasan Konsep & Teori Mendalam
       </h2>
-      <p class="dic-lead">
-        Bangun ruang 3D memiliki kapasitas volume serta luas permukaan penutup (envelope).
-      </p>
+      
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-box text-primary"></i> 1. Hubungan Indah Volume Bangun Ruang</h3>
+              <ul class="dic-list">
+                <li><strong>Keluarga Prisma & Tabung (Dinding Tegak Lurus):</strong>
+                  \[ \text{Volume} = \text{Luas Alas} \times \text{Tinggi} \]
+                  Tabung (Silinder): $V = \pi r^2 t$, Luas Permukaan: $L_p = 2\pi r(r + t)$.
+                </li>
+                <li><strong>Keluarga Limas & Kerucut (Meruncing ke Satu Puncak):</strong>
+                  \[ \text{Volume} = \frac{1}{3} \times \text{Luas Alas} \times \text{Tinggi} \]
+                  Kerucut: $V = \frac{1}{3}\pi r^2 t$, dengan garis pelukis $s = \sqrt{r^2 + t^2}$.
+                </li>
+                <li><strong>Bola Murni:</strong>
+                  \[ \text{Volume} = \frac{4}{3}\pi r^3 \quad ; \quad \text{Luas Permukaan} = 4\pi r^2 \]
+                </li>
+              </ul>
+            </div>
+            
+
+      <!-- Dicoding Insights & Callouts -->
+      <h2 class="dic-section-title" id="tips">
+        <i class="bi bi-patch-check" style="color:#a855f7;"></i> Tips Praktisi & Wawasan Kritis
+      </h2>
+      
+      <div class="dic-callout pro-tip">
+        <div class="dic-callout-icon"><i class="bi bi-lightbulb-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">💡 Dicoding Pro-Tip / Praktik Terbaik</div>
+          <div class="dic-callout-content">Konversi volume praktis yang wajib dihafal: $1\text{ liter} = 1\text{ dm}^3 = 1.000\text{ cm}^3$, dan $1\text{ meter kubik (m}^3\text{)} = 1.000\text{ liter}$!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout pitfall">
+        <div class="dic-callout-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">⚠️ Common Pitfall / Jebakan Umum</div>
+          <div class="dic-callout-content">Pada kerucut, jangan tertukar antara Tinggi Tegak (t) dan Garis Pelukis Miring (s)! Rumus volume menggunakan tinggi tegak t, sedangkan luas selimut menggunakan garis pelukis s ($\pi r s$).</div>
+        </div>
+      </div>
+
+      <div class="dic-callout fun-fact">
+        <div class="dic-callout-icon"><i class="bi bi-cpu-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">🧠 Wawasan Komputasi & Fakta Menarik</div>
+          <div class="dic-callout-content">Filsuf Yunani Archimedes sangat bangga membuktikan bahwa perbandingan volume bola terhadap silinder penampungnya adalah tepat 2 banding 3, sehingga ia meminta agar gambar bola di dalam silinder dipahat di atas batu nisannya.</div>
+        </div>
+      </div>
 
       <!-- Formula Section -->
       <h2 class="dic-section-title" id="formula">
-        <i class="bi bi-calculator" style="color:#a855f7;"></i> Formulasi Matematis & Bedah Rumus
+        <i class="bi bi-calculator" style="color:#a855f7;"></i> Formulasi KaTeX & Anatomi Parameter
       </h2>
       <div class="dic-formula-card">
-        \[ V_{\text{tabung}} = \pi r^2 t \quad ; \quad L_p = 2\pi r(r + t) \]
+        \[ V_{\text{tabung}} = \pi r^2 t \quad ; \quad V_{\text{kerucut}} = \frac{1}{3}\pi r^2 t \quad ; \quad V_{\text{bola}} = \frac{4}{3}\pi r^3 \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Volume silinder/tabung adalah luas penampang lingkaran yang diproyeksikan sepanjang tinggi t.
+        <strong>💡 Makna & Intuisi Formulasi:</strong> Volume adalah hasil proyeksi luas penampang 2D sepanjang dimensi tinggi ketiga ruang.
       </div>
+
+      <div class="small fw-bold text-muted text-uppercase mb-2 mt-3"><i class="bi bi-table me-1"></i> Bedah Anatomi Variabel Formulasi:</div>
+      
+    <div class="dic-param-table-wrap">
+      <table class="dic-param-table">
+        <thead>
+          <tr>
+            <th>Simbol / Notasi</th>
+            <th>Makna & Interpretasi Matematis</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">r</span></td>
+              <td class="text-light">Jari-jari penampang lingkaran.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">t</span></td>
+              <td class="text-light">Tinggi tegak bangun ruang.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">s</span></td>
+              <td class="text-light">Garis pelukis kerucut ($s = \sqrt{r^2 + t^2}$).</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 
       <!-- Worked Example -->
       <h2 class="dic-section-title" id="contoh">
-        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu
+        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu (Langkah Demi Langkah)
       </h2>
-      <div class="dic-example-box">
-        <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
-        <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh 3: Tabung dengan r = 7 cm dan t = 10 cm memiliki Volume = (22/7) × 49 × 10 = 1540 cm³.
-        </p>
+      
+    <div class="dic-step-box">
+      <div class="dic-step-problem">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-patch-question"></i> Skenario Studi Kasus:</div>
+        <div>Sebuah tangki penampung air berbentuk silinder tabung memiliki jari-jari alas 70 cm dan tinggi 200 cm. Hitunglah volume kapasitas air maksimal tangki tersebut dalam satuan Liter!</div>
       </div>
+      <div class="dic-step-item diketahui">
+        <div class="small fw-bold text-primary mb-1"><i class="bi bi-pin-angle-fill"></i> Diketahui:</div>
+        <div>$r = 70\text{ cm} = 7\text{ dm}$, $t = 200\text{ cm} = 20\text{ dm}$ (Gunakan dm agar langsung bernilai liter).</div>
+      </div>
+      <div class="dic-step-item ditanya">
+        <div class="small fw-bold text-warning mb-1"><i class="bi bi-question-circle-fill"></i> Ditanya:</div>
+        <div>Volume kapasitas dalam liter.</div>
+      </div>
+      <div class="dic-step-item langkah">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-diagram-3-fill"></i> Langkah Penyelesaian Terpandu:</div>
+        <div><div class='mb-2'><strong>Langkah 1: Gunakan Satuan Desimeter untuk Liter:</strong> $r = 7\text{ dm}$ dan $t = 20\text{ dm}$ (karena $1\text{ dm}^3 = 1\text{ Liter}$).</div><div class='mb-2'><strong>Langkah 2: Masukkan ke Rumus Volume Silinder Tabung:</strong> $V = \pi r^2 t = \frac{22}{7} \times 7^2 \times 20$.</div><div class='mb-2'><strong>Langkah 3: Hitung Perkalian Aljabar:</strong> $V = \frac{22}{7} \times 49 \times 20 = 22 \times 7 \times 20 = 154 \times 20 = 3.080\text{ dm}^3$.</div><div class='mb-2'><strong>Langkah 4: Konversikan ke Satuan Liter:</strong> $3.080\text{ dm}^3 = 3.080\text{ liter}$.</div></div>
+      </div>
+      <div class="dic-step-item kesimpulan">
+        <div class="small fw-bold text-info mb-1"><i class="bi bi-check-circle-fill"></i> Kesimpulan Akhir:</div>
+        <div>Tangki silinder tersebut mampu menampung air maksimal sebanyak 3.080 Liter.</div>
+      </div>
+    </div>
 
-      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <!-- Interactive Math Simulator Widget -->
       <h2 class="dic-section-title" id="simulator">
         <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
@@ -660,29 +968,37 @@
         </div>
       </div>
 
-      <!-- Active Recall / Capstone Challenge Exercise -->
+      <!-- Active Recall Quiz -->
       <div class="dic-quiz-card " id="latihan" style="">
         <div class="dic-quiz-tag" style="">
           <i class="bi bi-patch-question-fill"></i> 
           Active Recall Quiz - Bab 3
         </div>
-        <div class="dic-quiz-q" style="">Sebuah tabung memiliki jari-jari alas 7 cm dan tinggi 10 cm. Berapakah volumenya?</div>
+        <div class="dic-quiz-q" style="">Sebuah kerucut memiliki jari-jari dan tinggi yang sama persis dengan sebuah tabung silinder. Jika volume tabung adalah 900 cm³, berapakah volume kerucut tersebut?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Volume = πr²t = (22/7) × 49 × 10 = 1540 cm³.')">
-          <span>1540 cm³</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Volume kerucut adalah tepat 1/3 dari volume tabung dengan dimensi sama: (1/3) * 900 = 300 cm³.')">
+          <span>300 cm³</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Volume = πr²t = (22/7) × 49 × 10 = 1540 cm³.')">
-          <span>770 cm³</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Volume kerucut adalah tepat 1/3 dari volume tabung dengan dimensi sama: (1/3) * 900 = 300 cm³.')">
+          <span>450 cm³</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Volume = πr²t = (22/7) × 49 × 10 = 1540 cm³.')">
-          <span>3080 cm³</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Volume kerucut adalah tepat 1/3 dari volume tabung dengan dimensi sama: (1/3) * 900 = 300 cm³.')">
+          <span>600 cm³</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
+      </div>
+
+      <!-- Core Takeaways -->
+      <div class="dic-takeaway-box" id="rangkuman">
+        <div class="dic-takeaway-title"><i class="bi bi-bookmark-check-fill"></i> Ringkasan Intisari Dicoding (Key Takeaways):</div>
+        <ul class="dic-takeaway-list">
+          <li>Volume tabung adalah $\pi r^2 t$, sedangkan volume kerucut adalah sepertiganya: $\frac{1}{3}\pi r^2 t$.</li><li>Volume bola murni adalah $\frac{4}{3}\pi r^3$ dan luas kulit bolanya adalah $4\pi r^2$.</li><li>Satu desimeter kubik ($1\text{ dm}^3$) tepat setara dengan satu liter air.</li>
+        </ul>
       </div>
 
       <!-- Bottom Navigation -->

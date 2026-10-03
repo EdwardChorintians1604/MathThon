@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pengenalan Aljabar & PLSV - Bab 1: Fondasi: Latar Belakang & Konsep Variabel - MathThon</title>
+  <title>Pengenalan Aljabar & PLSV - Bab 1: Fondasi: Dari Aritmatika Konkret Menuju Abstraksi Variabel - MathThon</title>
   <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,7 +187,7 @@
     /* Main Content Area */
     .dic-main {
       padding: 2.5rem 3rem;
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       width: 100%;
     }
@@ -242,31 +242,63 @@
       color: #f8fafc;
       line-height: 1.25;
     }
-    
+
+    /* Target Box */
     .dic-target-box {
-      background: #111622;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.25rem;
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .dic-target-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #818cf8;
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .dic-target-list {
       margin: 0;
       padding-left: 1.25rem;
-      font-size: 0.88rem;
-      color: #94a3b8;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
     }
-    .dic-target-list li { margin-bottom: 0.35rem; }
-    
+    .dic-target-list li { margin-bottom: 0.4rem; }
+
+    /* Real-World Hook Box */
+    .dic-hook-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.02));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .dic-hook-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dic-hook-body {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Section Title */
     .dic-section-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -278,50 +310,192 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border-color);
     }
-    
-    .dic-lead {
-      font-size: 1.02rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin: 1rem 0 1.5rem;
-    }
-    
-    .dic-formula-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid var(--accent-glow);
+
+    /* Concepts Cards */
+    .dic-concept-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 1.5rem;
       margin: 1.25rem 0;
-      text-align: center;
-      overflow-x: auto;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .dic-formula-explain {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-      margin: 1rem 0;
-      line-height: 1.6;
-    }
-    
-    .dic-example-box {
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-    }
-    .dic-example-title {
-      font-size: 0.85rem;
+    .dic-h3 {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #34d399;
-      margin-bottom: 0.5rem;
+      color: #f8fafc;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+    .dic-list {
+      margin: 0.5rem 0 0.75rem 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .dic-list li { margin-bottom: 0.35rem; }
+
+    /* Dicoding Callout Boxes */
+    .dic-callout {
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .dic-callout-icon {
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .dic-callout-content { flex-grow: 1; font-size: 0.91rem; line-height: 1.7; }
+    .dic-callout-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
     
+    .dic-callout.pro-tip {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-left: 4px solid #10b981;
+    }
+    .dic-callout.pro-tip .dic-callout-title { color: #34d399; }
+    .dic-callout.pro-tip .dic-callout-icon { color: #10b981; }
+    .dic-callout.pro-tip .dic-callout-content { color: #d1fae5; }
+
+    .dic-callout.pitfall {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 4px solid #f43f5e;
+    }
+    .dic-callout.pitfall .dic-callout-title { color: #fb7185; }
+    .dic-callout.pitfall .dic-callout-icon { color: #f43f5e; }
+    .dic-callout.pitfall .dic-callout-content { color: #ffe4e6; }
+
+    .dic-callout.fun-fact {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-left: 4px solid #8b5cf6;
+    }
+    .dic-callout.fun-fact .dic-callout-title { color: #c084fc; }
+    .dic-callout.fun-fact .dic-callout-icon { color: #8b5cf6; }
+    .dic-callout.fun-fact .dic-callout-content { color: #ede9fe; }
+
+    /* Formula & Parameter Table */
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-param-table-wrap {
+      margin: 1.25rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .dic-param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .dic-param-table th {
+      background: #161d2e;
+      color: #94a3b8;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-param-table td {
+      padding: 0.75rem 1rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .dic-param-table tr:last-child td { border-bottom: none; }
+    .dic-param-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .dic-symbol-badge {
+      font-family: 'Fira Code', monospace;
+      color: #38bdf8;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .dic-formula-explain {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      line-height: 1.7;
+    }
+
+    /* Guided Step Box */
+    .dic-step-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dic-step-problem {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+      line-height: 1.7;
+    }
+    .dic-step-item {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .dic-step-item.diketahui {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid #6366f1;
+      color: #cbd5e1;
+    }
+    .dic-step-item.ditanya {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 3px solid #f59e0b;
+      color: #cbd5e1;
+    }
+    .dic-step-item.langkah {
+      background: rgba(16, 185, 129, 0.05);
+      border-left: 3px solid #10b981;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    .dic-step-item.kesimpulan {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid #38bdf8;
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
     /* Interactive Math Simulation Box */
     .dic-sim-box {
       background: #111622;
@@ -424,6 +598,34 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
+
+    /* Takeaways Box */
+    .dic-takeaway-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(16, 185, 129, 0.01));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .dic-takeaway-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-takeaway-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .dic-takeaway-list li { margin-bottom: 0.45rem; }
     
     /* Bottom Navigation */
     .dic-bottom-nav {
@@ -497,13 +699,13 @@
         <a href="{{ url_for('materi.subject_bab', subject='aljabar', bab_num=1) }}" 
            class="dic-chapter-link active {{ 'done' if all_bab_status[0]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[0]['is_completed'] else '1' }}</span>
-          <span>Fondasi: Latar Belakang & Konsep Variabel</span>
+          <span>Fondasi: Dari Aritmatika Konkret Menuju Abstraksi Variabel</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='aljabar', bab_num=2) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[1]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[1]['is_completed'] else '2' }}</span>
-          <span>Anatomi: Struktur Suku & Sifat Operasi Aljabar</span>
+          <span>Anatomi: Struktur Suku, Koefisien & Sifat Operasi Aljabar</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='aljabar', bab_num=3) }}" 
@@ -515,7 +717,7 @@
         <a href="{{ url_for('materi.subject_bab', subject='aljabar', bab_num=4) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[3]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[3]['is_completed'] else '4' }}</span>
-          <span>Pemodelan: Persamaan Linear Satu Variabel (PLSV)</span>
+          <span>Pemodelan: Persamaan Linear Satu Variabel (PLSV) & Neraca Solusi</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='aljabar', bab_num=5) }}" 
@@ -524,15 +726,18 @@
           <span>Capstone: Proyek Evaluasi Sintesis Pemodelan Aljabar</span>
         </a>
 
-      <!-- In-Page Anchor Links -->
+      <!-- In-Page Anchor Links (TOC) -->
       <div class="dic-sb-nav-title">Daftar Isi Halaman (TOC)</div>
       <div class="dic-anchor-box">
         <a href="#peruntukan" class="dic-anchor-link"><i class="bi bi-compass me-1"></i> Peruntukan & Sasaran</a>
+        <a href="#hook" class="dic-anchor-link"><i class="bi bi-lightbulb me-1"></i> Mengapa Ini Penting?</a>
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
-        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
+        <a href="#tips" class="dic-anchor-link"><i class="bi bi-patch-check me-1"></i> Tips & Jebakan Umum</a>
+        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi KaTeX</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
         <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
+        <a href="#rangkuman" class="dic-anchor-link"><i class="bi bi-check2-all me-1"></i> Rangkuman Intisari</a>
       </div>
     </aside>
 
@@ -546,6 +751,16 @@
         <span>Bab 1</span>
       </div>
 
+      <!-- Reading Meta Badges -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="badge bg-secondary-subtle text-light border border-secondary-subtle px-2 py-1 small">
+          <i class="bi bi-clock-history me-1"></i> ~12-15 Menit Baca Mendalam
+        </span>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 small">
+          <i class="bi bi-mortarboard me-1"></i> Standar Akademi Dicoding
+        </span>
+      </div>
+
       <!-- Explicit Stage Banner -->
       <div class="dic-role-banner" id="peruntukan">
         <div class="dic-role-icon"><i class="bi bi-stars"></i></div>
@@ -555,49 +770,148 @@
         </div>
       </div>
 
-      <h1 class="dic-h1">Fondasi: Latar Belakang & Konsep Variabel</h1>
+      <h1 class="dic-h1">Fondasi: Dari Aritmatika Konkret Menuju Abstraksi Variabel</h1>
 
       <!-- Learning Objectives -->
       <div class="dic-target-box">
         <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#6366f1;"></i> Sasaran Pembelajaran Bab 1:</div>
         <ul class="dic-target-list">
-          <li>Memahami landasan konseptual dari Fondasi: Latar Belakang & Konsep Variabel secara sistematis.</li>
-          <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
+          <li>Memahami mengapa manusia membutuhkan aljabar dan simbol variabel untuk menyatakan pola umum.</li><li>Membedakan antara kuantitas konstan (tetap) dan variabel (penampung nilai yang berubah).</li><li>Menerjemahkan kalimat bahasa sehari-hari menjadi kalimat matematika aljabar terbuka.</li>
         </ul>
       </div>
 
-      <!-- Core Concept -->
+      <!-- Real-World Motivation Hook -->
+      <div class="dic-hook-box" id="hook">
+        <div class="dic-hook-title"><i class="bi bi-lightbulb-fill"></i> Mengapa Konsep Ini Sangat Penting? (Perspektif Praktisi & Rekayasa)</div>
+        <p class="dic-hook-body">Bayangkan seorang pemilik toko grosir ingin menghitung total keuntungan harian. Hari ini ia menjual 15 kantong beras, besok mungkin 40 kantong, lusa 28 kantong. Jika ia harus menulis rumus baru dari awal setiap hari, ia akan kelelahan! Aljabar hadir sebagai mukjizat matematika: alih-alih angka kaku, kita menggunakan huruf penampung seperti x untuk mewakili jumlah kantong yang belum diketahui. Inilah awal mula komputasi dan pemrograman modern!</p>
+      </div>
+
+      <!-- Core Concept Sections -->
       <h2 class="dic-section-title" id="konsep">
-        <i class="bi bi-book-half" style="color:#6366f1;"></i> Pembahasan Konsep & Teori
+        <i class="bi bi-book-half" style="color:#6366f1;"></i> Pembahasan Konsep & Teori Mendalam
       </h2>
-      <p class="dic-lead">
-        Aljabar menggantikan nilai konkrit dengan simbol variabel untuk merumuskan hukum universal matematika dan pola umum.
-      </p>
+      
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-box-seam-fill text-primary"></i> 1. Konsep Variabel: Kotak Misteri Penampung Nilai</h3>
+              <p>Dalam aritmatika dasar SD, kita terbiasa melihat kotak kosong seperti $\square + 5 = 12$. Dalam aljabar formal, kotak kosong tersebut digantikan oleh simbol huruf kecil (biasanya $x, y, z, a, b$). Huruf ini dinamakan <strong>Variabel (Peubah)</strong>.</p>
+              <ul class="dic-list">
+                <li><strong>Konstanta:</strong> Nilai bilangan tetap yang tidak pernah berubah (contoh: angka $5, -12, \pi$).</li>
+                <li><strong>Variabel:</strong> Simbol huruf penampung nilai yang belum diketahui atau dapat bervariasi nilainya.</li>
+                <li><strong>Nilai Aljabar:</strong> Nilai numerik yang diperoleh ketika variabel disubstitusikan dengan angka tertentu.</li>
+              </ul>
+            </div>
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-translate text-primary"></i> 2. Menerjemahkan Bahasa Manusia ke Bahasa Aljabar</h3>
+              <p>Kunci penguasaan aljabar adalah kefasihan mengubah narasi verbal menjadi ekspresi simbolis:</p>
+              <ul class="dic-list">
+                <li>'Sebuah angka ditambah 7' $\rightarrow x + 7$.</li>
+                <li>'Tiga kali lipat umur Budi dikurangi 4 tahun' $\rightarrow 3y - 4$.</li>
+                <li>'Keliling persegi dengan sisi s' $\rightarrow K = 4s$.</li>
+              </ul>
+            </div>
+            
+
+      <!-- Dicoding Insights & Callouts -->
+      <h2 class="dic-section-title" id="tips">
+        <i class="bi bi-patch-check" style="color:#6366f1;"></i> Tips Praktisi & Wawasan Kritis
+      </h2>
+      
+      <div class="dic-callout pro-tip">
+        <div class="dic-callout-icon"><i class="bi bi-lightbulb-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">💡 Dicoding Pro-Tip / Praktik Terbaik</div>
+          <div class="dic-callout-content">Saat memodelkan soal cerita, biasakan mendefinisikan variabel secara eksplisit di awal, misalnya: 'Misalkan x = harga 1 buah buku' agar logika perhitungan tidak tersesat!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout pitfall">
+        <div class="dic-callout-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">⚠️ Common Pitfall / Jebakan Umum</div>
+          <div class="dic-callout-content">Hati-hati dengan pengurangan: '5 dikurangi x' ($5 - x$) BERBEDA TOTAL dengan 'x dikurangi dari 5' ($5 - x$) dan 'x dikurangi 5' ($x - 5$). Urutan sangat menentukan nilai!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout fun-fact">
+        <div class="dic-callout-icon"><i class="bi bi-cpu-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">🧠 Wawasan Komputasi & Fakta Menarik</div>
+          <div class="dic-callout-content">Kata 'Aljabar' berasal dari kitab mahakarya matematikawan Persia Muhammad bin Musa Al-Khwarizmi abad ke-9 berjudul 'Al-Kitab al-mukhtasar fi hisab al-jabr wa'l-muqabala'. Kata 'Al-Jabr' secara harfiah bermakna 'mengembalikan / menyatukan kembali tulang yang patah', mengibaratkan pemindahan suku negatif ke ruas lain agar menjadi positif!</div>
+        </div>
+      </div>
 
       <!-- Formula Section -->
       <h2 class="dic-section-title" id="formula">
-        <i class="bi bi-calculator" style="color:#6366f1;"></i> Formulasi Matematis & Bedah Rumus
+        <i class="bi bi-calculator" style="color:#6366f1;"></i> Formulasi KaTeX & Anatomi Parameter
       </h2>
       <div class="dic-formula-card">
         \[ ax + b = c \iff ax = c - b \implies x = \frac{c - b}{a} \quad (a \neq 0) \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> x adalah variabel tak diketahui, a adalah koefisien pengali, b konstanta pergeseran, dan c target persamaan.
+        <strong>💡 Makna & Intuisi Formulasi:</strong> Persamaan aljabar adalah neraca timbangan seimbang. Untuk mengisolasi variabel x sendirian di ruas kiri, kita harus membatalkan penjumlahan b dengan pengurangan b di kedua ruas, lalu membatalkan perkalian a dengan pembagian a di kedua ruas.
       </div>
+
+      <div class="small fw-bold text-muted text-uppercase mb-2 mt-3"><i class="bi bi-table me-1"></i> Bedah Anatomi Variabel Formulasi:</div>
+      
+    <div class="dic-param-table-wrap">
+      <table class="dic-param-table">
+        <thead>
+          <tr>
+            <th>Simbol / Notasi</th>
+            <th>Makna & Interpretasi Matematis</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">x</span></td>
+              <td class="text-light">Variabel peubah yang dicari nilainya.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">a</span></td>
+              <td class="text-light">Koefisien pengali variabel ($a \neq 0$).</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">b</span></td>
+              <td class="text-light">Konstanta aditif pergeseran.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">c</span></td>
+              <td class="text-light">Target nilai kesetaraan ruas kanan.</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 
       <!-- Worked Example -->
       <h2 class="dic-section-title" id="contoh">
-        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu
+        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu (Langkah Demi Langkah)
       </h2>
-      <div class="dic-example-box">
-        <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
-        <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh 1: Sebuah kotak memuat x pensil. Ditambah 5 pensil menjadi 14. Model: x + 5 = 14 => x = 9.
-        </p>
+      
+    <div class="dic-step-box">
+      <div class="dic-step-problem">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-patch-question"></i> Skenario Studi Kasus:</div>
+        <div>Sebuah dompet berisi sejumlah uang koin Rp 500-an sebanyak x keping. Jika diberi tambahan uang kertas Rp 3.000, total uang menjadi Rp 15.000. Tuliskan model persamaannya dan hitung berapa keping koin di dalam dompet tersebut!</div>
       </div>
+      <div class="dic-step-item diketahui">
+        <div class="small fw-bold text-primary mb-1"><i class="bi bi-pin-angle-fill"></i> Diketahui:</div>
+        <div>Nilai 1 koin = Rp 500, Tambahan = Rp 3.000, Total = Rp 15.000.</div>
+      </div>
+      <div class="dic-step-item ditanya">
+        <div class="small fw-bold text-warning mb-1"><i class="bi bi-question-circle-fill"></i> Ditanya:</div>
+        <div>Model persamaan dan nilai x (banyak keping koin).</div>
+      </div>
+      <div class="dic-step-item langkah">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-diagram-3-fill"></i> Langkah Penyelesaian Terpandu:</div>
+        <div><div class='mb-2'><strong>Langkah 1: Menyusun Model Aljabar:</strong> Model: $500x + 3000 = 15000$.</div><div class='mb-2'><strong>Langkah 2: Mengurangkan Kedua Ruas dengan 3000:</strong> $500x = 15000 - 3000 \implies 500x = 12000$.</div><div class='mb-2'><strong>Langkah 3: Membagi Kedua Ruas dengan 500:</strong> $x = \frac{12000}{500} = 24$ keping.</div></div>
+      </div>
+      <div class="dic-step-item kesimpulan">
+        <div class="small fw-bold text-info mb-1"><i class="bi bi-check-circle-fill"></i> Kesimpulan Akhir:</div>
+        <div>Di dalam dompet mula-mula terdapat 24 keping koin Rp 500-an.</div>
+      </div>
+    </div>
 
-      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <!-- Interactive Math Simulator Widget -->
       <h2 class="dic-section-title" id="simulator">
         <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
@@ -611,11 +925,11 @@
           </span>
         </div>
         <div class="dic-sim-body">
-          <p class="small text-muted mb-3">🎯 Misi Berpikir: Bagaimana cara menjaga kesetaraan persamaan 2x + b = c saat kedua ruas dimanipulasi secara logis?</p>
+          <p class="small text-muted mb-3">🎯 Misi Berpikir: Bagaimana cara menjaga kesetaraan persamaan ax + b = c saat kedua ruas dimanipulasi secara logis?</p>
           
         <div class="p-3 mb-3 rounded" style="background:rgba(99,102,241,0.08); border:1px solid rgba(99,102,241,0.25);">
           <div class="small fw-bold text-info mb-1"><i class="bi bi-lightbulb"></i> Tantangan Penalaran:</div>
-          <p class="small text-light mb-0">Aljabar adalah ilmu menjaga kesetaraan neraca timbangan. Geser nilai <strong>Konstanta b</strong> dan <strong>Target c</strong>, lalu amati rantai deduksi isolasi variabel x!</p>
+          <p class="small text-light mb-0">Aljabar adalah ilmu menjaga kesetaraan neraca timbangan. Geser nilai <strong>Koefisien a</strong>, <strong>Konstanta b</strong>, dan <strong>Target c</strong>, lalu amati rantai deduksi isolasi variabel x!</p>
         </div>
         <div class="row g-3 align-items-center">
           <div class="col-md-4">
@@ -650,29 +964,37 @@
         </div>
       </div>
 
-      <!-- Active Recall / Capstone Challenge Exercise -->
+      <!-- Active Recall Quiz -->
       <div class="dic-quiz-card " id="latihan" style="">
         <div class="dic-quiz-tag" style="">
           <i class="bi bi-patch-question-fill"></i> 
           Active Recall Quiz - Bab 1
         </div>
-        <div class="dic-quiz-q" style="">Jika 4x - 8 = 16, berapakah nilai x?</div>
+        <div class="dic-quiz-q" style="">Sebuah toko buku menjual pensil seharga Rp 2.500 per batang. Jika Budi membeli n batang pensil dan membayar dengan uang Rp 20.000 serta menerima kembalian Rp 5.000, berapakah nilai n?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, '4x = 16 + 8 = 24 => x = 24 / 4 = 6.')">
-          <span>x = 6</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, '2500n + 5000 = 20000 \implies 2500n = 15000 \implies n = 15000 / 2500 = 6\text{ batang}.')">
+          <span>n = 6 batang</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '4x = 16 + 8 = 24 => x = 24 / 4 = 6.')">
-          <span>x = 4</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '2500n + 5000 = 20000 \implies 2500n = 15000 \implies n = 15000 / 2500 = 6\text{ batang}.')">
+          <span>n = 8 batang</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '4x = 16 + 8 = 24 => x = 24 / 4 = 6.')">
-          <span>x = 8</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '2500n + 5000 = 20000 \implies 2500n = 15000 \implies n = 15000 / 2500 = 6\text{ batang}.')">
+          <span>n = 5 batang</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
+      </div>
+
+      <!-- Core Takeaways -->
+      <div class="dic-takeaway-box" id="rangkuman">
+        <div class="dic-takeaway-title"><i class="bi bi-bookmark-check-fill"></i> Ringkasan Intisari Dicoding (Key Takeaways):</div>
+        <ul class="dic-takeaway-list">
+          <li>Variabel adalah simbol huruf penampung nilai numerik yang belum diketahui nilainya.</li><li>Aljabar menggeneralisasi aritmatika angka menjadi hubungan matematis universal.</li><li>Prinsip kesetaraan: operasi matematika apa pun yang diterapkan di ruas kiri wajib diterapkan identik di ruas kanan.</li>
+        </ul>
       </div>
 
       <!-- Bottom Navigation -->

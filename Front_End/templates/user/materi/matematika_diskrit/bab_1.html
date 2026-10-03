@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Matematika Diskrit & Logika - Bab 1: Fondasi: Konsep Intuitif & Pengenalan Mat. Diskrit - MathThon</title>
+  <title>Matematika Diskrit & Logika - Bab 1: Fondasi: Dunia Kontinu vs Dunia Diskrit Komputer - MathThon</title>
   <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,7 +187,7 @@
     /* Main Content Area */
     .dic-main {
       padding: 2.5rem 3rem;
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       width: 100%;
     }
@@ -242,31 +242,63 @@
       color: #f8fafc;
       line-height: 1.25;
     }
-    
+
+    /* Target Box */
     .dic-target-box {
-      background: #111622;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.25rem;
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .dic-target-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #818cf8;
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .dic-target-list {
       margin: 0;
       padding-left: 1.25rem;
-      font-size: 0.88rem;
-      color: #94a3b8;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
     }
-    .dic-target-list li { margin-bottom: 0.35rem; }
-    
+    .dic-target-list li { margin-bottom: 0.4rem; }
+
+    /* Real-World Hook Box */
+    .dic-hook-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.02));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .dic-hook-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dic-hook-body {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Section Title */
     .dic-section-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -278,50 +310,192 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border-color);
     }
-    
-    .dic-lead {
-      font-size: 1.02rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin: 1rem 0 1.5rem;
-    }
-    
-    .dic-formula-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid var(--accent-glow);
+
+    /* Concepts Cards */
+    .dic-concept-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 1.5rem;
       margin: 1.25rem 0;
-      text-align: center;
-      overflow-x: auto;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .dic-formula-explain {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-      margin: 1rem 0;
-      line-height: 1.6;
-    }
-    
-    .dic-example-box {
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-    }
-    .dic-example-title {
-      font-size: 0.85rem;
+    .dic-h3 {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #34d399;
-      margin-bottom: 0.5rem;
+      color: #f8fafc;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+    .dic-list {
+      margin: 0.5rem 0 0.75rem 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .dic-list li { margin-bottom: 0.35rem; }
+
+    /* Dicoding Callout Boxes */
+    .dic-callout {
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .dic-callout-icon {
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .dic-callout-content { flex-grow: 1; font-size: 0.91rem; line-height: 1.7; }
+    .dic-callout-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
     
+    .dic-callout.pro-tip {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-left: 4px solid #10b981;
+    }
+    .dic-callout.pro-tip .dic-callout-title { color: #34d399; }
+    .dic-callout.pro-tip .dic-callout-icon { color: #10b981; }
+    .dic-callout.pro-tip .dic-callout-content { color: #d1fae5; }
+
+    .dic-callout.pitfall {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 4px solid #f43f5e;
+    }
+    .dic-callout.pitfall .dic-callout-title { color: #fb7185; }
+    .dic-callout.pitfall .dic-callout-icon { color: #f43f5e; }
+    .dic-callout.pitfall .dic-callout-content { color: #ffe4e6; }
+
+    .dic-callout.fun-fact {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-left: 4px solid #8b5cf6;
+    }
+    .dic-callout.fun-fact .dic-callout-title { color: #c084fc; }
+    .dic-callout.fun-fact .dic-callout-icon { color: #8b5cf6; }
+    .dic-callout.fun-fact .dic-callout-content { color: #ede9fe; }
+
+    /* Formula & Parameter Table */
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-param-table-wrap {
+      margin: 1.25rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .dic-param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .dic-param-table th {
+      background: #161d2e;
+      color: #94a3b8;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-param-table td {
+      padding: 0.75rem 1rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .dic-param-table tr:last-child td { border-bottom: none; }
+    .dic-param-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .dic-symbol-badge {
+      font-family: 'Fira Code', monospace;
+      color: #38bdf8;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .dic-formula-explain {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      line-height: 1.7;
+    }
+
+    /* Guided Step Box */
+    .dic-step-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dic-step-problem {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+      line-height: 1.7;
+    }
+    .dic-step-item {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .dic-step-item.diketahui {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid #6366f1;
+      color: #cbd5e1;
+    }
+    .dic-step-item.ditanya {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 3px solid #f59e0b;
+      color: #cbd5e1;
+    }
+    .dic-step-item.langkah {
+      background: rgba(16, 185, 129, 0.05);
+      border-left: 3px solid #10b981;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    .dic-step-item.kesimpulan {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid #38bdf8;
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
     /* Interactive Math Simulation Box */
     .dic-sim-box {
       background: #111622;
@@ -424,6 +598,34 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
+
+    /* Takeaways Box */
+    .dic-takeaway-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(16, 185, 129, 0.01));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .dic-takeaway-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-takeaway-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .dic-takeaway-list li { margin-bottom: 0.45rem; }
     
     /* Bottom Navigation */
     .dic-bottom-nav {
@@ -497,42 +699,45 @@
         <a href="{{ url_for('materi.subject_bab', subject='matematika_diskrit', bab_num=1) }}" 
            class="dic-chapter-link active {{ 'done' if all_bab_status[0]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[0]['is_completed'] else '1' }}</span>
-          <span>Fondasi: Konsep Intuitif & Pengenalan Mat. Diskrit</span>
+          <span>Fondasi: Dunia Kontinu vs Dunia Diskrit Komputer</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='matematika_diskrit', bab_num=2) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[1]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[1]['is_completed'] else '2' }}</span>
-          <span>Anatomi: Notasi, Kaidah & Sifat Baku Mat. Diskrit</span>
+          <span>Anatomi: Logika Proposisional, Tabel Kebenaran & Hukum De Morgan</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='matematika_diskrit', bab_num=3) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[2]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[2]['is_completed'] else '3' }}</span>
-          <span>Mekanika: Prosedur Perhitungan & Operasi Mat. Diskrit</span>
+          <span>Mekanika: Teori Himpunan & Diagram Venn Prinsip Inklusi-Eksklusi</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='matematika_diskrit', bab_num=4) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[3]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[3]['is_completed'] else '4' }}</span>
-          <span>Pemodelan: Aplikasi Nyata & Studi Kasus Mat. Diskrit</span>
+          <span>Pemodelan: Pengantar Teori Graf & Rute Terpendek Jaringan</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='matematika_diskrit', bab_num=5) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[4]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[4]['is_completed'] else '5' }}</span>
-          <span>Capstone: Proyek Integratif & Uji Sintesis Mat. Diskrit</span>
+          <span>Capstone: Perancangan Sirkuit Gerbang Logika Digital Keamanan Multi-Sensor</span>
         </a>
 
-      <!-- In-Page Anchor Links -->
+      <!-- In-Page Anchor Links (TOC) -->
       <div class="dic-sb-nav-title">Daftar Isi Halaman (TOC)</div>
       <div class="dic-anchor-box">
         <a href="#peruntukan" class="dic-anchor-link"><i class="bi bi-compass me-1"></i> Peruntukan & Sasaran</a>
+        <a href="#hook" class="dic-anchor-link"><i class="bi bi-lightbulb me-1"></i> Mengapa Ini Penting?</a>
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
-        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
+        <a href="#tips" class="dic-anchor-link"><i class="bi bi-patch-check me-1"></i> Tips & Jebakan Umum</a>
+        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi KaTeX</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
         <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
+        <a href="#rangkuman" class="dic-anchor-link"><i class="bi bi-check2-all me-1"></i> Rangkuman Intisari</a>
       </div>
     </aside>
 
@@ -546,6 +751,16 @@
         <span>Bab 1</span>
       </div>
 
+      <!-- Reading Meta Badges -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="badge bg-secondary-subtle text-light border border-secondary-subtle px-2 py-1 small">
+          <i class="bi bi-clock-history me-1"></i> ~12-15 Menit Baca Mendalam
+        </span>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 small">
+          <i class="bi bi-mortarboard me-1"></i> Standar Akademi Dicoding
+        </span>
+      </div>
+
       <!-- Explicit Stage Banner -->
       <div class="dic-role-banner" id="peruntukan">
         <div class="dic-role-icon"><i class="bi bi-stars"></i></div>
@@ -555,107 +770,214 @@
         </div>
       </div>
 
-      <h1 class="dic-h1">Fondasi: Konsep Intuitif & Pengenalan Mat. Diskrit</h1>
+      <h1 class="dic-h1">Fondasi: Dunia Kontinu vs Dunia Diskrit Komputer</h1>
 
       <!-- Learning Objectives -->
       <div class="dic-target-box">
         <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#475569;"></i> Sasaran Pembelajaran Bab 1:</div>
         <ul class="dic-target-list">
-          <li>Memahami landasan konseptual dari Fondasi: Konsep Intuitif & Pengenalan Mat. Diskrit secara sistematis.</li>
-          <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
+          <li>Memahami perbedaan mendasar antara matematika kontinu (kalkulus analog) dan matematika diskrit (struktur digital terpisah berhingga).</li><li>Memahami mengapa matematika diskrit adalah bahasa ibu dari seluruh algoritma ilmu komputer dan rekayasa perangkat lunak.</li><li>Mengenal struktur data diskrit dasar: himpunan, relasi biner, dan graf jaringan.</li>
         </ul>
       </div>
 
-      <!-- Core Concept -->
+      <!-- Real-World Motivation Hook -->
+      <div class="dic-hook-box" id="hook">
+        <div class="dic-hook-title"><i class="bi bi-lightbulb-fill"></i> Mengapa Konsep Ini Sangat Penting? (Perspektif Praktisi & Rekayasa)</div>
+        <p class="dic-hook-body">Jam dinding jarum analog bergerak mengalir mulus tanpa henti (kontinu). Namun jam digital melompat dari detik 01 ke detik 02 secara diskrit (terpisah tegas). Komputer digital kita tidak bekerja dengan kurva mulus tak terhingga; prosesor komputer memproses angka diskrit 0 dan 1 yang terputus-putus! Matematika Diskrit adalah fondasi logika arsitektur seluruh sistem operasi, struktur database SQL, enkripsi internet, dan kecerdasan buatan.</p>
+      </div>
+
+      <!-- Core Concept Sections -->
       <h2 class="dic-section-title" id="konsep">
-        <i class="bi bi-book-half" style="color:#475569;"></i> Pembahasan Konsep & Teori
+        <i class="bi bi-book-half" style="color:#475569;"></i> Pembahasan Konsep & Teori Mendalam
       </h2>
-      <p class="dic-lead">
-        Matematika diskrit mengkaji struktur matematika berhingga yang tidak kontinu, menjadi landasan ilmu komputer.
-      </p>
+      
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-cpu-fill text-primary"></i> 1. Hakikat Matematika Diskrit</h3>
+              <p>Matematika diskrit mengkaji struktur objek matematika yang terpisah satu sama lain dan dapat dicacah (countable), berbeda dengan kalkulus yang mengkaji perubahan mulus tak hingga.</p>
+              <ul class="dic-list">
+                <li><strong>Kontinu:</strong> Bilangan riil di antara 0 dan 1 (ada tak hingga banyaknya angka pecahan desimal kontinu).</li>
+                <li><strong>Diskrit:</strong> Bilangan bulat $\{\dots, -2, -1, 0, 1, 2, \dots\}$, piksel layar monitor, simpul jaringan internet, dan status sakelar biner ON/OFF.</li>
+              </ul>
+            </div>
+            
+
+      <!-- Dicoding Insights & Callouts -->
+      <h2 class="dic-section-title" id="tips">
+        <i class="bi bi-patch-check" style="color:#475569;"></i> Tips Praktisi & Wawasan Kritis
+      </h2>
+      
+      <div class="dic-callout pro-tip">
+        <div class="dic-callout-icon"><i class="bi bi-lightbulb-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">💡 Dicoding Pro-Tip / Praktik Terbaik</div>
+          <div class="dic-callout-content">Jika suatu masalah berkaitan dengan 'langkah-langkah algoritma langkah demi langkah', 'rute tercepat di peta GPS', atau 'hubungan relasi pertemanan media sosial', kamu sedang berada di ranah Matematika Diskrit!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout pitfall">
+        <div class="dic-callout-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">⚠️ Common Pitfall / Jebakan Umum</div>
+          <div class="dic-callout-content">Jangan gunakan konsep turunan atau integral kalkulus kontinu pada himpunan diskrit! Pada matematika diskrit, kita menggunakan teknik rekurensi, kombinatorika, dan pembuktian induksi matematika.</div>
+        </div>
+      </div>
+
+      <div class="dic-callout fun-fact">
+        <div class="dic-callout-icon"><i class="bi bi-cpu-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">🧠 Wawasan Komputasi & Fakta Menarik</div>
+          <div class="dic-callout-content">Pelopor komputer modern Alan Turing menggunakan konsep logika matematika diskrit mesin pita keadaan (Turing Machine) untuk mendefinisikan apa yang bisa dan tidak bisa dihitung oleh komputer.</div>
+        </div>
+      </div>
 
       <!-- Formula Section -->
       <h2 class="dic-section-title" id="formula">
-        <i class="bi bi-calculator" style="color:#475569;"></i> Formulasi Matematis & Bedah Rumus
+        <i class="bi bi-calculator" style="color:#475569;"></i> Formulasi KaTeX & Anatomi Parameter
       </h2>
       <div class="dic-formula-card">
-        \[ n(A \cup B) = n(A) + n(B) - n(A \cap B) \quad (\text{Prinsip Inklusi-Eksklusi}) \]
+        \[ S_{\text{diskrit}} = \{x_1, x_2, \dots, x_n\} \quad ; \quad |S| = n \quad (\text{Kardinalitas Himpunan}) \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Prinsip inklusi-eksklusi menghitung gabungan himpunan dengan mengurangi irisan ganda.
+        <strong>💡 Makna & Intuisi Formulasi:</strong> Mengelompokkan entitas terpisah ke dalam wadah koleksi terdefinisi tegas.
       </div>
+
+      <div class="small fw-bold text-muted text-uppercase mb-2 mt-3"><i class="bi bi-table me-1"></i> Bedah Anatomi Variabel Formulasi:</div>
+      
+    <div class="dic-param-table-wrap">
+      <table class="dic-param-table">
+        <thead>
+          <tr>
+            <th>Simbol / Notasi</th>
+            <th>Makna & Interpretasi Matematis</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">S</span></td>
+              <td class="text-light">Himpunan berhingga yang elemennya dapat dicacah.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">|S|</span></td>
+              <td class="text-light">Kardinalitas (jumlah anggota elemen di dalam himpunan).</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 
       <!-- Worked Example -->
       <h2 class="dic-section-title" id="contoh">
-        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu
+        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu (Langkah Demi Langkah)
       </h2>
-      <div class="dic-example-box">
-        <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
-        <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh 1: Himpunan A = {1, 2, 3}, B = {3, 4, 5}. A ∩ B = {3}, A ∪ B = {1, 2, 3, 4, 5}.
-        </p>
+      
+    <div class="dic-step-box">
+      <div class="dic-step-problem">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-patch-question"></i> Skenario Studi Kasus:</div>
+        <div>Diberikan himpunan karakter sandi $A = \{a, b, c, d\}$. Tentukan kardinalitas himpunan A, dan hitung banyaknya seluruh kemungkinan himpunan bagian (Himpunan Kuasa / Power Set) yang dapat dibentuk dari A!</div>
       </div>
+      <div class="dic-step-item diketahui">
+        <div class="small fw-bold text-primary mb-1"><i class="bi bi-pin-angle-fill"></i> Diketahui:</div>
+        <div>Himpunan A berisikan elemen a, b, c, d.</div>
+      </div>
+      <div class="dic-step-item ditanya">
+        <div class="small fw-bold text-warning mb-1"><i class="bi bi-question-circle-fill"></i> Ditanya:</div>
+        <div>Kardinalitas $|A|$ dan banyak himpunan bagian $|P(A)|$.</div>
+      </div>
+      <div class="dic-step-item langkah">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-diagram-3-fill"></i> Langkah Penyelesaian Terpandu:</div>
+        <div><div class='mb-2'><strong>Langkah 1: Hitung Kardinalitas Elemen A:</strong> Elemen A adalah a, b, c, d (ada 4 elemen unik). Maka $|A| = 4$.</div><div class='mb-2'><strong>Langkah 2: Terapkan Rumus Banyak Himpunan Kuasa:</strong> Setiap elemen memiliki 2 opsi (masuk atau tidak masuk ke himpunan bagian):<br>$|P(A)| = 2^{|A|} = 2^4$.</div><div class='mb-2'><strong>Langkah 3: Evaluasi Nilai Perpangkatan:</strong> $2^4 = 16\text{ himpunan bagian}$ (termasuk himpunan kosong $\emptyset$ dan himpunan A itu sendiri).</div></div>
+      </div>
+      <div class="dic-step-item kesimpulan">
+        <div class="small fw-bold text-info mb-1"><i class="bi bi-check-circle-fill"></i> Kesimpulan Akhir:</div>
+        <div>Kardinalitas himpunan adalah 4 dan total himpunan bagian yang dapat dibentuk adalah 16 himpunan.</div>
+      </div>
+    </div>
 
-      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <!-- Interactive Math Simulator Widget -->
       <h2 class="dic-section-title" id="simulator">
         <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
       <div class="dic-sim-box">
         <div class="dic-sim-topbar">
           <div class="dic-sim-title">
-            <i class="bi bi-cpu-fill" style="color:#475569;"></i> Laboratorium Parameter Interaktif Matematika Diskrit
+            <i class="bi bi-cpu-fill" style="color:#475569;"></i> Laboratorium Kombinatorika: Urutan (Permutasi) vs Pilihan Bebas (Kombinasi)
           </div>
           <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">
             <i class="bi bi-broadcast me-1"></i> Live Simulator
           </span>
         </div>
         <div class="dic-sim-body">
-          <p class="small text-muted mb-3">🎯 Misi Berpikir: Geser slider variabel untuk mengamati respons dan kalkulasi matematis secara langsung.</p>
+          <p class="small text-muted mb-3">🎯 Misi Berpikir: Geser total elemen n dan ukuran pemilihan r untuk melihat disparitas pertumbuhan permutasi P(n, r) versus kombinasi C(n, r)!</p>
           
+        <div class="p-3 mb-3 rounded" style="background:rgba(234,88,12,0.08); border:1px solid rgba(234,88,12,0.25);">
+          <div class="small fw-bold text-warning mb-1"><i class="bi bi-diagram-2"></i> Perbedaan Esensial: Apakah Posisi / Urutan Diperhitungkan?</div>
+          <p class="small text-light mb-0">Permutasi memperhitungkan urutan (seperti kata sandi PIN atau juara 1, 2, 3), sedangkan Kombinasi tidak peduli urutan (seperti memilih tim delegasi). Faktor r! membagi permutasi menjadi kombinasi!</p>
+        </div>
         <div class="row g-3 align-items-center">
           <div class="col-md-6">
-            <label class="form-label small text-muted">Parameter x: <span id="gen_val_x" class="fw-bold text-info">5</span></label>
-            <input type="range" class="form-range" id="gen_slider_x" min="1" max="50" value="5" oninput="updateGenericSim()">
+            <label class="form-label small text-muted">Jumlah Total Objek n: <span id="val_n" class="fw-bold text-info">6</span></label>
+            <input type="range" class="form-range" id="slider_n" min="1" max="10" value="6" oninput="updateDiskritSim()">
           </div>
           <div class="col-md-6">
-            <label class="form-label small text-muted">Faktor Skalar k: <span id="gen_val_k" class="fw-bold text-warning">2</span></label>
-            <input type="range" class="form-range" id="gen_slider_k" min="1" max="10" value="2" oninput="updateGenericSim()">
+            <label class="form-label small text-muted">Jumlah Objek Dipilih r: <span id="val_r" class="fw-bold text-warning">3</span></label>
+            <input type="range" class="form-range" id="slider_r" min="1" max="10" value="3" oninput="updateDiskritSim()">
           </div>
         </div>
         <div class="mt-3 p-3 rounded" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
-          <div class="d-flex justify-content-between">
-            <div><span class="small text-muted">Output Kalkulasi f(x) = k · x²:</span><div class="fs-5 fw-bold text-success" id="gen_out">50</div></div>
-            <div><span class="small text-muted">Nilai Invers / Akar:</span><div class="fs-5 fw-bold text-info" id="gen_sqrt">2.24</div></div>
+          <div class="row text-center g-2 mb-2">
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Faktorial n! (Total susunan):</div>
+              <div class="fs-5 fw-bold text-light" id="diskrit_fac">720</div>
+            </div>
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Permutasi P(n, r) [Urutan Penting]:</div>
+              <div class="fs-5 fw-bold text-warning" id="diskrit_perm">120</div>
+            </div>
+            <div class="col-4">
+              <div class="small text-muted">Kombinasi C(n, r) [Bebas Urutan]:</div>
+              <div class="fs-5 fw-bold text-success" id="diskrit_comb">20</div>
+            </div>
+          </div>
+          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #ea580c;">
+            <div class="small text-warning fw-bold mb-1"><i class="bi bi-lightbulb-fill"></i> Analisis Rasio Simetri r!:</div>
+            <div class="small text-light" id="diskrit_ratio">Ada 6 cara menata ulang 3 objek yang sama (3! = 6). Sehingga Kombinasi bernilai 6x lebih sedikit daripada Permutasi.</div>
           </div>
         </div>
         
         </div>
       </div>
 
-      <!-- Active Recall / Capstone Challenge Exercise -->
+      <!-- Active Recall Quiz -->
       <div class="dic-quiz-card " id="latihan" style="">
         <div class="dic-quiz-tag" style="">
           <i class="bi bi-patch-question-fill"></i> 
           Active Recall Quiz - Bab 1
         </div>
-        <div class="dic-quiz-q" style="">Jika A = {a, b, c, d}, berapakah banyak himpunan bagian yang mungkin dibuat dari A?</div>
+        <div class="dic-quiz-q" style="">Sebuah himpunan memiliki 3 elemen: {1, 2, 3}. Berapakah jumlah seluruh himpunan bagian yang mungkin dibuat dari himpunan tersebut?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Banyak himpunan bagian = 2⁴ = 16.')">
-          <span>16</span>
-          <i class="bi bi-circle"></i>
-        </button>
-
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Banyak himpunan bagian = 2⁴ = 16.')">
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Jumlah himpunan bagian = 2^n = 2^3 = 8.')">
           <span>8</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Banyak himpunan bagian = 2⁴ = 16.')">
-          <span>12</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Jumlah himpunan bagian = 2^n = 2^3 = 8.')">
+          <span>6</span>
+          <i class="bi bi-circle"></i>
+        </button>
+
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Jumlah himpunan bagian = 2^n = 2^3 = 8.')">
+          <span>9</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
+      </div>
+
+      <!-- Core Takeaways -->
+      <div class="dic-takeaway-box" id="rangkuman">
+        <div class="dic-takeaway-title"><i class="bi bi-bookmark-check-fill"></i> Ringkasan Intisari Dicoding (Key Takeaways):</div>
+        <ul class="dic-takeaway-list">
+          <li>Matematika diskrit mengkaji struktur yang terpisah dan terhitung, menjadi landasan ilmu komputer.</li><li>Kardinalitas $|S|$ menyatakan jumlah anggota di dalam suatu himpunan.</li><li>Himpunan dengan $n$ anggota memiliki $2^n$ kemungkinan himpunan bagian.</li>
+        </ul>
       </div>
 
       <!-- Bottom Navigation -->
@@ -720,13 +1042,30 @@
 
     // Widget Simulator Logic
     
-        function updateGenericSim() {
-          const x = parseInt(document.getElementById('gen_slider_x').value);
-          const k = parseInt(document.getElementById('gen_slider_k').value);
-          document.getElementById('gen_val_x').textContent = x;
-          document.getElementById('gen_val_k').textContent = k;
-          document.getElementById('gen_out').textContent = k * x * x;
-          document.getElementById('gen_sqrt').textContent = Math.sqrt(x).toFixed(2);
+        function fact(num) {
+          if (num <= 1) return 1;
+          let res = 1;
+          for (let i = 2; i <= num; i++) res *= i;
+          return res;
+        }
+        function updateDiskritSim() {
+          let n = parseInt(document.getElementById('slider_n').value);
+          let r = parseInt(document.getElementById('slider_r').value);
+          if (r > n) {
+            r = n;
+            document.getElementById('slider_r').value = r;
+          }
+          document.getElementById('val_n').textContent = n;
+          document.getElementById('val_r').textContent = r;
+          const fn = fact(n);
+          const fnr = fact(n - r);
+          const fr = fact(r);
+          const perm = Math.round(fn / fnr);
+          const comb = Math.round(fn / (fr * fnr));
+          document.getElementById('diskrit_fac').textContent = fn.toLocaleString('id-ID');
+          document.getElementById('diskrit_perm').textContent = perm.toLocaleString('id-ID');
+          document.getElementById('diskrit_comb').textContent = comb.toLocaleString('id-ID');
+          document.getElementById('diskrit_ratio').innerHTML = `Ada <strong>${fr}</strong> permutasi internal (r! = ${r}! = ${fr}) untuk setiap himpunan bagian. Karena itu, P(${n}, ${r}) = ${comb} × ${fr} = <strong>${perm}</strong> susunan.`;
         }
         
 

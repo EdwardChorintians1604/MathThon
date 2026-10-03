@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fungsi Turunan & Diferensial - Bab 3: Mekanika: Aturan Rantai & Turunan Tingkat Tinggi - MathThon</title>
+  <title>Fungsi Turunan & Diferensial - Bab 3: Mekanika: Aturan Perkalian (uv), Pembagian (u/v) & Aturan Rantai (Chain Rule) - MathThon</title>
   <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,9 +16,9 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
   <style>
     :root {
-      --accent: #ef4444;
-      --accent-glow: #ef444433;
-      --accent-dim: #ef444415;
+      --accent: #f59e0b;
+      --accent-glow: #f59e0b33;
+      --accent-dim: #f59e0b15;
       --bg-dark: #0a0d14;
       --bg-card: #111622;
       --bg-surface: #161d2e;
@@ -187,7 +187,7 @@
     /* Main Content Area */
     .dic-main {
       padding: 2.5rem 3rem;
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       width: 100%;
     }
@@ -242,31 +242,63 @@
       color: #f8fafc;
       line-height: 1.25;
     }
-    
+
+    /* Target Box */
     .dic-target-box {
-      background: #111622;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.25rem;
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .dic-target-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #818cf8;
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .dic-target-list {
       margin: 0;
       padding-left: 1.25rem;
-      font-size: 0.88rem;
-      color: #94a3b8;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
     }
-    .dic-target-list li { margin-bottom: 0.35rem; }
-    
+    .dic-target-list li { margin-bottom: 0.4rem; }
+
+    /* Real-World Hook Box */
+    .dic-hook-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.02));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .dic-hook-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dic-hook-body {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Section Title */
     .dic-section-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -278,50 +310,192 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border-color);
     }
-    
-    .dic-lead {
-      font-size: 1.02rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin: 1rem 0 1.5rem;
-    }
-    
-    .dic-formula-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid var(--accent-glow);
+
+    /* Concepts Cards */
+    .dic-concept-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 1.5rem;
       margin: 1.25rem 0;
-      text-align: center;
-      overflow-x: auto;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .dic-formula-explain {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-      margin: 1rem 0;
-      line-height: 1.6;
-    }
-    
-    .dic-example-box {
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-    }
-    .dic-example-title {
-      font-size: 0.85rem;
+    .dic-h3 {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #34d399;
-      margin-bottom: 0.5rem;
+      color: #f8fafc;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+    .dic-list {
+      margin: 0.5rem 0 0.75rem 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .dic-list li { margin-bottom: 0.35rem; }
+
+    /* Dicoding Callout Boxes */
+    .dic-callout {
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .dic-callout-icon {
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .dic-callout-content { flex-grow: 1; font-size: 0.91rem; line-height: 1.7; }
+    .dic-callout-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
     
+    .dic-callout.pro-tip {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-left: 4px solid #10b981;
+    }
+    .dic-callout.pro-tip .dic-callout-title { color: #34d399; }
+    .dic-callout.pro-tip .dic-callout-icon { color: #10b981; }
+    .dic-callout.pro-tip .dic-callout-content { color: #d1fae5; }
+
+    .dic-callout.pitfall {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 4px solid #f43f5e;
+    }
+    .dic-callout.pitfall .dic-callout-title { color: #fb7185; }
+    .dic-callout.pitfall .dic-callout-icon { color: #f43f5e; }
+    .dic-callout.pitfall .dic-callout-content { color: #ffe4e6; }
+
+    .dic-callout.fun-fact {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-left: 4px solid #8b5cf6;
+    }
+    .dic-callout.fun-fact .dic-callout-title { color: #c084fc; }
+    .dic-callout.fun-fact .dic-callout-icon { color: #8b5cf6; }
+    .dic-callout.fun-fact .dic-callout-content { color: #ede9fe; }
+
+    /* Formula & Parameter Table */
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-param-table-wrap {
+      margin: 1.25rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .dic-param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .dic-param-table th {
+      background: #161d2e;
+      color: #94a3b8;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-param-table td {
+      padding: 0.75rem 1rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .dic-param-table tr:last-child td { border-bottom: none; }
+    .dic-param-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .dic-symbol-badge {
+      font-family: 'Fira Code', monospace;
+      color: #38bdf8;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .dic-formula-explain {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      line-height: 1.7;
+    }
+
+    /* Guided Step Box */
+    .dic-step-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dic-step-problem {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+      line-height: 1.7;
+    }
+    .dic-step-item {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .dic-step-item.diketahui {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid #6366f1;
+      color: #cbd5e1;
+    }
+    .dic-step-item.ditanya {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 3px solid #f59e0b;
+      color: #cbd5e1;
+    }
+    .dic-step-item.langkah {
+      background: rgba(16, 185, 129, 0.05);
+      border-left: 3px solid #10b981;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    .dic-step-item.kesimpulan {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid #38bdf8;
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
     /* Interactive Math Simulation Box */
     .dic-sim-box {
       background: #111622;
@@ -424,6 +598,34 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
+
+    /* Takeaways Box */
+    .dic-takeaway-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(16, 185, 129, 0.01));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .dic-takeaway-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-takeaway-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .dic-takeaway-list li { margin-bottom: 0.45rem; }
     
     /* Bottom Navigation */
     .dic-bottom-nav {
@@ -473,7 +675,7 @@
       <a href="{{ url_for('materi.subject_index', subject='fungsi_turunan') }}" class="dic-back-btn">
         <i class="bi bi-arrow-left"></i> <span>Turunan</span>
       </a>
-      <span class="dic-badge"><i class="bi bi-graph-up" style="color:#ef4444;"></i> Fungsi Turunan & Diferensial</span>
+      <span class="dic-badge"><i class="bi bi-graph-up" style="color:#f59e0b;"></i> Fungsi Turunan & Diferensial</span>
     </div>
     <div class="d-flex align-items-center gap-2">
       <span class="dic-badge"><i class="bi bi-book"></i> Bab 3/5</span>
@@ -487,7 +689,7 @@
       <div class="dic-sb-header">
         <div class="dic-sb-icon"><i class="bi bi-graph-up"></i></div>
         <div>
-          <div style="font-size:0.75rem; color:#ef4444; font-weight:700; text-transform:uppercase;">Modul MathThon</div>
+          <div style="font-size:0.75rem; color:#f59e0b; font-weight:700; text-transform:uppercase;">Modul MathThon</div>
           <div style="font-weight:700; font-size:0.95rem; color:#f8fafc;">Turunan</div>
         </div>
       </div>
@@ -497,42 +699,45 @@
         <a href="{{ url_for('materi.subject_bab', subject='fungsi_turunan', bab_num=1) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[0]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[0]['is_completed'] else '1' }}</span>
-          <span>Fondasi: Gradien Garis Singgung & Laju Perubahan</span>
+          <span>Fondasi: Laju Perubahan Rata-Rata Menuju Kecepatan Sesaat</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='fungsi_turunan', bab_num=2) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[1]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[1]['is_completed'] else '2' }}</span>
-          <span>Anatomi: Kaidah Pangkat, Perkalian & Pembagian Turunan</span>
+          <span>Anatomi: Kaidah Pangkat Baku & Sifat Aljabar Diferensial</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='fungsi_turunan', bab_num=3) }}" 
            class="dic-chapter-link active {{ 'done' if all_bab_status[2]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[2]['is_completed'] else '3' }}</span>
-          <span>Mekanika: Aturan Rantai & Turunan Tingkat Tinggi</span>
+          <span>Mekanika: Aturan Perkalian (uv), Pembagian (u/v) & Aturan Rantai (Chain Rule)</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='fungsi_turunan', bab_num=4) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[3]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[3]['is_completed'] else '4' }}</span>
-          <span>Pemodelan: Titik Stasioner, Nilai Ekstrim & Kecekungan</span>
+          <span>Pemodelan: Titik Stasioner & Optimasi Nilai Maksimum/Minimum</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='fungsi_turunan', bab_num=5) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[4]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[4]['is_completed'] else '5' }}</span>
-          <span>Capstone: Proyek Optimasi Keuntungan & Desain Maksimum</span>
+          <span>Capstone: Desain Profil Sayap Aerodinamis & Optimasi Efisiensi Bahan Bakar</span>
         </a>
 
-      <!-- In-Page Anchor Links -->
+      <!-- In-Page Anchor Links (TOC) -->
       <div class="dic-sb-nav-title">Daftar Isi Halaman (TOC)</div>
       <div class="dic-anchor-box">
         <a href="#peruntukan" class="dic-anchor-link"><i class="bi bi-compass me-1"></i> Peruntukan & Sasaran</a>
+        <a href="#hook" class="dic-anchor-link"><i class="bi bi-lightbulb me-1"></i> Mengapa Ini Penting?</a>
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
-        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
+        <a href="#tips" class="dic-anchor-link"><i class="bi bi-patch-check me-1"></i> Tips & Jebakan Umum</a>
+        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi KaTeX</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
         <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
+        <a href="#rangkuman" class="dic-anchor-link"><i class="bi bi-check2-all me-1"></i> Rangkuman Intisari</a>
       </div>
     </aside>
 
@@ -546,6 +751,16 @@
         <span>Bab 3</span>
       </div>
 
+      <!-- Reading Meta Badges -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="badge bg-secondary-subtle text-light border border-secondary-subtle px-2 py-1 small">
+          <i class="bi bi-clock-history me-1"></i> ~12-15 Menit Baca Mendalam
+        </span>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 small">
+          <i class="bi bi-mortarboard me-1"></i> Standar Akademi Dicoding
+        </span>
+      </div>
+
       <!-- Explicit Stage Banner -->
       <div class="dic-role-banner" id="peruntukan">
         <div class="dic-role-icon"><i class="bi bi-gear-wide-connected"></i></div>
@@ -555,125 +770,228 @@
         </div>
       </div>
 
-      <h1 class="dic-h1">Mekanika: Aturan Rantai & Turunan Tingkat Tinggi</h1>
+      <h1 class="dic-h1">Mekanika: Aturan Perkalian (uv), Pembagian (u/v) & Aturan Rantai (Chain Rule)</h1>
 
       <!-- Learning Objectives -->
       <div class="dic-target-box">
-        <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#ef4444;"></i> Sasaran Pembelajaran Bab 3:</div>
+        <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#f59e0b;"></i> Sasaran Pembelajaran Bab 3:</div>
         <ul class="dic-target-list">
-          <li>Memahami landasan konseptual dari Mekanika: Aturan Rantai & Turunan Tingkat Tinggi secara sistematis.</li>
-          <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
+          <li>Menerapkan Aturan Perkalian Produk: d/dx (u * v) = u'v + uv'.</li><li>Menerapkan Aturan Pembagian Kuosien: d/dx (u / v) = (u'v - uv') / v^2.</li><li>Menguasai Aturan Rantai (Chain Rule) untuk fungsi komposisi berlapis: dy/dx = (dy/du) * (du/dx).</li>
         </ul>
       </div>
 
-      <!-- Core Concept -->
+      <!-- Real-World Motivation Hook -->
+      <div class="dic-hook-box" id="hook">
+        <div class="dic-hook-title"><i class="bi bi-lightbulb-fill"></i> Mengapa Konsep Ini Sangat Penting? (Perspektif Praktisi & Rekayasa)</div>
+        <p class="dic-hook-body">Apa yang terjadi jika dua fungsi yang berubah saling dikalikan, seperti Volume Balok = Luas Alas(t) * Tinggi(t)? Kita tidak bisa hanya mengalikan turunannya secara sembarangan ($u' \cdot v'$ adalah SALAH BESAR). Aturan Perkalian Leibniz $u'v + uv'$ adalah kaidah mekanik yang memastikan semua interaksi antar-variabel terhitung secara akurat!</p>
+      </div>
+
+      <!-- Core Concept Sections -->
       <h2 class="dic-section-title" id="konsep">
-        <i class="bi bi-book-half" style="color:#ef4444;"></i> Pembahasan Konsep & Teori
+        <i class="bi bi-book-half" style="color:#f59e0b;"></i> Pembahasan Konsep & Teori Mendalam
       </h2>
-      <p class="dic-lead">
-        Uji turunan kedua (f'') menentukan kecekungan kurva (concavity) dan mengonfirmasi sifat titik ekstrim.
-      </p>
+      
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-gear-wide-connected text-primary"></i> 1. Tiga Kaidah Mekanika Lanjutan</h3>
+              <ul class="dic-list">
+                <li><strong>Aturan Perkalian (Product Rule):</strong>
+                  \[ (u \cdot v)' = u'v + uv' \]
+                </li>
+                <li><strong>Aturan Pembagian (Quotient Rule):</strong>
+                  \[ \left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2} \]
+                </li>
+                <li><strong>Aturan Rantai (Chain Rule - Fungsi Komposisi):</strong> Jika $y = f(u)$ dan $u = g(x)$, maka:
+                  \[ \frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx} \]
+                  Aturan Praktis Pangkat: $\frac{d}{dx}[u(x)]^n = n [u(x)]^{n-1} \cdot u'(x)$.
+                </li>
+              </ul>
+            </div>
+            
+
+      <!-- Dicoding Insights & Callouts -->
+      <h2 class="dic-section-title" id="tips">
+        <i class="bi bi-patch-check" style="color:#f59e0b;"></i> Tips Praktisi & Wawasan Kritis
+      </h2>
+      
+      <div class="dic-callout pro-tip">
+        <div class="dic-callout-icon"><i class="bi bi-lightbulb-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">💡 Dicoding Pro-Tip / Praktik Terbaik</div>
+          <div class="dic-callout-content">Untuk mengingat Aturan Rantai fungsi berpangkat $[u(x)]^n$: Ingat aturan 'Turunkan Kulit Luar, lalu Kalikan dengan Turunan Isinya'!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout pitfall">
+        <div class="dic-callout-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">⚠️ Common Pitfall / Jebakan Umum</div>
+          <div class="dic-callout-content">Pada aturan pembagian, urutan tanda pengurangan sangat krusial! Selalu dahulukan $u'v$ dikurangi $uv'$. Jangan sampai terbalik menjadi $uv' - u'v$ karena pengurangan tidak bersifat komutatif!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout fun-fact">
+        <div class="dic-callout-icon"><i class="bi bi-cpu-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">🧠 Wawasan Komputasi & Fakta Menarik</div>
+          <div class="dic-callout-content">Aturan Rantai (Chain Rule) adalah formula matematika paling berharga di era kecerdasan buatan modern karena seluruh algoritma pelatihan model bahasa besar (LLM) seperti GPT-4 berjalan di atas prinsip diferensiasi aturan rantai berlapis.</div>
+        </div>
+      </div>
 
       <!-- Formula Section -->
       <h2 class="dic-section-title" id="formula">
-        <i class="bi bi-calculator" style="color:#ef4444;"></i> Formulasi Matematis & Bedah Rumus
+        <i class="bi bi-calculator" style="color:#f59e0b;"></i> Formulasi KaTeX & Anatomi Parameter
       </h2>
       <div class="dic-formula-card">
-        \[ \frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx} \quad (\text{Aturan Rantai}) \]
+        \[ (uv)' = u'v + uv' \quad ; \quad \left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2} \quad ; \quad \frac{d}{dx}[u(x)]^n = n [u(x)]^{n-1} u'(x) \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Aturan rantai mendiferensiasi fungsi komposit terluar dikalikan turunan fungsi dalamnya.
+        <strong>💡 Makna & Intuisi Formulasi:</strong> Menghitung laju perubahan total saat kedua komponen saling mempengaruhi secara multiplikatif.
       </div>
+
+      <div class="small fw-bold text-muted text-uppercase mb-2 mt-3"><i class="bi bi-table me-1"></i> Bedah Anatomi Variabel Formulasi:</div>
+      
+    <div class="dic-param-table-wrap">
+      <table class="dic-param-table">
+        <thead>
+          <tr>
+            <th>Simbol / Notasi</th>
+            <th>Makna & Interpretasi Matematis</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">u, v</span></td>
+              <td class="text-light">Fungsi-fungsi variabel x yang dapat diturunkan.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">u', v'</span></td>
+              <td class="text-light">Turunan pertama masing-masing fungsi.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">v^2</span></td>
+              <td class="text-light">Kuadrat fungsi penyebut.</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 
       <!-- Worked Example -->
       <h2 class="dic-section-title" id="contoh">
-        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu
+        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu (Langkah Demi Langkah)
       </h2>
-      <div class="dic-example-box">
-        <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
-        <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh 3: f(x) = (3x² - 5)⁴ => f'(x) = 4(3x² - 5)³ · (6x) = 24x(3x² - 5)³.
-        </p>
+      
+    <div class="dic-step-box">
+      <div class="dic-step-problem">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-patch-question"></i> Skenario Studi Kasus:</div>
+        <div>Tentukan turunan pertama dari fungsi komposisi berpangkat: $y = (3x^2 - 5)^4$!</div>
       </div>
+      <div class="dic-step-item diketahui">
+        <div class="small fw-bold text-primary mb-1"><i class="bi bi-pin-angle-fill"></i> Diketahui:</div>
+        <div>Fungsi komposisi luar berpangkat 4 dengan fungsi dalam $u = 3x^2 - 5$.</div>
+      </div>
+      <div class="dic-step-item ditanya">
+        <div class="small fw-bold text-warning mb-1"><i class="bi bi-question-circle-fill"></i> Ditanya:</div>
+        <div>Turunan $y'$ menggunakan aturan rantai.</div>
+      </div>
+      <div class="dic-step-item langkah">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-diagram-3-fill"></i> Langkah Penyelesaian Terpandu:</div>
+        <div><div class='mb-2'><strong>Langkah 1: Identifikasi Fungsi Dalam u dan Turunannya u':</strong> $u = 3x^2 - 5 \implies u' = 6x$.</div><div class='mb-2'><strong>Langkah 2: Terapkan Aturan Pangkat Luar:</strong> Turunkan pangkat 4 ke depan: $4(u)^{4-1} = 4(3x^2 - 5)^3$.</div><div class='mb-2'><strong>Langkah 3: Kalikan dengan Turunan Dalam u':</strong> $y' = 4(3x^2 - 5)^3 \cdot (6x)$.</div><div class='mb-2'><strong>Langkah 4: Rapikan Perkalian Koefisien Aljabar:</strong> $y' = 24x(3x^2 - 5)^3$.</div></div>
+      </div>
+      <div class="dic-step-item kesimpulan">
+        <div class="small fw-bold text-info mb-1"><i class="bi bi-check-circle-fill"></i> Kesimpulan Akhir:</div>
+        <div>Hasil turunan pertamanya adalah $y' = 24x(3x^2 - 5)^3$.</div>
+      </div>
+    </div>
 
-      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <!-- Interactive Math Simulator Widget -->
       <h2 class="dic-section-title" id="simulator">
         <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
       <div class="dic-sim-box">
         <div class="dic-sim-topbar">
           <div class="dic-sim-title">
-            <i class="bi bi-cpu-fill" style="color:#ef4444;"></i> Laboratorium Penalaran: Garis Singgung & Deteksi Titik Stasioner
+            <i class="bi bi-cpu-fill" style="color:#f59e0b;"></i> Laboratorium Garis Singgung: Tali Busur (Secant) Menuju Garis Singgung (Tangent)
           </div>
           <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">
             <i class="bi bi-broadcast me-1"></i> Live Simulator
           </span>
         </div>
         <div class="dic-sim-body">
-          <p class="small text-muted mb-3">🎯 Misi Berpikir: Geser titik evaluasi x₀ sepanjang kurva f(x) = x² - 4x. Amati kapan gradien garis singgung m = 0 dan apa maknanya bagi titik balik!</p>
+          <p class="small text-muted mb-3">🎯 Misi Berpikir: Geser nilai Δx menuju nol untuk melihat kemiringan rata-rata bertransformasi menjadi turunan sesaat f'(x)!</p>
           
         <div class="p-3 mb-3 rounded" style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.25);">
-          <div class="small fw-bold text-danger mb-1"><i class="bi bi-speedometer2"></i> Logika Titik Stasioner:</div>
-          <p class="small text-light mb-0">Saat kurva bergerak dari fase turun ke fase naik (atau sebaliknya), kurva wajib melewati titik datar di mana gradien garis singgungnya sesaat mendatar: <strong>m = f'(x) = 0</strong>.</p>
+          <div class="small fw-bold text-danger mb-1"><i class="bi bi-speedometer2"></i> Kecepatan Rata-Rata vs Kecepatan Sesaat:</div>
+          <p class="small text-light mb-0">Jika speedometer mobil Anda membaca 80 km/jam saat ini, itu bukan rata-rata perjalanan 2 jam, melainkan laju perubahan jarak dalam selang waktu Δt yang sangat mendekati nol!</p>
         </div>
         <div class="row g-3 align-items-center">
           <div class="col-md-6">
-            <label class="form-label small text-muted">Titik Evaluasi (x₀): <span id="tur_val_x" class="fw-bold text-warning">2</span></label>
-            <input type="range" class="form-range" id="tur_slider_x" min="-2" max="6" value="2" oninput="updateTurunanSim()">
+            <label class="form-label small text-muted">Titik Evaluasi x₀: <span id="tur_val_x" class="fw-bold text-info">2.0</span></label>
+            <input type="range" class="form-range" id="tur_slider_x" min="1" max="5" value="2" step="0.5" oninput="updateTurunanSim()">
           </div>
           <div class="col-md-6">
-            <div class="small text-muted mb-1">Fungsi Parabola Aktif:</div>
-            <div class="badge bg-danger-subtle text-danger p-2">f(x) = x² - 4x &nbsp;➔&nbsp; f'(x) = 2x - 4</div>
+            <label class="form-label small text-muted">Lebar Selang Δx: <span id="tur_val_dx" class="fw-bold text-warning">1.00</span></label>
+            <input type="range" class="form-range" id="tur_slider_dx" min="1" max="100" value="100" oninput="updateTurunanSim()">
           </div>
         </div>
         <div class="mt-3 p-3 rounded" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
           <div class="row text-center g-2 mb-2">
             <div class="col-4 border-end border-secondary border-opacity-25">
-              <div class="small text-muted">Titik Koordinat (x₀, y₀):</div>
-              <div class="fs-5 fw-bold text-light" id="tur_pt">(2, -4)</div>
+              <div class="small text-muted">Gradien Tali Busur (Secant):</div>
+              <div class="fs-5 fw-bold text-warning" id="tur_secant">5.00</div>
+              <div class="small text-muted">Δy / Δx rata-rata</div>
             </div>
             <div class="col-4 border-end border-secondary border-opacity-25">
-              <div class="small text-muted">Gradien Garis Singgung (m):</div>
-              <div class="fs-5 fw-bold text-warning" id="tur_grad">m = 0 (Datar)</div>
+              <div class="small text-muted">Turunan Eksak f'(x₀) = 2x₀:</div>
+              <div class="fs-5 fw-bold text-success" id="tur_exact">4.00</div>
+              <div class="small text-muted">Laju sesaat presisi</div>
             </div>
             <div class="col-4">
-              <div class="small text-muted">Status Geometris:</div>
-              <div class="fs-6 fw-bold text-success" id="tur_status">Titik Minimum Stasioner</div>
+              <div class="small text-muted">Penyimpangan Gradien:</div>
+              <div class="fs-5 fw-bold text-danger" id="tur_diff">1.00</div>
+              <div class="small text-muted">Galat tali busur</div>
             </div>
           </div>
           <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #ef4444;">
-            <div class="small text-danger fw-bold mb-1"><i class="bi bi-graph-up-arrow"></i> Rantai Penalaran Diferensial:</div>
-            <div class="small text-light" id="tur_tangent">f'(2) = 2(2) - 4 = 0. Garis singgung horizontal y = -4 menandai titik balik minimum kurva.</div>
+            <div class="small text-danger fw-bold mb-1"><i class="bi bi-activity"></i> Makna Matematis Turunan:</div>
+            <div class="small text-light" id="tur_summary">Saat Δx mengecil dari 1.00 menuju 0.01, tali busur berputar presisi menjadi garis singgung kurva di x = 2.0.</div>
           </div>
         </div>
         
         </div>
       </div>
 
-      <!-- Active Recall / Capstone Challenge Exercise -->
+      <!-- Active Recall Quiz -->
       <div class="dic-quiz-card " id="latihan" style="">
         <div class="dic-quiz-tag" style="">
           <i class="bi bi-patch-question-fill"></i> 
           Active Recall Quiz - Bab 3
         </div>
-        <div class="dic-quiz-q" style="">Turunan dari f(x) = (2x + 1)³ adalah?</div>
+        <div class="dic-quiz-q" style="">Berapakah turunan pertama dari $y = (2x + 1)^3$?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Aturan rantai: 3(2x + 1)² · 2 = 6(2x + 1)².')">
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Gunakan aturan rantai: y\' = 3(2x + 1)^2 * d/dx(2x + 1) = 3(2x + 1)^2 * 2 = 6(2x + 1)^2.')">
           <span>6(2x + 1)²</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Aturan rantai: 3(2x + 1)² · 2 = 6(2x + 1)².')">
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Gunakan aturan rantai: y\' = 3(2x + 1)^2 * d/dx(2x + 1) = 3(2x + 1)^2 * 2 = 6(2x + 1)^2.')">
           <span>3(2x + 1)²</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Aturan rantai: 3(2x + 1)² · 2 = 6(2x + 1)².')">
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Gunakan aturan rantai: y\' = 3(2x + 1)^2 * d/dx(2x + 1) = 3(2x + 1)^2 * 2 = 6(2x + 1)^2.')">
           <span>2(2x + 1)²</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
+      </div>
+
+      <!-- Core Takeaways -->
+      <div class="dic-takeaway-box" id="rangkuman">
+        <div class="dic-takeaway-title"><i class="bi bi-bookmark-check-fill"></i> Ringkasan Intisari Dicoding (Key Takeaways):</div>
+        <ul class="dic-takeaway-list">
+          <li>Turunan perkalian dua fungsi adalah $u'v + uv'$, bukan $u'v'$.</li><li>Turunan pembagian adalah $\frac{u'v - uv'}{v^2}$.</li><li>Aturan rantai mengalikan turunan fungsi luar dengan turunan fungsi dalam.</li>
+        </ul>
       </div>
 
       <!-- Bottom Navigation -->
@@ -739,29 +1057,20 @@
     // Widget Simulator Logic
     
         function updateTurunanSim() {
-          const x0 = parseInt(document.getElementById('tur_slider_x').value);
-          document.getElementById('tur_val_x').textContent = x0;
-          const y0 = x0 * x0 - 4 * x0;
-          const m = 2 * x0 - 4;
-          document.getElementById('tur_pt').textContent = `(${x0}, ${y0})`;
-          document.getElementById('tur_grad').textContent = `m = ${m}`;
-          let status = '';
-          let statusCls = '';
-          if (m < 0) {
-            status = 'Kurva Sedang Turun (m < 0)';
-            statusCls = 'fs-6 fw-bold text-info';
-          } else if (m === 0) {
-            status = '🎯 Titik Minimum Stasioner (m = 0)';
-            statusCls = 'fs-6 fw-bold text-success';
-          } else {
-            status = 'Kurva Sedang Naik (m > 0)';
-            statusCls = 'fs-6 fw-bold text-warning';
-          }
-          document.getElementById('tur_status').textContent = status;
-          document.getElementById('tur_status').className = statusCls;
-          const c = y0 - m * x0;
-          const cSign = c >= 0 ? `+ ${c}` : `- ${Math.abs(c)}`;
-          document.getElementById('tur_tangent').innerHTML = `Garis singgung: <strong>y = ${m}x ${cSign}</strong>. Nilai turunan f'(${x0}) = ${m} merepresentasikan kecepatan perubahan sesaat grafik.`;
+          const x0 = parseFloat(document.getElementById('tur_slider_x').value);
+          const rawDx = parseInt(document.getElementById('tur_slider_dx').value);
+          const dx = rawDx / 100;
+          document.getElementById('tur_val_x').textContent = x0.toFixed(1);
+          document.getElementById('tur_val_dx').textContent = dx.toFixed(2);
+          const y0 = x0 * x0;
+          const y1 = (x0 + dx) * (x0 + dx);
+          const secant = (y1 - y0) / dx;
+          const exact = 2 * x0;
+          const diff = Math.abs(secant - exact);
+          document.getElementById('tur_secant').textContent = secant.toFixed(2);
+          document.getElementById('tur_exact').textContent = exact.toFixed(2);
+          document.getElementById('tur_diff').textContent = diff.toFixed(3);
+          document.getElementById('tur_summary').innerHTML = `Pada f(x) = x², f'(${x0}) = 2(${x0}) = <strong>${exact.toFixed(2)}</strong>. Nilai tali busur secant = <strong>${secant.toFixed(2)}</strong> (galat = ${diff.toFixed(3)}).`;
         }
         
 

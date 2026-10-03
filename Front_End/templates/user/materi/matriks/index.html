@@ -16,9 +16,9 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
   <style>
     :root {
-      --accent: #06b6d4;
-      --accent-glow: #06b6d433;
-      --accent-dim: #06b6d415;
+      --accent: #ec4899;
+      --accent-glow: #ec489933;
+      --accent-dim: #ec489915;
       --bg-dark: #0a0d14;
       --bg-card: #111622;
       --bg-surface: #161d2e;
@@ -187,7 +187,7 @@
     /* Main Content Area */
     .dic-main {
       padding: 2.5rem 3rem;
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       width: 100%;
     }
@@ -242,31 +242,63 @@
       color: #f8fafc;
       line-height: 1.25;
     }
-    
+
+    /* Target Box */
     .dic-target-box {
-      background: #111622;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.25rem;
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .dic-target-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #818cf8;
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .dic-target-list {
       margin: 0;
       padding-left: 1.25rem;
-      font-size: 0.88rem;
-      color: #94a3b8;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
     }
-    .dic-target-list li { margin-bottom: 0.35rem; }
-    
+    .dic-target-list li { margin-bottom: 0.4rem; }
+
+    /* Real-World Hook Box */
+    .dic-hook-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.02));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .dic-hook-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dic-hook-body {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Section Title */
     .dic-section-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -278,50 +310,192 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border-color);
     }
-    
-    .dic-lead {
-      font-size: 1.02rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin: 1rem 0 1.5rem;
-    }
-    
-    .dic-formula-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid var(--accent-glow);
+
+    /* Concepts Cards */
+    .dic-concept-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 1.5rem;
       margin: 1.25rem 0;
-      text-align: center;
-      overflow-x: auto;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .dic-formula-explain {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-      margin: 1rem 0;
-      line-height: 1.6;
-    }
-    
-    .dic-example-box {
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-    }
-    .dic-example-title {
-      font-size: 0.85rem;
+    .dic-h3 {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #34d399;
-      margin-bottom: 0.5rem;
+      color: #f8fafc;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+    .dic-list {
+      margin: 0.5rem 0 0.75rem 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .dic-list li { margin-bottom: 0.35rem; }
+
+    /* Dicoding Callout Boxes */
+    .dic-callout {
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .dic-callout-icon {
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .dic-callout-content { flex-grow: 1; font-size: 0.91rem; line-height: 1.7; }
+    .dic-callout-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
     
+    .dic-callout.pro-tip {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-left: 4px solid #10b981;
+    }
+    .dic-callout.pro-tip .dic-callout-title { color: #34d399; }
+    .dic-callout.pro-tip .dic-callout-icon { color: #10b981; }
+    .dic-callout.pro-tip .dic-callout-content { color: #d1fae5; }
+
+    .dic-callout.pitfall {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 4px solid #f43f5e;
+    }
+    .dic-callout.pitfall .dic-callout-title { color: #fb7185; }
+    .dic-callout.pitfall .dic-callout-icon { color: #f43f5e; }
+    .dic-callout.pitfall .dic-callout-content { color: #ffe4e6; }
+
+    .dic-callout.fun-fact {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-left: 4px solid #8b5cf6;
+    }
+    .dic-callout.fun-fact .dic-callout-title { color: #c084fc; }
+    .dic-callout.fun-fact .dic-callout-icon { color: #8b5cf6; }
+    .dic-callout.fun-fact .dic-callout-content { color: #ede9fe; }
+
+    /* Formula & Parameter Table */
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-param-table-wrap {
+      margin: 1.25rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .dic-param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .dic-param-table th {
+      background: #161d2e;
+      color: #94a3b8;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-param-table td {
+      padding: 0.75rem 1rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .dic-param-table tr:last-child td { border-bottom: none; }
+    .dic-param-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .dic-symbol-badge {
+      font-family: 'Fira Code', monospace;
+      color: #38bdf8;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .dic-formula-explain {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      line-height: 1.7;
+    }
+
+    /* Guided Step Box */
+    .dic-step-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dic-step-problem {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+      line-height: 1.7;
+    }
+    .dic-step-item {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .dic-step-item.diketahui {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid #6366f1;
+      color: #cbd5e1;
+    }
+    .dic-step-item.ditanya {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 3px solid #f59e0b;
+      color: #cbd5e1;
+    }
+    .dic-step-item.langkah {
+      background: rgba(16, 185, 129, 0.05);
+      border-left: 3px solid #10b981;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    .dic-step-item.kesimpulan {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid #38bdf8;
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
     /* Interactive Math Simulation Box */
     .dic-sim-box {
       background: #111622;
@@ -424,6 +598,34 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
+
+    /* Takeaways Box */
+    .dic-takeaway-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(16, 185, 129, 0.01));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .dic-takeaway-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-takeaway-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .dic-takeaway-list li { margin-bottom: 0.45rem; }
     
     /* Bottom Navigation */
     .dic-bottom-nav {
@@ -469,8 +671,8 @@
 <style>
   .dic-overview-wrap { max-width: 980px; margin: 0 auto; padding: 2.5rem 1.5rem; }
   .dic-hero-card {
-    background: linear-gradient(135deg, #06b6d425, #06b6d408);
-    border: 1px solid #06b6d440;
+    background: linear-gradient(135deg, #ec489925, #ec489908);
+    border: 1px solid #ec489940;
     border-radius: 20px;
     padding: 2.5rem;
     margin-bottom: 2.5rem;
@@ -480,13 +682,13 @@
     width: 64px;
     height: 64px;
     border-radius: 16px;
-    background: #06b6d4;
+    background: #ec4899;
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.8rem;
-    box-shadow: 0 8px 20px #06b6d455;
+    box-shadow: 0 8px 20px #ec489955;
   }
   
   /* 5-Stage Framework Section */
@@ -550,7 +752,7 @@
   }
   .dic-card-item:hover {
     background: #161d2e;
-    border-color: #06b6d4;
+    border-color: #ec4899;
     transform: translateX(4px);
     color: #fff;
   }
@@ -569,7 +771,7 @@
   .dic-card-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.2rem; }
   .dic-card-meta { font-size: 0.8rem; color: #64748b; }
   .dic-start-btn {
-    background: #06b6d4;
+    background: #ec4899;
     color: #fff;
     font-weight: 700;
     padding: 0.85rem 2.2rem;
@@ -579,7 +781,7 @@
     align-items: center;
     gap: 0.6rem;
     font-size: 1rem;
-    box-shadow: 0 8px 20px #06b6d444;
+    box-shadow: 0 8px 20px #ec489944;
     transition: all 0.2s;
   }
   .dic-start-btn:hover { opacity: 0.95; transform: translateY(-2px); color:#fff; }
@@ -590,7 +792,7 @@
     <a href="{{ url_for('materi.materi_user') }}" class="dic-back-btn">
       <i class="bi bi-arrow-left"></i> <span>Katalog Materi</span>
     </a>
-    <span class="dic-badge"><i class="bi bi-grid-3x3" style="color:#06b6d4;"></i> Matriks & Aljabar Linear</span>
+    <span class="dic-badge"><i class="bi bi-grid-3x3" style="color:#ec4899;"></i> Matriks & Aljabar Linear</span>
   </header>
 
   <div class="dic-overview-wrap">
@@ -599,12 +801,12 @@
       <div class="d-flex align-items-center gap-3 mb-3">
         <div class="dic-hero-icon"><i class="bi bi-grid-3x3"></i></div>
         <div>
-          <div style="font-size:0.8rem; color:#06b6d4; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;">Modul Pembelajaran MathThon</div>
+          <div style="font-size:0.8rem; color:#ec4899; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;">Modul Pembelajaran MathThon</div>
           <h1 style="font-size:1.85rem; font-weight:800; margin:0; color:#f8fafc;">Matriks & Aljabar Linear</h1>
         </div>
       </div>
       <p style="color:#cbd5e1; font-size:1rem; margin-bottom:1.5rem; line-height:1.7;">
-        Kuasai operasi matriks, transpose, determinan, invers, dan pemecahan SPLDV menggunakan matriks.
+        Kuasai susunan data tabular matriks, operasi baris-kolom, perkalian matriks, determinan, invers, dan penerapannya dalam transformasi grafis dan kriptografi.
       </p>
       <div class="d-flex gap-4 flex-wrap" style="font-size:0.88rem; color:#94a3b8;">
         <span><i class="bi bi-collection text-info me-1"></i> 5 Bab Terstruktur</span>
@@ -614,60 +816,60 @@
 
       <!-- Progress Bar -->
       <div style="margin-top:1.25rem; background:rgba(255,255,255,0.08); border-radius:6px; height:7px; overflow:hidden;">
-        <div style="height:100%; background:#06b6d4; transition:width 0.4s; width: {{ (bab_progress|selectattr('is_completed')|list|length / 5 * 100)|int }}%;"></div>
+        <div style="height:100%; background:#ec4899; transition:width 0.4s; width: {{ (bab_progress|selectattr('is_completed')|list|length / 5 * 100)|int }}%;"></div>
       </div>
     </div>
 
     <!-- 5-Stage Framework Card -->
     <div class="dic-framework-box">
       <h2 style="font-size:1.05rem; font-weight:800; color:#f8fafc; margin-bottom:0.5rem; display:flex; align-items:center; gap:0.5rem;">
-        <i class="bi bi-diagram-3-fill" style="color:#06b6d4;"></i> Peta Peruntukan Kurikulum 5 Bab (Learning Pathway)
+        <i class="bi bi-diagram-3-fill" style="color:#ec4899;"></i> Peta Peruntukan Kurikulum 5 Bab (Learning Pathway)
       </h2>
       <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:1.25rem;">
-        Setiap bab dirancang secara pedagogis dengan peruntukan berjenjang dari intuisi hingga proyek sintesis:
+        Setiap bab dirancang secara pedagogis dengan peruntukan berjenjang ala Dicoding Academy:
       </p>
       
         <div class="dic-stage-card">
-          <div class="dic-stage-num" style="background:#06b6d420; color:#06b6d4;">1</div>
+          <div class="dic-stage-num" style="background:#ec489920; color:#ec4899;">1</div>
           <div class="flex-grow-1">
-            <div class="dic-stage-badge" style="color:#06b6d4;">TAHAP 1: FONDASI & INTUISI</div>
-            <div class="dic-stage-title">Fondasi: Konsep Matriks, Ordo & Representasi Data</div>
+            <div class="dic-stage-badge" style="color:#ec4899;">TAHAP 1: FONDASI & INTUISI</div>
+            <div class="dic-stage-title">Fondasi: Tabel Data Multi-Dimensi Menuju Matriks</div>
             <div class="dic-stage-desc">Peruntukan Bab 1: Membangun pemahaman intuitif dari nol, latar belakang mengapa konsep ini diciptakan, perbedaannya dengan topik sebelumnya, serta kerangka berpikir dasar.</div>
           </div>
         </div>
 
         <div class="dic-stage-card">
-          <div class="dic-stage-num" style="background:#06b6d420; color:#06b6d4;">2</div>
+          <div class="dic-stage-num" style="background:#ec489920; color:#ec4899;">2</div>
           <div class="flex-grow-1">
-            <div class="dic-stage-badge" style="color:#06b6d4;">TAHAP 2: ANATOMI & KAIDAH FORMAL</div>
-            <div class="dic-stage-title">Anatomi: Operasi Penjumlahan, Skalar & Perkalian Matriks</div>
+            <div class="dic-stage-badge" style="color:#ec4899;">TAHAP 2: ANATOMI & KAIDAH FORMAL</div>
+            <div class="dic-stage-title">Anatomi: Jenis-Jenis Matriks Baku & Operasi Aljabar Dasar</div>
             <div class="dic-stage-desc">Peruntukan Bab 2: Membedah struktur anatomi matematika, notasi formal, sifat-sifat fundamental, dan aksioma/teorema yang menjadi aturan main.</div>
           </div>
         </div>
 
         <div class="dic-stage-card">
-          <div class="dic-stage-num" style="background:#06b6d420; color:#06b6d4;">3</div>
+          <div class="dic-stage-num" style="background:#ec489920; color:#ec4899;">3</div>
           <div class="flex-grow-1">
-            <div class="dic-stage-badge" style="color:#06b6d4;">TAHAP 3: MEKANIKA PERHITUNGAN & ALGORITMA</div>
-            <div class="dic-stage-title">Mekanika: Determinan & Invers Matriks Ordo 2x2</div>
+            <div class="dic-stage-badge" style="color:#ec4899;">TAHAP 3: MEKANIKA PERHITUNGAN & ALGORITMA</div>
+            <div class="dic-stage-title">Mekanika: Prosedur Perkalian Matriks, Determinan & Invers 2x2</div>
             <div class="dic-stage-desc">Peruntukan Bab 3: Melatih keterampilan kalkulasi bertahap, metode analitik prosedural, strategi penyederhanaan, dan penanganan kasus khusus.</div>
           </div>
         </div>
 
         <div class="dic-stage-card">
-          <div class="dic-stage-num" style="background:#06b6d420; color:#06b6d4;">4</div>
+          <div class="dic-stage-num" style="background:#ec489920; color:#ec4899;">4</div>
           <div class="flex-grow-1">
-            <div class="dic-stage-badge" style="color:#06b6d4;">TAHAP 4: PEMODELAN & STUDI KASUS NYATA</div>
-            <div class="dic-stage-title">Pemodelan: Penyelesaian SPLDV dengan Metode Invers & Cramer</div>
-            <div class="dic-stage-desc">Peruntukan Bab 4: Menerjemahkan masalah dunia nyata (fisika, sains komputer, ekonomi, arsitektur) ke dalam pemodelan matematis formal.</div>
+            <div class="dic-stage-badge" style="color:#ec4899;">TAHAP 4: PEMODELAN & STUDI KASUS NYATA</div>
+            <div class="dic-stage-title">Pemodelan: Transformasi Geometri 2D & Penyelesaian Sistem Persamaan Matriks</div>
+            <div class="dic-stage-desc">Peruntukan Bab 4: Menerjemahkan masalah dunia nyata (fisika, sains komputer, ekonomi, rekayasa data) ke dalam pemodelan matematis formal.</div>
           </div>
         </div>
 
         <div class="dic-stage-card">
-          <div class="dic-stage-num" style="background:#06b6d420; color:#06b6d4;">5</div>
+          <div class="dic-stage-num" style="background:#ec489920; color:#ec4899;">5</div>
           <div class="flex-grow-1">
-            <div class="dic-stage-badge" style="color:#06b6d4;">TAHAP 5: CAPSTONE PROJECT & EVALUASI SINTESIS</div>
-            <div class="dic-stage-title">Capstone: Proyek Transformasi Spasial & Uji Sintesis Matriks</div>
+            <div class="dic-stage-badge" style="color:#ec4899;">TAHAP 5: CAPSTONE PROJECT & EVALUASI SINTESIS</div>
+            <div class="dic-stage-title">Capstone: Sistem Kriptografi Sandi Hill Cipher Berbasis Matriks</div>
             <div class="dic-stage-desc">Peruntukan Bab 5: Mengintegrasikan seluruh materi Bab 1 s/d Bab 4 dalam satu proyek tantangan komprehensif sebagai standar penguasaan modul.</div>
           </div>
         </div>
@@ -675,60 +877,60 @@
 
     <!-- Chapter List -->
     <h2 style="font-size:1.1rem; font-weight:700; color:#cbd5e1; margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem;">
-      <i class="bi bi-list-ol" style="color:#06b6d4;"></i> Daftar Bab Pembelajaran
+      <i class="bi bi-list-ol" style="color:#ec4899;"></i> Daftar Bab Pembelajaran
     </h2>
     
       <a href="{{ url_for('materi.subject_bab', subject='matriks', bab_num=1) }}" 
          class="dic-card-item {{ 'completed' if bab_progress[0]['is_completed'] else '' }}">
-        <div class="dic-card-num" style="background:#06b6d420; color:#06b6d4;">1</div>
+        <div class="dic-card-num" style="background:#ec489920; color:#ec4899;">1</div>
         <div class="flex-grow-1">
-          <div style="font-size:0.75rem; color:#06b6d4; font-weight:700; text-transform:uppercase;">TAHAP 1: FONDASI & INTUISI</div>
-          <div class="dic-card-title">Fondasi: Konsep Matriks, Ordo & Representasi Data</div>
-          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Simulator Interaktif</div>
+          <div style="font-size:0.75rem; color:#ec4899; font-weight:700; text-transform:uppercase;">TAHAP 1: FONDASI & INTUISI</div>
+          <div class="dic-card-title">Fondasi: Tabel Data Multi-Dimensi Menuju Matriks</div>
+          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~12-15 Menit &bull; Dilengkapi Simulator & Contoh Kasus</div>
         </div>
         <i class="bi {{ 'bi-check-circle-fill text-success' if bab_progress[0]['is_completed'] else 'bi-chevron-right text-muted' }} fs-5"></i>
       </a>
 
       <a href="{{ url_for('materi.subject_bab', subject='matriks', bab_num=2) }}" 
          class="dic-card-item {{ 'completed' if bab_progress[1]['is_completed'] else '' }}">
-        <div class="dic-card-num" style="background:#06b6d420; color:#06b6d4;">2</div>
+        <div class="dic-card-num" style="background:#ec489920; color:#ec4899;">2</div>
         <div class="flex-grow-1">
-          <div style="font-size:0.75rem; color:#06b6d4; font-weight:700; text-transform:uppercase;">TAHAP 2: ANATOMI & KAIDAH FORMAL</div>
-          <div class="dic-card-title">Anatomi: Operasi Penjumlahan, Skalar & Perkalian Matriks</div>
-          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Simulator Interaktif</div>
+          <div style="font-size:0.75rem; color:#ec4899; font-weight:700; text-transform:uppercase;">TAHAP 2: ANATOMI & KAIDAH FORMAL</div>
+          <div class="dic-card-title">Anatomi: Jenis-Jenis Matriks Baku & Operasi Aljabar Dasar</div>
+          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~12-15 Menit &bull; Dilengkapi Simulator & Contoh Kasus</div>
         </div>
         <i class="bi {{ 'bi-check-circle-fill text-success' if bab_progress[1]['is_completed'] else 'bi-chevron-right text-muted' }} fs-5"></i>
       </a>
 
       <a href="{{ url_for('materi.subject_bab', subject='matriks', bab_num=3) }}" 
          class="dic-card-item {{ 'completed' if bab_progress[2]['is_completed'] else '' }}">
-        <div class="dic-card-num" style="background:#06b6d420; color:#06b6d4;">3</div>
+        <div class="dic-card-num" style="background:#ec489920; color:#ec4899;">3</div>
         <div class="flex-grow-1">
-          <div style="font-size:0.75rem; color:#06b6d4; font-weight:700; text-transform:uppercase;">TAHAP 3: MEKANIKA PERHITUNGAN & ALGORITMA</div>
-          <div class="dic-card-title">Mekanika: Determinan & Invers Matriks Ordo 2x2</div>
-          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Simulator Interaktif</div>
+          <div style="font-size:0.75rem; color:#ec4899; font-weight:700; text-transform:uppercase;">TAHAP 3: MEKANIKA PERHITUNGAN & ALGORITMA</div>
+          <div class="dic-card-title">Mekanika: Prosedur Perkalian Matriks, Determinan & Invers 2x2</div>
+          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~12-15 Menit &bull; Dilengkapi Simulator & Contoh Kasus</div>
         </div>
         <i class="bi {{ 'bi-check-circle-fill text-success' if bab_progress[2]['is_completed'] else 'bi-chevron-right text-muted' }} fs-5"></i>
       </a>
 
       <a href="{{ url_for('materi.subject_bab', subject='matriks', bab_num=4) }}" 
          class="dic-card-item {{ 'completed' if bab_progress[3]['is_completed'] else '' }}">
-        <div class="dic-card-num" style="background:#06b6d420; color:#06b6d4;">4</div>
+        <div class="dic-card-num" style="background:#ec489920; color:#ec4899;">4</div>
         <div class="flex-grow-1">
-          <div style="font-size:0.75rem; color:#06b6d4; font-weight:700; text-transform:uppercase;">TAHAP 4: PEMODELAN & STUDI KASUS NYATA</div>
-          <div class="dic-card-title">Pemodelan: Penyelesaian SPLDV dengan Metode Invers & Cramer</div>
-          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Simulator Interaktif</div>
+          <div style="font-size:0.75rem; color:#ec4899; font-weight:700; text-transform:uppercase;">TAHAP 4: PEMODELAN & STUDI KASUS NYATA</div>
+          <div class="dic-card-title">Pemodelan: Transformasi Geometri 2D & Penyelesaian Sistem Persamaan Matriks</div>
+          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~12-15 Menit &bull; Dilengkapi Simulator & Contoh Kasus</div>
         </div>
         <i class="bi {{ 'bi-check-circle-fill text-success' if bab_progress[3]['is_completed'] else 'bi-chevron-right text-muted' }} fs-5"></i>
       </a>
 
       <a href="{{ url_for('materi.subject_bab', subject='matriks', bab_num=5) }}" 
          class="dic-card-item {{ 'completed' if bab_progress[4]['is_completed'] else '' }}">
-        <div class="dic-card-num" style="background:#06b6d420; color:#06b6d4;">5</div>
+        <div class="dic-card-num" style="background:#ec489920; color:#ec4899;">5</div>
         <div class="flex-grow-1">
-          <div style="font-size:0.75rem; color:#06b6d4; font-weight:700; text-transform:uppercase;">TAHAP 5: CAPSTONE PROJECT & EVALUASI SINTESIS</div>
-          <div class="dic-card-title">Capstone: Proyek Transformasi Spasial & Uji Sintesis Matriks</div>
-          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~10 Menit &bull; Simulator Interaktif</div>
+          <div style="font-size:0.75rem; color:#ec4899; font-weight:700; text-transform:uppercase;">TAHAP 5: CAPSTONE PROJECT & EVALUASI SINTESIS</div>
+          <div class="dic-card-title">Capstone: Sistem Kriptografi Sandi Hill Cipher Berbasis Matriks</div>
+          <div class="dic-card-meta"><i class="bi bi-clock"></i> ~12-15 Menit &bull; Dilengkapi Simulator & Contoh Kasus</div>
         </div>
         <i class="bi {{ 'bi-check-circle-fill text-success' if bab_progress[4]['is_completed'] else 'bi-chevron-right text-muted' }} fs-5"></i>
       </a>

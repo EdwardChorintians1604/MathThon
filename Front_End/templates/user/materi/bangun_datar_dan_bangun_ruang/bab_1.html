@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Geometri: Bangun Datar & Ruang - Bab 1: Fondasi: Dimensi Geometri & Teorema Pythagoras - MathThon</title>
+  <title>Geometri: Bangun Datar & Ruang - Bab 1: Fondasi: Dimensi Geometri Spasial & Teorema Pythagoras - MathThon</title>
   <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,7 +187,7 @@
     /* Main Content Area */
     .dic-main {
       padding: 2.5rem 3rem;
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       width: 100%;
     }
@@ -242,31 +242,63 @@
       color: #f8fafc;
       line-height: 1.25;
     }
-    
+
+    /* Target Box */
     .dic-target-box {
-      background: #111622;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.25rem;
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .dic-target-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #818cf8;
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .dic-target-list {
       margin: 0;
       padding-left: 1.25rem;
-      font-size: 0.88rem;
-      color: #94a3b8;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
     }
-    .dic-target-list li { margin-bottom: 0.35rem; }
-    
+    .dic-target-list li { margin-bottom: 0.4rem; }
+
+    /* Real-World Hook Box */
+    .dic-hook-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.02));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .dic-hook-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dic-hook-body {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Section Title */
     .dic-section-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -278,50 +310,192 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border-color);
     }
-    
-    .dic-lead {
-      font-size: 1.02rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin: 1rem 0 1.5rem;
-    }
-    
-    .dic-formula-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid var(--accent-glow);
+
+    /* Concepts Cards */
+    .dic-concept-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 1.5rem;
       margin: 1.25rem 0;
-      text-align: center;
-      overflow-x: auto;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .dic-formula-explain {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-      margin: 1rem 0;
-      line-height: 1.6;
-    }
-    
-    .dic-example-box {
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-    }
-    .dic-example-title {
-      font-size: 0.85rem;
+    .dic-h3 {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #34d399;
-      margin-bottom: 0.5rem;
+      color: #f8fafc;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+    .dic-list {
+      margin: 0.5rem 0 0.75rem 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .dic-list li { margin-bottom: 0.35rem; }
+
+    /* Dicoding Callout Boxes */
+    .dic-callout {
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .dic-callout-icon {
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .dic-callout-content { flex-grow: 1; font-size: 0.91rem; line-height: 1.7; }
+    .dic-callout-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
     
+    .dic-callout.pro-tip {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-left: 4px solid #10b981;
+    }
+    .dic-callout.pro-tip .dic-callout-title { color: #34d399; }
+    .dic-callout.pro-tip .dic-callout-icon { color: #10b981; }
+    .dic-callout.pro-tip .dic-callout-content { color: #d1fae5; }
+
+    .dic-callout.pitfall {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 4px solid #f43f5e;
+    }
+    .dic-callout.pitfall .dic-callout-title { color: #fb7185; }
+    .dic-callout.pitfall .dic-callout-icon { color: #f43f5e; }
+    .dic-callout.pitfall .dic-callout-content { color: #ffe4e6; }
+
+    .dic-callout.fun-fact {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-left: 4px solid #8b5cf6;
+    }
+    .dic-callout.fun-fact .dic-callout-title { color: #c084fc; }
+    .dic-callout.fun-fact .dic-callout-icon { color: #8b5cf6; }
+    .dic-callout.fun-fact .dic-callout-content { color: #ede9fe; }
+
+    /* Formula & Parameter Table */
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-param-table-wrap {
+      margin: 1.25rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .dic-param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .dic-param-table th {
+      background: #161d2e;
+      color: #94a3b8;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-param-table td {
+      padding: 0.75rem 1rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .dic-param-table tr:last-child td { border-bottom: none; }
+    .dic-param-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .dic-symbol-badge {
+      font-family: 'Fira Code', monospace;
+      color: #38bdf8;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .dic-formula-explain {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      line-height: 1.7;
+    }
+
+    /* Guided Step Box */
+    .dic-step-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dic-step-problem {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+      line-height: 1.7;
+    }
+    .dic-step-item {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .dic-step-item.diketahui {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid #6366f1;
+      color: #cbd5e1;
+    }
+    .dic-step-item.ditanya {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 3px solid #f59e0b;
+      color: #cbd5e1;
+    }
+    .dic-step-item.langkah {
+      background: rgba(16, 185, 129, 0.05);
+      border-left: 3px solid #10b981;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    .dic-step-item.kesimpulan {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid #38bdf8;
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
     /* Interactive Math Simulation Box */
     .dic-sim-box {
       background: #111622;
@@ -424,6 +598,34 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
+
+    /* Takeaways Box */
+    .dic-takeaway-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(16, 185, 129, 0.01));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .dic-takeaway-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-takeaway-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .dic-takeaway-list li { margin-bottom: 0.45rem; }
     
     /* Bottom Navigation */
     .dic-bottom-nav {
@@ -497,13 +699,13 @@
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=1) }}" 
            class="dic-chapter-link active {{ 'done' if all_bab_status[0]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[0]['is_completed'] else '1' }}</span>
-          <span>Fondasi: Dimensi Geometri & Teorema Pythagoras</span>
+          <span>Fondasi: Dimensi Geometri Spasial & Teorema Pythagoras</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=2) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[1]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[1]['is_completed'] else '2' }}</span>
-          <span>Anatomi: Bangun Datar Baku (Segitiga, Lingkaran, Segiempat)</span>
+          <span>Anatomi: Bangun Datar Baku (Segitiga, Segiempat & Lingkaran)</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=3) }}" 
@@ -515,24 +717,27 @@
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=4) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[3]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[3]['is_completed'] else '4' }}</span>
-          <span>Pemodelan: Konstruksi & Estimasi Material Ruang</span>
+          <span>Pemodelan: Hukum Skala Spasial Kuadratik vs Kubik</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=5) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[4]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[4]['is_completed'] else '5' }}</span>
-          <span>Capstone: Proyek Rekayasa & Uji Evaluasi Kapasitas Ruang</span>
+          <span>Capstone: Desain Tangki Penyimpanan Industri dengan Efisiensi Material</span>
         </a>
 
-      <!-- In-Page Anchor Links -->
+      <!-- In-Page Anchor Links (TOC) -->
       <div class="dic-sb-nav-title">Daftar Isi Halaman (TOC)</div>
       <div class="dic-anchor-box">
         <a href="#peruntukan" class="dic-anchor-link"><i class="bi bi-compass me-1"></i> Peruntukan & Sasaran</a>
+        <a href="#hook" class="dic-anchor-link"><i class="bi bi-lightbulb me-1"></i> Mengapa Ini Penting?</a>
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
-        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
+        <a href="#tips" class="dic-anchor-link"><i class="bi bi-patch-check me-1"></i> Tips & Jebakan Umum</a>
+        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi KaTeX</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
         <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
+        <a href="#rangkuman" class="dic-anchor-link"><i class="bi bi-check2-all me-1"></i> Rangkuman Intisari</a>
       </div>
     </aside>
 
@@ -546,6 +751,16 @@
         <span>Bab 1</span>
       </div>
 
+      <!-- Reading Meta Badges -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="badge bg-secondary-subtle text-light border border-secondary-subtle px-2 py-1 small">
+          <i class="bi bi-clock-history me-1"></i> ~12-15 Menit Baca Mendalam
+        </span>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 small">
+          <i class="bi bi-mortarboard me-1"></i> Standar Akademi Dicoding
+        </span>
+      </div>
+
       <!-- Explicit Stage Banner -->
       <div class="dic-role-banner" id="peruntukan">
         <div class="dic-role-icon"><i class="bi bi-stars"></i></div>
@@ -555,49 +770,142 @@
         </div>
       </div>
 
-      <h1 class="dic-h1">Fondasi: Dimensi Geometri & Teorema Pythagoras</h1>
+      <h1 class="dic-h1">Fondasi: Dimensi Geometri Spasial & Teorema Pythagoras</h1>
 
       <!-- Learning Objectives -->
       <div class="dic-target-box">
         <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#a855f7;"></i> Sasaran Pembelajaran Bab 1:</div>
         <ul class="dic-target-list">
-          <li>Memahami landasan konseptual dari Fondasi: Dimensi Geometri & Teorema Pythagoras secara sistematis.</li>
-          <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
+          <li>Memahami perbedaan dimensi spasial: Titik (0D), Garis Panjang (1D), Luas Penampang (2D), dan Volume Ruang (3D).</li><li>Membuktikan Teorema Pythagoras secara geometris pada segitiga siku-siku (c^2 = a^2 + b^2).</li><li>Menghitung diagonal ruang balok dan kubus menggunakan generalisasi Pythagoras 3D.</li>
         </ul>
       </div>
 
-      <!-- Core Concept -->
+      <!-- Real-World Motivation Hook -->
+      <div class="dic-hook-box" id="hook">
+        <div class="dic-hook-title"><i class="bi bi-lightbulb-fill"></i> Mengapa Konsep Ini Sangat Penting? (Perspektif Praktisi & Rekayasa)</div>
+        <p class="dic-hook-body">Tahukah kamu mengapa raksasa setinggi 20 meter seperti di film fiksi tidak mungkin bisa hidup di dunia nyata? Jika tinggi tubuh raksasa membesar 10 kali lipat, luas tulang penopang kakinya hanya membesar 100 kali (10^2), tetapi bobot massa tubuhnya melonjak 1.000 kali lipat (10^3)! Tulang kakinya akan patah seketika di bawah berat badannya sendiri. Geometri bukan sekadar hafalan rumus; geometri adalah aturan hukum fisika ruang yang membatasi bentuk seluruh makhluk hidup dan konstruksi gedung di alam semesta!</p>
+      </div>
+
+      <!-- Core Concept Sections -->
       <h2 class="dic-section-title" id="konsep">
-        <i class="bi bi-book-half" style="color:#a855f7;"></i> Pembahasan Konsep & Teori
+        <i class="bi bi-book-half" style="color:#a855f7;"></i> Pembahasan Konsep & Teori Mendalam
       </h2>
-      <p class="dic-lead">
-        Geometri mengkaji sifat ukuran, bentuk, posisi relatif bidang, dan sifat-sifat ruang dalam matematika formal.
-      </p>
+      
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-bounding-box text-primary"></i> 1. Hierarki Dimensi Ruang</h3>
+              <ul class="dic-list">
+                <li><strong>Dimensi 0 (Titik):</strong> Tidak memiliki panjang, luas, maupun volume. Hanya menyatakan posisi koordinat.</li>
+                <li><strong>Dimensi 1 (Garis / Panjang $L$):</strong> Memiliki satuan meter (m). Contoh: keliling, sisi, radius.</li>
+                <li><strong>Dimensi 2 (Bidang Datar / Luas $A$):</strong> Memiliki satuan meter persegi ($m^2$). Skala area bertumbuh kuadratik ($k^2$).</li>
+                <li><strong>Dimensi 3 (Ruang / Volume $V$):</strong> Memiliki satuan meter kubik ($m^3$). Skala kapasitas bertumbuh kubik ($k^3$).</li>
+              </ul>
+            </div>
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-triangle-fill text-primary"></i> 2. Teorema Pythagoras: Jembatan Antar-Dimensi</h3>
+              <p>Pada segitiga siku-siku dengan sisi siku-siku $a$ dan $b$ serta sisi miring (hipotenusa) $c$:</p>
+              \[ c^2 = a^2 + b^2 \iff c = \sqrt{a^2 + b^2} \]
+              <p>Perluasan Pythagoras pada Diagonal Ruang Balok 3D:</p>
+              \[ d_{\text{ruang}} = \sqrt{p^2 + l^2 + t^2} \]
+            </div>
+            
+
+      <!-- Dicoding Insights & Callouts -->
+      <h2 class="dic-section-title" id="tips">
+        <i class="bi bi-patch-check" style="color:#a855f7;"></i> Tips Praktisi & Wawasan Kritis
+      </h2>
+      
+      <div class="dic-callout pro-tip">
+        <div class="dic-callout-icon"><i class="bi bi-lightbulb-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">💡 Dicoding Pro-Tip / Praktik Terbaik</div>
+          <div class="dic-callout-content">Kuasai angka Triple Pythagoras populer: (3, 4, 5), (5, 12, 13), (7, 24, 25), (8, 15, 17) beserta kelipatannya. Menghafal angka ini menghemat 90% waktu pengerjaan soal ujian!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout pitfall">
+        <div class="dic-callout-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">⚠️ Common Pitfall / Jebakan Umum</div>
+          <div class="dic-callout-content">Teorema Pythagoras HANYA BERLAKU pada segitiga siku-siku (sudut tepat 90°)! Untuk segitiga sembarang lancip atau tumpul, kamu harus menggunakan Aturan Cosinus.</div>
+        </div>
+      </div>
+
+      <div class="dic-callout fun-fact">
+        <div class="dic-callout-icon"><i class="bi bi-cpu-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">🧠 Wawasan Komputasi & Fakta Menarik</div>
+          <div class="dic-callout-content">Meskipun dinamai menurut filsuf Yunani Pythagoras dari Samos (sekitar 500 SM), tablet tanah liat Babilonia kuno Plimpton 322 membuktikan bahwa bangsa Mesopotamia telah menggunakan angka Triple Pythagoras lebih dari 1.000 tahun sebelum Pythagoras lahir!</div>
+        </div>
+      </div>
 
       <!-- Formula Section -->
       <h2 class="dic-section-title" id="formula">
-        <i class="bi bi-calculator" style="color:#a855f7;"></i> Formulasi Matematis & Bedah Rumus
+        <i class="bi bi-calculator" style="color:#a855f7;"></i> Formulasi KaTeX & Anatomi Parameter
       </h2>
       <div class="dic-formula-card">
-        \[ c^2 = a^2 + b^2 \iff c = \sqrt{a^2 + b^2} \quad (\text{Pythagoras}) \]
+        \[ c = \sqrt{a^2 + b^2} \quad ; \quad d_{\text{ruang}} = \sqrt{p^2 + l^2 + t^2} \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Teorema Pythagoras menghubungkan sisi alas a, tinggi b, dan hipotenusa c pada segitiga siku-siku.
+        <strong>💡 Makna & Intuisi Formulasi:</strong> Luas bujur sangkar pada sisi miring sama persis dengan penjumlahan luas bujur sangkar pada kedua sisi siku-sikunya.
       </div>
+
+      <div class="small fw-bold text-muted text-uppercase mb-2 mt-3"><i class="bi bi-table me-1"></i> Bedah Anatomi Variabel Formulasi:</div>
+      
+    <div class="dic-param-table-wrap">
+      <table class="dic-param-table">
+        <thead>
+          <tr>
+            <th>Simbol / Notasi</th>
+            <th>Makna & Interpretasi Matematis</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">a, b</span></td>
+              <td class="text-light">Panjang sisi-sisi tegak siku-siku.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">c</span></td>
+              <td class="text-light">Sisi miring hipotenusa terpanjang.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">d_{\text{ruang}}</span></td>
+              <td class="text-light">Panjang diagonal ruang balok 3D.</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 
       <!-- Worked Example -->
       <h2 class="dic-section-title" id="contoh">
-        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu
+        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu (Langkah Demi Langkah)
       </h2>
-      <div class="dic-example-box">
-        <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
-        <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh 1: Segitiga siku-siku memiliki alas 6 cm dan tinggi 8 cm. Sisi miring c = √(6² + 8²) = √(36 + 64) = 10 cm.
-        </p>
+      
+    <div class="dic-step-box">
+      <div class="dic-step-problem">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-patch-question"></i> Skenario Studi Kasus:</div>
+        <div>Sebuah kamar tidur berukuran panjang 4 meter, lebar 3 meter, dan tinggi 12 meter. Berapakah panjang jarak garis lurus terjauh dari sudut lantai bawah ke sudut plafon langit-langit atas yang berseberangan (diagonal ruang)?</div>
       </div>
+      <div class="dic-step-item diketahui">
+        <div class="small fw-bold text-primary mb-1"><i class="bi bi-pin-angle-fill"></i> Diketahui:</div>
+        <div>$p = 4\text{ m}, l = 3\text{ m}, t = 12\text{ m}$.</div>
+      </div>
+      <div class="dic-step-item ditanya">
+        <div class="small fw-bold text-warning mb-1"><i class="bi bi-question-circle-fill"></i> Ditanya:</div>
+        <div>Diagonal ruang kamar $d_{\text{ruang}}$.</div>
+      </div>
+      <div class="dic-step-item langkah">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-diagram-3-fill"></i> Langkah Penyelesaian Terpandu:</div>
+        <div><div class='mb-2'><strong>Langkah 1: Hitung Kuadrat Masing-Masing Dimensi:</strong> $p^2 = 4^2 = 16$.<br>$l^2 = 3^2 = 9$.<br>$t^2 = 12^2 = 144$.</div><div class='mb-2'><strong>Langkah 2: Jumlahkan Ketiga Kuadrat Dimensi:</strong> $16 + 9 + 144 = 169$.</div><div class='mb-2'><strong>Langkah 3: Ambil Akar Kuadrat Total:</strong> $d_{\text{ruang}} = \sqrt{169} = 13\text{ meter}$.</div></div>
+      </div>
+      <div class="dic-step-item kesimpulan">
+        <div class="small fw-bold text-info mb-1"><i class="bi bi-check-circle-fill"></i> Kesimpulan Akhir:</div>
+        <div>Panjang diagonal ruang kamar tidur tersebut adalah tepat 13 meter.</div>
+      </div>
+    </div>
 
-      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <!-- Interactive Math Simulator Widget -->
       <h2 class="dic-section-title" id="simulator">
         <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
@@ -660,29 +968,37 @@
         </div>
       </div>
 
-      <!-- Active Recall / Capstone Challenge Exercise -->
+      <!-- Active Recall Quiz -->
       <div class="dic-quiz-card " id="latihan" style="">
         <div class="dic-quiz-tag" style="">
           <i class="bi bi-patch-question-fill"></i> 
           Active Recall Quiz - Bab 1
         </div>
-        <div class="dic-quiz-q" style="">Sebuah segitiga siku-siku memiliki sisi 9 cm dan 12 cm. Berapakah panjang sisi miringnya?</div>
+        <div class="dic-quiz-q" style="">Sebuah segitiga siku-siku memiliki sisi tegak 6 cm dan 8 cm. Berapakah panjang sisi miringnya?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'c = √(9² + 12²) = √(81 + 144) = √225 = 15 cm.')">
-          <span>15 cm</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'c = √(6² + 8²) = √(36 + 64) = √100 = 10 cm (Kelipatan 2 dari Triple 3-4-5).')">
+          <span>10 cm</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'c = √(9² + 12²) = √(81 + 144) = √225 = 15 cm.')">
-          <span>21 cm</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'c = √(6² + 8²) = √(36 + 64) = √100 = 10 cm (Kelipatan 2 dari Triple 3-4-5).')">
+          <span>14 cm</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'c = √(9² + 12²) = √(81 + 144) = √225 = 15 cm.')">
-          <span>18 cm</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'c = √(6² + 8²) = √(36 + 64) = √100 = 10 cm (Kelipatan 2 dari Triple 3-4-5).')">
+          <span>12 cm</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
+      </div>
+
+      <!-- Core Takeaways -->
+      <div class="dic-takeaway-box" id="rangkuman">
+        <div class="dic-takeaway-title"><i class="bi bi-bookmark-check-fill"></i> Ringkasan Intisari Dicoding (Key Takeaways):</div>
+        <ul class="dic-takeaway-list">
+          <li>Dimensi 1 (panjang), Dimensi 2 (luas), dan Dimensi 3 (volume) bertumbuh dengan faktor skala pangkat berbeda (k, k², k³).</li><li>Teorema Pythagoras $c^2 = a^2 + b^2$ adalah dasar pengukuran jarak euklides di seluruh cabang matematika.</li><li>Diagonal ruang balok 3D dihitung dengan $\sqrt{p^2 + l^2 + t^2}$.</li>
+        </ul>
       </div>
 
       <!-- Bottom Navigation -->

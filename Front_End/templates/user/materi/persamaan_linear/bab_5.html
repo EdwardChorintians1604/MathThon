@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistem Persamaan Linear - Bab 5: Capstone: Proyek Integratif & Uji Sintesis SPLDV - MathThon</title>
+  <title>Sistem Persamaan Linear - Bab 5: Capstone: Optimasi Anggaran Logistik Rantai Pasok Multi-Gudang - MathThon</title>
   <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,7 +187,7 @@
     /* Main Content Area */
     .dic-main {
       padding: 2.5rem 3rem;
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       width: 100%;
     }
@@ -242,31 +242,63 @@
       color: #f8fafc;
       line-height: 1.25;
     }
-    
+
+    /* Target Box */
     .dic-target-box {
-      background: #111622;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.25rem;
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .dic-target-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #818cf8;
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .dic-target-list {
       margin: 0;
       padding-left: 1.25rem;
-      font-size: 0.88rem;
-      color: #94a3b8;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
     }
-    .dic-target-list li { margin-bottom: 0.35rem; }
-    
+    .dic-target-list li { margin-bottom: 0.4rem; }
+
+    /* Real-World Hook Box */
+    .dic-hook-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.02));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .dic-hook-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dic-hook-body {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Section Title */
     .dic-section-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -278,50 +310,192 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border-color);
     }
-    
-    .dic-lead {
-      font-size: 1.02rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin: 1rem 0 1.5rem;
-    }
-    
-    .dic-formula-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid var(--accent-glow);
+
+    /* Concepts Cards */
+    .dic-concept-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 1.5rem;
       margin: 1.25rem 0;
-      text-align: center;
-      overflow-x: auto;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .dic-formula-explain {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-      margin: 1rem 0;
-      line-height: 1.6;
-    }
-    
-    .dic-example-box {
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-    }
-    .dic-example-title {
-      font-size: 0.85rem;
+    .dic-h3 {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #34d399;
-      margin-bottom: 0.5rem;
+      color: #f8fafc;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+    .dic-list {
+      margin: 0.5rem 0 0.75rem 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .dic-list li { margin-bottom: 0.35rem; }
+
+    /* Dicoding Callout Boxes */
+    .dic-callout {
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .dic-callout-icon {
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .dic-callout-content { flex-grow: 1; font-size: 0.91rem; line-height: 1.7; }
+    .dic-callout-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
     
+    .dic-callout.pro-tip {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-left: 4px solid #10b981;
+    }
+    .dic-callout.pro-tip .dic-callout-title { color: #34d399; }
+    .dic-callout.pro-tip .dic-callout-icon { color: #10b981; }
+    .dic-callout.pro-tip .dic-callout-content { color: #d1fae5; }
+
+    .dic-callout.pitfall {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 4px solid #f43f5e;
+    }
+    .dic-callout.pitfall .dic-callout-title { color: #fb7185; }
+    .dic-callout.pitfall .dic-callout-icon { color: #f43f5e; }
+    .dic-callout.pitfall .dic-callout-content { color: #ffe4e6; }
+
+    .dic-callout.fun-fact {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-left: 4px solid #8b5cf6;
+    }
+    .dic-callout.fun-fact .dic-callout-title { color: #c084fc; }
+    .dic-callout.fun-fact .dic-callout-icon { color: #8b5cf6; }
+    .dic-callout.fun-fact .dic-callout-content { color: #ede9fe; }
+
+    /* Formula & Parameter Table */
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-param-table-wrap {
+      margin: 1.25rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .dic-param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .dic-param-table th {
+      background: #161d2e;
+      color: #94a3b8;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-param-table td {
+      padding: 0.75rem 1rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .dic-param-table tr:last-child td { border-bottom: none; }
+    .dic-param-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .dic-symbol-badge {
+      font-family: 'Fira Code', monospace;
+      color: #38bdf8;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .dic-formula-explain {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      line-height: 1.7;
+    }
+
+    /* Guided Step Box */
+    .dic-step-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dic-step-problem {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+      line-height: 1.7;
+    }
+    .dic-step-item {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .dic-step-item.diketahui {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid #6366f1;
+      color: #cbd5e1;
+    }
+    .dic-step-item.ditanya {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 3px solid #f59e0b;
+      color: #cbd5e1;
+    }
+    .dic-step-item.langkah {
+      background: rgba(16, 185, 129, 0.05);
+      border-left: 3px solid #10b981;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    .dic-step-item.kesimpulan {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid #38bdf8;
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
     /* Interactive Math Simulation Box */
     .dic-sim-box {
       background: #111622;
@@ -424,6 +598,34 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
+
+    /* Takeaways Box */
+    .dic-takeaway-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(16, 185, 129, 0.01));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .dic-takeaway-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-takeaway-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .dic-takeaway-list li { margin-bottom: 0.45rem; }
     
     /* Bottom Navigation */
     .dic-bottom-nav {
@@ -497,42 +699,45 @@
         <a href="{{ url_for('materi.subject_bab', subject='persamaan_linear', bab_num=1) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[0]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[0]['is_completed'] else '1' }}</span>
-          <span>Fondasi: Konsep Intuitif & Pengenalan SPLDV</span>
+          <span>Fondasi: Garis Lurus & Makna Perpotongan Dua Hubungan Linier</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='persamaan_linear', bab_num=2) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[1]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[1]['is_completed'] else '2' }}</span>
-          <span>Anatomi: Notasi, Kaidah & Sifat Baku SPLDV</span>
+          <span>Anatomi: Struktur Baku SPLDV & Tiga Metode Penyelesaian</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='persamaan_linear', bab_num=3) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[2]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[2]['is_completed'] else '3' }}</span>
-          <span>Mekanika: Prosedur Perhitungan & Operasi SPLDV</span>
+          <span>Mekanika: Aturan Determinan Cramer & SPLTV 3 Variabel</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='persamaan_linear', bab_num=4) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[3]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[3]['is_completed'] else '4' }}</span>
-          <span>Pemodelan: Aplikasi Nyata & Studi Kasus SPLDV</span>
+          <span>Pemodelan: Aplikasi Nyata Sistem Persamaan Linear</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='persamaan_linear', bab_num=5) }}" 
            class="dic-chapter-link active {{ 'done' if all_bab_status[4]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[4]['is_completed'] else '5' }}</span>
-          <span>Capstone: Proyek Integratif & Uji Sintesis SPLDV</span>
+          <span>Capstone: Optimasi Anggaran Logistik Rantai Pasok Multi-Gudang</span>
         </a>
 
-      <!-- In-Page Anchor Links -->
+      <!-- In-Page Anchor Links (TOC) -->
       <div class="dic-sb-nav-title">Daftar Isi Halaman (TOC)</div>
       <div class="dic-anchor-box">
         <a href="#peruntukan" class="dic-anchor-link"><i class="bi bi-compass me-1"></i> Peruntukan & Sasaran</a>
+        <a href="#hook" class="dic-anchor-link"><i class="bi bi-lightbulb me-1"></i> Mengapa Ini Penting?</a>
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
-        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
+        <a href="#tips" class="dic-anchor-link"><i class="bi bi-patch-check me-1"></i> Tips & Jebakan Umum</a>
+        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi KaTeX</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
         <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
+        <a href="#rangkuman" class="dic-anchor-link"><i class="bi bi-check2-all me-1"></i> Rangkuman Intisari</a>
       </div>
     </aside>
 
@@ -546,6 +751,16 @@
         <span>Bab 5</span>
       </div>
 
+      <!-- Reading Meta Badges -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="badge bg-secondary-subtle text-light border border-secondary-subtle px-2 py-1 small">
+          <i class="bi bi-clock-history me-1"></i> ~12-15 Menit Baca Mendalam
+        </span>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 small">
+          <i class="bi bi-mortarboard me-1"></i> Standar Akademi Dicoding
+        </span>
+      </div>
+
       <!-- Explicit Stage Banner -->
       <div class="dic-role-banner" id="peruntukan">
         <div class="dic-role-icon"><i class="bi bi-trophy-fill"></i></div>
@@ -555,107 +770,219 @@
         </div>
       </div>
 
-      <h1 class="dic-h1">Capstone: Proyek Integratif & Uji Sintesis SPLDV</h1>
+      <h1 class="dic-h1">Capstone: Optimasi Anggaran Logistik Rantai Pasok Multi-Gudang</h1>
 
       <!-- Learning Objectives -->
       <div class="dic-target-box">
         <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#d97706;"></i> Sasaran Pembelajaran Bab 5:</div>
         <ul class="dic-target-list">
-          <li>Memahami landasan konseptual dari Capstone: Proyek Integratif & Uji Sintesis SPLDV secara sistematis.</li>
-          <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
+          <li>Mengintegrasikan penyelesaian SPLTV 3 variabel untuk memecahkan alokasi armada transportasi distribusi pangan nasional.</li><li>Menyusun model kendala kapasitas muatan, batas anggaran bahan bakar, dan kuota volume pengiriman.</li><li>Mengevaluasi keputusan manajerial logistik berdasarkan solusi matematis formal.</li>
         </ul>
       </div>
 
-      <!-- Core Concept -->
+      <!-- Real-World Motivation Hook -->
+      <div class="dic-hook-box" id="hook">
+        <div class="dic-hook-title"><i class="bi bi-lightbulb-fill"></i> Mengapa Konsep Ini Sangat Penting? (Perspektif Praktisi & Rekayasa)</div>
+        <p class="dic-hook-body">Selamat datang di Tahap Capstone! Kamu ditugaskan sebagai Director of Supply Chain Logistics BUMN Pangan. Sebuah pusat distribusi harus mengirimkan 90 ton bantuan beras menggunakan tiga jenis armada: Truk Kecil (x) bermuatan 2 ton, Truk Sedang (y) bermuatan 3 ton, dan Truk Tronton (z) bermuatan 5 ton. Total armada yang dikerahkan tepat 30 kendaraan. Biaya operasional total dipatok Rp 41 juta dengan rincian biaya: Truk Kecil Rp 1 juta, Truk Sedang Rp 1.5 juta, dan Truk Tronton Rp 2 juta per unit. Tentukan jumlah masing-masing armada yang harus diberangkatkan!</p>
+      </div>
+
+      <!-- Core Concept Sections -->
       <h2 class="dic-section-title" id="konsep">
-        <i class="bi bi-book-half" style="color:#d97706;"></i> Pembahasan Konsep & Teori
+        <i class="bi bi-book-half" style="color:#d97706;"></i> Pembahasan Konsep & Teori Mendalam
       </h2>
-      <p class="dic-lead">
-        Capstone SPLDV menguji pemecahan studi kasus nyata inventaris kendaraan parkir.
-      </p>
+      
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-trophy-fill text-warning"></i> Skenario SPLTV Logistik Pangan 3 Variabel</h3>
+              <p>Sistem dimodelkan oleh tiga persamaan simultan berderajat satu:</p>
+              \[ \begin{cases} x + y + z = 30 & (\text{Total Kendaraan}) \\ 2x + 3y + 5z = 90 & (\text{Kapasitas Tonase}) \\ x + 1.5y + 2z = 41 & (\text{Anggaran Biaya Juta Rp}) \end{cases} \]
+            </div>
+            
+
+      <!-- Dicoding Insights & Callouts -->
+      <h2 class="dic-section-title" id="tips">
+        <i class="bi bi-patch-check" style="color:#d97706;"></i> Tips Praktisi & Wawasan Kritis
+      </h2>
+      
+      <div class="dic-callout pro-tip">
+        <div class="dic-callout-icon"><i class="bi bi-lightbulb-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">💡 Dicoding Pro-Tip / Praktik Terbaik</div>
+          <div class="dic-callout-content">Untuk menyelesaikan SPLTV 3 variabel dengan cepat: Eliminasi variabel yang sama (misal x) dari dua pasang persamaan berbeda untuk menghasilkan SPLDV 2 variabel (y dan z) yang jauh lebih sederhana!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout pitfall">
+        <div class="dic-callout-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">⚠️ Common Pitfall / Jebakan Umum</div>
+          <div class="dic-callout-content">Jangan menggabungkan kembali persamaan yang baru saja dihasilkan dengan persamaan asal tanpa eliminasi, karena akan menghasilkan identitas lingkaran kosong (tautologi)!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout fun-fact">
+        <div class="dic-callout-icon"><i class="bi bi-cpu-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">🧠 Wawasan Komputasi & Fakta Menarik</div>
+          <div class="dic-callout-content">Metode penyelesaian sistem persamaan linear multi-variabel adalah fondasi dari algoritma optimasi rute armada pengiriman logistik raksasa dunia seperti FedEx, UPS, dan Amazon Prime.</div>
+        </div>
+      </div>
 
       <!-- Formula Section -->
       <h2 class="dic-section-title" id="formula">
-        <i class="bi bi-calculator" style="color:#d97706;"></i> Formulasi Matematis & Bedah Rumus
+        <i class="bi bi-calculator" style="color:#d97706;"></i> Formulasi KaTeX & Anatomi Parameter
       </h2>
       <div class="dic-formula-card">
-        \[ \begin{cases} x + y = 50 \\ 2x + 4y = 140 \end{cases} \implies 2x + 2y = 100 \implies 2y = 40 \implies y = 20, x = 30 \]
+        \[ \begin{cases} x + y + z = N \\ a x + b y + c z = T \\ d x + e y + f z = B \end{cases} \implies \text{Eliminasi Berjenjang menuju SPLDV} \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Sintesis Capstone memodelkan sistem parkir kendaraan roda 2 dan roda 4.
+        <strong>💡 Makna & Intuisi Formulasi:</strong> Menemukan titik potong persekutuan dari tiga bidang datar di ruang 3 dimensi (x, y, z).
       </div>
+
+      <div class="small fw-bold text-muted text-uppercase mb-2 mt-3"><i class="bi bi-table me-1"></i> Bedah Anatomi Variabel Formulasi:</div>
+      
+    <div class="dic-param-table-wrap">
+      <table class="dic-param-table">
+        <thead>
+          <tr>
+            <th>Simbol / Notasi</th>
+            <th>Makna & Interpretasi Matematis</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">x, y, z</span></td>
+              <td class="text-light">Alokasi armada truk kecil, sedang, dan tronton.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">N, T, B</span></td>
+              <td class="text-light">Kendala total kendaraan, tonase muatan, dan anggaran.</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 
       <!-- Worked Example -->
       <h2 class="dic-section-title" id="contoh">
-        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu
+        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu (Langkah Demi Langkah)
       </h2>
-      <div class="dic-example-box">
-        <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
-        <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh 5 (Capstone): Tempat parkir memuat 50 kendaraan (motor x dan mobil y) dengan total roda 140. Model: x + y = 50 dan 2x + 4y = 140. Kalikan persamaan 1 dengan 2: 2x + 2y = 100. Kurangkan: 2y = 40 => y = 20 mobil, maka x = 30 motor.
-        </p>
+      
+    <div class="dic-step-box">
+      <div class="dic-step-problem">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-patch-question"></i> Skenario Studi Kasus:</div>
+        <div>Selesaikan sistem logistik di atas untuk menentukan berapa banyak Truk Kecil (x), Truk Sedang (y), dan Truk Tronton (z) yang harus dikerahkan!</div>
       </div>
+      <div class="dic-step-item diketahui">
+        <div class="small fw-bold text-primary mb-1"><i class="bi bi-pin-angle-fill"></i> Diketahui:</div>
+        <div>(1) $x + y + z = 30$, (2) $2x + 3y + 5z = 90$, (3) $x + 1.5y + 2z = 41$.</div>
+      </div>
+      <div class="dic-step-item ditanya">
+        <div class="small fw-bold text-warning mb-1"><i class="bi bi-question-circle-fill"></i> Ditanya:</div>
+        <div>Nilai x, y, dan z.</div>
+      </div>
+      <div class="dic-step-item langkah">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-diagram-3-fill"></i> Langkah Penyelesaian Terpandu:</div>
+        <div><div class='mb-2'><strong>Langkah 1: Kalikan Persamaan (3) dengan 2 agar Bilangan Bulat:</strong> $2x + 3y + 4z = 82$ (Sebut sebagai Persamaan 4).</div><div class='mb-2'><strong>Langkah 2: Kurangkan Persamaan (2) dengan Persamaan (4):</strong> $(2x + 3y + 5z) - (2x + 3y + 4z) = 90 - 82 \implies z = 8\text{ unit tronton}$!</div><div class='mb-2'><strong>Langkah 3: Substitusikan z = 8 ke Persamaan (1) dan (2):</strong> Dari Pers (1): $x + y + 8 = 30 \implies x + y = 22$.<br>Dari Pers (2): $2x + 3y + 5(8) = 90 \implies 2x + 3y + 40 = 90 \implies 2x + 3y = 50$.</div><div class='mb-2'><strong>Langkah 4: Selesaikan SPLDV x dan y:</strong> Kalikan $x + y = 22$ dengan 2: $2x + 2y = 44$.<br>Kurangkan: $(2x + 3y) - (2x + 2y) = 50 - 44 \implies y = 6\text{ unit truk sedang}$.</div><div class='mb-2'><strong>Langkah 5: Cari Nilai x:</strong> $x = 22 - 6 = 16\text{ unit truk kecil}$.</div></div>
+      </div>
+      <div class="dic-step-item kesimpulan">
+        <div class="small fw-bold text-info mb-1"><i class="bi bi-check-circle-fill"></i> Kesimpulan Akhir:</div>
+        <div>Armada optimal yang diberangkatkan adalah 16 unit Truk Kecil, 6 unit Truk Sedang, dan 8 unit Truk Tronton (Total = 16 + 6 + 8 = 30 kendaraan).</div>
+      </div>
+    </div>
 
-      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <!-- Interactive Math Simulator Widget -->
       <h2 class="dic-section-title" id="simulator">
         <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
       <div class="dic-sim-box">
         <div class="dic-sim-topbar">
           <div class="dic-sim-title">
-            <i class="bi bi-cpu-fill" style="color:#d97706;"></i> Laboratorium Parameter Interaktif Persamaan Linear
+            <i class="bi bi-cpu-fill" style="color:#d97706;"></i> Laboratorium SPLDV: Determinant Cramer & Titik Potong Geometris
           </div>
           <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">
             <i class="bi bi-broadcast me-1"></i> Live Simulator
           </span>
         </div>
         <div class="dic-sim-body">
-          <p class="small text-muted mb-3">🎯 Misi Berpikir: Geser slider variabel untuk mengamati respons dan kalkulasi matematis secara langsung.</p>
+          <p class="small text-muted mb-3">🎯 Misi Berpikir: Geser koefisien dari 2 garis linear ax + by = c dan amati secara langsung letak titik potong (solusi unik) atau kondisi garis sejajar!</p>
           
-        <div class="row g-3 align-items-center">
-          <div class="col-md-6">
-            <label class="form-label small text-muted">Parameter x: <span id="gen_val_x" class="fw-bold text-info">5</span></label>
-            <input type="range" class="form-range" id="gen_slider_x" min="1" max="50" value="5" oninput="updateGenericSim()">
+        <div class="p-3 mb-3 rounded" style="background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.25);">
+          <div class="small fw-bold text-info mb-1"><i class="bi bi-intersect"></i> Dua Garis di Ruang 2D:</div>
+          <p class="small text-light mb-0">Solusi sistem persamaan linear dua variabel (SPLDV) adalah koordinat perpotongan dua garis lurus di bidang Kartesius. Jika determinan koefisien D = 0, garis bersifat sejajar (tidak ada solusi) atau berimpit.</p>
+        </div>
+        <div class="row g-2 align-items-center">
+          <div class="col-md-6 border-end border-secondary border-opacity-25 pe-3">
+            <div class="small fw-bold text-info mb-1">Garis 1: a₁x + b₁y = c₁</div>
+            <div class="d-flex gap-2">
+              <input type="number" class="form-control form-control-sm bg-dark text-light border-secondary" id="spldv_a1" value="2" oninput="updateSPLDVSim()">
+              <input type="number" class="form-control form-control-sm bg-dark text-light border-secondary" id="spldv_b1" value="1" oninput="updateSPLDVSim()">
+              <input type="number" class="form-control form-control-sm bg-dark text-light border-secondary" id="spldv_c1" value="8" oninput="updateSPLDVSim()">
+            </div>
           </div>
-          <div class="col-md-6">
-            <label class="form-label small text-muted">Faktor Skalar k: <span id="gen_val_k" class="fw-bold text-warning">2</span></label>
-            <input type="range" class="form-range" id="gen_slider_k" min="1" max="10" value="2" oninput="updateGenericSim()">
+          <div class="col-md-6 ps-3">
+            <div class="small fw-bold text-warning mb-1">Garis 2: a₂x + b₂y = c₂</div>
+            <div class="d-flex gap-2">
+              <input type="number" class="form-control form-control-sm bg-dark text-light border-secondary" id="spldv_a2" value="1" oninput="updateSPLDVSim()">
+              <input type="number" class="form-control form-control-sm bg-dark text-light border-secondary" id="spldv_b2" value="-1" oninput="updateSPLDVSim()">
+              <input type="number" class="form-control form-control-sm bg-dark text-light border-secondary" id="spldv_c2" value="1" oninput="updateSPLDVSim()">
+            </div>
           </div>
         </div>
         <div class="mt-3 p-3 rounded" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
-          <div class="d-flex justify-content-between">
-            <div><span class="small text-muted">Output Kalkulasi f(x) = k · x²:</span><div class="fs-5 fw-bold text-success" id="gen_out">50</div></div>
-            <div><span class="small text-muted">Nilai Invers / Akar:</span><div class="fs-5 fw-bold text-info" id="gen_sqrt">2.24</div></div>
+          <div class="row text-center g-2 mb-2">
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Determinan Utama D:</div>
+              <div class="fs-5 fw-bold text-info" id="spldv_det">D = -3</div>
+            </div>
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Nilai Solusi x:</div>
+              <div class="fs-5 fw-bold text-success" id="spldv_sol_x">x = 3.00</div>
+            </div>
+            <div class="col-4">
+              <div class="small text-muted">Nilai Solusi y:</div>
+              <div class="fs-5 fw-bold text-success" id="spldv_sol_y">y = 2.00</div>
+            </div>
+          </div>
+          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #3b82f6;">
+            <div class="small text-info fw-bold mb-1"><i class="bi bi-geo-alt-fill"></i> Titik Potong Koordinat (Solusi SPLDV):</div>
+            <div class="small text-light" id="spldv_status">Kedua garis berpotongan unik tepat di titik (3.00, 2.00).</div>
           </div>
         </div>
         
         </div>
       </div>
 
-      <!-- Active Recall / Capstone Challenge Exercise -->
+      <!-- Active Recall Quiz -->
       <div class="dic-quiz-card border border-warning border-opacity-50 shadow-lg" id="latihan" style="background: linear-gradient(145deg, #131b2e, #111622);">
         <div class="dic-quiz-tag" style="color:#eab308; font-size:0.82rem;">
           <i class="bi bi-trophy-fill"></i> 
           🏆 CAPSTONE CHALLENGE - UJI SINTESIS AKHIR MODUL
         </div>
-        <div class="dic-quiz-q" style="font-size:1.1rem; color:#fef08a;">Tantangan Capstone: Di tempat parkir terdapat 50 kendaraan yang terdiri dari motor (2 roda) dan mobil (4 roda). Jika jumlah roda seluruhnya 140, berapakah banyak mobil di tempat parkir?</div>
+        <div class="dic-quiz-q" style="font-size:1.1rem; color:#fef08a;">🏆 TANTANGAN CAPSTONE SPLTV: Berdasarkan hasil perhitungan alokasi armada di atas, berapakah banyak Truk Tronton (z) yang diberangkatkan?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'x + y = 50 dan 2x + 4y = 140. 2(50 - y) + 4y = 140 => 100 + 2y = 140 => 2y = 40 => y = 20 mobil (dan 30 motor).')">
-          <span>20 mobil</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Dari eliminasi (2x + 3y + 5z = 90) - (2x + 3y + 4z = 82) diperoleh langsung z = 8 unit.')">
+          <span>8 unit</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'x + y = 50 dan 2x + 4y = 140. 2(50 - y) + 4y = 140 => 100 + 2y = 140 => 2y = 40 => y = 20 mobil (dan 30 motor).')">
-          <span>30 mobil</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Dari eliminasi (2x + 3y + 5z = 90) - (2x + 3y + 4z = 82) diperoleh langsung z = 8 unit.')">
+          <span>6 unit</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'x + y = 50 dan 2x + 4y = 140. 2(50 - y) + 4y = 140 => 100 + 2y = 140 => 2y = 40 => y = 20 mobil (dan 30 motor).')">
-          <span>25 mobil</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Dari eliminasi (2x + 3y + 5z = 90) - (2x + 3y + 4z = 82) diperoleh langsung z = 8 unit.')">
+          <span>16 unit</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
+      </div>
+
+      <!-- Core Takeaways -->
+      <div class="dic-takeaway-box" id="rangkuman">
+        <div class="dic-takeaway-title"><i class="bi bi-bookmark-check-fill"></i> Ringkasan Intisari Dicoding (Key Takeaways):</div>
+        <ul class="dic-takeaway-list">
+          <li>SPLTV memodelkan masalah multi-kendala di dunia nyata menjadi solusi numerik unik.</li><li>Eliminasi berjenjang menyederhanakan 3 variabel menjadi 2 variabel hingga diperoleh solusi.</li><li>Selamat! Kamu telah menguasai seluruh kurikulum Sistem Persamaan Linear dengan standar pemecahan masalah tingkat tinggi!</li>
+        </ul>
       </div>
 
       <!-- Bottom Navigation -->
@@ -720,13 +1047,32 @@
 
     // Widget Simulator Logic
     
-        function updateGenericSim() {
-          const x = parseInt(document.getElementById('gen_slider_x').value);
-          const k = parseInt(document.getElementById('gen_slider_k').value);
-          document.getElementById('gen_val_x').textContent = x;
-          document.getElementById('gen_val_k').textContent = k;
-          document.getElementById('gen_out').textContent = k * x * x;
-          document.getElementById('gen_sqrt').textContent = Math.sqrt(x).toFixed(2);
+        function updateSPLDVSim() {
+          const a1 = parseFloat(document.getElementById('spldv_a1').value) || 0;
+          const b1 = parseFloat(document.getElementById('spldv_b1').value) || 0;
+          const c1 = parseFloat(document.getElementById('spldv_c1').value) || 0;
+          const a2 = parseFloat(document.getElementById('spldv_a2').value) || 0;
+          const b2 = parseFloat(document.getElementById('spldv_b2').value) || 0;
+          const c2 = parseFloat(document.getElementById('spldv_c2').value) || 0;
+          const D = (a1 * b2) - (a2 * b1);
+          const Dx = (c1 * b2) - (c2 * b1);
+          const Dy = (a1 * c2) - (a2 * c1);
+          document.getElementById('spldv_det').textContent = `D = ${D}`;
+          if (Math.abs(D) < 0.0001) {
+            document.getElementById('spldv_sol_x').textContent = "Tidak Unik";
+            document.getElementById('spldv_sol_y').textContent = "Tidak Unik";
+            if (Math.abs(Dx) < 0.0001 && Math.abs(Dy) < 0.0001) {
+              document.getElementById('spldv_status').innerHTML = "Kedua garis <strong>berhimpit</strong> (D=0, Dx=0, Dy=0), menghasilkan tak hingga solusi konsisten.";
+            } else {
+              document.getElementById('spldv_status').innerHTML = "Kedua garis <strong>sejajar</strong> sempurna (D=0 namun Dx≠0). Tidak ada titik potong (inkonsisten / himpunan kosong).";
+            }
+          } else {
+            const x = Dx / D;
+            const y = Dy / D;
+            document.getElementById('spldv_sol_x').textContent = `x = ${x.toFixed(2)}`;
+            document.getElementById('spldv_sol_y').textContent = `y = ${y.toFixed(2)}`;
+            document.getElementById('spldv_status').innerHTML = `Kedua garis berpotongan unik tepat di koordinat <strong>(${x.toFixed(2)}, ${y.toFixed(2)})</strong>. Solusi didapat via Aturan Cramer D_x/D dan D_y/D.`;
+          }
         }
         
 

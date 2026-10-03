@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Probabilitas & Kombinatorik - Bab 5: Capstone: Proyek Integratif & Uji Sintesis Probabilitas - MathThon</title>
+  <title>Probabilitas & Kombinatorik - Bab 5: Capstone: Sistem Skrining Diagnostik Medis & Teorema Bayes - MathThon</title>
   <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,7 +187,7 @@
     /* Main Content Area */
     .dic-main {
       padding: 2.5rem 3rem;
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       width: 100%;
     }
@@ -242,31 +242,63 @@
       color: #f8fafc;
       line-height: 1.25;
     }
-    
+
+    /* Target Box */
     .dic-target-box {
-      background: #111622;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.25rem;
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .dic-target-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #818cf8;
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .dic-target-list {
       margin: 0;
       padding-left: 1.25rem;
-      font-size: 0.88rem;
-      color: #94a3b8;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
     }
-    .dic-target-list li { margin-bottom: 0.35rem; }
-    
+    .dic-target-list li { margin-bottom: 0.4rem; }
+
+    /* Real-World Hook Box */
+    .dic-hook-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.02));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .dic-hook-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dic-hook-body {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Section Title */
     .dic-section-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -278,50 +310,192 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border-color);
     }
-    
-    .dic-lead {
-      font-size: 1.02rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin: 1rem 0 1.5rem;
-    }
-    
-    .dic-formula-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid var(--accent-glow);
+
+    /* Concepts Cards */
+    .dic-concept-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 1.5rem;
       margin: 1.25rem 0;
-      text-align: center;
-      overflow-x: auto;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .dic-formula-explain {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-      margin: 1rem 0;
-      line-height: 1.6;
-    }
-    
-    .dic-example-box {
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-    }
-    .dic-example-title {
-      font-size: 0.85rem;
+    .dic-h3 {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #34d399;
-      margin-bottom: 0.5rem;
+      color: #f8fafc;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+    .dic-list {
+      margin: 0.5rem 0 0.75rem 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .dic-list li { margin-bottom: 0.35rem; }
+
+    /* Dicoding Callout Boxes */
+    .dic-callout {
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .dic-callout-icon {
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .dic-callout-content { flex-grow: 1; font-size: 0.91rem; line-height: 1.7; }
+    .dic-callout-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
     
+    .dic-callout.pro-tip {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-left: 4px solid #10b981;
+    }
+    .dic-callout.pro-tip .dic-callout-title { color: #34d399; }
+    .dic-callout.pro-tip .dic-callout-icon { color: #10b981; }
+    .dic-callout.pro-tip .dic-callout-content { color: #d1fae5; }
+
+    .dic-callout.pitfall {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 4px solid #f43f5e;
+    }
+    .dic-callout.pitfall .dic-callout-title { color: #fb7185; }
+    .dic-callout.pitfall .dic-callout-icon { color: #f43f5e; }
+    .dic-callout.pitfall .dic-callout-content { color: #ffe4e6; }
+
+    .dic-callout.fun-fact {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-left: 4px solid #8b5cf6;
+    }
+    .dic-callout.fun-fact .dic-callout-title { color: #c084fc; }
+    .dic-callout.fun-fact .dic-callout-icon { color: #8b5cf6; }
+    .dic-callout.fun-fact .dic-callout-content { color: #ede9fe; }
+
+    /* Formula & Parameter Table */
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-param-table-wrap {
+      margin: 1.25rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .dic-param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .dic-param-table th {
+      background: #161d2e;
+      color: #94a3b8;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-param-table td {
+      padding: 0.75rem 1rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .dic-param-table tr:last-child td { border-bottom: none; }
+    .dic-param-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .dic-symbol-badge {
+      font-family: 'Fira Code', monospace;
+      color: #38bdf8;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .dic-formula-explain {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      line-height: 1.7;
+    }
+
+    /* Guided Step Box */
+    .dic-step-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dic-step-problem {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+      line-height: 1.7;
+    }
+    .dic-step-item {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .dic-step-item.diketahui {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid #6366f1;
+      color: #cbd5e1;
+    }
+    .dic-step-item.ditanya {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 3px solid #f59e0b;
+      color: #cbd5e1;
+    }
+    .dic-step-item.langkah {
+      background: rgba(16, 185, 129, 0.05);
+      border-left: 3px solid #10b981;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    .dic-step-item.kesimpulan {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid #38bdf8;
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
     /* Interactive Math Simulation Box */
     .dic-sim-box {
       background: #111622;
@@ -424,6 +598,34 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
+
+    /* Takeaways Box */
+    .dic-takeaway-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(16, 185, 129, 0.01));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .dic-takeaway-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-takeaway-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .dic-takeaway-list li { margin-bottom: 0.45rem; }
     
     /* Bottom Navigation */
     .dic-bottom-nav {
@@ -497,42 +699,45 @@
         <a href="{{ url_for('materi.subject_bab', subject='probabilitas', bab_num=1) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[0]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[0]['is_completed'] else '1' }}</span>
-          <span>Fondasi: Konsep Intuitif & Pengenalan Probabilitas</span>
+          <span>Fondasi: Ketidakpastian di Alam Semesta & Ruang Sampel</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='probabilitas', bab_num=2) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[1]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[1]['is_completed'] else '2' }}</span>
-          <span>Anatomi: Notasi, Kaidah & Sifat Baku Probabilitas</span>
+          <span>Anatomi: Kaidah Pencacahan, Permutasi (Urutan Penting) vs Kombinasi</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='probabilitas', bab_num=3) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[2]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[2]['is_completed'] else '3' }}</span>
-          <span>Mekanika: Prosedur Perhitungan & Operasi Probabilitas</span>
+          <span>Mekanika: Peluang Majemuk (Aturan Penjumlahan & Peluang Bersyarat)</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='probabilitas', bab_num=4) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[3]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[3]['is_completed'] else '4' }}</span>
-          <span>Pemodelan: Aplikasi Nyata & Studi Kasus Probabilitas</span>
+          <span>Pemodelan: Distribusi Binomial & Hukum Bilangan Besar</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='probabilitas', bab_num=5) }}" 
            class="dic-chapter-link active {{ 'done' if all_bab_status[4]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[4]['is_completed'] else '5' }}</span>
-          <span>Capstone: Proyek Integratif & Uji Sintesis Probabilitas</span>
+          <span>Capstone: Sistem Skrining Diagnostik Medis & Teorema Bayes</span>
         </a>
 
-      <!-- In-Page Anchor Links -->
+      <!-- In-Page Anchor Links (TOC) -->
       <div class="dic-sb-nav-title">Daftar Isi Halaman (TOC)</div>
       <div class="dic-anchor-box">
         <a href="#peruntukan" class="dic-anchor-link"><i class="bi bi-compass me-1"></i> Peruntukan & Sasaran</a>
+        <a href="#hook" class="dic-anchor-link"><i class="bi bi-lightbulb me-1"></i> Mengapa Ini Penting?</a>
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
-        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
+        <a href="#tips" class="dic-anchor-link"><i class="bi bi-patch-check me-1"></i> Tips & Jebakan Umum</a>
+        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi KaTeX</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
         <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
+        <a href="#rangkuman" class="dic-anchor-link"><i class="bi bi-check2-all me-1"></i> Rangkuman Intisari</a>
       </div>
     </aside>
 
@@ -546,6 +751,16 @@
         <span>Bab 5</span>
       </div>
 
+      <!-- Reading Meta Badges -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="badge bg-secondary-subtle text-light border border-secondary-subtle px-2 py-1 small">
+          <i class="bi bi-clock-history me-1"></i> ~12-15 Menit Baca Mendalam
+        </span>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 small">
+          <i class="bi bi-mortarboard me-1"></i> Standar Akademi Dicoding
+        </span>
+      </div>
+
       <!-- Explicit Stage Banner -->
       <div class="dic-role-banner" id="peruntukan">
         <div class="dic-role-icon"><i class="bi bi-trophy-fill"></i></div>
@@ -555,128 +770,216 @@
         </div>
       </div>
 
-      <h1 class="dic-h1">Capstone: Proyek Integratif & Uji Sintesis Probabilitas</h1>
+      <h1 class="dic-h1">Capstone: Sistem Skrining Diagnostik Medis & Teorema Bayes</h1>
 
       <!-- Learning Objectives -->
       <div class="dic-target-box">
         <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#14b8a6;"></i> Sasaran Pembelajaran Bab 5:</div>
         <ul class="dic-target-list">
-          <li>Memahami landasan konseptual dari Capstone: Proyek Integratif & Uji Sintesis Probabilitas secara sistematis.</li>
-          <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
+          <li>Menerapkan Teorema Bayes untuk memecahkan Paradoks Negatif Palsu dan Positif Palsu dalam uji diagnostik medis laboratorium.</li><li>Menghitung Nilai Prediktif Positif (PPV) berdasarkan sensitivitas alat uji dan prevalensi penyakit di masyarakat.</li><li>Mengevaluasi keputusan medis klinis berbasis probabilitas posterior yang teruji secara matematis.</li>
         </ul>
       </div>
 
-      <!-- Core Concept -->
+      <!-- Real-World Motivation Hook -->
+      <div class="dic-hook-box" id="hook">
+        <div class="dic-hook-title"><i class="bi bi-lightbulb-fill"></i> Mengapa Konsep Ini Sangat Penting? (Perspektif Praktisi & Rekayasa)</div>
+        <p class="dic-hook-body">Selamat datang di Tahap Capstone! Kamu ditugaskan sebagai Chief Epidemiologist Kementerian Kesehatan. Sebuah alat tes diagnostik cepat (Rapid Test) untuk penyakit langka memiliki tingkat akurasi akurat 99% (Sensitivitas 99% dan Spesifisitas 99%). Penyakit ini hanya menjangkiti 1 dari 1.000 orang di masyarakat (prevalensi 0.1%). Seseorang menjalani tes dan hasilnya POSITIF! Kebanyakan dokter awam mengira orang tersebut pasti 99% sakit. Padahal kenyataan matematis Teorema Bayes membuktikan bahwa peluang orang itu benar-benar sakit HANYA SEKITAR 9%! Mampukah kamu membuktikan paradoks probabilitas medis ini?</p>
+      </div>
+
+      <!-- Core Concept Sections -->
       <h2 class="dic-section-title" id="konsep">
-        <i class="bi bi-book-half" style="color:#14b8a6;"></i> Pembahasan Konsep & Teori
+        <i class="bi bi-book-half" style="color:#14b8a6;"></i> Pembahasan Konsep & Teori Mendalam
       </h2>
-      <p class="dic-lead">
-        Capstone Probabilitas menguji sintesis kombinatorika hipergeometrik pemilihan delegasi tim.
-      </p>
+      
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-trophy-fill text-warning"></i> Skenario Paradoks Teorema Bayes Medis</h3>
+              <p>Teorema Bayes menghitung probabilitas posterior terjadinya kondisi sakit ($S$) setelah diketahui hasil tes positif ($+$):</p>
+              \[ P(S | +) = \frac{P(+ | S) \cdot P(S)}{P(+)} \]
+              <p>Di mana total peluang hasil tes positif $P(+)$ berasal dari dua sumber: Orang yang <strong>Benar-benar Sakit dan Positif</strong> ditambah Orang yang <strong>Sehat tetapi Positif Palsu (False Positive)</strong>:</p>
+              \[ P(+) = P(+ | S)P(S) + P(+ | \text{Sehat})P(\text{Sehat}) \]
+            </div>
+            
+
+      <!-- Dicoding Insights & Callouts -->
+      <h2 class="dic-section-title" id="tips">
+        <i class="bi bi-patch-check" style="color:#14b8a6;"></i> Tips Praktisi & Wawasan Kritis
+      </h2>
+      
+      <div class="dic-callout pro-tip">
+        <div class="dic-callout-icon"><i class="bi bi-lightbulb-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">💡 Dicoding Pro-Tip / Praktik Terbaik</div>
+          <div class="dic-callout-content">Untuk memahami Teorema Bayes dengan sangat mudah tanpa rumus rumit: Bayangkan populasi 100.000 orang! Hitung berapa banyak orang sakit nyata dan berapa banyak orang sehat yang mendapat positif palsu, lalu bagi keduanya secara langsung!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout pitfall">
+        <div class="dic-callout-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">⚠️ Common Pitfall / Jebakan Umum</div>
+          <div class="dic-callout-content">Jangan abaikan angka PREVALENSI dasar (Base Rate Fallacy)! Pada penyakit langka, jumlah orang sehat yang mendapat positif palsu hampir selalu jauh lebih banyak daripada jumlah total orang yang benar-benar sakit.</div>
+        </div>
+      </div>
+
+      <div class="dic-callout fun-fact">
+        <div class="dic-callout-icon"><i class="bi bi-cpu-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">🧠 Wawasan Komputasi & Fakta Menarik</div>
+          <div class="dic-callout-content">Kesalahan penalaran Teorema Bayes di ruang pengadilan telah memicu banyak vonis salah dalam sejarah hukum pidana forensik (dikenal sebagai Prosecutor's Fallacy).</div>
+        </div>
+      </div>
 
       <!-- Formula Section -->
       <h2 class="dic-section-title" id="formula">
-        <i class="bi bi-calculator" style="color:#14b8a6;"></i> Formulasi Matematis & Bedah Rumus
+        <i class="bi bi-calculator" style="color:#14b8a6;"></i> Formulasi KaTeX & Anatomi Parameter
       </h2>
       <div class="dic-formula-card">
-        \[ P(\text{2P, 1W}) = \frac{^6C_2 \cdot ^4C_1}{^{10}C_3} = \frac{15 \cdot 4}{120} = \frac{60}{120} = 0.50 \]
+        \[ P(S | +) = \frac{P(+ | S) P(S)}{P(+ | S) P(S) + P(+ | H) P(H)} \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Sintesis Capstone menghitung peluang pemilihan delegasi gabungan pria dan wanita dari suatu komite.
+        <strong>💡 Makna & Intuisi Formulasi:</strong> Memperbarui keyakinan probabilitas awal menggunakan bukti eksperimental baru.
       </div>
+
+      <div class="small fw-bold text-muted text-uppercase mb-2 mt-3"><i class="bi bi-table me-1"></i> Bedah Anatomi Variabel Formulasi:</div>
+      
+    <div class="dic-param-table-wrap">
+      <table class="dic-param-table">
+        <thead>
+          <tr>
+            <th>Simbol / Notasi</th>
+            <th>Makna & Interpretasi Matematis</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">P(S)</span></td>
+              <td class="text-light">Prevalensi penyakit pada populasi umum (0.1%).</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">P(+ | S)</span></td>
+              <td class="text-light">Sensitivitas alat uji (akurasi positif benar = 99%).</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">P(+ | H)</span></td>
+              <td class="text-light">Tingkat positif palsu pada orang sehat (1 - 99% = 1%).</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 
       <!-- Worked Example -->
       <h2 class="dic-section-title" id="contoh">
-        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu
+        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu (Langkah Demi Langkah)
       </h2>
-      <div class="dic-example-box">
-        <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
-        <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh 5 (Capstone): Dalam komite 10 orang (6 pria, 4 wanita) dipilih 3 orang delegasi. Peluang terpilih 2 pria dan 1 wanita: [⁶C₂ × ⁴C₁] / ¹⁰C₃ = (15 × 4) / 120 = 60/120 = 0.50 (50%).
-        </p>
+      
+    <div class="dic-step-box">
+      <div class="dic-step-problem">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-patch-question"></i> Skenario Studi Kasus:</div>
+        <div>Pada populasi 100.000 orang, prevalensi penyakit adalah 0.1% (100 orang sakit, 99.900 orang sehat). Akurasi alat tes adalah 99% (Sensitivitas 99%, Spesifisitas 99%). Jika seseorang mendapat hasil tes positif, berapakah probabilitas bahwa ia benar-benar menderita penyakit tersebut?</div>
       </div>
+      <div class="dic-step-item diketahui">
+        <div class="small fw-bold text-primary mb-1"><i class="bi bi-pin-angle-fill"></i> Diketahui:</div>
+        <div>Total 100.000 orang. Sakit: 100 orang, Sehat: 99.900 orang. Tingkat positif benar: 99%, Positif palsu: 1%.</div>
+      </div>
+      <div class="dic-step-item ditanya">
+        <div class="small fw-bold text-warning mb-1"><i class="bi bi-question-circle-fill"></i> Ditanya:</div>
+        <div>Peluang benar sakit bersyarat hasil positif $P(S | +)$.</div>
+      </div>
+      <div class="dic-step-item langkah">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-diagram-3-fill"></i> Langkah Penyelesaian Terpandu:</div>
+        <div><div class='mb-2'><strong>Langkah 1: Hitung Positif Benar dari Kelompok Sakit:</strong> Dari 100 orang sakit, yang terdeteksi positif = $99\% \times 100 = 99\text{ orang}$.</div><div class='mb-2'><strong>Langkah 2: Hitung Positif Palsu dari Kelompok Sehat:</strong> Dari 99.900 orang sehat, yang keliru terdeteksi positif = $1\% \times 99.900 = 999\text{ orang}$!</div><div class='mb-2'><strong>Langkah 3: Hitung Total Seluruh Orang yang Mendapat Hasil Positif:</strong> Total positif = $99 + 999 = 1.098\text{ orang}$.</div><div class='mb-2'><strong>Langkah 4: Hitung Rasio Bayes Peluang Benar Sakit:</strong> $P(S | +) = \frac{99}{1.098} \approx 0.0901$ (atau tepatnya hanya $9.01\%$!).</div></div>
+      </div>
+      <div class="dic-step-item kesimpulan">
+        <div class="small fw-bold text-info mb-1"><i class="bi bi-check-circle-fill"></i> Kesimpulan Akhir:</div>
+        <div>Meskipun alat tes memiliki akurasi 99%, seseorang yang mendapat hasil positif hanya memiliki peluang sekitar 9.01% benar-benar sakit karena tingginya jumlah positif palsu dari populasi sehat.</div>
+      </div>
+    </div>
 
-      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <!-- Interactive Math Simulator Widget -->
       <h2 class="dic-section-title" id="simulator">
         <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
       <div class="dic-sim-box">
         <div class="dic-sim-topbar">
           <div class="dic-sim-title">
-            <i class="bi bi-cpu-fill" style="color:#14b8a6;"></i> Laboratorium Penalaran: Rasio Kombinatorika & Hukum Bilangan Besar
+            <i class="bi bi-cpu-fill" style="color:#14b8a6;"></i> Laboratorium Hukum Bilangan Besar (LLN): Dari Keacakan Menuju Kepastian Frekuensi
           </div>
           <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">
             <i class="bi bi-broadcast me-1"></i> Live Simulator
           </span>
         </div>
         <div class="dic-sim-body">
-          <p class="small text-muted mb-3">🎯 Misi Berpikir: Mengapa permutasi ⁿPᵣ selalu tepat r! kali lebih besar daripada kombinasi ⁿCᵣ?</p>
+          <p class="small text-muted mb-3">🎯 Misi Berpikir: Tingkatkan jumlah lemparan koin dari 10 hingga 5.000 kali untuk membuktikan konvergensi peluang teoretis 50%!</p>
           
-        <div class="p-3 mb-3 rounded" style="background:rgba(20,184,166,0.08); border:1px solid rgba(20,184,166,0.25);">
-          <div class="small fw-bold text-info mb-1"><i class="bi bi-dice-5"></i> Logika Urutan Posisi:</div>
-          <p class="small text-light mb-0">Kombinasi memilih anggota tanpa peduli urutan. Permutasi menata setiap anggota terpilih ke dalam urutan posisi (sebanyak r! cara). Ubah nilai r dan buktikan hubungan multiplikatifnya!</p>
+        <div class="p-3 mb-3 rounded" style="background:rgba(234,179,8,0.08); border:1px solid rgba(234,179,8,0.25);">
+          <div class="small fw-bold text-warning mb-1"><i class="bi bi-dice-5"></i> Mengapa Kasino Selalu Menang dalam Jangka Panjang?</div>
+          <p class="small text-light mb-0">Hukum Bilangan Besar (Law of Large Numbers) menyatakan bahwa dalam jumlah percobaan kecil, fluktuasi acak mendominasi. Namun saat N bertumbuh masif, frekuensi empiris pasti mengunci nilai peluang teoretis!</p>
         </div>
         <div class="row g-3 align-items-center">
-          <div class="col-md-6">
-            <label class="form-label small text-muted">Total Objek Tersedia (n): <span id="prob_val_n" class="fw-bold text-info">6</span></label>
-            <input type="range" class="form-range" id="prob_slider_n" min="2" max="10" value="6" oninput="updateProbSim()">
+          <div class="col-md-8">
+            <label class="form-label small text-muted">Jumlah Lemparan Koin Simulative (N): <span id="prob_n_val" class="fw-bold text-info">50</span></label>
+            <input type="range" class="form-range" id="prob_slider" min="10" max="5000" value="50" step="10" oninput="updateProbSim()">
           </div>
-          <div class="col-md-6">
-            <label class="form-label small text-muted">Objek Dipilih (r ≤ n): <span id="prob_val_r" class="fw-bold text-warning">3</span></label>
-            <input type="range" class="form-range" id="prob_slider_r" min="1" max="10" value="3" oninput="updateProbSim()">
+          <div class="col-md-4 text-end">
+            <button class="btn btn-sm btn-outline-warning" onclick="updateProbSim()"><i class="bi bi-shuffle"></i> Acak Ulang Sampel</button>
           </div>
         </div>
         <div class="mt-3 p-3 rounded" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
           <div class="row text-center g-2 mb-2">
             <div class="col-4 border-end border-secondary border-opacity-25">
-              <div class="small text-muted">Kombinasi ⁿCᵣ:</div>
-              <div class="fs-4 fw-bold text-success" id="prob_comb">20</div>
-              <div class="small text-muted">Tanpa urutan</div>
+              <div class="small text-muted">Peluang Teoretis:</div>
+              <div class="fs-5 fw-bold text-light">50.00%</div>
             </div>
             <div class="col-4 border-end border-secondary border-opacity-25">
-              <div class="small text-muted">Faktor Urutan (r!):</div>
-              <div class="fs-4 fw-bold text-warning" id="prob_fact">6</div>
-              <div class="small text-muted">Penataan posisi</div>
+              <div class="small text-muted">Frekuensi Gambar (Empiris):</div>
+              <div class="fs-5 fw-bold text-success" id="prob_emp">52.00%</div>
             </div>
             <div class="col-4">
-              <div class="small text-muted">Permutasi ⁿPᵣ:</div>
-              <div class="fs-4 fw-bold text-info" id="prob_perm">120</div>
-              <div class="small text-muted">ⁿCᵣ × r!</div>
+              <div class="small text-muted">Galat Deviasi dari Teori:</div>
+              <div class="fs-5 fw-bold text-warning" id="prob_err">2.00%</div>
             </div>
           </div>
-          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #14b8a6;">
-            <div class="small text-info fw-bold mb-1"><i class="bi bi-link-45deg"></i> Bukti Hubungan Logis:</div>
-            <div class="small text-light" id="prob_proof">ⁿP₃ = 20 × 3! = 20 × 6 = 120 cara susunan.</div>
+          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #eab308;">
+            <div class="small text-warning fw-bold mb-1"><i class="bi bi-graph-up"></i> Evaluasi Konvergensi LLN:</div>
+            <div class="small text-light" id="prob_text">Pada N=50 percobaan, galat acak masih terasa. Tingkatkan N hingga 5000 untuk melihat deviasi menyusut mendekati 0%.</div>
           </div>
         </div>
         
         </div>
       </div>
 
-      <!-- Active Recall / Capstone Challenge Exercise -->
+      <!-- Active Recall Quiz -->
       <div class="dic-quiz-card border border-warning border-opacity-50 shadow-lg" id="latihan" style="background: linear-gradient(145deg, #131b2e, #111622);">
         <div class="dic-quiz-tag" style="color:#eab308; font-size:0.82rem;">
           <i class="bi bi-trophy-fill"></i> 
           🏆 CAPSTONE CHALLENGE - UJI SINTESIS AKHIR MODUL
         </div>
-        <div class="dic-quiz-q" style="font-size:1.1rem; color:#fef08a;">Tantangan Capstone: Dari 10 anggota (6 pria, 4 wanita) dipilih 3 orang. Berapakah peluang terpilih 2 pria dan 1 wanita?</div>
+        <div class="dic-quiz-q" style="font-size:1.1rem; color:#fef08a;">🏆 TANTANGAN CAPSTONE PROBABILITAS: Mengapa pada penyakit sangat langka, hasil tes positif pertama tidak otomatis berarti orang tersebut pasti sakit?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, '[⁶C₂ × ⁴C₁] / ¹⁰C₃ = (15 × 4) / 120 = 60 / 120 = 0.50.')">
-          <span>0.50 (50%)</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Karena populasi sehat sangat dominan, kesalahan 1% dari populasi sehat menghasilkan lebih banyak orang positif palsu dibanding orang sakit sesungguhnya.')">
+          <span>Karena jumlah positif palsu dari orang sehat melampaui jumlah orang sakit nyata</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '[⁶C₂ × ⁴C₁] / ¹⁰C₃ = (15 × 4) / 120 = 60 / 120 = 0.50.')">
-          <span>0.25 (25%)</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Karena populasi sehat sangat dominan, kesalahan 1% dari populasi sehat menghasilkan lebih banyak orang positif palsu dibanding orang sakit sesungguhnya.')">
+          <span>Karena alat tes laboratorium selalu rusak</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '[⁶C₂ × ⁴C₁] / ¹⁰C₃ = (15 × 4) / 120 = 60 / 120 = 0.50.')">
-          <span>0.75 (75%)</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Karena populasi sehat sangat dominan, kesalahan 1% dari populasi sehat menghasilkan lebih banyak orang positif palsu dibanding orang sakit sesungguhnya.')">
+          <span>Karena probabilitas tidak berlaku di dunia nyata</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
+      </div>
+
+      <!-- Core Takeaways -->
+      <div class="dic-takeaway-box" id="rangkuman">
+        <div class="dic-takeaway-title"><i class="bi bi-bookmark-check-fill"></i> Ringkasan Intisari Dicoding (Key Takeaways):</div>
+        <ul class="dic-takeaway-list">
+          <li>Teorema Bayes membongkar bias intuisi manusia terhadap pengujian probabilitas bersyarat.</li><li>Pada populasi penyakit langka, hasil tes positif awal wajib dikonfirmasi dengan tes kedua (Confirmation Test).</li><li>Selamat! Kamu telah menguasai seluruh materi Probabilitas & Kombinatorik hingga tingkat sintesis mutakhir!</li>
+        </ul>
       </div>
 
       <!-- Bottom Navigation -->
@@ -742,19 +1045,17 @@
     // Widget Simulator Logic
     
         function updateProbSim() {
-          const fact = (num) => num <= 1 ? 1 : num * fact(num - 1);
-          let n = parseInt(document.getElementById('prob_slider_n').value);
-          let r = parseInt(document.getElementById('prob_slider_r').value);
-          if (r > n) { r = n; document.getElementById('prob_slider_r').value = r; }
-          document.getElementById('prob_val_n').textContent = n;
-          document.getElementById('prob_val_r').textContent = r;
-          const fR = fact(r);
-          const perm = fact(n) / fact(n - r);
-          const comb = fact(n) / (fR * fact(n - r));
-          document.getElementById('prob_comb').textContent = comb.toLocaleString('id-ID');
-          document.getElementById('prob_fact').textContent = `${r}! = ${fR}`;
-          document.getElementById('prob_perm').textContent = perm.toLocaleString('id-ID');
-          document.getElementById('prob_proof').innerHTML = `Hubungan: <strong>ⁿPᵣ = ⁿCᵣ × r!</strong> ➔ ${comb} × ${fR} = <strong>${perm} cara</strong>.`;
+          const N = parseInt(document.getElementById('prob_slider').value);
+          document.getElementById('prob_n_val').textContent = N.toLocaleString('id-ID');
+          let heads = 0;
+          for (let i = 0; i < N; i++) {
+            if (Math.random() < 0.5) heads++;
+          }
+          const pEmp = (heads / N) * 100;
+          const err = Math.abs(50 - pEmp);
+          document.getElementById('prob_emp').textContent = `${pEmp.toFixed(2)}%`;
+          document.getElementById('prob_err').textContent = `${err.toFixed(2)}%`;
+          document.getElementById('prob_text').innerHTML = `Dari <strong>${N.toLocaleString('id-ID')}</strong> lemparan, muncul gambar sebanyak <strong>${heads}</strong> kali (${pEmp.toFixed(2)}%). Deviasi dari probabilitas teoretis 50% tersisa <strong>${err.toFixed(2)}%</strong>. Semakin besar N, fluktuasi acak semakin teredam.`;
         }
         
 

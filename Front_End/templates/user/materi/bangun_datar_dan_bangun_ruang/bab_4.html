@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Geometri: Bangun Datar & Ruang - Bab 4: Pemodelan: Konstruksi & Estimasi Material Ruang - MathThon</title>
+  <title>Geometri: Bangun Datar & Ruang - Bab 4: Pemodelan: Hukum Skala Spasial Kuadratik vs Kubik - MathThon</title>
   <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,7 +187,7 @@
     /* Main Content Area */
     .dic-main {
       padding: 2.5rem 3rem;
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       width: 100%;
     }
@@ -242,31 +242,63 @@
       color: #f8fafc;
       line-height: 1.25;
     }
-    
+
+    /* Target Box */
     .dic-target-box {
-      background: #111622;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.25rem;
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .dic-target-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #818cf8;
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .dic-target-list {
       margin: 0;
       padding-left: 1.25rem;
-      font-size: 0.88rem;
-      color: #94a3b8;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
     }
-    .dic-target-list li { margin-bottom: 0.35rem; }
-    
+    .dic-target-list li { margin-bottom: 0.4rem; }
+
+    /* Real-World Hook Box */
+    .dic-hook-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.02));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .dic-hook-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dic-hook-body {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Section Title */
     .dic-section-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -278,50 +310,192 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border-color);
     }
-    
-    .dic-lead {
-      font-size: 1.02rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin: 1rem 0 1.5rem;
-    }
-    
-    .dic-formula-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid var(--accent-glow);
+
+    /* Concepts Cards */
+    .dic-concept-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 1.5rem;
       margin: 1.25rem 0;
-      text-align: center;
-      overflow-x: auto;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .dic-formula-explain {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-      margin: 1rem 0;
-      line-height: 1.6;
-    }
-    
-    .dic-example-box {
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-    }
-    .dic-example-title {
-      font-size: 0.85rem;
+    .dic-h3 {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #34d399;
-      margin-bottom: 0.5rem;
+      color: #f8fafc;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+    .dic-list {
+      margin: 0.5rem 0 0.75rem 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .dic-list li { margin-bottom: 0.35rem; }
+
+    /* Dicoding Callout Boxes */
+    .dic-callout {
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .dic-callout-icon {
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .dic-callout-content { flex-grow: 1; font-size: 0.91rem; line-height: 1.7; }
+    .dic-callout-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
     
+    .dic-callout.pro-tip {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-left: 4px solid #10b981;
+    }
+    .dic-callout.pro-tip .dic-callout-title { color: #34d399; }
+    .dic-callout.pro-tip .dic-callout-icon { color: #10b981; }
+    .dic-callout.pro-tip .dic-callout-content { color: #d1fae5; }
+
+    .dic-callout.pitfall {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 4px solid #f43f5e;
+    }
+    .dic-callout.pitfall .dic-callout-title { color: #fb7185; }
+    .dic-callout.pitfall .dic-callout-icon { color: #f43f5e; }
+    .dic-callout.pitfall .dic-callout-content { color: #ffe4e6; }
+
+    .dic-callout.fun-fact {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-left: 4px solid #8b5cf6;
+    }
+    .dic-callout.fun-fact .dic-callout-title { color: #c084fc; }
+    .dic-callout.fun-fact .dic-callout-icon { color: #8b5cf6; }
+    .dic-callout.fun-fact .dic-callout-content { color: #ede9fe; }
+
+    /* Formula & Parameter Table */
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-param-table-wrap {
+      margin: 1.25rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .dic-param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .dic-param-table th {
+      background: #161d2e;
+      color: #94a3b8;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-param-table td {
+      padding: 0.75rem 1rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .dic-param-table tr:last-child td { border-bottom: none; }
+    .dic-param-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .dic-symbol-badge {
+      font-family: 'Fira Code', monospace;
+      color: #38bdf8;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .dic-formula-explain {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      line-height: 1.7;
+    }
+
+    /* Guided Step Box */
+    .dic-step-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dic-step-problem {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+      line-height: 1.7;
+    }
+    .dic-step-item {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .dic-step-item.diketahui {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid #6366f1;
+      color: #cbd5e1;
+    }
+    .dic-step-item.ditanya {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 3px solid #f59e0b;
+      color: #cbd5e1;
+    }
+    .dic-step-item.langkah {
+      background: rgba(16, 185, 129, 0.05);
+      border-left: 3px solid #10b981;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    .dic-step-item.kesimpulan {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid #38bdf8;
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
     /* Interactive Math Simulation Box */
     .dic-sim-box {
       background: #111622;
@@ -424,6 +598,34 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
+
+    /* Takeaways Box */
+    .dic-takeaway-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(16, 185, 129, 0.01));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .dic-takeaway-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-takeaway-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .dic-takeaway-list li { margin-bottom: 0.45rem; }
     
     /* Bottom Navigation */
     .dic-bottom-nav {
@@ -497,13 +699,13 @@
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=1) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[0]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[0]['is_completed'] else '1' }}</span>
-          <span>Fondasi: Dimensi Geometri & Teorema Pythagoras</span>
+          <span>Fondasi: Dimensi Geometri Spasial & Teorema Pythagoras</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=2) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[1]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[1]['is_completed'] else '2' }}</span>
-          <span>Anatomi: Bangun Datar Baku (Segitiga, Lingkaran, Segiempat)</span>
+          <span>Anatomi: Bangun Datar Baku (Segitiga, Segiempat & Lingkaran)</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=3) }}" 
@@ -515,24 +717,27 @@
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=4) }}" 
            class="dic-chapter-link active {{ 'done' if all_bab_status[3]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[3]['is_completed'] else '4' }}</span>
-          <span>Pemodelan: Konstruksi & Estimasi Material Ruang</span>
+          <span>Pemodelan: Hukum Skala Spasial Kuadratik vs Kubik</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='bangun_datar_dan_bangun_ruang', bab_num=5) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[4]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[4]['is_completed'] else '5' }}</span>
-          <span>Capstone: Proyek Rekayasa & Uji Evaluasi Kapasitas Ruang</span>
+          <span>Capstone: Desain Tangki Penyimpanan Industri dengan Efisiensi Material</span>
         </a>
 
-      <!-- In-Page Anchor Links -->
+      <!-- In-Page Anchor Links (TOC) -->
       <div class="dic-sb-nav-title">Daftar Isi Halaman (TOC)</div>
       <div class="dic-anchor-box">
         <a href="#peruntukan" class="dic-anchor-link"><i class="bi bi-compass me-1"></i> Peruntukan & Sasaran</a>
+        <a href="#hook" class="dic-anchor-link"><i class="bi bi-lightbulb me-1"></i> Mengapa Ini Penting?</a>
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
-        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
+        <a href="#tips" class="dic-anchor-link"><i class="bi bi-patch-check me-1"></i> Tips & Jebakan Umum</a>
+        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi KaTeX</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
         <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
+        <a href="#rangkuman" class="dic-anchor-link"><i class="bi bi-check2-all me-1"></i> Rangkuman Intisari</a>
       </div>
     </aside>
 
@@ -546,58 +751,156 @@
         <span>Bab 4</span>
       </div>
 
+      <!-- Reading Meta Badges -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="badge bg-secondary-subtle text-light border border-secondary-subtle px-2 py-1 small">
+          <i class="bi bi-clock-history me-1"></i> ~12-15 Menit Baca Mendalam
+        </span>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 small">
+          <i class="bi bi-mortarboard me-1"></i> Standar Akademi Dicoding
+        </span>
+      </div>
+
       <!-- Explicit Stage Banner -->
       <div class="dic-role-banner" id="peruntukan">
         <div class="dic-role-icon"><i class="bi bi-lightbulb-fill"></i></div>
         <div>
           <div class="dic-role-title">TAHAP 4: PEMODELAN & STUDI KASUS NYATA</div>
-          <p class="dic-role-text">Peruntukan Bab 4: Menerjemahkan masalah dunia nyata (fisika, sains komputer, ekonomi, arsitektur) ke dalam pemodelan matematis formal.</p>
+          <p class="dic-role-text">Peruntukan Bab 4: Menerjemahkan masalah dunia nyata (fisika, sains komputer, ekonomi, rekayasa data) ke dalam pemodelan matematis formal.</p>
         </div>
       </div>
 
-      <h1 class="dic-h1">Pemodelan: Konstruksi & Estimasi Material Ruang</h1>
+      <h1 class="dic-h1">Pemodelan: Hukum Skala Spasial Kuadratik vs Kubik</h1>
 
       <!-- Learning Objectives -->
       <div class="dic-target-box">
         <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#a855f7;"></i> Sasaran Pembelajaran Bab 4:</div>
         <ul class="dic-target-list">
-          <li>Memahami landasan konseptual dari Pemodelan: Konstruksi & Estimasi Material Ruang secara sistematis.</li>
-          <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
+          <li>Memahami Hukum Penskalaan Geometris (Square-Cube Law): Luas ~ k^2 sedangkan Volume ~ k^3.</li><li>Menganalisis mengapa hewan bertubuh besar membutuhkan struktur tulang yang jauh lebih tebal dibanding serangga.</li><li>Memodelkan efisiensi termal rasio Luas Permukaan terhadap Volume (L/V) dalam desain industri pendinginan.</li>
         </ul>
       </div>
 
-      <!-- Core Concept -->
+      <!-- Real-World Motivation Hook -->
+      <div class="dic-hook-box" id="hook">
+        <div class="dic-hook-title"><i class="bi bi-lightbulb-fill"></i> Mengapa Konsep Ini Sangat Penting? (Perspektif Praktisi & Rekayasa)</div>
+        <p class="dic-hook-body">Pernahkah kamu bertanya mengapa gajah memiliki kaki silinder raksasa yang sangat tebal mirip pilar gedung, sedangkan laba-laba atau nyamuk memiliki kaki yang sangat ramping seperti benang tipis? Mengapa tidak ada serangga berukuran sebesar helikopter? Jawabannya ada pada Hukum Skala Kuadrat-Kubik Galileo Galilei: saat sebuah objek diperbesar k kali lipat, luas penampang tulangnya hanya membesar k² kali, tetapi beban volume massanya meledak k³ kali lipat!</p>
+      </div>
+
+      <!-- Core Concept Sections -->
       <h2 class="dic-section-title" id="konsep">
-        <i class="bi bi-book-half" style="color:#a855f7;"></i> Pembahasan Konsep & Teori
+        <i class="bi bi-book-half" style="color:#a855f7;"></i> Pembahasan Konsep & Teori Mendalam
       </h2>
-      <p class="dic-lead">
-        Aplikasi geometri mencakup perhitungan struktur sipil, arsitektur, dan optimasi kemasan logistik.
-      </p>
+      
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-aspect-ratio text-primary"></i> 1. Hukum Penskalaan Galileo (Square-Cube Law)</h3>
+              <p>Jika sebuah bangun geometri diskalakan secara proporsional sebesar faktor pengali $k$ di seluruh dimensinya:</p>
+              <ul class="dic-list">
+                <li>Panjang Linier (1D) bertambah sebesar: $k$ kali lipat.</li>
+                <li>Luas Permukaan (2D) bertambah sebesar: $k^2$ kali lipat.</li>
+                <li>Volume & Massa (3D) bertambah sebesar: $k^3$ kali lipat!</li>
+              </ul>
+              <h4 class="fw-bold text-info mt-3"><i class="bi bi-cpu"></i> Rasio Luas terhadap Volume (L/V):</h4>
+              <p>Rasio $L/V$ berbanding terbalik dengan ukuran ($\sim 1/r$). Benda kecil memiliki rasio permukaan terhadap volume yang sangat besar, sehingga cepat kehilangan panas; sedangkan benda raksasa memiliki rasio L/V kecil sehingga menahan panas jauh lebih lama.</p>
+            </div>
+            
+
+      <!-- Dicoding Insights & Callouts -->
+      <h2 class="dic-section-title" id="tips">
+        <i class="bi bi-patch-check" style="color:#a855f7;"></i> Tips Praktisi & Wawasan Kritis
+      </h2>
+      
+      <div class="dic-callout pro-tip">
+        <div class="dic-callout-icon"><i class="bi bi-lightbulb-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">💡 Dicoding Pro-Tip / Praktik Terbaik</div>
+          <div class="dic-callout-content">Dalam teknik mesin komputer, prosesor bertenaga tinggi (CPU/GPU) menggunakan pendingin heatsink dengan sirip-sirip tipis yang banyak untuk MEMPERBESAR luas permukaan 2D tanpa menambah volume total!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout pitfall">
+        <div class="dic-callout-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">⚠️ Common Pitfall / Jebakan Umum</div>
+          <div class="dic-callout-content">Jangan berasumsi jika dimensi panjang kotak diperbesar 2 kali lipat, berat bebannya hanya bertambah 2 kali lipat! Berat bebannya melonjak $2^3 = 8$ KALI LIPAT!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout fun-fact">
+        <div class="dic-callout-icon"><i class="bi bi-cpu-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">🧠 Wawasan Komputasi & Fakta Menarik</div>
+          <div class="dic-callout-content">Ilmuwan biologi J.B.S. Haldane menerbitkan esai sains terkenal tahun 1926 berjudul 'On Being the Right Size', yang membuktikan bahwa gravitasi mendikte bentuk anatomi seluruh makhluk hidup berdasarkan hukum geometri luas-volume.</div>
+        </div>
+      </div>
 
       <!-- Formula Section -->
       <h2 class="dic-section-title" id="formula">
-        <i class="bi bi-calculator" style="color:#a855f7;"></i> Formulasi Matematis & Bedah Rumus
+        <i class="bi bi-calculator" style="color:#a855f7;"></i> Formulasi KaTeX & Anatomi Parameter
       </h2>
       <div class="dic-formula-card">
-        \[ V_{\text{balok}} = p \cdot l \cdot t \quad ; \quad V_{\text{bola}} = \frac{4}{3}\pi r^3 \]
+        \[ \frac{A_2}{A_1} = k^2 \quad ; \quad \frac{V_2}{V_1} = k^3 \quad ; \quad \text{Rasio } \frac{\text{Luas}}{\text{Volume}} \propto \frac{1}{r} \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Volume ruang 3D mengukur total kapasitas kubik fluida atau materi yang dapat ditampung.
+        <strong>💡 Makna & Intuisi Formulasi:</strong> Pertumbuhan kubik dimensi volume 3D selalu mendominasi dan mengalahkan pertumbuhan kuadratik permukaan 2D.
       </div>
+
+      <div class="small fw-bold text-muted text-uppercase mb-2 mt-3"><i class="bi bi-table me-1"></i> Bedah Anatomi Variabel Formulasi:</div>
+      
+    <div class="dic-param-table-wrap">
+      <table class="dic-param-table">
+        <thead>
+          <tr>
+            <th>Simbol / Notasi</th>
+            <th>Makna & Interpretasi Matematis</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">k</span></td>
+              <td class="text-light">Faktor skala kelipatan pembesaran linier.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">A_2 / A_1</span></td>
+              <td class="text-light">Rasio pertambahan luas permukaan (kuadratik).</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">V_2 / V_1</span></td>
+              <td class="text-light">Rasio pertambahan kapasitas volume (kubik).</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 
       <!-- Worked Example -->
       <h2 class="dic-section-title" id="contoh">
-        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu
+        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu (Langkah Demi Langkah)
       </h2>
-      <div class="dic-example-box">
-        <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
-        <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh 4: Balok berukuran 12 cm × 8 cm × 5 cm memiliki Luas Permukaan = 2(96 + 60 + 40) = 392 cm².
-        </p>
+      
+    <div class="dic-step-box">
+      <div class="dic-step-problem">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-patch-question"></i> Skenario Studi Kasus:</div>
+        <div>Sebuah model prototipe patung miniatur logam padat memiliki tinggi 10 cm dengan berat 0.5 kg. Jika patung tersebut akan dibuat ukuran aslinya dengan tinggi 100 cm (skala k = 10) menggunakan bahan logam padat yang sama persis, berapakah berat total patung ukuran aslinya?</div>
       </div>
+      <div class="dic-step-item diketahui">
+        <div class="small fw-bold text-primary mb-1"><i class="bi bi-pin-angle-fill"></i> Diketahui:</div>
+        <div>Tinggi miniatur = 10 cm, Tinggi asli = 100 cm (Faktor skala $k = 100 / 10 = 10$). Berat awal = 0.5 kg.</div>
+      </div>
+      <div class="dic-step-item ditanya">
+        <div class="small fw-bold text-warning mb-1"><i class="bi bi-question-circle-fill"></i> Ditanya:</div>
+        <div>Berat patung asli (Volume berskala kubik).</div>
+      </div>
+      <div class="dic-step-item langkah">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-diagram-3-fill"></i> Langkah Penyelesaian Terpandu:</div>
+        <div><div class='mb-2'><strong>Langkah 1: Tentukan Faktor Skala Linier k:</strong> $k = \frac{100\text{ cm}}{10\text{ cm}} = 10$.</div><div class='mb-2'><strong>Langkah 2: Terapkan Hukum Skala Kubik untuk Volume & Massa:</strong> Karena bahan logam identik (massa jenis $\rho$ sama), rasio massa sebanding dengan rasio volume: $\frac{M_{\text{asli}}}{M_{\text{miniatur}}} = k^3$.</div><div class='mb-2'><strong>Langkah 3: Hitung $k^3$:</strong> $k^3 = 10^3 = 1.000\text{ kali lipat}$!</div><div class='mb-2'><strong>Langkah 4: Kalikan dengan Berat Miniatur Mula-Mula:</strong> $M_{\text{asli}} = 0.5\text{ kg} \times 1.000 = 500\text{ kg}$ (setengah ton!).</div></div>
+      </div>
+      <div class="dic-step-item kesimpulan">
+        <div class="small fw-bold text-info mb-1"><i class="bi bi-check-circle-fill"></i> Kesimpulan Akhir:</div>
+        <div>Meskipun tingginya hanya bertambah 10 kali lipat, berat patung melonjak 1.000 kali lipat menjadi 500 kg.</div>
+      </div>
+    </div>
 
-      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <!-- Interactive Math Simulator Widget -->
       <h2 class="dic-section-title" id="simulator">
         <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
@@ -660,29 +963,37 @@
         </div>
       </div>
 
-      <!-- Active Recall / Capstone Challenge Exercise -->
+      <!-- Active Recall Quiz -->
       <div class="dic-quiz-card " id="latihan" style="">
         <div class="dic-quiz-tag" style="">
           <i class="bi bi-patch-question-fill"></i> 
           Active Recall Quiz - Bab 4
         </div>
-        <div class="dic-quiz-q" style="">Sebuah balok berukuran 10 cm × 6 cm × 4 cm. Berapakah luas permukaannya?</div>
+        <div class="dic-quiz-q" style="">Jika panjang sisi sebuah kubus dilipatgandakan menjadi 3 kali lipat semula, berapa kali lipat pertambahan volume kubus tersebut?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Lp = 2(pl + pt + lt) = 2(60 + 40 + 24) = 2(124) = 248 cm².')">
-          <span>248 cm²</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Volume bertumbuh secara kubik: k^3 = 3^3 = 27 kali lipat.')">
+          <span>27 kali lipat</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Lp = 2(pl + pt + lt) = 2(60 + 40 + 24) = 2(124) = 248 cm².')">
-          <span>240 cm²</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Volume bertumbuh secara kubik: k^3 = 3^3 = 27 kali lipat.')">
+          <span>9 kali lipat</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Lp = 2(pl + pt + lt) = 2(60 + 40 + 24) = 2(124) = 248 cm².')">
-          <span>124 cm²</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Volume bertumbuh secara kubik: k^3 = 3^3 = 27 kali lipat.')">
+          <span>3 kali lipat</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
+      </div>
+
+      <!-- Core Takeaways -->
+      <div class="dic-takeaway-box" id="rangkuman">
+        <div class="dic-takeaway-title"><i class="bi bi-bookmark-check-fill"></i> Ringkasan Intisari Dicoding (Key Takeaways):</div>
+        <ul class="dic-takeaway-list">
+          <li>Hukum skala kuadrat-kubik membuktikan bahwa volume bertumbuh secara kubik ($k^3$) jauh lebih cepat daripada luas penampang ($k^2$).</li><li>Kapasitas muatan dan berat benda terikat pada volume, sedangkan kekuatan penopang terikat pada luas penampang.</li><li>Prinsip ini menjadi dasar rekayasa arsitektur gedung pencakar langit dan biomekanika tubuh hewan.</li>
+        </ul>
       </div>
 
       <!-- Bottom Navigation -->

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pecahan, Desimal & Persen - Bab 5: Capstone: Proyek Integratif & Uji Sintesis Desimal - MathThon</title>
+  <title>Pecahan, Desimal & Persen - Bab 5: Capstone: Laporan Rekonsiliasi Neraca Finansial Bisnis E-Commerce - MathThon</title>
   <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,7 +187,7 @@
     /* Main Content Area */
     .dic-main {
       padding: 2.5rem 3rem;
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       width: 100%;
     }
@@ -242,31 +242,63 @@
       color: #f8fafc;
       line-height: 1.25;
     }
-    
+
+    /* Target Box */
     .dic-target-box {
-      background: #111622;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.25rem;
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .dic-target-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #818cf8;
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .dic-target-list {
       margin: 0;
       padding-left: 1.25rem;
-      font-size: 0.88rem;
-      color: #94a3b8;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
     }
-    .dic-target-list li { margin-bottom: 0.35rem; }
-    
+    .dic-target-list li { margin-bottom: 0.4rem; }
+
+    /* Real-World Hook Box */
+    .dic-hook-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.02));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .dic-hook-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dic-hook-body {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Section Title */
     .dic-section-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -278,50 +310,192 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border-color);
     }
-    
-    .dic-lead {
-      font-size: 1.02rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin: 1rem 0 1.5rem;
-    }
-    
-    .dic-formula-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid var(--accent-glow);
+
+    /* Concepts Cards */
+    .dic-concept-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 1.5rem;
       margin: 1.25rem 0;
-      text-align: center;
-      overflow-x: auto;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .dic-formula-explain {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-      margin: 1rem 0;
-      line-height: 1.6;
-    }
-    
-    .dic-example-box {
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-    }
-    .dic-example-title {
-      font-size: 0.85rem;
+    .dic-h3 {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #34d399;
-      margin-bottom: 0.5rem;
+      color: #f8fafc;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+    .dic-list {
+      margin: 0.5rem 0 0.75rem 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .dic-list li { margin-bottom: 0.35rem; }
+
+    /* Dicoding Callout Boxes */
+    .dic-callout {
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .dic-callout-icon {
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .dic-callout-content { flex-grow: 1; font-size: 0.91rem; line-height: 1.7; }
+    .dic-callout-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
     
+    .dic-callout.pro-tip {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-left: 4px solid #10b981;
+    }
+    .dic-callout.pro-tip .dic-callout-title { color: #34d399; }
+    .dic-callout.pro-tip .dic-callout-icon { color: #10b981; }
+    .dic-callout.pro-tip .dic-callout-content { color: #d1fae5; }
+
+    .dic-callout.pitfall {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 4px solid #f43f5e;
+    }
+    .dic-callout.pitfall .dic-callout-title { color: #fb7185; }
+    .dic-callout.pitfall .dic-callout-icon { color: #f43f5e; }
+    .dic-callout.pitfall .dic-callout-content { color: #ffe4e6; }
+
+    .dic-callout.fun-fact {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-left: 4px solid #8b5cf6;
+    }
+    .dic-callout.fun-fact .dic-callout-title { color: #c084fc; }
+    .dic-callout.fun-fact .dic-callout-icon { color: #8b5cf6; }
+    .dic-callout.fun-fact .dic-callout-content { color: #ede9fe; }
+
+    /* Formula & Parameter Table */
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-param-table-wrap {
+      margin: 1.25rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .dic-param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .dic-param-table th {
+      background: #161d2e;
+      color: #94a3b8;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-param-table td {
+      padding: 0.75rem 1rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .dic-param-table tr:last-child td { border-bottom: none; }
+    .dic-param-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .dic-symbol-badge {
+      font-family: 'Fira Code', monospace;
+      color: #38bdf8;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .dic-formula-explain {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      line-height: 1.7;
+    }
+
+    /* Guided Step Box */
+    .dic-step-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dic-step-problem {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+      line-height: 1.7;
+    }
+    .dic-step-item {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .dic-step-item.diketahui {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid #6366f1;
+      color: #cbd5e1;
+    }
+    .dic-step-item.ditanya {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 3px solid #f59e0b;
+      color: #cbd5e1;
+    }
+    .dic-step-item.langkah {
+      background: rgba(16, 185, 129, 0.05);
+      border-left: 3px solid #10b981;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    .dic-step-item.kesimpulan {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid #38bdf8;
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
     /* Interactive Math Simulation Box */
     .dic-sim-box {
       background: #111622;
@@ -424,6 +598,34 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
+
+    /* Takeaways Box */
+    .dic-takeaway-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(16, 185, 129, 0.01));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .dic-takeaway-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-takeaway-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .dic-takeaway-list li { margin-bottom: 0.45rem; }
     
     /* Bottom Navigation */
     .dic-bottom-nav {
@@ -497,42 +699,45 @@
         <a href="{{ url_for('materi.subject_bab', subject='desimal', bab_num=1) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[0]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[0]['is_completed'] else '1' }}</span>
-          <span>Fondasi: Konsep Intuitif & Pengenalan Desimal</span>
+          <span>Fondasi: Tiga Wajah Kuantitas Bagian dari Keseluruhan</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='desimal', bab_num=2) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[1]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[1]['is_completed'] else '2' }}</span>
-          <span>Anatomi: Notasi, Kaidah & Sifat Baku Desimal</span>
+          <span>Anatomi: Nilai Tempat Desimal & Operasi Aritmetika Koma</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='desimal', bab_num=3) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[2]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[2]['is_completed'] else '3' }}</span>
-          <span>Mekanika: Prosedur Perhitungan & Operasi Desimal</span>
+          <span>Mekanika: Jebakan Logika Diskon Bertingkat (30% + 10%)</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='desimal', bab_num=4) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[3]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[3]['is_completed'] else '4' }}</span>
-          <span>Pemodelan: Aplikasi Nyata & Studi Kasus Desimal</span>
+          <span>Pemodelan: Margin Keuntungan Finansial & Mark-up Penjualan</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='desimal', bab_num=5) }}" 
            class="dic-chapter-link active {{ 'done' if all_bab_status[4]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[4]['is_completed'] else '5' }}</span>
-          <span>Capstone: Proyek Integratif & Uji Sintesis Desimal</span>
+          <span>Capstone: Laporan Rekonsiliasi Neraca Finansial Bisnis E-Commerce</span>
         </a>
 
-      <!-- In-Page Anchor Links -->
+      <!-- In-Page Anchor Links (TOC) -->
       <div class="dic-sb-nav-title">Daftar Isi Halaman (TOC)</div>
       <div class="dic-anchor-box">
         <a href="#peruntukan" class="dic-anchor-link"><i class="bi bi-compass me-1"></i> Peruntukan & Sasaran</a>
+        <a href="#hook" class="dic-anchor-link"><i class="bi bi-lightbulb me-1"></i> Mengapa Ini Penting?</a>
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
-        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
+        <a href="#tips" class="dic-anchor-link"><i class="bi bi-patch-check me-1"></i> Tips & Jebakan Umum</a>
+        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi KaTeX</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
         <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
+        <a href="#rangkuman" class="dic-anchor-link"><i class="bi bi-check2-all me-1"></i> Rangkuman Intisari</a>
       </div>
     </aside>
 
@@ -546,6 +751,16 @@
         <span>Bab 5</span>
       </div>
 
+      <!-- Reading Meta Badges -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="badge bg-secondary-subtle text-light border border-secondary-subtle px-2 py-1 small">
+          <i class="bi bi-clock-history me-1"></i> ~12-15 Menit Baca Mendalam
+        </span>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 small">
+          <i class="bi bi-mortarboard me-1"></i> Standar Akademi Dicoding
+        </span>
+      </div>
+
       <!-- Explicit Stage Banner -->
       <div class="dic-role-banner" id="peruntukan">
         <div class="dic-role-icon"><i class="bi bi-trophy-fill"></i></div>
@@ -555,123 +770,211 @@
         </div>
       </div>
 
-      <h1 class="dic-h1">Capstone: Proyek Integratif & Uji Sintesis Desimal</h1>
+      <h1 class="dic-h1">Capstone: Laporan Rekonsiliasi Neraca Finansial Bisnis E-Commerce</h1>
 
       <!-- Learning Objectives -->
       <div class="dic-target-box">
         <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#84cc16;"></i> Sasaran Pembelajaran Bab 5:</div>
         <ul class="dic-target-list">
-          <li>Memahami landasan konseptual dari Capstone: Proyek Integratif & Uji Sintesis Desimal secara sistematis.</li>
-          <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
+          <li>Mengintegrasikan desimal, persentase diskon bertingkat, komisi platform, dan pajak PPN dalam laporan keuangan e-commerce.</li><li>Menghitung pendapatan bersih (Net Payout) penjual online setelah dipotong biaya promosi dan biaya layanan.</li><li>Mengevaluasi profitabilitas operasional toko digital secara komprehensif.</li>
         </ul>
       </div>
 
-      <!-- Core Concept -->
+      <!-- Real-World Motivation Hook -->
+      <div class="dic-hook-box" id="hook">
+        <div class="dic-hook-title"><i class="bi bi-lightbulb-fill"></i> Mengapa Konsep Ini Sangat Penting? (Perspektif Praktisi & Rekayasa)</div>
+        <p class="dic-hook-body">Selamat datang di Tahap Capstone! Kamu ditugaskan sebagai Chief Financial Officer (CFO) sebuah brand pakaian yang berjualan di marketplace e-commerce. Dalam kampanye festival belanja 11.11, toko mencatatkan total omset kotor Rp 500.000.000. Namun marketplace mengenakan potongan komisi layanan 4%, promo voucher subsidi toko 5%, dan biaya pemrosesan pembayaran 1.5%. Menggunakan kalkulasi presisi pecahan desimal dan persen, susunlah rekonsiliasi keuangan bersih yang benar-benar masuk ke rekening kas perusahaan!</p>
+      </div>
+
+      <!-- Core Concept Sections -->
       <h2 class="dic-section-title" id="konsep">
-        <i class="bi bi-book-half" style="color:#84cc16;"></i> Pembahasan Konsep & Teori
+        <i class="bi bi-book-half" style="color:#84cc16;"></i> Pembahasan Konsep & Teori Mendalam
       </h2>
-      <p class="dic-lead">
-        Capstone Desimal menguji ketepatan kalkulasi transaksi finansial konsumen pada promo diskon bertingkat.
-      </p>
+      
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-trophy-fill text-warning"></i> Skenario Rekonsiliasi Keuangan Marketplace</h3>
+              <p>Struktur pembagian omset e-commerce:</p>
+              \[ \text{Net Payout} = \text{Omset Kotor} \times (1 - \text{Biaya Layanan} - \text{Subsidi Voucher} - \text{Biaya Payment}) \]
+            </div>
+            
+
+      <!-- Dicoding Insights & Callouts -->
+      <h2 class="dic-section-title" id="tips">
+        <i class="bi bi-patch-check" style="color:#84cc16;"></i> Tips Praktisi & Wawasan Kritis
+      </h2>
+      
+      <div class="dic-callout pro-tip">
+        <div class="dic-callout-icon"><i class="bi bi-lightbulb-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">💡 Dicoding Pro-Tip / Praktik Terbaik</div>
+          <div class="dic-callout-content">Dalam akuntansi e-commerce skala besar, selalu hitung desimal hingga 4 angka di belakang koma untuk menghindari selisih pembulatan sen uang!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout pitfall">
+        <div class="dic-callout-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">⚠️ Common Pitfall / Jebakan Umum</div>
+          <div class="dic-callout-content">Pastikan biaya persentase marketplace dihitung dari omset kotor ataukah dari nilai setelah subsidi voucher sesuai ketentuan kontrak penjual!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout fun-fact">
+        <div class="dic-callout-icon"><i class="bi bi-cpu-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">🧠 Wawasan Komputasi & Fakta Menarik</div>
+          <div class="dic-callout-content">Sistem kliring perbankan global (seperti SWIFT dan Bank Indonesia) menggunakan pembulatan Banker's Rounding (Round to Even) untuk mencegah bias inflasi akumulasi desimal pecahan sen.</div>
+        </div>
+      </div>
 
       <!-- Formula Section -->
       <h2 class="dic-section-title" id="formula">
-        <i class="bi bi-calculator" style="color:#84cc16;"></i> Formulasi Matematis & Bedah Rumus
+        <i class="bi bi-calculator" style="color:#84cc16;"></i> Formulasi KaTeX & Anatomi Parameter
       </h2>
       <div class="dic-formula-card">
-        \[ \text{Bayar Capstone} = 200.000 \times (1 - 0.30) \times (1 - 0.10) = 200.000 \times 0.70 \times 0.90 = \text{Rp } 126.000 \]
+        \[ \text{Dana Bersih} = \text{Omset} \times \left(1 - \sum \text{Fee}_{\%} \right) \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Sintesis Capstone menghitung harga akhir belanja setelah dikenakan promosi diskon ganda bertingkat.
+        <strong>💡 Makna & Intuisi Formulasi:</strong> Mengurangkan potongan komisi secara serentak dari total pendapatan kotor.
       </div>
+
+      <div class="small fw-bold text-muted text-uppercase mb-2 mt-3"><i class="bi bi-table me-1"></i> Bedah Anatomi Variabel Formulasi:</div>
+      
+    <div class="dic-param-table-wrap">
+      <table class="dic-param-table">
+        <thead>
+          <tr>
+            <th>Simbol / Notasi</th>
+            <th>Makna & Interpretasi Matematis</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">Omset</span></td>
+              <td class="text-light">Total nilai transaksi bruto penjualan.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">\sum \text{Fee}_{\%}</span></td>
+              <td class="text-light">Akumulasi seluruh persentase potongan layanan.</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 
       <!-- Worked Example -->
       <h2 class="dic-section-title" id="contoh">
-        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu
+        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu (Langkah Demi Langkah)
       </h2>
-      <div class="dic-example-box">
-        <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
-        <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh 5 (Capstone): Baju berlabel Rp 200.000 mendapatkan diskon bertingkat 30% + 10%. Harga akhir yang harus dibayar kasir: 200.000 × (1 - 0.30) × (1 - 0.10) = 200.000 × 0.70 × 0.90 = 140.000 × 0.90 = Rp 126.000.
-        </p>
+      
+    <div class="dic-step-box">
+      <div class="dic-step-problem">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-patch-question"></i> Skenario Studi Kasus:</div>
+        <div>Sebuah toko online membukukan omset kotor Rp 100.000.000. Potongan marketplace meliputi: Komisi Layanan 4% (0.04), Voucher Diskon Toko 5% (0.05), dan Biaya Gateway Pembayaran 1.5% (0.015). Hitunglah: (a) Total persentase potongan biaya, (b) Jumlah nominal rupiah seluruh potongan, dan (c) Dana bersih yang diterima penjual!</div>
       </div>
+      <div class="dic-step-item diketahui">
+        <div class="small fw-bold text-primary mb-1"><i class="bi bi-pin-angle-fill"></i> Diketahui:</div>
+        <div>Omset = Rp 100.000.000. Potongan: 4%, 5%, 1.5%.</div>
+      </div>
+      <div class="dic-step-item ditanya">
+        <div class="small fw-bold text-warning mb-1"><i class="bi bi-question-circle-fill"></i> Ditanya:</div>
+        <div>Total % fee, total potongan nominal, dan dana bersih.</div>
+      </div>
+      <div class="dic-step-item langkah">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-diagram-3-fill"></i> Langkah Penyelesaian Terpandu:</div>
+        <div><div class='mb-2'><strong>Langkah 1: Akumulasikan Persentase Seluruh Biaya Potongan:</strong> Total fee = $4\% + 5\% + 1.5\% = 10.5\% = 0.105$.</div><div class='mb-2'><strong>Langkah 2: Hitung Total Nominal Rupiah Potongan:</strong> Potongan = $100.000.000 \times 0.105 = 10.500.000\text{ rupiah}$.</div><div class='mb-2'><strong>Langkah 3: Hitung Dana Bersih (Net Payout):</strong> Dana bersih = $100.000.000 - 10.500.000 = 89.500.000\text{ rupiah}$.<br>Atau: $100.000.000 \times (1 - 0.105) = 100.000.000 \times 0.895 = 89.500.000$ rupiah.</div></div>
+      </div>
+      <div class="dic-step-item kesimpulan">
+        <div class="small fw-bold text-info mb-1"><i class="bi bi-check-circle-fill"></i> Kesimpulan Akhir:</div>
+        <div>Total potongan biaya adalah 10.5% (Rp 10.500.000) dan dana bersih yang berhasil dicairkan ke rekening penjual adalah Rp 89.500.000.</div>
+      </div>
+    </div>
 
-      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <!-- Interactive Math Simulator Widget -->
       <h2 class="dic-section-title" id="simulator">
         <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
       <div class="dic-sim-box">
         <div class="dic-sim-topbar">
           <div class="dic-sim-title">
-            <i class="bi bi-cpu-fill" style="color:#84cc16;"></i> Laboratorium Penalaran Finansial: Jebakan Logika Diskon Bertingkat (30% + 10%)
+            <i class="bi bi-cpu-fill" style="color:#84cc16;"></i> Laboratorium Presisi: Representasi Pecahan Desimal & Galat Floating-Point IEEE 754
           </div>
           <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">
             <i class="bi bi-broadcast me-1"></i> Live Simulator
           </span>
         </div>
         <div class="dic-sim-body">
-          <p class="small text-muted mb-3">🎯 Misi Berpikir: Mengapa promo diskon 30% + 10% BUKAN sama dengan diskon 40%?</p>
+          <p class="small text-muted mb-3">🎯 Misi Berpikir: Geser pecahan pembilang dan penyebut untuk mengamati fenomena desimal berulang tak hingga dan tantangan komputasi 0.1 + 0.2!</p>
           
-        <div class="p-3 mb-3 rounded" style="background:rgba(132,204,22,0.08); border:1px solid rgba(132,204,22,0.25);">
-          <div class="small fw-bold text-success mb-1"><i class="bi bi-tag-fill"></i> Analisis Basis Persentase:</div>
-          <p class="small text-light mb-0">Diskon pertama memotong dari 100% harga pokok. Namun diskon kedua hanya memotong dari <strong>sisa harga (70%)</strong>, bukan dari harga awal. Buktikan kalkulasinya di bawah!</p>
+        <div class="p-3 mb-3 rounded" style="background:rgba(14,165,233,0.08); border:1px solid rgba(14,165,233,0.25);">
+          <div class="small fw-bold text-info mb-1"><i class="bi bi-cpu"></i> Mengapa Komputer Menghasilkan 0.1 + 0.2 = 0.30000000000000004?</div>
+          <p class="small text-light mb-0">Bilangan desimal berbasis 10 (faktor 2 dan 5). Sementara prosesor komputer menggunakan basis 2 (biner). Pecahan 1/10 yang tampak sederhana menjadi bilangan berulang biner tak hingga, memicu galat pembulatan halus!</p>
         </div>
         <div class="row g-3 align-items-center">
           <div class="col-md-6">
-            <label class="form-label small text-muted">Harga Label Barang: Rp <span id="dec_val_price" class="fw-bold text-info">200.000</span></label>
-            <input type="range" class="form-range" id="dec_slider_price" min="50000" max="1000000" step="50000" value="200000" oninput="updateDesimalSim()">
+            <label class="form-label small text-muted">Pembilang (Numerator a): <span id="dec_val_a" class="fw-bold text-info">1</span></label>
+            <input type="range" class="form-range" id="dec_slider_a" min="1" max="20" value="1" oninput="updateDesimalSim()">
           </div>
           <div class="col-md-6">
-            <div class="small text-muted mb-1">Promo Bertingkat:</div>
-            <div class="badge bg-success-subtle text-success p-2">Diskon 30% + Diskon Tambahan 10%</div>
+            <label class="form-label small text-muted">Penyebut (Denominator b): <span id="dec_val_b" class="fw-bold text-warning">7</span></label>
+            <input type="range" class="form-range" id="dec_slider_b" min="2" max="20" value="7" oninput="updateDesimalSim()">
           </div>
         </div>
         <div class="mt-3 p-3 rounded" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
           <div class="row text-center g-2 mb-2">
-            <div class="col-6 border-end border-secondary border-opacity-25">
-              <div class="small text-muted">Bayar Promo Bertingkat (30% + 10%):</div>
-              <div class="fs-4 fw-bold text-success" id="dec_real_pay">Rp 126.000</div>
-              <div class="small text-muted">Faktor: 0.70 × 0.90 = 63% bayar</div>
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Bentuk Pecahan Biasa:</div>
+              <div class="fs-5 fw-bold text-light" id="dec_frac">1 / 7</div>
             </div>
-            <div class="col-6">
-              <div class="small text-muted">Jika Diskon 40% Langsung:</div>
-              <div class="fs-4 fw-bold text-danger" id="dec_fake_pay">Rp 120.000</div>
-              <div class="small text-muted">Faktor: 60% bayar</div>
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Ekspansi Desimal:</div>
+              <div class="fs-6 fw-bold text-success font-monospace" id="dec_res">0.142857142857...</div>
+            </div>
+            <div class="col-4">
+              <div class="small text-muted">Tipe Pola Desimal:</div>
+              <div class="fs-6 fw-bold text-warning" id="dec_type">Berulang Tak Hingga</div>
             </div>
           </div>
-          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #84cc16;">
-            <div class="small text-success fw-bold mb-1"><i class="bi bi-wallet2"></i> Pembongkaran Miskonsepsi:</div>
-            <div class="small text-light" id="dec_diff">Pembeli membayar lebih mahal Rp 6.000 pada diskon bertingkat karena diskon 10% hanya memotong Rp 14.000 dari sisa Rp 140.000.</div>
+          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #0ea5e9;">
+            <div class="small text-info fw-bold mb-1"><i class="bi bi-lightbulb-fill"></i> Analisis Faktor Prima Penyebut:</div>
+            <div class="small text-light" id="dec_factor">Penyebut 7 memiliki faktor prima selain 2 dan 5, sehingga pasti menghasilkan desimal berulang tanpa henti (non-terminating periodic decimal).</div>
           </div>
         </div>
         
         </div>
       </div>
 
-      <!-- Active Recall / Capstone Challenge Exercise -->
+      <!-- Active Recall Quiz -->
       <div class="dic-quiz-card border border-warning border-opacity-50 shadow-lg" id="latihan" style="background: linear-gradient(145deg, #131b2e, #111622);">
         <div class="dic-quiz-tag" style="color:#eab308; font-size:0.82rem;">
           <i class="bi bi-trophy-fill"></i> 
           🏆 CAPSTONE CHALLENGE - UJI SINTESIS AKHIR MODUL
         </div>
-        <div class="dic-quiz-q" style="font-size:1.1rem; color:#fef08a;">Tantangan Capstone: Suatu barang seharga Rp 200.000 mendapatkan promo diskon bertingkat 30% + 10%. Berapakah harga akhir yang harus dibayar pembeli?</div>
+        <div class="dic-quiz-q" style="font-size:1.1rem; color:#fef08a;">🏆 TANTANGAN CAPSTONE DESIMAL: Jika total akumulasi fee potongan marketplace adalah 10.5%, berapa persenkah dana bersih yang diterima penjual dari total omsetnya?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, '200.000 × 0.70 × 0.90 = 140.000 × 0.90 = Rp 126.000.')">
-          <span>Rp 126.000</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Dana bersih = 100% - 10.5% = 89.5%.')">
+          <span>89.5%</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '200.000 × 0.70 × 0.90 = 140.000 × 0.90 = Rp 126.000.')">
-          <span>Rp 120.000</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Dana bersih = 100% - 10.5% = 89.5%.')">
+          <span>90.5%</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '200.000 × 0.70 × 0.90 = 140.000 × 0.90 = Rp 126.000.')">
-          <span>Rp 140.000</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Dana bersih = 100% - 10.5% = 89.5%.')">
+          <span>88.5%</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
+      </div>
+
+      <!-- Core Takeaways -->
+      <div class="dic-takeaway-box" id="rangkuman">
+        <div class="dic-takeaway-title"><i class="bi bi-bookmark-check-fill"></i> Ringkasan Intisari Dicoding (Key Takeaways):</div>
+        <ul class="dic-takeaway-list">
+          <li>Persentase komisi dan diskon diakumulasikan untuk menghitung potongan netto akhir.</li><li>Ketelitian konversi desimal menjamin keakuratan laporan keuangan bisnis digital.</li><li>Selamat! Kamu telah menyelesaikan seluruh kurikulum Pecahan, Desimal & Persen dengan pemahaman praktis kelas satu!</li>
+        </ul>
       </div>
 
       <!-- Bottom Navigation -->
@@ -736,16 +1039,29 @@
 
     // Widget Simulator Logic
     
+        function isTerminating(b) {
+          while (b % 2 === 0) b /= 2;
+          while (b % 5 === 0) b /= 5;
+          return b === 1;
+        }
         function updateDesimalSim() {
-          const price = parseInt(document.getElementById('dec_slider_price').value);
-          document.getElementById('dec_val_price').textContent = price.toLocaleString('id-ID');
-          const step1 = price * 0.70;
-          const realPay = step1 * 0.90;
-          const fakePay = price * 0.60;
-          const diff = realPay - fakePay;
-          document.getElementById('dec_real_pay').textContent = `Rp ${realPay.toLocaleString('id-ID')}`;
-          document.getElementById('dec_fake_pay').textContent = `Rp ${fakePay.toLocaleString('id-ID')}`;
-          document.getElementById('dec_diff').innerHTML = `Selisih: <strong>Rp ${diff.toLocaleString('id-ID')}</strong> lebih mahal. Diskon efektif riil adalah <strong>37%</strong>, bukan 40%!`;
+          const a = parseInt(document.getElementById('dec_slider_a').value);
+          const b = parseInt(document.getElementById('dec_slider_b').value);
+          document.getElementById('dec_val_a').textContent = a;
+          document.getElementById('dec_val_b').textContent = b;
+          document.getElementById('dec_frac').textContent = `${a} / ${b}`;
+          const val = (a / b).toString();
+          document.getElementById('dec_res').textContent = (a / b).toFixed(8);
+          const term = isTerminating(b);
+          if (term) {
+            document.getElementById('dec_type').textContent = "Berhenti Terbatas (Terminating)";
+            document.getElementById('dec_type').className = "fs-6 fw-bold text-success";
+            document.getElementById('dec_factor').innerHTML = `Penyebut ${b} hanya memiliki faktor prima 2 dan/atau 5. Pecahan ini berhenti secara presisi dalam sistem desimal desimal basis 10.`;
+          } else {
+            document.getElementById('dec_type').textContent = "Berulang Tak Hingga (Periodic)";
+            document.getElementById('dec_type').className = "fs-6 fw-bold text-warning";
+            document.getElementById('dec_factor').innerHTML = `Penyebut ${b} mengandung faktor prima selain 2 dan 5. Angka akan berulang secara periodik tak hingga, menuntut strategi pembulatan pada komputasi digital.`;
+          }
         }
         
 

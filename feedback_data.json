@@ -1,5 +1,32 @@
 [
     {
+        "id": "86f56a61-facd-4b37-90d1-c1186b243394",
+        "timestamp": "2026-10-02 18:34:59",
+        "user": "Ririn Enjelyta Manulang",
+        "features": [
+            "F8",
+            "F7"
+        ],
+        "comment": "Tolong perbaiki responsivitas pada berbagai perangkat lain, seperti untuk ponsel, dsb....",
+        "analysis": {
+            "category": "Teknis & Bug",
+            "status": "Kritis",
+            "similarity": "55.62%",
+            "similarity_raw": 0.5562,
+            "sentiment": "Negatif",
+            "matched_case_id": "CAT_TECH_CRITICAL",
+            "recommendation": "Lakukan debugging pada function JavaScript dan kalkulator matematika. Terapkan automated testing serta audit integritas server."
+        },
+        "workflow": {
+            "status": "baru",
+            "priority": "kritis",
+            "admin_response": "",
+            "action_plan": "",
+            "updated_at": null,
+            "updated_by": null
+        }
+    },
+    {
         "id": "7be00964-5dac-4831-80c3-2e5f3394490f",
         "timestamp": "2026-10-02 03:35:37",
         "user": "Sutan Gabe",

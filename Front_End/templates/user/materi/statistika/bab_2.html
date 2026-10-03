@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Statistika & Analisis Data - Bab 2: Anatomi: Median, Modus & Kuartil Data Tunggal/Kelompok - MathThon</title>
+  <title>Statistika & Analisis Data - Bab 2: Anatomi: Ukuran Pemusatan (Mean, Median, Modus) & Ketahanan Outlier - MathThon</title>
   <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,7 +187,7 @@
     /* Main Content Area */
     .dic-main {
       padding: 2.5rem 3rem;
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       width: 100%;
     }
@@ -242,31 +242,63 @@
       color: #f8fafc;
       line-height: 1.25;
     }
-    
+
+    /* Target Box */
     .dic-target-box {
-      background: #111622;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.25rem;
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .dic-target-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #818cf8;
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .dic-target-list {
       margin: 0;
       padding-left: 1.25rem;
-      font-size: 0.88rem;
-      color: #94a3b8;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
     }
-    .dic-target-list li { margin-bottom: 0.35rem; }
-    
+    .dic-target-list li { margin-bottom: 0.4rem; }
+
+    /* Real-World Hook Box */
+    .dic-hook-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.02));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .dic-hook-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dic-hook-body {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Section Title */
     .dic-section-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -278,50 +310,192 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border-color);
     }
-    
-    .dic-lead {
-      font-size: 1.02rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin: 1rem 0 1.5rem;
-    }
-    
-    .dic-formula-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid var(--accent-glow);
+
+    /* Concepts Cards */
+    .dic-concept-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 1.5rem;
       margin: 1.25rem 0;
-      text-align: center;
-      overflow-x: auto;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .dic-formula-explain {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-      margin: 1rem 0;
-      line-height: 1.6;
-    }
-    
-    .dic-example-box {
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-    }
-    .dic-example-title {
-      font-size: 0.85rem;
+    .dic-h3 {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #34d399;
-      margin-bottom: 0.5rem;
+      color: #f8fafc;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+    .dic-list {
+      margin: 0.5rem 0 0.75rem 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .dic-list li { margin-bottom: 0.35rem; }
+
+    /* Dicoding Callout Boxes */
+    .dic-callout {
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .dic-callout-icon {
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .dic-callout-content { flex-grow: 1; font-size: 0.91rem; line-height: 1.7; }
+    .dic-callout-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
     
+    .dic-callout.pro-tip {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-left: 4px solid #10b981;
+    }
+    .dic-callout.pro-tip .dic-callout-title { color: #34d399; }
+    .dic-callout.pro-tip .dic-callout-icon { color: #10b981; }
+    .dic-callout.pro-tip .dic-callout-content { color: #d1fae5; }
+
+    .dic-callout.pitfall {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 4px solid #f43f5e;
+    }
+    .dic-callout.pitfall .dic-callout-title { color: #fb7185; }
+    .dic-callout.pitfall .dic-callout-icon { color: #f43f5e; }
+    .dic-callout.pitfall .dic-callout-content { color: #ffe4e6; }
+
+    .dic-callout.fun-fact {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-left: 4px solid #8b5cf6;
+    }
+    .dic-callout.fun-fact .dic-callout-title { color: #c084fc; }
+    .dic-callout.fun-fact .dic-callout-icon { color: #8b5cf6; }
+    .dic-callout.fun-fact .dic-callout-content { color: #ede9fe; }
+
+    /* Formula & Parameter Table */
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-param-table-wrap {
+      margin: 1.25rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .dic-param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .dic-param-table th {
+      background: #161d2e;
+      color: #94a3b8;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-param-table td {
+      padding: 0.75rem 1rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .dic-param-table tr:last-child td { border-bottom: none; }
+    .dic-param-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .dic-symbol-badge {
+      font-family: 'Fira Code', monospace;
+      color: #38bdf8;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .dic-formula-explain {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      line-height: 1.7;
+    }
+
+    /* Guided Step Box */
+    .dic-step-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dic-step-problem {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+      line-height: 1.7;
+    }
+    .dic-step-item {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .dic-step-item.diketahui {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid #6366f1;
+      color: #cbd5e1;
+    }
+    .dic-step-item.ditanya {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 3px solid #f59e0b;
+      color: #cbd5e1;
+    }
+    .dic-step-item.langkah {
+      background: rgba(16, 185, 129, 0.05);
+      border-left: 3px solid #10b981;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    .dic-step-item.kesimpulan {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid #38bdf8;
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
     /* Interactive Math Simulation Box */
     .dic-sim-box {
       background: #111622;
@@ -424,6 +598,34 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
+
+    /* Takeaways Box */
+    .dic-takeaway-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(16, 185, 129, 0.01));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .dic-takeaway-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-takeaway-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .dic-takeaway-list li { margin-bottom: 0.45rem; }
     
     /* Bottom Navigation */
     .dic-bottom-nav {
@@ -473,7 +675,7 @@
       <a href="{{ url_for('materi.subject_index', subject='statistika') }}" class="dic-back-btn">
         <i class="bi bi-arrow-left"></i> <span>Statistika</span>
       </a>
-      <span class="dic-badge"><i class="bi bi-bar-chart-fill" style="color:#ec4899;"></i> Statistika & Analisis Data</span>
+      <span class="dic-badge"><i class="bi bi-bar-chart-line" style="color:#ec4899;"></i> Statistika & Analisis Data</span>
     </div>
     <div class="d-flex align-items-center gap-2">
       <span class="dic-badge"><i class="bi bi-book"></i> Bab 2/5</span>
@@ -485,7 +687,7 @@
     <!-- Dicoding Sidebar -->
     <aside class="dic-sidebar">
       <div class="dic-sb-header">
-        <div class="dic-sb-icon"><i class="bi bi-bar-chart-fill"></i></div>
+        <div class="dic-sb-icon"><i class="bi bi-bar-chart-line"></i></div>
         <div>
           <div style="font-size:0.75rem; color:#ec4899; font-weight:700; text-transform:uppercase;">Modul MathThon</div>
           <div style="font-weight:700; font-size:0.95rem; color:#f8fafc;">Statistika</div>
@@ -497,42 +699,45 @@
         <a href="{{ url_for('materi.subject_bab', subject='statistika', bab_num=1) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[0]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[0]['is_completed'] else '1' }}</span>
-          <span>Fondasi: Populasi, Sampel & Ukuran Pemusatan Data</span>
+          <span>Fondasi: Sains Membaca Data & Populasi vs Sampel</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='statistika', bab_num=2) }}" 
            class="dic-chapter-link active {{ 'done' if all_bab_status[1]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[1]['is_completed'] else '2' }}</span>
-          <span>Anatomi: Median, Modus & Kuartil Data Tunggal/Kelompok</span>
+          <span>Anatomi: Ukuran Pemusatan (Mean, Median, Modus) & Ketahanan Outlier</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='statistika', bab_num=3) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[2]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[2]['is_completed'] else '3' }}</span>
-          <span>Mekanika: Jangkauan, Ragam (Varians) & Standar Deviasi</span>
+          <span>Mekanika: Ukuran Penyebaran (Varians, Standar Deviasi & Z-Score)</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='statistika', bab_num=4) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[3]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[3]['is_completed'] else '4' }}</span>
-          <span>Pemodelan: Distribusi Normal & Standarisasi Skor Z</span>
+          <span>Pemodelan: Distribusi Normal Baku & Deteksi Kualitas Industri</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='statistika', bab_num=5) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[4]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[4]['is_completed'] else '5' }}</span>
-          <span>Capstone: Proyek Analisis Kualitas & Evaluasi Data</span>
+          <span>Capstone: Audit Kinerja Akademik Ribuan Siswa & Analisis Anomali</span>
         </a>
 
-      <!-- In-Page Anchor Links -->
+      <!-- In-Page Anchor Links (TOC) -->
       <div class="dic-sb-nav-title">Daftar Isi Halaman (TOC)</div>
       <div class="dic-anchor-box">
         <a href="#peruntukan" class="dic-anchor-link"><i class="bi bi-compass me-1"></i> Peruntukan & Sasaran</a>
+        <a href="#hook" class="dic-anchor-link"><i class="bi bi-lightbulb me-1"></i> Mengapa Ini Penting?</a>
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
-        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
+        <a href="#tips" class="dic-anchor-link"><i class="bi bi-patch-check me-1"></i> Tips & Jebakan Umum</a>
+        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi KaTeX</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
         <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
+        <a href="#rangkuman" class="dic-anchor-link"><i class="bi bi-check2-all me-1"></i> Rangkuman Intisari</a>
       </div>
     </aside>
 
@@ -546,6 +751,16 @@
         <span>Bab 2</span>
       </div>
 
+      <!-- Reading Meta Badges -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="badge bg-secondary-subtle text-light border border-secondary-subtle px-2 py-1 small">
+          <i class="bi bi-clock-history me-1"></i> ~12-15 Menit Baca Mendalam
+        </span>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 small">
+          <i class="bi bi-mortarboard me-1"></i> Standar Akademi Dicoding
+        </span>
+      </div>
+
       <!-- Explicit Stage Banner -->
       <div class="dic-role-banner" id="peruntukan">
         <div class="dic-role-icon"><i class="bi bi-diagram-3"></i></div>
@@ -555,128 +770,222 @@
         </div>
       </div>
 
-      <h1 class="dic-h1">Anatomi: Median, Modus & Kuartil Data Tunggal/Kelompok</h1>
+      <h1 class="dic-h1">Anatomi: Ukuran Pemusatan (Mean, Median, Modus) & Ketahanan Outlier</h1>
 
       <!-- Learning Objectives -->
       <div class="dic-target-box">
         <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#ec4899;"></i> Sasaran Pembelajaran Bab 2:</div>
         <ul class="dic-target-list">
-          <li>Memahami landasan konseptual dari Anatomi: Median, Modus & Kuartil Data Tunggal/Kelompok secara sistematis.</li>
-          <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
+          <li>Menghitung rata-rata aritmetika (Mean), nilai tengah (Median), dan nilai yang paling sering muncul (Modus).</li><li>Memahami sensitivitas Mean terhadap nilai pencilan ekstrem (outlier).</li><li>Memilih ukuran pemusatan yang paling tepat dan adil berdasarkan bentuk distribusi data.</li>
         </ul>
       </div>
 
-      <!-- Core Concept -->
+      <!-- Real-World Motivation Hook -->
+      <div class="dic-hook-box" id="hook">
+        <div class="dic-hook-title"><i class="bi bi-lightbulb-fill"></i> Mengapa Konsep Ini Sangat Penting? (Perspektif Praktisi & Rekayasa)</div>
+        <p class="dic-hook-body">Jika sembilan orang buruh berpenghasilan Rp 3 juta per bulan sedang duduk di sebuah kafe, lalu masuklah Elon Musk (dengan kekayaan triliunan rupiah) bergabung ke dalam kafe tersebut. Tiba-tiba rata-rata (Mean) penghasilan orang di kafe itu melonjak menjadi Rp 10 miliar per orang! Apakah sembilan buruh itu tiba-tiba kaya mendadak? Tentu tidak! Di sinilah letak jebakan Mean: Mean sangat rapuh terhadap angka ekstrem (outlier), sedangkan Median (nilai tengah) tetap kokoh dan jujur!</p>
+      </div>
+
+      <!-- Core Concept Sections -->
       <h2 class="dic-section-title" id="konsep">
-        <i class="bi bi-book-half" style="color:#ec4899;"></i> Pembahasan Konsep & Teori
+        <i class="bi bi-book-half" style="color:#ec4899;"></i> Pembahasan Konsep & Teori Mendalam
       </h2>
-      <p class="dic-lead">
-        Ukuran pemusatan (Mean/Median/Modus) memberikan representasi nilai tipikal dari suatu gugus data.
-      </p>
+      
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-bullseye text-primary"></i> 1. Tiga Pilar Ukuran Pemusatan Data</h3>
+              <ul class="dic-list">
+                <li><strong>Mean (Rata-rata Hitung $\bar{x}$):</strong> Jumlah seluruh nilai data dibagi dengan banyaknya data:
+                  \[ \bar{x} = \frac{\sum x_i}{n} \]
+                </li>
+                <li><strong>Median (Nilai Tengah):</strong> Nilai data yang berada tepat di tengah setelah data <strong>diurutkan dari terkecil ke terbesar</strong>. Sangat tahan (robust) terhadap pencilan ekstrem.</li>
+                <li><strong>Modus:</strong> Nilai data yang memiliki frekuensi kemunculan paling tinggi.</li>
+              </ul>
+            </div>
+            
+
+      <!-- Dicoding Insights & Callouts -->
+      <h2 class="dic-section-title" id="tips">
+        <i class="bi bi-patch-check" style="color:#ec4899;"></i> Tips Praktisi & Wawasan Kritis
+      </h2>
+      
+      <div class="dic-callout pro-tip">
+        <div class="dic-callout-icon"><i class="bi bi-lightbulb-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">💡 Dicoding Pro-Tip / Praktik Terbaik</div>
+          <div class="dic-callout-content">Jika datamu berdistribusi miring (skewed) atau memiliki angka ekstrem—seperti data gaji karyawan, harga properti rumah, atau durasi pengguna di website—selalu laporkan MEDIAN, bukan Mean!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout pitfall">
+        <div class="dic-callout-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">⚠️ Common Pitfall / Jebakan Umum</div>
+          <div class="dic-callout-content">Jangan lupa mengurutkan data dari terkecil ke terbesar terlebih dahulu sebelum mencari Median! Jika jumlah data genap, Median adalah rata-rata dari dua angka yang berada di tengah.</div>
+        </div>
+      </div>
+
+      <div class="dic-callout fun-fact">
+        <div class="dic-callout-icon"><i class="bi bi-cpu-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">🧠 Wawasan Komputasi & Fakta Menarik</div>
+          <div class="dic-callout-content">Dalam platform e-commerce seperti Tokopedia dan Amazon, algoritma penentuan harga barang rekomendasi mengabaikan Mean dan menggunakan Median harga pasar untuk melindungi pengguna dari manipulasi harga penjual nakal.</div>
+        </div>
+      </div>
 
       <!-- Formula Section -->
       <h2 class="dic-section-title" id="formula">
-        <i class="bi bi-calculator" style="color:#ec4899;"></i> Formulasi Matematis & Bedah Rumus
+        <i class="bi bi-calculator" style="color:#ec4899;"></i> Formulasi KaTeX & Anatomi Parameter
       </h2>
       <div class="dic-formula-card">
-        \[ Me = x_{\frac{n+1}{2}} \quad ; \quad Q_k = x_{\frac{k(n+1)}{4}} \]
+        \[ \bar{x} = \frac{\sum_{i=1}^n x_i}{n} \quad ; \quad \text{Med} = x_{\frac{n+1}{2}} \quad (n \text{ ganjil}) \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Median membagi data terurut menjadi dua bagian sama besar tanpa terpengaruh nilai ekstrem (outlier).
+        <strong>💡 Makna & Intuisi Formulasi:</strong> Membagi rata beban nilai secara merata ke setiap anggota kumpulan data.
       </div>
+
+      <div class="small fw-bold text-muted text-uppercase mb-2 mt-3"><i class="bi bi-table me-1"></i> Bedah Anatomi Variabel Formulasi:</div>
+      
+    <div class="dic-param-table-wrap">
+      <table class="dic-param-table">
+        <thead>
+          <tr>
+            <th>Simbol / Notasi</th>
+            <th>Makna & Interpretasi Matematis</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">\bar{x}</span></td>
+              <td class="text-light">Mean (rata-rata sampel).</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">\sum x_i</span></td>
+              <td class="text-light">Total jumlah seluruh nilai data mentah.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">n</span></td>
+              <td class="text-light">Jumlah total sampel data observasi.</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 
       <!-- Worked Example -->
       <h2 class="dic-section-title" id="contoh">
-        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu
+        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu (Langkah Demi Langkah)
       </h2>
-      <div class="dic-example-box">
-        <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
-        <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh 2: Data: 3, 5, 7, 8, 9. Median = 7. Data: 4, 6, 8, 10 => Median = (6+8)/2 = 7.
-        </p>
+      
+    <div class="dic-step-box">
+      <div class="dic-step-problem">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-patch-question"></i> Skenario Studi Kasus:</div>
+        <div>Diberikan data nilai kuis 7 siswa: 70, 75, 80, 80, 85, 90, 100. Tentukan: (a) Mean, (b) Median, dan (c) Modus!</div>
       </div>
+      <div class="dic-step-item diketahui">
+        <div class="small fw-bold text-primary mb-1"><i class="bi bi-pin-angle-fill"></i> Diketahui:</div>
+        <div>Data terurut n = 7: [70, 75, 80, 80, 85, 90, 100].</div>
+      </div>
+      <div class="dic-step-item ditanya">
+        <div class="small fw-bold text-warning mb-1"><i class="bi bi-question-circle-fill"></i> Ditanya:</div>
+        <div>Mean, Median, Modus.</div>
+      </div>
+      <div class="dic-step-item langkah">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-diagram-3-fill"></i> Langkah Penyelesaian Terpandu:</div>
+        <div><div class='mb-2'><strong>Langkah 1: Menghitung Mean:</strong> Total = $70 + 75 + 80 + 80 + 85 + 90 + 100 = 580$.<br>$\bar{x} = \frac{580}{7} \approx 82.86$.</div><div class='mb-2'><strong>Langkah 2: Menentukan Median:</strong> Data sudah terurut. Posisi tengah data ke-$(7+1)/2 = 4$. Nilai data ke-4 adalah 80. Maka Median = 80.</div><div class='mb-2'><strong>Langkah 3: Menentukan Modus:</strong> Angka 80 muncul sebanyak 2 kali (paling sering dibanding angka lain). Maka Modus = 80.</div></div>
+      </div>
+      <div class="dic-step-item kesimpulan">
+        <div class="small fw-bold text-info mb-1"><i class="bi bi-check-circle-fill"></i> Kesimpulan Akhir:</div>
+        <div>Mean = 82.86, Median = 80, dan Modus = 80.</div>
+      </div>
+    </div>
 
-      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <!-- Interactive Math Simulator Widget -->
       <h2 class="dic-section-title" id="simulator">
         <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
       <div class="dic-sim-box">
         <div class="dic-sim-topbar">
           <div class="dic-sim-title">
-            <i class="bi bi-cpu-fill" style="color:#ec4899;"></i> Laboratorium Penalaran: Uji Sensitivitas Mean vs Kekokohan Median
+            <i class="bi bi-cpu-fill" style="color:#ec4899;"></i> Laboratorium Ketahanan: Sensitivitas Mean (Rata-rata) vs Median terhadap Outlier
           </div>
           <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">
             <i class="bi bi-broadcast me-1"></i> Live Simulator
           </span>
         </div>
         <div class="dic-sim-body">
-          <p class="small text-muted mb-3">🎯 Misi Berpikir: Suntikkan 1 data pencilan (outlier) ekstrem. Amati mengapa Mean melonjak drastis sedangkan Median tetap kokoh!</p>
+          <p class="small text-muted mb-3">🎯 Misi Berpikir: Geser nilai pencilan (outlier ekstrim) dan amati mengapa Mean bergeser drastis sementara Median tetap kokoh!</p>
           
-        <div class="p-3 mb-3 rounded" style="background:rgba(236,72,153,0.08); border:1px solid rgba(236,72,153,0.25);">
-          <div class="small fw-bold text-pink mb-1" style="color:#ec4899;"><i class="bi bi-shield-shaded"></i> Pertarungan Statistik: Mean vs Median</div>
-          <p class="small text-light mb-0">Dalam data ekonomi riil (seperti distribusi penghasilan penduduk), 1 orang miliarder dapat mendistorsi rata-rata (Mean) secara menyesatkan. Geser nilai outlier di bawah ini untuk melihat perbedaannya!</p>
+        <div class="p-3 mb-3 rounded" style="background:rgba(20,184,166,0.08); border:1px solid rgba(20,184,166,0.25);">
+          <div class="small fw-bold text-info mb-1"><i class="bi bi-shield-lock"></i> Mengapa Gaji Rata-Rata Sering Menipu?</div>
+          <p class="small text-light mb-0">Jika 9 karyawan bergaji Rp 5 juta dan 1 direktur bergaji Rp 100 juta, rata-rata (mean) adalah Rp 14,5 juta (tidak mewakili siapa pun). Namun median tetap Rp 5 juta. Amati fenomena ini secara langsung!</p>
         </div>
         <div class="row g-3 align-items-center">
-          <div class="col-md-7">
-            <label class="form-label small text-muted">Data Pokok: [70, 75, 80, 85, 90] + Injeksi Outlier</label>
-            <input type="range" class="form-range" id="stat_slider_outlier" min="90" max="1000" step="10" value="95" oninput="updateStatSim()">
+          <div class="col-md-8">
+            <label class="form-label small text-muted">Nilai Data Pencilan / Outlier: <span id="stat_out_val" class="fw-bold text-danger">100</span></label>
+            <input type="range" class="form-range" id="stat_slider" min="10" max="300" value="100" step="5" oninput="updateStatSim()">
           </div>
-          <div class="col-md-5">
-            <div class="small text-muted">Nilai Data Outlier Tambahan:</div>
-            <div class="fs-5 fw-bold text-warning" id="stat_outlier_val">95 (Normal)</div>
+          <div class="col-md-4 text-end">
+            <span class="small text-muted">Data Dasar: [ 4, 6, 7, 8, Outlier ]</span>
           </div>
         </div>
         <div class="mt-3 p-3 rounded" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
           <div class="row text-center g-2 mb-2">
             <div class="col-4 border-end border-secondary border-opacity-25">
-              <div class="small text-muted">Mean (Rata-rata):</div>
-              <div class="fs-4 fw-bold text-danger" id="st_mean">82.50</div>
-              <div class="small text-muted">Sensitif terhadap outlier</div>
+              <div class="small text-muted">Nilai Mean (Sensitif):</div>
+              <div class="fs-5 fw-bold text-danger" id="stat_mean">25.00</div>
+              <div class="small text-muted">Terdistorsi outlier</div>
             </div>
             <div class="col-4 border-end border-secondary border-opacity-25">
-              <div class="small text-muted">Median (Nilai Tengah):</div>
-              <div class="fs-4 fw-bold text-success" id="st_med">82.50</div>
-              <div class="small text-muted">Kebal & Robust</div>
+              <div class="small text-muted">Nilai Median (Robust):</div>
+              <div class="fs-5 fw-bold text-success" id="stat_med">7.00</div>
+              <div class="small text-muted">Kukuh & stabil</div>
             </div>
             <div class="col-4">
-              <div class="small text-muted">Standar Deviasi (s):</div>
-              <div class="fs-4 fw-bold text-info" id="st_sd">9.35</div>
-              <div class="small text-muted">Penyebaran data</div>
+              <div class="small text-muted">Disparitas Deviasi:</div>
+              <div class="fs-5 fw-bold text-warning" id="stat_disp">18.00</div>
+              <div class="small text-muted">Selisih distorsi</div>
             </div>
           </div>
-          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #ec4899;">
-            <div class="small fw-bold mb-1" style="color:#ec4899;"><i class="bi bi-lightbulb-fill"></i> Insight Pengambilan Keputusan:</div>
-            <div class="small text-light" id="stat_insight">Saat data memiliki kemiringan ekstrem (skewed), Median adalah representasi nilai tipikal yang jauh lebih adil daripada Mean.</div>
+          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #14b8a6;">
+            <div class="small text-info fw-bold mb-1"><i class="bi bi-lightbulb-fill"></i> Prinsip Pemilihan Ukuran Pemusatan:</div>
+            <div class="small text-light" id="stat_concl">Saat outlier sebesar 100 masuk, Mean melonjak ke 25.00, padahal 80% sampel berada di bawah 8! Gunakan Median untuk distribusi data condong (skewed).</div>
           </div>
         </div>
         
         </div>
       </div>
 
-      <!-- Active Recall / Capstone Challenge Exercise -->
+      <!-- Active Recall Quiz -->
       <div class="dic-quiz-card " id="latihan" style="">
         <div class="dic-quiz-tag" style="">
           <i class="bi bi-patch-question-fill"></i> 
           Active Recall Quiz - Bab 2
         </div>
-        <div class="dic-quiz-q" style="">Median dari kumpulan data terurut: 4, 5, 7, 8, 10, 12 adalah?</div>
+        <div class="dic-quiz-q" style="">Diberikan data: 4, 6, 8, 10, 100. Manakah ukuran pemusatan yang paling baik mewakili nilai tipikal kelompok tersebut?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Median = (7 + 8) / 2 = 15 / 2 = 7.5.')">
-          <span>7.5</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Angka 100 adalah outlier ekstrem yang mendistorsi Mean menjadi 25.6. Median (8) jauh lebih jujur mewakili kelompok mayoritas.')">
+          <span>Median (nilai 8)</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Median = (7 + 8) / 2 = 15 / 2 = 7.5.')">
-          <span>7.0</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Angka 100 adalah outlier ekstrem yang mendistorsi Mean menjadi 25.6. Median (8) jauh lebih jujur mewakili kelompok mayoritas.')">
+          <span>Mean (nilai 25.6)</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Median = (7 + 8) / 2 = 15 / 2 = 7.5.')">
-          <span>8.0</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Angka 100 adalah outlier ekstrem yang mendistorsi Mean menjadi 25.6. Median (8) jauh lebih jujur mewakili kelompok mayoritas.')">
+          <span>Modus</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
+      </div>
+
+      <!-- Core Takeaways -->
+      <div class="dic-takeaway-box" id="rangkuman">
+        <div class="dic-takeaway-title"><i class="bi bi-bookmark-check-fill"></i> Ringkasan Intisari Dicoding (Key Takeaways):</div>
+        <ul class="dic-takeaway-list">
+          <li>Mean membagi rata seluruh nilai data namun rentan terhadap outlier.</li><li>Median adalah nilai tengah yang kebal terhadap angka ekstrem.</li><li>Modus adalah nilai dengan frekuensi kemunculan terbanyak.</li>
+        </ul>
       </div>
 
       <!-- Bottom Navigation -->
@@ -742,22 +1051,16 @@
     // Widget Simulator Logic
     
         function updateStatSim() {
-          const outlier = parseInt(document.getElementById('stat_slider_outlier').value);
-          document.getElementById('stat_outlier_val').textContent = outlier >= 300 ? `${outlier} (Pencilan Ekstrem!)` : `${outlier}`;
-          const nums = [70, 75, 80, 85, 90, outlier].sort((a,b)=>a-b);
-          const mean = nums.reduce((a,b)=>a+b,0) / nums.length;
-          const mid = Math.floor(nums.length/2);
-          const med = (nums[mid-1] + nums[mid])/2;
-          const variance = nums.reduce((a,b)=>a + Math.pow(b-mean,2), 0) / (nums.length - 1);
-          const sd = Math.sqrt(variance);
-          document.getElementById('st_mean').textContent = mean.toFixed(2);
-          document.getElementById('st_med').textContent = med.toFixed(2);
-          document.getElementById('st_sd').textContent = sd.toFixed(2);
-          if (outlier >= 300) {
-            document.getElementById('stat_insight').innerHTML = `Perhatikan: Mean melonjak menjadi <strong>${mean.toFixed(1)}</strong> (terdistorsi outlier ${outlier}), sedangkan Median hanya bergeser ke <strong>${med.toFixed(1)}</strong>. Inilah bukti ketangguhan Median!`;
-          } else {
-            document.getElementById('stat_insight').innerHTML = `Pada data normal, Mean (${mean.toFixed(1)}) dan Median (${med.toFixed(1)}) berdekatan karena distribusi data seimbang simetris.`;
-          }
+          const outlier = parseInt(document.getElementById('stat_slider').value);
+          document.getElementById('stat_out_val').textContent = outlier;
+          const data = [4, 6, 7, 8, outlier].sort((a,b)=>a-b);
+          const mean = (4 + 6 + 7 + 8 + outlier) / 5;
+          const median = data[2];
+          const diff = Math.abs(mean - median);
+          document.getElementById('stat_mean').textContent = mean.toFixed(2);
+          document.getElementById('stat_med').textContent = median.toFixed(2);
+          document.getElementById('stat_disp').textContent = diff.toFixed(2);
+          document.getElementById('stat_concl').innerHTML = `Outlier <strong>${outlier}</strong> mendongkrak Mean menjadi <strong>${mean.toFixed(2)}</strong>, sedangkan Median tetap kokoh di angka <strong>${median}</strong>. Inilah alasan mengapa praktisi data sains wajib memeriksa outlier sebelum mengandalkan rata-rata.`;
         }
         
 

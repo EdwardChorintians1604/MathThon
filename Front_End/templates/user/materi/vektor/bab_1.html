@@ -187,7 +187,7 @@
     /* Main Content Area */
     .dic-main {
       padding: 2.5rem 3rem;
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       width: 100%;
     }
@@ -242,31 +242,63 @@
       color: #f8fafc;
       line-height: 1.25;
     }
-    
+
+    /* Target Box */
     .dic-target-box {
-      background: #111622;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.25rem;
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .dic-target-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #818cf8;
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .dic-target-list {
       margin: 0;
       padding-left: 1.25rem;
-      font-size: 0.88rem;
-      color: #94a3b8;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
     }
-    .dic-target-list li { margin-bottom: 0.35rem; }
-    
+    .dic-target-list li { margin-bottom: 0.4rem; }
+
+    /* Real-World Hook Box */
+    .dic-hook-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.02));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .dic-hook-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dic-hook-body {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Section Title */
     .dic-section-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -278,50 +310,192 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border-color);
     }
-    
-    .dic-lead {
-      font-size: 1.02rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin: 1rem 0 1.5rem;
-    }
-    
-    .dic-formula-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid var(--accent-glow);
+
+    /* Concepts Cards */
+    .dic-concept-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 1.5rem;
       margin: 1.25rem 0;
-      text-align: center;
-      overflow-x: auto;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .dic-formula-explain {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-      margin: 1rem 0;
-      line-height: 1.6;
-    }
-    
-    .dic-example-box {
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-    }
-    .dic-example-title {
-      font-size: 0.85rem;
+    .dic-h3 {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #34d399;
-      margin-bottom: 0.5rem;
+      color: #f8fafc;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+    .dic-list {
+      margin: 0.5rem 0 0.75rem 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .dic-list li { margin-bottom: 0.35rem; }
+
+    /* Dicoding Callout Boxes */
+    .dic-callout {
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .dic-callout-icon {
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .dic-callout-content { flex-grow: 1; font-size: 0.91rem; line-height: 1.7; }
+    .dic-callout-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
     
+    .dic-callout.pro-tip {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-left: 4px solid #10b981;
+    }
+    .dic-callout.pro-tip .dic-callout-title { color: #34d399; }
+    .dic-callout.pro-tip .dic-callout-icon { color: #10b981; }
+    .dic-callout.pro-tip .dic-callout-content { color: #d1fae5; }
+
+    .dic-callout.pitfall {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 4px solid #f43f5e;
+    }
+    .dic-callout.pitfall .dic-callout-title { color: #fb7185; }
+    .dic-callout.pitfall .dic-callout-icon { color: #f43f5e; }
+    .dic-callout.pitfall .dic-callout-content { color: #ffe4e6; }
+
+    .dic-callout.fun-fact {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-left: 4px solid #8b5cf6;
+    }
+    .dic-callout.fun-fact .dic-callout-title { color: #c084fc; }
+    .dic-callout.fun-fact .dic-callout-icon { color: #8b5cf6; }
+    .dic-callout.fun-fact .dic-callout-content { color: #ede9fe; }
+
+    /* Formula & Parameter Table */
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-param-table-wrap {
+      margin: 1.25rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .dic-param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .dic-param-table th {
+      background: #161d2e;
+      color: #94a3b8;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-param-table td {
+      padding: 0.75rem 1rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .dic-param-table tr:last-child td { border-bottom: none; }
+    .dic-param-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .dic-symbol-badge {
+      font-family: 'Fira Code', monospace;
+      color: #38bdf8;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .dic-formula-explain {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      line-height: 1.7;
+    }
+
+    /* Guided Step Box */
+    .dic-step-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dic-step-problem {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+      line-height: 1.7;
+    }
+    .dic-step-item {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .dic-step-item.diketahui {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid #6366f1;
+      color: #cbd5e1;
+    }
+    .dic-step-item.ditanya {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 3px solid #f59e0b;
+      color: #cbd5e1;
+    }
+    .dic-step-item.langkah {
+      background: rgba(16, 185, 129, 0.05);
+      border-left: 3px solid #10b981;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    .dic-step-item.kesimpulan {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid #38bdf8;
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
     /* Interactive Math Simulation Box */
     .dic-sim-box {
       background: #111622;
@@ -424,6 +598,34 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
+
+    /* Takeaways Box */
+    .dic-takeaway-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(16, 185, 129, 0.01));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .dic-takeaway-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-takeaway-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .dic-takeaway-list li { margin-bottom: 0.45rem; }
     
     /* Bottom Navigation */
     .dic-bottom-nav {
@@ -509,7 +711,7 @@
         <a href="{{ url_for('materi.subject_bab', subject='vektor', bab_num=3) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[2]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[2]['is_completed'] else '3' }}</span>
-          <span>Mekanika: Prosedur Perhitungan & Operasi Vektor</span>
+          <span>Mekanika: Prosedur Perhitungan & Operasi Lanjutan Vektor</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='vektor', bab_num=4) }}" 
@@ -524,15 +726,18 @@
           <span>Capstone: Proyek Integratif & Uji Sintesis Vektor</span>
         </a>
 
-      <!-- In-Page Anchor Links -->
+      <!-- In-Page Anchor Links (TOC) -->
       <div class="dic-sb-nav-title">Daftar Isi Halaman (TOC)</div>
       <div class="dic-anchor-box">
         <a href="#peruntukan" class="dic-anchor-link"><i class="bi bi-compass me-1"></i> Peruntukan & Sasaran</a>
+        <a href="#hook" class="dic-anchor-link"><i class="bi bi-lightbulb me-1"></i> Mengapa Ini Penting?</a>
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
-        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
+        <a href="#tips" class="dic-anchor-link"><i class="bi bi-patch-check me-1"></i> Tips & Jebakan Umum</a>
+        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi KaTeX</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
         <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
+        <a href="#rangkuman" class="dic-anchor-link"><i class="bi bi-check2-all me-1"></i> Rangkuman Intisari</a>
       </div>
     </aside>
 
@@ -544,6 +749,16 @@
         <a href="{{ url_for('materi.subject_index', subject='vektor') }}">Vektor</a>
         <i class="bi bi-chevron-right small"></i>
         <span>Bab 1</span>
+      </div>
+
+      <!-- Reading Meta Badges -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="badge bg-secondary-subtle text-light border border-secondary-subtle px-2 py-1 small">
+          <i class="bi bi-clock-history me-1"></i> ~12-15 Menit Baca Mendalam
+        </span>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 small">
+          <i class="bi bi-mortarboard me-1"></i> Standar Akademi Dicoding
+        </span>
       </div>
 
       <!-- Explicit Stage Banner -->
@@ -561,101 +776,249 @@
       <div class="dic-target-box">
         <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#3b82f6;"></i> Sasaran Pembelajaran Bab 1:</div>
         <ul class="dic-target-list">
-          <li>Memahami landasan konseptual dari Fondasi: Konsep Intuitif & Pengenalan Vektor secara sistematis.</li>
-          <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
+          <li>Membedakan secara tegas antara besaran skalar (hanya memiliki nilai) dan besaran vektor (memiliki nilai dan arah).</li><li>Memahami representasi grafis panah berarah di bidang koordinat Cartesius 2D dan ruang 3D.</li><li>Menghitung panjang (magnitudo) vektor dari titik pangkal ke titik ujung menggunakan perluasan Teorema Pythagoras.</li><li>Menentukan dan membentuk vektor satuan (unit vector) melalui proses normalisasi arah.</li>
         </ul>
       </div>
 
-      <!-- Core Concept -->
+      <!-- Real-World Motivation Hook -->
+      <div class="dic-hook-box" id="hook">
+        <div class="dic-hook-title"><i class="bi bi-lightbulb-fill"></i> Mengapa Konsep Ini Sangat Penting? (Perspektif Praktisi & Rekayasa)</div>
+        <p class="dic-hook-body">Bayangkan kamu sedang menerbangkan drone pengantar barang di area terbuka dengan kecepatan mesin 30 km/jam ke arah utara. Tiba-tiba, hembusan angin kencang berkecepatan 40 km/jam bertiup ke arah timur. Ke mana drone kamu akan benar-benar bergerak dan berapa kecepatan totalnya terhadap tanah? Jika kamu hanya menjumlahkan angkanya (30 + 40 = 70 km/jam), jawabanmu SALAH BESAR! Fisika alam semesta tidak bekerja seperti itu. Drone kamu akan bergerak miring ke arah timur laut dengan kecepatan tepat 50 km/jam. Inilah keajaiban besaran vektor yang memiliki nilai sekaligus orientasi arah!</p>
+      </div>
+
+      <!-- Core Concept Sections -->
       <h2 class="dic-section-title" id="konsep">
-        <i class="bi bi-book-half" style="color:#3b82f6;"></i> Pembahasan Konsep & Teori
+        <i class="bi bi-book-half" style="color:#3b82f6;"></i> Pembahasan Konsep & Teori Mendalam
       </h2>
-      <p class="dic-lead">
-        Vektor adalah besaran yang memiliki nilai (magnitudo) dan arah spesifik di dalam ruang.
-      </p>
+      
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-compass-fill text-primary"></i> 1. Skalar vs Vektor: Perbedaan Fundamental</h3>
+              <p>Dalam sains, rekayasa teknologi, dan matematika, semua besaran di alam semesta diklasifikasikan ke dalam dua kategori besar:</p>
+              <div class="row g-3 my-2">
+                <div class="col-md-6">
+                  <div class="p-3 rounded h-100" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
+                    <div class="fw-bold text-info mb-1"><i class="bi bi-circle"></i> Besaran Skalar</div>
+                    <p class="small text-muted mb-0">Hanya memiliki <strong>nilai numerik (magnitudo)</strong> dan satuan, tanpa bergantung pada orientasi arah. Operasi perhitungannya mengikuti hukum aritmetika dasar aljabar biasa.<br><br>
+                    <strong>Contoh:</strong> Suhu ($27^\circ\text{C}$), Massa ($65\text{ kg}$), Waktu ($15\text{ detik}$), Kelajuan mobil ($60\text{ km/jam}$), dan Energi listrik ($1200\text{ Joule}$).</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="p-3 rounded h-100" style="background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.25);">
+                    <div class="fw-bold text-primary mb-1"><i class="bi bi-arrow-up-right"></i> Besaran Vektor</div>
+                    <p class="small text-muted mb-0">Wajib memiliki <strong>nilai (magnitudo)</strong> SEKALIGUS <strong>arah tujuan spesifik</strong> di dalam ruang. Perhitungannya harus mempertimbangkan sudut dan geometri ruang.<br><br>
+                    <strong>Contoh:</strong> Perpindahan ($10\text{ meter ke timur}$), Kecepatan ($60\text{ km/jam arah } 45^\circ$), Gaya dorong roket ($5000\text{ N ke atas}$), dan Medan magnet bumi.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-bounding-box text-primary"></i> 2. Representasi Geometris & Vektor Posisi</h3>
+              <p>Secara geometris, vektor digambarkan sebagai ruas garis berarah (anak panah):</p>
+              <ul class="dic-list">
+                <li><strong>Titik Pangkal (Initial Point):</strong> Titik awal tempat fenomena atau gaya bermula (ekor panah).</li>
+                <li><strong>Titik Ujung (Terminal Point):</strong> Titik akhir yang ditunjuk oleh ujung kepala panah.</li>
+                <li><strong>Arah Panah:</strong> Menunjukkan orientasi lintasan atau aksi gaya di ruang.</li>
+                <li><strong>Panjang Ruas Garis:</strong> Merepresentasikan besar atau magnitudo vektor secara proporsional.</li>
+                <li><strong>Vektor Posisi (Position Vector):</strong> Vektor yang titik pangkalnya selalu terikat pada titik asal koordinat $O(0,0,0)$ dan ujungnya berada di titik koordinat $P(x,y,z)$, dinotasikan sebagai $\vec{r} = \vec{OP} = \begin{pmatrix} x \\ y \\ z \end{pmatrix}$.</li>
+              </ul>
+            </div>
+
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-bullseye text-primary"></i> 3. Vektor Satuan & Konsep Normalisasi</h3>
+              <p>Seringkali dalam komputasi 3D dan fisika, kita hanya membutuhkan <em>informasi arah murni</em> dari suatu vektor tanpa memedulikan panjang aslinya. Vektor yang memiliki panjang tepat 1 satuan disebut <strong>Vektor Satuan (Unit Vector)</strong>, dilambangkan dengan tanda topi $\hat{u}$ (u-hat). Proses mengubah vektor sembarang menjadi vektor satuan disebut <strong>Normalisasi</strong>.</p>
+            </div>
+            
+
+      <!-- Dicoding Insights & Callouts -->
+      <h2 class="dic-section-title" id="tips">
+        <i class="bi bi-patch-check" style="color:#3b82f6;"></i> Tips Praktisi & Wawasan Kritis
+      </h2>
+      
+      <div class="dic-callout pro-tip">
+        <div class="dic-callout-icon"><i class="bi bi-lightbulb-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">💡 Dicoding Pro-Tip / Praktik Terbaik</div>
+          <div class="dic-callout-content">Dalam game engine modern seperti Unity atau Unreal Engine, fungsi `vector.normalized` digunakan ribuan kali per detik untuk menentukan arah hadap karakter (facing direction) dan arah tembakan proyektil tanpa mengubah kecepatan dasarnya!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout pitfall">
+        <div class="dic-callout-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">⚠️ Common Pitfall / Jebakan Umum</div>
+          <div class="dic-callout-content">Miskonsepsi fatal: Jangan menjumlahkan panjang dua vektor secara langsung seperti skalar ($|\vec{a} + \vec{b}| \neq |\vec{a}| + |\vec{b}|$). Penjumlahan langsung hanya berlaku jika kedua vektor sejajar dan searah sempurna!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout fun-fact">
+        <div class="dic-callout-icon"><i class="bi bi-cpu-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">🧠 Wawasan Komputasi & Fakta Menarik</div>
+          <div class="dic-callout-content">Aljabar vektor modern diformulasikan oleh fisikawan Amerika Josiah Willard Gibbs dan matematikawan Inggris Oliver Heaviside pada akhir abad ke-19 untuk menggantikan notasi kuaternion William Rowan Hamilton yang terlalu rumit dalam memodelkan medan elektromagnetik Maxwell.</div>
+        </div>
+      </div>
 
       <!-- Formula Section -->
       <h2 class="dic-section-title" id="formula">
-        <i class="bi bi-calculator" style="color:#3b82f6;"></i> Formulasi Matematis & Bedah Rumus
+        <i class="bi bi-calculator" style="color:#3b82f6;"></i> Formulasi KaTeX & Anatomi Parameter
       </h2>
       <div class="dic-formula-card">
-        \[ |\vec{v}| = \sqrt{x^2 + y^2 + z^2} \quad ; \quad \hat{u} = \frac{\vec{v}}{|\vec{v}|} \]
+        \[ |\vec{v}| = \sqrt{x^2 + y^2 + z^2} \quad ; \quad \hat{u} = \frac{\vec{v}}{|\vec{v}|} = \left(\frac{x}{|\vec{v}|}, \frac{y}{|\vec{v}|}, \frac{z}{|\vec{v}|}\right) \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Panjang atau magnitudo vektor dihitung menggunakan generalisasi Pythagoras 3 dimensi.
+        <strong>💡 Makna & Intuisi Formulasi:</strong> Rumus panjang vektor di ruang 3D adalah generalisasi Teorema Pythagoras bertingkat. Jarak proyeksi di bidang XY adalah $d = \sqrt{x^2 + y^2}$, lalu digabungkan secara tegak lurus dengan elevasi sumbu Z sehingga menghasilkan diagonal ruang total $\sqrt{d^2 + z^2} = \sqrt{x^2 + y^2 + z^2}$.
       </div>
+
+      <div class="small fw-bold text-muted text-uppercase mb-2 mt-3"><i class="bi bi-table me-1"></i> Bedah Anatomi Variabel Formulasi:</div>
+      
+    <div class="dic-param-table-wrap">
+      <table class="dic-param-table">
+        <thead>
+          <tr>
+            <th>Simbol / Notasi</th>
+            <th>Makna & Interpretasi Matematis</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">x, y, z</span></td>
+              <td class="text-light">Komponen skalar proyeksi vektor terhadap sumbu Kartesius X, Y, dan Z.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">|\vec{v}|</span></td>
+              <td class="text-light">Magnitudo atau panjang mutlak vektor (selalu bernilai non-negatif $\ge 0$).</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">\hat{u}</span></td>
+              <td class="text-light">Vektor satuan (unit vector) yang memiliki magnitudo tepat 1 satuan ($|\hat{u}| = 1$).</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 
       <!-- Worked Example -->
       <h2 class="dic-section-title" id="contoh">
-        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu
+        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu (Langkah Demi Langkah)
       </h2>
-      <div class="dic-example-box">
-        <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
-        <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh 1: Vektor v = (3, 4). Panjang |v| = √(3² + 4²) = √25 = 5 satuan.
-        </p>
+      
+    <div class="dic-step-box">
+      <div class="dic-step-problem">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-patch-question"></i> Skenario Studi Kasus:</div>
+        <div>Sebuah sensor robotik mendeteksi keberadaan objek rintangan pada koordinat spasial P(3, 4, 12) meter dari titik pusat sensor O(0,0,0). Tentukan jarak garis lurus langsung dari sensor ke objek tersebut, lalu hitung vektor satuan yang menunjukkan arah pandang sensor ke target!</div>
       </div>
+      <div class="dic-step-item diketahui">
+        <div class="small fw-bold text-primary mb-1"><i class="bi bi-pin-angle-fill"></i> Diketahui:</div>
+        <div>Titik pangkal O(0,0,0), titik sasaran P(3, 4, 12). Maka komponen vektor $\vec{v} = (3, 4, 12)$.</div>
+      </div>
+      <div class="dic-step-item ditanya">
+        <div class="small fw-bold text-warning mb-1"><i class="bi bi-question-circle-fill"></i> Ditanya:</div>
+        <div>Magnitudo jarak $|\vec{v}|$ dan vektor satuan $\hat{u}$.</div>
+      </div>
+      <div class="dic-step-item langkah">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-diagram-3-fill"></i> Langkah Penyelesaian Terpandu:</div>
+        <div><div class='mb-2'><strong>Langkah 1: Menghitung Kuadrat Masing-Masing Komponen:</strong> Hitung kuadrat tiap sumbu: $x^2 = 3^2 = 9$, $y^2 = 4^2 = 16$, $z^2 = 12^2 = 144$.</div><div class='mb-2'><strong>Langkah 2: Menjumlahkan Komponen & Mengambil Akar Kuadrat:</strong> Jumlahkan total kuadrat: $9 + 16 + 144 = 169$. Maka panjang vektor adalah $|\vec{v}| = \sqrt{169} = 13\text{ meter}$.</div><div class='mb-2'><strong>Langkah 3: Melakukan Normalisasi untuk Mendapatkan Vektor Satuan:</strong> Bagi setiap komponen vektor dengan panjang totalnya: $\hat{u} = \frac{(3, 4, 12)}{13} = \left(\frac{3}{13}, \frac{4}{13}, \frac{12}{13}\right) \approx (0.231, 0.308, 0.923)$.</div></div>
+      </div>
+      <div class="dic-step-item kesimpulan">
+        <div class="small fw-bold text-info mb-1"><i class="bi bi-check-circle-fill"></i> Kesimpulan Akhir:</div>
+        <div>Objek berjarak tepat 13 meter dari sensor, dengan vektor satuan penunjuk arah $\hat{u} = \left(\frac{3}{13}, \frac{4}{13}, \frac{12}{13}\right)$ yang memiliki magnitudo tepat 1.</div>
+      </div>
+    </div>
 
-      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <!-- Interactive Math Simulator Widget -->
       <h2 class="dic-section-title" id="simulator">
         <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
       <div class="dic-sim-box">
         <div class="dic-sim-topbar">
           <div class="dic-sim-title">
-            <i class="bi bi-cpu-fill" style="color:#3b82f6;"></i> Laboratorium Parameter Interaktif Vektor
+            <i class="bi bi-cpu-fill" style="color:#3b82f6;"></i> Laboratorium Vektor 2D: Resultan & Perkalian Titik (Dot Product)
           </div>
           <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">
             <i class="bi bi-broadcast me-1"></i> Live Simulator
           </span>
         </div>
         <div class="dic-sim-body">
-          <p class="small text-muted mb-3">🎯 Misi Berpikir: Geser slider variabel untuk mengamati respons dan kalkulasi matematis secara langsung.</p>
+          <p class="small text-muted mb-3">🎯 Misi Berpikir: Geser komponen vektor u dan v, amati perubahan panjang resultan serta sudut orientasi melalui Dot Product!</p>
           
+        <div class="p-3 mb-3 rounded" style="background:rgba(99,102,241,0.08); border:1px solid rgba(99,102,241,0.25);">
+          <div class="small fw-bold text-info mb-1"><i class="bi bi-compass"></i> Mengapa Arah dan Sudut Kritis?</div>
+          <p class="small text-light mb-0">Dalam grafika 3D dan fisika game, dot product menentukan intensitas pencahayaan (Lambertian shading) dan arah gerakan. Amati saat u·v bernilai 0 (tegak lurus/ortogonal) atau negatif (berlawanan arah)!</p>
+        </div>
         <div class="row g-3 align-items-center">
-          <div class="col-md-6">
-            <label class="form-label small text-muted">Parameter x: <span id="gen_val_x" class="fw-bold text-info">5</span></label>
-            <input type="range" class="form-range" id="gen_slider_x" min="1" max="50" value="5" oninput="updateGenericSim()">
+          <div class="col-md-3">
+            <label class="form-label small text-muted">Vektor u_x: <span id="val_ux" class="fw-bold text-info">3</span></label>
+            <input type="range" class="form-range" id="slider_ux" min="-10" max="10" value="3" oninput="updateVektorSim()">
           </div>
-          <div class="col-md-6">
-            <label class="form-label small text-muted">Faktor Skalar k: <span id="gen_val_k" class="fw-bold text-warning">2</span></label>
-            <input type="range" class="form-range" id="gen_slider_k" min="1" max="10" value="2" oninput="updateGenericSim()">
+          <div class="col-md-3">
+            <label class="form-label small text-muted">Vektor u_y: <span id="val_uy" class="fw-bold text-info">4</span></label>
+            <input type="range" class="form-range" id="slider_uy" min="-10" max="10" value="4" oninput="updateVektorSim()">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label small text-muted">Vektor v_x: <span id="val_vx" class="fw-bold text-warning">4</span></label>
+            <input type="range" class="form-range" id="slider_vx" min="-10" max="10" value="4" oninput="updateVektorSim()">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label small text-muted">Vektor v_y: <span id="val_vy" class="fw-bold text-warning">0</span></label>
+            <input type="range" class="form-range" id="slider_vy" min="-10" max="10" value="0" oninput="updateVektorSim()">
           </div>
         </div>
         <div class="mt-3 p-3 rounded" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
-          <div class="d-flex justify-content-between">
-            <div><span class="small text-muted">Output Kalkulasi f(x) = k · x²:</span><div class="fs-5 fw-bold text-success" id="gen_out">50</div></div>
-            <div><span class="small text-muted">Nilai Invers / Akar:</span><div class="fs-5 fw-bold text-info" id="gen_sqrt">2.24</div></div>
+          <div class="row text-center g-2 mb-2">
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Panjang Magnitudo |u|:</div>
+              <div class="fs-5 fw-bold text-info" id="vektor_mag_u">5.00</div>
+            </div>
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Panjang Magnitudo |v|:</div>
+              <div class="fs-5 fw-bold text-warning" id="vektor_mag_v">4.00</div>
+            </div>
+            <div class="col-4">
+              <div class="small text-muted">Dot Product (u · v):</div>
+              <div class="fs-5 fw-bold text-success" id="vektor_dot">12.00</div>
+            </div>
+          </div>
+          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #6366f1;">
+            <div class="small text-info fw-bold mb-1"><i class="bi bi-arrows-angle"></i> Sudut Orientasi Antara u dan v (θ):</div>
+            <div class="small text-light" id="vektor_angle">Sudut θ = 53.13° (Lancip). Dot product bernilai positif menandakan kedua vektor mengarah ke kuadran yang searah.</div>
           </div>
         </div>
         
         </div>
       </div>
 
-      <!-- Active Recall / Capstone Challenge Exercise -->
+      <!-- Active Recall Quiz -->
       <div class="dic-quiz-card " id="latihan" style="">
         <div class="dic-quiz-tag" style="">
           <i class="bi bi-patch-question-fill"></i> 
           Active Recall Quiz - Bab 1
         </div>
-        <div class="dic-quiz-q" style="">Berapakah panjang magnitudo dari vektor v = (3, 4, 12)?</div>
+        <div class="dic-quiz-q" style="">Sebuah partikel bergerak dengan vektor posisi $\vec{r} = (6, 8, 0)\text{ meter}$. Berapakah panjang lintasan partikel tersebut dari pusat koordinat, dan berapakah vektor satuannya?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, '|v| = √(3² + 4² + 12²) = √(9 + 16 + 144) = √169 = 13.')">
-          <span>13</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, '|r| = \sqrt{6^2 + 8^2 + 0^2} = \sqrt{36 + 64} = \sqrt{100} = 10\text{ meter}. Vektor satuannya adalah \hat{u} = (6/10, 8/10, 0/10) = (0.6, 0.8, 0).')">
+          <span>Panjang 10 meter dengan vektor satuan (0.6, 0.8, 0)</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '|v| = √(3² + 4² + 12²) = √(9 + 16 + 144) = √169 = 13.')">
-          <span>15</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '|r| = \sqrt{6^2 + 8^2 + 0^2} = \sqrt{36 + 64} = \sqrt{100} = 10\text{ meter}. Vektor satuannya adalah \hat{u} = (6/10, 8/10, 0/10) = (0.6, 0.8, 0).')">
+          <span>Panjang 14 meter dengan vektor satuan (6, 8, 0)</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '|v| = √(3² + 4² + 12²) = √(9 + 16 + 144) = √169 = 13.')">
-          <span>19</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '|r| = \sqrt{6^2 + 8^2 + 0^2} = \sqrt{36 + 64} = \sqrt{100} = 10\text{ meter}. Vektor satuannya adalah \hat{u} = (6/10, 8/10, 0/10) = (0.6, 0.8, 0).')">
+          <span>Panjang 10 meter dengan vektor satuan (1, 1, 0)</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
+      </div>
+
+      <!-- Core Takeaways -->
+      <div class="dic-takeaway-box" id="rangkuman">
+        <div class="dic-takeaway-title"><i class="bi bi-bookmark-check-fill"></i> Ringkasan Intisari Dicoding (Key Takeaways):</div>
+        <ul class="dic-takeaway-list">
+          <li>Besaran skalar hanya memiliki nilai numerik, sedangkan besaran vektor memiliki nilai dan orientasi arah spasial.</li><li>Panjang (magnitudo) vektor 3D dihitung menggunakan rumus Pythagoras ruang: $|\vec{v}| = \sqrt{x^2 + y^2 + z^2}$.</li><li>Vektor satuan $\hat{u} = \vec{v} / |\vec{v}|$ berfungsi menyimpan informasi orientasi arah murni dengan panjang terstandarisasi 1 satuan.</li>
+        </ul>
       </div>
 
       <!-- Bottom Navigation -->
@@ -720,13 +1083,34 @@
 
     // Widget Simulator Logic
     
-        function updateGenericSim() {
-          const x = parseInt(document.getElementById('gen_slider_x').value);
-          const k = parseInt(document.getElementById('gen_slider_k').value);
-          document.getElementById('gen_val_x').textContent = x;
-          document.getElementById('gen_val_k').textContent = k;
-          document.getElementById('gen_out').textContent = k * x * x;
-          document.getElementById('gen_sqrt').textContent = Math.sqrt(x).toFixed(2);
+        function updateVektorSim() {
+          const ux = parseFloat(document.getElementById('slider_ux').value);
+          const uy = parseFloat(document.getElementById('slider_uy').value);
+          const vx = parseFloat(document.getElementById('slider_vx').value);
+          const vy = parseFloat(document.getElementById('slider_vy').value);
+          document.getElementById('val_ux').textContent = ux;
+          document.getElementById('val_uy').textContent = uy;
+          document.getElementById('val_vx').textContent = vx;
+          document.getElementById('val_vy').textContent = vy;
+          const magU = Math.sqrt(ux*ux + uy*uy);
+          const magV = Math.sqrt(vx*vx + vy*vy);
+          const dot = ux*vx + uy*vy;
+          document.getElementById('vektor_mag_u').textContent = magU.toFixed(2);
+          document.getElementById('vektor_mag_v').textContent = magV.toFixed(2);
+          document.getElementById('vektor_dot').textContent = dot.toFixed(2);
+          let angleText = "";
+          if (magU === 0 || magV === 0) {
+            angleText = "Vektor bernilai nol tidak memiliki orientasi arah terdefinisi.";
+          } else {
+            let cosTheta = dot / (magU * magV);
+            cosTheta = Math.max(-1, Math.min(1, cosTheta));
+            const deg = (Math.acos(cosTheta) * (180 / Math.PI)).toFixed(1);
+            let rel = "Lancip";
+            if (Math.abs(dot) < 0.001) rel = "Tegak Lurus (Ortogonal 90°)";
+            else if (dot < 0) rel = "Tumpul (> 90°)";
+            angleText = `Sudut θ = <strong>${deg}°</strong> (${rel}). Hasil dot product = <strong>${dot.toFixed(2)}</strong>.`;
+          }
+          document.getElementById('vektor_angle').innerHTML = angleText;
         }
         
 

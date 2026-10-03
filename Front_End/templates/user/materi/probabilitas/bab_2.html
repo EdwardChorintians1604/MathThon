@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Probabilitas & Kombinatorik - Bab 2: Anatomi: Notasi, Kaidah & Sifat Baku Probabilitas - MathThon</title>
+  <title>Probabilitas & Kombinatorik - Bab 2: Anatomi: Kaidah Pencacahan, Permutasi (Urutan Penting) vs Kombinasi - MathThon</title>
   <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,7 +187,7 @@
     /* Main Content Area */
     .dic-main {
       padding: 2.5rem 3rem;
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       width: 100%;
     }
@@ -242,31 +242,63 @@
       color: #f8fafc;
       line-height: 1.25;
     }
-    
+
+    /* Target Box */
     .dic-target-box {
-      background: #111622;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.25rem;
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .dic-target-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #818cf8;
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .dic-target-list {
       margin: 0;
       padding-left: 1.25rem;
-      font-size: 0.88rem;
-      color: #94a3b8;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
     }
-    .dic-target-list li { margin-bottom: 0.35rem; }
-    
+    .dic-target-list li { margin-bottom: 0.4rem; }
+
+    /* Real-World Hook Box */
+    .dic-hook-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.02));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .dic-hook-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dic-hook-body {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Section Title */
     .dic-section-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -278,50 +310,192 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border-color);
     }
-    
-    .dic-lead {
-      font-size: 1.02rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin: 1rem 0 1.5rem;
-    }
-    
-    .dic-formula-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid var(--accent-glow);
+
+    /* Concepts Cards */
+    .dic-concept-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 1.5rem;
       margin: 1.25rem 0;
-      text-align: center;
-      overflow-x: auto;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .dic-formula-explain {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-      margin: 1rem 0;
-      line-height: 1.6;
-    }
-    
-    .dic-example-box {
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-    }
-    .dic-example-title {
-      font-size: 0.85rem;
+    .dic-h3 {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #34d399;
-      margin-bottom: 0.5rem;
+      color: #f8fafc;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+    .dic-list {
+      margin: 0.5rem 0 0.75rem 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .dic-list li { margin-bottom: 0.35rem; }
+
+    /* Dicoding Callout Boxes */
+    .dic-callout {
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .dic-callout-icon {
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .dic-callout-content { flex-grow: 1; font-size: 0.91rem; line-height: 1.7; }
+    .dic-callout-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
     
+    .dic-callout.pro-tip {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-left: 4px solid #10b981;
+    }
+    .dic-callout.pro-tip .dic-callout-title { color: #34d399; }
+    .dic-callout.pro-tip .dic-callout-icon { color: #10b981; }
+    .dic-callout.pro-tip .dic-callout-content { color: #d1fae5; }
+
+    .dic-callout.pitfall {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 4px solid #f43f5e;
+    }
+    .dic-callout.pitfall .dic-callout-title { color: #fb7185; }
+    .dic-callout.pitfall .dic-callout-icon { color: #f43f5e; }
+    .dic-callout.pitfall .dic-callout-content { color: #ffe4e6; }
+
+    .dic-callout.fun-fact {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-left: 4px solid #8b5cf6;
+    }
+    .dic-callout.fun-fact .dic-callout-title { color: #c084fc; }
+    .dic-callout.fun-fact .dic-callout-icon { color: #8b5cf6; }
+    .dic-callout.fun-fact .dic-callout-content { color: #ede9fe; }
+
+    /* Formula & Parameter Table */
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-param-table-wrap {
+      margin: 1.25rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .dic-param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .dic-param-table th {
+      background: #161d2e;
+      color: #94a3b8;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-param-table td {
+      padding: 0.75rem 1rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .dic-param-table tr:last-child td { border-bottom: none; }
+    .dic-param-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .dic-symbol-badge {
+      font-family: 'Fira Code', monospace;
+      color: #38bdf8;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .dic-formula-explain {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      line-height: 1.7;
+    }
+
+    /* Guided Step Box */
+    .dic-step-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dic-step-problem {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+      line-height: 1.7;
+    }
+    .dic-step-item {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .dic-step-item.diketahui {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid #6366f1;
+      color: #cbd5e1;
+    }
+    .dic-step-item.ditanya {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 3px solid #f59e0b;
+      color: #cbd5e1;
+    }
+    .dic-step-item.langkah {
+      background: rgba(16, 185, 129, 0.05);
+      border-left: 3px solid #10b981;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    .dic-step-item.kesimpulan {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid #38bdf8;
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
     /* Interactive Math Simulation Box */
     .dic-sim-box {
       background: #111622;
@@ -424,6 +598,34 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
+
+    /* Takeaways Box */
+    .dic-takeaway-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(16, 185, 129, 0.01));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .dic-takeaway-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-takeaway-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .dic-takeaway-list li { margin-bottom: 0.45rem; }
     
     /* Bottom Navigation */
     .dic-bottom-nav {
@@ -497,42 +699,45 @@
         <a href="{{ url_for('materi.subject_bab', subject='probabilitas', bab_num=1) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[0]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[0]['is_completed'] else '1' }}</span>
-          <span>Fondasi: Konsep Intuitif & Pengenalan Probabilitas</span>
+          <span>Fondasi: Ketidakpastian di Alam Semesta & Ruang Sampel</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='probabilitas', bab_num=2) }}" 
            class="dic-chapter-link active {{ 'done' if all_bab_status[1]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[1]['is_completed'] else '2' }}</span>
-          <span>Anatomi: Notasi, Kaidah & Sifat Baku Probabilitas</span>
+          <span>Anatomi: Kaidah Pencacahan, Permutasi (Urutan Penting) vs Kombinasi</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='probabilitas', bab_num=3) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[2]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[2]['is_completed'] else '3' }}</span>
-          <span>Mekanika: Prosedur Perhitungan & Operasi Probabilitas</span>
+          <span>Mekanika: Peluang Majemuk (Aturan Penjumlahan & Peluang Bersyarat)</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='probabilitas', bab_num=4) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[3]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[3]['is_completed'] else '4' }}</span>
-          <span>Pemodelan: Aplikasi Nyata & Studi Kasus Probabilitas</span>
+          <span>Pemodelan: Distribusi Binomial & Hukum Bilangan Besar</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='probabilitas', bab_num=5) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[4]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[4]['is_completed'] else '5' }}</span>
-          <span>Capstone: Proyek Integratif & Uji Sintesis Probabilitas</span>
+          <span>Capstone: Sistem Skrining Diagnostik Medis & Teorema Bayes</span>
         </a>
 
-      <!-- In-Page Anchor Links -->
+      <!-- In-Page Anchor Links (TOC) -->
       <div class="dic-sb-nav-title">Daftar Isi Halaman (TOC)</div>
       <div class="dic-anchor-box">
         <a href="#peruntukan" class="dic-anchor-link"><i class="bi bi-compass me-1"></i> Peruntukan & Sasaran</a>
+        <a href="#hook" class="dic-anchor-link"><i class="bi bi-lightbulb me-1"></i> Mengapa Ini Penting?</a>
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
-        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
+        <a href="#tips" class="dic-anchor-link"><i class="bi bi-patch-check me-1"></i> Tips & Jebakan Umum</a>
+        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi KaTeX</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
         <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
+        <a href="#rangkuman" class="dic-anchor-link"><i class="bi bi-check2-all me-1"></i> Rangkuman Intisari</a>
       </div>
     </aside>
 
@@ -546,6 +751,16 @@
         <span>Bab 2</span>
       </div>
 
+      <!-- Reading Meta Badges -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="badge bg-secondary-subtle text-light border border-secondary-subtle px-2 py-1 small">
+          <i class="bi bi-clock-history me-1"></i> ~12-15 Menit Baca Mendalam
+        </span>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 small">
+          <i class="bi bi-mortarboard me-1"></i> Standar Akademi Dicoding
+        </span>
+      </div>
+
       <!-- Explicit Stage Banner -->
       <div class="dic-role-banner" id="peruntukan">
         <div class="dic-role-icon"><i class="bi bi-diagram-3"></i></div>
@@ -555,128 +770,230 @@
         </div>
       </div>
 
-      <h1 class="dic-h1">Anatomi: Notasi, Kaidah & Sifat Baku Probabilitas</h1>
+      <h1 class="dic-h1">Anatomi: Kaidah Pencacahan, Permutasi (Urutan Penting) vs Kombinasi</h1>
 
       <!-- Learning Objectives -->
       <div class="dic-target-box">
         <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#14b8a6;"></i> Sasaran Pembelajaran Bab 2:</div>
         <ul class="dic-target-list">
-          <li>Memahami landasan konseptual dari Anatomi: Notasi, Kaidah & Sifat Baku Probabilitas secara sistematis.</li>
-          <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
+          <li>Menguasai notasi faktorial n! = n * (n-1) * ... * 1 dengan definisi 0! = 1.</li><li>Membedakan Permutasi (urutan posisi diperhatikan) dan Kombinasi (urutan posisi bebas).</li><li>Menghitung banyaknya cara pemilihan pengurus organisasi dan formasi tim perwakilan.</li>
         </ul>
       </div>
 
-      <!-- Core Concept -->
+      <!-- Real-World Motivation Hook -->
+      <div class="dic-hook-box" id="hook">
+        <div class="dic-hook-title"><i class="bi bi-lightbulb-fill"></i> Mengapa Konsep Ini Sangat Penting? (Perspektif Praktisi & Rekayasa)</div>
+        <p class="dic-hook-body">Jika kamu memesan semangkuk es krim dengan tiga rasa: cokelat, vanila, dan stroberi—apakah rasa es krimmu berubah jika pelayan menaruh sendok vanila terlebih dahulu sebelum cokelat? Tidak berubah (Urutan Bebas = Kombinasi). Tetapi bagaimana jika kita memilih Juara 1, Juara 2, dan Juara 3 lomba lari? Hadiah Juara 1 tentu sangat berbeda dengan Juara 3 (Urutan Posisi Penting = Permutasi)! Memahami perbedaan anatomis inilah kunci kombinatorika!</p>
+      </div>
+
+      <!-- Core Concept Sections -->
       <h2 class="dic-section-title" id="konsep">
-        <i class="bi bi-book-half" style="color:#14b8a6;"></i> Pembahasan Konsep & Teori
+        <i class="bi bi-book-half" style="color:#14b8a6;"></i> Pembahasan Konsep & Teori Mendalam
       </h2>
-      <p class="dic-lead">
-        Faktorial n! merepresentasikan total permutasi dari n objek yang disusun berjajar.
-      </p>
+      
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-diagram-2 text-primary"></i> 1. Permutasi vs Kombinasi</h3>
+              <div class="row g-3 my-2">
+                <div class="col-md-6">
+                  <div class="p-3 rounded h-100" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
+                    <div class="fw-bold text-info mb-1"><i class="bi bi-sort-numeric-down"></i> Permutasi ($^n P_r$)</div>
+                    <p class="small text-muted mb-0"><strong>Urutan Sangat Diperhatikan!</strong> Susunan $(A, B)$ dianggap BERBEDA dengan $(B, A)$.<br><br>
+                    <strong>Contoh:</strong> Menentukan susunan Ketua, Sekretaris, Bendahara; Nomor PIN rekening ATM; dan Urutan pelari estafet.</p>
+                    \[ ^n P_r = \frac{n!}{(n - r)!} \]
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="p-3 rounded h-100" style="background:rgba(20,184,166,0.08); border:1px solid rgba(20,184,166,0.25);">
+                    <div class="fw-bold text-success mb-1"><i class="bi bi-people"></i> Kombinasi ($^n C_r$)</div>
+                    <p class="small text-muted mb-0"><strong>Urutan Bebas / Diabaikan!</strong> Kelompok $\{A, B\}$ dianggap SAMA PERSIS dengan $\{B, A\}$.<br><br>
+                    <strong>Contoh:</strong> Memilih 3 orang anggota regu piket, memilih 5 kartu remi poker, dan mencampur warna cat.</p>
+                    \[ ^n C_r = \frac{n!}{r!(n - r)!} \]
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+
+      <!-- Dicoding Insights & Callouts -->
+      <h2 class="dic-section-title" id="tips">
+        <i class="bi bi-patch-check" style="color:#14b8a6;"></i> Tips Praktisi & Wawasan Kritis
+      </h2>
+      
+      <div class="dic-callout pro-tip">
+        <div class="dic-callout-icon"><i class="bi bi-lightbulb-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">💡 Dicoding Pro-Tip / Praktik Terbaik</div>
+          <div class="dic-callout-content">Hubungan matematis penting: Permutasi selalu tepat $r!$ kali lebih besar daripada Kombinasi: $^n P_r = (^n C_r) \times r!$. Karena kombinasi hanya memilih, sedangkan permutasi melanjutkannya dengan menata urutan susunan anggota terpilih tersebut!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout pitfall">
+        <div class="dic-callout-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">⚠️ Common Pitfall / Jebakan Umum</div>
+          <div class="dic-callout-content">Jangan lupa bahwa $0!$ didefinisikan sama dengan 1 ($0! = 1$), bukan 0! Hal ini menjaga konsistensi aljabar pada $^n C_n = \frac{n!}{n! 0!} = 1$.</div>
+        </div>
+      </div>
+
+      <div class="dic-callout fun-fact">
+        <div class="dic-callout-icon"><i class="bi bi-cpu-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">🧠 Wawasan Komputasi & Fakta Menarik</div>
+          <div class="dic-callout-content">Banyaknya kemungkinan susunan acak tumpukan 52 kartu remi adalah $52! \approx 8 \times 10^{67}$. Angka ini begitu masif sehingga setiap kali kamu mengocok satu set kartu dengan benar, hampir pasti susunan kartumu belum pernah ada sebelumnya dalam seluruh sejarah alam semesta!</div>
+        </div>
+      </div>
 
       <!-- Formula Section -->
       <h2 class="dic-section-title" id="formula">
-        <i class="bi bi-calculator" style="color:#14b8a6;"></i> Formulasi Matematis & Bedah Rumus
+        <i class="bi bi-calculator" style="color:#14b8a6;"></i> Formulasi KaTeX & Anatomi Parameter
       </h2>
       <div class="dic-formula-card">
-        \[ ^n P_r = \frac{n!}{(n - r)!} \quad (\text{Permutasi - Urutan Diperhatikan}) \]
+        \[ ^n P_r = \frac{n!}{(n - r)!} \quad ; \quad ^n C_r = \binom{n}{r} = \frac{n!}{r!(n - r)!} \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Permutasi menghitung susunan objek di mana urutan posisi berpengaruh (seperti juara 1, 2, 3).
+        <strong>💡 Makna & Intuisi Formulasi:</strong> Membagi dengan faktorial $(n - r)!$ untuk memotong cabang yang tidak terpakai, dan membagi dengan $r!$ untuk mengeliminasi duplikasi permutasi posisi.
       </div>
+
+      <div class="small fw-bold text-muted text-uppercase mb-2 mt-3"><i class="bi bi-table me-1"></i> Bedah Anatomi Variabel Formulasi:</div>
+      
+    <div class="dic-param-table-wrap">
+      <table class="dic-param-table">
+        <thead>
+          <tr>
+            <th>Simbol / Notasi</th>
+            <th>Makna & Interpretasi Matematis</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">n</span></td>
+              <td class="text-light">Total jumlah objek yang tersedia.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">r</span></td>
+              <td class="text-light">Jumlah objek yang dipilih ($r \le n$).</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">n!</span></td>
+              <td class="text-light">Notasi faktorial $n \times (n-1) \times \dots \times 1$.</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 
       <!-- Worked Example -->
       <h2 class="dic-section-title" id="contoh">
-        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu
+        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu (Langkah Demi Langkah)
       </h2>
-      <div class="dic-example-box">
-        <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
-        <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh 2: Banyak susunan pengurus (Ketua, Sekretaris, Bendahara) dari 5 calon: ⁵P₃ = 5! / 2! = 60 cara.
-        </p>
+      
+    <div class="dic-step-box">
+      <div class="dic-step-problem">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-patch-question"></i> Skenario Studi Kasus:</div>
+        <div>Dari 7 orang kandidat pengurus kelas, akan dipilih: (a) Ketua, Sekretaris, dan Bendahara, serta (b) 3 orang delegasi regu belajar bersama. Hitung berapa banyak cara pemilihan untuk masing-masing kasus!</div>
       </div>
+      <div class="dic-step-item diketahui">
+        <div class="small fw-bold text-primary mb-1"><i class="bi bi-pin-angle-fill"></i> Diketahui:</div>
+        <div>Total kandidat $n = 7$, dipilih $r = 3$.</div>
+      </div>
+      <div class="dic-step-item ditanya">
+        <div class="small fw-bold text-warning mb-1"><i class="bi bi-question-circle-fill"></i> Ditanya:</div>
+        <div>Banyak susunan pengurus (urutan penting) dan delegasi (urutan bebas).</div>
+      </div>
+      <div class="dic-step-item langkah">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-diagram-3-fill"></i> Langkah Penyelesaian Terpandu:</div>
+        <div><div class='mb-2'><strong>Langkah 1: Kasus (a) Pengurus Menggunakan Permutasi:</strong> Posisi jabatan memiliki hierarki berbeda (urutan penting):<br>$^7 P_3 = \frac{7!}{(7 - 3)!} = \frac{7!}{4!} = 7 \times 6 \times 5 = 210\text{ cara}$.</div><div class='mb-2'><strong>Langkah 2: Kasus (b) Delegasi Menggunakan Kombinasi:</strong> Semua delegasi memiliki status setara tanpa jabatan (urutan bebas):<br>$^7 C_3 = \frac{7!}{3! (7 - 3)!} = \frac{7 \times 6 \times 5}{3 \times 2 \times 1} = \frac{210}{6} = 35\text{ cara}$.</div></div>
+      </div>
+      <div class="dic-step-item kesimpulan">
+        <div class="small fw-bold text-info mb-1"><i class="bi bi-check-circle-fill"></i> Kesimpulan Akhir:</div>
+        <div>Ada 210 cara untuk memilih susunan jabatan pengurus (Permutasi) dan ada 35 cara untuk memilih kelompok delegasi belajar (Kombinasi).</div>
+      </div>
+    </div>
 
-      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <!-- Interactive Math Simulator Widget -->
       <h2 class="dic-section-title" id="simulator">
         <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
       <div class="dic-sim-box">
         <div class="dic-sim-topbar">
           <div class="dic-sim-title">
-            <i class="bi bi-cpu-fill" style="color:#14b8a6;"></i> Laboratorium Penalaran: Rasio Kombinatorika & Hukum Bilangan Besar
+            <i class="bi bi-cpu-fill" style="color:#14b8a6;"></i> Laboratorium Hukum Bilangan Besar (LLN): Dari Keacakan Menuju Kepastian Frekuensi
           </div>
           <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">
             <i class="bi bi-broadcast me-1"></i> Live Simulator
           </span>
         </div>
         <div class="dic-sim-body">
-          <p class="small text-muted mb-3">🎯 Misi Berpikir: Mengapa permutasi ⁿPᵣ selalu tepat r! kali lebih besar daripada kombinasi ⁿCᵣ?</p>
+          <p class="small text-muted mb-3">🎯 Misi Berpikir: Tingkatkan jumlah lemparan koin dari 10 hingga 5.000 kali untuk membuktikan konvergensi peluang teoretis 50%!</p>
           
-        <div class="p-3 mb-3 rounded" style="background:rgba(20,184,166,0.08); border:1px solid rgba(20,184,166,0.25);">
-          <div class="small fw-bold text-info mb-1"><i class="bi bi-dice-5"></i> Logika Urutan Posisi:</div>
-          <p class="small text-light mb-0">Kombinasi memilih anggota tanpa peduli urutan. Permutasi menata setiap anggota terpilih ke dalam urutan posisi (sebanyak r! cara). Ubah nilai r dan buktikan hubungan multiplikatifnya!</p>
+        <div class="p-3 mb-3 rounded" style="background:rgba(234,179,8,0.08); border:1px solid rgba(234,179,8,0.25);">
+          <div class="small fw-bold text-warning mb-1"><i class="bi bi-dice-5"></i> Mengapa Kasino Selalu Menang dalam Jangka Panjang?</div>
+          <p class="small text-light mb-0">Hukum Bilangan Besar (Law of Large Numbers) menyatakan bahwa dalam jumlah percobaan kecil, fluktuasi acak mendominasi. Namun saat N bertumbuh masif, frekuensi empiris pasti mengunci nilai peluang teoretis!</p>
         </div>
         <div class="row g-3 align-items-center">
-          <div class="col-md-6">
-            <label class="form-label small text-muted">Total Objek Tersedia (n): <span id="prob_val_n" class="fw-bold text-info">6</span></label>
-            <input type="range" class="form-range" id="prob_slider_n" min="2" max="10" value="6" oninput="updateProbSim()">
+          <div class="col-md-8">
+            <label class="form-label small text-muted">Jumlah Lemparan Koin Simulative (N): <span id="prob_n_val" class="fw-bold text-info">50</span></label>
+            <input type="range" class="form-range" id="prob_slider" min="10" max="5000" value="50" step="10" oninput="updateProbSim()">
           </div>
-          <div class="col-md-6">
-            <label class="form-label small text-muted">Objek Dipilih (r ≤ n): <span id="prob_val_r" class="fw-bold text-warning">3</span></label>
-            <input type="range" class="form-range" id="prob_slider_r" min="1" max="10" value="3" oninput="updateProbSim()">
+          <div class="col-md-4 text-end">
+            <button class="btn btn-sm btn-outline-warning" onclick="updateProbSim()"><i class="bi bi-shuffle"></i> Acak Ulang Sampel</button>
           </div>
         </div>
         <div class="mt-3 p-3 rounded" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
           <div class="row text-center g-2 mb-2">
             <div class="col-4 border-end border-secondary border-opacity-25">
-              <div class="small text-muted">Kombinasi ⁿCᵣ:</div>
-              <div class="fs-4 fw-bold text-success" id="prob_comb">20</div>
-              <div class="small text-muted">Tanpa urutan</div>
+              <div class="small text-muted">Peluang Teoretis:</div>
+              <div class="fs-5 fw-bold text-light">50.00%</div>
             </div>
             <div class="col-4 border-end border-secondary border-opacity-25">
-              <div class="small text-muted">Faktor Urutan (r!):</div>
-              <div class="fs-4 fw-bold text-warning" id="prob_fact">6</div>
-              <div class="small text-muted">Penataan posisi</div>
+              <div class="small text-muted">Frekuensi Gambar (Empiris):</div>
+              <div class="fs-5 fw-bold text-success" id="prob_emp">52.00%</div>
             </div>
             <div class="col-4">
-              <div class="small text-muted">Permutasi ⁿPᵣ:</div>
-              <div class="fs-4 fw-bold text-info" id="prob_perm">120</div>
-              <div class="small text-muted">ⁿCᵣ × r!</div>
+              <div class="small text-muted">Galat Deviasi dari Teori:</div>
+              <div class="fs-5 fw-bold text-warning" id="prob_err">2.00%</div>
             </div>
           </div>
-          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #14b8a6;">
-            <div class="small text-info fw-bold mb-1"><i class="bi bi-link-45deg"></i> Bukti Hubungan Logis:</div>
-            <div class="small text-light" id="prob_proof">ⁿP₃ = 20 × 3! = 20 × 6 = 120 cara susunan.</div>
+          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #eab308;">
+            <div class="small text-warning fw-bold mb-1"><i class="bi bi-graph-up"></i> Evaluasi Konvergensi LLN:</div>
+            <div class="small text-light" id="prob_text">Pada N=50 percobaan, galat acak masih terasa. Tingkatkan N hingga 5000 untuk melihat deviasi menyusut mendekati 0%.</div>
           </div>
         </div>
         
         </div>
       </div>
 
-      <!-- Active Recall / Capstone Challenge Exercise -->
+      <!-- Active Recall Quiz -->
       <div class="dic-quiz-card " id="latihan" style="">
         <div class="dic-quiz-tag" style="">
           <i class="bi bi-patch-question-fill"></i> 
           Active Recall Quiz - Bab 2
         </div>
-        <div class="dic-quiz-q" style="">Banyak cara memilih Ketua dan Wakil Ketua dari 6 orang calon adalah?</div>
+        <div class="dic-quiz-q" style="">Berapa banyak cara memilih 2 orang perwakilan siswa dari 5 calon yang tersedia?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Permutasi ⁶P₂ = 6 × 5 = 30 cara.')">
-          <span>30 cara</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, '^5 C_2 = 5! / (2! * 3!) = (5 * 4) / (2 * 1) = 10 cara.')">
+          <span>10 cara</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Permutasi ⁶P₂ = 6 × 5 = 30 cara.')">
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '^5 C_2 = 5! / (2! * 3!) = (5 * 4) / (2 * 1) = 10 cara.')">
+          <span>20 cara</span>
+          <i class="bi bi-circle"></i>
+        </button>
+
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, '^5 C_2 = 5! / (2! * 3!) = (5 * 4) / (2 * 1) = 10 cara.')">
           <span>15 cara</span>
           <i class="bi bi-circle"></i>
         </button>
-
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Permutasi ⁶P₂ = 6 × 5 = 30 cara.')">
-          <span>12 cara</span>
-          <i class="bi bi-circle"></i>
-        </button>
         <div class="dic-feedback" id="quizFeedback"></div>
+      </div>
+
+      <!-- Core Takeaways -->
+      <div class="dic-takeaway-box" id="rangkuman">
+        <div class="dic-takeaway-title"><i class="bi bi-bookmark-check-fill"></i> Ringkasan Intisari Dicoding (Key Takeaways):</div>
+        <ul class="dic-takeaway-list">
+          <li>Permutasi digunakan saat urutan atau posisi memiliki makna berbeda ($^n P_r$).</li><li>Kombinasi digunakan saat urutan pemilihan tidak membedakan hasil kelompok ($^n C_r$).</li><li>Faktorial 0! didefinisikan bernilai 1.</li>
+        </ul>
       </div>
 
       <!-- Bottom Navigation -->
@@ -742,19 +1059,17 @@
     // Widget Simulator Logic
     
         function updateProbSim() {
-          const fact = (num) => num <= 1 ? 1 : num * fact(num - 1);
-          let n = parseInt(document.getElementById('prob_slider_n').value);
-          let r = parseInt(document.getElementById('prob_slider_r').value);
-          if (r > n) { r = n; document.getElementById('prob_slider_r').value = r; }
-          document.getElementById('prob_val_n').textContent = n;
-          document.getElementById('prob_val_r').textContent = r;
-          const fR = fact(r);
-          const perm = fact(n) / fact(n - r);
-          const comb = fact(n) / (fR * fact(n - r));
-          document.getElementById('prob_comb').textContent = comb.toLocaleString('id-ID');
-          document.getElementById('prob_fact').textContent = `${r}! = ${fR}`;
-          document.getElementById('prob_perm').textContent = perm.toLocaleString('id-ID');
-          document.getElementById('prob_proof').innerHTML = `Hubungan: <strong>ⁿPᵣ = ⁿCᵣ × r!</strong> ➔ ${comb} × ${fR} = <strong>${perm} cara</strong>.`;
+          const N = parseInt(document.getElementById('prob_slider').value);
+          document.getElementById('prob_n_val').textContent = N.toLocaleString('id-ID');
+          let heads = 0;
+          for (let i = 0; i < N; i++) {
+            if (Math.random() < 0.5) heads++;
+          }
+          const pEmp = (heads / N) * 100;
+          const err = Math.abs(50 - pEmp);
+          document.getElementById('prob_emp').textContent = `${pEmp.toFixed(2)}%`;
+          document.getElementById('prob_err').textContent = `${err.toFixed(2)}%`;
+          document.getElementById('prob_text').innerHTML = `Dari <strong>${N.toLocaleString('id-ID')}</strong> lemparan, muncul gambar sebanyak <strong>${heads}</strong> kali (${pEmp.toFixed(2)}%). Deviasi dari probabilitas teoretis 50% tersisa <strong>${err.toFixed(2)}%</strong>. Semakin besar N, fluktuasi acak semakin teredam.`;
         }
         
 

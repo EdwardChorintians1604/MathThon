@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eksponen & Fungsi Eksponensial - Bab 4: Pemodelan: Aplikasi Nyata & Studi Kasus Eksponen - MathThon</title>
+  <title>Eksponen & Fungsi Eksponensial - Bab 4: Pemodelan: Pertumbuhan Populasi & Peluruhan Radioaktif Waktu Paruh - MathThon</title>
   <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,7 +187,7 @@
     /* Main Content Area */
     .dic-main {
       padding: 2.5rem 3rem;
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       width: 100%;
     }
@@ -242,31 +242,63 @@
       color: #f8fafc;
       line-height: 1.25;
     }
-    
+
+    /* Target Box */
     .dic-target-box {
-      background: #111622;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.25rem;
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .dic-target-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #818cf8;
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .dic-target-list {
       margin: 0;
       padding-left: 1.25rem;
-      font-size: 0.88rem;
-      color: #94a3b8;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
     }
-    .dic-target-list li { margin-bottom: 0.35rem; }
-    
+    .dic-target-list li { margin-bottom: 0.4rem; }
+
+    /* Real-World Hook Box */
+    .dic-hook-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.02));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .dic-hook-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dic-hook-body {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Section Title */
     .dic-section-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -278,50 +310,192 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border-color);
     }
-    
-    .dic-lead {
-      font-size: 1.02rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin: 1rem 0 1.5rem;
-    }
-    
-    .dic-formula-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid var(--accent-glow);
+
+    /* Concepts Cards */
+    .dic-concept-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 1.5rem;
       margin: 1.25rem 0;
-      text-align: center;
-      overflow-x: auto;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .dic-formula-explain {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-      margin: 1rem 0;
-      line-height: 1.6;
-    }
-    
-    .dic-example-box {
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-    }
-    .dic-example-title {
-      font-size: 0.85rem;
+    .dic-h3 {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #34d399;
-      margin-bottom: 0.5rem;
+      color: #f8fafc;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+    .dic-list {
+      margin: 0.5rem 0 0.75rem 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .dic-list li { margin-bottom: 0.35rem; }
+
+    /* Dicoding Callout Boxes */
+    .dic-callout {
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .dic-callout-icon {
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .dic-callout-content { flex-grow: 1; font-size: 0.91rem; line-height: 1.7; }
+    .dic-callout-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
     
+    .dic-callout.pro-tip {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-left: 4px solid #10b981;
+    }
+    .dic-callout.pro-tip .dic-callout-title { color: #34d399; }
+    .dic-callout.pro-tip .dic-callout-icon { color: #10b981; }
+    .dic-callout.pro-tip .dic-callout-content { color: #d1fae5; }
+
+    .dic-callout.pitfall {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 4px solid #f43f5e;
+    }
+    .dic-callout.pitfall .dic-callout-title { color: #fb7185; }
+    .dic-callout.pitfall .dic-callout-icon { color: #f43f5e; }
+    .dic-callout.pitfall .dic-callout-content { color: #ffe4e6; }
+
+    .dic-callout.fun-fact {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-left: 4px solid #8b5cf6;
+    }
+    .dic-callout.fun-fact .dic-callout-title { color: #c084fc; }
+    .dic-callout.fun-fact .dic-callout-icon { color: #8b5cf6; }
+    .dic-callout.fun-fact .dic-callout-content { color: #ede9fe; }
+
+    /* Formula & Parameter Table */
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-param-table-wrap {
+      margin: 1.25rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .dic-param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .dic-param-table th {
+      background: #161d2e;
+      color: #94a3b8;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-param-table td {
+      padding: 0.75rem 1rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .dic-param-table tr:last-child td { border-bottom: none; }
+    .dic-param-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .dic-symbol-badge {
+      font-family: 'Fira Code', monospace;
+      color: #38bdf8;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .dic-formula-explain {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      line-height: 1.7;
+    }
+
+    /* Guided Step Box */
+    .dic-step-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dic-step-problem {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+      line-height: 1.7;
+    }
+    .dic-step-item {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .dic-step-item.diketahui {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid #6366f1;
+      color: #cbd5e1;
+    }
+    .dic-step-item.ditanya {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 3px solid #f59e0b;
+      color: #cbd5e1;
+    }
+    .dic-step-item.langkah {
+      background: rgba(16, 185, 129, 0.05);
+      border-left: 3px solid #10b981;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    .dic-step-item.kesimpulan {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid #38bdf8;
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
     /* Interactive Math Simulation Box */
     .dic-sim-box {
       background: #111622;
@@ -424,6 +598,34 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
+
+    /* Takeaways Box */
+    .dic-takeaway-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(16, 185, 129, 0.01));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .dic-takeaway-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-takeaway-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .dic-takeaway-list li { margin-bottom: 0.45rem; }
     
     /* Bottom Navigation */
     .dic-bottom-nav {
@@ -497,42 +699,45 @@
         <a href="{{ url_for('materi.subject_bab', subject='eksponensial', bab_num=1) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[0]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[0]['is_completed'] else '1' }}</span>
-          <span>Fondasi: Konsep Intuitif & Pengenalan Eksponen</span>
+          <span>Fondasi: Dari Penjumlahan Berulang Menuju Ledakan Eksponensial</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='eksponensial', bab_num=2) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[1]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[1]['is_completed'] else '2' }}</span>
-          <span>Anatomi: Notasi, Kaidah & Sifat Baku Eksponen</span>
+          <span>Anatomi: 7 Hukum Operasi Aljabar Pangkat Baku</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='eksponensial', bab_num=3) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[2]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[2]['is_completed'] else '3' }}</span>
-          <span>Mekanika: Prosedur Perhitungan & Operasi Eksponen</span>
+          <span>Mekanika: Prosedur Menyelesaikan Persamaan Eksponen</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='eksponensial', bab_num=4) }}" 
            class="dic-chapter-link active {{ 'done' if all_bab_status[3]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[3]['is_completed'] else '4' }}</span>
-          <span>Pemodelan: Aplikasi Nyata & Studi Kasus Eksponen</span>
+          <span>Pemodelan: Pertumbuhan Populasi & Peluruhan Radioaktif Waktu Paruh</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='eksponensial', bab_num=5) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[4]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[4]['is_completed'] else '5' }}</span>
-          <span>Capstone: Proyek Integratif & Uji Sintesis Eksponen</span>
+          <span>Capstone: Model Bunga Majemuk Finansial & Aturan Penggandaan Investasi</span>
         </a>
 
-      <!-- In-Page Anchor Links -->
+      <!-- In-Page Anchor Links (TOC) -->
       <div class="dic-sb-nav-title">Daftar Isi Halaman (TOC)</div>
       <div class="dic-anchor-box">
         <a href="#peruntukan" class="dic-anchor-link"><i class="bi bi-compass me-1"></i> Peruntukan & Sasaran</a>
+        <a href="#hook" class="dic-anchor-link"><i class="bi bi-lightbulb me-1"></i> Mengapa Ini Penting?</a>
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
-        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
+        <a href="#tips" class="dic-anchor-link"><i class="bi bi-patch-check me-1"></i> Tips & Jebakan Umum</a>
+        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi KaTeX</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
         <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
+        <a href="#rangkuman" class="dic-anchor-link"><i class="bi bi-check2-all me-1"></i> Rangkuman Intisari</a>
       </div>
     </aside>
 
@@ -546,132 +751,242 @@
         <span>Bab 4</span>
       </div>
 
+      <!-- Reading Meta Badges -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="badge bg-secondary-subtle text-light border border-secondary-subtle px-2 py-1 small">
+          <i class="bi bi-clock-history me-1"></i> ~12-15 Menit Baca Mendalam
+        </span>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 small">
+          <i class="bi bi-mortarboard me-1"></i> Standar Akademi Dicoding
+        </span>
+      </div>
+
       <!-- Explicit Stage Banner -->
       <div class="dic-role-banner" id="peruntukan">
         <div class="dic-role-icon"><i class="bi bi-lightbulb-fill"></i></div>
         <div>
           <div class="dic-role-title">TAHAP 4: PEMODELAN & STUDI KASUS NYATA</div>
-          <p class="dic-role-text">Peruntukan Bab 4: Menerjemahkan masalah dunia nyata (fisika, sains komputer, ekonomi, arsitektur) ke dalam pemodelan matematis formal.</p>
+          <p class="dic-role-text">Peruntukan Bab 4: Menerjemahkan masalah dunia nyata (fisika, sains komputer, ekonomi, rekayasa data) ke dalam pemodelan matematis formal.</p>
         </div>
       </div>
 
-      <h1 class="dic-h1">Pemodelan: Aplikasi Nyata & Studi Kasus Eksponen</h1>
+      <h1 class="dic-h1">Pemodelan: Pertumbuhan Populasi & Peluruhan Radioaktif Waktu Paruh</h1>
 
       <!-- Learning Objectives -->
       <div class="dic-target-box">
         <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#f97316;"></i> Sasaran Pembelajaran Bab 4:</div>
         <ul class="dic-target-list">
-          <li>Memahami landasan konseptual dari Pemodelan: Aplikasi Nyata & Studi Kasus Eksponen secara sistematis.</li>
-          <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
+          <li>Memodelkan pertumbuhan populasi organisme biologi secara eksponensial (N(t) = N0 * a^(t/T)).</li><li>Memodelkan hukum peluruhan zat radioaktif berbasis waktu paruh (Half-Life).</li><li>Menghitung proyeksi jumlah zat sisa setelah periode waktu tertentu.</li>
         </ul>
       </div>
 
-      <!-- Core Concept -->
+      <!-- Real-World Motivation Hook -->
+      <div class="dic-hook-box" id="hook">
+        <div class="dic-hook-title"><i class="bi bi-lightbulb-fill"></i> Mengapa Konsep Ini Sangat Penting? (Perspektif Praktisi & Rekayasa)</div>
+        <p class="dic-hook-body">Bakteri E. coli membelah diri menjadi dua setiap 20 menit sekali. Jika mula-mula hanya ada 1 butir bakteri di atas makanan yang dibiarkan terbuka, dalam waktu 8 jam saja jumlah bakteri tersebut telah meledak menjadi lebih dari 16 juta bakteri! Di sisi lain, limbah radioaktif nuklir meluruh separuh demi separuh selama ribuan tahun. Inilah dua sisi mata uang model eksponensial: Pertumbuhan dan Peluruhan!</p>
+      </div>
+
+      <!-- Core Concept Sections -->
       <h2 class="dic-section-title" id="konsep">
-        <i class="bi bi-book-half" style="color:#f97316;"></i> Pembahasan Konsep & Teori
+        <i class="bi bi-book-half" style="color:#f97316;"></i> Pembahasan Konsep & Teori Mendalam
       </h2>
-      <p class="dic-lead">
-        Peluruhan radioaktif mengikuti hukum eksponensial berbasis waktu paruh.
-      </p>
+      
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-activity text-primary"></i> 1. Model Pertumbuhan & Peluruhan Eksponensial</h3>
+              <ul class="dic-list">
+                <li><strong>Model Pertumbuhan (Pembelahan):</strong>
+                  \[ N(t) = N_0 \cdot r^{\frac{t}{T}} \]
+                  di mana $N_0$ adalah jumlah mula-mula, $r$ adalah faktor penggandaan (misal 2 untuk membelah dua), $T$ adalah periode waktu pembelahan.
+                </li>
+                <li><strong>Model Peluruhan Radioaktif (Waktu Paruh $T_{1/2}$):</strong>
+                  \[ N(t) = N_0 \cdot \left(\frac{1}{2}\right)^{\frac{t}{T_{1/2}}} \]
+                  di mana $T_{1/2}$ adalah waktu yang dibutuhkan zat untuk meluruh menjadi tepat separuh dari massa awalnya.
+                </li>
+              </ul>
+            </div>
+            
+
+      <!-- Dicoding Insights & Callouts -->
+      <h2 class="dic-section-title" id="tips">
+        <i class="bi bi-patch-check" style="color:#f97316;"></i> Tips Praktisi & Wawasan Kritis
+      </h2>
+      
+      <div class="dic-callout pro-tip">
+        <div class="dic-callout-icon"><i class="bi bi-lightbulb-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">💡 Dicoding Pro-Tip / Praktik Terbaik</div>
+          <div class="dic-callout-content">Untuk menghitung berapa kali pembelahan atau peluruhan terjadi: cukup bagi waktu total pengamatan $t$ dengan periode siklusnya $T$ ($n = t / T$)!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout pitfall">
+        <div class="dic-callout-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">⚠️ Common Pitfall / Jebakan Umum</div>
+          <div class="dic-callout-content">Pastikan satuan waktu t dan periode T sama persis! Jika waktu t dalam jam dan periode T dalam menit, ubah jam menjadi menit terlebih dahulu.</div>
+        </div>
+      </div>
+
+      <div class="dic-callout fun-fact">
+        <div class="dic-callout-icon"><i class="bi bi-cpu-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">🧠 Wawasan Komputasi & Fakta Menarik</div>
+          <div class="dic-callout-content">Unsur radioaktif Uranium-235 yang digunakan dalam reaktor nuklir memiliki waktu paruh sekitar 700 juta tahun, menjadikannya 'jam geologis' alami untuk mengukur usia formasi bebatuan bumi.</div>
+        </div>
+      </div>
 
       <!-- Formula Section -->
       <h2 class="dic-section-title" id="formula">
-        <i class="bi bi-calculator" style="color:#f97316;"></i> Formulasi Matematis & Bedah Rumus
+        <i class="bi bi-calculator" style="color:#f97316;"></i> Formulasi KaTeX & Anatomi Parameter
       </h2>
       <div class="dic-formula-card">
-        \[ N(t) = N_0 \cdot (1 + r)^t \quad (\text{Pertumbuhan Majemuk}) \]
+        \[ N(t) = N_0 \cdot 2^{\frac{t}{T}} \quad (\text{Pertumbuhan}) \quad ; \quad N(t) = N_0 \cdot \left(\frac{1}{2}\right)^{\frac{t}{T_{1/2}}} \quad (\text{Peluruhan}) \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Model pertumbuhan eksponensial menggambarkan pertambahan kuantitas berbanding lurus dengan nilai saat ini.
+        <strong>💡 Makna & Intuisi Formulasi:</strong> Melipatgandakan atau membagi separuh kuantitas secara berulang pada setiap kelipatan interval periode.
       </div>
+
+      <div class="small fw-bold text-muted text-uppercase mb-2 mt-3"><i class="bi bi-table me-1"></i> Bedah Anatomi Variabel Formulasi:</div>
+      
+    <div class="dic-param-table-wrap">
+      <table class="dic-param-table">
+        <thead>
+          <tr>
+            <th>Simbol / Notasi</th>
+            <th>Makna & Interpretasi Matematis</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">N_0</span></td>
+              <td class="text-light">Kuantitas mula-mula pada t = 0.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">N(t)</span></td>
+              <td class="text-light">Kuantitas pada saat waktu t.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">T_{1/2}</span></td>
+              <td class="text-light">Waktu paruh (half-life).</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 
       <!-- Worked Example -->
       <h2 class="dic-section-title" id="contoh">
-        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu
+        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu (Langkah Demi Langkah)
       </h2>
-      <div class="dic-example-box">
-        <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
-        <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh 4: Tabungan Rp 1.000.000 dengan bunga majemuk 10%/tahun setelah 2 tahun: 1.000.000 × (1.1)² = Rp 1.210.000.
-        </p>
+      
+    <div class="dic-step-box">
+      <div class="dic-step-problem">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-patch-question"></i> Skenario Studi Kasus:</div>
+        <div>Sebuah sampel zat radioaktif memiliki massa mula-mula 80 gram dengan waktu paruh 4 jam. Berapakah sisa massa zat radioaktif tersebut setelah disimpan selama 12 jam?</div>
       </div>
+      <div class="dic-step-item diketahui">
+        <div class="small fw-bold text-primary mb-1"><i class="bi bi-pin-angle-fill"></i> Diketahui:</div>
+        <div>Massa awal $N_0 = 80\text{ gram}$, waktu paruh $T_{1/2} = 4\text{ jam}$, waktu peluruhan $t = 12\text{ jam}$.</div>
+      </div>
+      <div class="dic-step-item ditanya">
+        <div class="small fw-bold text-warning mb-1"><i class="bi bi-question-circle-fill"></i> Ditanya:</div>
+        <div>Massa sisa $N(12)$.</div>
+      </div>
+      <div class="dic-step-item langkah">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-diagram-3-fill"></i> Langkah Penyelesaian Terpandu:</div>
+        <div><div class='mb-2'><strong>Langkah 1: Hitung Banyaknya Siklus Peluruhan yang Terjadi:</strong> $n = \frac{t}{T_{1/2}} = \frac{12}{4} = 3\text{ siklus}$.</div><div class='mb-2'><strong>Langkah 2: Masukkan ke Rumus Peluruhan Eksponensial:</strong> $N(12) = 80 \cdot \left(\frac{1}{2}\right)^3$.</div><div class='mb-2'><strong>Langkah 3: Hitung Nilai Pangkat:</strong> $\left(\frac{1}{2}\right)^3 = \frac{1}{8}$.</div><div class='mb-2'><strong>Langkah 4: Kalikan dengan Massa Awal:</strong> $N(12) = 80 \times \frac{1}{8} = 10\text{ gram}$.</div></div>
+      </div>
+      <div class="dic-step-item kesimpulan">
+        <div class="small fw-bold text-info mb-1"><i class="bi bi-check-circle-fill"></i> Kesimpulan Akhir:</div>
+        <div>Setelah 12 jam, massa zat radioaktif yang tersisa adalah 10 gram.</div>
+      </div>
+    </div>
 
-      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <!-- Interactive Math Simulator Widget -->
       <h2 class="dic-section-title" id="simulator">
         <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
       <div class="dic-sim-box">
         <div class="dic-sim-topbar">
           <div class="dic-sim-title">
-            <i class="bi bi-cpu-fill" style="color:#f97316;"></i> Laboratorium Penalaran: Fenomena Ledakan Multiplikasi Eksponensial
+            <i class="bi bi-cpu-fill" style="color:#f97316;"></i> Laboratorium Pertumbuhan Eksponensial: Bunga Majemuk & Ledakan Skala
           </div>
           <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">
             <i class="bi bi-broadcast me-1"></i> Live Simulator
           </span>
         </div>
         <div class="dic-sim-body">
-          <p class="small text-muted mb-3">🎯 Misi Berpikir: Bandingkan kecepatan pertumbuhan fungsi linier f(n) = 2n vs fungsi eksponensial g(n) = 2ⁿ!</p>
+          <p class="small text-muted mb-3">🎯 Misi Berpikir: Geser laju pertumbuhan r dan periode waktu t untuk menyaksikan percepatan kurva eksponensial melampaui pertumbuhan linier!</p>
           
-        <div class="p-3 mb-3 rounded" style="background:rgba(249,115,22,0.08); border:1px solid rgba(249,115,22,0.25);">
-          <div class="small fw-bold text-warning mb-1"><i class="bi bi-graph-up-arrow"></i> Mengapa Pertumbuhan Eksponensial Menipu Persepsi Manusia?</div>
-          <p class="small text-light mb-0">Pada langkah awal, pertumbuhan eksponensial terlihat lambat. Namun setelah melewati titik kritis, perkalian berulang memicu pelonjakan masif yang menyalip pertumbuhan linier!</p>
+        <div class="p-3 mb-3 rounded" style="background:rgba(244,63,94,0.08); border:1px solid rgba(244,63,94,0.25);">
+          <div class="small fw-bold text-danger mb-1"><i class="bi bi-graph-up-arrow"></i> Keajaiban Pertumbuhan Majemuk:</div>
+          <p class="small text-light mb-0">Pertumbuhan linier bertambah dengan konstanta tetap (1, 2, 3, 4...), sedangkan eksponensial melipatgandakan dirinya sendiri (1, 2, 4, 8, 16...). Dalam jangka panjang, eksponensial selalu mengalahkan linier secara telak!</p>
         </div>
         <div class="row g-3 align-items-center">
           <div class="col-md-6">
-            <label class="form-label small text-muted">Langkah / Periode Waktu (n): <span id="exp_val_n" class="fw-bold text-warning">5</span></label>
-            <input type="range" class="form-range" id="exp_slider_n" min="1" max="15" value="5" oninput="updateExpSim()">
+            <label class="form-label small text-muted">Laju Pertumbuhan (r): <span id="exp_r_val" class="fw-bold text-info">10% per periode</span></label>
+            <input type="range" class="form-range" id="exp_slider_r" min="2" max="30" value="10" oninput="updateExpSim()">
           </div>
           <div class="col-md-6">
-            <div class="small text-muted mb-1">Perbandingan Model:</div>
-            <div class="small text-light">Linier: <span class="badge bg-secondary">f(n) = 2n</span> &nbsp;|&nbsp; Eksponen: <span class="badge bg-warning text-dark">g(n) = 2ⁿ</span></div>
+            <label class="form-label small text-muted">Periode Waktu (t): <span id="exp_t_val" class="fw-bold text-warning">12 Periode</span></label>
+            <input type="range" class="form-range" id="exp_slider_t" min="1" max="30" value="12" oninput="updateExpSim()">
           </div>
         </div>
         <div class="mt-3 p-3 rounded" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
           <div class="row text-center g-2 mb-2">
-            <div class="col-6 border-end border-secondary border-opacity-25">
-              <div class="small text-muted">Pertumbuhan Linier (Penjumlahan):</div>
-              <div class="fs-4 fw-bold text-info" id="exp_lin">10</div>
-              <div class="small text-muted">Naik +2 konstan tiap langkah</div>
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Modal Awal P₀:</div>
+              <div class="fs-6 fw-bold text-light">1.000.000</div>
             </div>
-            <div class="col-6">
-              <div class="small text-muted">Pertumbuhan Eksponensial (Multiplikasi):</div>
-              <div class="fs-4 fw-bold text-warning" id="exp_res">32</div>
-              <div class="small text-muted">Melipatgandakan 2x lipat tiap langkah</div>
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Hasil Linier Sederhana:</div>
+              <div class="fs-5 fw-bold text-info" id="exp_lin">2.200.000</div>
+            </div>
+            <div class="col-4">
+              <div class="small text-muted">Hasil Eksponensial Majemuk:</div>
+              <div class="fs-5 fw-bold text-success" id="exp_res">3.138.428</div>
             </div>
           </div>
-          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #f97316;">
-            <div class="small text-warning fw-bold mb-1"><i class="bi bi-lightning-charge-fill"></i> Rasio Dominasi:</div>
-            <div class="small text-light" id="exp_ratio">Pada n = 5, nilai eksponensial sudah 3.20x lebih besar dari linier.</div>
+          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #f43f5e;">
+            <div class="small text-danger fw-bold mb-1"><i class="bi bi-trophy-fill"></i> Keunggulan Multiplikatif:</div>
+            <div class="small text-light" id="exp_adv">Eksponensial menghasilkan keuntungan Rp 938.428 lebih tinggi dari pertumbuhan linier.</div>
           </div>
         </div>
         
         </div>
       </div>
 
-      <!-- Active Recall / Capstone Challenge Exercise -->
+      <!-- Active Recall Quiz -->
       <div class="dic-quiz-card " id="latihan" style="">
         <div class="dic-quiz-tag" style="">
           <i class="bi bi-patch-question-fill"></i> 
           Active Recall Quiz - Bab 4
         </div>
-        <div class="dic-quiz-q" style="">Bentuk pangkat positif dari (x⁻² y³) / z⁻⁴ adalah?</div>
+        <div class="dic-quiz-q" style="">Sebuah koloni bakteri berjumlah 100 membelah diri menjadi dua setiap 15 menit. Berapakah jumlah bakteri setelah 1 jam (60 menit)?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Pangkat negatif berpindah posisi: (y³ · z⁴) / x².')">
-          <span>(y³ z⁴) / x²</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'n = 60 / 15 = 4 siklus. N = 100 * 2^4 = 100 * 16 = 1.600 bakteri.')">
+          <span>1.600 bakteri</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Pangkat negatif berpindah posisi: (y³ · z⁴) / x².')">
-          <span>(x² y³) / z⁴</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'n = 60 / 15 = 4 siklus. N = 100 * 2^4 = 100 * 16 = 1.600 bakteri.')">
+          <span>800 bakteri</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Pangkat negatif berpindah posisi: (y³ · z⁴) / x².')">
-          <span>y³ / (x² z⁴)</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'n = 60 / 15 = 4 siklus. N = 100 * 2^4 = 100 * 16 = 1.600 bakteri.')">
+          <span>3.200 bakteri</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
+      </div>
+
+      <!-- Core Takeaways -->
+      <div class="dic-takeaway-box" id="rangkuman">
+        <div class="dic-takeaway-title"><i class="bi bi-bookmark-check-fill"></i> Ringkasan Intisari Dicoding (Key Takeaways):</div>
+        <ul class="dic-takeaway-list">
+          <li>Pertumbuhan eksponensial melipatgandakan jumlah, sedangkan peluruhan memotong separuh jumlah secara berkala.</li><li>Pangkat eksponen menyatakan banyaknya siklus waktu yang telah berlalu ($t / T$).</li><li>Model eksponen krusial dalam mikrobiologi, kedokteran nuklir, dan analisis pandemi.</li>
+        </ul>
       </div>
 
       <!-- Bottom Navigation -->
@@ -737,14 +1052,18 @@
     // Widget Simulator Logic
     
         function updateExpSim() {
-          const n = parseInt(document.getElementById('exp_slider_n').value);
-          document.getElementById('exp_val_n').textContent = n;
-          const lin = 2 * n;
-          const exp = Math.pow(2, n);
-          const ratio = (exp / lin).toFixed(2);
-          document.getElementById('exp_lin').textContent = lin.toLocaleString('id-ID');
-          document.getElementById('exp_res').textContent = exp.toLocaleString('id-ID');
-          document.getElementById('exp_ratio').innerHTML = `Pada n = ${n}, nilai eksponensial (<strong>${exp.toLocaleString('id-ID')}</strong>) sudah <strong>${ratio}x lipat</strong> melampaui pertumbuhan linier (${lin}).`;
+          const r = parseInt(document.getElementById('exp_slider_r').value);
+          const t = parseInt(document.getElementById('exp_slider_t').value);
+          document.getElementById('exp_r_val').textContent = `${r}% per periode`;
+          document.getElementById('exp_t_val').textContent = `${t} Periode`;
+          const p0 = 1000000;
+          const rate = r / 100;
+          const linear = p0 * (1 + rate * t);
+          const exp = p0 * Math.pow(1 + rate, t);
+          const diff = exp - linear;
+          document.getElementById('exp_lin').textContent = Math.round(linear).toLocaleString('id-ID');
+          document.getElementById('exp_res').textContent = Math.round(exp).toLocaleString('id-ID');
+          document.getElementById('exp_adv').innerHTML = `Bunga majemuk menghasilkan <strong>Rp ${Math.round(diff).toLocaleString('id-ID')}</strong> ekstra dibanding bunga biasa. Inilah efek pelipatgandaan eksponensial P(t) = P₀(1+r)ᵗ.`;
         }
         
 

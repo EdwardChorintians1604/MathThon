@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Matriks & Aljabar Linear - Bab 3: Mekanika: Determinan & Invers Matriks Ordo 2x2 - MathThon</title>
+  <title>Matriks & Aljabar Linear - Bab 3: Mekanika: Prosedur Perkalian Matriks, Determinan & Invers 2x2 - MathThon</title>
   <link rel="icon" href="{{ url_for('static', filename='image/Toko Masabuk Jaya-fotor-bg-remover-2025102202457.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,9 +16,9 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
   <style>
     :root {
-      --accent: #06b6d4;
-      --accent-glow: #06b6d433;
-      --accent-dim: #06b6d415;
+      --accent: #ec4899;
+      --accent-glow: #ec489933;
+      --accent-dim: #ec489915;
       --bg-dark: #0a0d14;
       --bg-card: #111622;
       --bg-surface: #161d2e;
@@ -187,7 +187,7 @@
     /* Main Content Area */
     .dic-main {
       padding: 2.5rem 3rem;
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       width: 100%;
     }
@@ -242,31 +242,63 @@
       color: #f8fafc;
       line-height: 1.25;
     }
-    
+
+    /* Target Box */
     .dic-target-box {
-      background: #111622;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.25rem;
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .dic-target-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #818cf8;
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .dic-target-list {
       margin: 0;
       padding-left: 1.25rem;
-      font-size: 0.88rem;
-      color: #94a3b8;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
     }
-    .dic-target-list li { margin-bottom: 0.35rem; }
-    
+    .dic-target-list li { margin-bottom: 0.4rem; }
+
+    /* Real-World Hook Box */
+    .dic-hook-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.02));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .dic-hook-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dic-hook-body {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Section Title */
     .dic-section-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -278,50 +310,192 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border-color);
     }
-    
-    .dic-lead {
-      font-size: 1.02rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin: 1rem 0 1.5rem;
-    }
-    
-    .dic-formula-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid var(--accent-glow);
+
+    /* Concepts Cards */
+    .dic-concept-card {
+      background: #111622;
+      border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 1.5rem;
       margin: 1.25rem 0;
-      text-align: center;
-      overflow-x: auto;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .dic-formula-explain {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-      margin: 1rem 0;
-      line-height: 1.6;
-    }
-    
-    .dic-example-box {
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-    }
-    .dic-example-title {
-      font-size: 0.85rem;
+    .dic-h3 {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #34d399;
-      margin-bottom: 0.5rem;
+      color: #f8fafc;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+    .dic-list {
+      margin: 0.5rem 0 0.75rem 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .dic-list li { margin-bottom: 0.35rem; }
+
+    /* Dicoding Callout Boxes */
+    .dic-callout {
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .dic-callout-icon {
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .dic-callout-content { flex-grow: 1; font-size: 0.91rem; line-height: 1.7; }
+    .dic-callout-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
     
+    .dic-callout.pro-tip {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-left: 4px solid #10b981;
+    }
+    .dic-callout.pro-tip .dic-callout-title { color: #34d399; }
+    .dic-callout.pro-tip .dic-callout-icon { color: #10b981; }
+    .dic-callout.pro-tip .dic-callout-content { color: #d1fae5; }
+
+    .dic-callout.pitfall {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 4px solid #f43f5e;
+    }
+    .dic-callout.pitfall .dic-callout-title { color: #fb7185; }
+    .dic-callout.pitfall .dic-callout-icon { color: #f43f5e; }
+    .dic-callout.pitfall .dic-callout-content { color: #ffe4e6; }
+
+    .dic-callout.fun-fact {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-left: 4px solid #8b5cf6;
+    }
+    .dic-callout.fun-fact .dic-callout-title { color: #c084fc; }
+    .dic-callout.fun-fact .dic-callout-icon { color: #8b5cf6; }
+    .dic-callout.fun-fact .dic-callout-content { color: #ede9fe; }
+
+    /* Formula & Parameter Table */
+    .dic-formula-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-glow);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 1.25rem 0;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .dic-param-table-wrap {
+      margin: 1.25rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .dic-param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .dic-param-table th {
+      background: #161d2e;
+      color: #94a3b8;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .dic-param-table td {
+      padding: 0.75rem 1rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .dic-param-table tr:last-child td { border-bottom: none; }
+    .dic-param-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .dic-symbol-badge {
+      font-family: 'Fira Code', monospace;
+      color: #38bdf8;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .dic-formula-explain {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      line-height: 1.7;
+    }
+
+    /* Guided Step Box */
+    .dic-step-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dic-step-problem {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+      line-height: 1.7;
+    }
+    .dic-step-item {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .dic-step-item.diketahui {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid #6366f1;
+      color: #cbd5e1;
+    }
+    .dic-step-item.ditanya {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 3px solid #f59e0b;
+      color: #cbd5e1;
+    }
+    .dic-step-item.langkah {
+      background: rgba(16, 185, 129, 0.05);
+      border-left: 3px solid #10b981;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    .dic-step-item.kesimpulan {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid #38bdf8;
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
     /* Interactive Math Simulation Box */
     .dic-sim-box {
       background: #111622;
@@ -424,6 +598,34 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
+
+    /* Takeaways Box */
+    .dic-takeaway-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(16, 185, 129, 0.01));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .dic-takeaway-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dic-takeaway-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .dic-takeaway-list li { margin-bottom: 0.45rem; }
     
     /* Bottom Navigation */
     .dic-bottom-nav {
@@ -473,7 +675,7 @@
       <a href="{{ url_for('materi.subject_index', subject='matriks') }}" class="dic-back-btn">
         <i class="bi bi-arrow-left"></i> <span>Matriks</span>
       </a>
-      <span class="dic-badge"><i class="bi bi-grid-3x3" style="color:#06b6d4;"></i> Matriks & Aljabar Linear</span>
+      <span class="dic-badge"><i class="bi bi-grid-3x3" style="color:#ec4899;"></i> Matriks & Aljabar Linear</span>
     </div>
     <div class="d-flex align-items-center gap-2">
       <span class="dic-badge"><i class="bi bi-book"></i> Bab 3/5</span>
@@ -487,7 +689,7 @@
       <div class="dic-sb-header">
         <div class="dic-sb-icon"><i class="bi bi-grid-3x3"></i></div>
         <div>
-          <div style="font-size:0.75rem; color:#06b6d4; font-weight:700; text-transform:uppercase;">Modul MathThon</div>
+          <div style="font-size:0.75rem; color:#ec4899; font-weight:700; text-transform:uppercase;">Modul MathThon</div>
           <div style="font-weight:700; font-size:0.95rem; color:#f8fafc;">Matriks</div>
         </div>
       </div>
@@ -497,42 +699,45 @@
         <a href="{{ url_for('materi.subject_bab', subject='matriks', bab_num=1) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[0]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[0]['is_completed'] else '1' }}</span>
-          <span>Fondasi: Konsep Matriks, Ordo & Representasi Data</span>
+          <span>Fondasi: Tabel Data Multi-Dimensi Menuju Matriks</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='matriks', bab_num=2) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[1]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[1]['is_completed'] else '2' }}</span>
-          <span>Anatomi: Operasi Penjumlahan, Skalar & Perkalian Matriks</span>
+          <span>Anatomi: Jenis-Jenis Matriks Baku & Operasi Aljabar Dasar</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='matriks', bab_num=3) }}" 
            class="dic-chapter-link active {{ 'done' if all_bab_status[2]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[2]['is_completed'] else '3' }}</span>
-          <span>Mekanika: Determinan & Invers Matriks Ordo 2x2</span>
+          <span>Mekanika: Prosedur Perkalian Matriks, Determinan & Invers 2x2</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='matriks', bab_num=4) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[3]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[3]['is_completed'] else '4' }}</span>
-          <span>Pemodelan: Penyelesaian SPLDV dengan Metode Invers & Cramer</span>
+          <span>Pemodelan: Transformasi Geometri 2D & Penyelesaian Sistem Persamaan Matriks</span>
         </a>
 
         <a href="{{ url_for('materi.subject_bab', subject='matriks', bab_num=5) }}" 
            class="dic-chapter-link {{ 'done' if all_bab_status[4]['is_completed'] else '' }}">
           <span class="dic-num-badge">{{ '✓' if all_bab_status[4]['is_completed'] else '5' }}</span>
-          <span>Capstone: Proyek Transformasi Spasial & Uji Sintesis Matriks</span>
+          <span>Capstone: Sistem Kriptografi Sandi Hill Cipher Berbasis Matriks</span>
         </a>
 
-      <!-- In-Page Anchor Links -->
+      <!-- In-Page Anchor Links (TOC) -->
       <div class="dic-sb-nav-title">Daftar Isi Halaman (TOC)</div>
       <div class="dic-anchor-box">
         <a href="#peruntukan" class="dic-anchor-link"><i class="bi bi-compass me-1"></i> Peruntukan & Sasaran</a>
+        <a href="#hook" class="dic-anchor-link"><i class="bi bi-lightbulb me-1"></i> Mengapa Ini Penting?</a>
         <a href="#konsep" class="dic-anchor-link"><i class="bi bi-bookmark-fill me-1"></i> Pembahasan Konsep</a>
-        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi & Bedah Rumus</a>
+        <a href="#tips" class="dic-anchor-link"><i class="bi bi-patch-check me-1"></i> Tips & Jebakan Umum</a>
+        <a href="#formula" class="dic-anchor-link"><i class="bi bi-calculator me-1"></i> Formulasi KaTeX</a>
         <a href="#contoh" class="dic-anchor-link"><i class="bi bi-journal-check me-1"></i> Contoh Soal Terpandu</a>
         <a href="#simulator" class="dic-anchor-link"><i class="bi bi-sliders me-1"></i> Simulator Interaktif</a>
         <a href="#latihan" class="dic-anchor-link"><i class="bi bi-pencil-square me-1"></i> Active Recall Quiz</a>
+        <a href="#rangkuman" class="dic-anchor-link"><i class="bi bi-check2-all me-1"></i> Rangkuman Intisari</a>
       </div>
     </aside>
 
@@ -546,6 +751,16 @@
         <span>Bab 3</span>
       </div>
 
+      <!-- Reading Meta Badges -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="badge bg-secondary-subtle text-light border border-secondary-subtle px-2 py-1 small">
+          <i class="bi bi-clock-history me-1"></i> ~12-15 Menit Baca Mendalam
+        </span>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 small">
+          <i class="bi bi-mortarboard me-1"></i> Standar Akademi Dicoding
+        </span>
+      </div>
+
       <!-- Explicit Stage Banner -->
       <div class="dic-role-banner" id="peruntukan">
         <div class="dic-role-icon"><i class="bi bi-gear-wide-connected"></i></div>
@@ -555,119 +770,236 @@
         </div>
       </div>
 
-      <h1 class="dic-h1">Mekanika: Determinan & Invers Matriks Ordo 2x2</h1>
+      <h1 class="dic-h1">Mekanika: Prosedur Perkalian Matriks, Determinan & Invers 2x2</h1>
 
       <!-- Learning Objectives -->
       <div class="dic-target-box">
-        <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#06b6d4;"></i> Sasaran Pembelajaran Bab 3:</div>
+        <div class="dic-target-title"><i class="bi bi-bullseye" style="color:#ec4899;"></i> Sasaran Pembelajaran Bab 3:</div>
         <ul class="dic-target-list">
-          <li>Memahami landasan konseptual dari Mekanika: Determinan & Invers Matriks Ordo 2x2 secara sistematis.</li>
-          <li>Menguasai makna variabel dan cara kerja formulasi matematis terkait.</li>
-          <li>Mampu mengeksplorasi parameter matematika secara langsung melalui Simulator Interaktif.</li>
+          <li>Menguasai algoritma perkalian dua matriks menggunakan metode 'Baris kali Kolom' (Dot Product Baris-Kolom).</li><li>Menghitung determinan matriks persegi berordo 2x2 (ad - bc).</li><li>Menghitung matriks invers A^-1 dan mengidentifikasi syarat matriks singular.</li>
         </ul>
       </div>
 
-      <!-- Core Concept -->
+      <!-- Real-World Motivation Hook -->
+      <div class="dic-hook-box" id="hook">
+        <div class="dic-hook-title"><i class="bi bi-lightbulb-fill"></i> Mengapa Konsep Ini Sangat Penting? (Perspektif Praktisi & Rekayasa)</div>
+        <p class="dic-hook-body">Mengapa aturan perkalian matriks tidak mengalikan angka yang seletak saja? Karena perkalian matriks dirancang untuk memodelkan sistem persamaan linier simultan dan transformasi geometri! Kaidah 'Baris kali Kolom' adalah mesin komputasi paling fundamental yang menggerakkan pemrosesan grafis 3D dan algoritma deep learning di seluruh planet bumi saat ini.</p>
+      </div>
+
+      <!-- Core Concept Sections -->
       <h2 class="dic-section-title" id="konsep">
-        <i class="bi bi-book-half" style="color:#06b6d4;"></i> Pembahasan Konsep & Teori
+        <i class="bi bi-book-half" style="color:#ec4899;"></i> Pembahasan Konsep & Teori Mendalam
       </h2>
-      <p class="dic-lead">
-        Matriks yang memiliki determinan nol disebut matriks singular dan tidak memiliki invers.
-      </p>
+      
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-x-circle-fill text-primary"></i> 1. Syarat & Kaidah Perkalian Matriks</h3>
+              <p>Perkalian matriks $A \times B$ <strong>HANYA BISA DILAKUKAN</strong> jika:<br>
+              <strong>Jumlah Kolom Matriks A = Jumlah Baris Matriks B</strong></p>
+              \[ A_{m \times p} \times B_{p \times n} = C_{m \times n} \]
+              <p>Setiap entri $c_{ij}$ diperoleh dari perkalian titik antara Baris ke-$i$ pada matriks A dengan Kolom ke-$j$ pada matriks B.</p>
+            </div>
+            <div class="dic-concept-card mb-4">
+              <h3 class="dic-h3"><i class="bi bi-calculator text-primary"></i> 2. Determinan & Invers Matriks 2x2</h3>
+              <p>Untuk matriks $A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$:</p>
+              <ul class="dic-list">
+                <li><strong>Determinan:</strong> $\det(A) = |A| = ad - bc$. Determinan mengukur faktor penskalaan luas area transformasi.</li>
+                <li><strong>Matriks Invers ($A^{-1}$):</strong> Kebalikan matriks yang memenuhi $A \cdot A^{-1} = I$:
+                  \[ A^{-1} = \frac{1}{ad - bc} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix} \]
+                </li>
+                <li><strong>Matriks Singular:</strong> Matriks dengan $\det(A) = 0$. Matriks singular <strong>TIDAK MEMILIKI INVERS</strong>!</li>
+              </ul>
+            </div>
+            
+
+      <!-- Dicoding Insights & Callouts -->
+      <h2 class="dic-section-title" id="tips">
+        <i class="bi bi-patch-check" style="color:#ec4899;"></i> Tips Praktisi & Wawasan Kritis
+      </h2>
+      
+      <div class="dic-callout pro-tip">
+        <div class="dic-callout-icon"><i class="bi bi-lightbulb-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">💡 Dicoding Pro-Tip / Praktik Terbaik</div>
+          <div class="dic-callout-content">Untuk mengingat rumus Adjoin matriks 2x2: Tukar posisi diagonal utama (a dan d saling bertukar), dan kalikan diagonal samping dengan minus (-b dan -c)!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout pitfall">
+        <div class="dic-callout-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">⚠️ Common Pitfall / Jebakan Umum</div>
+          <div class="dic-callout-content">Perkalian matriks TIDAK KOMUTATIF! Secara umum $AB \neq BA$. Bahkan seringkali jika AB terdefinisi, BA belum tentu bisa dikalikan karena ketidaksesuaian ordo!</div>
+        </div>
+      </div>
+
+      <div class="dic-callout fun-fact">
+        <div class="dic-callout-icon"><i class="bi bi-cpu-fill"></i></div>
+        <div>
+          <div class="dic-callout-title">🧠 Wawasan Komputasi & Fakta Menarik</div>
+          <div class="dic-callout-content">Determinan matriks pertama kali ditemukan oleh matematikawan Jepang Seki Kowa pada tahun 1683 (lebih awal dari Gottfried Leibniz di Eropa) untuk memecahkan sistem persamaan simultan pertanian beras tradisional.</div>
+        </div>
+      </div>
 
       <!-- Formula Section -->
       <h2 class="dic-section-title" id="formula">
-        <i class="bi bi-calculator" style="color:#06b6d4;"></i> Formulasi Matematis & Bedah Rumus
+        <i class="bi bi-calculator" style="color:#ec4899;"></i> Formulasi KaTeX & Anatomi Parameter
       </h2>
       <div class="dic-formula-card">
-        \[ \begin{pmatrix} a & b \\ c & d \end{pmatrix} \begin{pmatrix} e & f \\ g & h \end{pmatrix} = \begin{pmatrix} ae+bg & af+bh \\ ce+dg & cf+dh \end{pmatrix} \]
+        \[ \det(A) = ad - bc \quad ; \quad A^{-1} = \frac{1}{\det(A)}\begin{pmatrix} d & -b \\ -c & a \end{pmatrix} \quad (\det(A) \neq 0) \]
       </div>
       <div class="dic-formula-explain">
-        <strong>💡 Makna Formulasi:</strong> Perkalian matriks mengalikan elemen baris matriks pertama dengan elemen kolom matriks kedua.
+        <strong>💡 Makna & Intuisi Formulasi:</strong> Invers matriks adalah analogi aljabar dari pembagian $1/x$, yang membatalkan efek transformasi linear matriks asal.
       </div>
+
+      <div class="small fw-bold text-muted text-uppercase mb-2 mt-3"><i class="bi bi-table me-1"></i> Bedah Anatomi Variabel Formulasi:</div>
+      
+    <div class="dic-param-table-wrap">
+      <table class="dic-param-table">
+        <thead>
+          <tr>
+            <th>Simbol / Notasi</th>
+            <th>Makna & Interpretasi Matematis</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">ad - bc</span></td>
+              <td class="text-light">Determinan skalar matriks 2x2.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">A^{-1}</span></td>
+              <td class="text-light">Matriks balikan / invers.</td>
+            </tr>
+            <tr>
+              <td style="width:25%;"><span class="dic-symbol-badge">\det(A) = 0</span></td>
+              <td class="text-light">Kondisi singular di mana matriks tidak dapat diinverskan.</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 
       <!-- Worked Example -->
       <h2 class="dic-section-title" id="contoh">
-        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu
+        <i class="bi bi-journal-text text-success"></i> Contoh Soal & Pembahasan Terpandu (Langkah Demi Langkah)
       </h2>
-      <div class="dic-example-box">
-        <div class="dic-example-title"><i class="bi bi-check2-circle"></i> Studi Kasus Pembahasan:</div>
-        <p style="margin:0; font-size:0.92rem; color:#cbd5e1; line-height:1.7;">
-          Contoh 3: Invers dari A=[[4, 1], [3, 1]] dengan det=4-3=1 adalah A⁻¹ = [[1, -1], [-3, 4]].
-        </p>
+      
+    <div class="dic-step-box">
+      <div class="dic-step-problem">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-patch-question"></i> Skenario Studi Kasus:</div>
+        <div>Diberikan matriks $A = \begin{pmatrix} 4 & 2 \\ 3 & 2 \end{pmatrix}$. Hitung determinan matriks A, lalu tentukan matriks invers $A^{-1}$!</div>
       </div>
+      <div class="dic-step-item diketahui">
+        <div class="small fw-bold text-primary mb-1"><i class="bi bi-pin-angle-fill"></i> Diketahui:</div>
+        <div>$a = 4, b = 2, c = 3, d = 2$.</div>
+      </div>
+      <div class="dic-step-item ditanya">
+        <div class="small fw-bold text-warning mb-1"><i class="bi bi-question-circle-fill"></i> Ditanya:</div>
+        <div>$\det(A)$ dan $A^{-1}$.</div>
+      </div>
+      <div class="dic-step-item langkah">
+        <div class="small fw-bold text-success mb-1"><i class="bi bi-diagram-3-fill"></i> Langkah Penyelesaian Terpandu:</div>
+        <div><div class='mb-2'><strong>Langkah 1: Menghitung Determinan ad - bc:</strong> $\det(A) = (4)(2) - (2)(3) = 8 - 6 = 2$ (Karena $\det \neq 0$, invers ada).</div><div class='mb-2'><strong>Langkah 2: Membentuk Matriks Adjoin:</strong> Tukar diagonal utama (4 dan 2 bertukar) dan negatifkan diagonal samping: $\begin{pmatrix} 2 & -2 \\ -3 & 4 \end{pmatrix}$.</div><div class='mb-2'><strong>Langkah 3: Mengalikan dengan $1/\det(A)$:</strong> $A^{-1} = \frac{1}{2} \begin{pmatrix} 2 & -2 \\ -3 & 4 \end{pmatrix} = \begin{pmatrix} 1 & -1 \\ -1.5 & 2 \end{pmatrix}$.</div></div>
+      </div>
+      <div class="dic-step-item kesimpulan">
+        <div class="small fw-bold text-info mb-1"><i class="bi bi-check-circle-fill"></i> Kesimpulan Akhir:</div>
+        <div>Determinan bernilai 2, dan invers matriksnya adalah $\begin{pmatrix} 1 & -1 \\ -1.5 & 2 \end{pmatrix}$.</div>
+      </div>
+    </div>
 
-      <!-- Interactive Math Simulator Widget (No Coding Required) -->
+      <!-- Interactive Math Simulator Widget -->
       <h2 class="dic-section-title" id="simulator">
         <i class="bi bi-sliders text-warning"></i> Laboratorium Eksplorasi Interaktif
       </h2>
       <div class="dic-sim-box">
         <div class="dic-sim-topbar">
           <div class="dic-sim-title">
-            <i class="bi bi-cpu-fill" style="color:#06b6d4;"></i> Laboratorium Penalaran Geometris: Determinan & Keruntuhan Dimensi
+            <i class="bi bi-cpu-fill" style="color:#ec4899;"></i> Laboratorium Geometri Matriks: Distorsi Ruang 2D & Determinan Skala Luas
           </div>
           <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">
             <i class="bi bi-broadcast me-1"></i> Live Simulator
           </span>
         </div>
         <div class="dic-sim-body">
-          <p class="small text-muted mb-3">🎯 Misi Berpikir: Apa arti determinan det(A) = 0 secara geometris dan logis pada sistem persamaan?</p>
+          <p class="small text-muted mb-3">🎯 Misi Berpikir: Geser entri matriks 2x2 dan amati bagaimana determinan mengukur perbesaran luas bidang dan orientasi arah!</p>
           
-        <div class="p-3 mb-3 rounded" style="background:rgba(6,182,212,0.08); border:1px solid rgba(6,182,212,0.25);">
-          <div class="small fw-bold text-info mb-1"><i class="bi bi-grid-fill"></i> Arti Geometris Determinan:</div>
-          <p class="small text-light mb-0">Determinan det(A) = ad - bc merepresentasikan <strong>faktor penskalaan luas</strong> bidang 2D. Jika det(A) = 0, bidang termampatkan menjadi 1 garis (kolaps dimensi), sehingga informasi hilang dan invers mustahil dibentuk!</p>
+        <div class="p-3 mb-3 rounded" style="background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.25);">
+          <div class="small fw-bold text-info mb-1"><i class="bi bi-grid-3x3"></i> Determinan Bukan Sekadar Angka Rumus:</div>
+          <p class="small text-light mb-0">Secara geometris, determinan matriks 2x2 merepresentasikan <strong>faktor pengali luas</strong> bujur sangkar satuan yang ditransformasikan. Jika det(M) = 0, ruang 2D runtuh menjadi garis atau titik 1D (ruang kehilangan dimensi)!</p>
         </div>
-        <div class="d-flex justify-content-center gap-2 mb-2">
-          <input type="number" class="form-control form-control-sm text-center bg-dark text-light border-secondary" style="width:70px;" id="m_a" value="4" oninput="updateMatrixSim()">
-          <input type="number" class="form-control form-control-sm text-center bg-dark text-light border-secondary" style="width:70px;" id="m_b" value="2" oninput="updateMatrixSim()">
-        </div>
-        <div class="d-flex justify-content-center gap-2">
-          <input type="number" class="form-control form-control-sm text-center bg-dark text-light border-secondary" style="width:70px;" id="m_c" value="2" oninput="updateMatrixSim()">
-          <input type="number" class="form-control form-control-sm text-center bg-dark text-light border-secondary" style="width:70px;" id="m_d" value="1" oninput="updateMatrixSim()">
+        <div class="row g-2 align-items-center">
+          <div class="col-3">
+            <label class="form-label small text-muted">a (x-scale): <span id="m_val_a" class="fw-bold text-info">2</span></label>
+            <input type="range" class="form-range" id="m_a" min="-4" max="4" value="2" oninput="updateMatriksSim()">
+          </div>
+          <div class="col-3">
+            <label class="form-label small text-muted">b (y-shear): <span id="m_val_b" class="fw-bold text-info">1</span></label>
+            <input type="range" class="form-range" id="m_b" min="-4" max="4" value="1" oninput="updateMatriksSim()">
+          </div>
+          <div class="col-3">
+            <label class="form-label small text-muted">c (x-shear): <span id="m_val_c" class="fw-bold text-warning">0</span></label>
+            <input type="range" class="form-range" id="m_c" min="-4" max="4" value="0" oninput="updateMatriksSim()">
+          </div>
+          <div class="col-3">
+            <label class="form-label small text-muted">d (y-scale): <span id="m_val_d" class="fw-bold text-warning">3</span></label>
+            <input type="range" class="form-range" id="m_d" min="-4" max="4" value="3" oninput="updateMatriksSim()">
+          </div>
         </div>
         <div class="mt-3 p-3 rounded" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
-          <div class="d-flex justify-content-around text-center mb-2">
-            <div>
-              <div class="small text-muted">Determinan det(A):</div>
-              <div class="fs-4 fw-bold text-warning" id="mat_det">0</div>
+          <div class="row text-center g-2 mb-2">
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Bentuk Matriks Transformasi:</div>
+              <div class="fs-6 fw-bold text-light font-monospace" id="m_matrix">[ 2 , 1 ; 0 , 3 ]</div>
             </div>
-            <div>
-              <div class="small text-muted">Status Inversibilitas:</div>
-              <div class="fs-6 fw-bold text-danger" id="mat_status">Singular (Kolaps Dimensi / Tidak Punya Invers)</div>
+            <div class="col-4 border-end border-secondary border-opacity-25">
+              <div class="small text-muted">Determinan (ad - bc):</div>
+              <div class="fs-5 fw-bold text-success" id="m_det">det = 6</div>
+            </div>
+            <div class="col-4">
+              <div class="small text-muted">Invertibilitas:</div>
+              <div class="fs-5 fw-bold text-info" id="m_invert">Memiliki Invers</div>
             </div>
           </div>
-          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #06b6d4;">
-            <div class="small text-info fw-bold mb-1"><i class="bi bi-lightbulb-fill"></i> Analisis Logika Aljabar Linear:</div>
-            <div class="small text-light" id="mat_reason">Baris kedua merupakan kelipatan baris pertama (rasio sama). Vektor kolom sejajar sehingga luas jajaran genjang = 0.</div>
+          <div class="p-2 rounded mt-2" style="background:rgba(0,0,0,0.3); border-left:3px solid #3b82f6;">
+            <div class="small text-info fw-bold mb-1"><i class="bi bi-aspect-ratio"></i> Efek Terhadap Bidang Ruang:</div>
+            <div class="small text-light" id="m_desc">Luas bidang berukuran 1 satuan diperbesar 6x lipat menjadi 6 satuan persegi.</div>
           </div>
         </div>
         
         </div>
       </div>
 
-      <!-- Active Recall / Capstone Challenge Exercise -->
+      <!-- Active Recall Quiz -->
       <div class="dic-quiz-card " id="latihan" style="">
         <div class="dic-quiz-tag" style="">
           <i class="bi bi-patch-question-fill"></i> 
           Active Recall Quiz - Bab 3
         </div>
-        <div class="dic-quiz-q" style="">Jika A · B = I, maka matriks B adalah?</div>
+        <div class="dic-quiz-q" style="">Berapakah determinan dari matriks $K = \begin{pmatrix} 5 & 3 \\ 2 & 4 \end{pmatrix}$?</div>
         
-        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'Perkalian matriks dengan inversnya menghasilkan matriks identitas I.')">
-          <span>Invers dari matriks A (A⁻¹)</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, true, 'det(K) = (5)(4) - (3)(2) = 20 - 6 = 14.')">
+          <span>14</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Perkalian matriks dengan inversnya menghasilkan matriks identitas I.')">
-          <span>Transpose dari matriks A</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'det(K) = (5)(4) - (3)(2) = 20 - 6 = 14.')">
+          <span>26</span>
           <i class="bi bi-circle"></i>
         </button>
 
-        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'Perkalian matriks dengan inversnya menghasilkan matriks identitas I.')">
-          <span>Determinan dari A</span>
+        <button class="dic-opt-btn" onclick="checkAnswer(this, false, 'det(K) = (5)(4) - (3)(2) = 20 - 6 = 14.')">
+          <span>20</span>
           <i class="bi bi-circle"></i>
         </button>
         <div class="dic-feedback" id="quizFeedback"></div>
+      </div>
+
+      <!-- Core Takeaways -->
+      <div class="dic-takeaway-box" id="rangkuman">
+        <div class="dic-takeaway-title"><i class="bi bi-bookmark-check-fill"></i> Ringkasan Intisari Dicoding (Key Takeaways):</div>
+        <ul class="dic-takeaway-list">
+          <li>Perkalian matriks mengikuti prinsip Baris kali Kolom.</li><li>Determinan matriks 2x2 dirumuskan dengan $ad - bc$.</li><li>Matriks memiliki invers jika dan hanya jika nilai determinannya tidak sama dengan nol (non-singular).</li>
+        </ul>
       </div>
 
       <!-- Bottom Navigation -->
@@ -732,21 +1064,27 @@
 
     // Widget Simulator Logic
     
-        function updateMatrixSim() {
-          const a = parseFloat(document.getElementById('m_a').value) || 0;
-          const b = parseFloat(document.getElementById('m_b').value) || 0;
-          const c = parseFloat(document.getElementById('m_c').value) || 0;
-          const d = parseFloat(document.getElementById('m_d').value) || 0;
+        function updateMatriksSim() {
+          const a = parseInt(document.getElementById('m_a').value);
+          const b = parseInt(document.getElementById('m_b').value);
+          const c = parseInt(document.getElementById('m_c').value);
+          const d = parseInt(document.getElementById('m_d').value);
+          document.getElementById('m_val_a').textContent = a;
+          document.getElementById('m_val_b').textContent = b;
+          document.getElementById('m_val_c').textContent = c;
+          document.getElementById('m_val_d').textContent = d;
+          document.getElementById('m_matrix').textContent = `[ ${a} , ${b} ; ${c} , ${d} ]`;
           const det = (a * d) - (b * c);
-          document.getElementById('mat_det').textContent = `${a}×${d} - ${b}×${c} = ${det}`;
-          if (det !== 0) {
-            document.getElementById('mat_status').textContent = 'Non-Singular (Punya Invers)';
-            document.getElementById('mat_status').className = 'fs-6 fw-bold text-success';
-            document.getElementById('mat_reason').innerHTML = `det(A) = ${det} ≠ 0. Transformasi mempertahankan area seluas <strong>${Math.abs(det)} satuan</strong>, sehingga sistem persamaan memiliki solusi unik.`;
+          document.getElementById('m_det').textContent = `det = ${det}`;
+          if (det === 0) {
+            document.getElementById('m_invert').textContent = "Singular (Tak Berinvers)";
+            document.getElementById('m_invert').className = "fs-5 fw-bold text-danger";
+            document.getElementById('m_desc').innerHTML = "Determinan nol menyebabkan seluruh bidang datar 2D runtuh menjadi garis lurus atau satu titik. Informasi spasial hilang secara permanen.";
           } else {
-            document.getElementById('mat_status').textContent = 'Singular (Kolaps Dimensi / Tidak Punya Invers)';
-            document.getElementById('mat_status').className = 'fs-6 fw-bold text-danger';
-            document.getElementById('mat_reason').innerHTML = `det(A) = 0. Vektor kolom saling segaris (kolinear). Bidang 2D termampatkan menjadi garis 1D, sehingga tidak ada balikan matriks.`;
+            document.getElementById('m_invert').textContent = "Invertibel (Dapat Dibalik)";
+            document.getElementById('m_invert').className = "fs-5 fw-bold text-success";
+            const orient = det > 0 ? "mempertahankan orientasi searah jarum jam" : "membalik orientasi bidang (seperti cermin refleksi)";
+            document.getElementById('m_desc').innerHTML = `Luas objek diperbesar <strong>${Math.abs(det)}x</strong> lipat dan transformasi ${orient}. Matriks ini memiliki balikan (invers).`;
           }
         }
         
