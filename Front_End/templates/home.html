@@ -76,7 +76,7 @@
 
         <a class="nav-link" href="#about">Tentang</a>
         <a class="nav-link" href="#fact">Fakta</a>
-        <a class="nav-link" href="#team">Tim</a>
+        <a class="nav-link" href="#math-history">Sejarah</a>
         <a class="nav-link" href="#statistics">Statistik</a>
         <a class="nav-link" href="#fitur">Fitur</a>
         <div class="dropdown">
@@ -102,7 +102,7 @@
         <a href="#" class="active">Beranda</a>
         <a href="#about">Tentang</a>
         <a href="#fact">Fakta</a>
-        <a href="#team">Tim</a>
+        <a href="#math-history">Sejarah</a>
         <a href="#statistics">Statistik</a>
         <a href="#fitur">Fitur</a>
         <div class="dropdown">
@@ -2522,43 +2522,274 @@
   </script>
 
 
-  <!-- Team Section -->
-  <section id="team" class="py-5">
-    <div class="team-maker">
-      <h2 data-aos="fade-up" class="fw-bold mb-1" style="color:white">Terima Kasih kepada Teman-teman yang membantu:
-      </h2>
-      <div class="team-grid">
-        <div class="team-member" data-aos="fade-down">
-          <img src="{{ url_for('static', filename='image/Edward_James_Kenway.png') }}" class="foto"
-            alt="Erantus P. Samaloisa">
-          <h5 class="Nama">Erantus P. Samaloisa</h5>
-          <p class="deskripsi">Founder & Developer</p>
+  <!-- Sejarah, Ilmu & Ilmuwan Matematika Section -->
+  <section id="math-history" class="py-5 position-relative overflow-hidden"
+    style="background: linear-gradient(180deg, #111328 0%, #171a36 55%, #1a1a2e 100%); color: #f8fafc;">
+    <div class="container py-4">
+      <!-- Header -->
+      <div class="text-center mx-auto mb-5" style="max-width: 780px;" data-aos="fade-up">
+        <span
+          class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3 text-uppercase fw-semibold"
+          style="font-size: 0.75rem; letter-spacing: 0.08em; background: rgba(99, 102, 241, 0.16); color: #a5b4fc; border: 1px solid rgba(129, 140, 248, 0.35);">
+          <i class="bi bi-compass"></i> Jejak Peradaban &amp; Disiplin Ilmu
+        </span>
+        <h2 class="fw-bold mb-3" style="font-size: clamp(1.75rem, 3vw, 2.5rem); color: #ffffff;">
+          Sejarah Matematika dalam Kehidupan Manusia
+        </h2>
+        <p class="mb-0" style="color: #cbd5e1; line-height: 1.75;">
+          Dari goresan hitung di tulang prasejarah hingga algoritma kecerdasan buatan masa kini, matematika tumbuh
+          bersama kebutuhan manusia untuk mengukur, memahami alam semesta, dan membangun peradaban modern.
+        </p>
+      </div>
+
+      <!-- 1. Timeline Sejarah Matematika dalam Kehidupan Manusia -->
+      <div class="mb-5" data-aos="fade-up">
+        <div class="d-flex align-items-center gap-2 mb-4">
+          <i class="bi bi-hourglass-split fs-4 text-info"></i>
+          <h3 class="h4 fw-bold mb-0 text-white">Linimasa Sejarah Matematika</h3>
         </div>
-        <div class="team-member" data-aos="fade-up">
-          <img src="{{ url_for('static', filename='image/Thoufiq_Jabbar_Silton.png') }}" class="foto"
-            alt="Thoufiq Jabbar Silton">
-          <h5 class="Nama">Thoufiq Jabbar Silton</h5>
-          <p class="deskripsi">Data Scientist</p>
+        <div class="row g-3">
+          <div class="col-md-6 col-lg-3">
+            <div class="h-100 p-4 rounded-4"
+              style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);">
+              <span class="badge rounded-pill mb-2" style="background: rgba(56, 189, 248, 0.2); color: #7dd3fc;">
+                ~20.000 SM – 500 SM
+              </span>
+              <h5 class="fw-bold text-white mb-2">Prasejarah &amp; Peradaban Kuno</h5>
+              <p class="small mb-0" style="color: #cbd5e1; line-height: 1.65;">
+                Dimulai dari takik hitung (<em>Tulang Ishango</em>), berlanjut ke Mesir dan Babilonia yang menggunakan
+                aritmetika dan geometri praktis untuk irigasi Sungai Nil, kalender astronomi, perdagangan, dan
+                pembangunan piramida.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="h-100 p-4 rounded-4"
+              style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);">
+              <span class="badge rounded-pill mb-2" style="background: rgba(167, 139, 250, 0.2); color: #c4b5fd;">
+                600 SM – 300 M
+              </span>
+              <h5 class="fw-bold text-white mb-2">Era Yunani &amp; Pembuktian Logis</h5>
+              <p class="small mb-0" style="color: #cbd5e1; line-height: 1.65;">
+                Matematika bertransformasi dari sekadar alat hitung menjadi ilmu deduktif. Thales, Pythagoras, Euclid,
+                dan Archimedes merumuskan aksioma, teorema geometri, serta konsep awal integral dan bilangan pi (π).
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="h-100 p-4 rounded-4"
+              style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);">
+              <span class="badge rounded-pill mb-2" style="background: rgba(52, 211, 153, 0.2); color: #6ee7b7;">
+                Abad ke-8 – ke-17
+              </span>
+              <h5 class="fw-bold text-white mb-2">Keemasan Islam &amp; Revolusi Ilmiah</h5>
+              <p class="small mb-0" style="color: #cbd5e1; line-height: 1.65;">
+                Al-Khwarizmi melahirkan aljabar sistematis dan memopulerkan sistem desimal Hindu-Arab (termasuk angka
+                nol). Di Eropa, Descartes menyatukan aljabar-geometri, lalu Newton &amp; Leibniz menemukan kalkulus.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="h-100 p-4 rounded-4"
+              style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);">
+              <span class="badge rounded-pill mb-2" style="background: rgba(251, 191, 36, 0.2); color: #fcd34d;">
+                Abad ke-19 – Kini
+              </span>
+              <h5 class="fw-bold text-white mb-2">Matematika Modern &amp; Era Digital</h5>
+              <p class="small mb-0" style="color: #cbd5e1; line-height: 1.65;">
+                Lahirnya teori himpunan, geometri non-Euclid, statistika modern, dan logika komputasi. Hari ini,
+                matematika menjadi tulang punggung kriptografi, internet, sains data, dan kecerdasan buatan (AI).
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="team-member" data-aos="fade-up">
-          <img src="{{ url_for('static', filename='image/ANisa.png') }}" class="foto" alt="Anisa Betsaida Pasaribu">
-          <h5 class="Nama">Anisa Betsaida Pasaribu</h5>
-          <p class="deskripsi">Mathematician</p>
+      </div>
+
+      <!-- 2. Ilmu Matematika yang Telah Ditemukan -->
+      <div class="mb-5" data-aos="fade-up">
+        <div class="d-flex align-items-center gap-2 mb-4">
+          <i class="bi bi-diagram-3 fs-4 text-warning"></i>
+          <h3 class="h4 fw-bold mb-0 text-white">Cabang Ilmu Matematika yang Ditemukan</h3>
         </div>
-        <div class="team-member" data-aos="fade-up">
-          <img src="{{ url_for('static', filename='image/mahez.png') }}" class="foto" alt="Maheza Novrauyuda">
-          <h5 class="Nama">Maheza Novrauyuda</h5>
-          <p class="deskripsi">AI Engineer</p>
+        <div class="row g-3">
+          <div class="col-md-6 col-lg-4">
+            <div class="h-100 p-4 rounded-4"
+              style="background: rgba(30, 41, 59, 0.55); border: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="d-inline-flex align-items-center justify-content-center rounded-3 fw-bold"
+                  style="width: 42px; height: 42px; background: rgba(59, 130, 246, 0.2); color: #93c5fd;">∑</span>
+                <h5 class="fw-bold text-white mb-0">Aritmetika &amp; Teori Bilangan</h5>
+              </div>
+              <p class="small mb-0" style="color: #cbd5e1; line-height: 1.65;">
+                Mempelajari sifat bilangan bulat, bilangan prima, dan operasi dasar. Menjadi fondasi keamanan siber dan
+                enkripsi digital modern (RSA).
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="h-100 p-4 rounded-4"
+              style="background: rgba(30, 41, 59, 0.55); border: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="d-inline-flex align-items-center justify-content-center rounded-3 fw-bold"
+                  style="width: 42px; height: 42px; background: rgba(16, 185, 129, 0.2); color: #6ee7b7;">△</span>
+                <h5 class="fw-bold text-white mb-0">Geometri &amp; Trigonometri</h5>
+              </div>
+              <p class="small mb-0" style="color: #cbd5e1; line-height: 1.65;">
+                Ilmu tentang bentuk, ruang, sudut, dan jarak. Digunakan dalam arsitektur, navigasi GPS, grafika komputer
+                3D, hingga teori relativitas.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="h-100 p-4 rounded-4"
+              style="background: rgba(30, 41, 59, 0.55); border: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="d-inline-flex align-items-center justify-content-center rounded-3 fw-bold"
+                  style="width: 42px; height: 42px; background: rgba(168, 85, 247, 0.2); color: #d8b4fe;">𝑥</span>
+                <h5 class="fw-bold text-white mb-0">Aljabar &amp; Aljabar Linear</h5>
+              </div>
+              <p class="small mb-0" style="color: #cbd5e1; line-height: 1.65;">
+                Bahasa simbolik untuk menyelesaikan persamaan dan memodelkan struktur vektor serta matriks—inti dari
+                pembelajaran mesin dan jaringan saraf tiruan.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="h-100 p-4 rounded-4"
+              style="background: rgba(30, 41, 59, 0.55); border: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="d-inline-flex align-items-center justify-content-center rounded-3 fw-bold"
+                  style="width: 42px; height: 42px; background: rgba(244, 63, 94, 0.2); color: #fda4af;">∫</span>
+                <h5 class="fw-bold text-white mb-0">Kalkulus &amp; Analisis</h5>
+              </div>
+              <p class="small mb-0" style="color: #cbd5e1; line-height: 1.65;">
+                Mempelajari laju perubahan (turunan) dan akumulasi (integral). Kunci dalam fisika, teknik mesin, ekonomi,
+                dan simulasi dinamika fluida.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="h-100 p-4 rounded-4"
+              style="background: rgba(30, 41, 59, 0.55); border: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="d-inline-flex align-items-center justify-content-center rounded-3 fw-bold"
+                  style="width: 42px; height: 42px; background: rgba(245, 158, 11, 0.2); color: #fcd34d;">%</span>
+                <h5 class="fw-bold text-white mb-0">Probabilitas &amp; Statistika</h5>
+              </div>
+              <p class="small mb-0" style="color: #cbd5e1; line-height: 1.65;">
+                Mengukur ketidakpastian dan menarik kesimpulan dari data. Vital untuk riset medis, prediksi cuaca,
+                asuransi, dan pengambilan keputusan berbasis data.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="h-100 p-4 rounded-4"
+              style="background: rgba(30, 41, 59, 0.55); border: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="d-inline-flex align-items-center justify-content-center rounded-3 fw-bold"
+                  style="width: 42px; height: 42px; background: rgba(6, 182, 212, 0.2); color: #67e8f9;">∀</span>
+                <h5 class="fw-bold text-white mb-0">Logika &amp; Matematika Diskrit</h5>
+              </div>
+              <p class="small mb-0" style="color: #cbd5e1; line-height: 1.65;">
+                Mencakup logika formal, teori graf, dan kombinatorika yang menjadi dasar langsung perancangan algoritma,
+                jaringan komputer, dan ilmu komputer.
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="team-member" data-aos="fade-up">
-          <img src="{{ url_for('static', filename='image/Alwi.png') }}" class="foto" alt="Maheza Novrauyuda">
-          <h5 class="Nama">Muhammad Almusyahwi</h5>
-          <p class="deskripsi">Content Creator</p>
+      </div>
+
+      <!-- 3. Ilmuwan-Ilmuwan Matematika yang Berjasa -->
+      <div data-aos="fade-up">
+        <div class="d-flex align-items-center gap-2 mb-4">
+          <i class="bi bi-mortarboard fs-4 text-primary"></i>
+          <h3 class="h4 fw-bold mb-0 text-white">Ilmuwan Pembentuk Matematika Modern</h3>
         </div>
-        <div class="team-member" data-aos="fade-up">
-          <img src="{{ url_for('static', filename='image/Rofiq_Yulhari.png') }}" class="foto" alt="Maheza Novrauyuda">
-          <h5 class="Nama">Rofiq Mahdi Yulhari</h5>
-          <p class="deskripsi">Video Editor, Multimedia Expert</p>
+        <div class="row g-3">
+          <div class="col-md-6 col-lg-4">
+            <div class="h-100 p-4 rounded-4"
+              style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="fw-bold text-white mb-0">Euclid</h5>
+                <span class="small px-2 py-1 rounded-2" style="background: rgba(99,102,241,0.2); color:#a5b4fc;">~300 SM</span>
+              </div>
+              <div class="small fw-semibold mb-2" style="color: #7dd3fc;">Bapak Geometri &amp; Metode Aksiomatik</div>
+              <p class="small mb-0" style="color: #cbd5e1; line-height: 1.65;">
+                Menulis <em>Elements</em>, karya monumental yang menyusun geometri secara logis dari definisi dan
+                aksioma, menjadi standar pembuktian matematika selama lebih dari dua milenium.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="h-100 p-4 rounded-4"
+              style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="fw-bold text-white mb-0">Al-Khwarizmi</h5>
+                <span class="small px-2 py-1 rounded-2" style="background: rgba(99,102,241,0.2); color:#a5b4fc;">~780–850</span>
+              </div>
+              <div class="small fw-semibold mb-2" style="color: #6ee7b7;">Bapak Aljabar &amp; Pelopor Algoritma</div>
+              <p class="small mb-0" style="color: #cbd5e1; line-height: 1.65;">
+                Karyanya <em>Al-Kitab al-Mukhtasar fi Hisab al-Jabr wal-Muqabala</em> melahirkan disiplin aljabar,
+                sementara namanya diabadikan menjadi kata <strong>algoritma</strong>.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="h-100 p-4 rounded-4"
+              style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="fw-bold text-white mb-0">Newton &amp; Leibniz</h5>
+                <span class="small px-2 py-1 rounded-2" style="background: rgba(99,102,241,0.2); color:#a5b4fc;">Abad ke-17</span>
+              </div>
+              <div class="small fw-semibold mb-2" style="color: #fda4af;">Penemu Kalkulus Modern</div>
+              <p class="small mb-0" style="color: #cbd5e1; line-height: 1.65;">
+                Secara independen merumuskan kalkulus diferensial dan integral. Notasi Leibniz (<em>dy/dx</em>, ∫) serta
+                hukum gerak Newton membuka jalan bagi fisika dan rekayasa modern.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="h-100 p-4 rounded-4"
+              style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="fw-bold text-white mb-0">Leonhard Euler</h5>
+                <span class="small px-2 py-1 rounded-2" style="background: rgba(99,102,241,0.2); color:#a5b4fc;">1707–1783</span>
+              </div>
+              <div class="small fw-semibold mb-2" style="color: #fcd34d;">Arsitek Notasi &amp; Teori Graf</div>
+              <p class="small mb-0" style="color: #cbd5e1; line-height: 1.65;">
+                Memperkenalkan notasi fungsi <em>f(x)</em>, bilangan <em>e</em>, <em>i</em>, dan <em>π</em>, serta
+                merintis teori graf dan topologi lewat masalah Tujuh Jembatan Königsberg.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="h-100 p-4 rounded-4"
+              style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="fw-bold text-white mb-0">Carl Friedrich Gauss</h5>
+                <span class="small px-2 py-1 rounded-2" style="background: rgba(99,102,241,0.2); color:#a5b4fc;">1777–1855</span>
+              </div>
+              <div class="small fw-semibold mb-2" style="color: #d8b4fe;">Pangeran Matematika</div>
+              <p class="small mb-0" style="color: #cbd5e1; line-height: 1.65;">
+                Memberi kontribusi fundamental pada teori bilangan, teorema dasar aljabar, geometri diferensial, serta
+                distribusi normal (kurva lonceng) dalam statistika.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="h-100 p-4 rounded-4"
+              style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="fw-bold text-white mb-0">Ada Lovelace &amp; Alan Turing</h5>
+                <span class="small px-2 py-1 rounded-2" style="background: rgba(99,102,241,0.2); color:#a5b4fc;">Abad 19–20</span>
+              </div>
+              <div class="small fw-semibold mb-2" style="color: #67e8f9;">Pelopor Komputasi Modern</div>
+              <p class="small mb-0" style="color: #cbd5e1; line-height: 1.65;">
+                Lovelace menulis algoritma komputer pertama untuk mesin analitik, sementara Turing memformalkan konsep
+                komputabilitas (Mesin Turing) yang melahirkan era komputer &amp; AI.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
